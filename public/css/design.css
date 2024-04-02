@@ -1,0 +1,29 @@
+.invs td {
+    padding-left: 3%;
+    background-color:#F8F8FF;
+    text-align: center;
+}
+.inv th {
+    text-align: center;
+}
+.inv {
+    background-color: #20B2AA;
+    color: white;
+}
+.navig div{
+    color: white;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    cursor: pointer;
+}
+.navig div:hover {
+    /*background-color: #00BFFF;*/
+}
+
+.div100 div i{
+    margin-right: 3%;
+}
+
+.div100 div {
+    cursor: pointer;
+}
