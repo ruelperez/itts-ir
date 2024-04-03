@@ -13,12 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/itts-ir', \App\Livewire\Ir::class)->middleware('auth');
-Route::get('/itts-age-checker', \App\Livewire\AgeCompute::class)->middleware('auth');
-Route::get('/itts-zip-checker', \App\Livewire\Zip::class)->middleware('auth');
+Route::get('/itts/1/{name}', \App\Livewire\Ir::class)->middleware('auth');
+Route::get('/itts/2/{name}', \App\Livewire\AgeCompute::class)->middleware('auth');
+Route::get('/itts/3/{name}', \App\Livewire\Zip::class)->middleware('auth');
+Route::get('/itts/4/{name}', \App\Livewire\NewsUpdate::class)->middleware('auth');
+Route::get('/itts/5/{name}', \App\Livewire\Dashboard::class)->middleware('auth');
+Route::get('/itts/6/{name}', \App\Livewire\MyNotes::class)->middleware('auth');
 
 Route::get('/', function () {
-    return redirect('/itts-ir');
+    return redirect('/itts/5/dashboard');
 });
 
 Route::get('/login', \App\Livewire\Login::class)->name('login')->middleware('guest');

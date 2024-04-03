@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class Zip extends Component
 {
-    public $registrationSwitch, $is_admin, $fullname, $user_id, $photo, $searchInput, $request_data=[];
+    public $registrationSwitch, $is_admin, $webName, $fullname, $user_id, $photo, $searchInput, $request_data=[];
 
     public function render()
     {
@@ -23,6 +23,10 @@ class Zip extends Component
         $this->user_id = auth()->user()->id;
         $this->is_admin = auth()->user()->is_admin;
         return view('livewire.zip');
+    }
+
+    public function mount($name){
+        $this->webName = $name;
     }
 
     public function search(){

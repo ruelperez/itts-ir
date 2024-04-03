@@ -8,13 +8,17 @@ use Livewire\Component;
 
 class Ir extends Component
 {
-    public $registrationSwitch, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
         $this->user_id = auth()->user()->id;
         $this->is_admin = auth()->user()->is_admin;
         return view('livewire.ir');
+    }
+
+    public function mount($name){
+        $this->webName = $name;
     }
 
     public function logout(){
