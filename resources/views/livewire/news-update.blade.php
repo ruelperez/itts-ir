@@ -34,9 +34,9 @@
                         <input type="text" placeholder="Search" wire:model.live="searchInput" style="padding: 1%;  width: 100%;">
                     </div>
                 </div>
-                <div style="overflow: hidden; position: relative;">
+                <div class="content">
                     @foreach($notes_all as $data)
-                        <div style=" overflow-y: auto; box-sizing: content-box; width: 76%; background-color: white; margin-left: 12%; padding-left: 3%; padding-right: 3%; padding-top: 1.5%; padding-bottom: 2%; margin-top: 2%; margin-bottom: 2%; word-wrap: break-word;">
+                        <div style="box-sizing: content-box; width: 76%; background-color: white; margin-left: 12%; padding-left: 3%; padding-right: 3%; padding-top: 1.5%; padding-bottom: 2%; margin-top: 2%; margin-bottom: 2%; word-wrap: break-word;">
                             <div class="fw-light" style="display: flex;">
                                 <div class="profile-picture">
                                     <img src="{{asset('storage/'.$photo)}}" alt="Profile Picture">
@@ -69,6 +69,24 @@
                             <div>
                                 {{$data->text}}
                             </div>
+                            <div style="margin-top: 2%;">
+                                <i class="fa-solid fa-heart" style="font-size: 20px; color: red; cursor: pointer"></i>
+                                <i class="fa-solid fa-thumbs-down" style="font-size: 20px; color: blue; cursor: pointer; margin-left: 1%;"></i>
+{{--                                comment--}}
+                            </div>
+                            <hr>
+                            <div style="display: flex">
+                                <div style="width: 35%; text-align: center">
+                                    <i class="fa-regular fa-heart" style="font-size: 22px; cursor: pointer;"></i>
+                                </div>
+                                <div style="width: 30%; text-align: center">
+                                    <i class="fa-regular fa-thumbs-down" style="font-size: 22px; cursor: pointer;"></i>
+                                </div>
+                                <div style="width: 35%; text-align: center">
+                                    <i class="fa-regular fa-comment" style="font-size: 22px; cursor: pointer;"></i> Comment
+                                </div>
+                            </div>
+                            <hr>
                         </div>
                     @endforeach
                 </div>

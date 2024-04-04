@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class Register extends Component
 {
-    public $fullname, $username, $password, $is_admin = false, $password_confirmation, $is_reg;
+    public $fullname, $username, $password, $is_admin = false, $password_confirmation, $is_reg, $photo = "default_profile.png";
     public function render()
     {
         $data = IsRegistration::all();
@@ -31,7 +31,7 @@ class Register extends Component
             'password' => 'required|min:5|confirmed',
             'password_confirmation' => 'required',
             'is_admin' => 'required',
-            'photo' => 'default_profile.png'
+            'photo' => 'required'
         ]);
 
         $validated['password'] = bcrypt($validated['password']);
