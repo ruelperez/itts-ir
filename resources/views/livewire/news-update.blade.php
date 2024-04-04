@@ -12,8 +12,18 @@
         </div>
         <div style="width: 81%; background-color: #E6E6FA">
             <div class="container">
-                <div>
-                    <h4 style="margin-top: 3%; margin-left: 2%;">News feed</h4>
+                <div style="display: flex; margin-top: 2%; margin-left: 1%;">
+                    <div>
+                        <h4>{{strtoupper($campaign_name)}}</h4>
+                    </div>
+                    <div style="margin-left: auto; margin-right: 5%;">
+                        <select class="form-select" aria-label="Default select example" wire:model.live="campaign_name">
+                            <option value="cl">CL</option>
+                            <option value="afff">AFFF</option>
+                            <option value="paraquat">Paraquat</option>
+                            <option value="round_up">Round up</option>
+                        </select>
+                    </div>
                 </div>
                 <div style="display: flex; padding-top: 2%;">
                     @if($is_admin == "1")

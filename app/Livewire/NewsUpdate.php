@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class NewsUpdate extends Component
 {
-    public $registrationSwitch, $text, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $photo, $user_fullname, $notes_all;
+    public $registrationSwitch, $campaign_name = "cl", $searchInput, $text, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $photo, $user_fullname, $notes_all;
 
     public function render()
     {
@@ -17,7 +17,7 @@ class NewsUpdate extends Component
         $this->user_id = auth()->user()->id;
         $this->is_admin = auth()->user()->is_admin;
         $this->user_fullname = auth()->user()->fullname;
-        $this->notes_all = Note::all();
+        $this->notes_all = Note::where('campaign','=',$this->campaign_name)->get();
         return view('livewire.news-update');
     }
 
@@ -32,8 +32,10 @@ class NewsUpdate extends Component
                 'user_id' => $this->user_id,
                 'user_fullname' => $this->user_fullname,
                 'tags' => $this->tags,
+                'campaign' => $this->campaign_name,
             ]);
             $this->text = "";
+            $this->tags = "";
             session()->flash('good', "Successfully added");
         }catch (\Exception $e){
             session()->flash('bad', "Failed to add");
@@ -139,6 +141,9 @@ class NewsUpdate extends Component
     public function updated($field){
         if ($field == "registrationSwitch"){
             $this->regSwitch();
+        }
+        if ($field == "campaign_name"){
+
         }
     }
 }
