@@ -1,10 +1,21 @@
 <div style="position: relative;">
+    @include('modal.news-update.show-photo')
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#show_photo" id="show_photo" hidden>
+        Launch demo modal
+    </button>
     <div style="text-align: center; margin-top: 10%; position: absolute; width: 100%;">
         <div style="display: flex;">
-            <i onclick="clickEllipsis()" class="fa-solid fa-ellipsis-vertical" id="ellip" style="color: white; margin-left: 10%;font-size: 23px; cursor: pointer; margin-right: 22%;"></i>
-            <i class="fa-solid fa-user" style="font-size: 100px; color: #DCDCDC	"></i>
+            <i onclick="clickEllipsis()" class="fa-solid fa-ellipsis-vertical" id="ellip" style="color: white; margin-left: 10%;font-size: 23px; cursor: pointer; margin-right: 11%;"></i>
+            <div class="profile">
+                <img src="{{asset('storage/'.$photo)}}" alt="Profile Picture">
+                <div style="background-color:#C0C0C0; position: absolute; top: 110px; left: 95px; border-radius: 80%; padding: 1%; width: 20%; cursor: pointer" onclick="chooseFile()">
+                    <i class="fa-solid fa-camera" style="font-size: 17px;"></i>
+                    <input type="file" id="fileInput" accept="image/*" hidden wire:model.live="photo">
+                </div>
+            </div>
+{{--            <i class="fa-solid fa-user" style="font-size: 100px; color: #DCDCDC	"></i>--}}
         </div>
-        <h5 style="color: white; margin-top: 5%;">@if($is_admin == "1") ADMIN @else AGENT @endif</h5>
+        <h5 style="color: white;">@if($is_admin == "1") ADMIN @else AGENT @endif</h5>
         <p style="color: white">{{ucwords($fullname)}}</p>
     </div>
     <div class="div100" style="display: none; width: 70%; padding: 5px 12px; background-color: #0d1321;  border: solid black 3px;border-radius: 12px;  position: relative; margin-left: 10%; top: 52px;
@@ -23,3 +34,4 @@
 
     </div>
 </div>
+<div class="div101" style="width: 80%; height: 1px; background-color: white; margin-left: 10%; margin-top: 85%;"></div>

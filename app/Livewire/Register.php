@@ -31,6 +31,7 @@ class Register extends Component
             'password' => 'required|min:5|confirmed',
             'password_confirmation' => 'required',
             'is_admin' => 'required',
+            'photo' => 'default_profile.png'
         ]);
 
         $validated['password'] = bcrypt($validated['password']);

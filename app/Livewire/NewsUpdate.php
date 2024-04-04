@@ -4,12 +4,19 @@ namespace App\Livewire;
 
 use App\Models\IsRegistration;
 use App\Models\Note;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class NewsUpdate extends Component
 {
-    public $registrationSwitch, $campaign_name = "cl", $searchInput, $text, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $photo, $user_fullname, $notes_all;
+    use WithFileUploads;
+
+    #[Validate('image|max:1024')] // 1MB Max
+    public $registrationSwitch, $campaign_name = "cl", $searchInput, $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
@@ -17,6 +24,7 @@ class NewsUpdate extends Component
         $this->user_id = auth()->user()->id;
         $this->is_admin = auth()->user()->is_admin;
         $this->user_fullname = auth()->user()->fullname;
+        $this->photo = auth()->user()->photo;
         $this->notes_all = Note::where('campaign','=',$this->campaign_name)->get();
         return view('livewire.news-update');
     }
@@ -145,5 +153,14 @@ class NewsUpdate extends Component
         if ($field == "campaign_name"){
 
         }
+        if ($field == "photo"){
+            $this->photo->store(path: 'public');
+            $hashPhoto = $this->photo->hashName();
+            $user = User::find($this->user_id);
+            $user->photo = $hashPhoto;
+            $user->save();
+            return redirect('/itts/4/news-feed');
+        }
+
     }
 }

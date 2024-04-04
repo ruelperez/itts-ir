@@ -11,6 +11,10 @@ function clickOrderItemName(id){
     window.livewire.emit('qwe',id);
 }
 
+function chooseFile() {
+    document.getElementById('fileInput').click(); // Click the hidden file input
+}
+
 $(document).ready(function() {
     var sn = $(".div101");
     // Hide the div when anything on the page is clicked

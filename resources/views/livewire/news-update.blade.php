@@ -7,7 +7,6 @@
     <div style="display: flex; width: 100%;">
         <div style="width: 19%; background-color: #0077b6">
             @include('components.layouts.profile')
-            <div class="div101" style="width: 80%; height: 1px; background-color: white; margin-left: 10%; margin-top: 75%;"></div>
             @include('components.layouts.navigation')
         </div>
         <div style="width: 81%; background-color: #E6E6FA">
@@ -40,7 +39,7 @@
                         <div style=" overflow-y: auto; box-sizing: content-box; width: 76%; background-color: white; margin-left: 12%; padding-left: 3%; padding-right: 3%; padding-top: 1.5%; padding-bottom: 2%; margin-top: 2%; margin-bottom: 2%; word-wrap: break-word;">
                             <div class="fw-light" style="display: flex;">
                                 <div class="profile-picture">
-                                    <img src="{{asset('photo/images.jpg')}}" alt="Profile Picture">
+                                    <img src="{{asset('storage/'.$photo)}}" alt="Profile Picture">
                                 </div>
                                 <div style="margin-right: 5%;">
                                     <b>{{ucwords($fullname)}}</b>

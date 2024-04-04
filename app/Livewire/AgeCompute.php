@@ -3,17 +3,24 @@
 namespace App\Livewire;
 
 use App\Models\IsRegistration;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class AgeCompute extends Component
 {
+    use WithFileUploads;
+
+    #[Validate('image|max:1024')] // 1MB Max
     public $registrationSwitch, $fullname, $is_admin, $webName, $user_id, $photo, $birth, $death, $error=0, $stat = "dependent", $hn = 0, $start, $alive, $end, $latency = 0, $name, $diagnosis, $age_diagnosed = 0, $age_passaway = 0, $age_started = 0, $age_left = 0, $year_exposure = 0, $remarks = 0;
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
         $this->user_id = auth()->user()->id;
         $this->is_admin = auth()->user()->is_admin;
+        $this->photo = auth()->user()->photo;
         return view('livewire.age-compute');
     }
 
@@ -204,6 +211,14 @@ class AgeCompute extends Component
     }
 
     public function updated($value){
+        if ($value == "photo"){
+            $this->photo->store(path: 'public');
+            $hashPhoto = $this->photo->hashName();
+            $user = User::find($this->user_id);
+            $user->photo = $hashPhoto;
+            $user->save();
+            return redirect('/itts/2/age-checker');
+        }
         if ($value === "alive"){
 //        ALIVE
             if ($this->alive == true){
