@@ -17,6 +17,25 @@
     border-radius: 100%; /* Create a circular shape */
     margin-right: 1%;
 }
+
+.profile-picture img {
+    width: 100%; /* Ensure the image fills the container */
+    height: 55px; /* Maintain aspect ratio */
+    border-radius: 100%; /* Ensure the image inside the circle is also circular */
+}
+
+.profile-picture-reactor {
+    width: 7%; /* Adjust width and height as needed */
+    height: 35px;
+    border-radius: 100%; /* Create a circular shape */
+    margin-right: 1%;
+}
+
+.profile-picture-reactor img{
+    width: 100%; /* Ensure the image fills the container */
+    height: 35px; /* Maintain aspect ratio */
+    border-radius: 100%; /* Ensure the image inside the circle is also circular */
+}
 .profile {
     width: 55%; /* Adjust width and height as needed */
     height: 155px;
@@ -44,11 +63,6 @@
     background: grey;
 }
 
-.profile-picture img {
-    width: 100%; /* Ensure the image fills the container */
-    height: 55px; /* Maintain aspect ratio */
-    border-radius: 100%; /* Ensure the image inside the circle is also circular */
-}
 .navig div{
     color: white;
     padding-top: 8px;

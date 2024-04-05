@@ -4,6 +4,7 @@
     @include('modal.news-update.add')
     @include('modal.news-update.edit_tags')
     @include('modal.news-update.edit')
+    @include('modal.news-update.reactor')
     <div style="display: flex; width: 100%;">
         <div style="width: 19%; background-color: #0077b6">
             @include('components.layouts.profile')
@@ -24,13 +25,13 @@
                         </select>
                     </div>
                 </div>
-                <div style="display: flex; padding-top: 2%;">
+                <div style="display: flex;">
                     @if($is_admin == "1")
                         <div style="margin-left: 12%;">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add">Create <i class="fa-solid fa-plus"></i></button>
                         </div>
                     @endif
-                    <div style="width: 20%; margin-left: 3%;">
+                    <div style="width: 20%; @if($is_admin != "1") margin-left: 12%; @endif ">
                         <input type="text" placeholder="Search" wire:model.live="searchInput" style="padding: 1%;  width: 100%;">
                     </div>
                 </div>
@@ -69,20 +70,40 @@
                             <div>
                                 {{$data->text}}
                             </div>
+                            @php $h=0;
+                                foreach ($heart as $fg){
+                                   if ($fg->note_id == $data->id){
+                                       $h++;
+                                   }
+                                }
+                                $totalHeart = $h;
+                            @endphp
                             <div style="margin-top: 2%;">
-                                <i class="fa-solid fa-heart" style="font-size: 20px; color: red; cursor: pointer"></i>
-                                <i class="fa-solid fa-thumbs-down" style="font-size: 20px; color: blue; cursor: pointer; margin-left: 1%;"></i>
-{{--                                comment--}}
+                               <i class="fa-solid fa-heart" style="font-size: 20px; color: red; cursor: pointer" data-bs-toggle="modal" data-bs-target="#reactor" wire:click="reactor({{$data->id}})"></i> {{$totalHeart}}
+                                {{--                                comment--}}
                             </div>
                             <hr>
                             <div style="display: flex">
-                                <div style="width: 35%; text-align: center">
-                                    <i class="fa-regular fa-heart" style="font-size: 22px; cursor: pointer;"></i>
+                                <div style="width: 50%; text-align: center">
+                                    @if(count($heart) < 1)
+                                        <i class="fa-regular fa-heart" style="font-size: 22px; cursor: pointer;" wire:click="clickHeart({{$data->id}})"></i>
+                                    @else
+                                        @php $n=0; @endphp
+                                        @foreach($heart as $hearts)
+                                            @if($hearts->user_id == $user_id and $hearts->note_id == $data->id)
+                                                <i class="fa-solid fa-heart" style="font-size: 22px; cursor: pointer; color: red" wire:click="clickHeart({{$data->id}})"></i>
+                                                @php $n++; @endphp
+                                            @else
+
+                                            @endif
+                                        @endforeach
+                                        @if($n == 0)
+                                            <i class="fa-regular fa-heart" style="font-size: 22px; cursor: pointer;" wire:click="clickHeart({{$data->id}})"></i>
+                                        @endif
+                                    @endif
+
                                 </div>
-                                <div style="width: 30%; text-align: center">
-                                    <i class="fa-regular fa-thumbs-down" style="font-size: 22px; cursor: pointer;"></i>
-                                </div>
-                                <div style="width: 35%; text-align: center">
+                                <div style="width: 50%; text-align: center">
                                     <i class="fa-regular fa-comment" style="font-size: 22px; cursor: pointer;"></i> Comment
                                 </div>
                             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Heart;
 use App\Models\IsRegistration;
 use App\Models\Note;
 use App\Models\User;
@@ -16,7 +17,7 @@ class NewsUpdate extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $campaign_name = "cl", $searchInput, $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
+    public $registrationSwitch, $reactors = [], $campaign_name = "cl", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
@@ -25,12 +26,40 @@ class NewsUpdate extends Component
         $this->is_admin = auth()->user()->is_admin;
         $this->user_fullname = auth()->user()->fullname;
         $this->photo = auth()->user()->photo;
+        $this->heart = Heart::all();
         $this->notes_all = Note::where('campaign','=',$this->campaign_name)->get();
         return view('livewire.news-update');
     }
 
+    public function reactor($id){
+        $dat = [];
+        $rs = Heart::where('note_id', $id)->get();
+        foreach ($rs as $rss){
+            $dat[]= User::find($rss->user_id);
+        }
+
+        $this->reactors = $dat;
+    }
+
     public function mount($name){
         $this->webName = $name;
+    }
+
+    public function clickHeart($id){
+        $he = Heart::where('note_id',$id)
+            ->where('user_id',$this->user_id)->get();
+        if (count($he) < 1){
+            Heart::create([
+                'note_id' => $id,
+                'user_id' => $this->user_id,
+            ]);
+        }
+        else{
+            foreach ($he as $hes){
+                Heart::find($hes->id)->delete();
+            }
+        }
+
     }
 
     public function submit(){
