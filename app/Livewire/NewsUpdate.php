@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Comment;
 use App\Models\Heart;
 use App\Models\IsRegistration;
 use App\Models\Note;
@@ -17,7 +18,7 @@ class NewsUpdate extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $reactors = [], $campaign_name = "cl", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
+    public $registrationSwitch, $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "cl", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
@@ -27,8 +28,18 @@ class NewsUpdate extends Component
         $this->user_fullname = auth()->user()->fullname;
         $this->photo = auth()->user()->photo;
         $this->heart = Heart::all();
-        $this->notes_all = Note::where('campaign','=',$this->campaign_name)->get();
+        if ($this->searchInput == ""){
+            $this->notes_all = Note::where('campaign',$this->campaign_name)->get();
+        }else{
+            $this->notes_all = Note::where('id','LIKE', '%'.$this->searchInput.'%')
+                ->orWhere('tags', 'LIKE', '%'.$this->searchInput.'%')
+                ->where('campaign',$this->campaign_name)->get();
+        }
         return view('livewire.news-update');
+    }
+
+    public function send(){
+        
     }
 
     public function reactor($id){
@@ -39,6 +50,12 @@ class NewsUpdate extends Component
         }
 
         $this->reactors = $dat;
+    }
+
+    public function commented($id){
+        $this->selectedNotes = Note::find($id);
+        $dat = [];
+        $this->comment = Comment::where('note_id', $id)->get();
     }
 
     public function mount($name){

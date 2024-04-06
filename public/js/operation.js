@@ -34,3 +34,18 @@ $(document).ready(function() {
 
 
 });
+
+
+$(document).ready(function() {
+    setInterval(function() {
+        $.ajax({
+            url: "{{ route('news-update') }}",
+            success: function(response) {
+                $('.content').html(response);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching notifications:', error);
+            }
+        });
+    }, 2000); // Poll every 5 seconds (adjust as needed)
+});

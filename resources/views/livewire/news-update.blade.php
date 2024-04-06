@@ -5,6 +5,7 @@
     @include('modal.news-update.edit_tags')
     @include('modal.news-update.edit')
     @include('modal.news-update.reactor')
+    @include('modal.news-update.comment')
     <div style="display: flex; width: 100%;">
         <div style="width: 19%; background-color: #0077b6">
             @include('components.layouts.profile')
@@ -67,7 +68,7 @@
                                 @endif
                             </div>
                             <hr>
-                            <div>
+                            <div style="white-space: pre-line;">
                                 {{$data->text}}
                             </div>
                             @php $h=0;
@@ -104,7 +105,7 @@
 
                                 </div>
                                 <div style="width: 50%; text-align: center">
-                                    <i class="fa-regular fa-comment" style="font-size: 22px; cursor: pointer;"></i> Comment
+                                    <i class="fa-regular fa-comment" style="font-size: 22px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#comment" wire:click="commented({{$data->id}})"></i> Comment
                                 </div>
                             </div>
                             <hr>

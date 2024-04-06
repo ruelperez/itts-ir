@@ -36,6 +36,19 @@
     height: 35px; /* Maintain aspect ratio */
     border-radius: 100%; /* Ensure the image inside the circle is also circular */
 }
+
+.profile-picture-comment {
+    width: 7%; /* Adjust width and height as needed */
+    height: 35px;
+    border-radius: 100%; /* Create a circular shape */
+    margin-right: 1%;
+}
+
+.profile-picture-comment img{
+    width: 80%; /* Ensure the image fills the container */
+    height: 35px; /* Maintain aspect ratio */
+    border-radius: 100%; /* Ensure the image inside the circle is also circular */
+}
 .profile {
     width: 55%; /* Adjust width and height as needed */
     height: 155px;
@@ -47,6 +60,20 @@
     overflow-y: scroll;
     width: 100%; /* Adjust width as needed */
     height: 500px; /* Adjust height as needed */
+}
+
+.modal-body{
+    overflow-y: scroll;
+    width: 100%; /* Adjust width as needed */
+    height: 430px; /* Adjust height as needed */
+    word-wrap: break-word;
+}
+
+.comment-body{
+    overflow-y: scroll;
+    width: 100%; /* Adjust width as needed */
+    height: 430px; /* Adjust height as needed */
+    word-wrap: break-word;
 }
 
 .profile img {

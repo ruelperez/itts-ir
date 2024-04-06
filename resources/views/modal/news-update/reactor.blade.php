@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">React <i class="fa-solid fa-heart" style="font-size: 20px; color: red; cursor: pointer"></i></h5>
+                <h5 class="modal-title">React <i class="fa-solid fa-heart" style="font-size: 20px; color: red;"></i></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form wire:submit.prevent="submit">
