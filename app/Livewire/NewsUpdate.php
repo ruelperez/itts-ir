@@ -18,7 +18,7 @@ class NewsUpdate extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "cl", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
+    public $registrationSwitch, $note_id, $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "cl", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
@@ -39,7 +39,15 @@ class NewsUpdate extends Component
     }
 
     public function send(){
-        
+        Comment::create([
+            'text' => $this->text_comment,
+            'photo' => $this->photo,
+            'fullname' => $this->fullname,
+            'user_id' => $this->user_id,
+            'note_id' => $this->note_id,
+        ]);
+        $this->text_comment = "";
+        $this->comment = Comment::where('note_id', $this->note_id)->get();
     }
 
     public function reactor($id){
@@ -48,14 +56,14 @@ class NewsUpdate extends Component
         foreach ($rs as $rss){
             $dat[]= User::find($rss->user_id);
         }
-
         $this->reactors = $dat;
     }
 
     public function commented($id){
-        $this->selectedNotes = Note::find($id);
+        $this->selectedNotes = Note::where('id',$id)->get();
         $dat = [];
         $this->comment = Comment::where('note_id', $id)->get();
+        $this->note_id = $id;
     }
 
     public function mount($name){
@@ -87,6 +95,7 @@ class NewsUpdate extends Component
                 'user_fullname' => $this->user_fullname,
                 'tags' => $this->tags,
                 'campaign' => $this->campaign_name,
+                'photo' => $this->photo,
             ]);
             $this->text = "";
             $this->tags = "";

@@ -12,23 +12,23 @@
             @include('components.layouts.navigation')
         </div>
         <div style="width: 81%; background-color: #E6E6FA">
-            <div class="container">
-                <div style="display: flex; margin-top: 2%; margin-left: 1%;">
-                    <div>
-                        <h4>{{strtoupper($campaign_name)}}</h4>
+            <div class="container" wire:poll.visible.2s>
+                    <div style="display: flex; margin-top: 2%; margin-left: 1%;">
+                        <div>
+                            <h4>{{strtoupper($campaign_name)}}</h4>
+                        </div>
+                        <div style="margin-left: auto; margin-right: 5%;">
+                            <select class="form-select" aria-label="Default select example" wire:model.live="campaign_name">
+                                <option value="cl">CL</option>
+                                <option value="afff">AFFF</option>
+                                <option value="paraquat">Paraquat</option>
+                                <option value="round_up">Round up</option>
+                            </select>
+                        </div>
                     </div>
-                    <div style="margin-left: auto; margin-right: 5%;">
-                        <select class="form-select" aria-label="Default select example" wire:model.live="campaign_name">
-                            <option value="cl">CL</option>
-                            <option value="afff">AFFF</option>
-                            <option value="paraquat">Paraquat</option>
-                            <option value="round_up">Round up</option>
-                        </select>
-                    </div>
-                </div>
                 <div style="display: flex;">
                     @if($is_admin == "1")
-                        <div style="margin-left: 12%;">
+                        <div style="margin-left: 12%;  margin-right: 1%;">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add">Create <i class="fa-solid fa-plus"></i></button>
                         </div>
                     @endif
@@ -41,10 +41,10 @@
                         <div style="box-sizing: content-box; width: 76%; background-color: white; margin-left: 12%; padding-left: 3%; padding-right: 3%; padding-top: 1.5%; padding-bottom: 2%; margin-top: 2%; margin-bottom: 2%; word-wrap: break-word;">
                             <div class="fw-light" style="display: flex;">
                                 <div class="profile-picture">
-                                    <img src="{{asset('storage/'.$photo)}}" alt="Profile Picture">
+                                    <img src="{{asset('storage/'.$data->photo)}}" alt="Profile Picture">
                                 </div>
                                 <div style="margin-right: 5%;">
-                                    <b>{{ucwords($fullname)}}</b>
+                                    <b>{{ucwords($data->user_fullname)}}</b>
                                     <p>{{$data->updated_at->format('M d, Y h:i')}}</p>
                                 </div>
 {{--                                <div style="margin-left: auto; @if($is_admin == "1") margin-right: 6%; @endif ">--}}
@@ -104,8 +104,9 @@
                                     @endif
 
                                 </div>
-                                <div style="width: 50%; text-align: center">
-                                    <i class="fa-regular fa-comment" style="font-size: 22px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#comment" wire:click="commented({{$data->id}})"></i> Comment
+                                <div style="width: 50%; display: flex;">
+                                    <i class="fa-regular fa-comment" style="margin-left: 35%; font-size: 22px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#comment" wire:click="commented({{$data->id}})"></i>
+                                    <p style="margin-left: 2%; cursor: pointer" data-bs-toggle="modal" data-bs-target="#comment" wire:click="commented({{$data->id}})">Comment</p>
                                 </div>
                             </div>
                             <hr>

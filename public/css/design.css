@@ -41,7 +41,6 @@
     width: 7%; /* Adjust width and height as needed */
     height: 35px;
     border-radius: 100%; /* Create a circular shape */
-    margin-right: 1%;
 }
 
 .profile-picture-comment img{

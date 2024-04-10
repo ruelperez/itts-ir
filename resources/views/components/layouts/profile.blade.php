@@ -1,4 +1,4 @@
-<div style="position: relative;">
+<div style="position: relative;" wire:ignore>
     @include('modal.news-update.show-photo')
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#show_photo" id="show_photo" hidden>
         Launch demo modal
@@ -34,4 +34,4 @@
 
     </div>
 </div>
-<div class="div101" style="width: 80%; height: 1px; background-color: white; margin-left: 10%; margin-top: 85%;"></div>
+<div class="div101" style="width: 80%; height: 1px; background-color: white; margin-left: 10%; margin-top: 90%;" wire:ignore></div>

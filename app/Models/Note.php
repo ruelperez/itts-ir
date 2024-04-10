@@ -13,6 +13,7 @@ class Note extends Model
         'user_fullname',
         'tags',
         'campaign',
+        'photo'
     ];
 
     use HasFactory;

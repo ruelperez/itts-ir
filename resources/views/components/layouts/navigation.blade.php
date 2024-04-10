@@ -1,4 +1,4 @@
-<div style="margin-top: 3%;" class="navig">
+<div style="margin-top: 3%;" class="navig" wire:ignore>
     <div href="/itts/5/dashboard" style="@if($webName == "dashboard") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>
         DASHBOARD
     </div>
