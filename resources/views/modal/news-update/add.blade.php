@@ -51,6 +51,14 @@
                         </div>
                         <div class="row g-3 align-items-center mb-2">
                             <div class="col-auto">
+                                <label class="col-form-label">Method</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="method">
+                            </div>
+                        </div>
+                        <div class="row g-3 align-items-center mb-2">
+                            <div class="col-auto">
                                 <label class="col-form-label">Tags #:</label>
                             </div>
                             <div class="col-auto">

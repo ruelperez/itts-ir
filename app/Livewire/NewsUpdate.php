@@ -99,12 +99,14 @@ class NewsUpdate extends Component
                 'title' => $this->title,
                 'client' => $this->client,
                 'lawfirm' => $this->lawfirm,
+                'method' => $this->method,
             ]);
             $this->text = "";
             $this->tags = "";
             $this->title = "";
             $this->client = "";
             $this->lawfirm = "";
+            $this->method = "";
             session()->flash('good', "Successfully added");
         }catch (\Exception $e){
             session()->flash('bad', "Failed to add");
@@ -152,12 +154,14 @@ class NewsUpdate extends Component
             $rt->campaign = $this->campaign_name;
             $rt->client = $this->client;
             $rt->lawfirm = $this->lawfirm;
+            $rt->method = $this->method;
             $rt->save();
             $this->tags = "";
             $this->text = "";
             $this->title = "";
             $this->client = "";
             $this->lawfirm = "";
+            $this->method = "";
             session()->flash('good', "Successfully updated");
         }catch (\Exception $e){
             session()->flash('bad', "Failed to update");
