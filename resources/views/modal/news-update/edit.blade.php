@@ -17,7 +17,54 @@
                         </div>
                     @endif
                     <div class="form-group">
-                        <input type="text" placeholder="Tags #" style="margin-bottom: 2%; width: 50%;" class="form-control" wire:model="tags" required>
+                        <div class="row g-3 align-items-center mb-2">
+                            <div class="col-auto">
+                                <label class="col-form-label">Title:</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" wire:model="title" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row g-3 align-items-center mb-2">
+                            <div class="col-auto">
+                                <label class="col-form-label">Campaign:</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="campaign_name">
+                            </div>
+                        </div>
+                        <div class="row g-3 align-items-center mb-2">
+                            <div class="col-auto">
+                                <label class="col-form-label">Client:</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="client">
+                            </div>
+                        </div>
+                        <div class="row g-3 align-items-center mb-2">
+                            <div class="col-auto">
+                                <label class="col-form-label">Law firm:</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="lawfirm">
+                            </div>
+                        </div>
+                        <div class="row g-3 align-items-center mb-2">
+                            <div class="col-auto">
+                                <label class="col-form-label">Method:</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="method">
+                            </div>
+                        </div>
+                        <div class="row g-3 align-items-center mb-2">
+                            <div class="col-auto">
+                                <label class="col-form-label">Tags #:</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="tags">
+                            </div>
+                        </div>
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" wire:model="text" required></textarea>
                     </div>
                 </div>

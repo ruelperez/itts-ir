@@ -18,7 +18,7 @@ class NewsUpdate extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $note_id, $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "cl", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
+    public $registrationSwitch, $title, $method, $client, $lawfirm, $note_id, $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "cl", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
@@ -96,9 +96,15 @@ class NewsUpdate extends Component
                 'tags' => $this->tags,
                 'campaign' => $this->campaign_name,
                 'photo' => $this->photo,
+                'title' => $this->title,
+                'client' => $this->client,
+                'lawfirm' => $this->lawfirm,
             ]);
             $this->text = "";
             $this->tags = "";
+            $this->title = "";
+            $this->client = "";
+            $this->lawfirm = "";
             session()->flash('good', "Successfully added");
         }catch (\Exception $e){
             session()->flash('bad', "Failed to add");
@@ -131,6 +137,10 @@ class NewsUpdate extends Component
         $rt = Note::find($id);
         $this->tags = $rt->tags;
         $this->text = $rt->text;
+        $this->title = $rt->title;
+        $this->campaign_name = $rt->campaign;
+        $this->client = $rt->client;
+        $this->lawfirm = $rt->lawfirm;
     }
 
     public function submit_edit(){
@@ -138,9 +148,16 @@ class NewsUpdate extends Component
         try {
             $rt->tags = $this->tags;
             $rt->text = $this->text;
+            $rt->title = $this->title;
+            $rt->campaign = $this->campaign_name;
+            $rt->client = $this->client;
+            $rt->lawfirm = $this->lawfirm;
             $rt->save();
             $this->tags = "";
             $this->text = "";
+            $this->title = "";
+            $this->client = "";
+            $this->lawfirm = "";
             session()->flash('good', "Successfully updated");
         }catch (\Exception $e){
             session()->flash('bad', "Failed to update");

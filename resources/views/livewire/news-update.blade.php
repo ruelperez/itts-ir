@@ -11,8 +11,11 @@
             @include('components.layouts.profile')
             @include('components.layouts.navigation')
         </div>
+{{--        <div wire:poll>--}}
+{{--            Current time: {{ now() }}--}}
+{{--        </div>--}}
         <div style="width: 81%; background-color: #E6E6FA">
-            <div class="container" wire:poll.visible.2s>
+            <div class="container" wire:poll.keep-alive>
                     <div style="display: flex; margin-top: 2%; margin-left: 1%;">
                         <div>
                             <h4>{{strtoupper($campaign_name)}}</h4>
@@ -69,7 +72,11 @@
                             </div>
                             <hr>
                             <div style="white-space: pre-line;">
-                                {{$data->text}}
+                                Title:  <b>{{ucwords($data->title)}}</b>
+                                Campaign: {{strtoupper($data->campaign)}}
+                                Client: {{ucwords($data->client)}}
+                                Law firm: {{ucwords($data->lawfirm)}}
+                                <p style="margin-top: 3%;">{{$data->text}}</p>
                             </div>
                             @php $h=0;
                                 foreach ($heart as $fg){
