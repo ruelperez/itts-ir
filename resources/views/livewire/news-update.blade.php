@@ -78,17 +78,24 @@
                                 Law firm: {{ucwords($data->lawfirm)}}
                                 <p style="margin-top: 3%;">{{$data->text}}</p>
                             </div>
-                            @php $h=0;
+                            @php $h=0; $g=0;
                                 foreach ($heart as $fg){
                                    if ($fg->note_id == $data->id){
                                        $h++;
                                    }
                                 }
+
+                                foreach ($all_comment as $com){
+                                    if ($com->note_id == $data->id){
+                                        $g++;
+                                    }
+                                }
                                 $totalHeart = $h;
+                                $totalComment = $g;
                             @endphp
-                            <div style="margin-top: 2%;">
-                               <i class="fa-solid fa-heart" style="font-size: 20px; color: red; cursor: pointer" data-bs-toggle="modal" data-bs-target="#reactor" wire:click="reactor({{$data->id}})"></i> {{$totalHeart}}
-                                {{--                                comment--}}
+                            <div style="margin-top: 2%; display: flex">
+                               <i class="fa-solid fa-heart" style="font-size: 20px; margin-right: 0.5%; color: red; cursor: pointer" data-bs-toggle="modal" data-bs-target="#reactor" wire:click="reactor({{$data->id}})"></i> {{$totalHeart}}
+                                <u style="margin-left: 4%; cursor: pointer" data-bs-toggle="modal" data-bs-target="#comment" wire:click="commented({{$data->id}})">{{$totalComment}} Comment</u>
                             </div>
                             <hr>
                             <div style="display: flex">
@@ -125,5 +132,4 @@
         </div>
 
     </div>
-
 </div>

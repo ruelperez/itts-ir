@@ -15,6 +15,6 @@
         NEWS FEED
     </div>
     <div href="/itts/6/my-notes" style="@if($webName == "my-notes") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>
-        MY NOTES
+        MY POST
     </div>
 </div>

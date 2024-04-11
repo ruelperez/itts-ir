@@ -36,8 +36,10 @@
                                 }
                                 $totalHeart = $h;
                             @endphp
-                            <div style="margin-top: 2%;">
-                                <i class="fa-solid fa-heart" style="font-size: 20px; color: red; cursor: pointer" data-bs-toggle="modal" data-bs-target="#reactor" wire:click="reactor({{$data->id}})"></i> {{$totalHeart}}
+                            <div style="margin-top: 2%; display: flex">
+                                <i class="fa-solid fa-heart" style="font-size: 20px; margin-right: 0.5%; color: red; cursor: pointer" data-bs-toggle="modal" data-bs-target="#reactor" wire:click="reactor({{$data->id}})"></i> {{$totalHeart}}
+                                <u style="margin-left: 4%; cursor: pointer">{{count($comment)}} Comment</u>
+                                {{--                                comment--}}
                             </div>
                             <hr>
                             <div style="display: flex">
@@ -66,7 +68,7 @@
                             </div>
                             <hr>
                             @foreach($comment as $coms)
-                                <div>
+                                <div id="comments">
                                     <div style="display: flex; margin-bottom: 5%;">
                                         <div class="profile-picture-comment">
                                             <img src="{{asset('storage/'.$coms->photo)}}" alt="Profile Picture">
