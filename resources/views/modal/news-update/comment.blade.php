@@ -68,8 +68,8 @@
                             </div>
                             <hr>
                             @foreach($comment as $coms)
-                                <div id="comments">
-                                    <div style="display: flex; margin-bottom: 5%;">
+                                <div id="comments" style="margin-bottom: 4%;">
+                                    <div style="display: flex;">
                                         <div class="profile-picture-comment">
                                             <img src="{{asset('storage/'.$coms->photo)}}" alt="Profile Picture">
                                         </div>
@@ -84,7 +84,9 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    <div style="margin-left: 8%;">
+                                        <small wire:ignore>{{ \Carbon\Carbon::parse($coms->created_at)->diffForHumans() }}</small>
+                                    </div>
                                 </div>
 
                             @endforeach

@@ -47,8 +47,8 @@
                                     <img src="{{asset('storage/'.$data->photo)}}" alt="Profile Picture">
                                 </div>
                                 <div style="margin-right: 5%;">
-                                    <b>{{ucwords($data->user_fullname)}}</b>
-                                    <p>{{$data->updated_at->format('M d, Y h:i')}}</p>
+                                    <b>{{ucwords($data->user_fullname)}}</b><br>
+                                    <small wire:ignore>{{ \Carbon\Carbon::parse($data->created_at)->diffForHumans() }}</small>
                                 </div>
 {{--                                <div style="margin-left: auto; @if($is_admin == "1") margin-right: 6%; @endif ">--}}
 {{--                                    --}}
