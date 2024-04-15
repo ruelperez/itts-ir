@@ -37,7 +37,7 @@
                                 $totalHeart = $h;
                             @endphp
                             <div style="margin-top: 2%; display: flex">
-                                <i class="fa-solid fa-heart" style="font-size: 20px; margin-right: 0.5%; color: red; cursor: pointer" data-bs-toggle="modal" data-bs-target="#reactor" wire:click="reactor({{$data->id}})"></i> {{$totalHeart}}
+                                <i class="fa-solid fa-heart" style="font-size: 20px; margin-right: 0.5%; color: red; cursor: pointer" wire:click="reactor({{$data->id}})"></i> {{$totalHeart}}
                                 <u style="margin-left: 4%; cursor: pointer">{{count($comment)}} Comment</u>
                                 {{--                                comment--}}
                             </div>
@@ -45,19 +45,19 @@
                             <div style="display: flex">
                                 <div style="width: 50%; text-align: center">
                                     @if(count($heart) < 1)
-                                        <i class="fa-regular fa-heart" style="font-size: 22px; cursor: pointer;" wire:click="clickHeart({{$data->id}})"></i>
+                                        <i class="fa-regular fa-heart" style="font-size: 25px; cursor: pointer;" wire:click="clickHeart({{$data->id}})"></i>
                                     @else
                                         @php $n=0; @endphp
                                         @foreach($heart as $hearts)
                                             @if($hearts->user_id == $user_id and $hearts->note_id == $data->id)
-                                                <i class="fa-solid fa-heart" style="font-size: 22px; cursor: pointer; color: red" wire:click="clickHeart({{$data->id}})"></i>
+                                                <i class="fa-solid fa-heart" style="font-size: 25px; cursor: pointer; color: red" wire:click="clickHeart({{$data->id}})"></i>
                                                 @php $n++; @endphp
                                             @else
 
                                             @endif
                                         @endforeach
                                         @if($n == 0)
-                                            <i class="fa-regular fa-heart" style="font-size: 22px; cursor: pointer;" wire:click="clickHeart({{$data->id}})"></i>
+                                            <i class="fa-regular fa-heart" style="font-size: 25px; cursor: pointer;" wire:click="clickHeart({{$data->id}})"></i>
                                         @endif
                                     @endif
 
@@ -68,6 +68,14 @@
                             </div>
                             <hr>
                             @foreach($comment as $coms)
+                                @php $u=0;
+                                foreach ($comment_heart as $fg){
+                                   if ($fg->comment_id == $coms->id){
+                                       $u++;
+                                   }
+                                }
+                                $totalCommentHeart = $u;
+                                @endphp
                                 <div id="comments" style="margin-bottom: 4%;">
                                     <div style="display: flex;">
                                         <div class="profile-picture-comment">
@@ -84,8 +92,29 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div style="margin-left: 8%;">
-                                        <small wire:ignore>{{ \Carbon\Carbon::parse($coms->created_at)->diffForHumans() }}</small>
+                                    <div style="margin-left: 8%; display: flex">
+                                        <div wire:ignore>
+                                            <small wire:ignore>{{ \Carbon\Carbon::parse($coms->created_at)->diffForHumans() }}</small>
+                                        </div>
+                                        <div style="margin-left: 2%;">
+                                            @if(count($comment_heart) < 1)
+                                                <i class="fa-regular fa-heart" style="font-size: 18px; cursor: pointer;" wire:click="clickCommentHeart({{$coms->id}})"></i>
+                                            @else
+                                                @php $m=0; @endphp
+                                                @foreach($comment_heart as $hearts)
+                                                    @if($hearts->user_id == $user_id and $hearts->comment_id == $coms->id)
+                                                        <i class="fa-solid fa-heart" style="font-size: 18px; cursor: pointer; color: red" wire:click="clickCommentHeart({{$coms->id}})"></i>
+                                                        @php $m++; @endphp
+                                                    @else
+
+                                                    @endif
+                                                @endforeach
+                                                @if($m == 0)
+                                                    <i class="fa-regular fa-heart" style="font-size: 18px; cursor: pointer;" wire:click="clickCommentHeart({{$coms->id}})"></i>
+                                                @endif
+                                            @endif
+                                            <small style="cursor: pointer">{{$totalCommentHeart}}</small>
+                                        </div>
                                     </div>
                                 </div>
 

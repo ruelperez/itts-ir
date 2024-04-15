@@ -101,19 +101,19 @@
                             <div style="display: flex">
                                 <div style="width: 50%; text-align: center">
                                     @if(count($heart) < 1)
-                                        <i class="fa-regular fa-heart" style="font-size: 22px; cursor: pointer;" wire:click="clickHeart({{$data->id}})"></i>
+                                        <i class="fa-regular fa-heart" style="font-size: 25px; cursor: pointer;" wire:click="clickHeart({{$data->id}})"></i>
                                     @else
                                         @php $n=0; @endphp
                                         @foreach($heart as $hearts)
                                             @if($hearts->user_id == $user_id and $hearts->note_id == $data->id)
-                                                <i class="fa-solid fa-heart" style="font-size: 22px; cursor: pointer; color: red" wire:click="clickHeart({{$data->id}})"></i>
+                                                <i class="fa-solid fa-heart" style="font-size: 25px; cursor: pointer; color: red" wire:click="clickHeart({{$data->id}})"></i>
                                                 @php $n++; @endphp
                                             @else
 
                                             @endif
                                         @endforeach
                                         @if($n == 0)
-                                            <i class="fa-regular fa-heart" style="font-size: 22px; cursor: pointer;" wire:click="clickHeart({{$data->id}})"></i>
+                                            <i class="fa-regular fa-heart" style="font-size: 25px; cursor: pointer;" wire:click="clickHeart({{$data->id}})"></i>
                                         @endif
                                     @endif
 
