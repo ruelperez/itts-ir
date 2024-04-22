@@ -42,7 +42,7 @@
                 </div>
                 <div class="content">
                     @foreach($notes_all as $data)
-                        <div style="box-sizing: content-box; width: 76%; background-color: white; margin-left: 12%; padding-left: 3%; padding-right: 3%; padding-top: 1.5%; padding-bottom: 2%; margin-top: 2%; margin-bottom: 2%; word-wrap: break-word;">
+                        <div style="box-sizing: content-box; width: 76%; background-color: white; margin-left: 12%; padding-left: 3%; padding-right: 3%; padding-top: 1.5%; padding-bottom: 2%; margin-bottom: 2%; word-wrap: break-word;">
                             <div class="fw-light" style="display: flex;">
                                 <div class="profile-picture">
                                     <img src="{{asset('storage/'.$data->photo)}}" alt="Profile Picture">
