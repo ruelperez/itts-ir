@@ -68,6 +68,16 @@
     word-wrap: break-word;
 }
 
+.modal_body{
+    overflow-y: scroll;
+    width: 100%; /* Adjust width as needed */
+    height: 350px; /* Adjust height as needed */
+    word-wrap: break-word;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 2%;
+}
+
 .comment-body{
     overflow-y: scroll;
     width: 100%; /* Adjust width as needed */

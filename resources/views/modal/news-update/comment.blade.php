@@ -113,7 +113,7 @@
                                                     <i class="fa-regular fa-heart" style="font-size: 18px; cursor: pointer;" wire:click="clickCommentHeart({{$coms->id}})"></i>
                                                 @endif
                                             @endif
-                                            <small style="cursor: pointer">{{$totalCommentHeart}}</small>
+                                            <small style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#comment_reactor" wire:click="comment_reactor({{$coms->id}})"><u>{{$totalCommentHeart}}</u></small>
                                         </div>
                                     </div>
                                 </div>

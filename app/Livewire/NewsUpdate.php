@@ -19,7 +19,7 @@ class NewsUpdate extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $title, $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "cl", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
+    public $registrationSwitch, $title, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "cl", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
@@ -60,6 +60,16 @@ class NewsUpdate extends Component
             $dat[]= User::find($rss->user_id);
         }
         $this->reactors = $dat;
+    }
+
+    public function comment_reactor($id){
+        $dat = [];
+        $rs = CommentHeart::where('comment_id', $id)
+            ->where('user_id',$this->user_id)->get();
+        foreach ($rs as $rss){
+            $dat[]= User::find($rss->user_id);
+        }
+        $this->comment_reactors = $dat;
     }
 
     public function commented($id){
