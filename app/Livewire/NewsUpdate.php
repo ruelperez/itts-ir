@@ -20,7 +20,7 @@ class NewsUpdate extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "cl", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
+    public $registrationSwitch, $fj = 0, $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "cl", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
@@ -187,30 +187,57 @@ class NewsUpdate extends Component
     }
 
     public function submit_edit(){
-        $this->image->store(path: 'public');
-        $hashPhoto = $this->image->hashName();
-        $rt = Note::find($this->ids);
-        try {
-            $rt->tags = $this->tags;
-            $rt->text = $this->text;
-            $rt->title = $this->title;
-            $rt->campaign = $this->campaign_name;
-            $rt->client = $this->client;
-            $rt->lawfirm = $this->lawfirm;
-            $rt->method = $this->method;
-            $rt->image = $hashPhoto;
-            $rt->save();
-            $this->tags = "";
-            $this->text = "";
-            $this->title = "";
-            $this->client = "";
-            $this->lawfirm = "";
-            $this->method = "";
-            $this->image = "";
-            session()->flash('good', "Successfully updated");
-        }catch (\Exception $e){
-            session()->flash('bad', "Failed to update");
+        if ($this->fj == 0){
+            $rt = Note::find($this->ids);
+            try {
+                $rt->tags = $this->tags;
+                $rt->text = $this->text;
+                $rt->title = $this->title;
+                $rt->campaign = $this->campaign_name;
+                $rt->client = $this->client;
+                $rt->lawfirm = $this->lawfirm;
+                $rt->method = $this->method;
+                $rt->image = $this->image;
+                $rt->save();
+                $this->tags = "";
+                $this->text = "";
+                $this->title = "";
+                $this->client = "";
+                $this->lawfirm = "";
+                $this->method = "";
+                $this->image = "";
+                session()->flash('good', "Successfully updated");
+            }catch (\Exception $e){
+                session()->flash('bad', "Failed to update");
+            }
         }
+        else{
+            $this->image->store(path: 'public');
+            $hashPhoto = $this->image->hashName();
+            $rt = Note::find($this->ids);
+            try {
+                $rt->tags = $this->tags;
+                $rt->text = $this->text;
+                $rt->title = $this->title;
+                $rt->campaign = $this->campaign_name;
+                $rt->client = $this->client;
+                $rt->lawfirm = $this->lawfirm;
+                $rt->method = $this->method;
+                $rt->image = $hashPhoto;
+                $rt->save();
+                $this->tags = "";
+                $this->text = "";
+                $this->title = "";
+                $this->client = "";
+                $this->lawfirm = "";
+                $this->method = "";
+                $this->image = "";
+                session()->flash('good', "Successfully updated");
+            }catch (\Exception $e){
+                session()->flash('bad', "Failed to update");
+            }
+        }
+
     }
 
     public function logout(){
@@ -335,6 +362,9 @@ class NewsUpdate extends Component
         }
         if ($field == "adminSwitch"){
             $this->admin_Switch();
+        }
+        if ($field == "image"){
+            $this->fj = 1;
         }
         if ($field == "campaign_name"){
 

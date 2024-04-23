@@ -69,7 +69,7 @@
                         <img src="{{asset('storage/'.$image)}}" style="max-width: 60%; max-height: 60%; margin-top: 2%;" id="imgs">
                         <div wire:ignore>
                             <img id="preview_edit" src="#" alt="Image Preview" style="display: none; max-width: 60%; max-height: 60%;">
-                            <input type="file" id="image" wire:model="image" accept="image/*" onchange="previewImageEdit(event)" style="margin-top: 1%;">
+                            <input type="file" id="image" wire:model.live="image" accept="image/*" onchange="previewImageEdit(event)" style="margin-top: 1%;">
                         </div>
                     </div>
                 </div>
