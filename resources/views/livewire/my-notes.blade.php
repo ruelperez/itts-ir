@@ -1,5 +1,4 @@
 <div>
-    @include('modal.click-settings')
     @include('partial.header')
     <div style="display: flex; width: 100%;">
         <div style="width: 19%; background-color: #0077b6">
@@ -9,7 +8,7 @@
         <div style="width: 81%;">
             <div class="container">
                 <div>
-                    <h4 style="margin-left: 2%; margin-top: 3%;">My notes</h4>
+                    <h4 style="margin-left: 2%; margin-top: 3%;">Bio</h4>
                 </div>
             </div>
         </div>

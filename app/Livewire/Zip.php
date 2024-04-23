@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\AdminShow;
 use App\Models\IsRegistration;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,7 @@ class Zip extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $is_admin, $webName, $fullname, $user_id, $photo, $searchInput, $request_data=[];
+    public $registrationSwitch, $adminSwitch, $is_admin, $webName, $fullname, $user_id, $photo, $searchInput, $request_data=[];
 
     public function render()
     {
@@ -66,6 +67,24 @@ class Zip extends Component
         else{
             $this->registrationSwitch = true;
         }
+
+        $data = AdminShow::all();
+        if (count($data) == 0){
+            AdminShow::create([
+                'user_id' => auth()->user()->id,
+                'on_off' => true,
+            ]);
+        }
+        $an = AdminShow::all();
+        foreach ($an as $ans){
+            $this->adminSwitch = $ans->on_off;
+        }
+        if ($this->adminSwitch == "0"){
+            $this->adminSwitch = false;
+        }
+        else{
+            $this->adminSwitch = true;
+        }
     }
 
     public function regSwitch(){
@@ -94,11 +113,58 @@ class Zip extends Component
                 }
             }
         }
+        else{
+            IsRegistration::create([
+                'user_id' => auth()->user()->id,
+                'on_off' => true,
+            ]);
+        }
+    }
+
+    public function admin_Switch(){
+        $data = AdminShow::all();
+        if (count($data) == 1){
+            if ($this->adminSwitch == false){
+                foreach ($data as $datas){
+                    $datas->user_id = auth()->user()->id;
+                    $datas->on_off = false;
+                    $datas->save();
+                }
+                $an = AdminShow::all();
+                foreach ($an as $ans){
+                    $this->adminSwitch = $ans->on_off;
+                }
+            }
+            else{
+                foreach ($data as $datas){
+                    $datas->user_id = auth()->user()->id;
+                    $datas->on_off = true;
+                    $datas->save();
+                }
+                $an = AdminShow::all();
+                foreach ($an as $ans){
+                    $this->adminSwitch = $ans->on_off;
+                }
+            }
+        }
+        else{
+            AdminShow::create([
+                'user_id' => auth()->user()->id,
+                'on_off' => true,
+            ]);
+            $an = AdminShow::all();
+            foreach ($an as $ans){
+                $this->adminSwitch = $ans->on_off;
+            }
+        }
     }
 
     public function updated($field){
         if ($field == "registrationSwitch"){
             $this->regSwitch();
+        }
+        if ($field == "adminSwitch"){
+            $this->admin_Switch();
         }
         if ($field == "photo"){
             $this->photo->store(path: 'public');

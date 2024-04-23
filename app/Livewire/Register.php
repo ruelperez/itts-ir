@@ -2,13 +2,14 @@
 
 namespace App\Livewire;
 
+use App\Models\AdminShow;
 use App\Models\IsRegistration;
 use App\Models\User;
 use Livewire\Component;
 
 class Register extends Component
 {
-    public $fullname, $username, $password, $is_admin = false, $password_confirmation, $is_reg, $photo = "default_profile.png";
+    public $fullname, $username, $admin_show, $password, $is_admin = false, $password_confirmation, $is_reg, $photo = "default_profile.png";
     public function render()
     {
         $data = IsRegistration::all();
@@ -21,6 +22,15 @@ class Register extends Component
             }
         }
 
+        $data = AdminShow::all();
+        if (count($data) < 1){
+            $this->admin_show = 1;
+        }
+        else{
+            foreach ($data as $datas){
+                $this->admin_show = $datas->on_off;
+            }
+        }
         return view('livewire.register');
     }
 

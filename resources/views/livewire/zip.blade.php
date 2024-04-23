@@ -1,5 +1,4 @@
 <div>
-    @include('modal.click-settings')
     @include('partial.header')
     <div style="display: flex; width: 100%;">
         <div style="width: 19%; background-color: #0077b6">

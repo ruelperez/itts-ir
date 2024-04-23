@@ -20,7 +20,7 @@
 
 .profile-picture img {
     width: 100%; /* Ensure the image fills the container */
-    height: 55px; /* Maintain aspect ratio */
+    height: 45px; /* Maintain aspect ratio */
     border-radius: 100%; /* Ensure the image inside the circle is also circular */
 }
 
@@ -59,7 +59,7 @@
     margin-top: 1%;
     margin-left: 7%;
     overflow-y: scroll;
-    width: 86%; /* Adjust width as needed */
+    width: 1000px; /* Adjust width as needed */
     height: 500px; /* Adjust height as needed */
 }
 

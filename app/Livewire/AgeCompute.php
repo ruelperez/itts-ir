@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\AdminShow;
 use App\Models\IsRegistration;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,7 @@ class AgeCompute extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $fullname, $is_admin, $webName, $user_id, $photo, $birth, $death, $error=0, $stat = "dependent", $hn = 0, $start, $alive, $end, $latency = 0, $name, $diagnosis, $age_diagnosed = 0, $age_passaway = 0, $age_started = 0, $age_left = 0, $year_exposure = 0, $remarks = 0;
+    public $registrationSwitch, $adminSwitch, $fullname, $is_admin, $webName, $user_id, $photo, $birth, $death, $error=0, $stat = "dependent", $hn = 0, $start, $alive, $end, $latency = 0, $name, $diagnosis, $age_diagnosed = 0, $age_passaway = 0, $age_started = 0, $age_left = 0, $year_exposure = 0, $remarks = 0;
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
@@ -233,6 +234,9 @@ class AgeCompute extends Component
         if ($value == "registrationSwitch"){
             $this->regSwitch();
         }
+        if ($value == "adminSwitch"){
+            $this->admin_Switch();
+        }
 
 
     }
@@ -261,6 +265,24 @@ class AgeCompute extends Component
         else{
             $this->registrationSwitch = true;
         }
+
+        $data = AdminShow::all();
+        if (count($data) == 0){
+            AdminShow::create([
+                'user_id' => auth()->user()->id,
+                'on_off' => true,
+            ]);
+        }
+        $an = AdminShow::all();
+        foreach ($an as $ans){
+            $this->adminSwitch = $ans->on_off;
+        }
+        if ($this->adminSwitch == "0"){
+            $this->adminSwitch = false;
+        }
+        else{
+            $this->adminSwitch = true;
+        }
     }
 
     public function regSwitch(){
@@ -287,6 +309,50 @@ class AgeCompute extends Component
                 foreach ($an as $ans){
                     $this->registrationSwitch = $ans->on_off;
                 }
+            }
+        }
+        else{
+            IsRegistration::create([
+                'user_id' => auth()->user()->id,
+                'on_off' => true,
+            ]);
+        }
+    }
+
+    public function admin_Switch(){
+        $data = AdminShow::all();
+        if (count($data) == 1){
+            if ($this->adminSwitch == false){
+                foreach ($data as $datas){
+                    $datas->user_id = auth()->user()->id;
+                    $datas->on_off = false;
+                    $datas->save();
+                }
+                $an = AdminShow::all();
+                foreach ($an as $ans){
+                    $this->adminSwitch = $ans->on_off;
+                }
+            }
+            else{
+                foreach ($data as $datas){
+                    $datas->user_id = auth()->user()->id;
+                    $datas->on_off = true;
+                    $datas->save();
+                }
+                $an = AdminShow::all();
+                foreach ($an as $ans){
+                    $this->adminSwitch = $ans->on_off;
+                }
+            }
+        }
+        else{
+            AdminShow::create([
+                'user_id' => auth()->user()->id,
+                'on_off' => true,
+            ]);
+            $an = AdminShow::all();
+            foreach ($an as $ans){
+                $this->adminSwitch = $ans->on_off;
             }
         }
     }

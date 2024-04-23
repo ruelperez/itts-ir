@@ -14,7 +14,7 @@
                 <form wire:submit.prevent="submit_register">
                     <div class="mb-4">
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" wire:model="is_admin" value="{{$is_admin}}" @if($is_reg == 0) disabled @endif>
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" wire:model="is_admin" value="{{$is_admin}}" @if($is_reg == 0) disabled @endif @if($admin_show == 0) disabled @endif>
                             <label class="form-check-label" for="flexSwitchCheckChecked">Admin</label>
                         </div>
                     </div>

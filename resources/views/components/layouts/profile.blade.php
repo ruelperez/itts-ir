@@ -1,4 +1,5 @@
 <div style="position: relative;" wire:ignore>
+    @include('modal.click-settings')
     @include('modal.news-update.show-photo')
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#show_photo" id="show_photo" hidden>
         Launch demo modal

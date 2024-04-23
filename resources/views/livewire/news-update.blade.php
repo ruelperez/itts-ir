@@ -1,5 +1,4 @@
 <div>
-    @include('modal.click-settings')
     @include('partial.header')
     @include('modal.news-update.add')
     @include('modal.news-update.edit_tags')

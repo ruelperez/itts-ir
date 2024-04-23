@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\AdminShow;
 use App\Models\Comment;
 use App\Models\CommentHeart;
 use App\Models\Heart;
@@ -19,7 +20,7 @@ class NewsUpdate extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "cl", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
+    public $registrationSwitch, $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "cl", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
@@ -32,7 +33,9 @@ class NewsUpdate extends Component
         $this->comment_heart = CommentHeart::all();
         $this->all_comment = Comment::all();
         if ($this->searchInput == ""){
-            $this->notes_all = Note::where('campaign',$this->campaign_name)->get();
+            $this->notes_all = Note::where('campaign',$this->campaign_name)
+                ->orderBy('updated_at', 'desc')
+                ->get();
         }else{
             $this->notes_all = Note::where('id','LIKE', '%'.$this->searchInput.'%')
                 ->orWhere('tags', 'LIKE', '%'.$this->searchInput.'%')
@@ -234,6 +237,24 @@ class NewsUpdate extends Component
         else{
             $this->registrationSwitch = true;
         }
+
+        $data = AdminShow::all();
+        if (count($data) == 0){
+            AdminShow::create([
+                'user_id' => auth()->user()->id,
+                'on_off' => true,
+            ]);
+        }
+        $an = AdminShow::all();
+        foreach ($an as $ans){
+            $this->adminSwitch = $ans->on_off;
+        }
+        if ($this->adminSwitch == "0"){
+            $this->adminSwitch = false;
+        }
+        else{
+            $this->adminSwitch = true;
+        }
     }
 
     public function regSwitch(){
@@ -262,11 +283,58 @@ class NewsUpdate extends Component
                 }
             }
         }
+        else{
+            IsRegistration::create([
+                'user_id' => auth()->user()->id,
+                'on_off' => true,
+            ]);
+        }
+    }
+
+    public function admin_Switch(){
+        $data = AdminShow::all();
+        if (count($data) == 1){
+            if ($this->adminSwitch == false){
+                foreach ($data as $datas){
+                    $datas->user_id = auth()->user()->id;
+                    $datas->on_off = false;
+                    $datas->save();
+                }
+                $an = AdminShow::all();
+                foreach ($an as $ans){
+                    $this->adminSwitch = $ans->on_off;
+                }
+            }
+            else{
+                foreach ($data as $datas){
+                    $datas->user_id = auth()->user()->id;
+                    $datas->on_off = true;
+                    $datas->save();
+                }
+                $an = AdminShow::all();
+                foreach ($an as $ans){
+                    $this->adminSwitch = $ans->on_off;
+                }
+            }
+        }
+        else{
+            AdminShow::create([
+                'user_id' => auth()->user()->id,
+                'on_off' => true,
+            ]);
+            $an = AdminShow::all();
+            foreach ($an as $ans){
+                $this->adminSwitch = $ans->on_off;
+            }
+        }
     }
 
     public function updated($field){
         if ($field == "registrationSwitch"){
             $this->regSwitch();
+        }
+        if ($field == "adminSwitch"){
+            $this->admin_Switch();
         }
         if ($field == "campaign_name"){
 

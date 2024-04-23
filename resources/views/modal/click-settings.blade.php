@@ -11,6 +11,10 @@
                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" wire:model.live="registrationSwitch" value="{{$registrationSwitch}}">
                         <label class="form-check-label" for="flexSwitchCheckChecked">Registration</label>
                     </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" wire:model.live="adminSwitch" value="{{$adminSwitch}}">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Admin option registration</label>
+                    </div>
                 </div>
             </div>
         </div>
