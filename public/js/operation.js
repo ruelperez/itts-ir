@@ -47,7 +47,7 @@ function previewImage(event) {
     reader.readAsDataURL(input.files[0]);
 }
 
-function previewImageEdit(event){alert('bababa');
+function previewImageEdit(event){
     var input = event.target;
     var reader = new FileReader();
     var imgs = document.getElementById('imgs');
