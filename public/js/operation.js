@@ -53,7 +53,7 @@ function previewImageEdit(event){
     var imgs = document.getElementById('imgs');
     imgs.style.display = 'none';
     reader.onload = function() {
-        var preview = document.getElementById('preview');
+        var preview = document.getElementById('preview_edit');
         preview.src = reader.result;
         preview.style.display = 'block';
     }

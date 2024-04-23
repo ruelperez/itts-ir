@@ -184,6 +184,8 @@ class NewsUpdate extends Component
     }
 
     public function submit_edit(){
+        $this->image->store(path: 'public');
+        $hashPhoto = $this->image->hashName();
         $rt = Note::find($this->ids);
         try {
             $rt->tags = $this->tags;
@@ -193,6 +195,7 @@ class NewsUpdate extends Component
             $rt->client = $this->client;
             $rt->lawfirm = $this->lawfirm;
             $rt->method = $this->method;
+            $rt->image = $hashPhoto;
             $rt->save();
             $this->tags = "";
             $this->text = "";
@@ -200,6 +203,7 @@ class NewsUpdate extends Component
             $this->client = "";
             $this->lawfirm = "";
             $this->method = "";
+            $this->image = "";
             session()->flash('good', "Successfully updated");
         }catch (\Exception $e){
             session()->flash('bad', "Failed to update");
