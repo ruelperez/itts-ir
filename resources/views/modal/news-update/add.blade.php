@@ -22,7 +22,7 @@
                                 <label class="col-form-label">Title:</label>
                             </div>
                             <div class="col-auto">
-                                <input type="text" wire:model="title" class="form-control">
+                                <input type="text" wire:model="title" class="form-control" required>
                             </div>
                         </div>
                         <div class="row g-3 align-items-center mb-2">
@@ -38,7 +38,7 @@
                                 <label class="col-form-label">Client:</label>
                             </div>
                             <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="client">
+                                <input type="text" class="form-control" wire:model="client" required>
                             </div>
                         </div>
                         <div class="row g-3 align-items-center mb-2">
@@ -46,7 +46,7 @@
                                 <label class="col-form-label">Law firm:</label>
                             </div>
                             <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="lawfirm">
+                                <input type="text" class="form-control" wire:model="lawfirm" required>
                             </div>
                         </div>
                         <div class="row g-3 align-items-center mb-2">
@@ -54,7 +54,7 @@
                                 <label class="col-form-label">Method</label>
                             </div>
                             <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="method">
+                                <input type="text" class="form-control" wire:model="method" required>
                             </div>
                         </div>
                         <div class="row g-3 align-items-center mb-2">
@@ -62,7 +62,7 @@
                                 <label class="col-form-label">Tags #:</label>
                             </div>
                             <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="tags">
+                                <input type="text" class="form-control" wire:model="tags" required>
                             </div>
                         </div>
                         <div wire:ignore>

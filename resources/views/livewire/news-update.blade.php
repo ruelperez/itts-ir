@@ -78,6 +78,7 @@
                                 Client: {{ucwords($data->client)}}
                                 Law firm: {{ucwords($data->lawfirm)}}
                                 <p style="margin-top: 3%;">{{$data->text}}</p>
+                                <img src="{{asset('storage/'.$data->image)}}" style="max-width: 90%; max-height: 90%; margin-left: 5%;">
                             </div>
                             @php $h=0; $g=0;
                                 foreach ($heart as $fg){

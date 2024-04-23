@@ -18,6 +18,7 @@ class Note extends Model
         'client',
         'lawfirm',
         'method',
+        'image',
     ];
 
     use HasFactory;

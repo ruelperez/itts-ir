@@ -19,7 +19,7 @@ class NewsUpdate extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $title, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "cl", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
+    public $registrationSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "cl", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
@@ -121,6 +121,8 @@ class NewsUpdate extends Component
     }
 
     public function submit(){
+        $this->image->store(path: 'public');
+        $hashPhoto = $this->image->hashName();
         try {
             Note::create([
                 'text' => $this->text,
@@ -133,6 +135,7 @@ class NewsUpdate extends Component
                 'client' => $this->client,
                 'lawfirm' => $this->lawfirm,
                 'method' => $this->method,
+                'image' => $hashPhoto,
             ]);
             $this->text = "";
             $this->tags = "";
@@ -140,6 +143,7 @@ class NewsUpdate extends Component
             $this->client = "";
             $this->lawfirm = "";
             $this->method = "";
+            $this->image = "";
             session()->flash('good', "Successfully added");
         }catch (\Exception $e){
             session()->flash('bad', "Failed to add");
