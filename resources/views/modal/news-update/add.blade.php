@@ -65,7 +65,11 @@
                                 <input type="text" class="form-control" wire:model="tags">
                             </div>
                         </div>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" wire:model="text" required></textarea>
+                        <div wire:ignore>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" wire:model="text" required></textarea>
+                            <img id="preview" src="#" alt="Image Preview" style="display: none; max-width: 150px; max-height: 150px;">
+                            <input type="file" id="image" wire:model="image" accept="image/*" onchange="previewImage(event)" style="margin-top: 1%;">
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

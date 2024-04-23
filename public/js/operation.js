@@ -34,6 +34,18 @@ $(document).ready(function() {
 
 });
 
+function previewImage(event) {
+    var input = event.target;
+    var reader = new FileReader();
+
+    reader.onload = function() {
+        var preview = document.getElementById('preview');
+        preview.src = reader.result;
+        preview.style.display = 'block';
+    }
+
+    reader.readAsDataURL(input.files[0]);
+}
 
 // $(document).ready(function() {
 //     setInterval(function() {
