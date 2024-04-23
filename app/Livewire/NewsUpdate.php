@@ -184,6 +184,7 @@ class NewsUpdate extends Component
         $this->client = $rt->client;
         $this->lawfirm = $rt->lawfirm;
         $this->image = $rt->image;
+        $this->method = $rt->method;
     }
 
     public function submit_edit(){
