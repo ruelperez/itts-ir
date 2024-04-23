@@ -180,6 +180,7 @@ class NewsUpdate extends Component
         $this->campaign_name = $rt->campaign;
         $this->client = $rt->client;
         $this->lawfirm = $rt->lawfirm;
+        $this->image = $rt->image;
     }
 
     public function submit_edit(){

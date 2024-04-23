@@ -47,6 +47,20 @@ function previewImage(event) {
     reader.readAsDataURL(input.files[0]);
 }
 
+function previewImageEdit(event){alert('bababa');
+    var input = event.target;
+    var reader = new FileReader();
+    var imgs = document.getElementById('imgs');
+    imgs.style.display = 'none';
+    reader.onload = function() {
+        var preview = document.getElementById('preview');
+        preview.src = reader.result;
+        preview.style.display = 'block';
+    }
+
+    reader.readAsDataURL(input.files[0]);
+}
+
 // $(document).ready(function() {
 //     setInterval(function() {
 //         $.ajax({
