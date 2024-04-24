@@ -60,10 +60,17 @@
                         <div class="row g-3 align-items-center mb-2">
                             <div class="col-auto">
                                 <label class="col-form-label">Link</label>
+                                <i class="fa-solid fa-circle-plus"  wire:click="addInputField" style="color: blue; margin-left: 10px; cursor: pointer; font-size: 18px;"></i>
                             </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="link" required>
+                            <div style="margin-left: 12%;">
+                                @foreach ($link as $index => $input)
+                                    <textarea type="text" class="form-control" wire:model="link.{{ $index }}" style="width: 70%; margin-bottom: 1%; " rows="2">{{$input->link}}</textarea>
+                                @endforeach
                             </div>
+                            <!-- Button to save data -->
+                            {{--                            <div class="col-auto">--}}
+                            {{--                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" wire:model="link" required></textarea>--}}
+                            {{--                            </div>--}}
                         </div>
                         <div class="row g-3 align-items-center mb-2">
                             <div class="col-auto">

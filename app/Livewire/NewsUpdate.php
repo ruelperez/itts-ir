@@ -10,6 +10,7 @@ use App\Models\IsRegistration;
 use App\Models\Link;
 use App\Models\Note;
 use App\Models\User;
+use Dflydev\DotAccessData\Data;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Validate;
@@ -214,7 +215,7 @@ class NewsUpdate extends Component
         $this->lawfirm = $rt->lawfirm;
         $this->image = $rt->image;
         $this->method = $rt->method;
-//        $this->link = $rt->link;
+        $this->link = Link::where('note_id',$id)->get();
     }
 
     public function submit_edit(){
