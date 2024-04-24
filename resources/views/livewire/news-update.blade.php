@@ -31,13 +31,22 @@
                     </div>
                 <div style="display: flex;">
                     @if($is_admin == "1")
-                        <div style="margin-left: 12%;  margin-right: 1%;">
+                        <div style="margin-left: 17%;  margin-right: 1%;">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add">Create <i class="fa-solid fa-plus"></i></button>
                         </div>
                     @endif
-                    <div style="width: 20%; @if($is_admin != "1") margin-left: 12%; @endif ">
+                    <div style="width: 20%; @if($is_admin != "1") margin-left: 17%; @endif ">
                         <input type="text" placeholder="Search" wire:model.live="searchInput" style="padding: 1%;  width: 100%;">
                     </div>
+{{--                    <div style="@if($is_admin != "1") margin-left: 3%; @else margin-left: 3%; @endif font-size: 24px; cursor: pointer">--}}
+{{--                        <div style="position: relative;">--}}
+{{--                            <i class="fa-regular fa-bell"></i>--}}
+{{--                            <div style="background-color: red; position: absolute; top: 0px; left: 10px; border-radius: 80%; padding: 1%; width: 100%; height: 60%; text-align: center" data-bs-toggle="modal" data-bs-target="#clickNotif">--}}
+{{--                                <p style="font-size: 15px; color: white">7</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
+{{--                    </div>--}}
                 </div>
                 <div class="content">
                     @foreach($notes_all as $data)
@@ -77,7 +86,7 @@
                                 Client: <b>{{ucwords($data->client)}}</b>
                                 Law firm: <b>{{ucwords($data->lawfirm)}}</b>
                                 Method: <b>{{ucwords($data->method)}}</b>
-                                Link: <a href="{{$data->link}}">{{$data->link}}</a>
+                                Link: <a href="{{$data->link}}" target="_blank">{{$data->link}}</a>
                                 <p style="margin-top: 3%;">{{$data->text}}</p>
                                 <img src="{{asset('storage/'.$data->image)}}" style="max-width: 90%; max-height: 90%; margin-left: 5%;">
                             </div>
