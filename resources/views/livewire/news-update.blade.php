@@ -80,17 +80,17 @@
                                 @endif
                             </div>
                             <hr>
-                            <div >
+                            <div>
                                 Title:  <b>{{ucwords($data->title)}}</b><br>
                                 Campaign: <b>{{strtoupper($data->campaign)}}</b><br>
                                 Client: <b>{{ucwords($data->client)}}</b><br>
                                 Law firm: <b>{{ucwords($data->lawfirm)}}</b><br>
                                 Method: <b>{{ucwords($data->method)}}</b><br>
                                 Link:
-                                <div>
+                                <div style="word-wrap: break-word">
                                     @foreach($linkData as $linked)
                                         @if($data->id == $linked->note_id)
-                                            <a href="{{$linked->link}}" target="_blank" style="margin-left: 5%;">{{$linked->link}}</a><br>
+                                            <a href="{{$linked->link}}" target="_blank" style="margin-left: 5%;">{{$linked->link}}</a>
                                         @endif
                                     @endforeach
                                 </div>
