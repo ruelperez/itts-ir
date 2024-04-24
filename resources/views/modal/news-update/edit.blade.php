@@ -64,7 +64,7 @@
                             </div>
                             <div style="margin-left: 12%;">
                                 @foreach ($link as $index => $input)
-                                    <textarea type="text" class="form-control" wire:model="link.{{ $index }}" style="width: 70%; margin-bottom: 1%; " rows="2">{{$input->link}}</textarea>
+                                    <textarea type="text" class="form-control" wire:model="link.{{ $index }}" style="width: 70%; margin-bottom: 1%; " rows="2"></textarea>
                                 @endforeach
                             </div>
                             <!-- Button to save data -->

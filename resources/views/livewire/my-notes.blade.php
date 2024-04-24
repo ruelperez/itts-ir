@@ -8,7 +8,10 @@
         <div style="width: 81%;">
             <div class="container">
                 <div>
-                    <h4 style="margin-left: 2%; margin-top: 3%;">Bio</h4>
+                    <h4 style="margin-left: 2%; margin-top: 3%;">Employee leave form</h4>
+                </div>
+                <div style="margin-left: 3%;margin-top: 2%;">
+                    Link: <br> <a href="https://docs.google.com/forms/d/e/1FAIpQLScsNvwJyFiQM-hv3tQL198w2O7BAAWZzg7PwxYymgRvtioJ7g/viewform" target="_blank">https://docs.google.com/forms/d/e/1FAIpQLScsNvwJyFiQM-hv3tQL198w2O7BAAWZzg7PwxYymgRvtioJ7g/viewform</a>
                 </div>
             </div>
         </div>
