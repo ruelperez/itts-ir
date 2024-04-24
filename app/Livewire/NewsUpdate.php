@@ -20,7 +20,7 @@ class NewsUpdate extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $fj = 0, $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "cl", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
+    public $registrationSwitch, $fj = 0, $link, $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "cl", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
@@ -139,6 +139,7 @@ class NewsUpdate extends Component
                 'lawfirm' => $this->lawfirm,
                 'method' => $this->method,
                 'image' => $hashPhoto,
+                'link' => $this->link,
             ]);
             $this->text = "";
             $this->tags = "";
@@ -147,6 +148,7 @@ class NewsUpdate extends Component
             $this->lawfirm = "";
             $this->method = "";
             $this->image = "";
+            $this->link = "";
             session()->flash('good', "Successfully added");
         }catch (\Exception $e){
             session()->flash('bad', "Failed to add");
@@ -185,6 +187,7 @@ class NewsUpdate extends Component
         $this->lawfirm = $rt->lawfirm;
         $this->image = $rt->image;
         $this->method = $rt->method;
+        $this->link = $rt->link;
     }
 
     public function submit_edit(){
@@ -199,6 +202,7 @@ class NewsUpdate extends Component
                 $rt->lawfirm = $this->lawfirm;
                 $rt->method = $this->method;
                 $rt->image = $this->image;
+                $rt->link = $this->link;
                 $rt->save();
                 $this->tags = "";
                 $this->text = "";
@@ -207,6 +211,7 @@ class NewsUpdate extends Component
                 $this->lawfirm = "";
                 $this->method = "";
                 $this->image = "";
+                $this->link = "";
                 session()->flash('good', "Successfully updated");
             }catch (\Exception $e){
                 session()->flash('bad', "Failed to update");
@@ -225,6 +230,7 @@ class NewsUpdate extends Component
                 $rt->lawfirm = $this->lawfirm;
                 $rt->method = $this->method;
                 $rt->image = $hashPhoto;
+                $rt->link = $this->link;
                 $rt->save();
                 $this->tags = "";
                 $this->text = "";
@@ -233,6 +239,7 @@ class NewsUpdate extends Component
                 $this->lawfirm = "";
                 $this->method = "";
                 $this->image = "";
+                $this->link = "";
                 session()->flash('good', "Successfully updated");
             }catch (\Exception $e){
                 session()->flash('bad', "Failed to update");

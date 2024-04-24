@@ -73,9 +73,11 @@
                             <hr>
                             <div style="white-space: pre-line;">
                                 Title:  <b>{{ucwords($data->title)}}</b>
-                                Campaign: {{strtoupper($data->campaign)}}
-                                Client: {{ucwords($data->client)}}
-                                Law firm: {{ucwords($data->lawfirm)}}
+                                Campaign: <b>{{strtoupper($data->campaign)}}</b>
+                                Client: <b>{{ucwords($data->client)}}</b>
+                                Law firm: <b>{{ucwords($data->lawfirm)}}</b>
+                                Method: <b>{{ucwords($data->method)}}</b>
+                                Link: <a href="{{$data->link}}">{{$data->link}}</a>
                                 <p style="margin-top: 3%;">{{$data->text}}</p>
                                 <img src="{{asset('storage/'.$data->image)}}" style="max-width: 90%; max-height: 90%; margin-left: 5%;">
                             </div>
