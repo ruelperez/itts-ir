@@ -20,7 +20,7 @@ class NewsUpdate extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $fj = 0, $link, $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "cl", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
+    public $registrationSwitch, $fj = 0, $imagePath, $link, $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "Camp lejeune", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
@@ -123,9 +123,17 @@ class NewsUpdate extends Component
 
     }
 
+    public function storeImage(){
+        $hashedFilename = $this->image->hashName();
+        // Store the uploaded image in the public directory with the hashed filename
+        $this->imagePath = $this->image->storeAs('images', $hashedFilename, 'public');
+
+    }
+
     public function submit(){
-        $this->image->store(path: 'public');
-        $hashPhoto = $this->image->hashName();
+        $this->storeImage();
+//        $this->image->store(path: 'public');
+//        $hashPhoto = $this->image->hashName();
         try {
             Note::create([
                 'text' => $this->text,
@@ -138,7 +146,7 @@ class NewsUpdate extends Component
                 'client' => $this->client,
                 'lawfirm' => $this->lawfirm,
                 'method' => $this->method,
-                'image' => $hashPhoto,
+                'image' => $this->imagePath,
                 'link' => $this->link,
             ]);
             $this->text = "";
@@ -147,7 +155,7 @@ class NewsUpdate extends Component
             $this->client = "";
             $this->lawfirm = "";
             $this->method = "";
-            $this->image = "";
+           $this->imagePath = "";
             $this->link = "";
             session()->flash('good', "Successfully added");
         }catch (\Exception $e){
@@ -218,8 +226,7 @@ class NewsUpdate extends Component
             }
         }
         else{
-            $this->image->store(path: 'public');
-            $hashPhoto = $this->image->hashName();
+            $this->storeImage();
             $rt = Note::find($this->ids);
             try {
                 $rt->tags = $this->tags;
@@ -229,7 +236,7 @@ class NewsUpdate extends Component
                 $rt->client = $this->client;
                 $rt->lawfirm = $this->lawfirm;
                 $rt->method = $this->method;
-                $rt->image = $hashPhoto;
+                $rt->image = $this->imagePath;
                 $rt->link = $this->link;
                 $rt->save();
                 $this->tags = "";

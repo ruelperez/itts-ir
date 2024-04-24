@@ -22,10 +22,10 @@
                         </div>
                         <div style="margin-left: auto; margin-right: 5%;">
                             <select class="form-select" aria-label="Default select example" wire:model.live="campaign_name">
-                                <option value="cl">CL</option>
-                                <option value="afff">AFFF</option>
-                                <option value="paraquat">Paraquat</option>
-                                <option value="round_up">Round up</option>
+                                <option value="Camp lejeune">CL</option>
+                                <option value="AFFF">AFFF</option>
+                                <option value="Paraquat">Paraquat</option>
+                                <option value="Round  Up">Round up</option>
                             </select>
                         </div>
                     </div>

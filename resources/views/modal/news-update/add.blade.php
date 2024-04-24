@@ -7,15 +7,6 @@
             </div>
             <form wire:submit.prevent="submit">
                 <div class="modal-body">
-                    @if(session()->has('good'))
-                        <div class="alert alert-success" style="width: 60%; ">
-                            {{ session('good') }}
-                        </div>
-                    @elseif(session()->has('bad'))
-                        <div class="alert alert-danger" style="width: 60%; ">
-                            {{ session('bad') }}
-                        </div>
-                    @endif
                     <div class="form-group">
                         <div class="row g-3 align-items-center mb-2">
                             <div class="col-auto">
@@ -30,7 +21,7 @@
                                 <label class="col-form-label">Campaign:</label>
                             </div>
                             <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="campaign_name">
+                                <input type="text" class="form-control" wire:model="campaign_name" disabled>
                             </div>
                         </div>
                         <div class="row g-3 align-items-center mb-2">
@@ -62,7 +53,7 @@
                                 <label class="col-form-label">Link</label>
                             </div>
                             <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="link" required>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" wire:model="link" required></textarea>
                             </div>
                         </div>
                         <div class="row g-3 align-items-center mb-2">
@@ -80,9 +71,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                <hr>
+                <div style="padding-bottom: 2%; padding-right: 3%; display: flex;">
+                    <div style="margin-left: 3%; width: 50%;">
+                        @if(session()->has('good'))
+                            <div class="alert alert-success" style="width: 100%; ">
+                                {{ session('good') }}
+                            </div>
+                        @elseif(session()->has('bad'))
+                            <div class="alert alert-danger" style="width: 100%; ">
+                                {{ session('bad') }}
+                            </div>
+                        @endif
+                    </div>
+                    <div style="margin-left: auto">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
                 </div>
             </form>
         </div>
