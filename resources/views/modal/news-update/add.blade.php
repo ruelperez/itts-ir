@@ -50,19 +50,26 @@
                         </div>
                         <div class="row g-3 align-items-center mb-2">
                             <div class="col-auto">
-                                <label class="col-form-label">Link</label>
-                            </div>
-                            <div class="col-auto">
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" wire:model="link" required></textarea>
-                            </div>
-                        </div>
-                        <div class="row g-3 align-items-center mb-2">
-                            <div class="col-auto">
                                 <label class="col-form-label">Tags #:</label>
                             </div>
                             <div class="col-auto">
                                 <input type="text" class="form-control" wire:model="tags" required>
                             </div>
+                        </div>
+                        <div class="row g-3 align-items-center mb-2">
+                            <div class="col-auto">
+                                <label class="col-form-label">Link</label>
+                                <i class="fa-solid fa-circle-plus"  wire:click="addInputField" style="color: blue; margin-left: 10px; cursor: pointer; font-size: 18px;"></i>
+                            </div>
+                            <div style="margin-left: 12%;">
+                                @foreach ($link as $index => $input)
+                                    <textarea type="text" class="form-control" wire:model="link.{{ $index }}" style="width: 70%; margin-bottom: 1%; " rows="2"></textarea>
+                                @endforeach
+                            </div>
+                            <!-- Button to save data -->
+{{--                            <div class="col-auto">--}}
+{{--                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" wire:model="link" required></textarea>--}}
+{{--                            </div>--}}
                         </div>
                         <div wire:ignore>
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" wire:model="text" required></textarea>
@@ -75,11 +82,11 @@
                 <div style="padding-bottom: 2%; padding-right: 3%; display: flex;">
                     <div style="margin-left: 3%; width: 50%;">
                         @if(session()->has('good'))
-                            <div class="alert alert-success" style="width: 100%; ">
+                            <div class="alert alert-success" style="width: 100%; " wire:ignore>
                                 {{ session('good') }}
                             </div>
                         @elseif(session()->has('bad'))
-                            <div class="alert alert-danger" style="width: 100%; ">
+                            <div class="alert alert-danger" style="width: 100%; " wire:ignore>
                                 {{ session('bad') }}
                             </div>
                         @endif

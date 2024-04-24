@@ -50,7 +50,7 @@
                 </div>
                 <div class="content">
                     @foreach($notes_all as $data)
-                        <div style="box-sizing: content-box; width: 76%; background-color: white; margin-left: 12%; padding-left: 3%; padding-right: 3%; padding-top: 1.5%; padding-bottom: 2%; margin-bottom: 2%; word-wrap: break-word;">
+                        <div style="width: 76%; background-color: white; margin-left: 12%; padding-left: 3%; padding-right: 3%; padding-top: 1.5%; padding-bottom: 2%; margin-bottom: 2%;">
                             <div class="fw-light" style="display: flex;">
                                 <div class="profile-picture">
                                     <img src="{{asset('storage/'.$data->photo)}}" alt="Profile Picture">
@@ -80,13 +80,22 @@
                                 @endif
                             </div>
                             <hr>
-                            <div style="white-space: pre-line;">
-                                Title:  <b>{{ucwords($data->title)}}</b>
-                                Campaign: <b>{{strtoupper($data->campaign)}}</b>
-                                Client: <b>{{ucwords($data->client)}}</b>
-                                Law firm: <b>{{ucwords($data->lawfirm)}}</b>
-                                Method: <b>{{ucwords($data->method)}}</b>
-                                Link: <a href="{{$data->link}}" target="_blank">{{$data->link}}</a>
+                            <div >
+                                Title:  <b>{{ucwords($data->title)}}</b><br>
+                                Campaign: <b>{{strtoupper($data->campaign)}}</b><br>
+                                Client: <b>{{ucwords($data->client)}}</b><br>
+                                Law firm: <b>{{ucwords($data->lawfirm)}}</b><br>
+                                Method: <b>{{ucwords($data->method)}}</b><br>
+                                Link:
+                                <div>
+                                    @foreach($linkData as $linked)
+                                        @if($data->id == $linked->note_id)
+                                            <a href="{{$linked->link}}" target="_blank" style="margin-left: 5%;">{{$linked->link}}</a><br>
+                                        @endif
+                                    @endforeach
+                                </div>
+
+
                                 <p style="margin-top: 3%;">{{$data->text}}</p>
                                 <img src="{{asset('storage/'.$data->image)}}" style="max-width: 90%; max-height: 90%; margin-left: 5%;">
                             </div>

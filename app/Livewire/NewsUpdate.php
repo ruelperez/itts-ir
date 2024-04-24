@@ -7,6 +7,7 @@ use App\Models\Comment;
 use App\Models\CommentHeart;
 use App\Models\Heart;
 use App\Models\IsRegistration;
+use App\Models\Link;
 use App\Models\Note;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,7 @@ class NewsUpdate extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $fj = 0, $imagePath, $link, $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "Camp lejeune", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
+    public $registrationSwitch, $fj = 0, $linkData = [], $imagePath, $link= [], $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "Camp lejeune", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
@@ -32,6 +33,7 @@ class NewsUpdate extends Component
         $this->heart = Heart::all();
         $this->comment_heart = CommentHeart::all();
         $this->all_comment = Comment::all();
+        $this->linkData = Link::all();
         if ($this->searchInput == ""){
             $this->notes_all = Note::where('campaign',$this->campaign_name)
                 ->orderBy('updated_at', 'desc')
@@ -130,10 +132,21 @@ class NewsUpdate extends Component
 
     }
 
+    public function addInputField()
+    {
+        $this->link[] = '';
+    }
+
     public function submit(){
-        $this->storeImage();
+        if ($this->image == null or $this->image == ""){
+            $this->imagePath = "";
+        }
+        else{
+            $this->storeImage();
 //        $this->image->store(path: 'public');
 //        $hashPhoto = $this->image->hashName();
+        }
+
         try {
             Note::create([
                 'text' => $this->text,
@@ -147,7 +160,6 @@ class NewsUpdate extends Component
                 'lawfirm' => $this->lawfirm,
                 'method' => $this->method,
                 'image' => $this->imagePath,
-                'link' => $this->link,
             ]);
             $this->text = "";
             $this->tags = "";
@@ -155,8 +167,15 @@ class NewsUpdate extends Component
             $this->client = "";
             $this->lawfirm = "";
             $this->method = "";
-           $this->imagePath = "";
-            $this->link = "";
+            $v = Note::latest()->first();
+
+            foreach ($this->link as $links){
+                Link::create([
+                   'link' => $links,
+                   'note_id' => $v->id,
+                ]);
+            }
+            $this->link = [];
             session()->flash('good', "Successfully added");
         }catch (\Exception $e){
             session()->flash('bad', "Failed to add");
@@ -195,7 +214,7 @@ class NewsUpdate extends Component
         $this->lawfirm = $rt->lawfirm;
         $this->image = $rt->image;
         $this->method = $rt->method;
-        $this->link = $rt->link;
+//        $this->link = $rt->link;
     }
 
     public function submit_edit(){
@@ -210,7 +229,7 @@ class NewsUpdate extends Component
                 $rt->lawfirm = $this->lawfirm;
                 $rt->method = $this->method;
                 $rt->image = $this->image;
-                $rt->link = $this->link;
+//                $rt->link = $this->link;
                 $rt->save();
                 $this->tags = "";
                 $this->text = "";
@@ -218,8 +237,7 @@ class NewsUpdate extends Component
                 $this->client = "";
                 $this->lawfirm = "";
                 $this->method = "";
-                $this->image = "";
-                $this->link = "";
+//                $this->link = "";
                 session()->flash('good', "Successfully updated");
             }catch (\Exception $e){
                 session()->flash('bad', "Failed to update");
@@ -237,7 +255,7 @@ class NewsUpdate extends Component
                 $rt->lawfirm = $this->lawfirm;
                 $rt->method = $this->method;
                 $rt->image = $this->imagePath;
-                $rt->link = $this->link;
+//                $rt->link = $this->link;
                 $rt->save();
                 $this->tags = "";
                 $this->text = "";
@@ -245,8 +263,7 @@ class NewsUpdate extends Component
                 $this->client = "";
                 $this->lawfirm = "";
                 $this->method = "";
-                $this->image = "";
-                $this->link = "";
+//                $this->link = "";
                 session()->flash('good', "Successfully updated");
             }catch (\Exception $e){
                 session()->flash('bad', "Failed to update");
