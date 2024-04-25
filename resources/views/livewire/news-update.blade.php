@@ -90,7 +90,7 @@
                                 <div style="word-wrap: break-word">
                                     @foreach($linkData as $linked)
                                         @if($data->id == $linked->note_id)
-                                            <a href="{{$linked->link}}" target="_blank" style="margin-left: 5%;">{{$linked->link}}</a>
+                                            <a href="{{$linked->link}}" target="_blank" style="margin-left: 5%;">{{$linked->link}}</a><br><br>
                                         @endif
                                     @endforeach
                                 </div>
