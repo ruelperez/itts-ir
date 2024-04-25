@@ -22,12 +22,14 @@ $(document).ready(function() {
     $(document).click(function(event) {
         if (!$(event.target).is("#ellip")) {
             $(".div100").hide();
-            sn.css("margin-top", "85%");
+            sn.css("margin-top", "270px");
         }
-        if (!$(event.target).is("#orderAddItemName")) {
+
+        else if (!$(event.target).is("#orderAddItemName")) {
+            sn.css("margin-top", "146px");
             $("#orderSuggestion").hide();
         }
-        else {
+        else {alert('babass');
             $("#orderSuggestion").show();
         }
     });
