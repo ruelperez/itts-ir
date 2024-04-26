@@ -11,7 +11,9 @@ class Logs extends Model
         'action',
         'user_id',
         'comment_id',
-        'note_id'
+        'note_id',
+        'fullname',
+        'photo'
     ];
 
     use HasFactory;

@@ -55,6 +55,13 @@ class NewsUpdate extends Component
 
     public function delete_comment($id){
         Comment::find($id)->delete();
+        \App\Models\Logs::create([
+            'action' => "delete comment",
+            'user_id' => $this->user_id,
+            'note_id' => $this->note_id,
+            'photo' => $this->photo,
+            'fullname' => $this->fullname,
+        ]);
     }
 
     public function submitCommentEdit(){
@@ -62,6 +69,13 @@ class NewsUpdate extends Component
         try {
             $hh->text = $this->editTextComment;
             $hh->save();
+            \App\Models\Logs::create([
+                'action' => "update comment",
+                'user_id' => $this->user_id,
+                'note_id' => $this->note_id,
+                'photo' => $this->photo,
+                'fullname' => $this->fullname,
+            ]);
             session()->flash('good', "Updated successfully");
         }catch (\Exception $e){
             session()->flash('bad', "Failed to update");
@@ -77,6 +91,14 @@ class NewsUpdate extends Component
         ]);
         $this->text_comment = "";
         $this->comment = Comment::where('note_id', $this->note_id)->get();
+
+        \App\Models\Logs::create([
+            'action' => "create comment",
+            'user_id' => $this->user_id,
+            'note_id' => $this->note_id,
+            'photo' => $this->photo,
+            'fullname' => $this->fullname,
+        ]);
     }
 
     public function reactor($id){
@@ -197,6 +219,13 @@ class NewsUpdate extends Component
                 ]);
             }
             $this->link = [];
+            \App\Models\Logs::create([
+                'action' => "create post",
+                'user_id' => $this->user_id,
+                'note_id' => $v->id,
+                'fullname' => $this->fullname,
+                'photo' => $this->photo,
+            ]);
             session()->flash('good', "Successfully added");
         }catch (\Exception $e){
             session()->flash('bad', "Failed to add");
@@ -205,6 +234,13 @@ class NewsUpdate extends Component
 
     public function delete($id){
         Note::find($id)->delete();
+        \App\Models\Logs::create([
+            'action' => "delete",
+            'user_id' => $this->user_id,
+            'note_id' => $id,
+            'photo' => $this->photo,
+            'fullname' => $this->fullname,
+        ]);
     }
     public function edit_tags($id){
         $this->ids = $id;
@@ -259,6 +295,13 @@ class NewsUpdate extends Component
                 $this->lawfirm = "";
                 $this->method = "";
 //                $this->link = "";
+                \App\Models\Logs::create([
+                    'action' => "edit",
+                    'user_id' => $this->user_id,
+                    'note_id' => $this->ids,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
                 session()->flash('good', "Successfully updated");
             }catch (\Exception $e){
                 session()->flash('bad', "Failed to update");

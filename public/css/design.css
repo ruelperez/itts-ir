@@ -38,7 +38,7 @@
 }
 
 .profile-picture-comment {
-    width: 7%; /* Adjust width and height as needed */
+    width: 60px; /* Adjust width and height as needed */
     height: 35px;
     border-radius: 100%; /* Create a circular shape */
 }
@@ -46,6 +46,18 @@
 .profile-picture-comment img{
     width: 80%; /* Ensure the image fills the container */
     height: 35px; /* Maintain aspect ratio */
+    border-radius: 100%; /* Ensure the image inside the circle is also circular */
+}
+
+.profile-picture-logs {
+    width: 60px; /* Adjust width and height as needed */
+    height: 35px;
+    border-radius: 100%; /* Create a circular shape */
+}
+
+.profile-picture-logs img{
+    width: 75%; /* Ensure the image fills the container */
+    height: 40px; /* Maintain aspect ratio */
     border-radius: 100%; /* Ensure the image inside the circle is also circular */
 }
 .profile {

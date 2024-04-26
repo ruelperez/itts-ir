@@ -10,7 +10,7 @@ use Livewire\Component;
 
 class Logs extends Component
 {
-    public $registrationSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $search, $logsData = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -18,6 +18,15 @@ class Logs extends Component
         $this->user_id = auth()->user()->id;
         $this->is_admin = auth()->user()->is_admin;
         $this->photo = auth()->user()->photo;
+        if ($this->search == ""){
+            $this->logsData = \App\Models\Logs::all();
+        }else{
+            $this->logsData = \App\Models\Logs::where('fullname','LIKE','%'.$this->search.'%')
+                ->orWhere('action','LIKE','%'.$this->search.'%')
+                ->orWhere('note_id','LIKE','%'.$this->search.'%')
+                ->orWhere('updated_at','LIKE','%'.$this->search.'%')
+                ->get();
+        }
         return view('livewire.logs');
     }
 
@@ -142,6 +151,9 @@ class Logs extends Component
     }
 
     public function updated($field){
+        if ($field == "search"){
+
+        }
         if ($field == "registrationSwitch"){
             $this->regSwitch();
         }
@@ -157,4 +169,5 @@ class Logs extends Component
             return redirect('/itts/5/dashboard');
         }
     }
+
 }
