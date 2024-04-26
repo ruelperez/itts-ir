@@ -24,7 +24,7 @@
                                             <b>{{ucwords($data->fullname)}}</b>
                                         </div>
                                         <div>
-                                            <p style="margin-left: 20px">{{ucfirst($data->action)}}, note id number <b>{{$data->note_id}}</b></p>
+                                            <p style="margin-left: 20px">{{ucfirst($data->action)}}, post id number <b>{{$data->note_id}}</b></p>
                                         </div>
                                     </div>
                                     <div style="margin-left: auto">

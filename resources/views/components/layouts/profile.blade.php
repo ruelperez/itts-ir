@@ -6,8 +6,10 @@
     </button>
     <div style="text-align: center; margin-top: 10%; position: absolute; width: 100%;">
         <div style="display: flex;">
-            <i onclick="clickEllipsis()" class="fa-solid fa-ellipsis-vertical" id="ellip" style="color: white; margin-left: 10%;font-size: 23px; cursor: pointer; margin-right: 11%;"></i>
-            <div class="profile">
+            @if($is_admin == 1)
+                <i onclick="clickEllipsis()" class="fa-solid fa-ellipsis-vertical" id="ellip" style="color: white; margin-left: 10%;font-size: 23px; cursor: pointer; margin-right: 11%;"></i>
+            @endif
+            <div class="profile" style="@if($is_admin != 1) margin-left: 22%; @endif">
                 <img src="{{asset('storage/'.$photo)}}" alt="Profile Picture">
                 <div style="background-color:#C0C0C0; position: absolute; top: 110px; left: 95px; border-radius: 80%; padding: 1%; width: 20%; cursor: pointer" onclick="chooseFile()">
                     <i class="fa-solid fa-camera" style="font-size: 17px;"></i>
