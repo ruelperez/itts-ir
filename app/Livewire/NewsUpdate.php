@@ -22,7 +22,7 @@ class NewsUpdate extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $fj = 0, $linkData = [], $imagePath, $link= [], $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "Camp lejeune", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
+    public $registrationSwitch, $fj = 0, $edit_comment_id, $editTextComment, $linkData = [], $imagePath, $link= [], $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "Camp lejeune", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
@@ -47,6 +47,26 @@ class NewsUpdate extends Component
         return view('livewire.news-update');
     }
 
+    public function edit_comment($id){
+        $this->edit_comment_id = $id;
+        $gg = Comment::find($id);
+        $this->editTextComment = $gg->text;
+    }
+
+    public function delete_comment($id){
+        Comment::find($id)->delete();
+    }
+
+    public function submitCommentEdit(){
+        $hh = Comment::find($this->edit_comment_id);
+        try {
+            $hh->text = $this->editTextComment;
+            $hh->save();
+            session()->flash('good', "Updated successfully");
+        }catch (\Exception $e){
+            session()->flash('bad', "Failed to update");
+        }
+    }
     public function send(){
         Comment::create([
             'text' => $this->text_comment,

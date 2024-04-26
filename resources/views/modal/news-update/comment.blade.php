@@ -81,7 +81,7 @@
                                         <div class="profile-picture-comment">
                                             <img src="{{asset('storage/'.$coms->photo)}}" alt="Profile Picture">
                                         </div>
-                                        <div style="margin-right: 5%; background-color: #2F4F4F; color: white; padding: 1%; border-radius: 20px; font-size: 14px">
+                                        <div style="margin-right: 1%; background-color: #2F4F4F; color: white; padding: 1%; border-radius: 20px; font-size: 14px">
                                             <div>
                                                 <div style="margin-right: 15px;">
                                                     <b>{{ucwords($coms->fullname)}}</b>
@@ -92,6 +92,18 @@
                                                 {{$coms->text}}
                                             </div>
                                         </div>
+                                        @if($is_admin == 1)
+                                        <div style="display: flex">
+                                            <div>
+                                                <i class="fa-solid fa-pen-to-square" style="cursor: pointer" title="edit" data-bs-toggle="modal" data-bs-target="#edit_comment" wire:click="edit_comment({{$coms->id}})"></i>
+                                            </div>
+                                            <div style="margin-left: 10px">
+                                                <i class="fa-solid fa-trash" style="color: red; cursor: pointer" title="delete" type="button"
+                                                   wire:click="delete_comment({{$coms->id}})"
+                                                   wire:confirm="Are you sure you want to delete this post?"></i>
+                                            </div>
+                                        </div>
+                                        @endif
                                     </div>
                                     <div style="margin-left: 8%; display: flex">
                                         <div wire:ignore>

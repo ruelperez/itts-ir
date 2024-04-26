@@ -6,6 +6,7 @@
     @include('modal.news-update.reactor')
     @include('modal.news-update.comment')
     @include('modal.news-update.comment_reactor')
+    @include('modal.news-update.edit_comment')
     <div style="display: flex; width: 100%;">
         <div style="width: 19%; background-color: #0077b6">
             @include('components.layouts.profile')
