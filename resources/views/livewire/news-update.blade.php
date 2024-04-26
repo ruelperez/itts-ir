@@ -26,6 +26,7 @@
                                 <option value="AFFF">AFFF</option>
                                 <option value="Paraquat">Paraquat</option>
                                 <option value="Round  Up">Round up</option>
+                                <option value="CGX">CGX</option>
                             </select>
                         </div>
                     </div>
@@ -96,7 +97,7 @@
                                 </div>
 
 
-                                <p style="margin-top: 3%;">{{$data->text}}</p>
+                                <p style="margin-top: 3%; white-space: pre-line;">{{$data->text}}</p>
                                 <img src="{{asset('storage/'.$data->image)}}" style="max-width: 90%; max-height: 90%; margin-left: 5%;">
                             </div>
                             @php $h=0; $g=0;

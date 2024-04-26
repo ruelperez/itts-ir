@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class Register extends Component
 {
-    public $fullname, $username, $admin_show, $password, $is_admin = false, $password_confirmation, $is_reg, $photo = "default_profile.png";
+    public $fullname, $username, $eye = 0, $eyes = 0, $admin_show, $password, $is_admin = false, $password_confirmation, $is_reg, $photo = "default_profile.png";
     public function render()
     {
         $data = IsRegistration::all();
@@ -32,6 +32,14 @@ class Register extends Component
             }
         }
         return view('livewire.register');
+    }
+
+    public function clickEyes($num){
+        $this->eye = $num;
+    }
+
+    public function clickEyess($num){
+        $this->eyes = $num;
     }
 
     public function submit_register(){

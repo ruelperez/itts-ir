@@ -8,7 +8,7 @@
         <div style="width: 81%;">
             <div class="container">
                 <div>
-                    <h4 style="margin-left: 2%; margin-top: 3%;"></h4>
+                    <h5 style="margin-left: 2%; margin-top: 3%;">Announcement   <i class="fa-solid fa-bullhorn"></i></h5>
                 </div>
             </div>
         </div>

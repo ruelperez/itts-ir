@@ -85,9 +85,10 @@
                                             <div>
                                                 <div style="margin-right: 15px;">
                                                     <b>{{ucwords($coms->fullname)}}</b>
+                                                    <p>{{$coms->updated_at->format('M-d-Y h:i a')}}</p>
                                                 </div>
                                             </div>
-                                            <div>
+                                            <div style="white-space: pre-line;">
                                                 {{$coms->text}}
                                             </div>
                                         </div>

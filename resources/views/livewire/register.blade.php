@@ -31,13 +31,27 @@
                     </div>
 
                     <div class="form-outline mb-4">
-                        <input type="password" id="form3Example4cg" class="form-control form-control-md" wire:model="password" @if($is_reg == 0) disabled @endif/>
+                        <div style="display: flex">
+                            <input  @if($eye == 0) type="password" @else type="text" @endif id="form3Example4cg" class="form-control form-control-md" wire:model="password" @if($is_reg == 0) disabled @endif/>
+                            @if($eye == 0)
+                                <i class="fa-regular fa-eye-slash" style="font-size: 18px; margin-left: 2%;margin-top: 2%; cursor: pointer" wire:click="clickEyes(1)"></i>
+                            @else
+                                <i class="fa-solid fa-eye" style="font-size: 18px; margin-left: 2%;margin-top: 2%; cursor: pointer" wire:click="clickEyes(0)"></i>
+                            @endif
+                        </div>
                         <label class="form-label" for="form3Example4cg">Password</label>
                         @error('password') <span style="color: red">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="form-outline mb-4">
-                        <input type="password" id="form3Example4cdg" class="form-control form-control-md" wire:model="password_confirmation" @if($is_reg == 0) disabled @endif/>
+                        <div style="display: flex">
+                            <input @if($eyes == 0) type="password" @else type="text" @endif id="form3Example4cdg" class="form-control form-control-md" wire:model="password_confirmation" @if($is_reg == 0) disabled @endif/>
+                            @if($eyes == 0)
+                                <i class="fa-regular fa-eye-slash" style="font-size: 18px; margin-left: 2%;margin-top: 2%; cursor: pointer" wire:click="clickEyess(1)"></i>
+                            @else
+                                <i class="fa-solid fa-eye" style="font-size: 18px; margin-left: 2%;margin-top: 2%; cursor: pointer" wire:click="clickEyess(0)"></i>
+                            @endif
+                        </div>
                         <label class="form-label" for="form3Example4cdg">Repeat your password</label>
                         @error('password_confirmation') <span style="color: red">{{ $message }}</span> @enderror
                     </div>
