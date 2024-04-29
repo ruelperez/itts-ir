@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="{{ asset('css/design.css')}}">
         <title>{{ $title ?? 'Page Title' }}</title>
     </head>
-    <body>
+    <body style="background-color: #E6E6FA;">
         {{ $slot }}
         <script defer src="{{asset('css/bootstrap.bundle.min.js')}}"></script>
         <script src="{{ asset('css/bootstrap.min.js') }}"></script>

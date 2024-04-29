@@ -1,6 +1,4 @@
 <div style="position: relative;" wire:ignore>
-    @include('modal.click-settings')
-    @include('modal.news-update.show-photo')
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#show_photo" id="show_photo" hidden>
         Launch demo modal
     </button>
@@ -11,7 +9,7 @@
             @endif
             <div class="profile" style="@if($is_admin != 1) margin-left: 22%; @endif">
                 <img src="{{asset('storage/'.$photo)}}" alt="Profile Picture">
-                <div style="background-color:#C0C0C0; position: absolute; top: 110px; left: 95px; border-radius: 80%; padding: 1%; width: 20%; cursor: pointer" onclick="chooseFile()">
+                <div style="background-color:#C0C0C0; position: absolute; top: 70%; left: 65%; border-radius: 80%; padding: 1%; width: 20%; cursor: pointer" onclick="chooseFile()">
                     <i class="fa-solid fa-camera" style="font-size: 17px;"></i>
                     <input type="file" id="fileInput" accept="image/*" hidden wire:model.live="photo">
                 </div>

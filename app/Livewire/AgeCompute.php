@@ -25,8 +25,8 @@ class AgeCompute extends Component
         return view('livewire.age-compute');
     }
 
-    public function mount($name){
-        $this->webName = $name;
+    public function mount($names){
+        $this->webName = $names;
     }
 
     public function submit(){

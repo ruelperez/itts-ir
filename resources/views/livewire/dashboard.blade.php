@@ -1,18 +1,18 @@
 <div>
-    @include('partial.header')
-    <div style="display: flex; width: 100%;">
-        <div style="width: 19%; background-color: #0077b6">
-            @include('components.layouts.profile')
-            @include('components.layouts.navigation')
-        </div>
-        <div style="width: 81%; background-color: #E6E6FA">
+    @include('modal.click-settings')
+    @include('modal.news-update.show-photo')
+    <div style="display: flex; width: 100%; margin-top: 135px;">
+        <div style="width: 81%; margin-left: 19%;">
             <div class="container">
                 <div>
                     <h5 style="margin-left: 2%; margin-top: 3%;">Announcement   <i class="fa-solid fa-bullhorn" style="color: darkblue"></i></h5>
                 </div>
             </div>
         </div>
-
+        <div style="width: 19%; background-color: #0077b6; position: fixed;top: 125px; left: 0; z-index: 1000;">
+            @include('components.layouts.profile')
+            @include('components.layouts.navigation')
+        </div>
     </div>
-
+    @include('partial.header')
 </div>

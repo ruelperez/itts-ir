@@ -1,5 +1,6 @@
 <div>
-    @include('partial.header')
+    @include('modal.click-settings')
+    @include('modal.news-update.show-photo')
     @include('modal.news-update.add')
     @include('modal.news-update.edit_tags')
     @include('modal.news-update.edit')
@@ -7,19 +8,24 @@
     @include('modal.news-update.comment')
     @include('modal.news-update.comment_reactor')
     @include('modal.news-update.edit_comment')
-    <div style="display: flex; width: 100%;">
-        <div style="width: 19%; background-color: #0077b6">
-            @include('components.layouts.profile')
-            @include('components.layouts.navigation')
-        </div>
+    <div style="display: flex; width: 100%; margin-top: 135px;">
 {{--        <div wire:poll>--}}
 {{--            Current time: {{ now() }}--}}
 {{--        </div>--}}
-        <div style="width: 81%; background-color: #E6E6FA">
+        <div style="width: 81%; margin-left: 19%;">
             <div class="container" wire:poll.keep-alive>
-                    <div style="display: flex; margin-top: 2%; margin-left: 1%;">
+                <div style="position: fixed;top: 17%; left: 17%; width: 85%; z-index: 1000; background-color: #41464b; padding-left: 3%; padding-bottom: 1%;">
+                    <div style="display: flex; margin-top: 2%;">
                         <div>
-                            <h4>{{strtoupper($campaign_name)}}</h4>
+                            <h5 style="color: white">{{strtoupper($campaign_name)}}</h5>
+                        </div>
+                        @if($is_admin == "1")
+                            <div style="margin-left: 5%;  margin-right: 1%;">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add">Create <i class="fa-solid fa-plus"></i></button>
+                            </div>
+                        @endif
+                        <div style="width: 20%; @if($is_admin != "1") margin-left: 17%; @endif ">
+                            <input type="text" placeholder="Search" wire:model.live="searchInput" style="padding: 1%;  width: 100%;">
                         </div>
                         <div style="margin-left: auto; margin-right: 5%;">
                             <select class="form-select" aria-label="Default select example" wire:model.live="campaign_name">
@@ -31,24 +37,6 @@
                             </select>
                         </div>
                     </div>
-                <div style="display: flex;">
-                    @if($is_admin == "1")
-                        <div style="margin-left: 17%;  margin-right: 1%;">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add">Create <i class="fa-solid fa-plus"></i></button>
-                        </div>
-                    @endif
-                    <div style="width: 20%; @if($is_admin != "1") margin-left: 17%; @endif ">
-                        <input type="text" placeholder="Search" wire:model.live="searchInput" style="padding: 1%;  width: 100%;">
-                    </div>
-{{--                    <div style="@if($is_admin != "1") margin-left: 3%; @else margin-left: 3%; @endif font-size: 24px; cursor: pointer">--}}
-{{--                        <div style="position: relative;">--}}
-{{--                            <i class="fa-regular fa-bell"></i>--}}
-{{--                            <div style="background-color: red; position: absolute; top: 0px; left: 10px; border-radius: 80%; padding: 1%; width: 100%; height: 60%; text-align: center" data-bs-toggle="modal" data-bs-target="#clickNotif">--}}
-{{--                                <p style="font-size: 15px; color: white">7</p>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
-{{--                    </div>--}}
                 </div>
                 <div class="content">
                     @foreach($notes_all as $data)
@@ -153,6 +141,10 @@
 
             </div>
         </div>
-
+        <div style="width: 19%; background-color: #0077b6; position: fixed;top: 125px; left: 0; z-index: 1000;">
+            @include('components.layouts.profile')
+            @include('components.layouts.navigation')
+        </div>
     </div>
+    @include('partial.header')
 </div>
