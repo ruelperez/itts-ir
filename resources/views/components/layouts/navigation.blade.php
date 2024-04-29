@@ -2,6 +2,9 @@
     <div href="/itts/5/dashboard" style="@if($webName == "dashboard") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>
         DASHBOARD
     </div>
+    <div href="/itts/8/dtr" style="@if($webName == "dtr") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>
+        DTR
+    </div>
     <div href="/itts/1/ir" style="@if($webName == "ir") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>
         I.R
     </div>

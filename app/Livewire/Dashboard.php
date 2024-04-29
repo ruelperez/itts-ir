@@ -29,14 +29,6 @@ class Dashboard extends Component
     public function mount($name){
         $this->webName = $name;
     }
-
-    protected $listeners = [
-        'ret' => 'ter'
-    ];
-
-    public function ter(){
-        dd('mama');
-    }
     public function logout(){
         Auth::logout();
         return redirect()->to('/login');

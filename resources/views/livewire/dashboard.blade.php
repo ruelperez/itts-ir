@@ -5,7 +5,7 @@
             @include('components.layouts.profile')
             @include('components.layouts.navigation')
         </div>
-        <div style="width: 81%;">
+        <div style="width: 81%; background-color: #E6E6FA">
             <div class="container">
                 <div>
                     <h5 style="margin-left: 2%; margin-top: 3%;">Announcement   <i class="fa-solid fa-bullhorn" style="color: darkblue"></i></h5>

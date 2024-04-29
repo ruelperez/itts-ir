@@ -20,6 +20,7 @@ Route::get('/itts/4/{name}', \App\Livewire\NewsUpdate::class)->middleware('auth'
 Route::get('/itts/5/{name}', \App\Livewire\Dashboard::class)->middleware('auth');
 Route::get('/itts/6/{name}', \App\Livewire\MyNotes::class)->middleware('auth');
 Route::get('/itts/7/{name}', \App\Livewire\Logs::class)->middleware('auth');
+Route::get('/itts/8/{name}', \App\Livewire\InOut::class)->middleware('auth');
 Route::get('/', function () {
     return redirect('/itts/5/dashboard');
 });
