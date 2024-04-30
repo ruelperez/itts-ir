@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('dtrs', function (Blueprint $table) {
             $table->id();
+            $table->string('fullname');
+            $table->dateTime('in')->nullable();
+            $table->dateTime('out')->nullable();
+            $table->dateTime('in2')->nullable();
+            $table->dateTime('out2')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

@@ -3,6 +3,8 @@
 namespace App\Livewire;
 
 use App\Models\AdminShow;
+use App\Models\Dtr;
+use App\Models\DtrPermanent;
 use App\Models\IsRegistration;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +12,7 @@ use Livewire\Component;
 
 class InOut extends Component
 {
-    public $registrationSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -18,9 +20,113 @@ class InOut extends Component
         $this->user_id = auth()->user()->id;
         $this->is_admin = auth()->user()->is_admin;
         $this->photo = auth()->user()->photo;
+        $this->dtr_data = Dtr::where('user_id', $this->user_id)->latest()->first();
         return view('livewire.in-out');
     }
 
+    public function in(){
+        $this->validate([
+            'designated_id' => 'required'
+        ]);
+        if ($this->designated_id == "ITTS-00".$this->user_id){
+            if ($this->dtr_data != null){
+                $gf = Dtr::find($this->dtr_data->id);
+            }
+            else{
+                Dtr::create([
+                    'fullname' => $this->fullname,
+                    'in' => now(),
+                    'user_id' => $this->user_id,
+                ]);
+
+                $ss = Dtr::where('fullname',$this->fullname)
+                    ->where('user_id', $this->user_id)->get();
+                foreach ($ss as $s){
+                    $id = $s->id;
+                }
+
+                DtrPermanent::create([
+                    'fullname' => $this->fullname,
+                    'in' => now(),
+                    'user_id' => $this->user_id,
+                    'dtr_id' => $id,
+                ]);
+            }
+            $this->designated_id = "";
+            session()->flash('good', 'Successfully Time in');
+        }
+        else{
+            session()->flash('bad', 'Wrong user number!!. Please retry');
+        }
+
+    }
+
+    public function out(){
+        $this->validate([
+            'designated_id' => 'required'
+        ]);
+        if ($this->designated_id == "ITTS-00".$this->user_id){
+            $gf = Dtr::find($this->dtr_data->id);
+            $gf->out = now();
+            $gf->save();
+
+            $gs = Dtr::find($this->dtr_data->id)->dtr_permanent;
+            foreach ($gs as $gg){
+                $gg->out = now();
+                $gg->save();
+            }
+            $this->designated_id = "";
+            session()->flash('good', 'Successfully Time out');
+        }
+        else{
+            session()->flash('bad', 'Wrong user number!!. Please retry');
+        }
+
+    }
+
+    public function in2(){
+        $this->validate([
+            'designated_id' => 'required'
+        ]);
+        if ($this->designated_id == "ITTS-00".$this->user_id){
+            $gf = Dtr::find($this->dtr_data->id);
+            $gf->in2 = now();
+            $gf->save();
+
+            $gs = Dtr::find($this->dtr_data->id)->dtr_permanent;
+            foreach ($gs as $gg){
+                $gg->in2 = now();
+                $gg->save();
+            }
+            $this->designated_id = "";
+            session()->flash('good', 'Successfully Time in');
+        }
+        else{
+            session()->flash('bad', 'Wrong user number!!. Please retry');
+        }
+    }
+
+    public function out2(){
+        $this->validate([
+            'designated_id' => 'required'
+        ]);
+        if ($this->designated_id == "ITTS-00".$this->user_id){
+            $gf = Dtr::find($this->dtr_data->id);
+            $gf->out2 = now();
+            $gf->save();
+
+            $gs = Dtr::find($this->dtr_data->id)->dtr_permanent;
+            foreach ($gs as $gg){
+                $gg->out2 = now();
+                $gg->save();
+            }
+            $this->designated_id = "";
+            session()->flash('good', 'Successfully Time out');
+        }
+        else{
+            session()->flash('bad', 'Wrong user number!!. Please retry');
+        }
+    }
     public function mount($name){
         $this->webName = $name;
     }
