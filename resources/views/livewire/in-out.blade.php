@@ -26,7 +26,34 @@
                         @endif
                     </div>
                 </div>
-
+                <div style="margin-top: 4%; width: 80%; margin-left: 10%;">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Day</th>
+                            <th scope="col">Time in</th>
+                            <th scope="col">Time out</th>
+                            <th scope="col">Time in</th>
+                            <th scope="col">Time out</th>
+                            <th scope="col">Total time</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($dtr_permanent_data as $data)
+                            <tr>
+                                <th scope="row">@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('D') }} @endif</th>
+                                <td>@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('h:i A') }} @endif</td>
+                                <td>@if($data->out == null) @else {{Carbon\Carbon::parse($data->out)->format('h:i A') }} @endif</td>
+                                <td>@if($data->in2 == null) @else {{Carbon\Carbon::parse($data->in2)->format('h:i A') }} @endif</td>
+                                <td>@if($data->out2 == null) @else {{Carbon\Carbon::parse($data->out2)->format('h:i A') }} @endif</td>
+                                <td>
+                                    {{$data->hour}}:{{$data->minute}}
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <div style="width: 19%; background-color: #0077b6; position: fixed;top: 125px; left: 0; z-index: 1000;">

@@ -15,6 +15,8 @@ class DtrPermanent extends Model
         'out2',
         'user_id',
         'dtr_id',
+        'hour',
+        'minute'
     ];
 
     use HasFactory;

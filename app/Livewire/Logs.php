@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\AdminShow;
+use App\Models\Dtr;
 use App\Models\IsRegistration;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +11,7 @@ use Livewire\Component;
 
 class Logs extends Component
 {
-    public $registrationSwitch, $search, $logsData = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $dtrData = [], $search, $logsData = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -18,6 +19,7 @@ class Logs extends Component
         $this->user_id = auth()->user()->id;
         $this->is_admin = auth()->user()->is_admin;
         $this->photo = auth()->user()->photo;
+        $this->dtrData = Dtr::all();
         if ($this->search == ""){
             $this->logsData = \App\Models\Logs::all();
         }else{

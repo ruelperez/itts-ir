@@ -7,12 +7,14 @@ use App\Models\Dtr;
 use App\Models\DtrPermanent;
 use App\Models\IsRegistration;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class InOut extends Component
 {
-    public $registrationSwitch, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+
+    public $registrationSwitch,$dtrData = [], $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -21,7 +23,24 @@ class InOut extends Component
         $this->is_admin = auth()->user()->is_admin;
         $this->photo = auth()->user()->photo;
         $this->dtr_data = Dtr::where('user_id', $this->user_id)->latest()->first();
+        $this->dtr_permanent_data = DtrPermanent::where('user_id',$this->user_id)->get();
+        $this->dtrData = Dtr::all();
         return view('livewire.in-out');
+    }
+
+    public function clickReset(){
+        $fd = Dtr::all();
+        foreach ($fd as $ff){
+            Dtr::find($ff->id)->delete();
+        }
+
+        \App\Models\Logs::create([
+            'action' => "Reset DTR button",
+            'user_id' => $this->user_id,
+            'photo' => $this->photo,
+            'fullname' => $this->fullname,
+        ]);
+
     }
 
     public function in(){
@@ -38,19 +57,20 @@ class InOut extends Component
                     'in' => now(),
                     'user_id' => $this->user_id,
                 ]);
-
                 $ss = Dtr::where('fullname',$this->fullname)
                     ->where('user_id', $this->user_id)->get();
                 foreach ($ss as $s){
                     $id = $s->id;
                 }
-
                 DtrPermanent::create([
                     'fullname' => $this->fullname,
                     'in' => now(),
                     'user_id' => $this->user_id,
                     'dtr_id' => $id,
+                    'hour' => "0",
+                    'minute' => "0",
                 ]);
+
             }
             $this->designated_id = "";
             session()->flash('good', 'Successfully Time in');
@@ -73,6 +93,20 @@ class InOut extends Component
             $gs = Dtr::find($this->dtr_data->id)->dtr_permanent;
             foreach ($gs as $gg){
                 $gg->out = now();
+                $gg->save();
+            }
+            $gd = Dtr::find($this->dtr_data->id)->dtr_permanent;
+            foreach ($gd as $gg){
+                $rr = $gg->in;
+                $ss = $gg->out;
+            }
+            $time1 = Carbon::parse($rr);
+            $time2 = Carbon::parse($ss);
+            $interval = $time1->diff($time2);
+            $gk = Dtr::find($this->dtr_data->id)->dtr_permanent;
+            foreach ($gk as $gg){
+                $gg->hour = $interval->h;
+                $gg->minute = $interval->i;
                 $gg->save();
             }
             $this->designated_id = "";
@@ -118,6 +152,32 @@ class InOut extends Component
             $gs = Dtr::find($this->dtr_data->id)->dtr_permanent;
             foreach ($gs as $gg){
                 $gg->out2 = now();
+                $gg->save();
+            }
+
+            $lk = Dtr::find($this->dtr_data->id)->dtr_permanent;
+            foreach ($lk as $gg){
+                $pp = $gg->in;
+                $kk = $gg->out;
+                $rr = $gg->in2;
+                $ss = $gg->out2;
+            }
+            $time1 = Carbon::parse($pp);
+            $time2 = Carbon::parse($kk);
+            $interval1 = $time1->diff($time2);
+
+            $time3 = Carbon::parse($rr);
+            $time4 = Carbon::parse($ss);
+            $interval2 = $time3->diff($time4);
+
+            $resultHour = intval($interval1->h) + intval($interval2->h);
+            $resultMinute = intval($interval1->i) + intval($interval2->i);
+
+
+            $gk = Dtr::find($this->dtr_data->id)->dtr_permanent;
+            foreach ($gk as $gg){
+                $gg->hour = $resultHour;
+                $gg->minute = $resultMinute;
                 $gg->save();
             }
             $this->designated_id = "";

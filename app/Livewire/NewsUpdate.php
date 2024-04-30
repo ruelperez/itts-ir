@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\AdminShow;
 use App\Models\Comment;
 use App\Models\CommentHeart;
+use App\Models\Dtr;
 use App\Models\Heart;
 use App\Models\IsRegistration;
 use App\Models\Link;
@@ -22,7 +23,7 @@ class NewsUpdate extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $fj = 0, $edit_comment_id, $editTextComment, $linkData = [], $imagePath, $link= [], $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "Camp lejeune", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
+    public $registrationSwitch, $fj = 0, $dtrData = [], $edit_comment_id, $editTextComment, $linkData = [], $imagePath, $link= [], $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "Camp lejeune", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
@@ -32,6 +33,7 @@ class NewsUpdate extends Component
         $this->user_fullname = auth()->user()->fullname;
         $this->photo = auth()->user()->photo;
         $this->heart = Heart::all();
+        $this->dtrData = Dtr::all();
         $this->comment_heart = CommentHeart::all();
         $this->all_comment = Comment::all();
         $this->linkData = Link::all();

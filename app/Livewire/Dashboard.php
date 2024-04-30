@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\AdminShow;
+use App\Models\Dtr;
 use App\Models\IsRegistration;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,7 @@ class Dashboard extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $dtrData = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -23,6 +24,7 @@ class Dashboard extends Component
         $this->user_id = auth()->user()->id;
         $this->is_admin = auth()->user()->is_admin;
         $this->photo = auth()->user()->photo;
+        $this->dtrData = Dtr::all();
         return view('livewire.dashboard');
     }
 
@@ -86,6 +88,12 @@ class Dashboard extends Component
                 foreach ($an as $ans){
                     $this->registrationSwitch = $ans->on_off;
                 }
+                \App\Models\Logs::create([
+                    'action' => "disabled registration",
+                    'user_id' => $this->user_id,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
             }
             else{
                 foreach ($data as $datas){
@@ -97,6 +105,12 @@ class Dashboard extends Component
                 foreach ($an as $ans){
                     $this->registrationSwitch = $ans->on_off;
                 }
+                \App\Models\Logs::create([
+                    'action' => "enabled registration",
+                    'user_id' => $this->user_id,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
             }
         }
         else{
@@ -120,6 +134,12 @@ class Dashboard extends Component
                 foreach ($an as $ans){
                     $this->adminSwitch = $ans->on_off;
                 }
+                \App\Models\Logs::create([
+                    'action' => "disabled admin registration",
+                    'user_id' => $this->user_id,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
             }
             else{
                 foreach ($data as $datas){
@@ -131,6 +151,12 @@ class Dashboard extends Component
                 foreach ($an as $ans){
                     $this->adminSwitch = $ans->on_off;
                 }
+                \App\Models\Logs::create([
+                    'action' => "enabled admin registration",
+                    'user_id' => $this->user_id,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
             }
         }
         else{

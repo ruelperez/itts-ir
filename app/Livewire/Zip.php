@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\AdminShow;
+use App\Models\Dtr;
 use App\Models\IsRegistration;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,7 @@ class Zip extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $adminSwitch, $is_admin, $webName, $fullname, $user_id, $photo, $searchInput, $request_data=[];
+    public $registrationSwitch, $dtrData = [], $adminSwitch, $is_admin, $webName, $fullname, $user_id, $photo, $searchInput, $request_data=[];
 
     public function render()
     {
@@ -30,6 +31,7 @@ class Zip extends Component
         $this->user_id = auth()->user()->id;
         $this->is_admin = auth()->user()->is_admin;
         $this->photo = auth()->user()->photo;
+        $this->dtrData = Dtr::all();
         return view('livewire.zip');
     }
 

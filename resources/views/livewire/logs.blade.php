@@ -20,9 +20,16 @@
                                         <div>
                                             <b>{{ucwords($data->fullname)}}</b>
                                         </div>
-                                        <div>
-                                            <p style="margin-left: 20px">{{ucfirst($data->action)}}, post id number <b>{{$data->note_id}}</b></p>
-                                        </div>
+                                        @if($data->note_id == null)
+                                            <div>
+                                                <p style="margin-left: 20px">{{ucfirst($data->action)}}</b></p>
+                                            </div>
+                                        @else
+                                            <div>
+                                                <p style="margin-left: 20px">{{ucfirst($data->action)}}, post id number <b>{{$data->note_id}}</b></p>
+                                            </div>
+                                        @endif
+
                                     </div>
                                     <div style="margin-left: auto">
                                         <p class="fw-light">{{$data->updated_at->format('M-d-Y, H:i A')}}</p>
