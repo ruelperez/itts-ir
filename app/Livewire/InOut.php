@@ -28,6 +28,10 @@ class InOut extends Component
         return view('livewire.in-out');
     }
 
+    public function clickResets(){
+        dd('baba');
+    }
+
     public function clickReset(){
         $fd = Dtr::all();
         foreach ($fd as $ff){

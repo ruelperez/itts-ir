@@ -1,11 +1,21 @@
 <div>
     @include('modal.click-settings')
     @include('modal.news-update.show-photo')
+    @include('modal.dtr.resetDtr')
     <div style="display: flex; width: 100%; margin-top: 135px;">
         <div style="width: 81%; margin-left: 19%;">
             <div class="container">
                 <div>
                     <h5 style="margin-left: 2%; margin-top: 3%;">DTR</h5>
+                    <div class="dropdown"style="margin-left: 80%;">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Select to reset
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li @if(count($dtrData) != 0) style="cursor: pointer" wire:click="clickReset" wire:confirm="Are you sure you want to reset DTR button?" @endif><a class="dropdown-item"><p>Reset DTR button @if(count($dtrData) == 0) <i class="fa-solid fa-check" style="color: green;font-size: 20px; margin-left: 3%;"></i>  @else <i class="fa-solid fa-rotate" style="margin-left: 3%; font-size: 20px;" type="button"></i> @endif </p></a></li>
+                            <li style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#resetDtr"><a class="dropdown-item" >Reset DTR <i class="fa-solid fa-rotate" style="margin-left: 3%; font-size: 20px;" type="button"></i></a></li>
+                        </ul>
+                    </div>
                 </div>
                 <div style="display: flex; @if($dtr_data == null )  @elseif($dtr_data->in != null and $dtr_data->out != null) display: none @endif">
                     <div style="border-radius: 100px; background-color: #008000; padding: 2%; width: 9%; text-align: center; margin-left: 40%; @if($dtr_data == null or $dtr_data->in == null) color: white; cursor: pointer @endif" @if($dtr_data == null or $dtr_data->in == null) wire:click="in" @endif ><h5>Time In</h5></div>
