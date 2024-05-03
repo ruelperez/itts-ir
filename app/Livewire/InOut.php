@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\AdminShow;
 use App\Models\Dtr;
+use App\Models\DtrContent;
 use App\Models\DtrPermanent;
 use App\Models\IsRegistration;
 use App\Models\User;
@@ -14,7 +15,7 @@ use Livewire\Component;
 class InOut extends Component
 {
 
-    public $registrationSwitch,$dtrData = [], $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch,$dtrData = [], $weekNumber = "Week 1", $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -28,10 +29,33 @@ class InOut extends Component
         return view('livewire.in-out');
     }
 
-    public function clickResets(){
-        dd('baba');
-    }
+    public function submitWeek(){
+        $bas = DtrPermanent::all();
+        try {
+            foreach ($bas as $bax){
+                DtrContent::create([
+                    'fullname' => $bax->fullname,
+                    'in' => $bax->in,
+                    'out' => $bax->out,
+                    'in2' => $bax->in2,
+                    'out2' => $bax->out2,
+                    'user_id' => $bax->user_id,
+                    'dtr_id' => $bax->dtr_id,
+                    'hour' => $bax->hour,
+                    'minute' => $bax->minute,
+                    'week' => $this->weekNumber,
+                ]);
+            }
+            foreach ($bas as $bax){
+                DtrPermanent::find($bax->id)->delete();
+            }
 
+            session()->flash('good', 'Successfully reset DTR');
+        }catch (\Exception $e){
+            session()->flash('bad', 'Failed to reset DTR');
+        }
+
+    }
     public function clickReset(){
         $fd = Dtr::all();
         foreach ($fd as $ff){
