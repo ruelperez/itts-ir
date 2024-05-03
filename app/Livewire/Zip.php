@@ -18,7 +18,7 @@ class Zip extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $dtrData = [], $superAdminSwitch, $adminSwitch, $is_admin, $webName, $fullname, $user_id, $photo, $searchInput, $request_data=[];
+    public $registrationSwitch, $dtrData = [], $superAdminSwitch, $position, $adminSwitch, $is_admin, $webName, $fullname, $user_id, $photo, $searchInput, $request_data=[];
 
     public function render()
     {
@@ -30,7 +30,7 @@ class Zip extends Component
         }
         $this->fullname = auth()->user()->fullname;
         $this->user_id = auth()->user()->id;
-        $this->is_admin = auth()->user()->is_admin;
+        $this->position = auth()->user()->position;
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
         return view('livewire.zip');

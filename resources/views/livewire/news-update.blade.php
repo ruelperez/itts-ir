@@ -19,12 +19,12 @@
                         <div>
                             <h5 style="color: white">{{strtoupper($campaign_name)}}</h5>
                         </div>
-                        @if($is_admin == "1")
+                        @if($position != "Agent")
                             <div style="margin-left: 5%;  margin-right: 1%;">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add">Create <i class="fa-solid fa-plus"></i></button>
                             </div>
                         @endif
-                        <div style="width: 20%; @if($is_admin != "1") margin-left: 17%; @endif ">
+                        <div style="width: 20%; @if($position == "Agent") margin-left: 17%; @endif ">
                             <input type="text" placeholder="Search" wire:model.live="searchInput" style="padding: 1%;  width: 100%;">
                         </div>
                         <div style="margin-left: auto; margin-right: 5%;">
@@ -56,9 +56,9 @@
                                     ID: {{$data->id}}
                                 </div>
                                 <div style="margin-right: 6%;">
-                                    {{$data->tags}} @if($is_admin == "1") <i class="fa-solid fa-pen" style="font-size: 14px; margin-left: 5px; cursor: pointer" data-bs-toggle="modal" data-bs-target="#edit_tags" wire:click="edit_tags({{$data->id}})"></i> @endif
+                                    {{$data->tags}} @if($position != "Agent") <i class="fa-solid fa-pen" style="font-size: 14px; margin-left: 5px; cursor: pointer" data-bs-toggle="modal" data-bs-target="#edit_tags" wire:click="edit_tags({{$data->id}})"></i> @endif
                                 </div>
-                                @if($is_admin == "1")
+                                @if($position != "Agent")
                                     <div style="margin-left: auto; margin-right: 1.5%;">
                                         <i class="fa-solid fa-pen-to-square" style="cursor: pointer" title="edit" data-bs-toggle="modal" data-bs-target="#edit" wire:click="edit({{$data->id}})"></i>
                                     </div>

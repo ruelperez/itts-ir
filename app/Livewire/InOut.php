@@ -16,13 +16,13 @@ use Livewire\Component;
 class InOut extends Component
 {
 
-    public $registrationSwitch,$dtrData = [], $dtrAll = [], $superAdminSwitch, $weekNumber = "Week 1", $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch,$dtrData = [], $dtrAll = [], $position, $superAdminSwitch, $weekNumber = "Week 1", $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
         $this->user_id = auth()->user()->id;
-        $this->is_admin = auth()->user()->is_admin;
+        $this->position = auth()->user()->position;
         $this->photo = auth()->user()->photo;
         $this->dtr_data = Dtr::where('user_id', $this->user_id)->latest()->first();
         $this->dtr_permanent_data = DtrPermanent::where('user_id',$this->user_id)->get();
