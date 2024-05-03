@@ -13,7 +13,7 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li @if(count($dtrData) != 0) style="cursor: pointer" wire:click="clickReset" wire:confirm="Are you sure you want to reset DTR button?" @endif><a class="dropdown-item"><p>Reset DTR button @if(count($dtrData) == 0) <i class="fa-solid fa-check" style="color: green;font-size: 20px; margin-left: 3%;"></i>  @else <i class="fa-solid fa-rotate" style="margin-left: 3%; font-size: 20px;" type="button"></i> @endif </p></a></li>
-                            <li style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#resetDtr"><a class="dropdown-item" >Reset DTR <i class="fa-solid fa-rotate" style="margin-left: 3%; font-size: 20px;" type="button"></i></a></li>
+                            <li @if(count($dtrAll) != 0) style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#resetDtr" @endif><a class="dropdown-item" >Reset DTR @if(count($dtrAll) == 0) <i class="fa-solid fa-check" style="color: green;font-size: 20px; margin-left: 3%;"></i>  @else <i class="fa-solid fa-rotate" style="margin-left: 3%; font-size: 20px;" type="button"></i> @endif </a></li>
                         </ul>
                     </div>
                 </div>

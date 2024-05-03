@@ -10,6 +10,7 @@ use App\Models\Heart;
 use App\Models\IsRegistration;
 use App\Models\Link;
 use App\Models\Note;
+use App\Models\SuperadminShow;
 use App\Models\User;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,7 @@ class NewsUpdate extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $fj = 0, $dtrData = [], $edit_comment_id, $editTextComment, $linkData = [], $imagePath, $link= [], $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "Camp lejeune", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
+    public $registrationSwitch, $fj = 0, $dtrData = [], $superAdminSwitch, $edit_comment_id, $editTextComment, $linkData = [], $imagePath, $link= [], $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "Camp lejeune", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
@@ -380,6 +381,24 @@ class NewsUpdate extends Component
         else{
             $this->adminSwitch = true;
         }
+
+        $data = SuperadminShow::all();
+        if (count($data) == 0){
+            SuperadminShow::create([
+                'user_id' => auth()->user()->id,
+                'on_off' => true,
+            ]);
+        }
+        $an = SuperadminShow::all();
+        foreach ($an as $ans){
+            $this->superAdminSwitch = $ans->on_off;
+        }
+        if ($this->superAdminSwitch == "0"){
+            $this->superAdminSwitch = false;
+        }
+        else{
+            $this->superAdminSwitch = true;
+        }
     }
 
     public function regSwitch(){
@@ -454,12 +473,54 @@ class NewsUpdate extends Component
         }
     }
 
+    public function super_admin_Switch(){
+        $data = SuperadminShow::all();
+        if (count($data) == 1) {
+            if ($this->superAdminSwitch == false) {
+                foreach ($data as $datas) {
+                    $datas->user_id = auth()->user()->id;
+                    $datas->on_off = false;
+                    $datas->save();
+                }
+                $an = SuperadminShow::all();
+                foreach ($an as $ans) {
+                    $this->superAdminSwitch = $ans->on_off;
+                }
+                \App\Models\Logs::create([
+                    'action' => "disabled super admin registration",
+                    'user_id' => $this->user_id,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
+            } else {
+                foreach ($data as $datas) {
+                    $datas->user_id = auth()->user()->id;
+                    $datas->on_off = true;
+                    $datas->save();
+                }
+                $an = SuperadminShow::all();
+                foreach ($an as $ans) {
+                    $this->superAdminSwitch = $ans->on_off;
+                }
+                \App\Models\Logs::create([
+                    'action' => "enabled super admin registration",
+                    'user_id' => $this->user_id,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
+            }
+        }
+    }
+
     public function updated($field){
         if ($field == "registrationSwitch"){
             $this->regSwitch();
         }
         if ($field == "adminSwitch"){
             $this->admin_Switch();
+        }
+        if ($field == "superAdminSwitch"){
+            $this->super_admin_Switch();
         }
         if ($field == "image"){
             $this->fj = 1;

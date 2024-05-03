@@ -13,7 +13,11 @@
                     </div>
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" wire:model.live="adminSwitch" value="{{$adminSwitch}}">
-                        <label class="form-check-label" for="flexSwitchCheckChecked">Admin option registration</label>
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Admin registration</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" wire:model.live="superAdminSwitch" value="{{$adminSwitch}}">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Super admin registration</label>
                     </div>
                 </div>
             </div>

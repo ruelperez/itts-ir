@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\AdminShow;
 use App\Models\Dtr;
 use App\Models\IsRegistration;
+use App\Models\SuperadminShow;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
@@ -16,7 +17,7 @@ class AgeCompute extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $dtrData = [], $adminSwitch, $fullname, $is_admin, $webName, $user_id, $photo, $birth, $death, $error=0, $stat = "dependent", $hn = 0, $start, $alive, $end, $latency = 0, $name, $diagnosis, $age_diagnosed = 0, $age_passaway = 0, $age_started = 0, $age_left = 0, $year_exposure = 0, $remarks = 0;
+    public $registrationSwitch, $dtrData = [], $superAdminSwitch, $adminSwitch, $fullname, $is_admin, $webName, $user_id, $photo, $birth, $death, $error=0, $stat = "dependent", $hn = 0, $start, $alive, $end, $latency = 0, $name, $diagnosis, $age_diagnosed = 0, $age_passaway = 0, $age_started = 0, $age_left = 0, $year_exposure = 0, $remarks = 0;
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
@@ -239,7 +240,9 @@ class AgeCompute extends Component
         if ($value == "adminSwitch"){
             $this->admin_Switch();
         }
-
+        if ($value == "superAdminSwitch"){
+            $this->super_admin_Switch();
+        }
 
     }
 
@@ -285,6 +288,24 @@ class AgeCompute extends Component
         else{
             $this->adminSwitch = true;
         }
+
+        $data = SuperadminShow::all();
+        if (count($data) == 0){
+            SuperadminShow::create([
+                'user_id' => auth()->user()->id,
+                'on_off' => true,
+            ]);
+        }
+        $an = SuperadminShow::all();
+        foreach ($an as $ans){
+            $this->superAdminSwitch = $ans->on_off;
+        }
+        if ($this->superAdminSwitch == "0"){
+            $this->superAdminSwitch = false;
+        }
+        else{
+            $this->superAdminSwitch = true;
+        }
     }
 
     public function regSwitch(){
@@ -318,6 +339,45 @@ class AgeCompute extends Component
                 'user_id' => auth()->user()->id,
                 'on_off' => true,
             ]);
+        }
+    }
+
+    public function super_admin_Switch(){
+        $data = SuperadminShow::all();
+        if (count($data) == 1) {
+            if ($this->superAdminSwitch == false) {
+                foreach ($data as $datas) {
+                    $datas->user_id = auth()->user()->id;
+                    $datas->on_off = false;
+                    $datas->save();
+                }
+                $an = SuperadminShow::all();
+                foreach ($an as $ans) {
+                    $this->superAdminSwitch = $ans->on_off;
+                }
+                \App\Models\Logs::create([
+                    'action' => "disabled super admin registration",
+                    'user_id' => $this->user_id,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
+            } else {
+                foreach ($data as $datas) {
+                    $datas->user_id = auth()->user()->id;
+                    $datas->on_off = true;
+                    $datas->save();
+                }
+                $an = SuperadminShow::all();
+                foreach ($an as $ans) {
+                    $this->superAdminSwitch = $ans->on_off;
+                }
+                \App\Models\Logs::create([
+                    'action' => "enabled super admin registration",
+                    'user_id' => $this->user_id,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
+            }
         }
     }
 

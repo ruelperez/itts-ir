@@ -13,10 +13,11 @@
                 <h2 class="text-uppercase text-center mb-4">Create an account</h2>
                 <form wire:submit.prevent="submit_register">
                     <div class="mb-4">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" wire:model="is_admin" value="{{$is_admin}}" @if($is_reg == 0) disabled @endif @if($admin_show == 0) disabled @endif>
-                            <label class="form-check-label" for="flexSwitchCheckChecked">Admin</label>
-                        </div>
+                        <select class="form-select" aria-label="Default select example" style="width: 50%;" wire:model="position" @if($is_reg == 0) disabled @endif>
+                            <option value="Agent">Agent</option>
+                            @if($admin_show != 0) <option value="Admin">Admin</option> @endif
+                            @if($super_admin_show != 0) <option value="Super Admin">Super Admin</option> @endif
+                        </select>
                     </div>
                     <div class="form-outline mb-4">
                         <input type="text" id="form3Example1cg" class="form-control form-control-md" wire:model="fullname" @if($is_reg == 0) disabled @endif/>

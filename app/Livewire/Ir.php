@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\AdminShow;
 use App\Models\Dtr;
 use App\Models\IsRegistration;
+use App\Models\SuperadminShow;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
@@ -16,7 +17,7 @@ class Ir extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $dtrData = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $dtrData = [], $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
@@ -73,7 +74,65 @@ class Ir extends Component
         else{
             $this->adminSwitch = true;
         }
+
+        $data = SuperadminShow::all();
+        if (count($data) == 0){
+            SuperadminShow::create([
+                'user_id' => auth()->user()->id,
+                'on_off' => true,
+            ]);
+        }
+        $an = SuperadminShow::all();
+        foreach ($an as $ans){
+            $this->superAdminSwitch = $ans->on_off;
+        }
+        if ($this->superAdminSwitch == "0"){
+            $this->superAdminSwitch = false;
+        }
+        else{
+            $this->superAdminSwitch = true;
+        }
     }
+
+    public function super_admin_Switch(){
+        $data = SuperadminShow::all();
+        if (count($data) == 1) {
+            if ($this->superAdminSwitch == false) {
+                foreach ($data as $datas) {
+                    $datas->user_id = auth()->user()->id;
+                    $datas->on_off = false;
+                    $datas->save();
+                }
+                $an = SuperadminShow::all();
+                foreach ($an as $ans) {
+                    $this->superAdminSwitch = $ans->on_off;
+                }
+                \App\Models\Logs::create([
+                    'action' => "disabled super admin registration",
+                    'user_id' => $this->user_id,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
+            } else {
+                foreach ($data as $datas) {
+                    $datas->user_id = auth()->user()->id;
+                    $datas->on_off = true;
+                    $datas->save();
+                }
+                $an = SuperadminShow::all();
+                foreach ($an as $ans) {
+                    $this->superAdminSwitch = $ans->on_off;
+                }
+                \App\Models\Logs::create([
+                    'action' => "enabled super admin registration",
+                    'user_id' => $this->user_id,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
+            }
+        }
+    }
+
 
     public function regSwitch(){
         $data = IsRegistration::all();
@@ -153,6 +212,9 @@ class Ir extends Component
         }
         if ($field == "adminSwitch"){
             $this->admin_Switch();
+        }
+        if ($field == "superAdminSwitch"){
+            $this->super_admin_Switch();
         }
         if ($field == "photo"){
             $this->photo->store(path: 'public');

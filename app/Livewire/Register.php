@@ -4,12 +4,13 @@ namespace App\Livewire;
 
 use App\Models\AdminShow;
 use App\Models\IsRegistration;
+use App\Models\SuperadminShow;
 use App\Models\User;
 use Livewire\Component;
 
 class Register extends Component
 {
-    public $fullname, $username, $eye = 0, $eyes = 0, $admin_show, $password, $is_admin = false, $password_confirmation, $is_reg, $photo = "default_profile.png";
+    public $fullname, $position = "Agent", $username, $eye = 0, $eyes = 0, $admin_show, $super_admin_show, $password, $is_admin = false, $password_confirmation, $is_reg, $photo = "default_profile.png";
     public function render()
     {
         $data = IsRegistration::all();
@@ -31,6 +32,16 @@ class Register extends Component
                 $this->admin_show = $datas->on_off;
             }
         }
+
+        $dats = SuperadminShow::all();
+        if (count($dats) < 1){
+            $this->super_admin_show = 1;
+        }
+        else{
+            foreach ($dats as $datas){
+                $this->super_admin_show = $datas->on_off;
+            }
+        }
         return view('livewire.register');
     }
 
@@ -48,7 +59,7 @@ class Register extends Component
             'username' => 'required|unique:users,username',
             'password' => 'required|min:5|confirmed',
             'password_confirmation' => 'required',
-            'is_admin' => 'required',
+            'position' => 'required',
             'photo' => 'required'
         ]);
 

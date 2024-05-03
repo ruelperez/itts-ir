@@ -21,7 +21,7 @@ class Logs extends Component
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
         if ($this->search == ""){
-            $this->logsData = \App\Models\Logs::all();
+            $this->logsData = \App\Models\Logs::orderBy('created_at', 'desc')->get();
         }else{
             $this->logsData = \App\Models\Logs::where('fullname','LIKE','%'.$this->search.'%')
                 ->orWhere('action','LIKE','%'.$this->search.'%')
