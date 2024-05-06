@@ -18,7 +18,7 @@
         NEWS FEED
     </div>
     <div href="/itts/6/my-notes" style="@if($webName == "my-notes") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>
-        EMPLOYEE LEAVE FORM
+        FORM LINK
     </div>
     @if($position == "Agent")
         <div style="margin-left: auto; text-align: right; padding-right: 5%;" wire:click="logout">

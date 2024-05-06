@@ -95,7 +95,7 @@ class InOut extends Component
             else{
                 Dtr::create([
                     'fullname' => $this->fullname,
-                    'in' => now(),
+                    'in' => Carbon::now(),
                     'user_id' => $this->user_id,
                     'photo' => $this->photo
                 ]);
@@ -106,7 +106,7 @@ class InOut extends Component
                 }
                 DtrPermanent::create([
                     'fullname' => $this->fullname,
-                    'in' => now(),
+                    'in' => Carbon::now(),
                     'user_id' => $this->user_id,
                     'dtr_id' => $id,
                     'hour' => "0",
@@ -130,12 +130,12 @@ class InOut extends Component
         ]);
         if ($this->designated_id == "ITTS-00".$this->user_id){
             $gf = Dtr::find($this->dtr_data->id);
-            $gf->out = now();
+            $gf->out = Carbon::now();
             $gf->save();
 
             $gs = Dtr::find($this->dtr_data->id)->dtr_permanent;
             foreach ($gs as $gg){
-                $gg->out = now();
+                $gg->out = Carbon::now();
                 $gg->save();
             }
             $gd = Dtr::find($this->dtr_data->id)->dtr_permanent;
@@ -167,12 +167,12 @@ class InOut extends Component
         ]);
         if ($this->designated_id == "ITTS-00".$this->user_id){
             $gf = Dtr::find($this->dtr_data->id);
-            $gf->in2 = now();
+            $gf->in2 = Carbon::now();
             $gf->save();
 
             $gs = Dtr::find($this->dtr_data->id)->dtr_permanent;
             foreach ($gs as $gg){
-                $gg->in2 = now();
+                $gg->in2 = Carbon::now();
                 $gg->save();
             }
             $this->designated_id = "";
@@ -189,12 +189,12 @@ class InOut extends Component
         ]);
         if ($this->designated_id == "ITTS-00".$this->user_id){
             $gf = Dtr::find($this->dtr_data->id);
-            $gf->out2 = now();
+            $gf->out2 = Carbon::now();
             $gf->save();
 
             $gs = Dtr::find($this->dtr_data->id)->dtr_permanent;
             foreach ($gs as $gg){
-                $gg->out2 = now();
+                $gg->out2 = Carbon::now();
                 $gg->save();
             }
 

@@ -5,10 +5,16 @@
         <div style="width: 81%; margin-left: 19%;">
             <div class="container">
                 <div>
-                    <h4 style="margin-left: 2%; margin-top: 3%;">Employee leave form</h4>
+                    <h5 style="margin-left: 2%; margin-top: 3%;">Form link</h5>
                 </div>
                 <div style="margin-left: 3%;margin-top: 2%;">
-                    Link: <br> <a href="https://docs.google.com/forms/d/e/1FAIpQLScsNvwJyFiQM-hv3tQL198w2O7BAAWZzg7PwxYymgRvtioJ7g/viewform" target="_blank">https://docs.google.com/forms/d/e/1FAIpQLScsNvwJyFiQM-hv3tQL198w2O7BAAWZzg7PwxYymgRvtioJ7g/viewform</a>
+                    Employee/Agent Form: <br> <a href="https://docs.google.com/forms/d/e/1FAIpQLScJnqXyMW7Vz_DCqlvllgn7B22yuvfNA79693E0IveyAZQbPg/viewform" target="_blank">https://docs.google.com/forms/d/e/1FAIpQLScsNvwJyFiQM-hv3tQL198w2O7BAAWZzg7PwxYymgRvtioJ7g/viewform</a>
+                </div>
+                <div style="margin-left: 3%;margin-top: 2%;">
+                    Employee Info: <br> <a href="https://docs.google.com/forms/d/e/1FAIpQLSdSUf-fS4a9hDnEXgEWamq7s_Zfc_DyAFIQAphYLqce7ePV1g/viewform" target="_blank">https://docs.google.com/forms/d/e/1FAIpQLScsNvwJyFiQM-hv3tQL198w2O7BAAWZzg7PwxYymgRvtioJ7g/viewform</a>
+                </div>
+                <div style="margin-left: 3%;margin-top: 2%;">
+                    Agent Performance MNGT. Form: <br> <a href="https://docs.google.com/forms/d/e/1FAIpQLSedBKV_OXc_Vz1EMx5g8qk-AasDN0-8_n9RvFKW8D0r5iQuvA/viewform" target="_blank">https://docs.google.com/forms/d/e/1FAIpQLScsNvwJyFiQM-hv3tQL198w2O7BAAWZzg7PwxYymgRvtioJ7g/viewform</a>
                 </div>
             </div>
         </div>
