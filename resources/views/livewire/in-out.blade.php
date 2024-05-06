@@ -77,7 +77,7 @@
                                     {{$result}}
                                 </td>
                                 <td>
-                                    <i class="fa-solid fa-list-check" style="margin-right: 3%; cursor: pointer" data-bs-toggle="modal" data-bs-target="#task" wire:click="clickTask"></i>
+                                    <i class="fa-solid fa-list-check" style="margin-right: 3%; cursor: pointer" data-bs-toggle="modal" data-bs-target="#task" wire:click="clickTask({{$data->id}})"></i>
                                 </td>
                             </tr>
                         @endforeach

@@ -35,8 +35,9 @@ class InOut extends Component
 
     }
 
-    public function clickTask(){
-
+    public function clickTask($id){
+        $data = DtrPermanent::find($id);
+        $this->task = $data->task;
     }
     public function submitWeek(){
         $bas = DtrPermanent::all();

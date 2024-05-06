@@ -15,6 +15,7 @@ class Dtr extends Model
         'out2',
         'user_id',
         'photo',
+        'task'
     ];
 
     use HasFactory;

@@ -19,6 +19,7 @@ class DtrContent extends Model
         'minute',
         'week',
         'photo',
+        'task'
     ];
 
     use HasFactory;
