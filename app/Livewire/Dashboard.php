@@ -28,10 +28,10 @@ class Dashboard extends Component
         $this->dtrData = Dtr::all();
         return view('livewire.dashboard');
     }
-
     public function mount($name){
         $this->webName = $name;
     }
+
     public function logout(){
         Auth::logout();
         return redirect()->to('/login');
