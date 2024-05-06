@@ -16,7 +16,8 @@ class DtrPermanent extends Model
         'user_id',
         'dtr_id',
         'hour',
-        'minute'
+        'minute',
+        'photo',
     ];
 
     use HasFactory;

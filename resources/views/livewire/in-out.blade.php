@@ -8,15 +8,21 @@
                 <div>
                     <h5 style="margin-left: 2%; margin-top: 3%;">DTR</h5>
                     @if($position == "Super Admin")
-                        <div class="dropdown"style="margin-left: 80%;">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Select to reset
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li @if(count($dtrData) != 0) style="cursor: pointer" wire:click="clickReset" wire:confirm="Are you sure you want to reset DTR button?" @endif><a class="dropdown-item"><p>Reset DTR button @if(count($dtrData) == 0) <i class="fa-solid fa-check" style="color: green;font-size: 20px; margin-left: 3%;"></i>  @else <i class="fa-solid fa-rotate" style="margin-left: 3%; font-size: 20px;" type="button"></i> @endif </p></a></li>
-                                <li @if(count($dtrAll) != 0) style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#resetDtr" @endif><a class="dropdown-item" >Reset DTR @if(count($dtrAll) == 0) <i class="fa-solid fa-check" style="color: green;font-size: 20px; margin-left: 3%;"></i>  @else <i class="fa-solid fa-rotate" style="margin-left: 3%; font-size: 20px;" type="button"></i> @endif </a></li>
-                            </ul>
+                        <div style="display: flex; padding-right: 3%; padding-left: 3%;">
+                            <div style="margin-left: auto; margin-right: 3%;">
+                                <a href="/itts/9/dtr-name" target="_blank">View all record</a>
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Select to reset
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li @if(count($dtrData) != 0) style="cursor: pointer" wire:click="clickReset" wire:confirm="Are you sure you want to reset DTR button?" @endif><a class="dropdown-item"><p>Reset DTR button @if(count($dtrData) == 0) <i class="fa-solid fa-check" style="color: green;font-size: 20px; margin-left: 3%;"></i>  @else <i class="fa-solid fa-rotate" style="margin-left: 3%; font-size: 20px;" type="button"></i> @endif </p></a></li>
+                                    <li @if(count($dtrAll) != 0) style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#resetDtr" @endif><a class="dropdown-item" >Reset DTR @if(count($dtrAll) == 0) <i class="fa-solid fa-check" style="color: green;font-size: 20px; margin-left: 3%;"></i>  @else <i class="fa-solid fa-rotate" style="margin-left: 3%; font-size: 20px;" type="button"></i> @endif </a></li>
+                                </ul>
+                            </div>
                         </div>
+                        <hr>
                     @endif
                 </div>
                 <div style="display: flex; @if($dtr_data == null )  @elseif($dtr_data->in != null and $dtr_data->out != null) display: none @endif">
@@ -59,7 +65,14 @@
                                 <td>@if($data->in2 == null) @else {{Carbon\Carbon::parse($data->in2)->format('h:i A') }} @endif</td>
                                 <td>@if($data->out2 == null) @else {{Carbon\Carbon::parse($data->out2)->format('h:i A') }} @endif</td>
                                 <td>
-                                    {{$data->hour}}:{{$data->minute}}
+                                    @php
+                                        $hours = floor($data->minute / 60);
+                                        $totalHours = floor($hours + $data->hour);
+                                        $remainingMinutes = $data->minute % 60;
+                                        $result = $totalHours . ':' . $remainingMinutes;
+//                                        dd($hours);
+                                    @endphp
+                                    {{$result}}
                                 </td>
                             </tr>
                         @endforeach
@@ -68,7 +81,7 @@
                 </div>
             </div>
         </div>
-        <div style="width: 19%; background-color: #0077b6; position: fixed;top: 125px; left: 0; z-index: 1000;">
+        <div style="width: 19%; background-color: #0077b6; position: fixed;top: 125px; left: 0; z-index: 1000; border: solid black 1px;">
             @include('components.layouts.profile')
             @include('components.layouts.navigation')
         </div>

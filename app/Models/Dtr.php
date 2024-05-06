@@ -14,6 +14,7 @@ class Dtr extends Model
         'in2',
         'out2',
         'user_id',
+        'photo',
     ];
 
     use HasFactory;

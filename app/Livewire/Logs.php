@@ -11,7 +11,7 @@ use Livewire\Component;
 
 class Logs extends Component
 {
-    public $registrationSwitch, $dtrData = [], $position, $search, $logsData = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $dtrData = [], $position, $superAdminSwitch, $search, $logsData = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {

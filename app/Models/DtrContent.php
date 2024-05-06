@@ -17,7 +17,8 @@ class DtrContent extends Model
         'dtr_id',
         'hour',
         'minute',
-        'week'
+        'week',
+        'photo',
     ];
 
     use HasFactory;

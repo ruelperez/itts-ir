@@ -46,6 +46,7 @@ class InOut extends Component
                     'hour' => $bax->hour,
                     'minute' => $bax->minute,
                     'week' => $this->weekNumber,
+                    'photo' => $bax->photo,
                 ]);
             }
             foreach ($bas as $bax){
@@ -96,6 +97,7 @@ class InOut extends Component
                     'fullname' => $this->fullname,
                     'in' => now(),
                     'user_id' => $this->user_id,
+                    'photo' => $this->photo
                 ]);
                 $ss = Dtr::where('fullname',$this->fullname)
                     ->where('user_id', $this->user_id)->get();
@@ -109,6 +111,7 @@ class InOut extends Component
                     'dtr_id' => $id,
                     'hour' => "0",
                     'minute' => "0",
+                    'photo' => $this->photo
                 ]);
 
             }
