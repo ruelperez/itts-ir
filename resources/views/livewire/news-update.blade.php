@@ -24,9 +24,14 @@
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add">Create <i class="fa-solid fa-plus"></i></button>
                             </div>
                         @endif
-                        <div style="width: 20%; @if($position == "Agent") margin-left: 17%; @endif ">
+                        <div style="width: 20%; @if($position == "Agent") margin-left: 10%; @endif ">
                             <input type="text" placeholder="Search" wire:model.live="searchInput" style="padding: 1%;  width: 100%;">
                         </div>
+                        @if($campaign_name == "Camp lejeune")
+                            <div style=" margin-left: 18px; margin-top: 4px;">
+                                <a href="/itts/2/age-checker" wire:navigate style="color: white;">Age checker</a>
+                            </div>
+                        @endif
                         <div style="margin-left: auto; margin-right: 5%;">
                             <select class="form-select" aria-label="Default select example" wire:model.live="campaign_name">
                                 <option value="Camp lejeune">CL</option>
@@ -142,7 +147,7 @@
 
             </div>
         </div>
-        <div style="width: 19%; background-color: #0077b6; position: fixed;top: 125px; left: 0; z-index: 1000;">
+        <div style="width: 19%; background-color: #0077b6; position: fixed;top: 125px; left: 0; z-index: 1000; height: 100%;">
             @include('components.layouts.profile')
             @include('components.layouts.navigation')
         </div>

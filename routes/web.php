@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/itts/1/{name}', \App\Livewire\Ir::class)->middleware('auth');
-Route::get('/itts/2/{names}', \App\Livewire\AgeCompute::class)->middleware('auth');
+//Route::get('/itts/1/{name}', \App\Livewire\Ir::class)->middleware('auth');
+//Route::get('/itts/2/{names}', \App\Livewire\AgeCompute::class)->middleware('auth');
 Route::get('/itts/3/{name}', \App\Livewire\Zip::class)->middleware('auth');
 Route::get('/itts/4/{name}', \App\Livewire\NewsUpdate::class)->middleware('auth')->name('news-update');
 Route::get('/itts/5/{name}', \App\Livewire\Dashboard::class)->middleware('auth');

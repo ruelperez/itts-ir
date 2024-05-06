@@ -16,7 +16,7 @@ use Livewire\Component;
 class InOut extends Component
 {
 
-    public $registrationSwitch,$dtrData = [], $dtrAll = [], $position, $superAdminSwitch, $weekNumber = "Week 1", $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch,$dtrData = [], $dtrAll = [], $task, $position, $superAdminSwitch, $weekNumber = "Week 1", $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -31,6 +31,13 @@ class InOut extends Component
         return view('livewire.in-out');
     }
 
+    public function submitTask(){
+
+    }
+
+    public function clickTask(){
+
+    }
     public function submitWeek(){
         $bas = DtrPermanent::all();
         try {

@@ -2,6 +2,7 @@
     @include('modal.click-settings')
     @include('modal.news-update.show-photo')
     @include('modal.dtr.resetDtr')
+    @include('modal.dtr.task')
     <div style="display: flex; width: 100%; margin-top: 135px;">
         <div style="width: 81%; margin-left: 19%;">
             <div class="container">
@@ -54,6 +55,7 @@
                             <th scope="col">Time in</th>
                             <th scope="col">Time out</th>
                             <th scope="col">Total time</th>
+                            <th scope="col">Task</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -74,6 +76,9 @@
                                     @endphp
                                     {{$result}}
                                 </td>
+                                <td>
+                                    <i class="fa-solid fa-list-check" style="margin-right: 3%; cursor: pointer" data-bs-toggle="modal" data-bs-target="#task" wire:click="clickTask"></i>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -81,7 +86,7 @@
                 </div>
             </div>
         </div>
-        <div style="width: 19%; background-color: #0077b6; position: fixed;top: 125px; left: 0; z-index: 1000; border: solid black 1px;">
+        <div style="width: 19%; background-color: #0077b6; position: fixed;top: 125px; left: 0; z-index: 1000; height: 100%;">
             @include('components.layouts.profile')
             @include('components.layouts.navigation')
         </div>
