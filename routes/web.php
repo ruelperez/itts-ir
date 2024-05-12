@@ -23,6 +23,7 @@ Route::get('/itts/7/{name}', \App\Livewire\Logs::class)->middleware('auth');
 Route::get('/itts/8/{name}', \App\Livewire\InOut::class)->middleware('auth');
 Route::get('/itts/9/{name}', \App\Livewire\DtrName::class)->middleware('auth');
 Route::get('/itts/10/dtr-all-record/{name}', \App\Livewire\DtrRecord::class)->middleware('auth');
+Route::get('itts/save-eod/{user_id}/{week}', [\App\Http\Controllers\EodController::class, 'pdf']);
 Route::get('/', function (){
     return redirect('/itts/5/dashboard');
 });

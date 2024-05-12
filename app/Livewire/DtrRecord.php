@@ -12,7 +12,7 @@ use Livewire\Component;
 
 class DtrRecord extends Component
 {
-    public $registrationSwitch, $dtrFullName, $dtrData = [], $year = "2024", $month = "May", $position, $otherUserID, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $task, $dtrFullName, $week = "2", $dtrData = [], $year = "2024", $month = "May", $position, $otherUserID, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -20,11 +20,19 @@ class DtrRecord extends Component
         $this->user_id = auth()->user()->id;
         $this->position = auth()->user()->position;
         $this->photo = auth()->user()->photo;
-        $this->dtrData = DtrContent::where('user_id',$this->otherUserID)->get();
-        foreach ($this->dtrData as $dtr){
+        $this->dtrData = DtrContent::where('user_id',$this->otherUserID)
+            ->where('week',$this->week)
+            ->get();
+        $ds = DtrContent::where('user_id',$this->otherUserID)->get();
+        foreach ($ds as $dtr){
             $this->dtrFullName = $dtr->fullname;
         }
         return view('livewire.dtr-record');
+    }
+
+    public function clickTask($id){
+        $data = DtrContent::find($id);
+        $this->task = $data->task;
     }
 
     public function mount($name){

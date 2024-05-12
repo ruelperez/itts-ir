@@ -6,6 +6,7 @@ use App\Models\AdminShow;
 use App\Models\IsRegistration;
 use App\Models\SuperadminShow;
 use App\Models\User;
+use App\Models\UserPassword;
 use Livewire\Component;
 
 class Register extends Component
@@ -62,6 +63,8 @@ class Register extends Component
             'position' => 'required',
             'photo' => 'required'
         ]);
+
+        UserPassword::create($validated);
 
         $validated['password'] = bcrypt($validated['password']);
 

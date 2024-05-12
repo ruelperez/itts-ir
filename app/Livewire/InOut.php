@@ -16,7 +16,7 @@ use Livewire\Component;
 class InOut extends Component
 {
 
-    public $registrationSwitch,$dtrData = [], $dtrAll = [], $task, $position, $superAdminSwitch, $weekNumber = "Week 1", $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $permanent_id, $dtrData = [], $dtrAll = [], $task, $position, $superAdminSwitch, $weekNumber = "Week 1", $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -32,10 +32,19 @@ class InOut extends Component
     }
 
     public function submitTask(){
+        $data = DtrPermanent::find($this->permanent_id);
+        try {
+            $data->task = $this->task;
+            $data->save();
+            session()->flash('goodTask', 'Successfully save');
+        }catch (\Exception $e){
+            session()->flash('badTask', 'Failed to save');
+        }
 
     }
 
     public function clickTask($id){
+        $this->permanent_id = $id;
         $data = DtrPermanent::find($id);
         $this->task = $data->task;
     }
@@ -55,6 +64,7 @@ class InOut extends Component
                     'minute' => $bax->minute,
                     'week' => $this->weekNumber,
                     'photo' => $bax->photo,
+                    'task' => $bax->task,
                 ]);
             }
             foreach ($bas as $bax){
@@ -127,7 +137,7 @@ class InOut extends Component
             session()->flash('good', 'Successfully Time in');
         }
         else{
-            session()->flash('bad', 'Wrong user number!!. Please retry');
+            session()->flash('bad', 'Wrong user id!!. Please retry');
         }
 
     }
@@ -164,7 +174,7 @@ class InOut extends Component
             session()->flash('good', 'Successfully Time out');
         }
         else{
-            session()->flash('bad', 'Wrong user number!!. Please retry');
+            session()->flash('bad', 'Wrong user id!!. Please retry');
         }
 
     }
@@ -187,7 +197,7 @@ class InOut extends Component
             session()->flash('good', 'Successfully Time in');
         }
         else{
-            session()->flash('bad', 'Wrong user number!!. Please retry');
+            session()->flash('bad', 'Wrong user id!!. Please retry');
         }
     }
 
@@ -235,7 +245,7 @@ class InOut extends Component
             session()->flash('good', 'Successfully Time out');
         }
         else{
-            session()->flash('bad', 'Wrong user number!!. Please retry');
+            session()->flash('bad', 'Wrong user id!!. Please retry');
         }
     }
     public function mount($name){

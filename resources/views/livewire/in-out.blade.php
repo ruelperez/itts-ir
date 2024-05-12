@@ -41,7 +41,7 @@
                         @if (session('good'))
                             <p style="color: blue; text-align: center; font-size: 19px;">{{ session('good') }}</p>
                         @elseif(session('bad'))
-                            <p style="color: red; text-align: center; font-size: 19px;">{{ session('bad') }}</p>
+                            <p style="color: red; text-align: center; font-size: 17px;">{{ session('bad') }}</p>
                         @endif
                     </div>
                 </div>
@@ -72,7 +72,6 @@
                                         $totalHours = floor($hours + $data->hour);
                                         $remainingMinutes = $data->minute % 60;
                                         $result = $totalHours . ':' . $remainingMinutes;
-//                                        dd($hours);
                                     @endphp
                                     {{$result}}
                                 </td>

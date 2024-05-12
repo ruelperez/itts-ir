@@ -62,9 +62,9 @@
                                     ID: {{$data->id}}
                                 </div>
                                 <div style="margin-right: 6%;">
-                                    {{$data->tags}} @if($position != "Agent") <i class="fa-solid fa-pen" style="font-size: 14px; margin-left: 5px; cursor: pointer" data-bs-toggle="modal" data-bs-target="#edit_tags" wire:click="edit_tags({{$data->id}})"></i> @endif
+                                    {{$data->tags}} @if($position != "Agent" and $data->user_id == $user_id) <i class="fa-solid fa-pen" style="font-size: 14px; margin-left: 5px; cursor: pointer" data-bs-toggle="modal" data-bs-target="#edit_tags" wire:click="edit_tags({{$data->id}})"></i> @endif
                                 </div>
-                                @if($position != "Agent")
+                                @if($position != "Agent" and $data->user_id == $user_id)
                                     <div style="margin-left: auto; margin-right: 1.5%;">
                                         <i class="fa-solid fa-pen-to-square" style="cursor: pointer" title="edit" data-bs-toggle="modal" data-bs-target="#edit" wire:click="edit({{$data->id}})"></i>
                                     </div>
