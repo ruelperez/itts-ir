@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content" style="height: 300px;">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Select week number</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Set shift schedule</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
