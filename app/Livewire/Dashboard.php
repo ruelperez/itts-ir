@@ -3,6 +3,8 @@
 namespace App\Livewire;
 
 use App\Models\AdminShow;
+use App\Models\Comment;
+use App\Models\CommentHeart;
 use App\Models\Dtr;
 use App\Models\IsRegistration;
 use App\Models\SuperadminShow;
@@ -245,6 +247,21 @@ class Dashboard extends Component
             $user = User::find($this->user_id);
             $user->photo = $hashPhoto;
             $user->save();
+//            $com = Comment::find($this->user_id);
+//            if (isset($com)){
+//                $com->photo = $hashPhoto;
+//                $com->save();
+//            }
+//            $comHeart = CommentHeart::find($this->user_id);
+//            if (isset($comHeart)){
+//                $comHeart->photo = $hashPhoto;
+//                $comHeart->save();
+//            }
+//            $dtr = Dtr::find($this->user_id);
+//            if (isset($comHeart)){
+//                $comHeart->photo = $hashPhoto;
+//                $comHeart->save();
+//            }
             return redirect('/itts/5/dashboard');
         }
     }

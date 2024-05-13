@@ -33,6 +33,10 @@ class InOut extends Component
         return view('livewire.in-out');
     }
 
+    public function target(){
+
+    }
+
     public function submitSched(){
         $o1 = $this->selectedHour.':'.$this->selectedMinute.' '.$this->selectedPeriod;
         $o2 = $this->selectedHour2.':'.$this->selectedMinute2.' '.$this->selectedPeriod2;
