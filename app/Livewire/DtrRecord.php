@@ -12,7 +12,7 @@ use Livewire\Component;
 
 class DtrRecord extends Component
 {
-    public $registrationSwitch, $task, $dtrFullName, $week = "2", $dtrData = [], $year = "2024", $month = "May", $position, $otherUserID, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $task, $dtrFullName, $week = "1", $dtrData = [], $year = "2024", $month = "May", $position, $otherUserID, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -245,6 +245,12 @@ class DtrRecord extends Component
         }
         if ($field == "superAdminSwitch"){
             $this->super_admin_Switch();
+        }
+        if ($field == "month"){
+
+        }
+        if ($field == "week"){
+
         }
         if ($field == "photo"){
             $this->photo->store(path: 'public');

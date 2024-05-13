@@ -8,6 +8,7 @@ use App\Models\DtrContent;
 use App\Models\DtrPermanent;
 use App\Models\IsRegistration;
 use App\Models\SuperadminShow;
+use App\Models\TimeSetting;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,7 @@ use Livewire\Component;
 class InOut extends Component
 {
 
-    public $registrationSwitch, $permanent_id, $dtrData = [], $dtrAll = [], $task, $position, $superAdminSwitch, $weekNumber = "Week 1", $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $permanent_id, $dtrData = [], $dtrAll = [], $task, $position, $superAdminSwitch, $weekNumber = "1", $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -110,29 +111,86 @@ class InOut extends Component
             if ($this->dtr_data != null){
                 $gf = Dtr::find($this->dtr_data->id);
             }
-            else{
-                Dtr::create([
-                    'fullname' => $this->fullname,
-                    'in' => Carbon::now(),
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo
-                ]);
-                $ss = Dtr::where('fullname',$this->fullname)
-                    ->where('user_id', $this->user_id)->get();
-                foreach ($ss as $s){
-                    $id = $s->id;
+            else {
+                $gn = TimeSetting::all();
+                if (count($gn) == 0){
+                    TimeSetting::create([
+                        'in' => "10:00 pm",
+                        'out' => "01:00 am",
+                        'in2' => "02:00 am",
+                        'out2' => "07:00 am",
+                        'fullname' => $this->fullname,
+                        'user_id' => $this->user_id,
+                        'photo' => $this->photo,
+                    ]);
                 }
-                DtrPermanent::create([
-                    'fullname' => $this->fullname,
-                    'in' => Carbon::now(),
-                    'user_id' => $this->user_id,
-                    'dtr_id' => $id,
-                    'hour' => "0",
-                    'minute' => "0",
-                    'photo' => $this->photo
-                ]);
 
+                $gh = TimeSetting::all();
+                    $gt = TimeSetting::all();
+                    foreach ($gt as $gs) {
+                        $end = $gs->out;
+                        $end2 = $gs->out2;
+                    }
+                    $rt = Carbon::now();
+                    $time1 = Carbon::parse($rt);
+                    $time2 = Carbon::parse($end);
+                    if ($time2->lessThan($time1)) {
+                        $time2->addDay(); // Add a day to the end time
+                    }
+                    $interval = $time1->diff($time2);
+
+                    //                    $gk = Dtr::find($this->dtr_data->id)->dtr_permanent;
+                    //                    foreach ($gk as $gg){
+                    //                        $gg->hour = $interval->h;
+                    //                        $gg->minute = $interval->i;
+                    //                        $gg->save();
+                    //                    }
+                    Dtr::create([
+                        'fullname' => $this->fullname,
+                        'in' => Carbon::now(),
+                        'out' => $end,
+                        'out2' => $end2,
+                        'user_id' => $this->user_id,
+                        'photo' => $this->photo
+                    ]);
+                    $ss = Dtr::where('fullname', $this->fullname)
+                        ->where('user_id', $this->user_id)->get();
+                    foreach ($ss as $s) {
+                        $id = $s->id;
+                    }
+
+                    DtrPermanent::create([
+                        'fullname' => $this->fullname,
+                        'in' => Carbon::now(),
+                        'out' => $end,
+                        'out2' => $end2,
+                        'user_id' => $this->user_id,
+                        'dtr_id' => $id,
+                        'hour' => $interval->h,
+                        'minute' => $interval->i,
+                        'photo' => $this->photo
+                    ]);
             }
+//                Dtr::create([
+//                    'fullname' => $this->fullname,
+//                    'in' => Carbon::now(),
+//                    'user_id' => $this->user_id,
+//                    'photo' => $this->photo
+//                ]);
+//                $ss = Dtr::where('fullname',$this->fullname)
+//                    ->where('user_id', $this->user_id)->get();
+//                foreach ($ss as $s){
+//                    $id = $s->id;
+//                }
+//                DtrPermanent::create([
+//                    'fullname' => $this->fullname,
+//                    'in' => Carbon::now(),
+//                    'user_id' => $this->user_id,
+//                    'dtr_id' => $id,
+//                    'hour' => "0",
+//                    'minute' => "0",
+//                    'photo' => $this->photo
+//                ]);
             $this->designated_id = "";
             session()->flash('good', 'Successfully Time in');
         }
@@ -159,10 +217,14 @@ class InOut extends Component
             $gd = Dtr::find($this->dtr_data->id)->dtr_permanent;
             foreach ($gd as $gg){
                 $rr = $gg->in;
-                $ss = $gg->out;
+                $ss = "";
             }
+            $ss = "1:30 am";
             $time1 = Carbon::parse($rr);
             $time2 = Carbon::parse($ss);
+            if ($time2->lessThan($time1)) {
+                $time2->addDay(); // Add a day to the end time
+            }
             $interval = $time1->diff($time2);
             $gk = Dtr::find($this->dtr_data->id)->dtr_permanent;
             foreach ($gk as $gg){
@@ -184,6 +246,7 @@ class InOut extends Component
             'designated_id' => 'required'
         ]);
         if ($this->designated_id == "ITTS-00".$this->user_id){
+
             $gf = Dtr::find($this->dtr_data->id);
             $gf->in2 = Carbon::now();
             $gf->save();
@@ -193,6 +256,76 @@ class InOut extends Component
                 $gg->in2 = Carbon::now();
                 $gg->save();
             }
+
+            $lk = Dtr::find($this->dtr_data->id)->dtr_permanent;
+            foreach ($lk as $gg){
+                $pp = $gg->in;
+                $kk = $gg->out;
+                $rr = $gg->in2;
+                $ss = $gg->out2;
+            }
+            $time1 = Carbon::parse($pp);
+            $time2 = Carbon::parse($kk);
+            $interval1 = $time1->diff($time2);
+
+            $time3 = Carbon::parse($rr);
+            $time4 = Carbon::parse($ss);
+            $interval2 = $time3->diff($time4);
+
+            $resultHour = intval($interval1->h) + intval($interval2->h);
+            $resultMinute = intval($interval1->i) + intval($interval2->i);
+
+
+            $gk = Dtr::find($this->dtr_data->id)->dtr_permanent;
+            foreach ($gk as $gg){
+                $gg->hour = $resultHour;
+                $gg->minute = $resultMinute;
+                $gg->save();
+            }
+
+
+
+            $gf = Dtr::find($this->dtr_data->id);
+            $gf->in2 = Carbon::now();
+            $gf->save();
+
+            $gs = Dtr::find($this->dtr_data->id)->dtr_permanent;
+            foreach ($gs as $gg){
+                $gg->in2 = Carbon::now();
+                $gg->save();
+            }
+
+            $lk = Dtr::find($this->dtr_data->id)->dtr_permanent;
+            foreach ($lk as $gg){
+                $pp = $gg->in;
+                $kk = $gg->out;
+                $rr = $gg->in2;
+                $ss = $gg->out2;
+            }
+            $time1 = Carbon::parse($pp);
+            $time2 = Carbon::parse($kk);
+            if ($time2->lessThan($time1)) {
+                $time2->addDay(); // Add a day to the end time
+            }
+            $interval1 = $time1->diff($time2);
+
+            $time3 = Carbon::parse($rr);
+            $time4 = Carbon::parse($ss);
+            if ($time4->lessThan($time3)) {
+                $time4->addDay(); // Add a day to the end time
+            }
+            $interval2 = $time3->diff($time4);
+
+            $resultHour = intval($interval1->h) + intval($interval2->h);
+            $resultMinute = intval($interval1->i) + intval($interval2->i);
+
+            $gk = Dtr::find($this->dtr_data->id)->dtr_permanent;
+            foreach ($gk as $gg){
+                $gg->hour = $resultHour;
+                $gg->minute = $resultMinute;
+                $gg->save();
+            }
+
             $this->designated_id = "";
             session()->flash('good', 'Successfully Time in');
         }
