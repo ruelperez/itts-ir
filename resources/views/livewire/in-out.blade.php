@@ -59,7 +59,7 @@
                             <th scope="col">Time in</th>
                             <th scope="col">Time out</th>
                             <th scope="col">Total time</th>
-                            <th scope="col">Task</th>
+                            @if($position != "Agent") <th scope="col">Task</th> @endif
                         </tr>
                         </thead>
                         <tbody>
@@ -79,9 +79,11 @@
                                     @endphp
                                     {{$result}}
                                 </td>
-                                <td>
-                                    <i class="fa-solid fa-list-check" style="margin-right: 3%; cursor: pointer" data-bs-toggle="modal" data-bs-target="#task" wire:click="clickTask({{$data->id}})"></i>
-                                </td>
+                                @if($position != "Agent")
+                                    <td>
+                                        <i class="fa-solid fa-list-check" style="margin-right: 3%; cursor: pointer" data-bs-toggle="modal" data-bs-target="#task" wire:click="clickTask({{$data->id}})"></i>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                         </tbody>

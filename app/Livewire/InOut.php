@@ -17,7 +17,7 @@ use Livewire\Component;
 class InOut extends Component
 {
 
-    public $registrationSwitch, $permanent_id, $dtrData = [], $dtrAll = [], $task, $position, $superAdminSwitch, $weekNumber = "1", $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $timeSched = [], $selectedMinute2 = "00", $selectedHour2 = "7", $selectedHour = "1", $selectedMinute = "00", $selectedPeriod = "am", $selectedPeriod2 = "am", $permanent_id, $dtrData = [], $dtrAll = [], $task, $position, $superAdminSwitch, $weekNumber = "1", $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -29,7 +29,41 @@ class InOut extends Component
         $this->dtr_permanent_data = DtrPermanent::where('user_id',$this->user_id)->get();
         $this->dtrData = Dtr::all();
         $this->dtrAll = DtrPermanent::all();
+        $this->timeSched = TimeSetting::latest()->first();
         return view('livewire.in-out');
+    }
+
+    public function submitSched(){
+        $o1 = $this->selectedHour.':'.$this->selectedMinute.' '.$this->selectedPeriod;
+        $o2 = $this->selectedHour2.':'.$this->selectedMinute2.' '.$this->selectedPeriod2;
+        try {
+            if (isset($this->timeSched)){
+                $gb = TimeSetting::find($this->timeSched->id);
+                $gb->out = $o1;
+                $gb->out2 = $o2;
+                $gb->save();
+
+                \App\Models\Logs::create([
+                    'action' => "Update lunch out to ".$o1." and lunch in to ".$o2,
+                    'user_id' => $this->user_id,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
+            }
+            else{
+                TimeSetting::create([
+                    'out' => $o1,
+                    'out2' => $o2,
+                    'user_id' => $this->user_id,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
+            }
+            session()->flash('goodSched', 'Successfully saved');
+        }catch (\Exception $e){
+            session()->flash('badSched', 'Failed to save');
+        }
+
     }
 
     public function submitTask(){
