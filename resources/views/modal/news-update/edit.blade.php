@@ -5,7 +5,7 @@
                 <h5 class="modal-title">Create notes</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form wire:submit.prevent="submit_edit">
+            <form wire:submit.prevent="submit_edit" wire:ignore>
                 <div class="modal-body">
                     @if(session()->has('good'))
                         <div class="alert alert-success" style="width: 60%; ">
