@@ -1,8 +1,7 @@
-.invs td {
-    padding-left: 3%;
-    background-color:#F8F8FF;
-    text-align: center;
+.invs{
+    color: white;
 }
+
 .inv th {
     text-align: center;
 }

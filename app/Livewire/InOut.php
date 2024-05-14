@@ -75,7 +75,7 @@ class InOut extends Component
         try {
             $data->task = $this->task;
             $data->save();
-            session()->flash('goodTask', 'Successfully save');
+            session()->flash('goodTask', 'Successfully saved');
         }catch (\Exception $e){
             session()->flash('badTask', 'Failed to save');
         }

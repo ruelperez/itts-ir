@@ -1,4 +1,4 @@
-<table style="text-align: center; width: 100%;">
+<table style="text-align: center; width: 100%; margin-left: 5%;">
     <tr>
         <td style="text-align: right; padding-right: 10px; width: 35%;">
             <img src="{{public_path('photo/logo.jpg')}}" width="100">
@@ -15,84 +15,82 @@
         </td>
     </tr>
 </table>
-<table style="width: 100%; text-align: center;border: 1px solid; border-collapse: collapse;">
-    <tr style="border: 1px solid;">
-        <td colspan="3" rowspan="3" style="border: 1px solid; text-align: left;">
-{{--            <b>Item: {{ucwords($item)}}</b>--}}
+<table style="width: 100%; text-align: center;border: 1px solid; border-collapse: collapse;" >
+    <tr style="border: 1px solid; text-align: left;" >
+        <td colspan="5" style="border: 1px solid; padding: 10px;">
+            <b>Employee Name: </b>{{$userData->fullname}}
         </td>
-        <td colspan="2" rowspan="2" style="border: 1px solid;text-align: left;">
-            <b>Description:</b>
+        <td colspan="1" style="border: 1px solid; padding: 10px;">
+            <b>Date Coverage:</b>
         </td>
-        <td colspan="2" style="border: 1px solid; text-align: left;">
-{{--            <b>Stock No.: {{$stockNum}}</b>--}}
+    </tr>
+    <tr style="border: 1px solid; text-align: left;">
+        <td colspan="5" style="border: 1px solid; padding: 10px;">
+            <b>Designation:</b> {{$userData->position}}
+        </td>
+        <td colspan="1" style="border: 1px solid; padding: 10px;">
+            <b>Immediate Supervisor:</b>
+        </td>
+    </tr>
+    <tr style="border: 1px solid; text-align: left;">
+        <td colspan="5" style="border: 1px solid; padding: 10px;">
+            <b>Department:</b>
+        </td>
+        <td colspan="1" style="border: 1px solid; padding: 10px;">
+
+        </td>
+    </tr>
+    <tr style="border: 1px solid; text-align: left;">
+        <td style="border: 1px solid; padding: 10px;">
+
+        </td>
+        <td colspan="4" style="border: 1px solid; padding: 10px;">
+            <b>Regular Hours (i.e. 8am TO 5pm, 9am to 6pm)</b>
+        </td>
+        <td style="border: 1px solid;">
+
         </td>
     </tr>
     <tr style="border: 1px solid;">
-        <td colspan="2" style="border: 1px solid; text-align: left;">
-            <b>Re-order Point:</b>
+        <td style="border: 1px solid; padding: 10px;">
+            <b>Date & Day</b>
         </td>
-    </tr>
-    <tr style="border: 1px solid;">
-        <td colspan="2" style="border: 1px solid;">
-            <b>Issuance</b>
+        <td style="border: 1px solid; padding: 10px;">
+            <b>Time In</b>
         </td>
-        <td style="border: 1px solid;">
-            <b>Balance</b>
+        <td style="border: 1px solid; padding: 10px;">
+            <b>Lunch Out</b>
         </td>
-        <td rowspan="2" style="border: 1px solid;">
-            <b>No. of Days to Consume</b>
+        <td style="border: 1px solid; padding: 10px;">
+            <b>Lunch In</b>
         </td>
-    </tr>
-    <tr style="text-align: center;">
-        <td style="border: 1px solid; width: 15%;">
-            <b>Date</b>
+        <td style="border: 1px solid; padding: 10px;">
+            <b>Time Out</b>
         </td>
-        <td style="border: 1px solid;">
-            <b>Day</b>
-        </td>
-        <td style="border: 1px solid;">
-            <b>Time in</b>
-        </td>
-        <td style="border: 1px solid;">
-            <b>Time out</b>
-        </td>
-        <td style="border: 1px solid; width: 26%;">
-            <b>Time in</b>
-        </td>
-        <td style="border: 1px solid;">
-            <b>Time in</b>
-        </td>
-        <td style="border: 1px solid;">
-            <b>Total time</b>
-        </td>
-        <td style="border: 1px solid;">
-            <b>Task</b>
+        <td style="border: 1px solid; padding: 10px;">
+            <b>EOD</b>
         </td>
     </tr>
     @foreach($dtrData as $data)
-        <tr>
+        <tr style="border: 1px solid;">
             <td style="border: 1px solid;">
-{{--                {{ $data->created_at->format('M-d-Y')}}--}}
+                {{Carbon\Carbon::parse($data->in)->format('M-d-Y (D)')}}
             </td>
             <td style="border: 1px solid;">
-
+                {{Carbon\Carbon::parse($data->in)->format('h:i a')}}
             </td>
             <td style="border: 1px solid;">
-{{--                {{$data->receiptQty}}--}}
+                {{$data->out}}
             </td>
             <td style="border: 1px solid;">
-{{--                {{$data->quantity}}--}}
+                {{Carbon\Carbon::parse($data->in2)->format('h:i a')}}
             </td>
             <td style="border: 1px solid;">
-{{--                {{ucwords($data->receiver)}}--}}
+                {{$data->out2}}
             </td>
-            <td style="border: 1px solid;">
-{{--                {{$data->receiptQty - $data->quantity}}--}}
+            <td style="border: 1px solid; white-space: pre-line; text-align: left; padding: 10px;">
+                {{$data->task}}
             </td>
-            <td style="border: 1px solid;">
-
-            </td>
-
         </tr>
     @endforeach
 </table>
