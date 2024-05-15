@@ -9,9 +9,25 @@ use Illuminate\Http\Request;
 
 class ShiftController extends Controller
 {
-    public function pdf($month, $day, $year){
+    public function pdf($month, $day, $year, $role){
         $dtrData = DtrContent::all();
-        $pdf = PDF::loadView('form.shift', compact('dtrData','month','day','year'))
+        if ($role == "all"){
+            $userID = [];
+        }
+        elseif ($role == "agent"){
+//            $userID = [];
+//            $hg = DtrContent::all();
+//            foreach ($hg as $gh){
+//                $userID[] = $gh->user_id;
+//            }
+            $userID = User::where('position',"Agent")->get();
+
+        }
+        else{
+            $userID = User::where('position','!=',"Agent")->get();
+        }
+
+        $pdf = PDF::loadView('form.shift', compact('dtrData','month','day','year','userID','role'))
             ->setPaper('legal','landscape');
         return $pdf->download('load.pdf');
     }

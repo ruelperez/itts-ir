@@ -13,7 +13,7 @@ use Livewire\Component;
 
 class PerShift extends Component
 {
-    public $registrationSwitch, $year = "2024", $month="05", $day = "13", $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $task, $userID = [], $role = "all", $year = "2024", $month="05", $day = "13", $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
 
     public function render()
@@ -23,7 +23,22 @@ class PerShift extends Component
         $this->position = auth()->user()->position;
         $this->photo = auth()->user()->photo;
         $this->dtrData = DtrContent::all();
+        if ($this->role == "all"){
+            $this->userID = [];
+        }
+        elseif ($this->role == "agent"){
+            $this->userID = User::where('position',"Agent")->get();
+
+        }
+        else{
+            $this->userID = User::where('position','!=',"Agent")->get();
+        }
         return view('livewire.per-shift');
+    }
+
+    public function clickTask($id){
+        $data = DtrContent::find($id);
+        $this->task = $data->task;
     }
 
     public function mount($name){

@@ -9,9 +9,9 @@
                 <p style="white-space: pre-line;">{{$task}}</p>
             </div>
             <div class="modal-footer">
-                    <div>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
+                <div>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>

@@ -321,7 +321,7 @@ class InOut extends Component
             $gk = Dtr::find($this->dtr_data->id)->dtr_permanent;
             foreach ($gk as $gg){
                 $gg->hour = $resultHour;
-                $gg->minute = $resultMinute;
+                $gg->minute = $resultMinute + 2;
                 $gg->save();
             }
 

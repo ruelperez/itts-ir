@@ -35,7 +35,6 @@ class Dashboard extends Component
     public function mount($name){
         $this->webName = $name;
     }
-
     public function logout(){
         Auth::logout();
         return redirect()->to('/login');
