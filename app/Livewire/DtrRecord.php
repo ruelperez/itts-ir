@@ -12,7 +12,7 @@ use Livewire\Component;
 
 class DtrRecord extends Component
 {
-    public $registrationSwitch, $task, $dtrFullName, $week = "1", $dtrData = [], $year = "2024", $month = "May", $position, $otherUserID, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $task, $dtrFullName, $week = "1", $dtrData = [], $year = "2024", $month = "05", $position, $otherUserID, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {

@@ -17,7 +17,7 @@
 </table>
 <table style="width: 100%; text-align: center;border: 1px solid; border-collapse: collapse;" >
     <tr style="border: 1px solid; text-align: left;" >
-        <td colspan="5" style="border: 1px solid; padding: 10px;">
+        <td colspan="6" style="border: 1px solid; padding: 10px;">
             <b>Employee Name: </b>{{$userData->fullname}}
         </td>
         <td colspan="1" style="border: 1px solid; padding: 10px;">
@@ -25,7 +25,7 @@
         </td>
     </tr>
     <tr style="border: 1px solid; text-align: left;">
-        <td colspan="5" style="border: 1px solid; padding: 10px;">
+        <td colspan="6" style="border: 1px solid; padding: 10px;">
             <b>Designation:</b> {{$userData->position}}
         </td>
         <td colspan="1" style="border: 1px solid; padding: 10px;">
@@ -33,7 +33,7 @@
         </td>
     </tr>
     <tr style="border: 1px solid; text-align: left;">
-        <td colspan="5" style="border: 1px solid; padding: 10px;">
+        <td colspan="6" style="border: 1px solid; padding: 10px;">
             <b>Department:</b>
         </td>
         <td colspan="1" style="border: 1px solid; padding: 10px;">
@@ -44,7 +44,7 @@
         <td style="border: 1px solid; padding: 10px;">
 
         </td>
-        <td colspan="4" style="border: 1px solid; padding: 10px;">
+        <td colspan="5" style="border: 1px solid; padding: 10px;">
             <b>Regular Hours (i.e. 8am TO 5pm, 9am to 6pm)</b>
         </td>
         <td style="border: 1px solid;">
@@ -68,6 +68,9 @@
             <b>Time Out</b>
         </td>
         <td style="border: 1px solid; padding: 10px;">
+            <b>Total Working Hour</b>
+        </td>
+        <td style="border: 1px solid; padding: 10px;">
             <b>EOD</b>
         </td>
     </tr>
@@ -87,6 +90,15 @@
             </td>
             <td style="border: 1px solid;">
                 {{$data->out2}}
+            </td>
+            <td style="border: 1px solid;">
+                @php
+                    $hours = floor($data->minute / 60);
+                    $totalHours = floor($hours + $data->hour);
+                    $remainingMinutes = $data->minute % 60;
+                    $result = $totalHours . ':' . $remainingMinutes;
+                @endphp
+                {{$result}}
             </td>
             <td style="border: 1px solid; white-space: pre-line; text-align: left; padding: 10px;">
                 {{$data->task}}

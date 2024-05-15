@@ -7,7 +7,15 @@
                 <div>
                     <h5 style="margin-left: 2%; margin-top: 3%;">DTR Record</h5>
                 </div>
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search Name" wire:model.live="search" style="width: 30%; margin-left: 10%; margin-bottom: 1%; margin-top: 2%;">
+                <div style="display: flex; width: 90%;  margin-left: 10%; margin-bottom: 1%; margin-top: 2%;">
+                    <div style="width: 30%;">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search Name" wire:model.live="search" style="width: 100%;">
+                    </div>
+                    <div style="width: 30%;">
+                        <button class="btn btn-info" style="margin-left: 10%;" href="/itts/12/per-shift" style="@if($webName == "news-feed") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>View per shift</button>
+                    </div>
+                </div>
+
                 <div style="width: 80%; margin-left: 10%;">
                     <ul class="list-group">
                         @foreach($dtrData as $data)

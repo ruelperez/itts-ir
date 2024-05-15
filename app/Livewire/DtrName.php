@@ -24,7 +24,9 @@ class DtrName extends Component
                 ->distinct('fullname')
                 ->get();
         }else{
-            $this->dtrData = DtrContent::where('fullname','LIKE','%'.$this->search.'%')->get();
+            $this->dtrData = DtrContent::select('fullname','photo','user_id')
+            ->where('fullname','LIKE','%'.$this->search.'%')
+                ->distinct('fullname')->get();
         }
         return view('livewire.dtr-name');
     }

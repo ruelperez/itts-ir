@@ -3,8 +3,8 @@
         <div style="width: 50%; margin-left: 6%;">
             <img src="{{asset('photo/logo.jpg')}}" width="90"> <b style="color: white; font-size: 19px; margin-left: 2%;">IND. Teleoutsource Telemarketing Services.</b>
         </div>
-        <div style="width: 50%; text-align: right; padding-right: 3%; padding-top: 25px;">
-            <livewire:clock />
-        </div>
+{{--        <div style="width: 50%; text-align: right; padding-right: 3%; padding-top: 25px;">--}}
+{{--            <livewire:clock />--}}
+{{--        </div>--}}
     </div>
 </div>

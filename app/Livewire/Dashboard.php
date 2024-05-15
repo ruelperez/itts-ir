@@ -6,6 +6,8 @@ use App\Models\AdminShow;
 use App\Models\Comment;
 use App\Models\CommentHeart;
 use App\Models\Dtr;
+use App\Models\DtrContent;
+use App\Models\DtrPermanent;
 use App\Models\IsRegistration;
 use App\Models\SuperadminShow;
 use App\Models\User;

@@ -205,7 +205,7 @@ class InOut extends Component
                         'user_id' => $this->user_id,
                         'dtr_id' => $id,
                         'hour' => $interval->h,
-                        'minute' => $interval->i,
+                        'minute' => $interval->i + 1,
                         'photo' => $this->photo
                     ]);
             }
@@ -267,7 +267,7 @@ class InOut extends Component
             $gk = Dtr::find($this->dtr_data->id)->dtr_permanent;
             foreach ($gk as $gg){
                 $gg->hour = $interval->h;
-                $gg->minute = $interval->i;
+                $gg->minute = $interval->i + 2;
                 $gg->save();
             }
             $this->designated_id = "";
@@ -284,45 +284,6 @@ class InOut extends Component
             'designated_id' => 'required'
         ]);
         if ($this->designated_id == "ITTS-00".$this->user_id){
-
-            $gf = Dtr::find($this->dtr_data->id);
-            $gf->in2 = Carbon::now();
-            $gf->save();
-
-            $gs = Dtr::find($this->dtr_data->id)->dtr_permanent;
-            foreach ($gs as $gg){
-                $gg->in2 = Carbon::now();
-                $gg->save();
-            }
-
-            $lk = Dtr::find($this->dtr_data->id)->dtr_permanent;
-            foreach ($lk as $gg){
-                $pp = $gg->in;
-                $kk = $gg->out;
-                $rr = $gg->in2;
-                $ss = $gg->out2;
-            }
-            $time1 = Carbon::parse($pp);
-            $time2 = Carbon::parse($kk);
-            $interval1 = $time1->diff($time2);
-
-            $time3 = Carbon::parse($rr);
-            $time4 = Carbon::parse($ss);
-            $interval2 = $time3->diff($time4);
-
-            $resultHour = intval($interval1->h) + intval($interval2->h);
-            $resultMinute = intval($interval1->i) + intval($interval2->i);
-
-
-            $gk = Dtr::find($this->dtr_data->id)->dtr_permanent;
-            foreach ($gk as $gg){
-                $gg->hour = $resultHour;
-                $gg->minute = $resultMinute;
-                $gg->save();
-            }
-
-
-
             $gf = Dtr::find($this->dtr_data->id);
             $gf->in2 = Carbon::now();
             $gf->save();
@@ -363,6 +324,10 @@ class InOut extends Component
                 $gg->minute = $resultMinute;
                 $gg->save();
             }
+
+            $gf = Dtr::find($this->dtr_data->id);
+            $gf->in2 = Carbon::now();
+            $gf->save();
 
             $this->designated_id = "";
             session()->flash('good', 'Successfully Time in');
