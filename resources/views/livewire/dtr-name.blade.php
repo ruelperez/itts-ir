@@ -11,8 +11,11 @@
                     <div style="width: 30%;">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search Name" wire:model.live="search" style="width: 100%;">
                     </div>
-                    <div style="width: 30%;">
-                        <button class="btn btn-info" style="margin-left: 10%;" href="/itts/12/per-shift" style="@if($webName == "news-feed") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>View per shift</button>
+                    <div style="width: 15%; margin-left: 2%;">
+                        <button class="btn btn-info" style="width: 100%" href="/itts/12/per-shift" style="padding-left: 10%;" wire:navigate>View per shift</button>
+                    </div>
+                    <div style="width: 15%; margin-left: 2%;">
+                        <button class="btn btn-warning" style="width: 100%" href="/itts/12/per-shift"  wire:navigate>View current shift</button>
                     </div>
                 </div>
 
