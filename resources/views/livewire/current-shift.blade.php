@@ -10,7 +10,7 @@
                 </div>
                 <div style="display: flex; width: 92%; margin-top: 2%; margin-left: 4%;">
                     <div style="width: 10%;">
-                        <b style="font-size: 17px; ">{{Carbon\Carbon::parse($date->in)->format('m-d-Y')}}</b>
+                        <b style="font-size: 17px; ">@if(isset($date)) {{Carbon\Carbon::parse($date->in)->format('m-d-Y')}}@endif </b>
                     </div>
                 </div>
                 <div style="margin-left: 4%; margin-top: 1%; width: 92%;">
