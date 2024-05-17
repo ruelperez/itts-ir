@@ -12,10 +12,10 @@
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search Name" wire:model.live="search" style="width: 100%;">
                     </div>
                     <div style="width: 15%; margin-left: 2%;">
-                        <button class="btn btn-info" style="width: 100%" href="/itts/12/per-shift" style="padding-left: 10%;" wire:navigate>View per shift</button>
+                        <button class="btn btn-info" style="width: 100%" href="/itts/12/per-shift" style="padding-left: 10%;" wire:navigate>Daily Shift</button>
                     </div>
                     <div style="width: 15%; margin-left: 2%;">
-                        <button class="btn btn-warning" style="width: 100%" href="/itts/current-shift"  wire:navigate>View current shift</button>
+                        <button class="btn btn-warning" style="width: 100%" href="/itts/current-shift"  wire:navigate>Current Shift</button>
                     </div>
                 </div>
 

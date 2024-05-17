@@ -8,40 +8,81 @@
             <div class="modal-body">
                 <div class="form-outline mb-4">
                     <div>
-                        <label class="form-label" for="form3Example3cg" style="margin-right: 3%;">Lunch out</label>
-                        <select wire:model="selectedHour">
-                            @for ($hour = 0; $hour <= 12; $hour++)
-                                <option value="{{sprintf('%02d', $hour)}}">{{ str_pad($hour, 2, '0', STR_PAD_LEFT) }}</option>
-                            @endfor
-                        </select>
-                        <select wire:model="selectedMinute">
-                            @for ($minute = 0; $minute <= 59; $minute++)
-                                <option value="{{sprintf('%02d', $minute)}}">{{ str_pad($minute, 2, '0', STR_PAD_LEFT) }}</option>
-                            @endfor
-                        </select>
-                        <select wire:model="selectedPeriod" style="margin-right: 3%;">
-                            <option value="am">AM</option>
-                            <option value="pm">PM</option>
-                        </select>
-                        @if(isset($timeSched)) {{$timeSched->out}} @endif
+                        <label class="form-label" for="form3Example3cg" style="margin-right: 3%;">Lunch out -</label>
+                        @if(isset($timeSched) and $timeClick1 == 1)
+                            <select wire:model="selectedHour">
+                                @for ($hour = 0; $hour <= 12; $hour++)
+                                    <option value="{{sprintf('%02d', $hour)}}">{{ str_pad($hour, 2, '0', STR_PAD_LEFT) }}</option>
+                                @endfor
+                            </select>
+                            <select wire:model="selectedMinute">
+                                @for ($minute = 0; $minute <= 59; $minute++)
+                                    <option value="{{sprintf('%02d', $minute)}}">{{ str_pad($minute, 2, '0', STR_PAD_LEFT) }}</option>
+                                @endfor
+                            </select>
+                            <select wire:model="selectedPeriod" style="margin-right: 3%;">
+                                <option value="am">AM</option>
+                                <option value="pm">PM</option>
+                            </select>
+                        @elseif(isset($timeSched) and $timeClick1 == 0)
+                            {{$timeSched->out}}
+                        @elseif(!isset($timeSched) and $timeClick1 == 0)
+                            <select wire:model="selectedHour">
+                                @for ($hour = 0; $hour <= 12; $hour++)
+                                    <option value="{{sprintf('%02d', $hour)}}">{{ str_pad($hour, 2, '0', STR_PAD_LEFT) }}</option>
+                                @endfor
+                            </select>
+                            <select wire:model="selectedMinute">
+                                @for ($minute = 0; $minute <= 59; $minute++)
+                                    <option value="{{sprintf('%02d', $minute)}}">{{ str_pad($minute, 2, '0', STR_PAD_LEFT) }}</option>
+                                @endfor
+                            </select>
+                            <select wire:model="selectedPeriod" style="margin-right: 3%;">
+                                <option value="am">AM</option>
+                                <option value="pm">PM</option>
+                            </select>
+                        @endif
+
+                        @if(isset($timeSched)) <i class="fa-solid fa-pen-to-square" style="margin-left: 5%; cursor: pointer" wire:click="clickTimeEdit1"></i> @endif
+
                     </div>
                     <div style="margin-top: 3%;">
-                        <label class="form-label" for="form3Example3cg" style="margin-right: 3%;">Lunch in (after lunch)</label>
-                        <select wire:model="selectedHour2">
-                            @for ($hour = 0; $hour <= 12; $hour++)
-                                <option value="{{ $hour }}">{{ str_pad($hour, 2, '0', STR_PAD_LEFT) }}</option>
-                            @endfor
-                        </select>
-                        <select wire:model="selectedMinute2">
-                            @for ($minute = 0; $minute <= 59; $minute++)
-                                <option value="{{ $minute }}">{{ str_pad($minute, 2, '0', STR_PAD_LEFT) }}</option>
-                            @endfor
-                        </select>
-                        <select wire:model="selectedPeriod2" style="margin-right: 3%;">
-                            <option value="am">AM</option>
-                            <option value="pm">PM</option>
-                        </select>
-                        @if(isset($timeSched)) {{$timeSched->out2}} @endif
+                        <label class="form-label" for="form3Example3cg" style="margin-right: 3%;">Lunch in (after lunch) -</label>
+                        @if(isset($timeSched) and $timeClick2 == 1)
+                            <select wire:model="selectedHour2">
+                                @for ($hour = 0; $hour <= 12; $hour++)
+                                    <option value="{{sprintf('%02d', $hour)}}">{{ str_pad($hour, 2, '0', STR_PAD_LEFT) }}</option>
+                                @endfor
+                            </select>
+                            <select wire:model="selectedMinute2">
+                                @for ($minute = 0; $minute <= 59; $minute++)
+                                    <option value="{{sprintf('%02d', $minute)}}">{{ str_pad($minute, 2, '0', STR_PAD_LEFT) }}</option>
+                                @endfor
+                            </select>
+                            <select wire:model="selectedPeriod2" style="margin-right: 3%;">
+                                <option value="am">AM</option>
+                                <option value="pm">PM</option>
+                            </select>
+                        @elseif(isset($timeSched) and $timeClick2 == 0)
+                            {{$timeSched->out2}}
+                        @elseif(!isset($timeSched) and $timeClick2 == 0)
+                            <select wire:model="selectedHour2">
+                                @for ($hour = 0; $hour <= 12; $hour++)
+                                    <option value="{{sprintf('%02d', $hour)}}">{{ str_pad($hour, 2, '0', STR_PAD_LEFT) }}</option>
+                                @endfor
+                            </select>
+                            <select wire:model="selectedMinute2">
+                                @for ($minute = 0; $minute <= 59; $minute++)
+                                    <option value="{{sprintf('%02d', $minute)}}">{{ str_pad($minute, 2, '0', STR_PAD_LEFT) }}</option>
+                                @endfor
+                            </select>
+                            <select wire:model="selectedPeriod2" style="margin-right: 3%;">
+                                <option value="am">AM</option>
+                                <option value="pm">PM</option>
+                            </select>
+                        @endif
+
+                        @if(isset($timeSched)) <i class="fa-solid fa-pen-to-square" style="margin-left: 5%; cursor: pointer" wire:click="clickTimeEdit2"></i> @endif
                     </div>
 
                 </div>

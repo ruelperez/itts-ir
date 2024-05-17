@@ -36,6 +36,26 @@ $(document).ready(function() {
 
 });
 
+$(document).ready(function() {
+    var sn = $(".div101");
+    // Hide the div when anything on the page is clicked
+    $(document).on('dblclick', '.editable', function(event) {
+        if (!$(event.target).is("#ellip")) {
+            $(".div100").hide();
+            sn.css("margin-top", "270px");
+        }
+
+        else if (!$(event.target).is("#orderAddItemName")) {
+            sn.css("margin-top", "146px");
+            $("#orderSuggestion").hide();
+        }
+        else {alert('babass');
+            $("#orderSuggestion").show();
+        }
+    });
+
+});
+
 function previewImage(event) {
     var input = event.target;
     var reader = new FileReader();

@@ -17,7 +17,7 @@ use Livewire\Component;
 class InOut extends Component
 {
 
-    public $registrationSwitch, $timeSched = [], $selectedMinute2 = "00", $selectedHour2 = "7", $selectedHour = "1", $selectedMinute = "00", $selectedPeriod = "am", $selectedPeriod2 = "am", $permanent_id, $dtrData = [], $dtrAll = [], $task, $position, $superAdminSwitch, $weekNumber = "1", $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $timeClick1 = 0, $timeClick2 = 0, $timeSched = [], $selectedMinute2 = "00", $selectedHour2 = "00", $selectedHour = "00", $selectedMinute = "00", $selectedPeriod = "am", $selectedPeriod2 = "am", $permanent_id, $dtrData = [], $dtrAll = [], $task, $position, $superAdminSwitch, $weekNumber = "1", $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -33,6 +33,14 @@ class InOut extends Component
         return view('livewire.in-out');
     }
 
+    public function clickTimeEdit1(){
+        $this->timeClick1 = 1;
+    }
+
+    public function clickTimeEdit2(){
+        $this->timeClick2 = 1;
+    }
+
     public function target(){
 
     }
@@ -43,9 +51,64 @@ class InOut extends Component
         try {
             if (isset($this->timeSched)){
                 $gb = TimeSetting::find($this->timeSched->id);
-                $gb->out = $o1;
-                $gb->out2 = $o2;
-                $gb->save();
+
+                if ($this->selectedHour2 != "00" and $this->selectedHour != "00"){
+                    $gb->out = $o1;
+                    $gb->out2 = $o2;
+                    $gb->save();
+                }
+                elseif ($this->selectedHour == "00" and $this->selectedHour2 == "00"){
+                    return;
+                }
+                elseif ($this->selectedHour2 != "00" and $this->selectedHour == "00"){
+                    $gb->out2 = $o2;
+                    $gb->save();
+                }
+                elseif ($this->selectedHour2 == "00" and $this->selectedHour != "00"){
+                    $gb->out = $o1;
+                    $gb->save();
+                }
+                
+                $jc = TimeSetting::latest()->first();
+
+                $gj = DtrPermanent::all();
+                if (count($gj) > 0){
+                    foreach ($gj as $jj){
+                        $re = DtrPermanent::find($jj->id);
+                        $re->out = $jc->out;
+                        $re->out2 = $jc->out2;
+                        $re->save();
+                    }
+
+                    $yy = DtrPermanent::all();
+                    foreach ($yy as $hh){
+                        $lk = DtrPermanent::find($hh->id);
+                        $pp = $lk->in;
+                        $kk = $lk->out;
+                        $rr = $lk->in2;
+                        $ss = $lk->out2;
+                        $time1 = Carbon::parse($pp);
+                        $time2 = Carbon::parse($kk);
+                        if ($time2->lessThan($time1)) {
+                            $time2->addDay(); // Add a day to the end time
+                        }
+                        $interval1 = $time1->diff($time2);
+
+                        $time3 = Carbon::parse($rr);
+                        $time4 = Carbon::parse($ss);
+                        if ($time4->lessThan($time3)) {
+                            $time4->addDay(); // Add a day to the end time
+                        }
+                        $interval2 = $time3->diff($time4);
+
+                        $resultHour = intval($interval1->h) + intval($interval2->h);
+                        $resultMinute = intval($interval1->i) + intval($interval2->i);
+
+                        $lk->hour = $resultHour;
+                        $lk->minute = $resultMinute + 2;
+                        $lk->save();
+                    }
+                }
 
                 \App\Models\Logs::create([
                     'action' => "Update lunch out to ".$o1." and lunch in to ".$o2,
@@ -56,8 +119,8 @@ class InOut extends Component
             }
             else{
                 TimeSetting::create([
-                    'out' => $o1,
-                    'out2' => $o2,
+                    'out' => "01:00 am",
+                    'out2' => "07:00 am",
                     'user_id' => $this->user_id,
                     'photo' => $this->photo,
                     'fullname' => $this->fullname,

@@ -15,6 +15,6 @@ class EodController extends Controller
        $userData = User::find($user_id);
         $pdf = PDF::loadView('form.eod', compact('dtrData','userData'))
             ->setPaper('legal','landscape');
-        return $pdf->stream('load.pdf');
+        return $pdf->download('load.pdf');
     }
 }

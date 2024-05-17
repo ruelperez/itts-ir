@@ -30,7 +30,7 @@
                             @php $q=0; @endphp
                             @foreach($request_data as $data)
                                 @if($q < 15)
-                                    <tr class="invs">
+                                    <tr style="color: black">
                                         <td style="text-align: left">{{$data->zip_code}}</td>
                                     </tr>
                                 @endif
