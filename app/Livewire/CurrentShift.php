@@ -8,12 +8,13 @@ use App\Models\DtrPermanent;
 use App\Models\IsRegistration;
 use App\Models\SuperadminShow;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class CurrentShift extends Component
 {
-    public $registrationSwitch, $date, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $timeIn1, $dtrName, $ids, $timeIn2, $timeOut1, $timeOut2, $date, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
@@ -23,6 +24,77 @@ class CurrentShift extends Component
         $this->dtrData = DtrPermanent::all();
         $this->date = DtrPermanent::latest()->first();
         return view('livewire.current-shift');
+    }
+
+    public function clickTimeEdit($id){
+        $this->ids =$id;
+        $bn = DtrPermanent::find($id);
+        $this->timeIn1 = $bn->in;
+        $this->timeOut1 = $bn->out;
+        $this->timeIn2 = $bn->in2;
+        $this->timeOut2 = $bn->out2;
+        $this->dtrName = $bn->fullname;
+    }
+
+    public function submitEdit(){
+        $bn = DtrPermanent::find($this->ids);
+        try {
+            $bn->in = $this->timeIn1;
+            $bn->out = $this->timeOut1;
+            $bn->in2 = $this->timeIn2;
+            $bn->out2 = $this->timeOut2;
+            $bn->save();
+
+            $lk = DtrPermanent::find($this->ids);
+            $pp = $lk->in;
+            $kk = $lk->out;
+            $rr = $lk->in2;
+            $ss = $lk->out2;
+
+            if ($rr != null or $rr != ""){
+                $time1 = Carbon::parse($pp);
+                $time2 = Carbon::parse($kk);
+                if ($time2->lessThan($time1)) {
+                    $time2->addDay(); // Add a day to the end time
+                }
+                $interval1 = $time1->diff($time2);
+
+                $time3 = Carbon::parse($rr);
+                $time4 = Carbon::parse($ss);
+                if ($time4->lessThan($time3)) {
+                    $time4->addDay(); // Add a day to the end time
+                }
+                $interval2 = $time3->diff($time4);
+
+                $resultHour = intval($interval1->h) + intval($interval2->h);
+                $resultMinute = intval($interval1->i) + intval($interval2->i);
+
+                $lk->hour = $resultHour;
+                $lk->minute = $resultMinute + 2;
+                $lk->save();
+            }
+            else{
+                $time1 = Carbon::parse($pp);
+                $time2 = Carbon::parse($kk);
+                if ($time2->lessThan($time1)) {
+                    $time2->addDay(); // Add a day to the end time
+                }
+                $interval1 = $time1->diff($time2);
+
+                $resultHour = $interval1->h;
+                $resultMinute = $interval1->i;
+
+                $lk->hour = $resultHour;
+                $lk->minute = $resultMinute + 1;
+                $lk->save();
+            }
+
+
+            session()->flash('goodSched', 'Successfully saved');
+        }catch (\Exception $e){
+            session()->flash('badSched', 'Failed to save');
+        }
+
     }
 
     public function mount(){

@@ -68,7 +68,7 @@ class InOut extends Component
                     $gb->out = $o1;
                     $gb->save();
                 }
-                
+
                 $jc = TimeSetting::latest()->first();
 
                 $gj = DtrPermanent::all();

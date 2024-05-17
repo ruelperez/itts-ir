@@ -15,6 +15,20 @@ function chooseFile() {
     document.getElementById('fileInput').click(); // Click the hidden file input
 }
 
+function hoverTimeEdit(id){
+    var fwe = $('#timeEdit'+id);
+    var yhg = $('#uiy'+id);
+    fwe.show();
+    yhg.css("padding-right", "");
+}
+
+function hoverOutTimeEdit(id){
+    var fwe = $('#timeEdit'+id);
+    var yhg = $('#uiy'+id);
+    fwe.hide();
+    yhg.css("padding-right", "60px");
+}
+
 
 $(document).ready(function() {
     var sn = $(".div101");
