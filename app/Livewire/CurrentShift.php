@@ -14,7 +14,7 @@ use Livewire\Component;
 
 class CurrentShift extends Component
 {
-    public $registrationSwitch, $timeIn1, $dtrName, $ids, $timeIn2, $timeOut1, $timeOut2, $date, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $unchangeTimeIn1, $unchangeTimeIn2, $timeIn1, $dtrName, $ids, $timeIn2, $timeOut1, $timeOut2, $date, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
@@ -34,6 +34,8 @@ class CurrentShift extends Component
         $this->timeIn2 = $bn->in2;
         $this->timeOut2 = $bn->out2;
         $this->dtrName = $bn->fullname;
+        $this->unchangeTimeIn1 = $bn->in;
+        $this->unchangeTimeIn2 = $bn->in2;
     }
 
     public function submitEdit(){
@@ -50,6 +52,7 @@ class CurrentShift extends Component
             $kk = $lk->out;
             $rr = $lk->in2;
             $ss = $lk->out2;
+            $name = $lk->fullname;
 
             if ($rr != null or $rr != ""){
                 $time1 = Carbon::parse($pp);
@@ -72,6 +75,12 @@ class CurrentShift extends Component
                 $lk->hour = $resultHour;
                 $lk->minute = $resultMinute + 2;
                 $lk->save();
+                \App\Models\Logs::create([
+                    'action' => "Adjust time in (after lunch) from ".$this->unchangeTimeIn2.' to '.$rr.' for '.$name,
+                    'user_id' => $this->user_id,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
             }
             else{
                 $time1 = Carbon::parse($pp);
@@ -87,6 +96,13 @@ class CurrentShift extends Component
                 $lk->hour = $resultHour;
                 $lk->minute = $resultMinute + 1;
                 $lk->save();
+
+                \App\Models\Logs::create([
+                    'action' => "Adjust time in from ".$this->unchangeTimeIn1.' to '.$pp.' for '.$name,
+                    'user_id' => $this->user_id,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
             }
 
 

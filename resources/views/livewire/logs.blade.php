@@ -41,7 +41,7 @@
                 </div>
             </div>
         </div>
-        <div style="width: 19%; background-color: #0077b6; position: fixed;top: 125px; left: 0; z-index: 1000;">
+        <div style="width: 19%; background-color: #0077b6; position: fixed;top: 125px; left: 0; z-index: 1000; height: 100%;">
             @include('components.layouts.profile')
             @include('components.layouts.navigation')
         </div>
