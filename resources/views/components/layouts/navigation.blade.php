@@ -30,7 +30,7 @@
             <i class="fa-solid fa-right-from-bracket" style=" color: white; margin-right: 5px; "></i>Log Out
         </div>
     @endif
-    <div href="/itts/4/faq" style="@if($webName == "faq") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>
+    <div href="/itts/13/faq" style="@if($webName == "faq") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>
         FAQ
     </div>
 </div>

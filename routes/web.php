@@ -28,7 +28,7 @@ Route::get('/itts/12/{name}', \App\Livewire\PerShift::class)->middleware('auth')
 Route::get('itts/save-eod/{user_id}/{week}', [\App\Http\Controllers\EodController::class, 'pdf']);
 Route::get('itts/per-shift-pdf/{month}/{day}/{year}/{role}', [\App\Http\Controllers\ShiftController::class, 'pdf']);
 Route::get('itts/current-shift', \App\Livewire\CurrentShift::class)->middleware('auth');
-Route::get('/itts/13/{name}', \App\Livewire\NewsUpdate::class)->middleware('auth')->name('news-update');
+Route::get('/itts/13/{name}', \App\Livewire\Faq::class)->middleware('auth');
 Route::get('/', function (){
     return redirect('/itts/5/dashboard');
 });
