@@ -33,7 +33,7 @@ class Zip extends Component
         $this->position = auth()->user()->position;
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
-        return view('livewire.zip');
+        return view('livewire.zip')->title('Zip code checker');
     }
 
     public function mount($name){

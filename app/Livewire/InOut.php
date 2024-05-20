@@ -30,7 +30,7 @@ class InOut extends Component
         $this->dtrData = Dtr::all();
         $this->dtrAll = DtrPermanent::all();
         $this->timeSched = TimeSetting::latest()->first();
-        return view('livewire.in-out');
+        return view('livewire.in-out')->title('Dtr');
     }
 
     public function clickTimeEdit1(){

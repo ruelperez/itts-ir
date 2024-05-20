@@ -21,7 +21,7 @@ class Faq extends Component
         $this->position = auth()->user()->position;
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
-        return view('livewire.faq');
+        return view('livewire.faq')->title('FAQ');
     }
 
     public function mount($name){

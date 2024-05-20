@@ -47,7 +47,7 @@ class NewsUpdate extends Component
                 ->orWhere('tags', 'LIKE', '%'.$this->searchInput.'%')
                 ->where('campaign',$this->campaign_name)->get();
         }
-        return view('livewire.news-update');
+        return view('livewire.news-update')->title('Campaign');
     }
 
     public function edit_comment($id){

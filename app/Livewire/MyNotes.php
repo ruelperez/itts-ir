@@ -26,7 +26,7 @@ class MyNotes extends Component
         $this->position = auth()->user()->position;
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
-        return view('livewire.my-notes');
+        return view('livewire.my-notes')->title('Form link');
     }
 
     public function mount($name){

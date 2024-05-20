@@ -30,7 +30,7 @@ class Dashboard extends Component
         $this->position = auth()->user()->position;
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
-        return view('livewire.dashboard');
+        return view('livewire.dashboard')->title('Dashboard');
     }
     public function mount($name){
         $this->webName = $name;

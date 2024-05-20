@@ -22,7 +22,7 @@ class Employee extends Component
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
 
-        return view('livewire.employee');
+        return view('livewire.employee')->title('Employee info');
     }
     public function mount($name){
         $this->webName = $name;
