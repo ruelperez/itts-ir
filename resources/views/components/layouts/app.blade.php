@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css')}}">
         <link rel="stylesheet" href="{{ asset('css/design.css')}}">
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
         <title>{{ $title ?? 'Page Title' }}</title>
     </head>
     <body style="background-color: #E6E6FA;">
