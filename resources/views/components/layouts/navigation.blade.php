@@ -33,4 +33,7 @@
     <div href="/itts/13/faq" style="@if($webName == "faq") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>
         FAQ
     </div>
+    <div href="/itts/14/notes" style="@if($webName == "notes") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>
+        MY NOTES
+    </div>
 </div>
