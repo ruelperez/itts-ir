@@ -29,6 +29,25 @@ function hoverOutTimeEdit(id){
     yhg.css("padding-right", "60px");
 }
 
+function hoverNotes(id){
+    var rad = $('#rag'+id);
+    var fwe = $('#myNotes'+id);
+    // var yhg = $('#uiy'+id);
+    fwe.show();
+    rad.css("color", "white");
+    rad.css("background-color", "#696969");
+}
+
+function hoverOutNotes(id){
+    var rad = $('#rag'+id);
+    var fwe = $('#myNotes'+id);
+    // var yhg = $('#uiy'+id);
+    fwe.hide();
+    rad.css("color", "");
+    rad.css("background-color", "");
+    // yhg.css("padding-right", "60px");
+}
+
 
 $(document).ready(function() {
     var sn = $(".div101");

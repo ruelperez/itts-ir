@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\AdminShow;
 use App\Models\Dtr;
 use App\Models\IsRegistration;
+use App\Models\MyNote;
 use App\Models\SuperadminShow;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,7 @@ use Livewire\Component;
 
 class Notes extends Component
 {
-    public $registrationSwitch, $inputNotes, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $editInputTitle, $editInputNotes, $myNotesData, $addInputNotes, $inputBase = 0, $baseId, $addInputTitle, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -21,7 +22,31 @@ class Notes extends Component
         $this->position = auth()->user()->position;
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
+        $this->myNotesData = MyNote::where('user_id', $this->user_id)->get();
         return view('livewire.notes');
+    }
+
+    public function delete($id){
+        MyNote::find($id)->delete();
+    }
+
+    public function closeBtn(){
+        if ($this->inputBase == 1){
+            if ($this->addInputTitle == "" and $this->addInputNotes == ""){
+                MyNote::find($this->baseId)->delete();
+            }
+        }
+        $this->inputBase = 0;
+        $this->addInputNotes = "";
+        $this->addInputTitle = "";
+        $this->editInputTitle = "";
+        $this->editInputNotes = "";
+    }
+
+    public function edit($id){
+        $hj = MyNote::find($id);
+        $this->editInputNotes = $hj->text;
+        $this->editInputTitle = $hj->title;
     }
 
     public function mount($name){
@@ -257,8 +282,45 @@ class Notes extends Component
 //            }
             return redirect('/itts/5/dashboard');
         }
-        if ($field == "inputNotes"){
+        if ($field == "addInputNotes"){
+            if ($this->inputBase == 0){
+                MyNote::create([
+                    'text' => $this->addInputNotes,
+                    'title' => $this->addInputTitle,
+                    'fullname' => $this->fullname,
+                    'user_id' => $this->user_id,
+                ]);
+                $this->inputBase = 1;
+                $vs = MyNote::latest()->first();
+                $this->baseId = $vs->id;
+            }
+            else{
+                $moi = MyNote::find($this->baseId);
+                $moi->text = $this->addInputNotes;
+                $moi->title = $this->addInputTitle;
+                $moi->save();
 
+            }
+
+        }
+        if ($field == "addInputTitle"){
+            if ($this->inputBase == 0){
+                MyNote::create([
+                    'text' => $this->addInputNotes,
+                    'title' => $this->addInputTitle,
+                    'fullname' => $this->fullname,
+                    'user_id' => $this->user_id,
+                ]);
+                $this->inputBase = 1;
+                $vs = MyNote::latest()->first();
+                $this->baseId = $vs->id;
+            }
+            else{
+                $moi = MyNote::find($this->baseId);
+                $moi->text = $this->addInputNotes;
+                $moi->title = $this->addInputTitle;
+                $moi->save();
+            }
         }
     }
 }
