@@ -12,7 +12,7 @@ use Livewire\Component;
 
 class Notes extends Component
 {
-    public $registrationSwitch, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $inputNotes, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -256,6 +256,9 @@ class Notes extends Component
 //                $comHeart->save();
 //            }
             return redirect('/itts/5/dashboard');
+        }
+        if ($field == "inputNotes"){
+
         }
     }
 }

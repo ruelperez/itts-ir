@@ -1,14 +1,15 @@
 <div>
     @include('modal.click-settings')
     @include('modal.news-update.show-photo')
+    @include('modal.Notes.add')
     <div style="display: flex; width: 100%; margin-top: 135px;">
         <div style="width: 81%; margin-left: 19%;">
             <div class="container">
                 <div>
-                    <h5 style="margin-left: 2%; margin-top: 3%;">My Notes</h5>
+                    <h5 style="margin-left: 2%; margin-top: 3%;">Dipa tapos, ginagawa pa</h5>
                 </div>
-                <div>
-                    <i class="fa-solid fa-circle-plus"></i>
+                <div style="margin-left: 10%; margin-top: 2%;width: 80%;">
+                    <i class="fa-solid fa-circle-plus" style="font-size: 30px;cursor: pointer" data-bs-toggle="modal" data-bs-target="#addNotes"></i>
                 </div>
             </div>
         </div>
