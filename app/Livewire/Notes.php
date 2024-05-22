@@ -13,7 +13,7 @@ use Livewire\Component;
 
 class Notes extends Component
 {
-    public $registrationSwitch, $editInputTitle, $editInputNotes, $myNotesData, $addInputNotes, $inputBase = 0, $baseId, $addInputTitle, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $search = "", $editInputTitle, $noteId, $editInputNotes, $myNotesData, $addInputNotes, $inputBase = 0, $baseId, $addInputTitle, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -22,7 +22,15 @@ class Notes extends Component
         $this->position = auth()->user()->position;
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
-        $this->myNotesData = MyNote::where('user_id', $this->user_id)->get();
+        if ($this->search != ""){
+            $this->myNotesData = MyNote::where('user_id',$this->user_id)
+            ->where('text','LIKE', '%'.$this->search.'%')
+                ->orWhere('title', 'LIKE', '%'.$this->search.'%')->get();
+        }
+        else{
+            $this->myNotesData = MyNote::where('user_id', $this->user_id)->get();
+        }
+
         return view('livewire.notes');
     }
 
@@ -44,6 +52,7 @@ class Notes extends Component
     }
 
     public function edit($id){
+        $this->noteId = $id;
         $hj = MyNote::find($id);
         $this->editInputNotes = $hj->text;
         $this->editInputTitle = $hj->title;
@@ -322,5 +331,21 @@ class Notes extends Component
                 $moi->save();
             }
         }
+        if ($field == "editInputNotes"){
+            $moi = MyNote::find($this->noteId);
+            $moi->text = $this->editInputNotes;
+            $moi->title = $this->editInputTitle;
+            $moi->save();
+        }
+        if ($field == "editInputTitle"){
+            $moi = MyNote::find($this->noteId);
+            $moi->text = $this->editInputNotes;
+            $moi->title = $this->editInputTitle;
+            $moi->save();
+        }
+        if ($field == "search"){
+
+        }
+
     }
 }
