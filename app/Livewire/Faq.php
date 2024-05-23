@@ -12,7 +12,7 @@ use Livewire\Component;
 
 class Faq extends Component
 {
-    public $registrationSwitch, $faqData = [], $campaign_name = "Camp lejeune", $search = "", $answer, $question, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $ids, $faqData = [], $campaign_name = "Camp lejeune", $search = "", $answer, $question, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -32,6 +32,31 @@ class Faq extends Component
         return view('livewire.faq')->title('FAQ');
     }
 
+    public function clickEdit($id){
+        $this->ids = $id;
+        $bn = \App\Models\Faq::find($id);
+        $this->question = $bn->question;
+        $this->answer = $bn->answer;
+    }
+
+    public function submitEdit(){
+        try {
+            $bn = \App\Models\Faq::find($this->ids);
+            $bn->question = $this->question;
+            $bn->answer = $this->answer;
+            $bn->save();
+            $this->question = "";
+            $this->answer = "";
+            session()->flash('goodEdit', "Successfully updated");
+        }catch (\Exception $e){
+            session()->flash('badEdit', "Failed to update");
+        }
+    }
+
+    public function delete($id){
+        \App\Models\Faq::find($id)->delete();
+    }
+
     public function submit(){
         try {
             \App\Models\Faq::create([
@@ -43,8 +68,6 @@ class Faq extends Component
             ]);
             $this->question = "";
             $this->answer = "";
-            $this->user_id = "";
-            $this->fullname = "";
             session()->flash('good', "Successfully saved");
         }catch (\Exception $e){
             session()->flash('bad', "Failed to save");
