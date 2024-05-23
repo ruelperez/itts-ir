@@ -19,15 +19,15 @@
 {{--            EMPLOYEE INFO--}}
 {{--        </div>--}}
     @endif
-    @if($position == "Agent")
-        <div style="margin-left: auto; text-align: right; padding-right: 5%;" wire:click="logout">
-            <i class="fa-solid fa-right-from-bracket" style=" color: white; margin-right: 5px; "></i>Log Out
-        </div>
-    @endif
     <div href="/itts/14/notes" style="@if($webName == "notes") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>
         MY NOTES
     </div>
     <div href="/itts/13/faq" style="@if($webName == "faq") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>
         FAQ
     </div>
+    @if($position == "Agent")
+        <div style="margin-left: auto; text-align: right; padding-right: 5%;" wire:click="logout">
+            <i class="fa-solid fa-right-from-bracket" style=" color: white; margin-right: 5px; "></i>Log Out
+        </div>
+    @endif
 </div>

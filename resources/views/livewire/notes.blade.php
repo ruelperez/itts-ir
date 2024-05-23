@@ -7,7 +7,7 @@
         <div style="width: 81%; margin-left: 19%;">
             <div class="container">
                 <div>
-                    <h5 style="margin-left: 2%; margin-top: 3%;">Dipa tapos, ginagawa pa</h5>
+                    <h5 style="margin-left: 2%; margin-top: 3%;">My Notes</h5>
                 </div>
                 <div style="display: flex; margin-top: 2%; width: 80%; margin-left: 10%; margin-bottom: 2%;">
                     <div>

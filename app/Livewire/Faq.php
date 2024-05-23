@@ -12,7 +12,7 @@ use Livewire\Component;
 
 class Faq extends Component
 {
-    public $registrationSwitch, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $addQuestion, $addAnswer, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -22,6 +22,10 @@ class Faq extends Component
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
         return view('livewire.faq')->title('FAQ');
+    }
+
+    public function submit(){
+
     }
 
     public function mount($name){
