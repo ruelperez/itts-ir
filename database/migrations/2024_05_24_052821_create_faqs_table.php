@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('faqs', function (Blueprint $table) {
             $table->id();
+            $table->text('question');
+            $table->text('answer');
+            $table->string('campaign');
+            $table->string('fullname');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

@@ -12,7 +12,7 @@ use Livewire\Component;
 
 class Faq extends Component
 {
-    public $registrationSwitch, $addQuestion, $addAnswer, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $faqData = [], $campaign_name = "Camp lejeune", $search = "", $answer, $question, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -21,11 +21,34 @@ class Faq extends Component
         $this->position = auth()->user()->position;
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
+        if ($this->search != ""){
+            $this->faqData = \App\Models\Faq::where('campaign',$this->campaign_name)
+                ->where('question','LIKE', '%'.$this->search.'%')
+                ->orWhere('answer','LIKE', '%'.$this->search.'%')->get();
+        }
+        else{
+            $this->faqData = \App\Models\Faq::where('campaign',$this->campaign_name)->get();
+        }
         return view('livewire.faq')->title('FAQ');
     }
 
     public function submit(){
-
+        try {
+            \App\Models\Faq::create([
+                'question' => $this->question,
+                'answer' => $this->answer,
+                'campaign' => $this->campaign_name,
+                'user_id' => $this->user_id,
+                'fullname' => $this->fullname,
+            ]);
+            $this->question = "";
+            $this->answer = "";
+            $this->user_id = "";
+            $this->fullname = "";
+            session()->flash('good', "Successfully saved");
+        }catch (\Exception $e){
+            session()->flash('bad', "Failed to save");
+        }
     }
 
     public function mount($name){
@@ -260,6 +283,9 @@ class Faq extends Component
 //                $comHeart->save();
 //            }
             return redirect('/itts/5/dashboard');
+        }
+        if ($field == "campaign_name"){
+
         }
     }
 }

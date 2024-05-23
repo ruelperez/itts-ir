@@ -27,6 +27,16 @@
                     </div>
                 </div>
                 <hr>
+                @foreach($faqData as $data)
+                    <div style="margin-bottom: 2%; background-color: white; margin-left: 8%; margin-right: 8%; margin-top: 1%; padding: 20px; border-radius: 15px;">
+                        <div>
+                            <b style="white-space: pre-line;">{{ucfirst($data->question)}} ?</b>
+                        </div>
+                        <div style="white-space: pre-line; margin-left: 5%;">
+                            {{ucfirst($data->answer)}}
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
         <div style="width: 19%; background-color: #0077b6; position: fixed;top: 125px; left: 0; z-index: 1000; height: 100%;">
