@@ -12,11 +12,15 @@ use App\Models\TimeSetting;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class InOut extends Component
 {
+    use WithFileUploads;
 
+    #[Validate('image|max:1024')] // 1MB Max
     public $registrationSwitch, $timeClick1 = 0, $timeClick2 = 0, $timeSched = [], $selectedMinute2 = "00", $selectedHour2 = "00", $selectedHour = "00", $selectedMinute = "00", $selectedPeriod = "am", $selectedPeriod2 = "am", $permanent_id, $dtrData = [], $dtrAll = [], $task, $position, $superAdminSwitch, $weekNumber = "1", $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()

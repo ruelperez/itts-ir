@@ -8,9 +8,15 @@ use App\Models\IsRegistration;
 use App\Models\SuperadminShow;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\WithFileUploads;
+
 class DtrName extends Component
 {
+    use WithFileUploads;
+
+    #[Validate('image|max:1024')] // 1MB Max
     public $registrationSwitch, $dtrData = [], $search, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
