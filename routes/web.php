@@ -30,6 +30,7 @@ Route::get('itts/per-shift-pdf/{month}/{day}/{year}/{role}', [\App\Http\Controll
 Route::get('itts/current-shift', \App\Livewire\CurrentShift::class)->middleware('auth');
 Route::get('/itts/13/{name}', \App\Livewire\Faq::class)->middleware('auth');
 Route::get('/itts/14/{name}', \App\Livewire\Notes::class)->middleware('auth');
+Route::get('/itts/15/{name}', \App\Livewire\Employee::class)->middleware('auth');
 Route::get('/', function (){
     return redirect('/itts/5/dashboard');
 });

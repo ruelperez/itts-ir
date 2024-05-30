@@ -15,13 +15,16 @@
         <div href="/itts/6/my-notes" style="@if($webName == "my-notes") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>
             FORM LINK
         </div>
-{{--        <div href="/itts/11/employee" style="@if($webName == "employee") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>--}}
-{{--            EMPLOYEE INFO--}}
-{{--        </div>--}}
     @endif
     <div href="/itts/14/notes" style="@if($webName == "notes") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>
         MY NOTES
     </div>
+    @if($position != "Agent")
+        <div href="/itts/15/employee" style="@if($webName == "employee") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>
+            EMPLOYEE
+        </div>
+    @endif
+
     <div href="/itts/13/faq" style="@if($webName == "faq") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>
         FAQ
     </div>

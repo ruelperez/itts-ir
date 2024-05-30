@@ -9,12 +9,16 @@
     @include('modal.news-update.comment_reactor')
     @include('modal.news-update.edit_comment')
     <div style="display: flex; width: 100%; margin-top: 135px;">
+        <div style="width: 19%; background-color: #0077b6; position: fixed;top: 125px; left: 0; z-index: 1000; height: 100%; ">
+            @include('components.layouts.profile')
+            @include('components.layouts.navigation')
+        </div>
 {{--        <div wire:poll>--}}
 {{--            Current time: {{ now() }}--}}
 {{--        </div>--}}
         <div style="width: 81%; margin-left: 19%;">
-            <div class="container" wire:poll.keep-alive>
-                <div style="position: fixed;top: 17%; left: 17%; width: 85%; z-index: 1000; background-color: #41464b; padding-left: 3%; padding-bottom: 1%;">
+            <div wire:poll.keep-alive>
+                <div style="position: fixed;top: 17%; left: 19%; width: 85%; z-index: 1000; background-color: #41464b; padding-left: 3%; padding-bottom: 1%;">
                     <div style="display: flex; margin-top: 2%;">
                         <div>
                             <h5 style="color: white">{{strtoupper($campaign_name)}}</h5>
@@ -147,10 +151,6 @@
                 </div>
 
             </div>
-        </div>
-        <div style="width: 19%; background-color: #0077b6; position: fixed;top: 125px; left: 0; z-index: 1000; height: 100%; ">
-            @include('components.layouts.profile')
-            @include('components.layouts.navigation')
         </div>
     </div>
     @include('partial.header')
