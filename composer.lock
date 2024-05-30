@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "58c21a5319ce76fdeac6d370ba83b2ee",
+    "content-hash": "448942ac869c6d67b4cf59fb4b367b74",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1250,16 +1250,16 @@
         },
         {
             "name": "intervention/image",
-            "version": "3.6.1",
+            "version": "3.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Intervention/image.git",
-                "reference": "33cbb217a00926149d96ed9e794100d8f8b53263"
+                "reference": "193324ec88bc5ad4039e57ce9b926ae28dfde813"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/image/zipball/33cbb217a00926149d96ed9e794100d8f8b53263",
-                "reference": "33cbb217a00926149d96ed9e794100d8f8b53263",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/193324ec88bc5ad4039e57ce9b926ae28dfde813",
+                "reference": "193324ec88bc5ad4039e57ce9b926ae28dfde813",
                 "shasum": ""
             },
             "require": {
@@ -1306,7 +1306,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Intervention/image/issues",
-                "source": "https://github.com/Intervention/image/tree/3.6.1"
+                "source": "https://github.com/Intervention/image/tree/3.6.4"
             },
             "funding": [
                 {
@@ -1318,7 +1318,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-23T14:17:12+00:00"
+            "time": "2024-05-08T13:53:15+00:00"
         },
         {
             "name": "intervention/image-laravel",

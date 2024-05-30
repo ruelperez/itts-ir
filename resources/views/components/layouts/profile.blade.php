@@ -8,7 +8,7 @@
                 <i onclick="clickEllipsis()" class="fa-solid fa-ellipsis-vertical" id="ellip" style="color: white; margin-left: 10%;font-size: 23px; cursor: pointer; margin-right: 11%;"></i>
             @endif
             <div class="profile" style="@if($position == "Agent") margin-left: 22%; @endif">
-                <img src="{{asset('storage/'.$photo)}}" alt="Profile Picture">
+                <img src="{{asset('photos/photos/'.$photo)}}" alt="Profile Picture">
                 <div style="background-color:#C0C0C0; position: absolute; top: 70%; left: 65%; border-radius: 80%; padding: 1%; width: 20%; cursor: pointer" onclick="chooseFile()">
                     <i class="fa-solid fa-camera" style="font-size: 17px;"></i>
                     <input type="file" id="fileInput" accept="image/*" hidden wire:model.live="photo">
