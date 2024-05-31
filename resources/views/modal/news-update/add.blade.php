@@ -101,7 +101,7 @@
                                 <div style="margin-top: 10%">
                                     <div class="list-group">
                                         <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox" wire:model="tcpa" value="{{$tcpa}}">
+                                            <input class="form-check-input me-1" type="checkbox" wire:model.live="tcpa" value="{{$tcpa}}">
                                             TCPA/ LITIGATOR CHECK
                                         </label>
                                         <label class="list-group-item">
@@ -134,7 +134,7 @@
                         </div>
 
 
-                        <div class="row g-3 align-items-center mb-2">
+                        <div class="row g-3 align-items-center mb-2" style="padding-left: 2%; padding-right: 2%;">
                             <div class="col-auto">
                                 <label class="col-form-label">Link</label>
                                 <i class="fa-solid fa-circle-plus"  wire:click="addInputField" style="color: blue; margin-left: 10px; cursor: pointer; font-size: 18px;"></i>
@@ -149,7 +149,7 @@
 {{--                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" wire:model="link" required></textarea>--}}
 {{--                            </div>--}}
                         </div>
-                        <div wire:ignore>
+                        <div wire:ignore style="padding-left: 2%; padding-right: 2%;">
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" wire:model="text" required></textarea>
                             <img id="preview" src="#" alt="Image Preview" style="display: none; max-width: 60%; max-height: 60%;">
                             <input type="file" id="image" wire:model="image" accept="image/*" onchange="previewImage(event)" style="margin-top: 1%;">

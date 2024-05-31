@@ -17,13 +17,13 @@ return new class extends Migration
             $table->string('geo')->nullable();
             $table->string('restriction')->nullable();
             $table->string('campaign_stat')->nullable();
-            $table->boolean('tcpa')->default('0');
-            $table->boolean('tf')->default('0');
-            $table->boolean('blacklist')->default('0');
-            $table->boolean('thatsthem')->default('0');
-            $table->boolean('dupe')->default('0');
-            $table->boolean('email')->default('0');
-            $table->boolean('govt')->default('0');
+            $table->boolean('tcpa')->default(false);
+            $table->boolean('tf')->default(false);
+            $table->boolean('blacklist')->default(false);
+            $table->boolean('thatsthem')->default(false);
+            $table->boolean('dupe')->default(false);
+            $table->boolean('email')->default(false);
+            $table->boolean('govt')->default(false);
         });
     }
 

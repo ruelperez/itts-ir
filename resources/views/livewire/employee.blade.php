@@ -11,17 +11,23 @@
                 <div>
                     <h5 style="margin-left: 2%; margin-top: 2%;">Employee</h5>
                 </div>
-{{--                <div class="row border border-dark">--}}
-{{--                    <div class="col">--}}
-{{--                        1 of 3--}}
-{{--                    </div>--}}
-{{--                    <div class="col">--}}
-{{--                        2 of 3 (wider)--}}
-{{--                    </div>--}}
-{{--                    <div class="col">--}}
-{{--                        3 of 3--}}
-{{--                    </div>--}}
-{{--                </div>--}}
+
+                <table class="table" style="margin-left: 10%; width: 30%;">
+                    <thead>
+                    <tr>
+                        <th scope="col">Fullname</th>
+                        <th scope="col">ID</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($employeeData as $data)
+                        <tr>
+                            <td>{{ucwords($data->fullname)}}</td>
+                           <td>ITTS-00{{$data->id}}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

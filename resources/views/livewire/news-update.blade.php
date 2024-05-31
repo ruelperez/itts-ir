@@ -82,11 +82,36 @@
                             </div>
                             <hr>
                             <div>
-                                Title:  <b>{{ucwords($data->title)}}</b><br>
-                                Campaign: <b>{{strtoupper($data->campaign)}}</b><br>
-                                Client: <b>{{ucwords($data->client)}}</b><br>
-                                Law firm: <b>{{ucwords($data->lawfirm)}}</b><br>
-                                Method: <b>{{ucwords($data->method)}}</b><br>
+                                <div style="display: flex">
+                                    <div style="width: 60%;">
+                                        Title:  <b>{{strtoupper($data->title)}}</b><br>
+                                        Campaign: <b>{{strtoupper($data->campaign)}}</b><br>
+                                        Client: <b>{{strtoupper($data->client)}}</b><br>
+                                        Law firm: <b>{{strtoupper($data->lawfirm)}}</b><br>
+                                        Method: <b style="margin-right: 20px;">{{ucwords($data->method)}}</b> DID: <b>{{$data->did}}</b><br>
+                                        Schedule: <b>{{strtoupper($data->schedule)}}</b> </b><br>
+                                        GEO: <b>{{strtoupper($data->geo)}}</b> </b><br>
+                                        Restriction: <b>{{strtoupper($data->restriction)}}</b> </b><br>
+                                    </div>
+                                    <div style="width: 40%;">
+                                        <div>
+                                            @if($data->campaign_stat == "active")
+                                                <div style="color: green; display: flex; margin-left: auto;">
+                                                    <i class="fa-solid fa-circle" style="margin-right: 5px; margin-left: auto"></i> <h4>ACTIVE</h4>
+                                                </div>
+                                            @elseif($data->campaign_stat == "pause")
+                                                <div style="color: red; display: flex; margin-left: auto;">
+                                                    <i class="fa-solid fa-circle" style="margin-right: 5px; margin-left: auto"></i> <h4>PAUSE</h4>
+                                                </div>
+                                            @elseif($data->campaign_stat == "dormant")
+                                                <div style="color: brown; display: flex; margin-left: auto;">
+                                                    <i class="fa-solid fa-circle" style="margin-right: 5px; margin-left: auto"></i> <h5>DORMANT</h5>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
                                 Link:
                                 <div style="word-wrap: break-word">
                                     @foreach($linkData as $linked)
@@ -95,9 +120,41 @@
                                         @endif
                                     @endforeach
                                 </div>
-
-
                                 <p style="margin-top: 3%; white-space: pre-line;">{{$data->text}}</p>
+                                <hr>
+                                <b>LEAD COMPLIANCE</b>
+                                <div style="margin-top: 1%; margin-bottom: 2%;">
+                                    <div class="list-group">
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox" disabled {{ $data->tcpa ? 'checked' : '' }}>
+                                            TCPA/ LITIGATOR CHECK
+                                        </label>
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox"  {{ $data->tf ? 'checked' : '' }} disabled>
+                                            TF
+                                        </label>
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox"  {{ $data->blacklist ? 'checked' : '' }} disabled>
+                                            BLACKLIST
+                                        </label>
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox" {{ $data->thatsthem ? 'checked' : '' }} disabled>
+                                            SMARTBACKGROUND - THATSTHEM
+                                        </label>
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox" {{ $data->dupe ? 'checked' : '' }} disabled>
+                                            DUPE CHECK
+                                        </label>
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox"  {{ $data->email ? 'checked' : '' }} disabled>
+                                            EMAIL REQUIRED
+                                        </label>
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox" {{ $data->govt ? 'checked' : '' }} disabled>
+                                            GOVT. ISSUED ID
+                                        </label>
+                                    </div>
+                                </div>
                                 <img src="{{asset('photos/photos/'.$data->image)}}" style="max-width: 85%; max-height: 90%; margin-left: 7%;">
                             </div>
                             @php $h=0; $g=0;

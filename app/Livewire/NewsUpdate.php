@@ -25,7 +25,7 @@ class NewsUpdate extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $did, $schedule, $geo, $restriction, $tcpa, $tf, $fj = 0, $email, $thatsthem, $dupe, $blacklist, $govt, $dtrData = [], $campaign_stat = "active", $superAdminSwitch, $position, $edit_comment_id, $editTextComment, $linkData = [], $imagePath, $link= [], $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "Camp lejeune", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
+    public $registrationSwitch, $did, $schedule, $geo, $restriction, $tcpa = false, $tf = false, $fj = 0, $email= false, $thatsthem= false, $dupe= false, $blacklist = false, $govt= false, $dtrData = [], $campaign_stat = "active", $superAdminSwitch, $position, $edit_comment_id, $editTextComment, $linkData = [], $imagePath, $link= [], $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "Camp lejeune", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
@@ -206,6 +206,18 @@ class NewsUpdate extends Component
                 'lawfirm' => $this->lawfirm,
                 'method' => $this->method,
                 'image' => $this->imagePath,
+                'did' => $this->did,
+                'schedule' => $this->schedule,
+                'geo' => $this->geo,
+                'restriction' => $this->restriction,
+                'campaign_stat' => $this->campaign_stat,
+                'tcpa' => $this->tcpa,
+                'tf' => $this->tf,
+                'blacklist' => $this->blacklist,
+                'thatsthem' => $this->thatsthem,
+                'dupe' => $this->dupe,
+                'email' => $this->email,
+                'govt' => $this->govt,
             ]);
             $this->text = "";
             $this->tags = "";
@@ -213,6 +225,18 @@ class NewsUpdate extends Component
             $this->client = "";
             $this->lawfirm = "";
             $this->method = "";
+            $this->did = "";
+            $this->schedule = "";
+            $this->geo= "";
+            $this->restriction= "";
+            $this->campaign_stat= "";
+            $this->tcpa= false;
+            $this->tf= false;
+            $this->blacklist= false;
+            $this->thatsthem= false;
+            $this->dupe= false;
+            $this->email= false;
+            $this->govt= false;
             $v = Note::latest()->first();
 
             foreach ($this->link as $links){
