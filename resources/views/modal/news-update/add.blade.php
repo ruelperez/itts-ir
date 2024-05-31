@@ -1,4 +1,4 @@
-<div wire:ignore.self class="modal" tabindex="-1" id="add">
+<div wire:ignore.self class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" id="add">
     <div class="modal-dialog modal-lg">
         <div class="modal-content" >
             <div class="modal-header">
@@ -82,11 +82,11 @@
                 <div style="padding-bottom: 2%; padding-right: 3%; display: flex;">
                     <div style="margin-left: 3%; width: 50%;">
                         @if(session()->has('good'))
-                            <div class="alert alert-success" style="width: 100%; " wire:ignore>
+                            <div class="alert alert-success" style="width: 100%; " >
                                 {{ session('good') }}
                             </div>
                         @elseif(session()->has('bad'))
-                            <div class="alert alert-danger" style="width: 100%; " wire:ignore>
+                            <div class="alert alert-danger" style="width: 100%; ">
                                 {{ session('bad') }}
                             </div>
                         @endif

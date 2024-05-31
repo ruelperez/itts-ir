@@ -17,7 +17,7 @@
 {{--            Current time: {{ now() }}--}}
 {{--        </div>--}}
         <div style="width: 81%; margin-left: 19%;">
-            <div wire:poll.keep-alive>
+            <div>
                 <div style="position: fixed;top: 17%; left: 19%; width: 85%; z-index: 1000; background-color: #41464b; padding-left: 3%; padding-bottom: 1%;">
                     <div style="display: flex; margin-top: 2%;">
                         <div>
@@ -36,7 +36,7 @@
                                 <a href="/itts/2/age-checker" wire:navigate style="color: white;">Age checker</a>
                             </div>
                         @endif
-                        <div style="margin-left: auto; margin-right: 5%;">
+                        <div style="margin-left: auto; margin-right: 10%;">
                             <select class="form-select" aria-label="Default select example" wire:model.live="campaign_name">
                                 <option value="Camp lejeune">CL</option>
                                 <option value="AFFF">AFFF</option>
@@ -49,12 +49,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="content">
+                <div class="content" wire:poll.keep-alive.5s>
                     @foreach($notes_all as $data)
-                        <div style="width: 100%; background-color: white; padding-left: 3%; padding-right: 3%; padding-top: 1.5%; padding-bottom: 2%;">
+                        <div style="width: 100%; background-color: white; padding-left: 3%; padding-right: 3%; padding-top: 1.5%; padding-bottom: 2%; margin-bottom: 3%;">
                             <div class="fw-light" style="display: flex;">
                                 <div class="profile-picture">
-                                    <img src="{{asset('storage/'.$data->photo)}}" alt="Profile Picture">
+                                    <img src="{{asset('photos/photos/'.$data->photo)}}" alt="Profile Picture">
                                 </div>
                                 <div style="margin-right: 5%;">
                                     <b>{{ucwords($data->user_fullname)}}</b><br>
@@ -98,7 +98,7 @@
 
 
                                 <p style="margin-top: 3%; white-space: pre-line;">{{$data->text}}</p>
-                                <img src="{{asset('storage/'.$data->image)}}" style="max-width: 90%; max-height: 90%; margin-left: 5%;">
+                                <img src="{{asset('photos/photos/'.$data->image)}}" style="max-width: 85%; max-height: 90%; margin-left: 7%;">
                             </div>
                             @php $h=0; $g=0;
                                 foreach ($heart as $fg){

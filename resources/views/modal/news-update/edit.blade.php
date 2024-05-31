@@ -7,15 +7,6 @@
             </div>
             <form wire:submit.prevent="submit_edit" wire:ignore>
                 <div class="modal-body">
-                    @if(session()->has('good'))
-                        <div class="alert alert-success" style="width: 60%; ">
-                            {{ session('good') }}
-                        </div>
-                    @elseif(session()->has('bad'))
-                        <div class="alert alert-danger" style="width: 60%; ">
-                            {{ session('bad') }}
-                        </div>
-                    @endif
                     <div class="form-group">
                         <div class="row g-3 align-items-center mb-2">
                             <div class="col-auto">
@@ -91,13 +82,13 @@
                 <hr>
                 <div style="padding-bottom: 2%; padding-right: 3%; display: flex;">
                     <div style="margin-left: 3%; width: 50%;">
-                        @if(session()->has('good'))
+                        @if(session()->has('goodEdit'))
                             <div class="alert alert-success" style="width: 100%; ">
-                                {{ session('good') }}
+                                {{ session('goodEdit') }}
                             </div>
-                        @elseif(session()->has('bad'))
+                        @elseif(session()->has('badEdit'))
                             <div class="alert alert-danger" style="width: 100%; ">
-                                {{ session('bad') }}
+                                {{ session('badEdit') }}
                             </div>
                         @endif
                     </div>

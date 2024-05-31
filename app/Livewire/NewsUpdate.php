@@ -173,14 +173,9 @@ class NewsUpdate extends Component
     }
 
     public function storeImage(){
-        $filename = Str::random(40) . '.' . $this->photo->getClientOriginalExtension();
-
-        $this->photo->storeAs('photos', $filename, 'public_photos');
-
-        $hashedFilename = $this->image->hashName();
-        // Store the uploaded image in the public directory with the hashed filename
-        $this->imagePath = $this->image->storeAs('images', $hashedFilename, 'public');
-
+        $filename = Str::random(40) . '.' . $this->image->getClientOriginalExtension();
+        $this->image->storeAs('photos', $filename, 'public_photos');
+        $this->imagePath = $filename;
     }
 
     public function addInputField()
@@ -310,9 +305,9 @@ class NewsUpdate extends Component
                     'photo' => $this->photo,
                     'fullname' => $this->fullname,
                 ]);
-                session()->flash('good', "Successfully updated");
+                session()->flash('goodEdit', "Successfully updated");
             }catch (\Exception $e){
-                session()->flash('bad', "Failed to update");
+                session()->flash('badEdit', "Failed to update");
             }
         }
         else{
