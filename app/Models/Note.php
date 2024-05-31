@@ -19,6 +19,18 @@ class Note extends Model
         'lawfirm',
         'method',
         'image',
+        'did',
+        'schedule',
+        'geo',
+        'restriction',
+        'campaign_stat',
+        'tcpa',
+        'tf',
+        'blacklist',
+        'thatsthem',
+        'dupe',
+        'email',
+        'govt',
     ];
 
     use HasFactory;
