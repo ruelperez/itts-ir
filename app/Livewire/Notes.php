@@ -9,6 +9,7 @@ use App\Models\MyNote;
 use App\Models\SuperadminShow;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -276,10 +277,14 @@ class Notes extends Component
             $this->super_admin_Switch();
         }
         if ($field == "photo"){
-            $this->photo->store(path: 'public');
-            $hashPhoto = $this->photo->hashName();
+            $filename = Str::random(40) . '.' . $this->photo->getClientOriginalExtension();
+
+            // Save the photo directly to the public/photos directory
+            $this->photo->storeAs('photos', $filename, 'public_photos');
+//            $this->photo->store(path: 'public');
+//            $hashPhoto = $this->photo->hashName();
             $user = User::find($this->user_id);
-            $user->photo = $hashPhoto;
+            $user->photo = $filename;
             $user->save();
 //            $com = Comment::find($this->user_id);
 //            if (isset($com)){

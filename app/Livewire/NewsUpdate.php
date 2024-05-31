@@ -15,6 +15,7 @@ use App\Models\User;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -172,6 +173,10 @@ class NewsUpdate extends Component
     }
 
     public function storeImage(){
+        $filename = Str::random(40) . '.' . $this->photo->getClientOriginalExtension();
+
+        $this->photo->storeAs('photos', $filename, 'public_photos');
+
         $hashedFilename = $this->image->hashName();
         // Store the uploaded image in the public directory with the hashed filename
         $this->imagePath = $this->image->storeAs('images', $hashedFilename, 'public');
@@ -529,10 +534,14 @@ class NewsUpdate extends Component
 
         }
         if ($field == "photo"){
-            $this->photo->store(path: 'public');
-            $hashPhoto = $this->photo->hashName();
+            $filename = Str::random(40) . '.' . $this->photo->getClientOriginalExtension();
+
+            // Save the photo directly to the public/photos directory
+            $this->photo->storeAs('photos', $filename, 'public_photos');
+//            $this->photo->store(path: 'public');
+//            $hashPhoto = $this->photo->hashName();
             $user = User::find($this->user_id);
-            $user->photo = $hashPhoto;
+            $user->photo = $filename;
             $user->save();
             return redirect('/itts/4/news-feed');
         }

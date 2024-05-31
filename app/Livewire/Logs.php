@@ -7,6 +7,7 @@ use App\Models\Dtr;
 use App\Models\IsRegistration;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -168,10 +169,14 @@ class Logs extends Component
             $this->admin_Switch();
         }
         if ($field == "photo"){
-            $this->photo->store(path: 'public');
-            $hashPhoto = $this->photo->hashName();
+            $filename = Str::random(40) . '.' . $this->photo->getClientOriginalExtension();
+
+            // Save the photo directly to the public/photos directory
+            $this->photo->storeAs('photos', $filename, 'public_photos');
+//            $this->photo->store(path: 'public');
+//            $hashPhoto = $this->photo->hashName();
             $user = User::find($this->user_id);
-            $user->photo = $hashPhoto;
+            $user->photo = $filename;
             $user->save();
             return redirect('/itts/5/dashboard');
         }
