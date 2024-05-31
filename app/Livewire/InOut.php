@@ -640,15 +640,11 @@ class InOut extends Component
         }
         if ($field == "photo"){
             $filename = Str::random(40) . '.' . $this->photo->getClientOriginalExtension();
-
-            // Save the photo directly to the public/photos directory
             $this->photo->storeAs('photos', $filename, 'public_photos');
-//            $this->photo->store(path: 'public');
-//            $hashPhoto = $this->photo->hashName();
             $user = User::find($this->user_id);
             $user->photo = $filename;
             $user->save();
-            return redirect('/itts/5/dashboard');
+            return redirect('/itts/8/dtr');
         }
     }
 }

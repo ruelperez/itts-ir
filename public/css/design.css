@@ -69,9 +69,8 @@
 .content{
     margin-top: 8%;
     margin-left: 5%;
-    /*overflow-y: scroll;*/
-    width: 90%; /* Adjust width as needed */
-    height: 1000px; /* Adjust height as needed */
+    width: 90%;
+    height: 1000px;
 }
 
 .modal-body{

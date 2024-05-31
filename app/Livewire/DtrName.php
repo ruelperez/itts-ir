@@ -261,7 +261,7 @@ class DtrName extends Component
             $user = User::find($this->user_id);
             $user->photo = $filename;
             $user->save();
-            return redirect('/itts/5/dashboard');
+            return redirect('/itts/9/dtr-name');
         }
     }
 }
