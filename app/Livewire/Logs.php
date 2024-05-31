@@ -178,7 +178,7 @@ class Logs extends Component
             $user = User::find($this->user_id);
             $user->photo = $filename;
             $user->save();
-            return redirect('/itts/5/dashboard');
+            return redirect('/itts/7/'.$this->webName);
         }
     }
 
