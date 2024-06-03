@@ -25,7 +25,9 @@ class NewsUpdate extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $did, $schedule, $geo, $restriction, $tcpa = false, $tf = false, $fj = 0, $email= false, $thatsthem= false, $dupe= false, $blacklist = false, $govt= false, $dtrData = [], $campaign_stat = "active", $superAdminSwitch, $position, $edit_comment_id, $editTextComment, $linkData = [], $imagePath, $link= [], $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "Camp lejeune", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
+    public $registrationSwitch, $did, $link = [
+        ['title' => '', 'textLink' => ''],
+    ],  $schedule, $geo, $restriction, $tcpa = false, $tf = false, $fj = 0, $email= false, $thatsthem= false, $dupe= false, $blacklist = false, $govt= false, $dtrData = [], $campaign_stat = "active", $superAdminSwitch, $position, $edit_comment_id, $editTextComment, $linkData = [], $imagePath, $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "Camp lejeune", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
@@ -49,6 +51,18 @@ class NewsUpdate extends Component
                 ->where('campaign',$this->campaign_name)->get();
         }
         return view('livewire.news-update')->title('Campaign');
+    }
+
+
+    public function addUser()
+    {
+        $this->link[] = ['title' => '', 'textLink' => ''];
+    }
+
+    public function removeUser($index)
+    {
+        unset($this->link[$index]);
+        $this->link = array_values($this->link); // Re-index the array
     }
 
     public function edit_comment($id){
@@ -177,13 +191,8 @@ class NewsUpdate extends Component
         $this->image->storeAs('photos', $filename, 'public_photos');
         $this->imagePath = $filename;
     }
-
-    public function addInputField()
-    {
-        $this->link[] = '';
-    }
-
     public function submit(){
+        dd($this->users);
         if ($this->image == null or $this->image == ""){
             $this->imagePath = "";
         }

@@ -133,26 +133,26 @@
                             </div>
                         </div>
 
-
                         <div class="row g-3 align-items-center mb-2" style="padding-left: 2%; padding-right: 2%;">
                             <div class="col-auto">
                                 <label class="col-form-label">Link</label>
-                                <i class="fa-solid fa-circle-plus"  wire:click="addInputField" style="color: blue; margin-left: 10px; cursor: pointer; font-size: 18px;"></i>
+                                <i class="fa-solid fa-circle-plus"  wire:click="addUser" style="color: blue; margin-left: 10px; cursor: pointer; font-size: 18px;"></i>
                             </div>
-                            <div style="margin-left: 12%;">
-                                @foreach ($link as $index => $input)
-                                    <textarea type="text" class="form-control" wire:model="link.{{ $index }}" style="width: 70%; margin-bottom: 1%; " rows="2"></textarea>
+                            <div style="margin-left: 8%;">
+                                @foreach($link as $index => $user)
+                                    <div class="user-form mb-2" style="display: flex">
+                                        <input class="form-control" type="text" placeholder="Enter title" wire:model="link.{{ $index }}.title" style="width: 20%;">
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Enter link"  wire:model="link.{{ $index }}.textLink" style="width: 50%; margin-left: 1%"></textarea>
+                                        <button type="button" class="btn btn-danger" wire:click="removeUser({{ $index }})" style="margin-left: 1%;">Remove</button>
+                                    </div>
                                 @endforeach
                             </div>
-                            <!-- Button to save data -->
-{{--                            <div class="col-auto">--}}
-{{--                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" wire:model="link" required></textarea>--}}
-{{--                            </div>--}}
                         </div>
-                        <div wire:ignore style="padding-left: 2%; padding-right: 2%;">
+                        <hr>
+                        <div wire:ignore style="padding-left: 2%; padding-right: 2%;" class="mt-4">
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" wire:model="text" required></textarea>
-                            <img id="preview" src="#" alt="Image Preview" style="display: none; max-width: 60%; max-height: 60%;">
-                            <input type="file" id="image" wire:model="image" accept="image/*" onchange="previewImage(event)" style="margin-top: 1%;">
+                            <img id="preview" src="#" alt="Image Preview" style="display: none; max-width: 60%; max-height: 60%; margin-top: 3%;">
+                            <input type="file" id="image" wire:model="image" accept="image/*" onchange="previewImage(event)" style="margin-top: 3%;">
                         </div>
                     </div>
                 </div>

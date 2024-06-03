@@ -133,15 +133,14 @@
                             </div>
                         </div>
 
-
                         <div class="row g-3 align-items-center mb-2" style="padding-left: 2%; padding-right: 2%;">
                             <div class="col-auto">
                                 <label class="col-form-label">Link</label>
                                 <i class="fa-solid fa-circle-plus"  wire:click="addInputField" style="color: blue; margin-left: 10px; cursor: pointer; font-size: 18px;"></i>
                             </div>
                             <div style="margin-left: 12%;">
-                                @foreach ($link as $index => $input)
-                                    <textarea type="text" class="form-control" wire:model="link.{{ $index }}" style="width: 70%; margin-bottom: 1%; " rows="2"></textarea>
+                                @foreach ($link as $index)
+                                    <textarea type="text" class="form-control" wire:model="link[]" style="width: 70%; margin-bottom: 1%; " rows="2"></textarea>
                                 @endforeach
                             </div>
                             <!-- Button to save data -->
