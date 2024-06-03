@@ -10,7 +10,7 @@
                     @foreach($comment_reactors as $act)
                         <div class="fw-light" style="display: flex; margin-bottom: 1%;">
                             <div class="profile-picture-reactor">
-                                <img src="{{asset('storage/'.$act->photo)}}" alt="Profile Picture">
+                                <img src="{{asset('photos/photos/'.$act->photo)}}" alt="Profile Picture">
                             </div>
                             <div style="margin-right: 5%;">
                                 <b>{{ucwords($act->fullname)}}</b>

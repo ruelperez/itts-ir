@@ -5,7 +5,7 @@
                 <h5 class="modal-title">Update</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click="clearInput"></button>
             </div>
-            <form wire:submit.prevent="submit_edit" wire:ignore>
+            <form wire:submit.prevent="submit_edit">
                 <div class="modal-body">
                     <div class="form-group">
                         <div style="display: flex; padding-left: 2%; padding-right: 2%;">
@@ -136,17 +136,17 @@
                         <div class="row g-3 align-items-center mb-2" style="padding-left: 2%; padding-right: 2%;">
                             <div class="col-auto">
                                 <label class="col-form-label">Link</label>
-                                <i class="fa-solid fa-circle-plus"  wire:click="addInputField" style="color: blue; margin-left: 10px; cursor: pointer; font-size: 18px;"></i>
+                                <i class="fa-solid fa-circle-plus"  wire:click="addUser" style="color: blue; margin-left: 10px; cursor: pointer; font-size: 18px;"></i>
                             </div>
-                            <div style="margin-left: 12%;">
-                                @foreach ($link as $index)
-                                    <textarea type="text" class="form-control" wire:model="link[]" style="width: 70%; margin-bottom: 1%; " rows="2"></textarea>
+                            <div style="margin-left: 8%;">
+                                @foreach($link as $index => $user)
+                                    <div class="user-form mb-2" style="display: flex">
+                                        <input class="form-control" type="text" placeholder="Enter title" wire:model="link.{{ $index }}.title" style="width: 20%;">
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Enter link"  wire:model="link.{{ $index }}.textLink" style="width: 50%; margin-left: 1%"></textarea>
+                                        <button type="button" class="btn btn-danger" wire:click="removeUser({{ $index }})" style="margin-left: 1%;">Remove</button>
+                                    </div>
                                 @endforeach
                             </div>
-                            <!-- Button to save data -->
-                            {{--                            <div class="col-auto">--}}
-                            {{--                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" wire:model="link" required></textarea>--}}
-                            {{--                            </div>--}}
                         </div>
                         <div wire:ignore style="padding-left: 2%; padding-right: 2%;">
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" wire:model="text" required></textarea>
@@ -170,7 +170,7 @@
                     </div>
                     <div style="margin-left: auto">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" wire:click="clearInput">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </div>
             </form>

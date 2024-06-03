@@ -6,12 +6,16 @@ use App\Models\AdminShow;
 use App\Models\Comment;
 use App\Models\CommentHeart;
 use App\Models\Dtr;
+use App\Models\DtrContent;
+use App\Models\DtrPermanent;
 use App\Models\Heart;
 use App\Models\IsRegistration;
 use App\Models\Link;
 use App\Models\Note;
 use App\Models\SuperadminShow;
+use App\Models\TimeSetting;
 use App\Models\User;
+use App\Models\UserPassword;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -192,7 +196,6 @@ class NewsUpdate extends Component
         $this->imagePath = $filename;
     }
     public function submit(){
-        dd($this->users);
         if ($this->image == null or $this->image == ""){
             $this->imagePath = "";
         }
@@ -228,16 +231,17 @@ class NewsUpdate extends Component
                 'email' => $this->email,
                 'govt' => $this->govt,
             ]);
-            $this->clearInput();
+
             $v = Note::latest()->first();
 
             foreach ($this->link as $links){
                 Link::create([
-                   'link' => $links,
+                    'title' => $links['title'],
+                   'link' => $links['textLink'],
                    'note_id' => $v->id,
                 ]);
             }
-            $this->link = [];
+            $this->clearInput();
             \App\Models\Logs::create([
                 'action' => "create post",
                 'user_id' => $this->user_id,
@@ -302,7 +306,20 @@ class NewsUpdate extends Component
         $this->dupe = $rt->dupe;
         $this->email = $rt->email;
         $this->govt =$rt->govt;
-        $this->link = Link::where('note_id',$id)->get();
+        $lnk = Link::where('note_id',$id)->get();
+        $this->link = [];
+        foreach ($lnk as $ln){
+            $this->link[] = ['title' => $ln->title, 'textLink' => $ln->link];
+        }
+
+//        unset($this->link[$index]);
+//        $this->link = array_values($this->link); // Re-index the array
+//
+//        $this->link[] = ['title' => '', 'textLink' => ''];
+//
+//        $link = [
+//            ['title' => '', 'textLink' => ''],
+//        ],
     }
 
     public function submit_edit(){
@@ -317,8 +334,31 @@ class NewsUpdate extends Component
                 $rt->lawfirm = $this->lawfirm;
                 $rt->method = $this->method;
                 $rt->image = $this->image;
-//                $rt->link = $this->link;
+                $rt->did = $this->did;
+                $rt->schedule = $this->schedule;
+                $rt->geo = $this->geo;
+                $rt->restriction = $this->restriction;
+                $rt->campaign_stat = $this->campaign_stat;
+                $rt->tcpa = $this->tcpa;
+                $rt->tf = $this->tf;
+               $rt->blacklist = $this->blacklist;
+               $rt->thatsthem = $this->thatsthem;
+               $rt->dupe= $this->dupe;
+               $rt->email = $this->email;
+               $rt->govt = $this->govt;
                 $rt->save();
+
+                $jas = Link::where('note_id',$this->ids)->get();
+                foreach ($jas as $gg){
+                    Link::find($gg->id)->delete();
+                }
+                foreach ($this->link as $links){
+                    Link::create([
+                        'title' => $links['title'],
+                        'link' => $links['textLink'],
+                        'note_id' => $this->ids,
+                    ]);
+                }
                 $this->clearInput();
                 \App\Models\Logs::create([
                     'action' => "edit",
@@ -327,6 +367,7 @@ class NewsUpdate extends Component
                     'photo' => $this->photo,
                     'fullname' => $this->fullname,
                 ]);
+//                $this->dispatch('post-created');
                 session()->flash('goodEdit', "Successfully updated");
             }catch (\Exception $e){
                 session()->flash('badEdit', "Failed to update");
@@ -344,18 +385,35 @@ class NewsUpdate extends Component
                 $rt->lawfirm = $this->lawfirm;
                 $rt->method = $this->method;
                 $rt->image = $this->imagePath;
-//                $rt->link = $this->link;
+                $rt->did = $this->did;
+                $rt->schedule = $this->schedule;
+                $rt->geo = $this->geo;
+                $rt->restriction = $this->restriction;
+                $rt->campaign_stat = $this->campaign_stat;
+                $rt->tcpa = $this->tcpa;
+                $rt->tf = $this->tf;
+                $rt->blacklist = $this->blacklist;
+                $rt->thatsthem = $this->thatsthem;
+                $rt->dupe= $this->dupe;
+                $rt->email = $this->email;
+                $rt->govt = $this->govt;
                 $rt->save();
-                $this->tags = "";
-                $this->text = "";
-                $this->title = "";
-                $this->client = "";
-                $this->lawfirm = "";
-                $this->method = "";
-//                $this->link = "";
-                session()->flash('good', "Successfully updated");
+
+                $jas = Link::where('note_id',$this->ids)->get();
+                foreach ($jas as $gg){
+                    Link::find($gg->id)->delete();
+                }
+                foreach ($this->link as $links){
+                    Link::create([
+                        'title' => $links['title'],
+                        'link' => $links['textLink'],
+                        'note_id' => $this->ids,
+                    ]);
+                }
+                $this->clearInput();
+                session()->flash('goodEdit', "Successfully updated");
             }catch (\Exception $e){
-                session()->flash('bad', "Failed to update");
+                session()->flash('badEdit', "Failed to update");
             }
         }
 
@@ -380,6 +438,10 @@ class NewsUpdate extends Component
         $this->dupe = false;
         $this->email = false;
         $this->govt = false;
+        $this->link = [
+            ['title' => '', 'textLink' => ''],
+        ];
+        $this->image = "";
     }
 
     public function logout(){
@@ -577,6 +639,51 @@ class NewsUpdate extends Component
             $user = User::find($this->user_id);
             $user->photo = $filename;
             $user->save();
+            $user = User::find($this->user_id)->comment;
+            foreach ($user as $usr){
+                $jn = Comment::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->comment_heart;
+            foreach ($user as $usr){
+                $jn = CommentHeart::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->dtr;
+            foreach ($user as $usr){
+                $jn =Dtr::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->dtr_content;
+            foreach ($user as $usr){
+                $jn =DtrContent::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->log;
+            foreach ($user as $usr){
+                $jn =\App\Models\Logs::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->note;
+            foreach ($user as $usr){
+                $jn = Note::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->time_setting;
+            foreach ($user as $usr){
+                $jn = TimeSetting::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = UserPassword::find($this->user_id);
+                $user->photo = $filename;
+                $user->save();
             return redirect('/itts/4/news-feed');
         }
 

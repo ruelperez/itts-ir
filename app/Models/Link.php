@@ -10,6 +10,7 @@ class Link extends Model
     protected $fillable = [
         'link',
         'note_id',
+        'title'
     ];
 
     use HasFactory;

@@ -81,7 +81,7 @@
                                 @endif
                             </div>
                             <hr>
-                            <div>
+                            <div style="font-size: 15px;" >
                                 <div style="display: flex">
                                     <div style="width: 60%;">
                                         Title:  <b>{{strtoupper($data->title)}}</b><br>
@@ -97,11 +97,11 @@
                                         <div>
                                             @if($data->campaign_stat == "active")
                                                 <div style="color: green; display: flex; margin-left: auto;">
-                                                    <i class="fa-solid fa-circle" style="margin-right: 5px; margin-left: auto"></i> <h4>ACTIVE</h4>
+                                                    <i class="fa-solid fa-circle" style="margin-right: 5px; margin-left: auto"></i> <h5>ACTIVE</h5>
                                                 </div>
                                             @elseif($data->campaign_stat == "pause")
                                                 <div style="color: red; display: flex; margin-left: auto;">
-                                                    <i class="fa-solid fa-circle" style="margin-right: 5px; margin-left: auto"></i> <h4>PAUSE</h4>
+                                                    <i class="fa-solid fa-circle" style="margin-right: 5px; margin-left: auto"></i> <h5>PAUSE</h5>
                                                 </div>
                                             @elseif($data->campaign_stat == "dormant")
                                                 <div style="color: brown; display: flex; margin-left: auto;">
@@ -116,11 +116,15 @@
                                 <div style="word-wrap: break-word">
                                     @foreach($linkData as $linked)
                                         @if($data->id == $linked->note_id)
-                                            <a href="{{$linked->link}}" target="_blank" style="margin-left: 5%;">{{$linked->link}}</a><br><br>
+                                            <div style="display: flex; margin-left: 5%;">
+                                                <p style="margin-right: 2%;">{{ucfirst($linked->title)}}</p>
+                                                <a href="{{$linked->link}}" target="_blank" >{{$linked->link}}</a><br><br>
+                                            </div>
                                         @endif
                                     @endforeach
                                 </div>
-                                <p style="margin-top: 3%; white-space: pre-line;">{{$data->text}}</p>
+                                <hr>
+                                <p style="white-space: pre-line;">{{$data->text}}</p>
                                 <hr>
                                 <b>LEAD COMPLIANCE</b>
                                 <div style="margin-top: 1%; margin-bottom: 2%;">
@@ -155,7 +159,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <img src="{{asset('photos/photos/'.$data->image)}}" style="max-width: 85%; max-height: 90%; margin-left: 7%;">
+                                <img src="{{asset('photos/photos/'.$data->image)}}" style="max-width: 60%; max-height: 65%;">
                             </div>
                             @php $h=0; $g=0;
                                 foreach ($heart as $fg){
@@ -211,4 +215,11 @@
         </div>
     </div>
     @include('partial.header')
+{{--    @script--}}
+{{--    <script>--}}
+{{--        $wire.on('post-created', () => {--}}
+{{--            $('#image').val('');--}}
+{{--        });--}}
+{{--    </script>--}}
+{{--    @endscript--}}
 </div>

@@ -9,8 +9,11 @@ use App\Models\Dtr;
 use App\Models\DtrContent;
 use App\Models\DtrPermanent;
 use App\Models\IsRegistration;
+use App\Models\Note;
 use App\Models\SuperadminShow;
+use App\Models\TimeSetting;
 use App\Models\User;
+use App\Models\UserPassword;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
@@ -244,30 +247,56 @@ class Dashboard extends Component
             $this->super_admin_Switch();
         }
         if ($field == "photo"){
-
-//            $com = Comment$filename = Str::random(40) . '.' . $this->photo->getClientOriginalExtension();
-//
-//            // Save the photo directly to the public/photos directory
-//            $this->photo->storeAs('photos', $filename, 'public_photos');
-////            $this->photo->store(path: 'public');
-////            $hashPhoto = $this->photo->hashName();
-//            $user = User::find($this->user_id);
-//            $user->photo = $filename;
-//            $user->save();::find($this->user_id);
-//            if (isset($com)){
-//                $com->photo = $hashPhoto;
-//                $com->save();
-//            }
-//            $comHeart = CommentHeart::find($this->user_id);
-//            if (isset($comHeart)){
-//                $comHeart->photo = $hashPhoto;
-//                $comHeart->save();
-//            }
-//            $dtr = Dtr::find($this->user_id);
-//            if (isset($comHeart)){
-//                $comHeart->photo = $hashPhoto;
-//                $comHeart->save();
-//            }
+            $filename = Str::random(40) . '.' . $this->photo->getClientOriginalExtension();
+            $this->photo->storeAs('photos', $filename, 'public_photos');
+            $user = User::find($this->user_id);
+            $user->photo = $filename;
+            $user->save();
+            $user = User::find($this->user_id)->comment;
+            foreach ($user as $usr){
+                $jn = Comment::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->comment_heart;
+            foreach ($user as $usr){
+                $jn = CommentHeart::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->dtr;
+            foreach ($user as $usr){
+                $jn =Dtr::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->dtr_content;
+            foreach ($user as $usr){
+                $jn =DtrContent::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->log;
+            foreach ($user as $usr){
+                $jn =\App\Models\Logs::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->note;
+            foreach ($user as $usr){
+                $jn = Note::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->time_setting;
+            foreach ($user as $usr){
+                $jn = TimeSetting::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = UserPassword::find($this->user_id);
+            $user->photo = $filename;
+            $user->save();
             return redirect('/itts/5/dashboard');
         }
     }

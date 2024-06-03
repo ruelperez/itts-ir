@@ -95,7 +95,7 @@
                                         @if($position == "Super Admin")
                                         <div style="display: flex">
                                             <div>
-                                                <i class="fa-solid fa-pen-to-square" style="cursor: pointer" title="edit" data-bs-toggle="modal" data-bs-target="#edit_comment" wire:click="edit_comment({{$coms->id}})"></i>
+                                                <i class="fa-solid fa-pen-to-square" style="cursor: pointer" title="edit" data-bs-toggle="modal" data-bs-target="#edit_comment" wire:click="edit_comment({{$coms->id}})" data-bs-dismiss="modal" aria-label="Close"></i>
                                             </div>
                                             <div style="margin-left: 10px">
                                                 <i class="fa-solid fa-trash" style="color: red; cursor: pointer" title="delete" type="button"
@@ -126,7 +126,7 @@
                                                     <i class="fa-regular fa-heart" style="font-size: 18px; cursor: pointer;" wire:click="clickCommentHeart({{$coms->id}})"></i>
                                                 @endif
                                             @endif
-                                            <small style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#comment_reactor" wire:click="comment_reactor({{$coms->id}})"><u>{{$totalCommentHeart}}</u></small>
+                                            <small style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#comment_reactor" wire:click="comment_reactor({{$coms->id}})" data-bs-dismiss="modal" aria-label="Close"><u>{{$totalCommentHeart}}</u></small>
                                         </div>
                                     </div>
                                 </div>

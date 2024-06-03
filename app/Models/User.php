@@ -45,4 +45,33 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function comment(){
+        return $this->hasMany(Comment::class);
+    }
+    public function comment_heart(){
+        return $this->hasMany(CommentHeart::class);
+    }
+
+    public function dtr(){
+        return $this->hasMany(Dtr::class);
+    }
+    public function dtr_content(){
+        return $this->hasMany(DtrContent::class);
+    }
+    public function dtr_permanent(){
+        return $this->hasMany(DtrPermanent::class);
+    }
+    public function log(){
+        return $this->hasMany(Logs::class);
+    }
+    public function note(){
+        return $this->hasMany(Note::class);
+    }
+    public function time_setting(){
+        return $this->hasMany(TimeSetting::class);
+    }
+    public function user_password(){
+        return $this->hasMany(UserPassword::class);
+    }
 }

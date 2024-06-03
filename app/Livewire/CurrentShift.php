@@ -3,11 +3,17 @@
 namespace App\Livewire;
 
 use App\Models\AdminShow;
+use App\Models\Comment;
+use App\Models\CommentHeart;
 use App\Models\Dtr;
+use App\Models\DtrContent;
 use App\Models\DtrPermanent;
 use App\Models\IsRegistration;
+use App\Models\Note;
 use App\Models\SuperadminShow;
+use App\Models\TimeSetting;
 use App\Models\User;
+use App\Models\UserPassword;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -334,6 +340,51 @@ class CurrentShift extends Component
             $filename = Str::random(40) . '.' . $this->photo->getClientOriginalExtension();
             $this->photo->storeAs('photos', $filename, 'public_photos');
             $user = User::find($this->user_id);
+            $user->photo = $filename;
+            $user->save();
+            $user = User::find($this->user_id)->comment;
+            foreach ($user as $usr){
+                $jn = Comment::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->comment_heart;
+            foreach ($user as $usr){
+                $jn = CommentHeart::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->dtr;
+            foreach ($user as $usr){
+                $jn =Dtr::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->dtr_content;
+            foreach ($user as $usr){
+                $jn =DtrContent::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->log;
+            foreach ($user as $usr){
+                $jn =\App\Models\Logs::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->note;
+            foreach ($user as $usr){
+                $jn = Note::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->time_setting;
+            foreach ($user as $usr){
+                $jn = TimeSetting::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = UserPassword::find($this->user_id);
             $user->photo = $filename;
             $user->save();
             return redirect('/itts/current-shift');
