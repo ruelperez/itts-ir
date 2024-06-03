@@ -11,7 +11,7 @@
                         <div style="box-sizing: content-box; background-color: white; margin-left: 1%; margin-bottom: 1%; word-wrap: break-word;">
                             <div class="fw-light" style="display: flex;">
                                 <div class="profile-picture">
-                                    <img src="{{asset('storage/'.$data->photo)}}" alt="Profile Picture">
+                                    <img src="{{asset('photos/photos/'.$data->photo)}}" alt="Profile Picture">
                                 </div>
                                 <div style="margin-right: 5%;">
                                     <b>{{ucwords($data->user_fullname)}}</b>
@@ -79,7 +79,7 @@
                                 <div id="comments" style="margin-bottom: 4%;">
                                     <div style="display: flex;">
                                         <div class="profile-picture-comment">
-                                            <img src="{{asset('storage/'.$coms->photo)}}" alt="Profile Picture">
+                                            <img src="{{asset('photos/photos/'.$coms->photo)}}" alt="Profile Picture">
                                         </div>
                                         <div style="margin-right: 1%; background-color: #2F4F4F; color: white; padding: 1%; border-radius: 20px; font-size: 14px">
                                             <div>
@@ -138,7 +138,7 @@
                 <div style="background-color: #D3D3D3; padding-top: 1%; padding-bottom: 1%;">
                     <div class="fw-light" style="display: flex; margin-bottom: 1%; padding-left: 2%; padding-right: 2%;">
                         <div class="profile-picture-comment">
-                            <img src="{{asset('storage/'.$photo)}}" alt="Profile Picture">
+                            <img src="{{asset('photos/photos/'.$photo)}}" alt="Profile Picture">
                         </div>
                         <div style="margin-right: 5%; background-color: white; width: 90%; border-radius: 10px;">
                             <textarea class="form-control" rows="2" wire:model="text_comment" style="border: none;" required></textarea>

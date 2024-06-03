@@ -219,24 +219,7 @@ class NewsUpdate extends Component
                 'email' => $this->email,
                 'govt' => $this->govt,
             ]);
-            $this->text = "";
-            $this->tags = "";
-            $this->title = "";
-            $this->client = "";
-            $this->lawfirm = "";
-            $this->method = "";
-            $this->did = "";
-            $this->schedule = "";
-            $this->geo= "";
-            $this->restriction= "";
-            $this->campaign_stat= "";
-            $this->tcpa= false;
-            $this->tf= false;
-            $this->blacklist= false;
-            $this->thatsthem= false;
-            $this->dupe= false;
-            $this->email= false;
-            $this->govt= false;
+            $this->clearInput();
             $v = Note::latest()->first();
 
             foreach ($this->link as $links){
@@ -298,6 +281,18 @@ class NewsUpdate extends Component
         $this->lawfirm = $rt->lawfirm;
         $this->image = $rt->image;
         $this->method = $rt->method;
+        $this->did = $rt->did;
+        $this->schedule = $rt->schedule;
+        $this->geo = $rt->geo;
+        $this->restriction = $rt->restriction;
+        $this->campaign_stat = $rt->campaign_stat;
+        $this->tcpa = $rt->tcpa;
+        $this->tf = $rt->tf;
+        $this->blacklist = $rt->blacklist;
+        $this->thatsthem = $rt->thatsthem;
+        $this->dupe = $rt->dupe;
+        $this->email = $rt->email;
+        $this->govt =$rt->govt;
         $this->link = Link::where('note_id',$id)->get();
     }
 
@@ -315,13 +310,7 @@ class NewsUpdate extends Component
                 $rt->image = $this->image;
 //                $rt->link = $this->link;
                 $rt->save();
-                $this->tags = "";
-                $this->text = "";
-                $this->title = "";
-                $this->client = "";
-                $this->lawfirm = "";
-                $this->method = "";
-//                $this->link = "";
+                $this->clearInput();
                 \App\Models\Logs::create([
                     'action' => "edit",
                     'user_id' => $this->user_id,
@@ -361,6 +350,27 @@ class NewsUpdate extends Component
             }
         }
 
+    }
+
+    public function clearInput(){
+        $this->tags = "";
+        $this->text = "";
+        $this->title = "";
+        $this->client = "";
+        $this->lawfirm = "";
+        $this->method = "";
+        $this->did = "";
+        $this->schedule = "";
+        $this->geo = "";
+        $this->restriction = "";
+        $this->campaign_stat = "active";
+        $this->tcpa = false;
+        $this->tf = false;
+        $this->blacklist = false;
+        $this->thatsthem = false;
+        $this->dupe = false;
+        $this->email = false;
+        $this->govt = false;
     }
 
     public function logout(){

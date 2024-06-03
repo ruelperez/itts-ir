@@ -1,8 +1,8 @@
-<div wire:ignore.self class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" id="add">
+<div wire:ignore.self class="modal" tabindex="-1" id="add">
     <div class="modal-dialog modal-xl">
         <div class="modal-content" >
             <div class="modal-header">
-                <h5 class="modal-title">Create notes</h5>
+                <h5 class="modal-title">Create</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form wire:submit.prevent="submit">
@@ -101,7 +101,7 @@
                                 <div style="margin-top: 10%">
                                     <div class="list-group">
                                         <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox" wire:model.live="tcpa" value="{{$tcpa}}">
+                                            <input class="form-check-input me-1" type="checkbox" wire:model="tcpa" value="{{$tcpa}}">
                                             TCPA/ LITIGATOR CHECK
                                         </label>
                                         <label class="list-group-item">

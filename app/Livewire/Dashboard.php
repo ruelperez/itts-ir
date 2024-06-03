@@ -244,16 +244,16 @@ class Dashboard extends Component
             $this->super_admin_Switch();
         }
         if ($field == "photo"){
-            $filename = Str::random(40) . '.' . $this->photo->getClientOriginalExtension();
 
-            // Save the photo directly to the public/photos directory
-            $this->photo->storeAs('photos', $filename, 'public_photos');
-//            $this->photo->store(path: 'public');
-//            $hashPhoto = $this->photo->hashName();
-            $user = User::find($this->user_id);
-            $user->photo = $filename;
-            $user->save();
-//            $com = Comment::find($this->user_id);
+//            $com = Comment$filename = Str::random(40) . '.' . $this->photo->getClientOriginalExtension();
+//
+//            // Save the photo directly to the public/photos directory
+//            $this->photo->storeAs('photos', $filename, 'public_photos');
+////            $this->photo->store(path: 'public');
+////            $hashPhoto = $this->photo->hashName();
+//            $user = User::find($this->user_id);
+//            $user->photo = $filename;
+//            $user->save();::find($this->user_id);
 //            if (isset($com)){
 //                $com->photo = $hashPhoto;
 //                $com->save();

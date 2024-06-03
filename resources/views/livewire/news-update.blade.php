@@ -49,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="content" wire:poll.keep-alive.5s>
+                <div style="margin-top: 8%;margin-left: 5%;width: 90%;height: 1000px;" wire:poll.keep-alive.5s>
                     @foreach($notes_all as $data)
                         <div style="width: 100%; background-color: white; padding-left: 3%; padding-right: 3%; padding-top: 1.5%; padding-bottom: 2%; margin-bottom: 3%;">
                             <div class="fw-light" style="display: flex;">

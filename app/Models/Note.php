@@ -33,5 +33,15 @@ class Note extends Model
         'govt',
     ];
 
+    protected $casts = [
+        'tcpa' => 'boolean',
+        'tf' => 'boolean',
+        'blacklist' => 'boolean',
+        'thatsthem' => 'boolean',
+        'dupe' => 'boolean',
+        'email' => 'boolean',
+        'govt' => 'boolean',
+    ];
+
     use HasFactory;
 }
