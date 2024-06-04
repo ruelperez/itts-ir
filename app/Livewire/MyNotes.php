@@ -7,6 +7,7 @@ use App\Models\Comment;
 use App\Models\CommentHeart;
 use App\Models\Dtr;
 use App\Models\DtrContent;
+use App\Models\FormLink;
 use App\Models\IsRegistration;
 use App\Models\Note;
 use App\Models\SuperadminShow;
@@ -24,7 +25,7 @@ class MyNotes extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $dtrData = [], $adminSwitch, $position, $superAdminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $ids, $title, $textlink, $dataLink = [], $dtrData = [], $adminSwitch, $position, $superAdminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -33,7 +34,46 @@ class MyNotes extends Component
         $this->position = auth()->user()->position;
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
+        $this->dataLink = FormLink::all();
         return view('livewire.my-notes')->title('Form link');
+    }
+
+    public function edit($id){
+        $this->ids = $id;
+       $mm = FormLink::find($id);
+       $this->title = $mm->title;
+       $this->textlink = $mm->textLink;
+    }
+
+    public function submit_edit(){
+        $mm = FormLink::find($this->ids);
+        try {
+            $mm->title = $this->title;
+            $mm->textLink = $this->textlink;
+            $mm->save();
+            $this->title = "";
+            $this->textlink = "";
+            session()->flash('goodEdit', "Successfully updated");
+        }catch (\Exception $e){
+            session()->flash('badEdit', "Failed to update");
+        }
+    }
+    public function delete($id){
+        FormLink::find($id)->delete();
+    }
+    public function submit(){
+        try {
+            FormLink::create([
+                'title' => $this->title,
+                'textLink' => $this->textlink,
+            ]);
+            $this->title = "";
+            $this->textlink = "";
+            session()->flash('good', "Successfully added");
+        }catch (\Exception $e){
+            session()->flash('bad', "Failed to add");
+        }
+
     }
 
     public function mount($name){

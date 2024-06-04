@@ -48,6 +48,20 @@ function hoverOutNotes(id){
     // yhg.css("padding-right", "60px");
 }
 
+function hoverLink(id){
+    var fwe = $('#myLink'+id);
+    var fwes = $('#myLinks'+id);
+    fwe.show();
+    fwes.show();
+}
+
+function hoverOutLink(id){
+    var fwe = $('#myLink'+id);
+    var fwes = $('#myLinks'+id);
+    fwe.hide();
+    fwes.hide();
+}
+
 
 $(document).ready(function() {
     var sn = $(".div101");

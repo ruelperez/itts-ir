@@ -14,7 +14,7 @@
                             <li class="list-group-item" style="padding: 2%;">
                                 <div style="display: flex;">
                                     <div class="profile-picture-logs">
-                                        <img src="{{asset('storage/'.$data->photo)}}" alt="Profile Picture">
+                                        <img src="{{asset('photos/photos/'.$data->photo)}}" alt="Profile Picture">
                                     </div>
                                     <div style="display: flex">
                                         <div>

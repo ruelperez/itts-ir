@@ -134,8 +134,7 @@ class NewsUpdate extends Component
 
     public function comment_reactor($id){
         $dat = [];
-        $rs = CommentHeart::where('comment_id', $id)
-            ->where('user_id',$this->user_id)->get();
+        $rs = CommentHeart::where('comment_id', $id)->get();
         foreach ($rs as $rss){
             $dat[]= User::find($rss->user_id);
         }
