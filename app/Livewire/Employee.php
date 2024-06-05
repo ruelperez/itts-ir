@@ -24,7 +24,7 @@ class Employee extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $is_submitted = false, $ng = 0, $is_create, $is_success = false, $employeeData = [], $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
+    public $registrationSwitch, $is_submitted = false, $branch = "bicol", $ng = 0, $is_create, $is_success = false, $employeeData = [], $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
             $fname, $mname, $lname, $mi, $suffix, $age, $phone_number, $dob, $gender_preference, $civil_status, $religion, $personal_email, $current_house, $current_street,
             $current_brgy, $current_city, $current_working_email, $same_current_permanent = false, $permanent_house, $permanent_street,
             $permanent_brgy, $permanent_city, $permanent_working_email, $sss, $philhealth, $tin, $hire_date, $yot, $designation, $department, $contact_number, $address, $relationship;
@@ -56,6 +56,7 @@ class Employee extends Component
         $jj = \App\Models\Employee::where('user_id',$this->user_id)->get();
         foreach ($jj as $gg) {
             $pp = \App\Models\Employee::find($gg->id);
+            $this->branch = $pp->branch;
             $this->fname = $pp->fname;
             $this->lname = $pp->lname;
             $this->mi = $pp->mi;
@@ -134,6 +135,7 @@ class Employee extends Component
                     'address' => $this->address,
                     'relationship' => $this->relationship,
                     'user_id' => $this->user_id,
+                    'branch' => $this->branch,
                 ]);
             }
             else{
@@ -162,10 +164,21 @@ class Employee extends Component
                     $pp->permanent_brgy = $this->permanent_brgy;
                     $pp->permanent_city = $this->permanent_city;
                     $pp->permanent_working_email = $this->permanent_working_email;
+                    $pp->sss = $this->sss;
+                    $pp->philhealth = $this->philhealth;
+                    $pp->tin = $this->tin;
+                    $pp->hire_date = $this->hire_date;
+                    $pp->yot = $this->yot;
+                    $pp->designation = $this->designation;
+                    $pp->department = $this->department;
+                    $pp->branch = $this->branch;
+                    $pp->contact_number = $this->contact_number;
+                    $pp->address = $this->address;
+                    $pp->relationship = $this->relationship;
                     $pp->save();
                 }
             }
-
+            $this->getInfo();
             $this->is_success = true;
             // Emit event to trigger modal
             $this->dispatch('formSubmitted');

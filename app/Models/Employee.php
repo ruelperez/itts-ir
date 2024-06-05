@@ -41,6 +41,7 @@ class Employee extends Model
         'address',
         'relationship',
         'user_id',
+        'branch',
 
     ];
 

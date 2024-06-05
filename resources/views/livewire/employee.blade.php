@@ -296,6 +296,17 @@
                                         <input type="text"  class="form-control" wire:model="department" title="{{ucwords($department)}}" required>
                                     </div>
                                 </div>
+                                <div class="col-2">
+                                    <div>
+                                        <label class="col-form-label">Branch</label>
+                                    </div>
+                                    <div>
+                                        <select class="form-select" aria-label="Default select example" wire:model="branch">
+                                            <option value="mindoro">Mindoro</option>
+                                            <option value="bicol">Bicol</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row g-2 align-items-center mt-4 mb-4">
                                 <div class="col-2">
