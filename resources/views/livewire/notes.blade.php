@@ -7,8 +7,9 @@
         <div style="width: 81%; margin-left: 19%;">
             <div class="container">
                 <div>
-                    <h5 style="margin-left: 2%; margin-top: 3%;">My Notes</h5>
+                    <h6 style="margin-left: 2%; margin-top: 3%;">MY NOTES</h6>
                 </div>
+                <hr>
                 <div style="display: flex; margin-top: 2%; width: 80%; margin-left: 10%; margin-bottom: 2%;">
                     <div>
                         <i class="fa-solid fa-circle-plus" style="font-size: 35px;cursor: pointer" data-bs-toggle="modal" data-bs-target="#addNotes"></i>

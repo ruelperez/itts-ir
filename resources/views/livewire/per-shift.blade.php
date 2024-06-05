@@ -6,7 +6,7 @@
         <div style="width: 81%; margin-left: 19%;">
             <div class="container">
                 <div>
-                    <h5 style="margin-left: 2%; margin-top: 3%;">DTR Per Shift</h5>
+                    <h6 style="margin-left: 2%; margin-top: 3%;">DTR PER SHIFT</h6>
                 </div>
                 <div style="margin-top: 2%; width: 80%; margin-left: 4%; display: flex">
                     <input type="text" class="form-control" placeholder="Year" wire:model.live="year" style="width: 15%;">
@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div style="margin-left: 4%; margin-top: 1%; width: 92%;">
-                    <table class="table">
+                    <table class="table table-hover">
                         <thead>
                         <tr>
                             <th scope="col">Fullname</th>

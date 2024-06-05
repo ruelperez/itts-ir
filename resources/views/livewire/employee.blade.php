@@ -11,11 +11,13 @@
             <div>
                 <div style="display: flex;" class="align-items-center">
                     <div class="w-50 ps-4 mt-4">
-                        <h5>Employee</h5>
+                        <h6>EMPLOYEE</h6>
                     </div>
-{{--                    <div class="w-50 mt-4 text-end pe-5">--}}
-{{--                        <button class="btn btn-primary w-25"><i class="fa-solid fa-arrows-to-circle me-2"></i> View Form</button>--}}
-{{--                    </div>--}}
+                    @if($position == "Super Admin")
+                        <div class="w-50 mt-4 text-end pe-5">
+                            <button class="btn btn-primary" style="width: 40%;" onclick="location.href = '/itts/16/staff-directory';"><i class="fa-solid fa-arrows-to-circle me-2" ></i>Staff Directory</button>
+                        </div>
+                    @endif
                 </div>
                 <hr>
                 <div>

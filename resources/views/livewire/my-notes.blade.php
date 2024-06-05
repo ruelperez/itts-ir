@@ -7,8 +7,9 @@
         <div style="width: 81%; margin-left: 19%;">
             <div class="container">
                 <div>
-                    <h5 style="margin-left: 2%; margin-top: 3%;">Form link</h5>
+                    <h6 style="margin-left: 2%; margin-top: 3%;">FORM LINK</h6>
                 </div>
+                <hr>
                 <div style="margin-left: 3%; margin-top: 1%">
                     <i class="fa-solid fa-circle-plus" style="font-size: 30px;cursor: pointer" data-bs-toggle="modal" data-bs-target="#addForm"></i>
                 </div>

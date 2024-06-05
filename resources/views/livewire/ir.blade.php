@@ -5,7 +5,7 @@
         <div style="width: 81%; margin-left: 19%;">
             <div class="container">
                 <div>
-                    <h4 style="margin-left: 2%; margin-top: 3%;">I.R</h4>
+                    <h6 style="margin-left: 2%; margin-top: 3%;">I.R</h6>
                 </div>
             </div>
         </div>

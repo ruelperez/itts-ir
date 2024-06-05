@@ -21,7 +21,7 @@
                 <div style="position: fixed;top: 17%; left: 19%; width: 85%; z-index: 1000; background-color: #41464b; padding-left: 3%; padding-bottom: 1%;">
                     <div style="display: flex; margin-top: 2%;">
                         <div>
-                            <h5 style="color: white">{{strtoupper($campaign_name)}}</h5>
+                            <h6 style="color: white">{{strtoupper($campaign_name)}}</h6>
                         </div>
                         @if($position != "Agent")
                             <div style="margin-left: 5%;  margin-right: 1%;">

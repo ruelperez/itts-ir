@@ -5,7 +5,7 @@
         <div style="width: 81%; margin-left: 19%;">
             <div class="container">
                 <div>
-                    <h4 style="margin-top: 3%; margin-left: 2%;">Age checker</h4>
+                    <h6 style="margin-top: 3%; margin-left: 2%;">AGE CHECKER</h6>
                 </div>
                 <div style="margin-left: 3%; margin-top: 2%; background-color: #F5F5F5; border-radius: 2%;">
                     <form wire:submit.prevent="submit">

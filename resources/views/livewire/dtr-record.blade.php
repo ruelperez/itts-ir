@@ -6,7 +6,7 @@
         <div style="width: 81%; margin-left: 19%;">
             <div class="container">
                 <div>
-                    <h5 style="margin-left: 2%; margin-top: 3%;">DTR Record</h5>
+                    <h6 style="margin-left: 2%; margin-top: 3%;">DTR RECORD</h6>
                 </div>
                 <div style="margin-left: 4%; margin-top: 2%;">
                     <h6>{{$dtrFullName}}</h6>
@@ -52,7 +52,7 @@
                     <div style="margin-left: auto; width: 120px; margin-bottom: 1%; cursor: pointer" onclick="location.href = '/itts/save-eod/{{$otherUserID}}/{{$week}}';">
                         <i class="fa-solid fa-file-pdf" style="color: #0c63e4; font-size: 22px; margin-right: 1%;"></i> Save as OED
                     </div>
-                    <table class="table">
+                    <table class="table table-hover">
                         <thead>
                         <tr>
                             <th scope="col">Date</th>

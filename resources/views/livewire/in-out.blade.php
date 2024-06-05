@@ -8,7 +8,7 @@
         <div style="width: 81%; margin-left: 19%;">
             <div class="container">
                 <div>
-                    <h5 style="margin-left: 2%; margin-top: 3%;">DTR</h5>
+                    <h6 style="margin-left: 2%; margin-top: 3%;">DTR</h6>
                     @if($position == "Super Admin")
                         <div style="display: flex; padding-right: 3%; padding-left: 3%;">
                             <div style="margin-left: auto; margin-right: 1%;">

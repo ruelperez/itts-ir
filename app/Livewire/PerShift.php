@@ -24,7 +24,7 @@ class PerShift extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $task, $userID = [], $role = "all", $year = "2024", $month="05", $day = "13", $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $ids, $task, $userID = [], $role = "all", $year = "2024", $month="05", $day = "13", $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
 
     public function render()
@@ -48,6 +48,7 @@ class PerShift extends Component
     }
 
     public function clickTask($id){
+        $this->ids = $id;
         $data = DtrContent::find($id);
         $this->task = $data->task;
     }
@@ -254,6 +255,11 @@ class PerShift extends Component
     }
 
     public function updated($field){
+        if ($field == "task"){
+            $data = DtrContent::find($this->ids);
+            $data->task = $this->task;
+            $data->save();
+        }
         if ($field == "registrationSwitch"){
             $this->regSwitch();
         }

@@ -5,7 +5,7 @@
         <div style="width: 81%; margin-left: 19%;">
             <div class="container">
                 <div>
-                    <h5 style="margin-left: 2%; margin-top: 3%;">Announcement   <i class="fa-solid fa-bullhorn" style="color: darkblue"></i></h5>
+                    <h6 style="margin-left: 2%; margin-top: 3%;">ANNOUNCEMENT   <i class="fa-solid fa-bullhorn" style="color: darkblue"></i></h6>
                 </div>
             </div>
         </div>

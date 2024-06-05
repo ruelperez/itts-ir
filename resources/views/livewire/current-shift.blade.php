@@ -6,7 +6,7 @@
         <div style="width: 81%; margin-left: 19%;">
             <div class="container">
                 <div>
-                    <h5 style="margin-left: 2%; margin-top: 3%;">DTR Current Shift</h5>
+                    <h6 style="margin-left: 2%; margin-top: 3%;">DTR CURRENT SHIFT</h6>
                 </div>
                 <div style="display: flex; width: 92%; margin-top: 2%; margin-left: 4%;">
                     <div style="width: 10%;">
@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div style="margin-left: 4%; margin-top: 1%; width: 92%;">
-                    <table class="table">
+                    <table class="table table-hover">
                         <thead>
                         <tr>
                             <th scope="col">Fullname</th>

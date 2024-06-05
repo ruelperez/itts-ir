@@ -5,7 +5,7 @@
         <div style="width: 81%; margin-left: 19%;">
             <div class="container">
                 <div>
-                    <h5 style="margin-left: 2%; margin-top: 3%;">Activity Logs</h5>
+                    <h6 style="margin-left: 2%; margin-top: 3%;">ACTIVITY LOGS</h6>
                 </div>
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" wire:model.live="search" style="width: 30%; margin-left: 10%; margin-bottom: 1%; margin-top: 2%;">
                 <div style="width: 80%; margin-left: 10%;">

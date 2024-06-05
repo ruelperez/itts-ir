@@ -5,7 +5,7 @@
         <div style="width: 81%; margin-left: 19%;">
             <div class="container">
                 <div>
-                    <h5 style="margin-left: 2%; margin-top: 3%;">DTR Record</h5>
+                    <h6 style="margin-left: 2%; margin-top: 3%;">DTR RECORD</h6>
                 </div>
                 <div style="display: flex; width: 90%;  margin-left: 10%; margin-bottom: 1%; margin-top: 2%;">
                     <div style="width: 30%;">
