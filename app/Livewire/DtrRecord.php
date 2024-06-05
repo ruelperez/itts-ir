@@ -24,7 +24,7 @@ class DtrRecord extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $task, $dtrFullName, $week = "1", $dtrData = [], $year = "2024", $month = "05", $position, $otherUserID, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $ids, $task, $dtrFullName, $week = "1", $dtrData = [], $year = "2024", $month = "05", $position, $otherUserID, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -43,6 +43,7 @@ class DtrRecord extends Component
     }
 
     public function clickTask($id){
+        $this->ids = $id;
         $data = DtrContent::find($id);
         $this->task = $data->task;
     }
@@ -249,6 +250,11 @@ class DtrRecord extends Component
     }
 
     public function updated($field){
+        if ($field == "task"){
+            $data = DtrContent::find($this->ids);
+            $data->task = $this->task;
+            $data->save();
+        }
         if ($field == "registrationSwitch"){
             $this->regSwitch();
         }
