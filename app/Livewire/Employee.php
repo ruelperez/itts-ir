@@ -24,7 +24,10 @@ class Employee extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $employeeData = [], $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $employeeData = [], $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
+            $fname, $mname, $lname, $mi, $suffix, $age, $phone_number, $dob, $gender_preference, $civil_status, $religion, $personal_email, $current_house, $current_street,
+            $current_brgy, $current_city, $current_working_email, $same_current_permanent = false, $permanent_house, $permanent_street,
+            $permanent_brgy, $permanent_city, $permanent_working_email, $sss, $philhealth, $tin, $hire_date, $yot, $designation, $department, $contact_number, $address, $relationship;
 
     public function render()
     {
@@ -39,6 +42,13 @@ class Employee extends Component
     }
     public function mount($name){
         $this->webName = $name;
+    }
+
+    public function submitForm()
+    {
+
+        // Emit event to trigger modal
+        $this->dispatch('formSubmitted');
     }
 
     public function logout(){
@@ -244,6 +254,9 @@ class Employee extends Component
         }
         if ($field == "adminSwitch"){
             $this->admin_Switch();
+        }
+        if ($field == "same_current_permanent"){
+            dd($this->same_current_permanent);
         }
         if ($field == "superAdminSwitch"){
             $this->super_admin_Switch();
