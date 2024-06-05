@@ -5,8 +5,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
             </div>
             <div class="modal-body" style="text-align: center">
-                <i class="fa fa-check-circle" style="color: green; font-size: 35px"></i>
-                <p class="mt-3">Submitted successfully!</p>
+                @if($is_success == true)
+                    <i class="fa fa-check-circle" style="color: green; font-size: 35px"></i>
+                    <p class="mt-3">Successfully Saved!</p>
+                @else
+                    <i class="fa-solid fa-circle-exclamation" style="color: red; font-size: 35px"></i>
+                    <p class="mt-3">Failed to save!</p>
+                @endif
             </div>
         </div>
     </div>

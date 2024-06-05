@@ -40,6 +40,7 @@ class Employee extends Model
         'contact_number',
         'address',
         'relationship',
+        'user_id',
 
     ];
 
