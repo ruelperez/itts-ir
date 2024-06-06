@@ -87,10 +87,10 @@
                                 </div>
                                 <div class="col-2">
                                     <div>
-                                        <label class="col-form-label">Date of Birth</label>
+                                        <label class="col-form-label">Date of Birth (mm/dd/yyyy)</label>
                                     </div>
                                     <div >
-                                        <input type="text"  class="form-control" wire:model="dob" title="{{ucwords($dob)}}" required>
+                                        <input type="text" id="date-input" placeholder="mm/dd/yyyy"  class="form-control" wire:model="dob" title="{{ucwords($dob)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -222,14 +222,6 @@
                                         <input type="text"  class="form-control" wire:model="permanent_city" title="{{ucwords($permanent_city)}}" required>
                                     </div>
                                 </div>
-                                <div class="col-2">
-                                    <div>
-                                        <label class="col-form-label">Working Email</label>
-                                    </div>
-                                    <div>
-                                        <input type="text"  class="form-control" wire:model="permanent_working_email" title="{{ucwords($permanent_working_email)}}" required>
-                                    </div>
-                                </div>
                             </div>
                             <div class="row g-3 align-items-center mt-4">
                                 <div class="col-2">
@@ -261,10 +253,10 @@
                                 </div>
                                 <div class="col-2">
                                     <div>
-                                        <label class="col-form-label">Hire Date</label>
+                                        <label class="col-form-label">Hire Date (mm/dd/yyyy)</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="hire_date" title="{{ucwords($hire_date)}}" required>
+                                        <input type="text" id="hire-date" class="form-control" wire:model="hire_date" title="{{ucwords($hire_date)}}" placeholder="mm/dd/yyyy" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -314,6 +306,14 @@
                                 <div class="col-2">
                                     <div>
                                         <label class="col-form-label">Emergency Contact :</label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div>
+                                        <label class="col-form-label">Fullname</label>
+                                    </div>
+                                    <div>
+                                        <input type="text"  class="form-control" wire:model="full_name" title="{{ucwords($contact_number)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">

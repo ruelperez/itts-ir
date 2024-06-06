@@ -29,7 +29,6 @@ class Employee extends Model
         'permanent_street',
         'permanent_brgy',
         'permanent_city',
-        'permanent_working_email',
         'sss',
         'philhealth',
         'tin',
@@ -42,6 +41,7 @@ class Employee extends Model
         'relationship',
         'user_id',
         'branch',
+        'fullname'
 
     ];
 

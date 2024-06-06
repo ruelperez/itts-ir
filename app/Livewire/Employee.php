@@ -24,10 +24,10 @@ class Employee extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $is_submitted = false, $branch = "bicol", $ng = 0, $is_create, $is_success = false, $employeeData = [], $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
+    public $registrationSwitch, $full_name, $is_submitted = false, $branch = "bicol", $ng = 0, $is_create, $is_success = false, $employeeData = [], $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
             $fname, $mname, $lname, $mi, $suffix, $age, $phone_number, $dob, $gender_preference, $civil_status, $religion, $personal_email, $current_house, $current_street,
             $current_brgy, $current_city, $current_working_email, $same_current_permanent = false, $permanent_house, $permanent_street,
-            $permanent_brgy, $permanent_city, $permanent_working_email, $sss, $philhealth, $tin, $hire_date, $yot, $designation, $department, $contact_number, $address, $relationship;
+            $permanent_brgy, $permanent_city, $sss, $philhealth, $tin, $hire_date, $yot, $designation, $department, $contact_number, $address, $relationship;
 
     public function render()
     {
@@ -78,7 +78,6 @@ class Employee extends Component
             $this->permanent_street = $pp->permanent_street;
             $this->permanent_brgy = $pp->permanent_brgy;
             $this->permanent_city = $pp->permanent_city;
-            $this->permanent_working_email = $pp->permanent_working_email;
             $this->sss = $pp->sss;
             $this->philhealth = $pp->philhealth;
             $this->tin = $pp->tin;
@@ -89,6 +88,7 @@ class Employee extends Component
             $this->contact_number = $pp->contact_number;
             $this->address = $pp->address;
             $this->relationship = $pp->relationship;
+            $this->full_name = $pp->fullname;
         }
     }
     public function mount($name){
@@ -123,7 +123,6 @@ class Employee extends Component
                     'permanent_street' => $this->permanent_street,
                     'permanent_brgy' => $this->permanent_brgy,
                     'permanent_city' => $this->permanent_city,
-                    'permanent_working_email' => $this->permanent_working_email,
                     'sss' => $this->sss,
                     'philhealth' => $this->philhealth,
                     'tin' => $this->tin,
@@ -136,6 +135,7 @@ class Employee extends Component
                     'relationship' => $this->relationship,
                     'user_id' => $this->user_id,
                     'branch' => $this->branch,
+                    'fullname' => $this->full_name,
                 ]);
             }
             else{
@@ -163,7 +163,6 @@ class Employee extends Component
                     $pp->permanent_street = $this->permanent_street;
                     $pp->permanent_brgy = $this->permanent_brgy;
                     $pp->permanent_city = $this->permanent_city;
-                    $pp->permanent_working_email = $this->permanent_working_email;
                     $pp->sss = $this->sss;
                     $pp->philhealth = $this->philhealth;
                     $pp->tin = $this->tin;
@@ -175,6 +174,7 @@ class Employee extends Component
                     $pp->contact_number = $this->contact_number;
                     $pp->address = $this->address;
                     $pp->relationship = $this->relationship;
+                    $pp->fullname = $this->full_name;
                     $pp->save();
                 }
             }
@@ -403,14 +403,12 @@ class Employee extends Component
                 $this->permanent_street = $this->current_street;
                 $this->permanent_brgy = $this->current_brgy;
                 $this->permanent_city = $this->current_city;
-                $this->permanent_working_email = $this->current_working_email;
             }
             else{
                 $this->permanent_house = "";
                 $this->permanent_street = "";
                 $this->permanent_brgy = "";
                 $this->permanent_city = "";
-                $this->permanent_working_email = "";
             }
         }
         if ($field == "superAdminSwitch"){
