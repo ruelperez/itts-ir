@@ -38,6 +38,11 @@ class Dashboard extends Component
     }
     public function mount($name){
         $this->webName = $name;
+        $usrId = auth()->user()->id;
+        $sd = \App\Models\Employee::where('user_id',$usrId)->get();
+        if (count($sd) < 1){
+            return redirect('/itts/15/employee');
+        }
     }
     public function logout(){
         Auth::logout();

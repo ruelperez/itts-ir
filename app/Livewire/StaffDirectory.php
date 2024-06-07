@@ -24,7 +24,7 @@ class StaffDirectory extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $stat, $checkBox = [], $dtrData = [], $staffData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -33,6 +33,7 @@ class StaffDirectory extends Component
         $this->position = auth()->user()->position;
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
+        $this->staffData = \App\Models\Employee::all();
         return view('livewire.staff-directory');
     }
     public function mount(){
@@ -240,6 +241,7 @@ class StaffDirectory extends Component
         if ($field == "registrationSwitch") {
             $this->regSwitch();
         }
+
         if ($field == "adminSwitch") {
             $this->admin_Switch();
         }

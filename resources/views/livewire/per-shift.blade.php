@@ -8,7 +8,7 @@
                 <div>
                     <h6 style="margin-left: 2%; margin-top: 3%;">DTR PER SHIFT</h6>
                 </div>
-                <div style="margin-top: 2%; width: 80%; margin-left: 4%; display: flex">
+                <div style="margin-top: 2%; width: 80%; margin-left: 4%; display: flex;">
                     <input type="text" class="form-control" placeholder="Year" wire:model.live="year" style="width: 15%;">
                     {{--                    <select class="form-select" aria-label="Default select example" wire:model.live="month" style="width: 15%;">--}}
                     {{--                        <option value="Jan">January</option>--}}
@@ -70,6 +70,7 @@
                             <th scope="col">Time in</th>
                             <th scope="col">Time out</th>
                             <th scope="col">Total working hour</th>
+                            <th scope="col">Branch</th>
                             @if($role == "admin")
                                 <th scope="col">Task</th>
                             @endif

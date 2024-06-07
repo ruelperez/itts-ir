@@ -25,6 +25,17 @@ window.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+
+function hoverStaff(id){
+    var fwe = $('#idStaff'+id);
+    fwe.show();
+}
+
+function hoverOutStaff(id){
+    var fwe = $('#idStaff'+id);
+    fwe.hide();
+}
+
 function clickEllipsis(){
     var an = $(".div100");
     $(".div100").show();

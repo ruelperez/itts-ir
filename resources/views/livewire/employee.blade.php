@@ -2,6 +2,7 @@
     @include('modal.click-settings')
     @include('modal.news-update.show-photo')
     @include('modal.employee.loading')
+    @include('modal.employee.disclick')
     <div style="display: flex; width: 100%; margin-top: 135px; ">
         <div style="width: 19%; background-color: #0077b6; position: fixed; top: 125px; z-index: 1000; height: 100%;">
             @include('components.layouts.profile')
@@ -26,13 +27,14 @@
                     </div>
                     <form wire:submit.prevent="submitForm" class="px-5 pt-1 pb-5" >
                         <fieldset @if($is_success == true) disabled @endif wire:loading.remove>
+                            <div class="mb-2"><i>Put n/a if not applicable</i></div>
                             <div class="row g-3 align-items-center">
                                 <div class="col-2">
                                     <div>
                                         <label class="col-form-label">First Name</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="fname" title="{{ucwords($fname)}}" >
+                                        <input type="text"  class="form-control" wire:model="fname" title="{{ucwords($fname)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -40,7 +42,7 @@
                                         <label class="col-form-label">Middle Name</label>
                                     </div>
                                     <div >
-                                        <input type="text"  class="form-control" wire:model="mname" title="{{ucwords($mname)}}" >
+                                        <input type="text"  class="form-control" wire:model="mname" title="{{ucwords($mname)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -48,7 +50,7 @@
                                         <label class="col-form-label">M.I</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="mi" title="{{ucwords($mi)}}" >
+                                        <input type="text"  class="form-control" wire:model="mi" title="{{ucwords($mi)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -56,7 +58,7 @@
                                         <label class="col-form-label">Last Name</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="lname" title="{{ucwords($lname)}}" >
+                                        <input type="text"  class="form-control" wire:model="lname" title="{{ucwords($lname)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -64,7 +66,7 @@
                                         <label class="col-form-label">Suffix</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="suffix" title="{{ucwords($suffix)}}" >
+                                        <input type="text"  class="form-control" wire:model="suffix" title="{{ucwords($suffix)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -72,7 +74,7 @@
                                         <label class="col-form-label">Age</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="age" title="{{ucwords($age)}}" >
+                                        <input type="text"  class="form-control" wire:model="age" title="{{ucwords($age)}}" required>
                                     </div>
                                 </div>
                             </div>
@@ -122,7 +124,7 @@
                                         <label class="col-form-label">Personal Email</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="personal_email" title="{{ucwords($personal_email)}}" required>
+                                        <input type="text"  class="form-control" wire:model="personal_email" title="{{$personal_email}}" required>
                                     </div>
                                 </div>
                             </div>

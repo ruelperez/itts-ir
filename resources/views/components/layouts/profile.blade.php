@@ -17,7 +17,7 @@
 {{--            <i class="fa-solid fa-user" style="font-size: 100px; color: #DCDCDC	"></i>--}}
         </div>
         <h5 style="color: white;">@if($position == "Super Admin") SUPER ADMIN @elseif($position == "Admin") ADMIN @else AGENT @endif</h5>
-        <p style="color: white">{{ucwords($fullname)}}<br><small>ITTS-00{{$user_id}}</small></p>
+        <p class="text-white">{{ucwords($fullname)}}<br><small class="user-select-all">ITTS-00{{$user_id}}</small></p>
     </div>
     <div class="div100" style="display: none; width: 70%; padding: 5px 12px; background-color: #0d1321;  border: solid black 3px;border-radius: 12px;  position: relative; margin-left: 10%; top: 52px;
                     z-index: 2; /* Make sure this is lower than the z-index of the covering div */
