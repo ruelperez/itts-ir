@@ -137,6 +137,9 @@ class Employee extends Component
                     'branch' => $this->branch,
                     'fullname' => $this->full_name,
                 ]);
+                $ff = User::find($this->user_id);
+                $ff->branch = $this->branch;
+                $ff->save();
             }
             else{
                 $jj = \App\Models\Employee::where('user_id',$this->user_id)->get();
@@ -177,6 +180,9 @@ class Employee extends Component
                     $pp->fullname = $this->full_name;
                     $pp->save();
                 }
+                $ff = User::find($this->user_id);
+                $ff->branch = $this->branch;
+                $ff->save();
             }
             if ($this->is_create == true){
                 return redirect('/');
