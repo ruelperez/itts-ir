@@ -37,7 +37,13 @@ class StaffDirectory extends Component
         return view('livewire.staff-directory');
     }
     public function mount(){
+        $pst = auth()->user()->position;
+        if ($pst == "Super Admin"){
 
+        }
+        else{
+            return redirect('/');
+        }
     }
     public function logout(){
         Auth::logout();

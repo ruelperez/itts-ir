@@ -54,6 +54,13 @@ class PerShift extends Component
     }
 
     public function mount($name){
+        $pst = auth()->user()->position;
+        if ($pst == "Super Admin"){
+
+        }
+        else{
+            return redirect('/');
+        }
         $this->webName = $name;
     }
 

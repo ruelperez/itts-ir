@@ -77,6 +77,10 @@ class MyNotes extends Component
     }
 
     public function mount($name){
+        $pst = auth()->user()->position;
+        if ($pst == "Agent"){
+            return redirect('/');
+        }
         $this->webName = $name;
     }
 

@@ -47,6 +47,13 @@ class DtrName extends Component
         return redirect()->to('itts/10/dtr-all-record/'.$userids);
     }
     public function mount($name){
+        $pst = auth()->user()->position;
+        if ($pst == "Super Admin"){
+
+        }
+        else{
+            return redirect('/');
+        }
         $this->webName = $name;
     }
 
