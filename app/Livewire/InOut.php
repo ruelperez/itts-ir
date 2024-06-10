@@ -177,6 +177,7 @@ class InOut extends Component
                     'week' => $this->weekNumber,
                     'photo' => $bax->photo,
                     'task' => $bax->task,
+                    'branch' => $bax->branch,
                 ]);
             }
             foreach ($bas as $bax){
