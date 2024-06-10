@@ -77,6 +77,15 @@ class Dashboard extends Component
 //
 //        dd('save');
 //    }
+
+//    public function baam(){
+//        $kk = \App\Models\Employee::all();
+//        foreach ($kk as $hh){
+//            $ii = \App\Models\Employee::find($hh->id);
+//            $ii->id_user = "ITTS-00".$hh->id;
+//            $ii->save();
+//        }
+//    }
     public function logout(){
         Auth::logout();
         return redirect()->to('/login');

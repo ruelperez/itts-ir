@@ -1,7 +1,7 @@
 <div>
     @include('modal.click-settings')
     @include('modal.news-update.show-photo')
-    <div style="display: flex; width: 100%; margin-top: 135px;">
+    <div style="display: flex; width: 100%; margin-top: 105px;">
         <div style="width: 81%; margin-left: 19%;">
             <div class="container">
                 <div>

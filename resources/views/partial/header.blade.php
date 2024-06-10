@@ -1,10 +1,10 @@
-<div style="background-color: #0d1321; padding-top: 1.5%; padding-bottom: 1.5%; padding-right: 5%; position: fixed;top: 0;left: 0;width: 100%;  z-index: 1000;">
+<div class="fixed-top" style="background-color: #0d1321; padding-top: 18px; padding-bottom: 18px; padding-right: 50px;width: 100%;  z-index: 1000;">
     <div style="display: flex; ">
         <div style="width: 50%; margin-left: 6%;">
-            <img src="{{asset('photo/logo.jpg')}}" width="90"> <b style="color: white; font-size: 19px; margin-left: 2%;">IND. Teleoutsource Telemarketing Services.</b>
+            <img src="{{asset('photo/logo.jpg')}}" width="80"> <b style="color: white; font-size: 17px; margin-left: 2%;">IND. Teleoutsource Telemarketing Services.</b>
         </div>
         <div style="width: 50%; text-align: right; padding-right: 3%; padding-top: 25px;">
-            <h4 style="color: white">Knowledge Based Tool</h4>
+            <h4 style="color: white; font-size: 18px;">Knowledge Based Tool</h4>
         </div>
 {{--        <div style="width: 50%; text-align: right; padding-right: 3%; padding-top: 25px;">--}}
 {{--            <livewire:clock />--}}

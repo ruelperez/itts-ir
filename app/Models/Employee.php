@@ -41,8 +41,14 @@ class Employee extends Model
         'relationship',
         'user_id',
         'branch',
-        'fullname'
+        'fullname',
+        'status',
+        'id_user',
 
+    ];
+
+    protected $casts = [
+        'status' => 'boolean',
     ];
 
     use HasFactory;

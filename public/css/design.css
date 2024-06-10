@@ -113,8 +113,8 @@
 
 .navig div{
     color: white;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
     cursor: pointer;
 }
 .navig div:hover {

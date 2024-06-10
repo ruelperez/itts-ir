@@ -1,4 +1,6 @@
 <div>
+    @include('components.layouts.profile')
+    @include('components.layouts.navigation')
     @include('modal.click-settings')
     @include('modal.news-update.show-photo')
     @include('modal.news-update.add')
@@ -8,17 +10,13 @@
     @include('modal.news-update.comment')
     @include('modal.news-update.comment_reactor')
     @include('modal.news-update.edit_comment')
-    <div style="display: flex; width: 100%; margin-top: 135px;">
-        <div style="width: 19%; background-color: #0077b6; position: fixed;top: 125px; left: 0; z-index: 1000; height: 100%; ">
-            @include('components.layouts.profile')
-            @include('components.layouts.navigation')
-        </div>
+    <div style="display: flex; width: 100%; margin-top: 105px;">
 {{--        <div wire:poll>--}}
 {{--            Current time: {{ now() }}--}}
 {{--        </div>--}}
         <div style="width: 81%; margin-left: 19%;">
             <div>
-                <div style="position: fixed;top: 17%; left: 19%; width: 85%; z-index: 1000; background-color: #41464b; padding-left: 3%; padding-bottom: 1%;">
+                <div style="position: fixed;top: 15%; left: 19%; width: 85%; z-index: 1000; background-color: #41464b; padding-left: 3%; padding-bottom: 1%;">
                     <div style="display: flex; margin-top: 2%;">
                         <div>
                             <h6 style="color: white">{{strtoupper($campaign_name)}}</h6>
@@ -45,6 +43,8 @@
                                 <option value="CGX">CGX</option>
                                 <option value="ACA">ACA</option>
                                 <option value="NEC">NEC</option>
+                                <option value="NEURO">NEURO</option>
+                                <option value="IMMUNO">IMMUNO</option>
                             </select>
                         </div>
                     </div>

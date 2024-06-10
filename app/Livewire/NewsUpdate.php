@@ -311,14 +311,6 @@ class NewsUpdate extends Component
             $this->link[] = ['title' => $ln->title, 'textLink' => $ln->link];
         }
 
-//        unset($this->link[$index]);
-//        $this->link = array_values($this->link); // Re-index the array
-//
-//        $this->link[] = ['title' => '', 'textLink' => ''];
-//
-//        $link = [
-//            ['title' => '', 'textLink' => ''],
-//        ],
     }
 
     public function submit_edit(){

@@ -24,7 +24,7 @@ class StaffDirectory extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $stat, $checkBox = [], $dtrData = [], $staffData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $stat = [], $checkBox = [], $search, $dtrData = [], $staffData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -33,7 +33,52 @@ class StaffDirectory extends Component
         $this->position = auth()->user()->position;
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
-        $this->staffData = \App\Models\Employee::all();
+        if ($this->search != ""){
+            $this->staffData = \App\Models\Employee::where('fname','LIKE', '%'.$this->search.'%')
+                ->orWhere('lname', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('mi', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('mname', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('suffix', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('age', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('phone_number', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('dob', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('gender_preference', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('civil_status', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('religion', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('personal_email', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('current_house', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('current_street', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('current_brgy', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('current_city', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('current_working_email', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('permanent_house', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('permanent_street', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('permanent_brgy', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('permanent_city', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('sss', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('philhealth', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('tin', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('hire_date', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('yot', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('designation', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('department', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('contact_number', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('address', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('relationship', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('branch', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('fullname', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('id_user', 'LIKE', '%'.$this->search.'%')
+                ->get();
+            foreach ($this->staffData as $index => $staff){
+                $this->stat[$index] = $staff->status;
+            }
+        }
+        else{
+            $this->staffData = \App\Models\Employee::all();
+            foreach ($this->staffData as $index => $staff){
+                $this->stat[$index] = $staff->status;
+            }
+        }
         return view('livewire.staff-directory');
     }
     public function mount(){
@@ -242,12 +287,30 @@ class StaffDirectory extends Component
         }
     }
 
+    public function status($indexNum,$id){
+        $jk = \App\Models\Employee::find($id);
+        $jk->status = $this->stat[$indexNum];
+        $jk->save();
+        if($this->stat[$indexNum] == true){
+            $u = "active";
+        }
+        else{
+            $u = "inactive";
+        }
+
+        \App\Models\Logs::create([
+            'action' => "set ".ucfirst($jk->fname).' '.ucfirst($jk->lname).' to '.$u,
+            'user_id' => $this->user_id,
+            'photo' => $this->photo,
+            'fullname' => $this->fullname,
+        ]);
+    }
+
     public function updated($field)
     {
         if ($field == "registrationSwitch") {
             $this->regSwitch();
         }
-
         if ($field == "adminSwitch") {
             $this->admin_Switch();
         }
