@@ -7,6 +7,7 @@
                 <div>
                     <h6 style="margin-left: 2%; margin-top: 3%;">ANNOUNCEMENT   <i class="fa-solid fa-bullhorn" style="color: darkblue"></i></h6>
                 </div>
+{{--                <button wire:click="boom">clickIT</button>--}}
             </div>
         </div>
         <div style="width: 19%; background-color: #0077b6; position: fixed;top: 125px; left: 0; z-index: 1000; height: 100%;">

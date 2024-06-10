@@ -10,20 +10,6 @@
                 </div>
                 <div style="margin-top: 2%; width: 80%; margin-left: 4%; display: flex;">
                     <input type="text" class="form-control" placeholder="Year" wire:model.live="year" style="width: 15%;">
-                    {{--                    <select class="form-select" aria-label="Default select example" wire:model.live="month" style="width: 15%;">--}}
-                    {{--                        <option value="Jan">January</option>--}}
-                    {{--                        <option value="Feb">February</option>--}}
-                    {{--                        <option value="Mar">March</option>--}}
-                    {{--                        <option value="Apr">April</option>--}}
-                    {{--                        <option value="May">May</option>--}}
-                    {{--                        <option value="Jun">June</option>--}}
-                    {{--                        <option value="Jul">July</option>--}}
-                    {{--                        <option value="Aug">August</option>--}}
-                    {{--                        <option value="Sept">September</option>--}}
-                    {{--                        <option value="Oct">October</option>--}}
-                    {{--                        <option value="Nov">November</option>--}}
-                    {{--                        <option value="Dec">December</option>--}}
-                    {{--                    </select>--}}
                     <select class="form-select" aria-label="Default select example" wire:model.live="month" style="width: 15%; margin-left: 1%;">
                         <option value="01">January</option>
                         <option value="02">February</option>
@@ -98,9 +84,9 @@
                                             @endphp
                                             {{$result}}
                                         </td>
-                                        {{--                                    <td>--}}
-                                        {{--                                        <i class="fa-solid fa-list-check" style="margin-right: 3%; cursor: pointer" data-bs-toggle="modal" data-bs-target="#taskRecord" wire:click="clickTask({{$data->id}})"></i>--}}
-                                        {{--                                    </td>--}}
+                                        <td>
+                                           {{ucfirst($data->branch)}}
+                                        </td>
                                     </tr>
                                 @endif
                             @elseif($role == "agent")
@@ -124,9 +110,9 @@
                                                     @endphp
                                                     {{$result}}
                                                 </td>
-                                                {{--                                    <td>--}}
-                                                {{--                                        <i class="fa-solid fa-list-check" style="margin-right: 3%; cursor: pointer" data-bs-toggle="modal" data-bs-target="#taskRecord" wire:click="clickTask({{$data->id}})"></i>--}}
-                                                {{--                                    </td>--}}
+                                                <td>
+                                                    {{ucfirst($data->branch)}}
+                                                </td>
                                             </tr>
                                         @endif
                                     @endif
@@ -153,6 +139,9 @@
                                                     {{$result}}
                                                 </td>
                                                 <td>
+                                                    {{ucfirst($data->branch)}}
+                                                </td>
+                                                <td>
                                                     <i class="fa-solid fa-list-check" style="margin-right: 3%; cursor: pointer" data-bs-toggle="modal" data-bs-target="#taskRecord" wire:click="clickTask({{$data->id}})"></i>
                                                 </td>
                                             </tr>
@@ -160,7 +149,6 @@
                                     @endif
                                 @endforeach
                             @endif
-
                         @endforeach
                         </tbody>
                     </table>

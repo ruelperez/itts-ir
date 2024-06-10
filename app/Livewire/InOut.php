@@ -26,7 +26,7 @@ class InOut extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $timeClick1 = 0, $timeClick2 = 0, $timeSched = [], $selectedMinute2 = "00", $selectedHour2 = "00", $selectedHour = "00", $selectedMinute = "00", $selectedPeriod = "am", $selectedPeriod2 = "am", $permanent_id, $dtrData = [], $dtrAll = [], $task, $position, $superAdminSwitch, $weekNumber = "1", $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $branch, $timeClick1 = 0, $timeClick2 = 0, $timeSched = [], $selectedMinute2 = "00", $selectedHour2 = "00", $selectedHour = "00", $selectedMinute = "00", $selectedPeriod = "am", $selectedPeriod2 = "am", $permanent_id, $dtrData = [], $dtrAll = [], $task, $position, $superAdminSwitch, $weekNumber = "1", $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -34,6 +34,7 @@ class InOut extends Component
         $this->user_id = auth()->user()->id;
         $this->position = auth()->user()->position;
         $this->photo = auth()->user()->photo;
+        $this->branch = auth()->user()->branch;
         $this->dtr_data = Dtr::where('user_id', $this->user_id)->latest()->first();
         $this->dtr_permanent_data = DtrPermanent::where('user_id',$this->user_id)->get();
         $this->dtrData = Dtr::all();
@@ -248,20 +249,14 @@ class InOut extends Component
                         $time2->addDay(); // Add a day to the end time
                     }
                     $interval = $time1->diff($time2);
-
-                    //                    $gk = Dtr::find($this->dtr_data->id)->dtr_permanent;
-                    //                    foreach ($gk as $gg){
-                    //                        $gg->hour = $interval->h;
-                    //                        $gg->minute = $interval->i;
-                    //                        $gg->save();
-                    //                    }
                     Dtr::create([
                         'fullname' => $this->fullname,
                         'in' => Carbon::now(),
                         'out' => $end,
                         'out2' => $end2,
                         'user_id' => $this->user_id,
-                        'photo' => $this->photo
+                        'photo' => $this->photo,
+                        'branch' => $this->branch,
                     ]);
                     $ss = Dtr::where('fullname', $this->fullname)
                         ->where('user_id', $this->user_id)->get();
@@ -278,29 +273,11 @@ class InOut extends Component
                         'dtr_id' => $id,
                         'hour' => $interval->h,
                         'minute' => $interval->i + 1,
-                        'photo' => $this->photo
+                        'photo' => $this->photo,
+                        'branch' => $this->branch,
                     ]);
             }
-//                Dtr::create([
-//                    'fullname' => $this->fullname,
-//                    'in' => Carbon::now(),
-//                    'user_id' => $this->user_id,
-//                    'photo' => $this->photo
-//                ]);
-//                $ss = Dtr::where('fullname',$this->fullname)
-//                    ->where('user_id', $this->user_id)->get();
-//                foreach ($ss as $s){
-//                    $id = $s->id;
-//                }
-//                DtrPermanent::create([
-//                    'fullname' => $this->fullname,
-//                    'in' => Carbon::now(),
-//                    'user_id' => $this->user_id,
-//                    'dtr_id' => $id,
-//                    'hour' => "0",
-//                    'minute' => "0",
-//                    'photo' => $this->photo
-//                ]);
+
             $this->designated_id = "";
             session()->flash('good', 'Successfully Time in');
         }

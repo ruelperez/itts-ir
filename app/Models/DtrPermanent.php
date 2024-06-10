@@ -18,7 +18,8 @@ class DtrPermanent extends Model
         'hour',
         'minute',
         'photo',
-        'task'
+        'task',
+        'branch',
     ];
 
     use HasFactory;

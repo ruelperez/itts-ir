@@ -44,6 +44,39 @@ class Dashboard extends Component
             return redirect('/itts/15/employee');
         }
     }
+
+//    public function boom(){
+//        $gg = \App\Models\Employee::all();
+//        foreach ($gg as $hh){
+//            $aa = User::find($hh->user_id);
+//            $aa->branch = $hh->branch;
+//            $aa->save();
+//
+//            $aa = User::find($hh->user_id)->dtr;
+//            foreach ($aa as $bb){
+//                $kk = Dtr::find($bb->id);
+//                $kk->branch = $hh->branch;
+//                $kk->save();
+//            }
+//
+//            $aa = User::find($hh->user_id)->dtr_permanent;
+//            foreach ($aa as $bb){
+//                $kk = DtrPermanent::find($bb->id);
+//                $kk->branch = $hh->branch;
+//                $kk->save();
+//            }
+//
+//            $aa = User::find($hh->user_id)->dtr_content;
+//            foreach ($aa as $bb){
+//                $kk = DtrContent::find($bb->id);
+//                $kk->branch = $hh->branch;
+//                $kk->save();
+//            }
+//
+//        }
+//
+//        dd('save');
+//    }
     public function logout(){
         Auth::logout();
         return redirect()->to('/login');

@@ -7,6 +7,7 @@ use App\Models\Comment;
 use App\Models\CommentHeart;
 use App\Models\Dtr;
 use App\Models\DtrContent;
+use App\Models\DtrPermanent;
 use App\Models\IsRegistration;
 use App\Models\Note;
 use App\Models\SuperadminShow;
@@ -183,6 +184,27 @@ class Employee extends Component
                 $ff = User::find($this->user_id);
                 $ff->branch = $this->branch;
                 $ff->save();
+
+                $ff = User::find($this->user_id)->dtr;
+                foreach ($ff as $gg){
+                    $aa = Dtr::find($gg->id);
+                    $aa->branch = $this->branch;
+                    $aa->save();
+                }
+
+                $ff = User::find($this->user_id)->dtr_permanent;
+                foreach ($ff as $gg){
+                    $aa = DtrPermanent::find($gg->id);
+                    $aa->branch = $this->branch;
+                    $aa->save();
+                }
+
+                $ff = User::find($this->user_id)->dtr_content;
+                foreach ($ff as $gg){
+                    $aa = DtrContent::find($gg->id);
+                    $aa->branch = $this->branch;
+                    $aa->save();
+                }
             }
             if ($this->is_create == true){
                 return redirect('/');
