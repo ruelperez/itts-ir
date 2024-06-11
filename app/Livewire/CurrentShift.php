@@ -8,6 +8,7 @@ use App\Models\CommentHeart;
 use App\Models\Dtr;
 use App\Models\DtrContent;
 use App\Models\DtrPermanent;
+use App\Models\Employee;
 use App\Models\IsRegistration;
 use App\Models\Note;
 use App\Models\SuperadminShow;
@@ -26,14 +27,24 @@ class CurrentShift extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $unchangeTimeIn1, $unchangeTimeIn2, $timeIn1, $dtrName, $ids, $timeIn2, $timeOut1, $timeOut2, $date, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $search, $employeeData, $unchangeTimeIn1, $unchangeTimeIn2, $timeIn1, $dtrName, $ids, $timeIn2, $timeOut1, $timeOut2, $date, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
         $this->user_id = auth()->user()->id;
         $this->position = auth()->user()->position;
+        $jj = Employee::where('user_id',$this->user_id)->get();
+        foreach ($jj as $yy){
+            $emp = Employee::find($yy->id);
+            $this->employeeData = $emp->designation;
+        }
         $this->photo = auth()->user()->photo;
-        $this->dtrData = DtrPermanent::all();
+        if ($this->search == ""){
+            $this->dtrData = DtrPermanent::all();
+        }else{
+            $this->dtrData = DtrPermanent::where('fullname','LIKE', '%'.$this->search.'%')
+                ->orWhere('branch', 'LIKE', '%'.$this->search.'%')->get();
+        }
         $this->date = DtrPermanent::latest()->first();
         return view('livewire.current-shift');
     }

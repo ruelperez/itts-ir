@@ -25,13 +25,18 @@ class MyNotes extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $ids, $title, $textlink, $dataLink = [], $dtrData = [], $adminSwitch, $position, $superAdminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $ids, $title, $employeeData, $textlink, $dataLink = [], $dtrData = [], $adminSwitch, $position, $superAdminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
         $this->user_id = auth()->user()->id;
         $this->position = auth()->user()->position;
+        $jj = \App\Models\Employee::where('user_id',$this->user_id)->get();
+        foreach ($jj as $yy){
+            $emp = \App\Models\Employee::find($yy->id);
+            $this->employeeData = $emp->designation;
+        }
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
         $this->dataLink = FormLink::all();

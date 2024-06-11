@@ -57,7 +57,7 @@
                             <th scope="col">Time out</th>
                             <th scope="col">Time in</th>
                             <th scope="col">Time out</th>
-                            <th scope="col">Total working hour</th>
+                            <th scope="col">Total hour</th>
                             <th scope="col">Branch</th>
                             @if($role == "admin")
                                 <th scope="col">Task</th>

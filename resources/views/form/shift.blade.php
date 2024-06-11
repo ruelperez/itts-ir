@@ -38,7 +38,7 @@
             <b>Time Out</b>
         </td>
         <td style="border: 1px solid; padding: 8px;">
-            <b>Total Working Hour</b>
+            <b>Total Hour</b>
         </td>
         <td style="border: 1px solid; padding: 8px;">
             <b>Branch</b>

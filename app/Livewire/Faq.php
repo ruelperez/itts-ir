@@ -24,13 +24,18 @@ class Faq extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $ids, $faqData = [], $campaign_name = "Camp lejeune", $search = "", $answer, $question, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $ids, $faqData = [], $employeeData, $campaign_name = "Camp lejeune", $search = "", $answer, $question, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
         $this->user_id = auth()->user()->id;
         $this->position = auth()->user()->position;
+        $jj = \App\Models\Employee::where('user_id',$this->user_id)->get();
+        foreach ($jj as $yy){
+            $emp = \App\Models\Employee::find($yy->id);
+            $this->employeeData = $emp->designation;
+        }
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
         if ($this->search != ""){

@@ -18,7 +18,7 @@
 <table style="width: 100%; text-align: center;border: 1px solid; border-collapse: collapse;" >
     <tr style="border: 1px solid; text-align: left;" >
         <td colspan="6" style="border: 1px solid; padding: 10px;">
-            <b>Employee Name: </b>{{$userData->fullname}}
+            <b>Employee Name: </b>{{$userData->fname}} {{$userData->lname}}
         </td>
         <td colspan="1" style="border: 1px solid; padding: 10px;">
             <b>Date Coverage:</b>
@@ -26,7 +26,7 @@
     </tr>
     <tr style="border: 1px solid; text-align: left;">
         <td colspan="6" style="border: 1px solid; padding: 10px;">
-            <b>Designation:</b> {{$userData->position}}
+            <b>Designation:</b> {{$userData->designation}}
         </td>
         <td colspan="1" style="border: 1px solid; padding: 10px;">
             <b>Immediate Supervisor:</b>

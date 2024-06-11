@@ -7,6 +7,7 @@ use App\Models\Comment;
 use App\Models\CommentHeart;
 use App\Models\Dtr;
 use App\Models\DtrContent;
+use App\Models\Employee;
 use App\Models\IsRegistration;
 use App\Models\Note;
 use App\Models\SuperadminShow;
@@ -24,12 +25,17 @@ class AgeCompute extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $fullname, $is_admin, $webName, $user_id, $photo, $birth, $death, $error=0, $stat = "dependent", $hn = 0, $start, $alive, $end, $latency = 0, $name, $diagnosis, $age_diagnosed = 0, $age_passaway = 0, $age_started = 0, $age_left = 0, $year_exposure = 0, $remarks = 0;
+    public $registrationSwitch, $dtrData = [], $employeeData, $position, $superAdminSwitch, $adminSwitch, $fullname, $is_admin, $webName, $user_id, $photo, $birth, $death, $error=0, $stat = "dependent", $hn = 0, $start, $alive, $end, $latency = 0, $name, $diagnosis, $age_diagnosed = 0, $age_passaway = 0, $age_started = 0, $age_left = 0, $year_exposure = 0, $remarks = 0;
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
         $this->user_id = auth()->user()->id;
         $this->position = auth()->user()->position;
+        $jj = Employee::where('user_id',$this->user_id)->get();
+        foreach ($jj as $yy){
+            $emp = Employee::find($yy->id);
+            $this->employeeData = $emp->designation;
+        }
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
         return view('livewire.age-compute');

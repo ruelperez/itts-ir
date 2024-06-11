@@ -35,9 +35,13 @@ class Employee extends Component
         $this->fullname = auth()->user()->fullname;
         $this->user_id = auth()->user()->id;
         $this->position = auth()->user()->position;
+        $jj = \App\Models\Employee::where('user_id',$this->user_id)->get();
+        foreach ($jj as $yy){
+            $emp = \App\Models\Employee::find($yy->id);
+            $this->employeeData = $emp->designation;
+        }
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
-        $this->employeeData = User::all();
         $gn = \App\Models\Employee::where('user_id',$this->user_id)->get();
         if ($this->ng == 0){
             if (count($gn) < 1){

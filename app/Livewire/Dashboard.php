@@ -8,6 +8,7 @@ use App\Models\CommentHeart;
 use App\Models\Dtr;
 use App\Models\DtrContent;
 use App\Models\DtrPermanent;
+use App\Models\Employee;
 use App\Models\IsRegistration;
 use App\Models\Note;
 use App\Models\SuperadminShow;
@@ -25,13 +26,18 @@ class Dashboard extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
         $this->user_id = auth()->user()->id;
         $this->position = auth()->user()->position;
+        $jj = Employee::where('user_id',$this->user_id)->get();
+        foreach ($jj as $yy){
+            $emp = Employee::find($yy->id);
+            $this->employeeData = $emp->designation;
+        }
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
         return view('livewire.dashboard')->title('Dashboard');

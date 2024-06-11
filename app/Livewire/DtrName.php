@@ -7,6 +7,7 @@ use App\Models\Comment;
 use App\Models\CommentHeart;
 use App\Models\Dtr;
 use App\Models\DtrContent;
+use App\Models\Employee;
 use App\Models\IsRegistration;
 use App\Models\Note;
 use App\Models\SuperadminShow;
@@ -24,13 +25,18 @@ class DtrName extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $dtrData = [], $search, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $dtrData = [], $employeeData, $search, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
         $this->user_id = auth()->user()->id;
         $this->position = auth()->user()->position;
+        $jj = Employee::where('user_id',$this->user_id)->get();
+        foreach ($jj as $yy){
+            $emp = Employee::find($yy->id);
+            $this->employeeData = $emp->designation;
+        }
         $this->photo = auth()->user()->photo;
         if ($this->search == ""){
             $this->dtrData = DtrContent::select('fullname','photo','user_id')

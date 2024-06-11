@@ -23,7 +23,7 @@ class Logs extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $dtrData = [], $position, $superAdminSwitch, $search, $logsData = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $dtrData = [], $employeeData, $position, $superAdminSwitch, $search, $logsData = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -31,6 +31,11 @@ class Logs extends Component
         $this->user_id = auth()->user()->id;
         $this->is_admin = auth()->user()->is_admin;
         $this->photo = auth()->user()->photo;
+        $jj = \App\Models\Employee::where('user_id',$this->user_id)->get();
+        foreach ($jj as $yy){
+            $emp = \App\Models\Employee::find($yy->id);
+            $this->employeeData = $emp->designation;
+        }
         $this->dtrData = Dtr::all();
         if ($this->search == ""){
             $this->logsData = \App\Models\Logs::orderBy('created_at', 'desc')->get();

@@ -14,20 +14,21 @@
                     <div style="width: 10%;">
                         <b style="font-size: 17px; ">@if(isset($date)) {{Carbon\Carbon::parse($date->in)->format('m-d-Y')}}@endif </b>
                     </div>
+                    <div style="margin-left: 3%; width: 25%;">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" wire:model.live="search">
+                    </div>
                 </div>
                 <div style="margin-left: 4%; margin-top: 1%; width: 92%;">
                     <table class="table table-hover">
                         <thead>
                         <tr>
                             <th scope="col">Fullname</th>
-                            {{--                            <th scope="col">Date</th>--}}
-                            {{--                            <th scope="col">Day</th>--}}
                             <th scope="col">Time in</th>
                             <th scope="col">Time out</th>
                             <th scope="col">Time in</th>
                             <th scope="col">Time out</th>
-                            <th scope="col">Total working hour</th>
-                            {{--                            <th scope="col">Task</th>--}}
+                            <th scope="col">Total hour</th>
+                            <th scope="col">Branch</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -40,7 +41,7 @@
                                 <td>@if($data->out == null) @else {{Carbon\Carbon::parse($data->out)->format('h:i A') }} @endif</td>
                                 <td>@if($data->in2 == null) @else {{Carbon\Carbon::parse($data->in2)->format('h:i A') }} @endif</td>
                                 <td>@if($data->out2 == null) @else {{Carbon\Carbon::parse($data->out2)->format('h:i A') }} @endif</td>
-                                <td style="text-align: right;width: 15%;padding-right: 60px;" id="uiy{{$data->id}}">
+                                <td>
                                     @php
                                         $hours = floor($data->minute / 60);
                                         $totalHours = floor($hours + $data->hour);
@@ -48,14 +49,11 @@
                                         $result = $totalHours . ':' . $remainingMinutes;
                                     @endphp
                                     {{$result}}
+                                </td>
+                                <td style="width: 15%;padding-right: 60px;" id="uiy{{$data->id}}">
+                                    {{ucfirst($data->branch)}}
                                     <i class="fa-solid fa-pen-to-square" style="cursor: pointer; margin-left: 20%; display: none" wire:click="clickTimeEdit({{$data->id}})" id="timeEdit{{$data->id}}"  data-bs-toggle="modal" data-bs-target="#current"></i>
                                 </td>
-{{--                                <td style="display: none; border: solid black 1px;" id="timeEdit{{$data->id}}">--}}
-{{--                                    <i class="fa-solid fa-pen-to-square" style="margin-left: 5%; cursor: pointer" wire:click="clickTimeEdit1"></i>--}}
-{{--                                </td>--}}
-                                    {{--                                    <td>--}}
-                                    {{--                                        <i class="fa-solid fa-list-check" style="margin-right: 3%; cursor: pointer" data-bs-toggle="modal" data-bs-target="#taskRecord" wire:click="clickTask({{$data->id}})"></i>--}}
-                                    {{--                                    </td>--}}
                              </tr>
                         @endforeach
                         </tbody>

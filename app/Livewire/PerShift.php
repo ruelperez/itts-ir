@@ -24,7 +24,7 @@ class PerShift extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $ids, $task, $userID = [], $role = "all", $year = "2024", $month="05", $day = "13", $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $ids, $task, $userID = [], $employeeData, $role = "all", $year = "2024", $month="05", $day = "13", $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
 
     public function render()
@@ -32,6 +32,11 @@ class PerShift extends Component
         $this->fullname = auth()->user()->fullname;
         $this->user_id = auth()->user()->id;
         $this->position = auth()->user()->position;
+        $jj = \App\Models\Employee::where('user_id',$this->user_id)->get();
+        foreach ($jj as $yy){
+            $emp = \App\Models\Employee::find($yy->id);
+            $this->employeeData = $emp->designation;
+        }
         $this->photo = auth()->user()->photo;
         $this->dtrData = DtrContent::all();
         if ($this->role == "all"){

@@ -17,7 +17,7 @@
                     </div>
                     <div class="w-25 ps-5">
                         @if(count($checkBox) == 1)
-                            <i class="fa-solid fa-eye text-primary" style="cursor: pointer"></i>
+                            <i class="fa-solid fa-eye text-primary" wire:click="viewInfo" style="cursor: pointer"></i>
                             <i class="fa-solid fa-pen-to-square ms-3" style="cursor: pointer"></i>
                             <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer"></i>
                         @elseif(count($checkBox) > 1)
@@ -74,7 +74,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <input class="form-check-input" type="checkbox" wire:model.live="checkBox" value="{{$data->id}}" id="flexCheckDefault{{$data->id}}" style="font-size: 18px; cursor: pointer">
+                                        <input class="form-check-input" type="checkbox" wire:model="checkBox.{{$i}}" value="{{$checkBox[$i]}}" wire:change="boxCheck({{$i}},{{$data->id}})" style="font-size: 18px; cursor: pointer">
                                     </td>
                                 </tr>
                                 @php $i++; @endphp

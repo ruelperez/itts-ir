@@ -388,22 +388,6 @@
 
                 </div>
 <button id="btn1" data-bs-toggle="modal" data-bs-target="#loading" style="display: none"></button>
-{{--                <table class="table" style="margin-left: 10%; width: 30%;">--}}
-{{--                    <thead>--}}
-{{--                    <tr>--}}
-{{--                        <th scope="col">Fullname</th>--}}
-{{--                        <th scope="col">ID</th>--}}
-{{--                    </tr>--}}
-{{--                    </thead>--}}
-{{--                    <tbody>--}}
-{{--                    @foreach($employeeData as $data)--}}
-{{--                        <tr>--}}
-{{--                            <td>{{ucwords($data->fullname)}}</td>--}}
-{{--                           <td>ITTS-00{{$data->id}}</td>--}}
-{{--                        </tr>--}}
-{{--                    @endforeach--}}
-{{--                    </tbody>--}}
-{{--                </table>--}}
             </div>
         </div>
     </div>

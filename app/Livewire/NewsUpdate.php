@@ -31,13 +31,18 @@ class NewsUpdate extends Component
     #[Validate('image|max:1024')] // 1MB Max
     public $registrationSwitch, $did, $link = [
         ['title' => '', 'textLink' => ''],
-    ],  $schedule, $geo, $restriction, $tcpa = false, $tf = false, $fj = 0, $email= false, $thatsthem= false, $dupe= false, $blacklist = false, $govt= false, $dtrData = [], $campaign_stat = "active", $superAdminSwitch, $position, $edit_comment_id, $editTextComment, $linkData = [], $imagePath, $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "Camp lejeune", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
+    ],  $schedule, $geo, $restriction, $tcpa = false, $employeeData, $tf = false, $fj = 0, $email= false, $thatsthem= false, $dupe= false, $blacklist = false, $govt= false, $dtrData = [], $campaign_stat = "active", $superAdminSwitch, $position, $edit_comment_id, $editTextComment, $linkData = [], $imagePath, $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "Camp lejeune", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
         $this->user_id = auth()->user()->id;
         $this->position = auth()->user()->position;
+        $jj = \App\Models\Employee::where('user_id',$this->user_id)->get();
+        foreach ($jj as $yy){
+            $emp = \App\Models\Employee::find($yy->id);
+            $this->employeeData = $emp->designation;
+        }
         $this->user_fullname = auth()->user()->fullname;
         $this->photo = auth()->user()->photo;
         $this->heart = Heart::all();

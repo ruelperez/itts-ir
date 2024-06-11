@@ -24,13 +24,18 @@ class StaffDirectory extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $stat = [], $checkBox = [], $search, $dtrData = [], $staffData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $stat = [], $checkBox = [], $employeeData, $search, $dtrData = [], $staffData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
         $this->user_id = auth()->user()->id;
         $this->position = auth()->user()->position;
+        $jj = \App\Models\Employee::where('user_id',$this->user_id)->get();
+        foreach ($jj as $yy){
+            $emp = \App\Models\Employee::find($yy->id);
+            $this->employeeData = $emp->designation;
+        }
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
         if ($this->search != ""){
@@ -77,9 +82,14 @@ class StaffDirectory extends Component
             $this->staffData = \App\Models\Employee::all();
             foreach ($this->staffData as $index => $staff){
                 $this->stat[$index] = $staff->status;
+                $this->checkBox[$index] = false;
             }
         }
         return view('livewire.staff-directory');
+    }
+
+    public function viewInfo(){
+
     }
     public function mount(){
         $pst = auth()->user()->position;
@@ -291,6 +301,24 @@ class StaffDirectory extends Component
         $jk = \App\Models\Employee::find($id);
         $jk->status = $this->stat[$indexNum];
         $jk->save();
+        if($this->stat[$indexNum] == true){
+            $u = "active";
+        }
+        else{
+            $u = "inactive";
+        }
+
+        \App\Models\Logs::create([
+            'action' => "set ".ucfirst($jk->fname).' '.ucfirst($jk->lname).' to '.$u,
+            'user_id' => $this->user_id,
+            'photo' => $this->photo,
+            'fullname' => $this->fullname,
+        ]);
+    }
+
+    public function boxCheck($indexNum,$id){
+        $jk = \App\Models\Employee::find($id);
+
         if($this->stat[$indexNum] == true){
             $u = "active";
         }
