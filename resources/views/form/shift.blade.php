@@ -40,6 +40,9 @@
         <td style="border: 1px solid; padding: 8px;">
             <b>Total Working Hour</b>
         </td>
+        <td style="border: 1px solid; padding: 8px;">
+            <b>Branch</b>
+        </td>
         @if($role == "admin")
             <td style="border: 1px solid; padding: 8px; width: 40%;">
                 <b>Task</b>
@@ -64,6 +67,9 @@
                         @endphp
                         {{$result}}
                     </td>
+                    <td style="border: 1px solid;">
+                        {{ucfirst($data->branch)}}
+                    </td>
                 </tr>
             @endif
         @elseif($role == "agent")
@@ -84,6 +90,9 @@
                                     $result = $totalHours . ':' . $remainingMinutes;
                                 @endphp
                                 {{$result}}
+                            </td>
+                            <td style="border: 1px solid;">
+                               {{ucfirst($data->branch)}}
                             </td>
                         </tr>
                     @endif
@@ -107,6 +116,9 @@
                                     $result = $totalHours . ':' . $remainingMinutes;
                                 @endphp
                                 {{$result}}
+                            </td>
+                            <td style="border: 1px solid;">
+                                {{ucfirst($data->branch)}}
                             </td>
                             <td style="border: 1px solid; white-space: pre-line; text-align: left; padding: 8px;">
                                 {{$data->task}}
