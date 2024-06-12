@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('serial');
             $table->integer('quantity');
             $table->string('action');
-            $table->boolean('is_active')->default(1);
+            $table->string('status');
             $table->boolean('is_approved')->default(0);
             $table->boolean('is_declined')->default(0);
             $table->string('fullname');
