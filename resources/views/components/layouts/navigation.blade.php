@@ -27,6 +27,9 @@
                 <div style="@if($webName == "faq") background-color: #023e8a; @endif  padding-left: 10%;" data-bs-toggle="modal" data-bs-target="#disclick">
                     FAQ
                 </div>
+                <div onclick="location.href = '/itts/17/my-device';" style="@if($webName == "my-device") background-color: #023e8a; @endif  padding-left: 10%;" >
+                    MY DEVICE
+                </div>
                 @if($position == "Agent")
                     <div style="margin-left: auto; text-align: right; padding-right: 5%;" wire:click="logout">
                         <i class="fa-solid fa-right-from-bracket" style=" color: white; margin-right: 5px; "></i>Log Out
@@ -58,6 +61,9 @@
                 </div>
                 <div onclick="location.href = '/itts/13/faq';" style="@if($webName == "faq") background-color: #023e8a; @endif  padding-left: 10%;" >
                     FAQ
+                </div>
+                <div onclick="location.href = '/itts/17/my-device';" style="@if($webName == "my-device") background-color: #023e8a; @endif  padding-left: 10%;" >
+                    MY DEVICE
                 </div>
                 @if($position == "Agent")
                     <div style="margin-left: auto; text-align: right; padding-right: 5%;" wire:click="logout">
@@ -92,6 +98,9 @@
             </div>
             <div onclick="location.href = '/itts/13/faq';" style="@if($webName == "faq") background-color: #023e8a; @endif  padding-left: 10%;" >
                 FAQ
+            </div>
+            <div onclick="location.href = '/itts/17/my-device';" style="@if($webName == "my-device") background-color: #023e8a; @endif  padding-left: 10%;" >
+                MY DEVICE
             </div>
             @if($position == "Agent")
                 <div style="margin-left: auto; text-align: right; padding-right: 5%;" wire:click="logout">
