@@ -82,7 +82,6 @@ class StaffDirectory extends Component
             $this->staffData = \App\Models\Employee::all();
             foreach ($this->staffData as $index => $staff){
                 $this->stat[$index] = $staff->status;
-                $this->checkBox[$index] = false;
             }
         }
         return view('livewire.staff-directory');

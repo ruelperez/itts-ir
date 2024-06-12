@@ -16,9 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('serial');
             $table->integer('quantity');
-            $table->boolean('status')->default(1);
+            $table->string('status');
             $table->string('fullname');
-            $table->unsignedBigInteger('inventory_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });

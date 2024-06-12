@@ -88,7 +88,7 @@ class Dashboard extends Component
 //        $kk = \App\Models\Employee::all();
 //        foreach ($kk as $hh){
 //            $ii = \App\Models\Employee::find($hh->id);
-//            $ii->id_user = "ITTS-00".$hh->id;
+//            $ii->id_user = "ITTS-00".$hh->user_id;
 //            $ii->save();
 //        }
 //    }

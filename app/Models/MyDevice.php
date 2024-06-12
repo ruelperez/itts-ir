@@ -12,6 +12,7 @@ class MyDevice extends Model
         'serial',
         'quantity',
         'action',
+        'status',
         'is_active',
         'is_approved',
         'is_declined',

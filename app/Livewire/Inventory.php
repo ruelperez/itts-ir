@@ -20,23 +20,58 @@ use Livewire\Component;
 
 class Inventory extends Component
 {
-    public $registrationSwitch, $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $checkBox = [], $InvData = [], $search, $brand_name, $quantity, $serial, $device_name = "laptop", $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
         $this->user_id = auth()->user()->id;
         $this->position = auth()->user()->position;
+        $this->photo = auth()->user()->photo;
         $jj = Employee::where('user_id',$this->user_id)->get();
         foreach ($jj as $yy){
             $emp = Employee::find($yy->id);
             $this->employeeData = $emp->designation;
         }
-        $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
+        if ($this->search == ""){
+            $this->InvData = \App\Models\Inventory::all();
+        }
+        else{
+            $this->InvData = \App\Models\Inventory::where('name','LIKE', '%'.$this->search.'%')
+                ->orWhere('serial', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('quantity', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('status', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('brand_name', 'LIKE', '%'.$this->search.'%')
+                ->get();
+        }
+
         return view('livewire.inventory');
     }
 
+    public function boxCheck(){
+
+    }
+
+    public function submitAdd(){
+        try {
+            \App\Models\Inventory::create([
+                'name' => $this->device_name,
+                'serial' => $this->serial,
+                'quantity' => $this->quantity,
+                'status' => "active",
+                'fullname' => $this->fullname,
+                'user_id' => $this->user_id,
+                'brand_name' => $this->brand_name,
+            ]);
+            $this->device_name = "";
+            $this->serial = "";
+            $this->quantity = "";
+            session()->flash('good', "Successfully saved");
+        }catch (\Exception $e){
+            session()->flash('bad', "Failed to save");
+        }
+    }
     public function mount(){
         $usrId = auth()->user()->id;
         $sd = \App\Models\Employee::where('user_id',$usrId)->get();
