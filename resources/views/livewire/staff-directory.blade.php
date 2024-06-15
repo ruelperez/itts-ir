@@ -45,7 +45,7 @@
                         @foreach($staffData as $data)
                             <tr onmouseover="hoverStaff({{$data->id}})" onmouseout="hoverOutStaff({{$data->id}})">
                                 <td>
-                                    {{ucwords($data->fname.' '.$data->mi.'. '.$data->lname)}}
+                                    {{ucwords($data->fname.' '.$data->mi.' '.$data->lname)}}
                                 </td>
                                 <td>
                                     {{$data->personal_email}}
