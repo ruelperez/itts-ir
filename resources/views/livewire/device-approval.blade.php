@@ -28,21 +28,21 @@
                         </thead>
                         <tbody>
                         @foreach($deviceData as $data)
-                            <tr onmouseover="hoverStaff({{$data->id}})" onmouseout="hoverOutStaff({{$data->id}})" @if($data->is_approved == true or $data->is_declined == true) style=" filter: contrast(25%);" @else style=" cursor: pointer;" data-bs-toggle="modal" data-bs-target="#clickRow" wire:click="clickData({{$data->id}})" @endif>
+                            <tr onmouseover="hoverStaff({{$data->id}})" onmouseout="hoverOutStaff({{$data->id}})" @if($data->status != "pending") style=" filter: contrast(25%);" @else style=" cursor: pointer;" data-bs-toggle="modal" data-bs-target="#clickRow" wire:click="clickData({{$data->id}})" @endif>
                                 <td>
-                                    @if($data->is_approved == true or $data->is_declined == true) {{ucfirst($data->name)}}  @else <b>{{ucfirst($data->name)}}</b> @endif
+                                    @if($data->status != "pending") {{ucfirst($data->name)}}  @else <b>{{ucfirst($data->name)}}</b> @endif
                                 </td>
                                 <td>
-                                    @if($data->is_approved == true or $data->is_declined == true) {{ucfirst($data->brand_name)}}  @else <b>{{ucfirst($data->brand_name)}}</b> @endif
+                                    @if($data->status != "pending") {{ucfirst($data->brand_name)}}  @else <b>{{ucfirst($data->brand_name)}}</b> @endif
                                 </td>
                                 <td>
-                                    @if($data->is_approved == true or $data->is_declined == true) {{ucfirst($data->serial)}}  @else <b>{{ucfirst($data->serial)}}</b> @endif
+                                    @if($data->status != "pending") {{ucfirst($data->serial)}}  @else <b>{{ucfirst($data->serial)}}</b> @endif
                                 </td>
                                 <td>
-                                    @if($data->is_approved == true or $data->is_declined == true) {{ucfirst($data->quantity)}}  @else <b>{{ucfirst($data->quantity)}}</b> @endif
+                                    @if($data->status != "pending") {{ucfirst($data->quantity)}}  @else <b>{{ucfirst($data->quantity)}}</b> @endif
                                 </td>
                                 <td>
-                                    @if($data->is_declined == true) <b>Declined</b>@elseif($data->is_approved == true) <b>Approved</b>  @else <b>For approval</b> @endif
+                                    {{ucfirst($data->status)}}
                                 </td>
                             </tr>
                         @endforeach

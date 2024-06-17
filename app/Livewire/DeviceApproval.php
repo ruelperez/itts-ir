@@ -51,8 +51,6 @@ class DeviceApproval extends Component
         $kl= \App\Models\MyDevice::find($this->device_id);
         $ty = \App\Models\Inventory::find($kl->inventory_id);
         try {
-            $kl->is_approved = true;
-            $kl->is_declined = false;
             $kl->status = "deployed";
             $kl->save();
             $ty->status = "deployed";
@@ -68,8 +66,6 @@ class DeviceApproval extends Component
         $kl= \App\Models\MyDevice::find($this->device_id);
         $ty = \App\Models\Inventory::find($kl->inventory_id);
         try {
-            $kl->is_approved = false;
-            $kl->is_declined = true;
             $kl->status = "declined";
             $kl->save();
             $ty->status = "stocked";

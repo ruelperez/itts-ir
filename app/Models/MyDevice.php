@@ -13,16 +13,10 @@ class MyDevice extends Model
         'quantity',
         'status',
         'brand_name',
-        'is_approved',
-        'is_declined',
         'fullname',
         'inventory_id',
         'user_id',
     ];
-    protected $casts = [
-        'is_active' => 'boolean',
-        'is_approved' => 'boolean',
-        'is_declined' => 'boolean',
-    ];
+
     use HasFactory;
 }
