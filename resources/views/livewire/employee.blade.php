@@ -366,26 +366,6 @@
                             </div>
                         </div>
                     </form>
-{{--                    <div class="row align-items-center mb-3 position-fixed bottom-0 w-75 ms-5">--}}
-{{--                        <div class="col-4">--}}
-
-{{--                        </div>--}}
-{{--                        @if($is_success == true)--}}
-{{--                            <div class="col-4">--}}
-{{--                                <button class="btn btn-warning" style="width: 100%;" id="submitButton" wire:click="updateForm" wire:loading.attr="disabled">UPDATE--}}
-{{--                                    <div class="spinner-border spinner-border-sm ms-5" role="status" style="display: none">--}}
-{{--                                        <span class="visually-hidden">Loading...</span>--}}
-{{--                                    </div>--}}
-{{--                                </button>--}}
-{{--                            </div>--}}
-{{--                        @else--}}
-
-{{--                        @endif--}}
-{{--                        <div class="col-4">--}}
-
-{{--                        </div>--}}
-{{--                    </div>--}}
-
                 </div>
 <button id="btn1" data-bs-toggle="modal" data-bs-target="#loading" style="display: none"></button>
             </div>
