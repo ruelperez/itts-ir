@@ -348,7 +348,7 @@
                             </div>
                             @if($is_success == true)
                                 <div class="col-4">
-                                    <button type="button" class="btn btn-warning" style="width: 100%;" id="submitButton" wire:click="updateForm" wire:loading.attr="disabled">UPDATE
+                                    <button type="button" class="btn btn-warning" style="width: 100%;  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9); " id="submitButton" wire:click="updateForm" wire:loading.attr="disabled">UPDATE
                                         <div class="spinner-border spinner-border-sm ms-5" role="status" style="display: none">
                                             <span class="visually-hidden">Loading...</span>
                                         </div>
@@ -356,7 +356,7 @@
                                 </div>
                             @else
                                 <div class="col-4">
-                                    <button type="submit" class="btn btn-primary" style="width: 100%;" wire:target="submitForm" wire:loading.attr="disabled">SAVE
+                                    <button type="submit" class="btn btn-primary" style="width: 100%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9); " wire:target="submitForm" wire:loading.attr="disabled">SAVE
 
                                     </button>
                                 </div>

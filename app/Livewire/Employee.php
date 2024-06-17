@@ -25,7 +25,7 @@ class Employee extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $id_user, $full_name, $empData, $is_submitted = false, $branch = "bicol", $ng = 0, $is_create, $is_success = false, $employeeData = [], $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
+    public $registrationSwitch, $id_user, $full_name, $empData, $is_submitted = false, $branch = "bicol", $ng = 0, $is_create, $is_success = false, $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
             $fname, $mname, $lname, $mi, $suffix, $age, $phone_number, $dob, $gender_preference, $civil_status, $religion, $personal_email, $current_house, $current_street,
             $current_brgy, $current_city, $current_working_email, $same_current_permanent = false, $permanent_house, $permanent_street,
             $permanent_brgy, $permanent_city, $sss, $philhealth, $tin, $hire_date, $yot, $designation, $department, $contact_number, $address, $relationship;

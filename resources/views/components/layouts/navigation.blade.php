@@ -27,7 +27,7 @@
                 <div style="@if($webName == "faq") background-color: #023e8a; @endif  padding-left: 10%;" data-bs-toggle="modal" data-bs-target="#disclick">
                     FAQ
                 </div>
-                <div onclick="location.href = '/itts/17/my-device';" style="@if($webName == "my-device") background-color: #023e8a; @endif  padding-left: 10%;" >
+                <div style="@if($webName == "my-device") background-color: #023e8a; @endif  padding-left: 10%;"  data-bs-toggle="modal" data-bs-target="#disclick">
                     MY DEVICE
                 </div>
                 @if($position == "Agent")

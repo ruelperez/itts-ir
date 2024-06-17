@@ -35,7 +35,7 @@ class Inventory extends Component
         }
         $this->dtrData = Dtr::all();
         if ($this->search == ""){
-            $this->InvData = \App\Models\Inventory::all();
+            $this->InvData = \App\Models\Inventory::latest()->get();
         }
         else{
             $this->InvData = \App\Models\Inventory::where('name','LIKE', '%'.$this->search.'%')
@@ -59,14 +59,15 @@ class Inventory extends Component
                 'name' => $this->device_name,
                 'serial' => $this->serial,
                 'quantity' => $this->quantity,
-                'status' => "active",
+                'status' => "stocked",
                 'fullname' => $this->fullname,
                 'user_id' => $this->user_id,
                 'brand_name' => $this->brand_name,
             ]);
-            $this->device_name = "";
+            $this->device_name = "laptop";
             $this->serial = "";
             $this->quantity = "";
+            $this->brand_name = "";
             session()->flash('good', "Successfully saved");
         }catch (\Exception $e){
             session()->flash('bad', "Failed to save");

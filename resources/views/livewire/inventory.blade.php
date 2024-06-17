@@ -9,19 +9,36 @@
             <div class="container">
                 <div style="display: flex;">
                     <h6 style="margin-left: 2%; margin-top: 3%;">INVENTORY</h6>
-                    <div style="margin-left: 3%; margin-top: 2.5%; width: 25%;">
+                    <div style="margin-left: 3%; margin-top: 2.5%; width: 20%;">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" wire:model="inven">
                     </div>
                     <div style="margin-left: 3%; margin-top: 3%">
-                        <i class="fa-solid fa-circle-plus" style="font-size: 30px;cursor: pointer" data-bs-toggle="modal" data-bs-target="#add"></i>
+                        <i class="fa-solid fa-circle-plus" style="font-size: 25px;cursor: pointer" data-bs-toggle="modal" data-bs-target="#add"></i>
                     </div>
-                    <div class="border border-dark mt-4 align-items-center">
+                    <div style="display: flex; font-size: 14px;" class="mt-4 align-items-center ms-5">
+                        <div style="margin-top: 20px;">
+                            <i class="fa-solid fa-circle" style="color: green"></i> Deployed
+                        </div>
+                        <div class="ms-4" style="margin-top: 20px;">
+                            <i class="fa-solid fa-circle" style="color: blue"></i> Stocked
+                        </div>
+                        <div class="ms-4" style="margin-top: 20px;">
+                            <i class="fa-solid fa-circle" style="color: red"></i> Disposed
+                        </div>
+                        <div class="ms-4" style="margin-top: 20px;">
+                            <i class="fa-solid fa-circle" style="color: yellow "></i> Pending
+                        </div>
+                    </div>
+                    <div class="mt-4 ms-5" onclick="location.href = '/itts/19/device-approval';">
+                        <button class="btn btn-primary">Device approval</button>
+                    </div>
+                    <div class="mt-4 align-items-center ms-auto me-5">
                         @if(count($checkBox) == 1)
-                            <i class="fa-solid fa-eye text-primary" style="cursor: pointer"></i>
+                            <i class="fa-solid fa-eye text-primary" style="cursor: pointer; margin-top: 20px;"></i>
                             <i class="fa-solid fa-pen-to-square ms-3" style="cursor: pointer"></i>
                             <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer"></i>
                         @elseif(count($checkBox) > 1)
-                            <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer"></i>
+                            <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer; margin-top: 20px;"></i>
                         @endif
                     </div>
                 </div>
@@ -34,7 +51,6 @@
                             <th scope="col">Brand name</th>
                             <th scope="col">Serial</th>
                             <th scope="col">Quantity</th>
-                            <th scope="col">Status</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -53,7 +69,7 @@
                                     {{$data->quantity}}
                                 </td>
                                 <td>
-                                    {{ucfirst($data->status)}}
+                                    @if($data->status == "deployed") <i class="fa-solid fa-circle" style="color: green"></i> @elseif($data->status == "stocked") <i class="fa-solid fa-circle" style="color: blue"></i> @elseif($data->status == "pending") <i class="fa-solid fa-circle" style="color: yellow"></i>@else <i class="fa-solid fa-circle" style="color: red"></i> @endif
                                 </td>
                                 <td>
                                     <input class="form-check-input" type="checkbox" wire:model.live="checkBox" value="{{$data->id}}" style="font-size: 18px; cursor: pointer">

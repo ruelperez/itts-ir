@@ -42,12 +42,15 @@ class Notes extends Component
         if ($this->search != ""){
             $this->myNotesData = MyNote::where('user_id',$this->user_id)
             ->where('text','LIKE', '%'.$this->search.'%')
-            ->orWhere('title', 'LIKE', '%'.$this->search.'%')->get();
+            ->orWhere('title', 'LIKE', '%'.$this->search.'%')
+            ->where('user_id',$this->user_id)
+            ->orderBy('updated_at', 'desc')->get();
 //            ->orWhere('updated_at', 'LIKE', '%'.$this->search.'%')->get();
 
         }
         else{
-            $this->myNotesData = MyNote::where('user_id', $this->user_id)->get();
+            $this->myNotesData = MyNote::where('user_id', $this->user_id)
+                ->orderBy('updated_at', 'desc')->get();
         }
 
         return view('livewire.notes');

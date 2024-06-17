@@ -20,7 +20,7 @@ use Livewire\Component;
 
 class MyDevice extends Component
 {
-    public $registrationSwitch, $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $brand_name, $deviceData = [], $inventory_id, $results = [], $device_name, $serial, $quantity = 1, $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -34,6 +34,8 @@ class MyDevice extends Component
         }
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
+        $this->deviceData = \App\Models\MyDevice::where('user_id',$this->user_id)
+            ->orderBy('created_at', 'desc')->get();
         return view('livewire.my-device')->title('My device');
     }
 
@@ -243,7 +245,60 @@ class MyDevice extends Component
         }
     }
 
+    public function click_items($id){
+        $gh = \App\Models\Inventory::find($id);
+        $this->device_name = $gh->name;
+        $this->brand_name = $gh->brand_name;
+        $this->quantity = $gh->quantity;
+        $this->serial = $gh->serial;
+        $this->inventory_id = $id;
+        $this->results = [];
+    }
+
+    public function submitAdd(){
+        $yu = \App\Models\Inventory::where('serial',$this->serial)->get();
+        if (count($yu) != 0){
+            try {
+                \App\Models\MyDevice::create([
+                    'name' => $this->device_name,
+                    'serial' => $this->serial,
+                    'quantity' => $this->quantity,
+                    'status' => "pending",
+                    'brand_name' => $this->brand_name,
+                    'fullname' => $this->fullname,
+                    'inventory_id' => $this->inventory_id,
+                    'user_id' => $this->user_id,
+                ]);
+                $aa = \App\Models\Inventory::find($this->inventory_id);
+                $aa->status = "pending";
+                $aa->save();
+                $this->device_name = "";
+                $this->serial = "";
+                $this->quantity = "";
+                $this->brand_name = "";
+                session()->flash('good', "Successfully saved");
+            }catch (\Exception $e){
+                session()->flash('bad', "Failed to save");
+            }
+
+        }
+        else{
+            session()->flash('bad', "Failed to save");
+            return;
+        }
+    }
+
     public function updated($field){
+        if ($field == "serial"){
+            if ($this->serial != ""){
+                $this->results = \App\Models\Inventory::where('serial','LIKE','%'. $this->serial. '%')
+                    ->where('status','stocked')->get();
+            }
+            else{
+                $this->results = [];
+            }
+
+        }
         if ($field == "registrationSwitch"){
             $this->regSwitch();
         }
