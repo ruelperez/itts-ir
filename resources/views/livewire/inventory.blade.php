@@ -4,6 +4,7 @@
     @include('modal.click-settings')
     @include('modal.news-update.show-photo')
     @include('modal.inventory.add')
+    @include('modal.inventory.edit')
     <div style="display: flex; width: 100%; margin-top: 105px;">
         <div style="width: 81%; margin-left: 19%;">
             <div class="container">
@@ -29,21 +30,28 @@
                             <i class="fa-solid fa-circle" style="color: yellow "></i> Pending
                         </div>
                     </div>
-                    <div class="mt-4 ms-5" onclick="location.href = '/itts/19/device-approval';">
-                        <button class="btn btn-primary">Device approval</button>
-                    </div>
                     <div class="mt-4 align-items-center ms-auto me-5">
                         @if(count($checkBox) == 1)
-                            <i class="fa-solid fa-eye text-primary" style="cursor: pointer; margin-top: 20px;"></i>
-                            <i class="fa-solid fa-pen-to-square ms-3" style="cursor: pointer"></i>
-                            <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer"></i>
+                           <i class="fa-solid fa-circle-minus" style="cursor: pointer; margin-top: 20px; font-size: 17px;" title="Dispose" wire:click="dispose" wire:confirm="Are you sure you want to dispose this device?"></i>
+                            <i class="fa-solid fa-pen-to-square ms-3" style="cursor: pointer" title="Edit" wire:click="edit" data-bs-toggle="modal" data-bs-target="#edit"></i>
+                            <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer" title="Delete" wire:click="delete" wire:confirm="Are you sure you want to delete?"></i>
                         @elseif(count($checkBox) > 1)
-                            <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer; margin-top: 20px;"></i>
+                            <i class="fa-solid fa-circle-minus" style="cursor: pointer; margin-top: 20px; font-size: 17px;" title="Dispose" wire:click="dispose" wire:confirm="Are you sure you want to dispose this device?"></i>
+                            <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer; margin-top: 20px;" title="Delete" wire:click="delete" wire:confirm="Are you sure you want to delete?"></i>
                         @endif
                     </div>
                 </div>
               <HR>
-                <div style="font-size: 14px; margin-top: 30px;"  class="px-5">
+                <div style="display: flex">
+                    <div class="ms-4" onclick="location.href = '/itts/19/device-approval';">
+                        <button class="btn btn-success">Device approval</button>
+                    </div>
+                    <div class="ms-3" onclick="location.href = '/itts/19/device-approval';">
+                        <button class="btn btn-secondary">All active devices</button>
+                    </div>
+                </div>
+
+                <div style="font-size: 14px; margin-top: 30px; width: 92%; margin-left: 4%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); "  class="px-4 py-3">
                     <table class="table table-hover">
                         <thead>
                         <tr>
@@ -72,7 +80,9 @@
                                     @if($data->status == "deployed") <i class="fa-solid fa-circle" style="color: green"></i> @elseif($data->status == "stocked") <i class="fa-solid fa-circle" style="color: blue"></i> @elseif($data->status == "pending") <i class="fa-solid fa-circle" style="color: yellow"></i>@else <i class="fa-solid fa-circle" style="color: red"></i> @endif
                                 </td>
                                 <td>
-                                    <input class="form-check-input" type="checkbox" wire:model.live="checkBox" value="{{$data->id}}" style="font-size: 18px; cursor: pointer">
+                                    @if($data->status == "stocked")
+                                        <input class="form-check-input" type="checkbox" wire:model.live="checkBox" value="{{$data->id}}" style="font-size: 18px; cursor: pointer">
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

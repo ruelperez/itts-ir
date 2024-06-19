@@ -27,19 +27,7 @@
                     <div class="mb-4">
                         <label for="exampleInputPassword1" class="form-label">Serial number</label>
                         <input type="text" class="form-control" wire:model="serial" required>
-{{--                        <div style="position: absolute;">--}}
-{{--                            <ul class="list-group">--}}
-{{--                                @php $h=0; @endphp--}}
-{{--                                @foreach($results as $data)--}}
-{{--                                    @if($h < 6)--}}
-{{--                                        <li class="list-group-item btn" style="text-align: left; background-color: #E0FFFF" wire:click="click_items({{$data->id}})">--}}
-{{--                                            {{$data->fullname}}--}}
-{{--                                        </li>--}}
-{{--                                    @endif--}}
-{{--                                    @php $h++; @endphp--}}
-{{--                                @endforeach--}}
-{{--                            </ul>--}}
-{{--                        </div>--}}
+                        @error('serial') <span style="color: red">{{ $message }}</span> @enderror
                     </div>
                     <div class="mb-4">
                         <label for="exampleInputPassword1" class="form-label">Quantity</label>

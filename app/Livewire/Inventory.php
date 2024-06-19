@@ -49,11 +49,48 @@ class Inventory extends Component
         return view('livewire.inventory');
     }
 
-    public function boxCheck(){
-
+    public function dispose(){
+        for ($i=0; count($this->checkBox) > $i; $i++){
+            $yr = \App\Models\Inventory::find($this->checkBox[$i]);
+            $yr->status = "dispose";
+            $yr->save();
+        }
+        $this->checkBox = [];
     }
 
+    public function delete(){
+        for ($i=0; count($this->checkBox) > $i; $i++){
+           \App\Models\Inventory::find($this->checkBox[$i])->delete();
+        }
+        $this->checkBox = [];
+    }
+
+    public function edit(){
+        for ($i=0; count($this->checkBox) > $i; $i++){
+            $yr = \App\Models\Inventory::find($this->checkBox[$i]);
+            $this->device_name = $yr->name;
+            $this->brand_name = $yr->brand_name;
+            $this->serial = $yr->serial;
+            $this->quantity = $yr->quantity;
+        }
+    }
+
+    public function submitEdit(){
+        for ($i=0; count($this->checkBox) > $i; $i++){
+            $yr = \App\Models\Inventory::find($this->checkBox[$i]);
+            $yr->name = $this->device_name;
+            $yr->brand_name = $this->brand_name;
+            $yr->serial = $this->serial;
+            $yr->quantity = $this->quantity;
+            $yr->save();
+        }
+
+        $this->checkBox = [];
+    }
     public function submitAdd(){
+        $this->validate([
+            'serial' => 'required|unique:inventories,serial',
+        ]);
         try {
             \App\Models\Inventory::create([
                 'name' => $this->device_name,

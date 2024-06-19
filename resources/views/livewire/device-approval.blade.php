@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <hr>
-                <div style="font-size: 14px; margin-top: 30px; width: 86%; margin-left: 7%;"  class="px-5">
+                <div style="font-size: 14px; margin-top: 30px; width: 92%; margin-left: 4%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);"  class="px-4 py-3">
                     <table class="table table-hover">
                         <thead>
                         <tr>
@@ -28,7 +28,7 @@
                         </thead>
                         <tbody>
                         @foreach($deviceData as $data)
-                            <tr onmouseover="hoverStaff({{$data->id}})" onmouseout="hoverOutStaff({{$data->id}})" @if($data->status != "pending") style=" filter: contrast(25%);" @else style=" cursor: pointer;" data-bs-toggle="modal" data-bs-target="#clickRow" wire:click="clickData({{$data->id}})" @endif>
+                            <tr onmouseover="hoverStaff({{$data->id}})" onmouseout="hoverOutStaff({{$data->id}})" @if($data->status != "pending") style=" filter: contrast(75%);" @else style=" cursor: pointer;" data-bs-toggle="modal" data-bs-target="#clickRow" wire:click="clickData({{$data->id}})" @endif>
                                 <td>
                                     @if($data->status != "pending") {{ucfirst($data->name)}}  @else <b>{{ucfirst($data->name)}}</b> @endif
                                 </td>
@@ -42,7 +42,7 @@
                                     @if($data->status != "pending") {{ucfirst($data->quantity)}}  @else <b>{{ucfirst($data->quantity)}}</b> @endif
                                 </td>
                                 <td>
-                                    {{ucfirst($data->status)}}
+                                    @if($data->status != "pending") {{ucfirst($data->status)}}  @else <b>{{ucfirst($data->status)}}</b> @endif
                                 </td>
                             </tr>
                         @endforeach

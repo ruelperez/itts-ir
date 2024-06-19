@@ -20,7 +20,7 @@ use Livewire\Component;
 
 class MyDevice extends Component
 {
-    public $registrationSwitch, $brand_name, $deviceData = [], $inventory_id, $results = [], $device_name, $serial, $quantity = 1, $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $ids, $srl, $brand_name, $deviceData = [], $inventory_id, $results = [], $device_name, $serial, $quantity = 1, $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -206,6 +206,25 @@ class MyDevice extends Component
         }
     }
 
+    public function cancelApproval($id){
+        $this->ids = $id;
+        $tu = \App\Models\MyDevice::find($id);
+        $this->srl = $tu->serial;
+    }
+
+    public function cancelItemApproval(){
+        try {
+            $tr = \App\Models\MyDevice::find($this->ids);
+            $hh = \App\Models\Inventory::find($tr->inventory_id);
+            $hh->status = "stocked";
+            $hh->save();
+            \App\Models\MyDevice::find($this->ids)->delete();
+            session()->flash('good', "Successfully cancel");
+        }catch (\Exception $e){
+            session()->flash('bad', "Failed to delete");
+        }
+    }
+
     public function super_admin_Switch(){
         $data = SuperadminShow::all();
         if (count($data) == 1) {
@@ -285,6 +304,28 @@ class MyDevice extends Component
         else{
             session()->flash('bad', "Failed to save");
             return;
+        }
+    }
+
+    public function return($id){
+        $this->ids = $id;
+        $tu = \App\Models\MyDevice::find($id);
+        $this->srl = $tu->serial;
+    }
+
+    public function returnItem(){
+        try {
+            $tr = \App\Models\MyDevice::find($this->ids);
+            $tr->status = "returned";
+            $tr->save();
+
+            $ts = \App\Models\MyDevice::find($this->ids);
+            $hh = \App\Models\Inventory::find($ts->inventory_id);
+            $hh->status = "stocked";
+            $hh->save();
+            session()->flash('goodReturn', "Successfully return");
+        }catch (\Exception $e){
+            session()->flash('badReturn', "Failed to return");
         }
     }
 
