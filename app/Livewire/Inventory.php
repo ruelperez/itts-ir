@@ -53,6 +53,12 @@ class Inventory extends Component
         for ($i=0; count($this->checkBox) > $i; $i++){
             $yr = \App\Models\Inventory::find($this->checkBox[$i]);
             $yr->status = "dispose";
+            \App\Models\Logs::create([
+                'action' => "Dispose an item with a serial number ".$yr->serial,
+                'user_id' => $this->user_id,
+                'photo' => $this->photo,
+                'fullname' => $this->fullname,
+            ]);
             $yr->save();
         }
         $this->checkBox = [];
@@ -60,7 +66,14 @@ class Inventory extends Component
 
     public function delete(){
         for ($i=0; count($this->checkBox) > $i; $i++){
-           \App\Models\Inventory::find($this->checkBox[$i])->delete();
+           $th = \App\Models\Inventory::find($this->checkBox[$i]);
+            \App\Models\Logs::create([
+                'action' => "Delete item with serial number ".$th->serial,
+                'user_id' => $this->user_id,
+                'photo' => $this->photo,
+                'fullname' => $this->fullname,
+            ]);
+            $th->delete();
         }
         $this->checkBox = [];
     }
@@ -76,16 +89,26 @@ class Inventory extends Component
     }
 
     public function submitEdit(){
-        for ($i=0; count($this->checkBox) > $i; $i++){
-            $yr = \App\Models\Inventory::find($this->checkBox[$i]);
-            $yr->name = $this->device_name;
-            $yr->brand_name = $this->brand_name;
-            $yr->serial = $this->serial;
-            $yr->quantity = $this->quantity;
-            $yr->save();
+        try {
+            for ($i=0; count($this->checkBox) > $i; $i++){
+                $yr = \App\Models\Inventory::find($this->checkBox[$i]);
+                $yr->name = $this->device_name;
+                $yr->brand_name = $this->brand_name;
+                $yr->serial = $this->serial;
+                $yr->quantity = $this->quantity;
+                \App\Models\Logs::create([
+                    'action' => "Edit item on inventory with a serial number ".$this->serial,
+                    'user_id' => $this->user_id,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
+                $yr->save();
+            }
+            $this->checkBox = [];
+            session()->flash('goodEdit', "Successfully saved");
+        }catch (\Exception $e){
+            session()->flash('badEdit', "Successfully saved");
         }
-
-        $this->checkBox = [];
     }
     public function submitAdd(){
         $this->validate([
@@ -100,6 +123,12 @@ class Inventory extends Component
                 'fullname' => $this->fullname,
                 'user_id' => $this->user_id,
                 'brand_name' => $this->brand_name,
+            ]);
+            \App\Models\Logs::create([
+                'action' => "Add item on inventory with a serial number ".$this->serial,
+                'user_id' => $this->user_id,
+                'photo' => $this->photo,
+                'fullname' => $this->fullname,
             ]);
             $this->device_name = "laptop";
             $this->serial = "";

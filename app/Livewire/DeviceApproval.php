@@ -62,12 +62,24 @@ class DeviceApproval extends Component
         $ty = \App\Models\Inventory::find($kl->inventory_id);
         try {
             if ($this->pendingStat == "pending deployment"){
+                \App\Models\Logs::create([
+                    'action' => "Approved deployment an item with serial number ".$kl->serial." from ".$kl->fullname,
+                    'user_id' => $this->user_id,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
                 $kl->status = "deployed";
                 $kl->save();
                 $ty->status = "deployed";
                 $ty->save();
             }
             elseif ($this->pendingStat == "pending return"){
+                \App\Models\Logs::create([
+                    'action' => "Approved return item with serial number ".$kl->serial." from ".$kl->fullname,
+                    'user_id' => $this->user_id,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
                 $kl->status = "returned";
                 $kl->save();
                 $ty->status = "stocked";
@@ -85,12 +97,24 @@ class DeviceApproval extends Component
         $ty = \App\Models\Inventory::find($kl->inventory_id);
         try {
             if ($this->pendingStat == "pending deployment"){
+                \App\Models\Logs::create([
+                    'action' => "Declined deployment an item with serial number ".$kl->serial." from ".$kl->fullname,
+                    'user_id' => $this->user_id,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
                 $kl->status = "declined";
                 $kl->save();
                 $ty->status = "stocked";
                 $ty->save();
             }
             elseif ($this->pendingStat == "pending return"){
+                \App\Models\Logs::create([
+                    'action' => "Declined return an item with serial number ".$kl->serial." from ".$kl->fullname,
+                    'user_id' => $this->user_id,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
                 $kl->status = "deployed";
                 $kl->save();
                 $ty->status = "deployed";

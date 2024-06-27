@@ -1,6 +1,6 @@
 <div wire:ignore.self class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content" >
+        <div class="modal-content" style="height: 550px;">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Add item</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -29,11 +29,11 @@
                         <input type="text" class="form-control" wire:model="serial" required>
                         @error('serial') <span style="color: red">{{ $message }}</span> @enderror
                     </div>
-                    <div class="mb-4">
+                    <div class="mb-2">
                         <label for="exampleInputPassword1" class="form-label">Quantity</label>
                         <input type="text" class="form-control" wire:model="quantity" required>
                     </div>
-                    <button type="submit" class="btn btn-primary mb-3">Submit</button>
+                    <button type="submit" class="btn btn-primary mb-1">Submit</button>
                     @if(session()->has('good'))
                         <div class="alert alert-success" style="width: 100%; " wire:ignore>
                             {{ session('good') }}
