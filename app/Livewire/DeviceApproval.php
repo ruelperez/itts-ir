@@ -20,7 +20,7 @@ use Livewire\Component;
 
 class DeviceApproval extends Component
 {
-    public $registrationSwitch, $brand_name, $device_id, $deviceData = [], $inventory_id, $results = [], $device_name, $serial, $quantity = 1, $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $searchApproval, $pendingStat, $showSearch = false, $brand_name, $device_id, $deviceData = [], $inventory_id, $results = [], $device_name, $serial, $quantity = 1, $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -34,8 +34,18 @@ class DeviceApproval extends Component
         }
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
-        $this->deviceData = \App\Models\MyDevice::where('user_id',$this->user_id)
-            ->orderBy('created_at', 'desc')->get();
+        if ($this->searchApproval == ""){
+            $this->deviceData = \App\Models\MyDevice::orderBy('created_at', 'desc')->get();
+        }
+        else{
+            $this->deviceData = \App\Models\MyDevice::where('name','LIKE', '%'.$this->searchApproval.'%')
+                ->orWhere('serial', 'LIKE', '%'.$this->searchApproval.'%')
+                ->orWhere('status', 'LIKE', '%'.$this->searchApproval.'%')
+                ->orWhere('name', 'LIKE', '%'.$this->searchApproval.'%')
+                ->orWhere('brand_name', 'LIKE', '%'.$this->searchApproval.'%')
+                ->orWhere('fullname', 'LIKE', '%'.$this->searchApproval.'%')
+                ->get();
+        }
         return view('livewire.device-approval');
     }
 
@@ -51,10 +61,18 @@ class DeviceApproval extends Component
         $kl= \App\Models\MyDevice::find($this->device_id);
         $ty = \App\Models\Inventory::find($kl->inventory_id);
         try {
-            $kl->status = "deployed";
-            $kl->save();
-            $ty->status = "deployed";
-            $ty->save();
+            if ($this->pendingStat == "pending deployment"){
+                $kl->status = "deployed";
+                $kl->save();
+                $ty->status = "deployed";
+                $ty->save();
+            }
+            elseif ($this->pendingStat == "pending return"){
+                $kl->status = "returned";
+                $kl->save();
+                $ty->status = "stocked";
+                $ty->save();
+            }
             session()->flash('good', "Device approved");
         }catch (\Exception $e){
             session()->flash('bad', "Failed to approve, please try again");
@@ -66,10 +84,18 @@ class DeviceApproval extends Component
         $kl= \App\Models\MyDevice::find($this->device_id);
         $ty = \App\Models\Inventory::find($kl->inventory_id);
         try {
-            $kl->status = "declined";
-            $kl->save();
-            $ty->status = "stocked";
-            $ty->save();
+            if ($this->pendingStat == "pending deployment"){
+                $kl->status = "declined";
+                $kl->save();
+                $ty->status = "stocked";
+                $ty->save();
+            }
+            elseif ($this->pendingStat == "pending return"){
+                $kl->status = "deployed";
+                $kl->save();
+                $ty->status = "deployed";
+                $ty->save();
+            }
             session()->flash('good', "Device declined");
         }catch (\Exception $e){
             session()->flash('bad', "Failed to decline, please try again");
@@ -78,6 +104,9 @@ class DeviceApproval extends Component
 
     public function clickData($id){
         $this->device_id = $id;
+        $kl = \App\Models\MyDevice::find($id);
+        $this->pendingStat = $kl->status;
+
     }
 
     public function logout(){

@@ -20,7 +20,7 @@ use Livewire\Component;
 
 class MyDevice extends Component
 {
-    public $registrationSwitch, $ids, $srl, $brand_name, $deviceData = [], $inventory_id, $results = [], $device_name, $serial, $quantity = 1, $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $mydeviceSearch, $showSearch = false, $ids, $srl, $brand_name, $deviceData = [], $inventory_id, $results = [], $device_name, $serial, $quantity = 1, $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -34,9 +34,41 @@ class MyDevice extends Component
         }
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
-        $this->deviceData = \App\Models\MyDevice::where('user_id',$this->user_id)
-            ->orderBy('created_at', 'desc')->get();
+        if ($this->mydeviceSearch == ""){
+            $this->deviceData = \App\Models\MyDevice::where('user_id',$this->user_id)
+                ->orderBy('created_at', 'desc')->get();
+        }
+        else{
+            $this->deviceData = \App\Models\MyDevice::where('user_id',$this->user_id)
+                ->where('name','LIKE', '%'.$this->mydeviceSearch.'%')
+                ->orWhere('serial', 'LIKE', '%'.$this->mydeviceSearch.'%')
+                ->where('user_id',$this->user_id)
+                ->orWhere('status', 'LIKE', '%'.$this->mydeviceSearch.'%')
+                ->where('user_id',$this->user_id)
+                ->orWhere('name', 'LIKE', '%'.$this->mydeviceSearch.'%')
+                ->where('user_id',$this->user_id)
+                ->orWhere('brand_name', 'LIKE', '%'.$this->mydeviceSearch.'%')
+                ->where('user_id',$this->user_id)
+                ->get();
+        }
+
         return view('livewire.my-device')->title('My device');
+    }
+
+    public function removeSearch(){
+        $this->showSearch = false;
+    }
+
+    public function clickSearch(){
+        if ($this->serial != ""){
+            $this->results = \App\Models\Inventory::where('serial','LIKE','%'. $this->serial. '%')
+                ->where('status','stocked')->get();
+            $this->showSearch = true;
+        }
+        else{
+            $this->showSearch = false;
+            $this->results = [];
+        }
     }
 
     public function mount($name){
@@ -275,35 +307,43 @@ class MyDevice extends Component
     }
 
     public function submitAdd(){
-        $yu = \App\Models\Inventory::where('serial',$this->serial)->get();
-        if (count($yu) != 0){
-            try {
-                \App\Models\MyDevice::create([
-                    'name' => $this->device_name,
-                    'serial' => $this->serial,
-                    'quantity' => $this->quantity,
-                    'status' => "pending",
-                    'brand_name' => $this->brand_name,
-                    'fullname' => $this->fullname,
-                    'inventory_id' => $this->inventory_id,
-                    'user_id' => $this->user_id,
-                ]);
-                $aa = \App\Models\Inventory::find($this->inventory_id);
-                $aa->status = "pending";
-                $aa->save();
-                $this->device_name = "";
-                $this->serial = "";
-                $this->quantity = "";
-                $this->brand_name = "";
-                session()->flash('good', "Successfully saved");
-            }catch (\Exception $e){
-                session()->flash('bad', "Failed to save");
-            }
-
+        $fg = \App\Models\Inventory::where('serial',$this->serial)
+            ->where('status','stocked')->get();
+        if (count($fg) == 0){
+            session()->flash('notExist', "Serial number does not exist");
+            return;
         }
         else{
-            session()->flash('bad', "Failed to save");
-            return;
+            $yu = \App\Models\Inventory::where('serial',$this->serial)->get();
+            if (count($yu) != 0){
+                try {
+                    \App\Models\MyDevice::create([
+                        'name' => $this->device_name,
+                        'serial' => $this->serial,
+                        'quantity' => $this->quantity,
+                        'status' => "pending deployment",
+                        'brand_name' => $this->brand_name,
+                        'fullname' => $this->fullname,
+                        'inventory_id' => $this->inventory_id,
+                        'user_id' => $this->user_id,
+                    ]);
+                    $aa = \App\Models\Inventory::find($this->inventory_id);
+                    $aa->status = "pending deployment";
+                    $aa->save();
+                    $this->device_name = "";
+                    $this->serial = "";
+                    $this->quantity = "";
+                    $this->brand_name = "";
+                    session()->flash('good', "Successfully saved");
+                }catch (\Exception $e){
+                    session()->flash('bad', "Failed to save");
+                }
+
+            }
+            else{
+                session()->flash('bad', "Failed to save");
+                return;
+            }
         }
     }
 
@@ -316,14 +356,14 @@ class MyDevice extends Component
     public function returnItem(){
         try {
             $tr = \App\Models\MyDevice::find($this->ids);
-            $tr->status = "returned";
+            $tr->status = "pending return";
             $tr->save();
 
             $ts = \App\Models\MyDevice::find($this->ids);
             $hh = \App\Models\Inventory::find($ts->inventory_id);
-            $hh->status = "stocked";
+            $hh->status = "pending return";
             $hh->save();
-            session()->flash('goodReturn', "Successfully return");
+            session()->flash('goodReturn', "Pending return");
         }catch (\Exception $e){
             session()->flash('badReturn', "Failed to return");
         }
@@ -334,8 +374,10 @@ class MyDevice extends Component
             if ($this->serial != ""){
                 $this->results = \App\Models\Inventory::where('serial','LIKE','%'. $this->serial. '%')
                     ->where('status','stocked')->get();
+                $this->showSearch = true;
             }
             else{
+                $this->showSearch = false;
                 $this->results = [];
             }
 

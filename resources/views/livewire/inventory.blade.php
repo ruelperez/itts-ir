@@ -11,7 +11,7 @@
                 <div style="display: flex;">
                     <h6 style="margin-left: 2%; margin-top: 3%;">INVENTORY</h6>
                     <div style="margin-left: 3%; margin-top: 2.5%; width: 20%;">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" wire:model="inven">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" wire:model.live="search">
                     </div>
                     <div style="margin-left: 3%; margin-top: 3%">
                         <i class="fa-solid fa-circle-plus" style="font-size: 25px;cursor: pointer" data-bs-toggle="modal" data-bs-target="#add"></i>
@@ -46,9 +46,6 @@
                     <div class="ms-4" onclick="location.href = '/itts/19/device-approval';">
                         <button class="btn btn-success">Device approval</button>
                     </div>
-                    <div class="ms-3" onclick="location.href = '/itts/19/device-approval';">
-                        <button class="btn btn-secondary">All active devices</button>
-                    </div>
                 </div>
 
                 <div style="font-size: 14px; margin-top: 30px; width: 92%; margin-left: 4%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); "  class="px-4 py-3">
@@ -77,7 +74,7 @@
                                     {{$data->quantity}}
                                 </td>
                                 <td>
-                                    @if($data->status == "deployed") <i class="fa-solid fa-circle" style="color: green"></i> @elseif($data->status == "stocked") <i class="fa-solid fa-circle" style="color: blue"></i> @elseif($data->status == "pending") <i class="fa-solid fa-circle" style="color: yellow"></i>@else <i class="fa-solid fa-circle" style="color: red"></i> @endif
+                                    @if($data->status == "deployed") <i class="fa-solid fa-circle" style="color: green"></i> @elseif($data->status == "stocked") <i class="fa-solid fa-circle" style="color: blue"></i> @elseif($data->status == "pending deployment" or $data->status == "pending return")<i class="fa-solid fa-circle" style="color: yellow"></i>@else <i class="fa-solid fa-circle" style="color: red"></i> @endif
                                 </td>
                                 <td>
                                     @if($data->status == "stocked")

@@ -40,8 +40,8 @@ class Inventory extends Component
         else{
             $this->InvData = \App\Models\Inventory::where('name','LIKE', '%'.$this->search.'%')
                 ->orWhere('serial', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('quantity', 'LIKE', '%'.$this->search.'%')
                 ->orWhere('status', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('name', 'LIKE', '%'.$this->search.'%')
                 ->orWhere('brand_name', 'LIKE', '%'.$this->search.'%')
                 ->get();
         }

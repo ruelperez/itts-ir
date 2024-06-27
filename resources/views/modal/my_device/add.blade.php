@@ -9,20 +9,25 @@
                 <form wire:submit.prevent="submitAdd">
                     <div class="mb-4">
                         <label for="exampleInputPassword1" class="form-label">Serial number</label>
-                        <input type="text" class="form-control" wire:model.live="serial" required>
-                        <div style="position: absolute; width: 93%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);">
-                            <ul class="list-group">
-                                @php $h=0; @endphp
-                                @foreach($results as $data)
-                                    @if($h < 6)
-                                        <li class="list-group-item btn" style="text-align: left; background-color: #E0FFFF" wire:click="click_items({{$data->id}})">
-                                            {{$data->serial}}
-                                        </li>
-                                    @endif
-                                    @php $h++; @endphp
-                                @endforeach
-                            </ul>
-                        </div>
+                        <input type="text" class="form-control" wire:model.live="serial" wire:blur="removeSearch" wire:click="clickSearch" required>
+                        @if(session()->has('notExist'))
+                                <p style="color: red">{{ session('notExist') }}</p>
+                        @endif
+                        @if($showSearch == true)
+                            <div style="position: absolute; width: 93%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);">
+                                <ul class="list-group">
+                                    @php $h=0; @endphp
+                                    @foreach($results as $data)
+                                        @if($h < 6)
+                                            <li class="list-group-item btn" style="text-align: left; background-color: #E0FFFF" wire:click="click_items({{$data->id}})">
+                                                {{$data->serial}}
+                                            </li>
+                                        @endif
+                                        @php $h++; @endphp
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                     <div class="mb-4">
                         <label class="form-label">Device type</label>
@@ -36,7 +41,7 @@
                         <label for="exampleInputPassword1" class="form-label">Quantity</label>
                         <input type="text" class="form-control" wire:model="quantity" required disabled>
                     </div>
-                    <button type="submit" class="btn btn-primary mb-3">Submit</button>
+                    <button type="submit" class="btn btn-primary mb-1">Submit</button>
                     @if(session()->has('good'))
                         <div class="alert alert-success" style="width: 100%; " wire:ignore>
                             {{ session('good') }}
