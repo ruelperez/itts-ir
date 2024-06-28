@@ -34,7 +34,6 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th scope="col">emp name</th>
                             <th scope="col">Device</th>
                             <th scope="col">Brand name</th>
                             <th scope="col">Serial</th>
@@ -45,9 +44,6 @@
                         <tbody>
                         @foreach($deviceData as $data)
                             <tr @if($data->status != "pending deployment" and $data->status != "pending return") style=" filter: contrast(75%); cursor: pointer" @else data-bs-toggle="modal" data-bs-target="#cancel" wire:click="cancelApproval({{$data->id}})" style=" cursor: pointer;" @endif @if($data->status == "deployed") data-bs-toggle="modal" data-bs-target="#return" wire:click="return({{$data->id}})" @endif>
-                                <td>
-                                    @if($data->status != "pending deployment"  and $data->status != "pending return") {{ucfirst($data->fullname)}}  @else <b>{{ucfirst($data->fullname)}}</b> @endif
-                                </td>
                                 <td>
                                     @if($data->status != "pending deployment"  and $data->status != "pending return") {{ucfirst($data->name)}}  @else <b>{{ucfirst($data->name)}}</b> @endif
                                 </td>
