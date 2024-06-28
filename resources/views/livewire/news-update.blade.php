@@ -45,6 +45,7 @@
                                 <option value="NEC">NEC</option>
                                 <option value="NEURO">NEURO</option>
                                 <option value="IMMUNO">IMMUNO</option>
+                                <option value="DTV">DTV</option>
                             </select>
                         </div>
                     </div>
