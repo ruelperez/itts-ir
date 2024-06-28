@@ -55,6 +55,14 @@ class DeviceApproval extends Component
         if (count($sd) < 1){
             return redirect('/itts/15/employee');
         }
+
+        $pst = auth()->user()->position;
+        if ($pst == "Super Admin"){
+
+        }
+        else{
+            return redirect('/');
+        }
     }
 
     public function approve(){
