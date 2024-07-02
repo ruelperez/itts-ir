@@ -34,7 +34,7 @@
     </tr>
     <tr style="border: 1px solid; text-align: left;">
         <td colspan="6" style="border: 1px solid; padding: 10px;">
-            <b>Department:</b>
+            <b>Department:</b> {{$userData->department}}
         </td>
         <td colspan="1" style="border: 1px solid; padding: 10px;">
 

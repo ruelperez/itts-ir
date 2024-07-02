@@ -41,7 +41,7 @@
             <b>Total Hour</b>
         </td>
         <td style="border: 1px solid; padding: 8px;">
-            <b>Branch</b>
+            <b>Site</b>
         </td>
         @if($role == "admin")
             <td style="border: 1px solid; padding: 8px; width: 40%;">

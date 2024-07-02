@@ -43,7 +43,7 @@
                         <b style="font-size: 17px; ">{{$month}}-{{$day}}-{{$year}}</b>
                     </div>
                     <div style="width: 15%;margin-left: auto; cursor: pointer" onclick="location.href = '/itts/per-shift-pdf/{{$month}}/{{$day}}/{{$year}}/{{$role}}'; ">
-                        <i class="fa-solid fa-file-pdf" style="color: #0c63e4; font-size: 22px;"></i> Save as OED
+                        <i class="fa-solid fa-file-pdf" style="color: #0c63e4; font-size: 22px;"></i> Save as PDF
                     </div>
                 </div>
                 <div style="margin-left: 4%; margin-top: 1%; width: 92%;">
@@ -58,7 +58,7 @@
                             <th scope="col">Time in</th>
                             <th scope="col">Time out</th>
                             <th scope="col">Total hour</th>
-                            <th scope="col">Branch</th>
+                            <th scope="col">Site</th>
                             @if($role == "admin")
                                 <th scope="col">Task</th>
                             @endif

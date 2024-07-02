@@ -20,7 +20,7 @@ use Livewire\Component;
 
 class DeployedByname extends Component
 {
-    public $registrationSwitch, $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $employeeData, $deviceData = [], $search, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -33,8 +33,20 @@ class DeployedByname extends Component
             $this->employeeData = $emp->designation;
         }
         $this->photo = auth()->user()->photo;
-        $this->dtrData = Dtr::all();
-        return view('livewire.deployed-byname')->title('deployed device');
+        if ($this->search == ""){
+            $this->deviceData = \App\Models\MyDevice::select('fullname','user_id')
+                ->distinct('fullname')
+                ->get();
+        }else{
+            $this->deviceData = \App\Models\MyDevice::select('fullname','user_id')
+                ->where('fullname','LIKE','%'.$this->search.'%')
+                ->distinct('fullname')->get();
+        }
+        return view('livewire.deployed-byname')->title('deployed device by name');
+    }
+
+    public function clickName($userids){
+        return redirect()->to('itts/21/deployed-item-record/'.$userids);
     }
     public function mount(){
         $usrId = auth()->user()->id;
@@ -43,48 +55,6 @@ class DeployedByname extends Component
             return redirect('/itts/15/employee');
         }
     }
-
-//    public function boom(){
-//        $gg = \App\Models\Employee::all();
-//        foreach ($gg as $hh){
-//            $aa = User::find($hh->user_id);
-//            $aa->branch = $hh->branch;
-//            $aa->save();
-//
-//            $aa = User::find($hh->user_id)->dtr;
-//            foreach ($aa as $bb){
-//                $kk = Dtr::find($bb->id);
-//                $kk->branch = $hh->branch;
-//                $kk->save();
-//            }
-//
-//            $aa = User::find($hh->user_id)->dtr_permanent;
-//            foreach ($aa as $bb){
-//                $kk = DtrPermanent::find($bb->id);
-//                $kk->branch = $hh->branch;
-//                $kk->save();
-//            }
-//
-//            $aa = User::find($hh->user_id)->dtr_content;
-//            foreach ($aa as $bb){
-//                $kk = DtrContent::find($bb->id);
-//                $kk->branch = $hh->branch;
-//                $kk->save();
-//            }
-//
-//        }
-//
-//        dd('save');
-//    }
-
-//    public function baam(){
-//        $kk = \App\Models\Employee::all();
-//        foreach ($kk as $hh){
-//            $ii = \App\Models\Employee::find($hh->id);
-//            $ii->id_user = "ITTS-00".$hh->user_id;
-//            $ii->save();
-//        }
-//    }
     public function logout(){
         Auth::logout();
         return redirect()->to('/login');

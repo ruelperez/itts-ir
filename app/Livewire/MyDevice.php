@@ -20,7 +20,7 @@ use Livewire\Component;
 
 class MyDevice extends Component
 {
-    public $registrationSwitch, $mydeviceSearch, $showSearch = false, $ids, $srl, $brand_name, $deviceData = [], $inventory_id, $results = [], $device_name, $serial, $quantity = 1, $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $mydeviceSearch, $status = "all", $showSearch = false, $ids, $srl, $brand_name, $deviceData = [], $inventory_id, $results = [], $device_name, $serial, $quantity = 1, $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -35,8 +35,25 @@ class MyDevice extends Component
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
         if ($this->mydeviceSearch == ""){
-            $this->deviceData = \App\Models\MyDevice::where('user_id',$this->user_id)
-                ->orderBy('created_at', 'desc')->get();
+            if ($this->status == "all"){
+                $this->deviceData = \App\Models\MyDevice::where('user_id',$this->user_id)
+                    ->orderBy('created_at', 'desc')->get();
+            }
+            elseif ($this->status == "active"){
+                $this->deviceData = \App\Models\MyDevice::where('user_id',$this->user_id)
+                    ->where('status','deployed')
+                    ->orderBy('created_at', 'desc')->get();
+            }
+            elseif ($this->status == "returned"){
+                $this->deviceData = \App\Models\MyDevice::where('user_id',$this->user_id)
+                    ->where('status','returned')
+                    ->orderBy('created_at', 'desc')->get();
+            }
+            elseif ($this->status == "declined"){
+                $this->deviceData = \App\Models\MyDevice::where('user_id',$this->user_id)
+                    ->where('status','declined')
+                    ->orderBy('created_at', 'desc')->get();
+            }
         }
         else{
             $this->deviceData = \App\Models\MyDevice::where('user_id',$this->user_id)

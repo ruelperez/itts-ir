@@ -36,9 +36,10 @@ Route::get('/itts/17/{name}', \App\Livewire\MyDevice::class)->middleware('auth')
 Route::get('/itts/18/inventory', \App\Livewire\Inventory::class)->middleware('auth');
 Route::get('/itts/19/device-approval', \App\Livewire\DeviceApproval::class)->middleware('auth');
 Route::get('/itts/20/deployed-item', \App\Livewire\DeployedByname::class)->middleware('auth');
+Route::get('/itts/21/deployed-item-record/{userID}', \App\Livewire\DeployedItemRecord::class)->middleware('auth');
+Route::get('/itts/22/device-clearance/{userID}', [\App\Http\Controllers\ClearanceController::class, 'pdf'])->middleware('auth');
 Route::get('/', function (){
     return redirect('/itts/5/dashboard');
 });
-
 Route::get('/login', \App\Livewire\Login::class)->name('login')->middleware('guest');
 Route::get('/register', \App\Livewire\Register::class);

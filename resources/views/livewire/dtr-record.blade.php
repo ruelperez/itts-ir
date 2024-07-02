@@ -15,20 +15,6 @@
                 </div>
                 <div style="margin-top: 2%; width: 80%; margin-left: 4%; display: flex">
                     <input type="text" class="form-control" placeholder="Year" wire:model.live="year" style="width: 15%;">
-{{--                    <select class="form-select" aria-label="Default select example" wire:model.live="month" style="width: 15%;">--}}
-{{--                        <option value="Jan">January</option>--}}
-{{--                        <option value="Feb">February</option>--}}
-{{--                        <option value="Mar">March</option>--}}
-{{--                        <option value="Apr">April</option>--}}
-{{--                        <option value="May">May</option>--}}
-{{--                        <option value="Jun">June</option>--}}
-{{--                        <option value="Jul">July</option>--}}
-{{--                        <option value="Aug">August</option>--}}
-{{--                        <option value="Sept">September</option>--}}
-{{--                        <option value="Oct">October</option>--}}
-{{--                        <option value="Nov">November</option>--}}
-{{--                        <option value="Dec">December</option>--}}
-{{--                    </select>--}}
                     <select class="form-select" aria-label="Default select example" wire:model.live="month" style="width: 15%; margin-left: 1%;">
                         <option value="01">January</option>
                         <option value="02">February</option>
@@ -52,7 +38,7 @@
                 </div>
                 <div style="margin-left: 4%; margin-top: 2%; width: 92%;">
                     <div style="margin-left: auto; width: 120px; margin-bottom: 1%; cursor: pointer" onclick="location.href = '/itts/save-eod/{{$otherUserID}}/{{$week}}';">
-                        <i class="fa-solid fa-file-pdf" style="color: #0c63e4; font-size: 22px; margin-right: 1%;"></i> Save as OED
+                        <i class="fa-solid fa-file-pdf" style="color: #0c63e4; font-size: 22px; margin-right: 1%;"></i> Save as PDF
                     </div>
                     <table class="table table-hover">
                         <thead>
@@ -64,7 +50,9 @@
                             <th scope="col">Time in</th>
                             <th scope="col">Time out</th>
                             <th scope="col">Total time</th>
-                            <th scope="col">Task</th>
+                            @if($empPosition != "Agent")
+                                <th scope="col">Task</th>
+                            @endif
                         </tr>
                         </thead>
                         <tbody>
@@ -86,9 +74,11 @@
                                         @endphp
                                         {{$result}}
                                     </td>
-                                    <td>
-                                        <i class="fa-solid fa-list-check" style="margin-right: 3%; cursor: pointer" data-bs-toggle="modal" data-bs-target="#taskRecord" wire:click="clickTask({{$data->id}})"></i>
-                                    </td>
+                                    @if($empPosition != "Agent")
+                                        <td>
+                                            <i class="fa-solid fa-list-check" style="margin-right: 3%; cursor: pointer" data-bs-toggle="modal" data-bs-target="#taskRecord" wire:click="clickTask({{$data->id}})"></i>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endif
                         @endforeach

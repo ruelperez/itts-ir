@@ -9,7 +9,7 @@
     <div style="display: flex; width: 100%; margin-top: 105px;">
         <div style="width: 81%; margin-left: 19%;">
             <div class="container">
-                <div style="display: flex">
+                <div style="display: flex;">
                     <h6 style="margin-left: 2%; margin-top: 3%;">MY DEVICE</h6>
                     <div style="margin-left: 3%; margin-top: 2.5%; width: 25%;">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" wire:model.live="mydeviceSearch">
@@ -17,7 +17,7 @@
                     <div style="margin-left: 3%; margin-top: 3%">
                         <i class="fa-solid fa-circle-plus" style="font-size: 30px;cursor: pointer" data-bs-toggle="modal" data-bs-target="#add"></i>
                     </div>
-                    <div style="display: flex; font-size: 14px;" class="mt-4 align-items-center ms-5">
+                    <div style="display: flex; font-size: 14px; width: 50%;" class="mt-4 align-items-center ms-5">
                         <div style="margin-top: 20px;">
                             <i class="fa-solid fa-circle" style="color: green"></i> Active
                         </div>
@@ -27,6 +27,12 @@
                         <div class="ms-5" style="margin-top: 20px;">
                             <i class="fa-solid fa-circle" style="color: blue"></i> Declined
                         </div>
+                        <select class="form-select ms-5" aria-label="Default select example" wire:model.live="status" style="margin-top: 10px; width: 20%;">
+                            <option value="all">All</option>
+                            <option value="active">Active</option>
+                            <option value="returned">Returned</option>
+                            <option value="declined">Declined</option>
+                        </select>
                     </div>
                 </div>
                 <hr>

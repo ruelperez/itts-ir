@@ -15,13 +15,7 @@ class ShiftController extends Controller
             $userID = [];
         }
         elseif ($role == "agent"){
-//            $userID = [];
-//            $hg = DtrContent::all();
-//            foreach ($hg as $gh){
-//                $userID[] = $gh->user_id;
-//            }
             $userID = User::where('position',"Agent")->get();
-
         }
         else{
             $userID = User::where('position','!=',"Agent")->get();
