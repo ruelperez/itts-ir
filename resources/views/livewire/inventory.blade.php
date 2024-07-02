@@ -46,9 +46,12 @@
                     <div class="ms-4" onclick="location.href = '/itts/19/device-approval';">
                         <button class="btn btn-success">Device approval</button>
                     </div>
+                    <div class="ms-2" onclick="location.href = '/itts/20/deployed-item';">
+                        <button class="btn btn-warning">Deployed device</button>
+                    </div>
                 </div>
 
-                <div style="font-size: 14px; margin-top: 30px; width: 92%; margin-left: 4%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); "  class="px-4 py-3">
+                <div style="font-size: 14px; margin-top: 20px; width: 92%; margin-left: 4%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); "  class="px-4 py-3">
                     <table class="table table-hover">
                         <thead>
                         <tr>

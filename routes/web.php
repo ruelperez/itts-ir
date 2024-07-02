@@ -35,6 +35,7 @@ Route::get('/itts/16/staff-directory', \App\Livewire\StaffDirectory::class)->mid
 Route::get('/itts/17/{name}', \App\Livewire\MyDevice::class)->middleware('auth');
 Route::get('/itts/18/inventory', \App\Livewire\Inventory::class)->middleware('auth');
 Route::get('/itts/19/device-approval', \App\Livewire\DeviceApproval::class)->middleware('auth');
+Route::get('/itts/20/deployed-item', \App\Livewire\DeployedByname::class)->middleware('auth');
 Route::get('/', function (){
     return redirect('/itts/5/dashboard');
 });
