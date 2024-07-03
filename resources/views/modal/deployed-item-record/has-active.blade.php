@@ -8,7 +8,7 @@
                 There are devices that are active. Would you like to proceed?
             </div>
             <div class="modal-footer">
-                <button class="btn btn-outline-dark">CANCEL</button>
+                <button class="btn btn-outline-dark" data-bs-dismiss="modal" aria-label="Close">CANCEL</button>
                 <button class="btn btn-warning" onclick="location.href = '/itts/22/device-clearance/{{$deviceUserID}}';">YES</button>
             </div>
         </div>

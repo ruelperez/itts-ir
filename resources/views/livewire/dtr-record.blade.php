@@ -43,6 +43,7 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
+                            <th scope="col">ID</th>
                             <th scope="col">Date</th>
                             <th scope="col">Day</th>
                             <th scope="col">Time in</th>
@@ -59,6 +60,7 @@
                         @foreach($dtrData as $data)
                             @if(Carbon\Carbon::parse($data->in)->format('Y') == $year and Carbon\Carbon::parse($data->in)->format('m') == $month)
                                 <tr>
+                                    <td>{{$data->id}}</td>
                                     <td>{{Carbon\Carbon::parse($data->in)->format('M/d/Y')}}</td>
                                     <th scope="row">@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('D') }} @endif</th>
                                     <td>@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('h:i A') }} @endif</td>
