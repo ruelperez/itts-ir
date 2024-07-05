@@ -34,6 +34,7 @@
                         <option value="2">Week 2</option>
                         <option value="3">Week 3</option>
                         <option value="4">Week 4</option>
+                        <option value="5">Week 5</option>
                     </select>
                 </div>
                 <div style="margin-left: 4%; margin-top: 2%; width: 92%;">
@@ -43,7 +44,6 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th scope="col">ID</th>
                             <th scope="col">Date</th>
                             <th scope="col">Day</th>
                             <th scope="col">Time in</th>
@@ -60,7 +60,6 @@
                         @foreach($dtrData as $data)
                             @if(Carbon\Carbon::parse($data->in)->format('Y') == $year and Carbon\Carbon::parse($data->in)->format('m') == $month)
                                 <tr>
-                                    <td>{{$data->id}}</td>
                                     <td>{{Carbon\Carbon::parse($data->in)->format('M/d/Y')}}</td>
                                     <th scope="row">@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('D') }} @endif</th>
                                     <td>@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('h:i A') }} @endif</td>
