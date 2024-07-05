@@ -81,7 +81,7 @@
             <td style="border: 1px solid; text-align: left; padding: 8px;">{{ucwords($data->name)}} ({{ucwords($data->brand_name)}})</td>
             <td style="border: 1px solid;">{{$data->serial}}</td>
             <td style="border: 1px solid;">{{$data->status}}</td>
-            <td style="border: 1px solid;">@if($data->status == "returned") <img src="{{public_path('photo/signature.png')}}" width="160"> @endif</td>
+            <td style="border: 1px solid;">@if($data->status == "returned") <img src="{{public_path('photo/signature.png')}}" width="170"> @endif</td>
             <td style="border: 1px solid;">{{\Carbon\Carbon::now()->format('m-d-Y')}}</td>
         </tr>
     @endforeach
@@ -93,7 +93,7 @@
         </td>
     </tr>
 </table>
-<table style="width: 100%; text-align: center;border: 1px solid; border-collapse: collapse;" >
+<table style="width: 100%; text-align: center;border: 1px solid; border-collapse: collapse; margin-bottom: 15px;" >
     <tr style="border: 1px solid;">
         <td style="border: 1px solid; padding: 8px; width: 30%;">
 
@@ -115,21 +115,22 @@
         <td style="border: 1px solid; text-align: left; padding: 8px;">Confirm the deletion of employees from system access & password.</td>
         <td style="border: 1px solid;"></td>
         <td style="border: 1px solid;"></td>
-        <td style="border: 1px solid;"></td>
+        <td style="border: 1px solid;"><img src="{{public_path('photo/signature.png')}}" width="180"></td>
         <td style="border: 1px solid;">{{\Carbon\Carbon::now()->format('m-d-Y')}}</td>
     </tr>
     <tr style="border: 1px solid;">
         <td style="border: 1px solid; text-align: left; padding: 8px;">Confirm the deletion/suspension of email address and redirection of email to supervisor</td>
         <td style="border: 1px solid;"></td>
         <td style="border: 1px solid;"></td>
-        <td style="border: 1px solid;"></td>
+        <td style="border: 1px solid;"><img src="{{public_path('photo/signature.png')}}" width="180"></td>
         <td style="border: 1px solid;">{{\Carbon\Carbon::now()->format('m-d-Y')}}</td>
     </tr>
     <tr style="border: 1px solid;">
         <td style="border: 1px solid; text-align: left; padding: 8px;">Confirm the deletion/suspension of the links and dialer</td>
         <td style="border: 1px solid;"></td>
         <td style="border: 1px solid;"></td>
-        <td style="border: 1px solid;"></td>
+        <td style="border: 1px solid;"><img src="{{public_path('photo/signature.png')}}" width="180"></td>
         <td style="border: 1px solid;">{{\Carbon\Carbon::now()->format('m-d-Y')}}</td>
     </tr>
 </table>
+<i>Return this form to the Finance and Administration Department on completion to facilitate the release of final dues</i>

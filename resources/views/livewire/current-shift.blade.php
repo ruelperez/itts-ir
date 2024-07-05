@@ -17,6 +17,11 @@
                     <div style="margin-left: 3%; width: 25%;">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" wire:model.live="search">
                     </div>
+                    <select class="form-select ms-4" aria-label="Default select example" wire:model.live="branch" style="width: 11%;">
+                        <option value="all">All</option>
+                        <option value="mindoro">Mindoro</option>
+                        <option value="bicol">Bicol</option>
+                    </select>
                 </div>
                 <div style="margin-left: 4%; margin-top: 1%; width: 92%;">
                     <table class="table table-hover">
@@ -28,7 +33,7 @@
                             <th scope="col">Time in</th>
                             <th scope="col">Time out</th>
                             <th scope="col">Total hour</th>
-                            <th scope="col">Branch</th>
+                            <th scope="col">Site</th>
                         </tr>
                         </thead>
                         <tbody>

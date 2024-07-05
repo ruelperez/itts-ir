@@ -46,6 +46,7 @@
                                 <option value="NEURO">NEURO</option>
                                 <option value="IMMUNO">IMMUNO</option>
                                 <option value="DTV">DTV</option>
+                                <option value="Zantac">ZANTAC</option>
                             </select>
                         </div>
                     </div>

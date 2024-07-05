@@ -27,7 +27,7 @@ class CurrentShift extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $search, $employeeData, $unchangeTimeIn1, $unchangeTimeIn2, $timeIn1, $dtrName, $ids, $timeIn2, $timeOut1, $timeOut2, $date, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $branch = "all", $search, $employeeData, $unchangeTimeIn1, $unchangeTimeIn2, $timeIn1, $dtrName, $ids, $timeIn2, $timeOut1, $timeOut2, $date, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
@@ -40,7 +40,12 @@ class CurrentShift extends Component
         }
         $this->photo = auth()->user()->photo;
         if ($this->search == ""){
-            $this->dtrData = DtrPermanent::all();
+            if ($this->branch == "all"){
+                $this->dtrData = DtrPermanent::all();
+            }
+            else{
+                $this->dtrData = DtrPermanent::where('branch',$this->branch)->get();
+            }
         }else{
             $this->dtrData = DtrPermanent::where('fullname','LIKE', '%'.$this->search.'%')
                 ->orWhere('branch', 'LIKE', '%'.$this->search.'%')->get();
