@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
+            $table->string('fullname');
             $table->string('fname');
             $table->string('lname');
             $table->string('mi');
@@ -34,7 +35,6 @@ return new class extends Migration
             $table->string('permanent_street');
             $table->string('permanent_brgy');
             $table->string('permanent_city');
-            $table->string('permanent_working_email');
             $table->string('sss');
             $table->string('philhealth');
             $table->string('tin');
@@ -45,6 +45,8 @@ return new class extends Migration
             $table->string('contact_number');
             $table->string('address');
             $table->string('relationship');
+            $table->string('id_user');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

@@ -15,6 +15,7 @@ class Inventory extends Model
         'fullname',
         'user_id',
         'brand_name',
+        'deployed_name'
     ];
     use HasFactory;
 }

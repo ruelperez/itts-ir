@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->boolean('is_admin');
+            $table->string('branch');
             $table->rememberToken();
             $table->timestamps();
         });

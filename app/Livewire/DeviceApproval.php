@@ -79,6 +79,7 @@ class DeviceApproval extends Component
                 $kl->status = "deployed";
                 $kl->save();
                 $ty->status = "deployed";
+                $ty->deployed_name = $kl->fullname;
                 $ty->save();
             }
             elseif ($this->pendingStat == "pending return"){
@@ -126,6 +127,7 @@ class DeviceApproval extends Component
                 $kl->status = "deployed";
                 $kl->save();
                 $ty->status = "deployed";
+                $ty->deployed_name = $kl->fullname;
                 $ty->save();
             }
             session()->flash('good', "Device declined");

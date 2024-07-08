@@ -20,6 +20,7 @@ return new class extends Migration
             $table->dateTime('out2')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('dtr_id');
+            $table->string('branch');
             $table->timestamps();
         });
     }

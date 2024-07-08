@@ -52,6 +52,15 @@ class Dashboard extends Component
     }
 
 //    public function boom(){
+//        $ty = \App\Models\MyDevice::where('status','deployed')->get();
+//        foreach ($ty as $tt){
+//            $ee = \App\Models\Inventory::find($tt->inventory_id);
+//            $ee->deployed_name = $tt->fullname;
+//            $ee->save();
+//        }
+//    }
+
+//    public function boom(){
 //        $gg = \App\Models\Employee::all();
 //        foreach ($gg as $hh){
 //            $aa = User::find($hh->user_id);

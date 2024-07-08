@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('links', function (Blueprint $table) {
             $table->id();
+            $table->string('title')->nullable();
             $table->text('link');
             $table->unsignedBigInteger('note_id');
             $table->timestamps();

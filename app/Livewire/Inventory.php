@@ -43,6 +43,7 @@ class Inventory extends Component
                 ->orWhere('status', 'LIKE', '%'.$this->search.'%')
                 ->orWhere('name', 'LIKE', '%'.$this->search.'%')
                 ->orWhere('brand_name', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('deployed_name', 'LIKE', '%'.$this->search.'%')
                 ->get();
         }
 

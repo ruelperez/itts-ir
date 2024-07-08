@@ -18,6 +18,7 @@ return new class extends Migration
             $table->dateTime('out')->nullable();
             $table->dateTime('in2')->nullable();
             $table->dateTime('out2')->nullable();
+            $table->string('branch');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });

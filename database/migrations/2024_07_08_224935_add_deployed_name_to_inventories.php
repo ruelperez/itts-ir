@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('dtrs', function (Blueprint $table) {
-            $table->string('branch');
+        Schema::table('inventories', function (Blueprint $table) {
+            $table->string('deployed_name')->nullable();
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('dtrs', function (Blueprint $table) {
+        Schema::table('inventories', function (Blueprint $table) {
             //
         });
     }

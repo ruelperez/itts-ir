@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('minute')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('dtr_id');
+            $table->string('branch');
             $table->string('week')->nullable();
             $table->timestamps();
         });
