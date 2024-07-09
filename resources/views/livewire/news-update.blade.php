@@ -156,6 +156,10 @@
                                             EMAIL REQUIRED
                                         </label>
                                         <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox"  {{ $data->email ? 'checked' : '' }} disabled>
+                                            FELONY
+                                        </label>
+                                        <label class="list-group-item">
                                             <input class="form-check-input me-1" type="checkbox" {{ $data->govt ? 'checked' : '' }} disabled>
                                             GOVT. ISSUED ID
                                         </label>

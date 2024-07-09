@@ -20,7 +20,7 @@
                                     @foreach($results as $data)
                                         @if($h < 6)
                                             <li class="list-group-item btn" style="text-align: left; background-color: #E0FFFF" wire:click="click_items({{$data->id}})">
-                                                {{$data->serial}}
+                                                <i class="fa-solid fa-magnifying-glass me-2"></i> {{$data->serial}}
                                             </li>
                                         @endif
                                         @php $h++; @endphp
