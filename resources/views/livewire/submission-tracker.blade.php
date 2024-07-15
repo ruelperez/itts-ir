@@ -14,7 +14,7 @@
                         <div class="row">
                             <div class="col-4">
                                 <label class="form-label">Date*</label>
-                                <input id="datepicker" width="276" wire:model="date">
+                                <input type="text" id="datepicker" class="form-control">
                             </div>
                             <div class="col-4">
                                 <label for="exampleInputPassword1" class="form-label">Campaign*</label>
