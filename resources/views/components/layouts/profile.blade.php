@@ -23,10 +23,13 @@
                         z-index: 2; /* Make sure this is lower than the z-index of the covering div */
                       color: white;">
             @if($position != "Agent")
-                <div href="/itts/7/logs" wire:loading.attr="disabled" wire:navigate target="_blank"><i class="fa-solid fa-tent-arrow-left-right"></i>Activity logs</div>
+                <div  href="/itts/7/logs" wire:loading.attr="disabled" wire:navigate target="_blank"><i class="fa-solid fa-tent-arrow-left-right"></i>Activity logs</div>
     {{--            <div style=" margin-top: 5%;" data-bs-toggle="modal" data-bs-target="#changePassModal"><i class="fa-solid fa-pen-nib"></i> Change Password</div>--}}
                 <div onclick="location.href = '/itts/18/inventory';"  style="margin-top: 5%; color: white; background-color: #0d1321">
                     <i class="fa-solid fa-store" style="margin-right: 7px;"></i>Inventory
+                </div>
+                <div onclick="location.href = '/itts/23/dupe-checker';"  style="margin-top: 5%; color: white; background-color: #0d1321">
+                    <i class="fa-solid fa-check-to-slot" style="margin-right: 7px;"></i>Dupe checker
                 </div>
                 <div wire:click="clickSettings" data-bs-toggle="modal" data-bs-target="#clickSettings" id="settings" style="margin-top: 5%; color: white; background-color: #0d1321">
                     <i class="fa-solid fa-gear" style="margin-right: 7px;"></i>Settings

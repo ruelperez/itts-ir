@@ -18,14 +18,14 @@
                 <div style="font-size: 14px; margin-top: 30px; width: 92%; margin-left: 4%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);"  class="px-4 py-3">
                     <table class="table table-hover">
                         <thead>
-                        <tr>
-                            <th scope="col">Employee name</th>
-                            <th scope="col">Device</th>
-                            <th scope="col">Brand name</th>
-                            <th scope="col">Serial</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Status</th>
-                        </tr>
+                            <tr>
+                                <th scope="col">Employee name</th>
+                                <th scope="col">Device</th>
+                                <th scope="col">Brand name</th>
+                                <th scope="col">Serial</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Status</th>
+                            </tr>
                         </thead>
                         <tbody>
                         @foreach($deviceData as $data)

@@ -38,6 +38,8 @@ Route::get('/itts/19/device-approval', \App\Livewire\DeviceApproval::class)->mid
 Route::get('/itts/20/deployed-item', \App\Livewire\DeployedByname::class)->middleware('auth');
 Route::get('/itts/21/deployed-item-record/{userID}', \App\Livewire\DeployedItemRecord::class)->middleware('auth');
 Route::get('/itts/22/device-clearance/{userID}', [\App\Http\Controllers\ClearanceController::class, 'pdf'])->middleware('auth');
+Route::get('/itts/23/dupe-checker', \App\Livewire\DupeChecker::class)->middleware('auth');
+Route::get('/itts/24/submission-tracker', \App\Livewire\SubmissionTracker::class)->middleware('auth');
 Route::get('/', function (){
     return redirect('/itts/5/dashboard');
 });

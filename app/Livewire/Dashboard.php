@@ -51,56 +51,6 @@ class Dashboard extends Component
         }
     }
 
-//    public function boom(){
-//        $ty = \App\Models\MyDevice::where('status','deployed')->get();
-//        foreach ($ty as $tt){
-//            $ee = \App\Models\Inventory::find($tt->inventory_id);
-//            $ee->deployed_name = $tt->fullname;
-//            $ee->save();
-//        }
-//    }
-
-//    public function boom(){
-//        $gg = \App\Models\Employee::all();
-//        foreach ($gg as $hh){
-//            $aa = User::find($hh->user_id);
-//            $aa->branch = $hh->branch;
-//            $aa->save();
-//
-//            $aa = User::find($hh->user_id)->dtr;
-//            foreach ($aa as $bb){
-//                $kk = Dtr::find($bb->id);
-//                $kk->branch = $hh->branch;
-//                $kk->save();
-//            }
-//
-//            $aa = User::find($hh->user_id)->dtr_permanent;
-//            foreach ($aa as $bb){
-//                $kk = DtrPermanent::find($bb->id);
-//                $kk->branch = $hh->branch;
-//                $kk->save();
-//            }
-//
-//            $aa = User::find($hh->user_id)->dtr_content;
-//            foreach ($aa as $bb){
-//                $kk = DtrContent::find($bb->id);
-//                $kk->branch = $hh->branch;
-//                $kk->save();
-//            }
-//
-//        }
-//
-//        dd('save');
-//    }
-
-//    public function baam(){
-//        $kk = \App\Models\Employee::all();
-//        foreach ($kk as $hh){
-//            $ii = \App\Models\Employee::find($hh->id);
-//            $ii->id_user = "ITTS-00".$hh->user_id;
-//            $ii->save();
-//        }
-//    }
     public function logout(){
         Auth::logout();
         return redirect()->to('/login');
