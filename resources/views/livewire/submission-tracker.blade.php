@@ -14,7 +14,7 @@
                         <div class="row">
                             <div class="col-4">
                                 <label class="form-label">Date*</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" wire:model="date">
+                                <input id="datepicker" width="276" wire:model="date">
                             </div>
                             <div class="col-4">
                                 <label for="exampleInputPassword1" class="form-label">Campaign*</label>
@@ -22,7 +22,7 @@
                             </div>
                             <div class="col-4">
                                 <label class="form-label">Client*</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1"  wire:model="phone_num">
+                                <input type="text" class="form-control" id="exampleInputPassword1"  wire:model="client">
                             </div>
                         </div>
                         <div class="mt-4 row">
@@ -39,35 +39,35 @@
                             </div>
                             <div class="col-4">
                                 <label for="exampleInputPassword1" class="form-label">Name of Claimant*</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1"  wire:model="campaign">
+                                <input type="text" class="form-control" id="exampleInputPassword1"  wire:model="claimant">
                             </div>
                             <div class="col-4">
                                 <label class="form-label">Name of Injured Party*</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1"  wire:model="coach">
+                                <input type="text" class="form-control" id="exampleInputPassword1"  wire:model="injuredParty">
                             </div>
                         </div>
                         <div class="mt-4 row">
                             <div class="col-4">
                                 <label class="form-label">Phone Number*</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  wire:model="assigned_verifier">
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  wire:model="phoneNumber">
                             </div>
                             <div class="col-4">
                                 <label  class="form-label">Alt. Phone number</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" wire:model="address">
+                                <input type="text" class="form-control" id="exampleInputPassword1" wire:model="altPhoneNumber">
                             </div>
                             <div class="col-4">
                                 <label  class="form-label">DOB*</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" wire:model="address">
+                                <input type="text" class="form-control" id="exampleInputPassword1" wire:model="dob">
                             </div>
                         </div>
                         <div class="mt-4 row">
                             <div class="col-4">
                                 <label  class="form-label">Email</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" wire:model="dob">
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" wire:model="email">
                             </div>
                             <div class="col-4">
                                 <label class="form-label">Address</label>
-                                <input type="email" class="form-control" id="exampleInputPassword1" wire:model="email">
+                                <input type="email" class="form-control" id="exampleInputPassword1" wire:model="address">
                             </div>
                             <div class="col-4">
                                 <label  class="form-label">SSN</label>
@@ -77,22 +77,22 @@
                         <div class="mt-4 row">
                             <div class="col-3">
                                 <label  class="form-label">Agent</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" wire:model="dob">
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" wire:model="agent">
                             </div>
                             <div class="col-3">
                                 <label class="form-label">Coach</label>
-                                <input type="email" class="form-control" id="exampleInputPassword1" wire:model="email">
+                                <input type="email" class="form-control" id="exampleInputPassword1" wire:model="coach">
                             </div>
                             <div class="col-3">
                                 <label  class="form-label">Verifier</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" wire:model="ssn">
+                                <input type="text" class="form-control" id="exampleInputPassword1" wire:model="verifier">
                             </div>
                             <div class="col-3">
                                 <div>
                                     <label class="form-label">Source</label>
                                 </div>
                                 <div>
-                                    <select class="form-select" aria-label="Default select example" wire:model="caseType">
+                                    <select class="form-select" aria-label="Default select example" wire:model="source">
                                         <option value="self">Dialer</option>
                                         <option value="obo">Agent callback</option>
                                         <option value="self">DQ from other campaign</option>
@@ -110,25 +110,25 @@
                             <div class="col-10">
                                 <div class="row mb-3">
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="findings" value="Diagnos" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="result" value="submitted" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Submitted
                                         </label>
                                     </div>
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="findings" value="Systems only" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="result" value="litigator" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Litigator
                                         </label>
                                     </div>
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="findings" value="Systems only" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="result" value="warmXfer" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Warm XFER
                                         </label>
                                     </div>
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="findings" value="Systems only" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="result" value="federalDNC" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Federal DNC
                                         </label>
@@ -136,19 +136,19 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="findings" value="Diagnos" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="result" value="tcpa" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             TCPA
                                         </label>
                                     </div>
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="findings" value="Systems only" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="result" value="alreadyRep" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Already REP
                                         </label>
                                     </div>
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="findings" value="Systems only" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="findings" value="blacklist only" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Blacklist
                                         </label>

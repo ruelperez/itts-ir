@@ -24,7 +24,7 @@ class SubmissionTracker extends Component
 {
     use WithFileUploads;
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $result=[], $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
