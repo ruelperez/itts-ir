@@ -15,16 +15,19 @@ use App\Models\TimeSetting;
 use App\Models\User;
 use App\Models\UserPassword;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use function Laravel\Prompts\select;
+use function Laravel\Prompts\table;
 
 class SubmissionTracker extends Component
 {
     use WithFileUploads;
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $result=[], $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $caseType = "self", $result=[], $clientList, $campaignList = [], $campaign, $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -37,6 +40,9 @@ class SubmissionTracker extends Component
             $this->employeeData = $emp->designation;
         }
         $this->photo = auth()->user()->photo;
+        $this->campaignList = Note::select('campaign')
+            ->distinct('campaign')
+            ->get();
         return view('livewire.submission-tracker');
     }
 
@@ -46,6 +52,13 @@ class SubmissionTracker extends Component
         if (count($sd) < 1){
             return redirect('/itts/15/employee');
         }
+        $this->campaignList = Note::select('campaign')
+            ->distinct('campaign')
+            ->get();
+            foreach ($this->campaignList as $list){
+                $this->clientList = DB::table('notes')->select('client')->where('campaign',$list->campaign)->distinct()->get();
+                break;
+            }
     }
 
     public function logout(){
@@ -246,6 +259,9 @@ class SubmissionTracker extends Component
     }
 
     public function updated($field){
+        if ($field == "campaign"){
+            $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+        }
         if ($field == "registrationSwitch"){
             $this->regSwitch();
         }

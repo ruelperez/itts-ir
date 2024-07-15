@@ -14,15 +14,31 @@
                         <div class="row">
                             <div class="col-4">
                                 <label class="form-label">Date*</label>
-                                <input type="text" id="datepicker" class="form-control">
+                                <input type="text" id="datepicker" class="form-control" wire:model="date" required>
                             </div>
                             <div class="col-4">
-                                <label for="exampleInputPassword1" class="form-label">Campaign*</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1"  wire:model="campaign">
+                                <div>
+                                    <label class="form-label">Campaign*</label>
+                                </div>
+                                <div>
+                                    <select class="form-select" aria-label="Default select example" wire:model.live="campaign">
+                                        @foreach($campaignList as $list)
+                                            <option value="{{$list->campaign}}">{{$list->campaign}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                             <div class="col-4">
-                                <label class="form-label">Client*</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1"  wire:model="client">
+                                <div>
+                                    <label class="form-label">Client*</label>
+                                </div>
+                                <div>
+                                    <select class="form-select" aria-label="Default select example" wire:model="client">
+                                        @foreach($clientList as $list)
+                                            <option value="{{$list->client}}">{{$list->client}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="mt-4 row">
@@ -31,25 +47,33 @@
                                     <label class="form-label">Self / OBO</label>
                                 </div>
                                 <div>
-                                    <select class="form-select" aria-label="Default select example" wire:model="caseType">
+                                    <select class="form-select" aria-label="Default select example" wire:model.live="caseType">
                                         <option value="self">Self</option>
                                         <option value="obo">OBO</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-4">
-                                <label for="exampleInputPassword1" class="form-label">Name of Claimant*</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1"  wire:model="claimant">
-                            </div>
-                            <div class="col-4">
-                                <label class="form-label">Name of Injured Party*</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1"  wire:model="injuredParty">
-                            </div>
+                            @if($caseType == "obo")
+                                <div class="col-4">
+                                    <label for="exampleInputPassword1" class="form-label">Name of Claimant*</label>
+                                    <input type="text" class="form-control" id="exampleInputPassword1"  wire:model="claimant" required>
+                                </div>
+                                <div class="col-4">
+                                    <label class="form-label">Name of Injured Party*</label>
+                                    <input type="text" class="form-control" id="exampleInputPassword1"  wire:model="injuredParty" required>
+                                </div>
+                            @else
+                                <div class="col-4">
+                                    <label class="form-label">Name of Injured Party*</label>
+                                    <input type="text" class="form-control" id="exampleInputPassword1"  wire:model="injuredParty" required>
+                                </div>
+                            @endif
+
                         </div>
                         <div class="mt-4 row">
                             <div class="col-4">
                                 <label class="form-label">Phone Number*</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  wire:model="phoneNumber">
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  wire:model="phoneNumber" required>
                             </div>
                             <div class="col-4">
                                 <label  class="form-label">Alt. Phone number</label>
@@ -57,30 +81,30 @@
                             </div>
                             <div class="col-4">
                                 <label  class="form-label">DOB*</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" wire:model="dob">
+                                <input type="text" id="datepickerDob" class="form-control" wire:model="dob" required>
                             </div>
                         </div>
                         <div class="mt-4 row">
                             <div class="col-4">
-                                <label  class="form-label">Email</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" wire:model="email">
+                                <label  class="form-label">Email*</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" wire:model="email" required>
                             </div>
                             <div class="col-4">
-                                <label class="form-label">Address</label>
-                                <input type="email" class="form-control" id="exampleInputPassword1" wire:model="address">
+                                <label class="form-label">Address*</label>
+                                <input type="email" class="form-control" id="exampleInputPassword1" wire:model="address" required>
                             </div>
                             <div class="col-4">
-                                <label  class="form-label">SSN</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" wire:model="ssn">
+                                <label  class="form-label">SSN*</label>
+                                <input type="text" class="form-control" id="exampleInputPassword1" wire:model="ssn" required>
                             </div>
                         </div>
                         <div class="mt-4 row">
                             <div class="col-3">
-                                <label  class="form-label">Agent</label>
+                                <label  class="form-label">Agent*</label>
                                 <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" wire:model="agent">
                             </div>
                             <div class="col-3">
-                                <label class="form-label">Coach</label>
+                                <label class="form-label">Coach*</label>
                                 <input type="email" class="form-control" id="exampleInputPassword1" wire:model="coach">
                             </div>
                             <div class="col-3">

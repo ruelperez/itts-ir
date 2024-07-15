@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css')}}">
         <link rel="stylesheet" href="{{ asset('css/design.css')}}">
-        <link rel="stylesheet" href="{{ asset('node_modules/flatpickr/dist/flatpickr.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('flatpickr/dist/flatpickr.css') }}">
 {{--        @vite(['resources/css/app.css', 'resources/js/app.js'])--}}
         <title>{{ $title ?? 'Page Title' }}</title>
     </head>
@@ -19,13 +19,16 @@
         <script src="{{ asset('css/bootstrap.min.js') }}"></script>
         <script src="{{asset('js/cdn.js')}}"></script>
         <script src="{{asset('js/operation.js')}}"></script>
-        <script src="{{ asset('node_modules/flatpickr/dist/flatpickr.min.js') }}"></script>
-{{--        <script>--}}
-{{--            document.addEventListener('DOMContentLoaded', function() {console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbb')--}}
-{{--                flatpickr('#datepicker', {--}}
-{{--                    dateFormat: 'Y-m-d',--}}
-{{--                });--}}
-{{--            });--}}
-{{--        </script>--}}
+        <script src="{{ asset('flatpickr/dist/flatpickr.js') }}"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+                flatpickr('#datepicker', {
+                    dateFormat: 'm/d/Y',
+                });
+                flatpickr('#datepickerDob', {
+                    dateFormat: 'm/d/Y',
+                });
+            });
+        </script>
     </body>
 </html>
