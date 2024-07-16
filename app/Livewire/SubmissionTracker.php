@@ -57,7 +57,8 @@ class SubmissionTracker extends Component
             'phoneNumber' => 'required|numeric',
             'ssn' => 'required|numeric',
         ]);
-        
+        dd('nananna');
+
     }
 
     public function removeSearch(){

@@ -11,6 +11,7 @@
                 </div>
                 <div style="background-color: #696969; color: white; padding: 15px 40px; width: 80%; margin-left: 10%; border-radius: 2%;" class="mt-2">
                     <form wire:submit.prevent="submit">
+                        <div class="mb-2"><i>Put "n/a" if not applicable</i></div>
                         <div class="row">
                             <div class="col-4">
                                 <label class="form-label">Date*</label>
@@ -74,12 +75,12 @@
                         <div class="mt-4 row">
                             <div class="col-4">
                                 <label class="form-label">Phone Number*</label>
-                                <input type="text" class="form-control"  aria-describedby="emailHelp"  wire:model="phoneNumber" required>
+                                <input type="text" class="form-control"  wire:model="phoneNumber" placeholder="Put &quot;0000&quot; if not applicable" required>
                                 @error('phoneNumber') <span style="color: #8B0000">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-4">
                                 <label  class="form-label">Alt. Phone number</label>
-                                <input type="text" class="form-control" wire:model="altPhoneNumber">
+                                <input type="text" class="form-control" wire:model="altPhoneNumber" placeholder="Put &quot;0000&quot; if not applicable" required>
                                 @error('altPhoneNumber') <span style="color: #8B0000">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-4">
@@ -90,7 +91,7 @@
                         <div class="mt-4 row">
                             <div class="col-4">
                                 <label  class="form-label">Email*</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" wire:model="email" required>
+                                <input type="text" class="form-control" wire:model="email" required>
                             </div>
                             <div class="col-5">
                                 <label class="form-label">Address*</label>
@@ -98,7 +99,7 @@
                             </div>
                             <div class="col-3">
                                 <label  class="form-label">SSN*</label>
-                                <input type="text" class="form-control"  wire:model="ssn" required>
+                                <input type="text" class="form-control"  wire:model="ssn" placeholder="Put &quot;0000&quot; if not applicable" required>
                                 @error('ssn') <span style="color: #8B0000">{{ $message }}</span> @enderror
                             </div>
                         </div>

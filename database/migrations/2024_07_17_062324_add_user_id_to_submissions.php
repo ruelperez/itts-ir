@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('inventories', function (Blueprint $table) {
-            $table->string('deployed_name')->nullable();
+        Schema::table('submissions', function (Blueprint $table) {
+            $table->string('user_name');
+            $table->unsignedBigInteger('user_id');
         });
     }
 
@@ -21,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('inventories', function (Blueprint $table) {
+        Schema::table('submissions', function (Blueprint $table) {
             //
         });
     }
