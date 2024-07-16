@@ -27,7 +27,8 @@ class SubmissionTracker extends Component
 {
     use WithFileUploads;
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $caseType = "self", $result=[], $clientList, $campaignList = [], $campaign, $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $caseType = "self", $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $result=[], $clientList, $campaignList = [], $campaign, $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
+            $date, $client, $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source, $resultsVerifier = [], $showSearchVerifier = false ;
 
     public function render()
     {
@@ -44,6 +45,95 @@ class SubmissionTracker extends Component
             ->distinct('campaign')
             ->get();
         return view('livewire.submission-tracker');
+    }
+
+    public function submit(){
+        if ($this->altPhoneNumber != "" or $this->altPhoneNumber != null){
+            $this->validate([
+                'altPhoneNumber' => 'numeric',
+            ]);
+        }
+        $this->validate([
+            'phoneNumber' => 'required|numeric',
+            'ssn' => 'required|numeric',
+        ]);
+        
+    }
+
+    public function removeSearch(){
+        $this->showSearch = false;
+    }
+
+    public function removeSearchVerifier(){
+        $this->showSearchVerifier = false;
+    }
+
+    public function removeSearchCoach(){
+        $this->showSearchCoach = false;
+    }
+
+    public function clickSearch(){
+        if ($this->agent != ""){
+            $this->results = Employee::where('fname','LIKE','%'. $this->agent. '%')
+                ->orWhere('lname','LIKE','%'. $this->agent. '%')
+                ->take(5)
+                ->get();
+            $this->showSearch = true;
+        }
+        else{
+            $this->showSearch = false;
+            $this->results = [];
+        }
+    }
+
+    public function clickSearchVerifier(){
+        if ($this->verifier != ""){
+            $this->resultsVerifier = Employee::where('fname','LIKE','%'. $this->verifier. '%')
+                ->orWhere('lname','LIKE','%'. $this->verifier. '%')
+                ->take(5)
+                ->get();
+            $this->showSearchVerifier = true;
+        }
+        else{
+            $this->showSearchVerifier = false;
+            $this->resultsVerifier = [];
+        }
+    }
+
+    public function clickSearchCoach(){
+        if ($this->coach != ""){
+            $this->resultsCoach = Employee::where('fname','LIKE','%'. $this->coach. '%')
+                ->where('designation','Subject Matter Expert')
+                ->where('designation','Team Leader')
+                ->where('designation','Senior Team Leader')
+                ->orWhere('lname','LIKE','%'. $this->coach. '%')
+                ->where('designation','Subject Matter Expert')
+                ->where('designation','Team Leader')
+                ->where('designation','Senior Team Leader')->take(5)
+                ->get();
+            $this->showSearchCoach = true;
+        }
+        else{
+            $this->showSearchCoach = false;
+            $this->resultsCoach = [];
+        }
+    }
+
+    public function click_items($id){
+        $gh = Employee::find($id);
+        $this->agent = $gh->fname.' '.$gh->lname;
+        $this->showSearchCoach = false;
+    }
+
+    public function click_itemsVerifier($id){
+        $gh = Employee::find($id);
+        $this->verifier = $gh->fname.' '.$gh->lname;
+        $this->showSearchVerifier = false;
+    }
+    public function click_itemsCoach($id){
+        $gh = Employee::find($id);
+        $this->coach = $gh->fname.' '.$gh->lname;
+        $this->showSearchCoach = false;
     }
 
     public function mount(){
@@ -259,6 +349,67 @@ class SubmissionTracker extends Component
     }
 
     public function updated($field){
+        if ($field == "verifier"){
+            if ($this->verifier != ""){
+                $this->resultsVerifier = Employee::where('fname','LIKE','%'. $this->verifier. '%')
+                    ->where('designation','Subject Matter Expert')
+                    ->orWhere('fname','LIKE','%'. $this->verifier. '%')
+                    ->where('designation','Team Leader')
+                    ->orWhere('fname','LIKE','%'. $this->verifier. '%')
+                    ->where('designation','Senior Team Leader')
+                    ->orWhere('lname','LIKE','%'. $this->verifier. '%')
+                    ->where('designation','Subject Matter Expert')
+                    ->orWhere('lname','LIKE','%'. $this->verifier. '%')
+                    ->where('designation','Team Leader')
+                    ->orWhere('lname','LIKE','%'. $this->verifier. '%')
+                    ->where('designation','Senior Team Leader')
+                    ->take(5)
+                    ->get();
+                $this->showSearchVerifier = true;
+            }
+            else{
+                $this->showSearchVerifier = false;
+                $this->resultsVerifier = [];
+            }
+
+        }
+        if ($field == "coach"){
+            if ($this->coach != ""){
+                $this->resultsCoach = Employee::where('fname','LIKE','%'. $this->coach. '%')
+                    ->where('designation','Subject Matter Expert')
+                    ->orWhere('fname','LIKE','%'. $this->coach. '%')
+                    ->where('designation','Team Leader')
+                    ->orWhere('fname','LIKE','%'. $this->coach. '%')
+                    ->where('designation','Senior Team Leader')
+                    ->orWhere('lname','LIKE','%'. $this->coach. '%')
+                    ->where('designation','Subject Matter Expert')
+                    ->orWhere('lname','LIKE','%'. $this->coach. '%')
+                    ->where('designation','Team Leader')
+                    ->orWhere('lname','LIKE','%'. $this->coach. '%')
+                    ->where('designation','Senior Team Leader')
+                    ->take(5)
+                    ->get();
+                $this->showSearchCoach = true;
+            }
+            else{
+                $this->showSearchCoach = false;
+                $this->resultsCoach = [];
+            }
+
+        }
+        if ($field == "agent"){
+            if ($this->agent != ""){
+                $this->results = Employee::where('fname','LIKE','%'. $this->agent. '%')
+                    ->orWhere('lname','LIKE','%'. $this->agent. '%')->take(5)
+                    ->get();
+                $this->showSearch = true;
+            }
+            else{
+                $this->showSearch = false;
+                $this->results = [];
+            }
+
+        }
         if ($field == "campaign"){
             $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
         }

@@ -276,23 +276,68 @@
                                 </div>
                                 <div class="col-2">
                                     <div>
-                                        <label class="col-form-label">Designation/ Position</label>
-                                    </div>
-                                    <div>
-                                        <input type="text"  class="form-control" wire:model="designation" title="{{ucwords($designation)}}" required>
-                                    </div>
-                                </div>
-                                <div class="col-2">
-                                    <div>
                                         <label class="col-form-label">Department</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="department" title="{{ucwords($department)}}" required>
+                                        <select class="form-select" aria-label="Default select example" wire:model.live="department">
+                                            <option value="Management">Management</option>
+                                            <option value="Admin">Admin </option>
+                                            <option value="Admin - Production">Admin - Production</option>
+                                            <option value="Admin - Back Office">Admin - Back Office</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-2">
+                                    @if($department == "Management")
+                                        <div>
+                                            <label class="col-form-label">Designation / Position</label>
+                                        </div>
+                                        <div>
+                                            <select class="form-select" aria-label="Default select example" wire:model="designation">
+                                                <option value="Chief Executive Officer">Chief Executive Officer</option>
+                                                <option value="President">President</option>
+                                            </select>
+                                        </div>
+                                    @elseif($department == "Admin")
+                                        <div>
+                                            <label class="col-form-label">Designation / Position</label>
+                                        </div>
+                                        <div>
+                                            <select class="form-select" aria-label="Default select example" wire:model="designation">
+                                                <option value="Accounts and Back Office Manager">Accounts and Back Office Manager</option>
+                                                <option value="Production Floor Manager/ Process Lead">Production Floor Manager/ Process Lead</option>
+                                                <option value="Human Resource Officer">Human Resource Officer</option>
+                                            </select>
+                                        </div>
+                                    @elseif($department == "Admin - Production")
+                                        <div>
+                                            <label class="col-form-label">Designation / Position</label>
+                                        </div>
+                                        <div>
+                                            <select class="form-select" aria-label="Default select example" wire:model="designation">
+                                                <option value="Senior Team Leader">Senior Team Leader</option>
+                                                <option value="Team Leader">Team Leader</option>
+                                                <option value="Subject Matter Expert">Subject Matter Expert</option>
+                                                <option value="Agent / Sale Associate">Agent/ Sale Associate</option>
+                                                <option value="Receptionist">Receptionist</option>
+                                            </select>
+                                        </div>
+                                    @elseif($department == "Admin - Back Office")
+                                        <div>
+                                            <label class="col-form-label">Designation / Position</label>
+                                        </div>
+                                        <div>
+                                            <select class="form-select" aria-label="Default select example" wire:model="designation">
+                                                <option value="Quality Assurance">Quality Assurance</option>
+                                                <option value="Recording & Editor">Recording & Editor </option>
+                                                <option value="BO - IT">BO - IT</option>
+                                            </select>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="col-2">
                                     <div>
-                                        <label class="col-form-label">Branch</label>
+                                        <label class="col-form-label">Site</label>
                                     </div>
                                     <div>
                                         <select class="form-select" aria-label="Default select example" wire:model="branch">

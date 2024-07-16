@@ -95,6 +95,10 @@ class Employee extends Component
             $this->relationship = $pp->relationship;
             $this->full_name = $pp->fullname;
             $this->id_user = $pp->id_user;
+            if ($this->department == "" or $this->department == null){
+                $this->department = "Admin - Production";
+                $this->designation = "Agent/ Sale Associate";
+            }
         }
     }
     public function mount($name){

@@ -55,17 +55,18 @@
                             </div>
                             @if($caseType == "obo")
                                 <div class="col-4">
-                                    <label for="exampleInputPassword1" class="form-label">Name of Claimant*</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1"  wire:model="claimant" required>
+                                    <label class="form-label">Name of Claimant*</label>
+                                    <input type="text" class="form-control"  wire:model="claimant" required>
                                 </div>
                                 <div class="col-4">
                                     <label class="form-label">Name of Injured Party*</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1"  wire:model="injuredParty" required>
+                                    <input type="text" class="form-control" wire:model="injuredParty" required>
                                 </div>
-                            @else
+                            @endif
+                            @if($caseType == "self")
                                 <div class="col-4">
                                     <label class="form-label">Name of Injured Party*</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1"  wire:model="injuredParty" required>
+                                    <input type="text" class="form-control" wire:model="injuredParty" required>
                                 </div>
                             @endif
 
@@ -73,11 +74,13 @@
                         <div class="mt-4 row">
                             <div class="col-4">
                                 <label class="form-label">Phone Number*</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  wire:model="phoneNumber" required>
+                                <input type="text" class="form-control"  aria-describedby="emailHelp"  wire:model="phoneNumber" required>
+                                @error('phoneNumber') <span style="color: #8B0000">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-4">
                                 <label  class="form-label">Alt. Phone number</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" wire:model="altPhoneNumber">
+                                <input type="text" class="form-control" wire:model="altPhoneNumber">
+                                @error('altPhoneNumber') <span style="color: #8B0000">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-4">
                                 <label  class="form-label">DOB*</label>
@@ -89,31 +92,65 @@
                                 <label  class="form-label">Email*</label>
                                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" wire:model="email" required>
                             </div>
-                            <div class="col-4">
+                            <div class="col-5">
                                 <label class="form-label">Address*</label>
-                                <input type="email" class="form-control" id="exampleInputPassword1" wire:model="address" required>
+                                <input type="text" class="form-control" wire:model="address" required>
                             </div>
-                            <div class="col-4">
+                            <div class="col-3">
                                 <label  class="form-label">SSN*</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" wire:model="ssn" required>
+                                <input type="text" class="form-control"  wire:model="ssn" required>
+                                @error('ssn') <span style="color: #8B0000">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="mt-4 row">
                             <div class="col-3">
                                 <label  class="form-label">Agent*</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" wire:model="agent">
+                                <input type="text" class="form-control" wire:model.live="agent" wire:blur="removeSearch" wire:click="clickSearch" required>
+                                @if($showSearch == true)
+                                    <div style="position: absolute; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);">
+                                        <ul class="list-group">
+                                            @foreach($results as $data)
+                                                <li class="list-group-item btn text-start" style="background-color: #E0FFFF;" wire:click="click_items({{$data->id}})">
+                                                    <i class="fa-solid fa-magnifying-glass me-3"></i> {{ucfirst($data->fname)}} {{ucfirst($data->lname)}}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                             </div>
                             <div class="col-3">
-                                <label class="form-label">Coach*</label>
-                                <input type="email" class="form-control" id="exampleInputPassword1" wire:model="coach">
+                                <label  class="form-label">Coach*</label>
+                                <input type="text" class="form-control" wire:model.live="coach" wire:blur="removeSearchCoach" wire:click="clickSearchCoach" required>
+                                @if($showSearchCoach == true)
+                                    <div style="position: absolute; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);">
+                                        <ul class="list-group">
+                                            @foreach($resultsCoach as $data)
+                                                    <li class="list-group-item btn text-start" style="background-color: #E0FFFF;" wire:click="click_itemsCoach({{$data->id}})">
+                                                        <i class="fa-solid fa-magnifying-glass me-3"></i> {{ucfirst($data->fname)}} {{ucfirst($data->lname)}}
+                                                    </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                             </div>
                             <div class="col-3">
-                                <label  class="form-label">Verifier</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" wire:model="verifier">
+                                <label  class="form-label">Verifier*</label>
+                                <input type="text" class="form-control" wire:model.live="verifier" wire:blur="removeSearchVerifier" wire:click="clickSearchVerifier" required>
+                                @if($showSearchVerifier == true)
+                                    <div style="position: absolute; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);">
+                                        <ul class="list-group">
+                                            @foreach($resultsVerifier as $data)
+                                                <li class="list-group-item btn text-start" style="background-color: #E0FFFF;" wire:click="click_itemsVerifier({{$data->id}})">
+                                                    <i class="fa-solid fa-magnifying-glass me-3"></i> {{ucfirst($data->fname)}} {{ucfirst($data->lname)}}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                             </div>
                             <div class="col-3">
                                 <div>
-                                    <label class="form-label">Source</label>
+                                    <label class="form-label">Source*</label>
                                 </div>
                                 <div>
                                     <select class="form-select" aria-label="Default select example" wire:model="source">
