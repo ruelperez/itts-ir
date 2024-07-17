@@ -139,6 +139,21 @@ $(document).ready(function() {
 
 });
 
+function campHover(id){
+    var mmm = $("#camp"+id);
+    mmm.css("color", "white");
+    mmm.css("background-color", "#696969");
+    // yhg.css("padding-right", "60px");
+
+}
+
+function campHoverOut(id){
+    var nnn = $("#camp"+id);
+    nnn.css("color", "");
+    nnn.css("background-color", "");
+}
+
+
 function previewImage(event) {
     var input = event.target;
     var reader = new FileReader();

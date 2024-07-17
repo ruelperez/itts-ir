@@ -14,15 +14,9 @@
                 <div style="display: flex; margin-top: 1%; width: 80%; margin-left: 8%; margin-bottom: 2%;">
                     <div style="margin-right: 2%; width: 15%;">
                         <select class="form-select" aria-label="Default select example" wire:model.live="campaign_name">
-                            <option value="Camp lejeune">CL</option>
-                            <option value="AFFF">AFFF</option>
-                            <option value="Paraquat">Paraquat</option>
-                            <option value="Round  Up">Round up</option>
-                            <option value="CGX">CGX</option>
-                            <option value="ACA">ACA</option>
-                            <option value="Medicare">Medicare</option>
-                            <option value="DTV">DTV</option>
-                            <option value="Zantac">ZANTAC</option>
+                            @foreach($campaignList as $list)
+                                <option value="{{$list->name}}">{{$list->name}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div style="margin-left: 1%; width: 30%;">

@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\AdminShow;
+use App\Models\Campaign;
 use App\Models\Comment;
 use App\Models\CommentHeart;
 use App\Models\Dtr;
@@ -17,6 +18,7 @@ use App\Models\TimeSetting;
 use App\Models\User;
 use App\Models\UserPassword;
 use Dflydev\DotAccessData\Data;
+use FontLib\Table\Type\name;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -31,7 +33,7 @@ class NewsUpdate extends Component
     #[Validate('image|max:1024')] // 1MB Max
     public $registrationSwitch, $did, $link = [
         ['title' => '', 'textLink' => ''],
-    ],  $schedule, $geo, $restriction, $tcpa = false, $employeeData, $tf = false, $fj = 0, $email= false, $thatsthem= false, $dupe= false, $blacklist = false, $govt= false, $dtrData = [], $campaign_stat = "active", $superAdminSwitch, $position, $edit_comment_id, $editTextComment, $linkData = [], $imagePath, $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "Camp lejeune", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
+    ],  $schedule, $geo, $restriction, $tcpa = false, $campaignList = [], $campName, $employeeData, $tf = false, $fj = 0, $email= false, $thatsthem= false, $dupe= false, $blacklist = false, $govt= false, $dtrData = [], $campaign_stat = "active", $superAdminSwitch, $position, $edit_comment_id, $editTextComment, $linkData = [], $imagePath, $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "Camp lejeune", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
@@ -59,10 +61,35 @@ class NewsUpdate extends Component
                 ->orWhere('tags', 'LIKE', '%'.$this->searchInput.'%')
                 ->where('campaign',$this->campaign_name)->get();
         }
+        $this->campaignList = Campaign::all();
         return view('livewire.news-update')->title('Campaign');
     }
 
+    public function submit_campaign(){
+        try {
+            Campaign::create([
+                'name' => $this->campName,
+            ]);
+            $this->campName = "";
+            session()->flash('good', "Successfully saved");
+        }catch (\Exception $e){
+            session()->flash('bad', "Failed to save");
+        }
+    }
 
+    public function campRemove($id,$name){
+        Campaign::find($id)->delete();
+        $ha = Note::where('campaign',$name)->get();
+        foreach ($ha as $has){
+            Note::find($has->id)->delete();
+        }
+        \App\Models\Logs::create([
+            'action' => "delete campaign named ".$name,
+            'user_id' => $this->user_id,
+            'photo' => $this->photo,
+            'fullname' => $this->fullname,
+        ]);
+    }
     public function addUser()
     {
         $this->link[] = ['title' => '', 'textLink' => ''];

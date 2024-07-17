@@ -42,22 +42,14 @@
                         @endif
                         <div style="margin-left: auto; margin-right: 10%;">
                             <select class="form-select" aria-label="Default select example" wire:model.live="campaign_name">
-                                <option value="Camp lejeune">CL</option>
-                                <option value="AFFF">AFFF</option>
-                                <option value="Paraquat">Paraquat</option>
-                                <option value="Round  Up">Round up</option>
-                                <option value="CGX">CGX</option>
-                                <option value="ACA">ACA</option>
-                                <option value="NEC">NEC</option>
-                                <option value="NEURO">NEURO</option>
-                                <option value="IMMUNO">IMMUNO</option>
-                                <option value="DTV">DTV</option>
-                                <option value="Zantac">ZANTAC</option>
+                                @foreach($campaignList as $list)
+                                    <option value="{{$list->name}}">{{$list->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                 </div>
-                <div style="margin-top: 8%;margin-left: 5%;width: 90%;height: 1000px;" wire:poll.keep-alive.5s>
+                <div style="margin-top: 8%;margin-left: 5%;width: 90%;height: 1000px;">
                     @foreach($notes_all as $data)
                         <div style="box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);width: 100%; background-color: white; padding-left: 3%; padding-right: 3%; padding-top: 1.5%; padding-bottom: 2%; margin-bottom: 3%;">
                             <div class="fw-light" style="display: flex;">
