@@ -10,6 +10,7 @@
     @include('modal.news-update.comment')
     @include('modal.news-update.comment_reactor')
     @include('modal.news-update.edit_comment')
+    @include('modal.news-update.add_remove_campaign')
     <div style="display: flex; width: 100%; margin-top: 105px;">
 {{--        <div wire:poll>--}}
 {{--            Current time: {{ now() }}--}}
@@ -32,6 +33,11 @@
                         @if($campaign_name == "Camp lejeune")
                             <div style=" margin-left: 18px; margin-top: 4px;">
                                 <a href="/itts/2/age-checker" wire:navigate style="color: white;">Age checker</a>
+                            </div>
+                        @endif
+                        @if($position != "Agent")
+                            <div style=" margin-left: 18px; margin-top: 4px;">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#arc">+/-  Campaign</button>
                             </div>
                         @endif
                         <div style="margin-left: auto; margin-right: 10%;">

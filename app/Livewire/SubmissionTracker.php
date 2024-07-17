@@ -57,7 +57,10 @@ class SubmissionTracker extends Component
             'phoneNumber' => 'required|numeric',
             'ssn' => 'required|numeric',
         ]);
-        dd('nananna');
+        dd(count($this->result));
+        for ($i=0; $i<count($this->result); $i++){
+
+        }
 
     }
 
