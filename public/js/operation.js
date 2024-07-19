@@ -36,6 +36,16 @@ function hoverOutStaff(id){
     fwe.hide();
 }
 
+// function hoverDupe(id){
+//     var fws = $('#idDupe'+id);
+//     fws.show();
+// }
+//
+// function hoverOutDupe(id){
+//     var fws = $('#idDupe'+id);
+//     fws.hide();
+// }
+
 function clickEllipsis(){
     var an = $(".div100");
     $(".div100").show();

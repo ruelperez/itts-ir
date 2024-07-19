@@ -28,6 +28,12 @@
                 flatpickr('#datepickerDob', {
                     dateFormat: 'm/d/Y',
                 });
+                flatpickr('#datepickerDupe', {
+                    dateFormat: 'm/d/Y',
+                });
+                flatpickr('#datepickerDobDupe', {
+                    dateFormat: 'm/d/Y',
+                });
             });
         </script>
     </body>

@@ -10,17 +10,20 @@ use App\Models\DtrContent;
 use App\Models\Employee;
 use App\Models\IsRegistration;
 use App\Models\Note;
+use App\Models\Submission;
 use App\Models\SuperadminShow;
 use App\Models\TimeSetting;
 use App\Models\User;
 use App\Models\UserPassword;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
 class DupeChecker extends Component
 {
-    public $registrationSwitch, $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $is_success = false, $search, $ids, $displayRemarks, $checkBox = [], $submissionData = [], $resultsCoach = [], $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo, $campaignList = [], $campaign,
+        $date, $base = true, $client, $remarks = [], $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $showSearch = false, $showSearchCoach = false, $agent, $coach, $verifier, $source = "Dialer", $caseType = "self", $resultsVerifier = [], $results = [], $clientList= [], $showSearchVerifier = false, $result;
 
     public function render()
     {
@@ -33,8 +36,61 @@ class DupeChecker extends Component
             $this->employeeData = $emp->designation;
         }
         $this->photo = auth()->user()->photo;
-        $this->dtrData = Dtr::all();
+        if ($this->search == ""){
+            $this->submissionData = Submission::take(20)->get();
+        }
+        else{
+            $this->submissionData = Submission::where('phoneNumber', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('altPhoneNumber', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('date', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('agent', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('caseType', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('claimant', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('injuredParty', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('campaign', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('remarks', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('coach', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('result', 'LIKE', '%'.$this->search.'%')
+                ->take(20)
+                ->get();
+        }
+        $this->campaignList = Note::select('campaign')
+            ->distinct('campaign')
+            ->get();
         return view('livewire.dupe-checker');
+    }
+
+    public function edit(){
+        for ($i=0; count($this->checkBox) > $i; $i++){
+            $this->ids = $this->checkBox[$i];
+            $yr = Submission::find($this->checkBox[$i]);
+            $this->date = $yr->date;
+            $this->campaign = $yr->campaign;
+            $this->client = $yr->client;
+            $this->caseType = $yr->caseType;
+            $this->claimant = $yr->claimant;
+            $this->injuredParty = $yr->injuredParty;
+            $this->phoneNumber = $yr->phoneNumber;
+            $this->altPhoneNumber = $yr->altPhoneNumber;
+            $this->dob = $yr->dob;
+            $this->email = $yr->email;
+            $this->address = $yr->address;
+            $this->ssn = $yr->ssn;
+            $this->agent = $yr->agent;
+            $this->coach = $yr->coach;
+            $this->verifier = $yr->verifier;
+            $this->source = $yr->source;
+            $this->displayRemarks = $yr->remarks;
+            $this->result = $yr->result;
+        }
+
+        $this->campaignList = Note::select('campaign')
+            ->distinct('campaign')
+            ->get();
+        foreach ($this->campaignList as $list){
+            $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+            break;
+        }
     }
 
     public function mount(){
@@ -242,7 +298,253 @@ class DupeChecker extends Component
         }
     }
 
+    public function submitEdit(){
+        if ($this->base == false){
+            if ($this->altPhoneNumber != "" or $this->altPhoneNumber != null){
+                $this->validate([
+                    'altPhoneNumber' => 'required|numeric',
+                ]);
+            }
+            if ($this->caseType == "self"){
+                $this->validate([
+                    'phoneNumber' => 'required|numeric',
+                    'ssn' => 'required|numeric',
+                    'campaign' => 'required',
+                    'date' => 'required',
+                    'agent' => 'required',
+                    'claimant' => 'required',
+                    'coach' => 'required',
+                    'client' => 'required',
+                    'caseType' => 'required',
+                    'dob' => 'required',
+                    'email' => 'required',
+                    'address' => 'required',
+                    'verifier' => 'required',
+                    'source' => 'required',
+                ]);
+            }else{
+                $this->validate([
+                    'phoneNumber' => 'required|numeric',
+                    'ssn' => 'required|numeric',
+                    'campaign' => 'required',
+                    'date' => 'required',
+                    'agent' => 'required',
+                    'claimant' => 'required',
+                    'injuredParty' => 'required',
+                    'coach' => 'required',
+                    'client' => 'required',
+                    'caseType' => 'required',
+                    'dob' => 'required',
+                    'email' => 'required',
+                    'address' => 'required',
+                    'verifier' => 'required',
+                    'source' => 'required',
+                ]);
+            }
+            try {
+                $res = implode(', ', $this->remarks);
+                $kk = Submission::find($this->ids);
+                $kk->date = $this->date;
+                $kk->agent = $this->agent;
+                $kk->claimant = $this->claimant;
+                $kk->phoneNumber = $this->phoneNumber;
+                $kk->altPhoneNumber = $this->altPhoneNumber;
+                $kk->campaign = $this->campaign;
+                $kk->coach = $this->coach;
+                $kk->remarks = $res;
+                $kk->client = $this->client;
+                $kk->caseType = $this->caseType;
+                $kk->injuredParty = $this->injuredParty;
+                $kk->dob = $this->dob;
+                $kk->email = $this->email;
+                $kk->address = $this->address;
+                $kk->ssn = $this->ssn;
+                $kk->verifier = $this->verifier;
+                $kk->source = $this->source;
+                $kk->fullname = $this->fullname;
+                $kk->user_id = $this->user_id;
+                $kk->result = $this->result;
+                $kk->save();
+                \App\Models\Logs::create([
+                    'action' => "Edit dupe checker with a customer phone number ".$this->phoneNumber,
+                    'user_id' => $this->user_id,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
+                $this->is_success = true;
+                $this->dispatch('dupeSubmitted');
+            }catch (\Exception $e){
+                $this->is_success = false;
+                $this->dispatch('dupeSubmitted');
+            }
+        }
+        else{
+            try {
+                $kk = Submission::find($this->ids);
+                $kk->result = $this->result;
+                $kk->save();
+                \App\Models\Logs::create([
+                    'action' => "Edit dupe checker with a customer phone number ".$this->phoneNumber,
+                    'user_id' => $this->user_id,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
+                $this->is_success = true;
+                $this->dispatch('dupeSubmitted');
+            }catch (\Exception $e){
+                $this->is_success = false;
+                $this->dispatch('dupeSubmitted');
+            }
+
+        }
+
+    }
+
+    public function clickSearch(){
+        if ($this->agent != ""){
+            $this->results = Employee::where('fname','LIKE','%'. $this->agent. '%')
+                ->orWhere('lname','LIKE','%'. $this->agent. '%')
+                ->take(5)
+                ->get();
+            $this->showSearch = true;
+        }
+        else{
+            $this->showSearch = false;
+            $this->results = [];
+        }
+    }
+
+    public function clickSearchVerifier(){
+        if ($this->verifier != ""){
+            $this->resultsVerifier = Employee::where('fname','LIKE','%'. $this->verifier. '%')
+                ->orWhere('lname','LIKE','%'. $this->verifier. '%')
+                ->take(5)
+                ->get();
+            $this->showSearchVerifier = true;
+        }
+        else{
+            $this->showSearchVerifier = false;
+            $this->resultsVerifier = [];
+        }
+    }
+
+    public function clickSearchCoach(){
+        if ($this->coach != ""){
+            $this->resultsCoach = Employee::where('fname','LIKE','%'. $this->coach. '%')
+                ->where('designation','Subject Matter Expert')
+                ->where('designation','Team Leader')
+                ->where('designation','Senior Team Leader')
+                ->orWhere('lname','LIKE','%'. $this->coach. '%')
+                ->where('designation','Subject Matter Expert')
+                ->where('designation','Team Leader')
+                ->where('designation','Senior Team Leader')->take(5)
+                ->get();
+            $this->showSearchCoach = true;
+        }
+        else{
+            $this->showSearchCoach = false;
+            $this->resultsCoach = [];
+        }
+    }
+
+    public function removeSearch(){
+        $this->showSearch = false;
+    }
+
+    public function removeSearchVerifier(){
+        $this->showSearchVerifier = false;
+    }
+
+    public function removeSearchCoach(){
+        $this->showSearchCoach = false;
+    }
+
+    public function click_items($id){
+        $gh = Employee::find($id);
+        $this->agent = $gh->fname.' '.$gh->lname;
+        $this->showSearchCoach = false;
+    }
+
+    public function clickEdit(){
+        $this->base = false;
+    }
+
+    public function click_itemsVerifier($id){
+        $gh = Employee::find($id);
+        $this->verifier = $gh->fname.' '.$gh->lname;
+        $this->showSearchVerifier = false;
+    }
+    public function click_itemsCoach($id){
+        $gh = Employee::find($id);
+        $this->coach = $gh->fname.' '.$gh->lname;
+        $this->showSearchCoach = false;
+    }
+
     public function updated($field){
+        if ($field == "verifier"){
+            if ($this->verifier != ""){
+                $this->resultsVerifier = Employee::where('fname','LIKE','%'. $this->verifier. '%')
+                    ->where('designation','Subject Matter Expert')
+                    ->orWhere('fname','LIKE','%'. $this->verifier. '%')
+                    ->where('designation','Team Leader')
+                    ->orWhere('fname','LIKE','%'. $this->verifier. '%')
+                    ->where('designation','Senior Team Leader')
+                    ->orWhere('lname','LIKE','%'. $this->verifier. '%')
+                    ->where('designation','Subject Matter Expert')
+                    ->orWhere('lname','LIKE','%'. $this->verifier. '%')
+                    ->where('designation','Team Leader')
+                    ->orWhere('lname','LIKE','%'. $this->verifier. '%')
+                    ->where('designation','Senior Team Leader')
+                    ->take(5)
+                    ->get();
+                $this->showSearchVerifier = true;
+            }
+            else{
+                $this->showSearchVerifier = false;
+                $this->resultsVerifier = [];
+            }
+
+        }
+        if ($field == "coach"){
+            if ($this->coach != ""){
+                $this->resultsCoach = Employee::where('fname','LIKE','%'. $this->coach. '%')
+                    ->where('designation','Subject Matter Expert')
+                    ->orWhere('fname','LIKE','%'. $this->coach. '%')
+                    ->where('designation','Team Leader')
+                    ->orWhere('fname','LIKE','%'. $this->coach. '%')
+                    ->where('designation','Senior Team Leader')
+                    ->orWhere('lname','LIKE','%'. $this->coach. '%')
+                    ->where('designation','Subject Matter Expert')
+                    ->orWhere('lname','LIKE','%'. $this->coach. '%')
+                    ->where('designation','Team Leader')
+                    ->orWhere('lname','LIKE','%'. $this->coach. '%')
+                    ->where('designation','Senior Team Leader')
+                    ->take(5)
+                    ->get();
+                $this->showSearchCoach = true;
+            }
+            else{
+                $this->showSearchCoach = false;
+                $this->resultsCoach = [];
+            }
+
+        }
+        if ($field == "agent"){
+            if ($this->agent != ""){
+                $this->results = Employee::where('fname','LIKE','%'. $this->agent. '%')
+                    ->orWhere('lname','LIKE','%'. $this->agent. '%')->take(5)
+                    ->get();
+                $this->showSearch = true;
+            }
+            else{
+                $this->showSearch = false;
+                $this->results = [];
+            }
+
+        }
+        if ($field == "campaign"){
+            $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+        }
         if ($field == "registrationSwitch"){
             $this->regSwitch();
         }

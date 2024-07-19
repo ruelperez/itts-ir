@@ -9,22 +9,25 @@ class Submission extends Model
 {
     protected $fillable = [
         'date',
-        'campaign',
-        'client',
-        'caseType',
-        'injuredParty',
+        'agent',
         'claimant',
         'phoneNumber',
         'altPhoneNumber',
+        'campaign',
+        'coach',
+        'remarks',
+        'client',
+        'caseType',
+        'injuredParty',
         'dob',
         'email',
         'address',
         'ssn',
-        'agent',
-        'coach',
         'verifier',
         'source',
         'result',
+        'user_name',
+        'user_id'
     ];
 
     use HasFactory;

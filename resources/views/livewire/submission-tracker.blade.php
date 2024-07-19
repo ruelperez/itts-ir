@@ -3,6 +3,7 @@
     @include('components.layouts.navigation')
     @include('modal.click-settings')
     @include('modal.news-update.show-photo')
+    @include('modal.submission.saveOrNot')
     <div style="display: flex; width: 100%; margin-top: 105px;">
         <div style="width: 81%; margin-left: 19%;">
             <div class="container">
@@ -27,6 +28,7 @@
                                             <option value="{{$list->campaign}}">{{$list->campaign}}</option>
                                         @endforeach
                                     </select>
+                                    @error('campaign') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="col-4">
@@ -39,6 +41,7 @@
                                             <option value="{{$list->client}}">{{$list->client}}</option>
                                         @endforeach
                                     </select>
+                                    @error('client') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                         </div>
@@ -52,22 +55,26 @@
                                         <option value="self">Self</option>
                                         <option value="obo">OBO</option>
                                     </select>
+                                    @error('caseType') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             @if($caseType == "obo")
                                 <div class="col-4">
                                     <label class="form-label">Name of Claimant*</label>
                                     <input type="text" class="form-control"  wire:model="claimant" required>
+                                    @error('claimant') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="col-4">
                                     <label class="form-label">Name of Injured Party*</label>
                                     <input type="text" class="form-control" wire:model="injuredParty" required>
+                                    @error('injuredParty') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
                             @endif
                             @if($caseType == "self")
                                 <div class="col-4">
-                                    <label class="form-label">Name of Injured Party*</label>
-                                    <input type="text" class="form-control" wire:model="injuredParty" required>
+                                    <label class="form-label">Name of Claimant*</label>
+                                    <input type="text" class="form-control" wire:model="claimant" required>
+                                    @error('claimant') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
                             @endif
 
@@ -80,22 +87,25 @@
                             </div>
                             <div class="col-4">
                                 <label  class="form-label">Alt. Phone number</label>
-                                <input type="text" class="form-control" wire:model="altPhoneNumber" placeholder="Put &quot;0000&quot; if not applicable" required>
+                                <input type="text" class="form-control" wire:model="altPhoneNumber" placeholder="Put &quot;0000&quot; if not applicable">
                                 @error('altPhoneNumber') <span style="color: #8B0000">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-4">
                                 <label  class="form-label">DOB*</label>
                                 <input type="text" id="datepickerDob" class="form-control" wire:model="dob" required>
+                                @error('dob') <span style="color: #8B0000">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="mt-4 row">
                             <div class="col-4">
                                 <label  class="form-label">Email*</label>
                                 <input type="text" class="form-control" wire:model="email" required>
+                                @error('email') <span style="color: #8B0000">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-5">
                                 <label class="form-label">Address*</label>
                                 <input type="text" class="form-control" wire:model="address" required>
+                                @error('address') <span style="color: #8B0000">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-3">
                                 <label  class="form-label">SSN*</label>
@@ -118,6 +128,7 @@
                                         </ul>
                                     </div>
                                 @endif
+                                @error('agent') <span style="color: #8B0000">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-3">
                                 <label  class="form-label">Coach*</label>
@@ -133,6 +144,7 @@
                                         </ul>
                                     </div>
                                 @endif
+                                @error('coach') <span style="color: #8B0000">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-3">
                                 <label  class="form-label">Verifier*</label>
@@ -148,49 +160,51 @@
                                         </ul>
                                     </div>
                                 @endif
+                                @error('verifier') <span style="color: #8B0000">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-3">
                                 <div>
                                     <label class="form-label">Source*</label>
                                 </div>
                                 <div>
-                                    <select class="form-select" aria-label="Default select example" wire:model="source">
-                                        <option value="self">Dialer</option>
-                                        <option value="obo">Agent callback</option>
-                                        <option value="self">DQ from other campaign</option>
-                                        <option value="obo">Retransfer</option>
-                                        <option value="self">Rework</option>
-                                        <option value="obo">Special lead</option>
+                                    <select class="form-select" aria-label="Default select example" wire:model="source" required>
+                                        <option value="Dialer">Dialer</option>
+                                        <option value="Agent callback">Agent callback</option>
+                                        <option value="DQ from other campaign">DQ from other campaign</option>
+                                        <option value="Retransfer">Retransfer</option>
+                                        <option value="Rework">Rework</option>
+                                        <option value="Special lead">Special lead</option>
                                     </select>
+                                    @error('source') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                         </div>
                         <div class="mt-4 row">
                             <div class="col-2">
-                                <label class="form-label">Result</label>
+                                <label class="form-label">Remarks</label>
                             </div>
                             <div class="col-10">
                                 <div class="row mb-3">
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="result" value="submitted" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Submitted" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Submitted
                                         </label>
                                     </div>
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="result" value="litigator" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Litigator" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Litigator
                                         </label>
                                     </div>
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="result" value="warmXfer" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Warm XFER" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Warm XFER
                                         </label>
                                     </div>
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="result" value="federalDNC" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Federal DNC" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Federal DNC
                                         </label>
@@ -198,19 +212,19 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="result" value="tcpa" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="TCPA" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             TCPA
                                         </label>
                                     </div>
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="result" value="alreadyRep" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Already REP" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Already REP
                                         </label>
                                     </div>
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="findings" value="blacklist only" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Blacklist" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Blacklist
                                         </label>
@@ -218,19 +232,19 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="findings" value="Diagnos" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Plaintiff" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Plaintiff
                                         </label>
                                     </div>
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="findings" value="Systems only" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Thatsthem issue-not found" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Thatsthem issue-not found
                                         </label>
                                     </div>
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="findings" value="Systems only" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Felony charge" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Felony charge
                                         </label>
@@ -240,9 +254,17 @@
                         </div>
                         <button type="submit" class="btn btn-primary mt-4" style="width: 30%; margin-left: 35%;">Submit</button>
                     </form>
+                    <button id="btn123" data-bs-toggle="modal" data-bs-target="#loading" style="display: none"></button>
                 </div>
             </div>
         </div>
     </div>
     @include('partial.header')
+    @script
+    <script>
+        $wire.on('subSubmitted', () => {
+            $('#btn123').click();
+        });
+    </script>
+    @endscript
 </div>

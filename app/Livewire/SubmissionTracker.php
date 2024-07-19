@@ -10,6 +10,7 @@ use App\Models\DtrContent;
 use App\Models\Employee;
 use App\Models\IsRegistration;
 use App\Models\Note;
+use App\Models\Submission;
 use App\Models\SuperadminShow;
 use App\Models\TimeSetting;
 use App\Models\User;
@@ -25,10 +26,9 @@ use function Laravel\Prompts\table;
 
 class SubmissionTracker extends Component
 {
-    use WithFileUploads;
-    #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $caseType = "self", $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $result=[], $clientList, $campaignList = [], $campaign, $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
-            $date, $client, $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source, $resultsVerifier = [], $showSearchVerifier = false ;
+
+    public $registrationSwitch, $caseType = "self", $is_success = false, $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $clientList, $campaignList = [], $campaign, $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
+            $date, $client, $remarks = [], $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "Dialer", $resultsVerifier = [], $showSearchVerifier = false ;
 
     public function render()
     {
@@ -50,18 +50,81 @@ class SubmissionTracker extends Component
     public function submit(){
         if ($this->altPhoneNumber != "" or $this->altPhoneNumber != null){
             $this->validate([
-                'altPhoneNumber' => 'numeric',
+                'altPhoneNumber' => 'required|numeric',
             ]);
         }
-        $this->validate([
-            'phoneNumber' => 'required|numeric',
-            'ssn' => 'required|numeric',
-        ]);
-        dd(count($this->result));
-        for ($i=0; $i<count($this->result); $i++){
-
+        if ($this->caseType == "self"){
+            $this->validate([
+                'phoneNumber' => 'required|numeric',
+                'ssn' => 'required|numeric',
+                'campaign' => 'required',
+                'date' => 'required',
+                'agent' => 'required',
+                'claimant' => 'required',
+                'coach' => 'required',
+                'client' => 'required',
+                'caseType' => 'required',
+                'dob' => 'required',
+                'email' => 'required',
+                'address' => 'required',
+                'verifier' => 'required',
+                'source' => 'required',
+            ]);
+        }else{
+            $this->validate([
+                'phoneNumber' => 'required|numeric',
+                'ssn' => 'required|numeric',
+                'campaign' => 'required',
+                'date' => 'required',
+                'agent' => 'required',
+                'claimant' => 'required',
+                'injuredParty' => 'required',
+                'coach' => 'required',
+                'client' => 'required',
+                'caseType' => 'required',
+                'dob' => 'required',
+                'email' => 'required',
+                'address' => 'required',
+                'verifier' => 'required',
+                'source' => 'required',
+            ]);
         }
 
+        $res = implode(', ', $this->remarks);
+        try {
+            Submission::create([
+                'date' => $this->date,
+                'agent' => $this->agent,
+                'claimant' => $this->claimant,
+                'phoneNumber' => $this->phoneNumber,
+                'altPhoneNumber' => $this->altPhoneNumber,
+                'campaign' => $this->campaign,
+                'coach' => $this->coach,
+                'remarks' => $res,
+                'client' => $this->client,
+                'caseType' => $this->caseType,
+                'injuredParty' => $this->injuredParty,
+                'dob' => $this->dob,
+                'email' => $this->email,
+                'address' => $this->address,
+                'ssn' => $this->ssn,
+                'verifier' => $this->verifier,
+                'source' => $this->source,
+                'user_name' => $this->fullname,
+                'user_id' => $this->user_id,
+            ]);
+            \App\Models\Logs::create([
+                'action' => "Add submission with a customer phone number ".$this->phoneNumber,
+                'user_id' => $this->user_id,
+                'photo' => $this->photo,
+                'fullname' => $this->fullname,
+            ]);
+            $this->is_success = true;
+            $this->dispatch('subSubmitted');
+        }catch (\Exception $e){
+            $this->is_success = false;
+            $this->dispatch('subSubmitted');
+        }
     }
 
     public function removeSearch(){
@@ -149,10 +212,18 @@ class SubmissionTracker extends Component
         $this->campaignList = Note::select('campaign')
             ->distinct('campaign')
             ->get();
-            foreach ($this->campaignList as $list){
-                $this->clientList = DB::table('notes')->select('client')->where('campaign',$list->campaign)->distinct()->get();
-                break;
-            }
+        foreach ($this->campaignList as $hh){
+            $this->campaign = $hh->campaign;
+            break;
+        }
+        foreach ($this->campaignList as $list){
+            $this->clientList = DB::table('notes')->select('client')->where('campaign',$list->campaign)->distinct()->get();
+            break;
+        }
+        foreach ($this->clientList as $hh){
+            $this->client = $hh->client;
+            break;
+        }
     }
 
     public function logout(){
