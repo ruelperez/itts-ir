@@ -20,11 +20,11 @@
                 </div>
                 <hr>
                 <div>
-                    <div wire:loading class="spinner-border spin" style="height: 55px; width: 55px; margin-left:47%; margin-top:10%; color: black">
-                        <span class="visually-hidden" style="color: black">Loading...</span>
-                    </div>
+{{--                    <div wire:loading class="spinner-border spin" style="height: 55px; width: 55px; margin-left:47%; margin-top:10%; color: black">--}}
+{{--                        <span class="visually-hidden" style="color: black">Loading...</span>--}}
+{{--                    </div>--}}
                     <form wire:submit.prevent="submitForm" class="px-5 pt-1 pb-5" >
-                        <fieldset @if($is_success == true) disabled @endif wire:loading.remove>
+                        <fieldset @if($is_success == true) disabled @endif>
                             <div class="mb-2"><i>Put n/a if not applicable</i></div>
                             <div class="row g-3 align-items-center">
                                 <div class="col-2">
@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="col-2">
                                     <div>
-                                        <label class="col-form-label">Date of Birth (mm/dd/yyyy)</label>
+                                        <label class="col-form-label">Date of Birth</label>
                                     </div>
                                     <div >
                                         <input type="text" id="date-input" placeholder="mm/dd/yyyy"  class="form-control" wire:model="dob" title="{{ucwords($dob)}}" required>
@@ -253,7 +253,7 @@
                                 </div>
                                 <div class="col-2">
                                     <div>
-                                        <label class="col-form-label">Hire Date (mm/dd/yyyy)</label>
+                                        <label class="col-form-label">Hire Date</label>
                                     </div>
                                     <div>
                                         <input type="text" id="hire-date" class="form-control" wire:model="hire_date" title="{{ucwords($hire_date)}}" placeholder="mm/dd/yyyy" required>
@@ -279,7 +279,7 @@
                                         <label class="col-form-label">Department</label>
                                     </div>
                                     <div>
-                                        <select class="form-select" aria-label="Default select example" wire:model.live="department">
+                                        <select class="form-select" aria-label="Default select example" wire:model.live="department" required>
                                             <option value="Management">Management</option>
                                             <option value="Admin">Admin </option>
                                             <option value="Admin - Production">Admin - Production</option>
@@ -294,7 +294,7 @@
                                         </div>
                                         <div>
                                             <select class="form-select" aria-label="Default select example" wire:model="designation">
-                                                <option value="Chief Executive Officer">Chief Executive Officer</option>
+                                                <option selected value="Chief Executive Officer">Chief Executive Officer</option>
                                                 <option value="President">President</option>
                                             </select>
                                         </div>
@@ -304,7 +304,7 @@
                                         </div>
                                         <div>
                                             <select class="form-select" aria-label="Default select example" wire:model="designation">
-                                                <option value="Accounts and Back Office Manager">Accounts and Back Office Manager</option>
+                                                <option selected value="Accounts and Back Office Manager">Accounts and Back Office Manager</option>
                                                 <option value="Production Floor Manager/ Process Lead">Production Floor Manager/ Process Lead</option>
                                                 <option value="Human Resource Officer">Human Resource Officer</option>
                                             </select>
@@ -315,10 +315,10 @@
                                         </div>
                                         <div>
                                             <select class="form-select" aria-label="Default select example" wire:model="designation">
+                                                <option selected value="Agent / Sale Associate">Agent/ Sale Associate</option>
                                                 <option value="Senior Team Leader">Senior Team Leader</option>
                                                 <option value="Team Leader">Team Leader</option>
                                                 <option value="Subject Matter Expert">Subject Matter Expert</option>
-                                                <option value="Agent / Sale Associate">Agent/ Sale Associate</option>
                                                 <option value="Receptionist">Receptionist</option>
                                             </select>
                                         </div>
@@ -328,7 +328,7 @@
                                         </div>
                                         <div>
                                             <select class="form-select" aria-label="Default select example" wire:model="designation">
-                                                <option value="Quality Assurance">Quality Assurance</option>
+                                                <option selected value="Quality Assurance">Quality Assurance</option>
                                                 <option value="Recording & Editor">Recording & Editor </option>
                                                 <option value="BO - IT">BO - IT</option>
                                             </select>

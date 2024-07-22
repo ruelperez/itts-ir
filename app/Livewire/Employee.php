@@ -28,7 +28,7 @@ class Employee extends Component
     public $registrationSwitch, $id_user, $full_name, $empData, $is_submitted = false, $branch = "bicol", $ng = 0, $is_create, $is_success = false, $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
             $fname, $mname, $lname, $mi, $suffix, $age, $phone_number, $dob, $gender_preference, $civil_status, $religion, $personal_email, $current_house, $current_street,
             $current_brgy, $current_city, $current_working_email, $same_current_permanent = false, $permanent_house, $permanent_street,
-            $permanent_brgy, $permanent_city, $sss, $philhealth, $tin, $hire_date, $yot, $designation, $department, $contact_number, $address, $relationship;
+            $permanent_brgy, $permanent_city, $sss, $philhealth, $tin, $hire_date, $yot, $designation = "Agent / Sale Associate", $department = "Admin - Production", $contact_number, $address, $relationship;
 
     public function render()
     {
@@ -431,6 +431,21 @@ class Employee extends Component
     }
 
     public function updated($field){
+        if ($field == "department"){
+            if ($this->department == "Management"){
+                $this->designation = "Chief Executive Officer";
+            }
+            elseif ($this->department == "Admin"){
+                $this->designation = "Accounts and Back Office Manager";
+            }
+            elseif ($this->department == "Admin - Production"){
+                $this->designation = "Agent / Sale Associate";
+
+            }
+            elseif ($this->department == "Admin - Back Office"){
+                $this->designation = "Quality Assurance";
+            }
+        }
         if ($field == "registrationSwitch"){
             $this->regSwitch();
         }

@@ -1,28 +1,28 @@
 window.addEventListener('DOMContentLoaded', function () {
-    const dateInput = document.getElementById('date-input');
-    const dateHire = document.getElementById('hire-date');
-
-    dateInput.addEventListener('input', function () {
-        let value = dateInput.value.replace(/[^0-9]/g, '');
-        if (value.length > 2) {
-            value = value.slice(0, 2) + '/' + value.slice(2);
-        }
-        if (value.length > 5) {
-            value = value.slice(0, 5) + '/' + value.slice(5);
-        }
-        dateInput.value = value;
-    });
-
-    dateHire.addEventListener('input', function () {
-        let value = dateHire.value.replace(/[^0-9]/g, '');
-        if (value.length > 2) {
-            value = value.slice(0, 2) + '/' + value.slice(2);
-        }
-        if (value.length > 5) {
-            value = value.slice(0, 5) + '/' + value.slice(5);
-        }
-        dateHire.value = value;
-    });
+    // const dateInput = document.getElementById('date-input');
+    // const dateHire = document.getElementById('hire-date');
+    //
+    // dateInput.addEventListener('input', function () {
+    //     let value = dateInput.value.replace(/[^0-9]/g, '');
+    //     if (value.length > 2) {
+    //         value = value.slice(0, 2) + '/' + value.slice(2);
+    //     }
+    //     if (value.length > 5) {
+    //         value = value.slice(0, 5) + '/' + value.slice(5);
+    //     }
+    //     dateInput.value = value;
+    // });
+    //
+    // dateHire.addEventListener('input', function () {
+    //     let value = dateHire.value.replace(/[^0-9]/g, '');
+    //     if (value.length > 2) {
+    //         value = value.slice(0, 2) + '/' + value.slice(2);
+    //     }
+    //     if (value.length > 5) {
+    //         value = value.slice(0, 5) + '/' + value.slice(5);
+    //     }
+    //     dateHire.value = value;
+    // });
 });
 
 

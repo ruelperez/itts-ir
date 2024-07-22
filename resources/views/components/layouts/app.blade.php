@@ -34,6 +34,12 @@
                 flatpickr('#datepickerDobDupe', {
                     dateFormat: 'm/d/Y',
                 });
+                flatpickr('#date-input', {
+                    dateFormat: 'm/d/Y',
+                });
+                flatpickr('#hire-date', {
+                    dateFormat: 'm/d/Y',
+                });
             });
         </script>
     </body>
