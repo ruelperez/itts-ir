@@ -209,6 +209,13 @@ class SubmissionTracker extends Component
         if (count($sd) < 1){
             return redirect('/itts/15/employee');
         }
+        $pst = auth()->user()->position;
+        if ($pst != "Agent"){
+
+        }
+        else{
+            return redirect('/');
+        }
         $this->campaignList = Note::select('campaign')
             ->distinct('campaign')
             ->get();

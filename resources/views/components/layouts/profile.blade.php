@@ -28,9 +28,11 @@
                 <div onclick="location.href = '/itts/18/inventory';"  style="margin-top: 5%; color: white; background-color: #0d1321">
                     <i class="fa-solid fa-store" style="margin-right: 7px;"></i>Inventory
                 </div>
-                <div onclick="location.href = '/itts/23/dupe-checker';"  style="margin-top: 5%; color: white; background-color: #0d1321">
-                    <i class="fa-solid fa-check-to-slot" style="margin-right: 7px;"></i>Dupe checker
-                </div>
+            @if($position == "Super Admin")
+                    <div onclick="location.href = '/itts/23/dupe-checker';"  style="margin-top: 5%; color: white; background-color: #0d1321">
+                        <i class="fa-solid fa-check-to-slot" style="margin-right: 7px;"></i>Dupe checker
+                    </div>
+            @endif
                 <div wire:click="clickSettings" data-bs-toggle="modal" data-bs-target="#clickSettings" id="settings" style="margin-top: 5%; color: white; background-color: #0d1321">
                     <i class="fa-solid fa-gear" style="margin-right: 7px;"></i>Settings
                 </div>

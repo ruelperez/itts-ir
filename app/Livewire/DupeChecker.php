@@ -37,7 +37,7 @@ class DupeChecker extends Component
         }
         $this->photo = auth()->user()->photo;
         if ($this->search == ""){
-            $this->submissionData = Submission::take(20)->get();
+            $this->submissionData = Submission::take(20)->latest()->get();
         }
         else{
             $this->submissionData = Submission::where('phoneNumber', 'LIKE', '%'.$this->search.'%')
@@ -51,7 +51,7 @@ class DupeChecker extends Component
                 ->orWhere('remarks', 'LIKE', '%'.$this->search.'%')
                 ->orWhere('coach', 'LIKE', '%'.$this->search.'%')
                 ->orWhere('result', 'LIKE', '%'.$this->search.'%')
-                ->take(20)
+                ->take(20)->latest()
                 ->get();
         }
         $this->campaignList = Note::select('campaign')
@@ -98,6 +98,10 @@ class DupeChecker extends Component
         $sd = \App\Models\Employee::where('user_id',$usrId)->get();
         if (count($sd) < 1){
             return redirect('/itts/15/employee');
+        }
+        $pst = auth()->user()->position;
+        if ($pst != "Super Admin"){
+            return redirect('/');
         }
     }
 
