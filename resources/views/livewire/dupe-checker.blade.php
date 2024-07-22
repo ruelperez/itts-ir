@@ -5,6 +5,7 @@
     @include('modal.news-update.show-photo')
     @include('modal.dupe-checker.form')
     @include('modal.dupe-checker.saveOrNot')
+    @include('modal.dupe-checker.viewDetail')
     <div style="display: flex; width: 100%; margin-top: 105px;">
         <div style="width: 81%; margin-left: 19%;">
             <div class="container">
@@ -17,8 +18,9 @@
                         <div class="w-50">
                             <input class="form-control" type="search" placeholder="Search" aria-label="Search" wire:model.live="search">
                         </div>
-                        <div class="ms-4 pt-2">
+                        <div class="ms-5 pt-2">
                             @if(count($checkBox) == 1)
+                                <i class="fa-solid fa-eye" style="cursor: pointer" title="View details" wire:loading.attr="disabled" wire:click="viewDetail" data-bs-toggle="modal" data-bs-target="#viewDetail"></i>
                                 <i class="fa-solid fa-pen-to-square ms-3" style="cursor: pointer" title="Edit" wire:click="edit" data-bs-toggle="modal" data-bs-target="#edit"></i>
                                 <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer" title="Delete" wire:click="delete" wire:confirm="Are you sure you want to delete?"></i>
                             @elseif(count($checkBox) > 1)
@@ -33,7 +35,12 @@
 
                     </div>
                 </div>
-                <div style="font-size: 14px; margin-top: 15px;"  class="px-5">
+                <div class="text-center">
+                    <div class="spinner-border mt-5" role="status" wire:loading>
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <div style="font-size: 14px; margin-top: 15px;"  class="px-5" wire:loading.remove>
                     <table class="table table-hover">
                         <thead>
                         <tr>
@@ -96,7 +103,7 @@
                                     {{ucfirst($data->result)}}
                                 </td>
                                 <td>
-                                    <input class="form-check-input" type="checkbox" wire:model.live="checkBox" value="{{$data->id}}" id="flexCheckDefault{{$data->id}}" style="font-size: 18px; cursor: pointer">
+                                    <input class="form-check-input" type="checkbox" wire:model.live="checkBox" value="{{$data->id}}" id="flexCheckDefault{{$data->id}}" style="font-size: 18px; cursor: pointer" wire:loading.attr="disabled">
                                 </td>
                             </tr>
                         @endforeach
@@ -110,6 +117,7 @@
     @script
     <script>
         $wire.on('dupeSubmitted', () => {
+            $('#formClose').click();
             $('#btn123456').click();
         });
     </script>

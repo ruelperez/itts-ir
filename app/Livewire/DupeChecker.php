@@ -361,7 +361,7 @@ class DupeChecker extends Component
                 $kk->ssn = $this->ssn;
                 $kk->verifier = $this->verifier;
                 $kk->source = $this->source;
-                $kk->fullname = $this->fullname;
+                $kk->user_name = $this->fullname;
                 $kk->user_id = $this->user_id;
                 $kk->result = $this->result;
                 $kk->save();
@@ -400,6 +400,26 @@ class DupeChecker extends Component
 
     }
 
+    public function viewDetail(){
+        for ($i=0; count($this->checkBox) > $i; $i++){
+            $this->ids = $this->checkBox[$i];
+        }
+        $dv = Submission::find($this->ids);
+        $this->caseType = $dv->caseType;
+        if ($this->caseType == "obo"){
+            $this->claimant = $dv->claimant;
+            $this->injuredParty = $dv->injuredParty;
+        }
+        else{
+            $this->claimant = $dv->claimant;
+        }
+        $this->phoneNumber = $dv->phoneNumber;
+        $this->altPhoneNumber = $dv->altPhoneNumber;
+        $this->dob = $dv->dob;
+        $this->email = $dv->email;
+        $this->address = $dv->address;
+        $this->ssn = $dv->ssn;
+    }
     public function clickSearch(){
         if ($this->agent != ""){
             $this->results = Employee::where('fname','LIKE','%'. $this->agent. '%')
@@ -478,6 +498,20 @@ class DupeChecker extends Component
         $gh = Employee::find($id);
         $this->coach = $gh->fname.' '.$gh->lname;
         $this->showSearchCoach = false;
+    }
+
+    public function delete(){
+        for ($i=0; count($this->checkBox) > $i; $i++){
+            $jk = Submission::find($this->checkBox[$i]);
+            $gn = $jk->phoneNumber;
+            $jk->delete();
+            \App\Models\Logs::create([
+                'action' => "Delete phone number ".$gn." from dupe checker",
+                'user_id' => $this->user_id,
+                'photo' => $this->photo,
+                'fullname' => $this->fullname,
+            ]);
+        }
     }
 
     public function updated($field){

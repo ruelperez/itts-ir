@@ -3,7 +3,7 @@
         <div class="modal-content" >
             <div class="modal-header">
                 <h5 class="modal-title">EDIT</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" id="formClose" aria-label="Close"></button>
             </div>
             <div style="background-color: #696969; color: white; padding: 15px 40px; width: 96%; margin-left: 2%; border-radius: 2%;" class="mt-2">
                 <form wire:submit.prevent="submitEdit">
@@ -207,6 +207,7 @@
                                         <option value="DQ by QA">DQ by QA</option>
                                         <option value="DQ BTY Manager">DQ BTY Manager</option>
                                         <option value="DQ by VER">DQ by VER</option>
+                                        <option value="Pending">Pending</option>
                                     </select>
                                     @error('result') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
@@ -288,9 +289,22 @@
                     @if($base == false)
                         <div class="mt-2 row">
                             <div class="col-4 d-flex">
-                                <label class="form-label">Result</label>
-                                <input type="text" class="form-control ms-3"  wire:model="result">
-                                @error('result') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                                <div>
+                                    <label class="form-label me-3">Result</label>
+                                </div>
+                                <div>
+                                    <select class="form-select" aria-label="Default select example" wire:model.live="result">
+                                        <option value="Signed / Executed">Signed / Executed</option>
+                                        <option value="Return by Client">Return by Client</option>
+                                        <option value="DQ - Criteria">DQ - Criteria</option>
+                                        <option value="DQ by Client">DQ by Client</option>
+                                        <option value="DQ by QA">DQ by QA</option>
+                                        <option value="DQ BTY Manager">DQ BTY Manager</option>
+                                        <option value="DQ by VER">DQ by VER</option>
+                                        <option value="Pending">Pending</option>
+                                    </select>
+                                    @error('result') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                                </div>
                             </div>
                         </div>
                     @endif
