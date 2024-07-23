@@ -1,11 +1,16 @@
 <div wire:ignore.self class="modal" tabindex="-1" id="edit">
     <div class="modal-dialog modal-xl">
-        <div class="modal-content" >
+        <div class="modal-content pb-5">
             <div class="modal-header">
                 <h5 class="modal-title">EDIT</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" id="formClose" aria-label="Close"></button>
             </div>
-            <div style="background-color: #696969; color: white; padding: 15px 40px; width: 96%; margin-left: 2%; border-radius: 2%;" class="mt-2">
+            <div class="text-center">
+                <div class="spinner-border mt-5" role="status" wire:loading>
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            <div style="background-color: #696969; color: white; padding: 15px 40px; width: 96%; margin-left: 2%; border-radius: 2%;" class="mt-4" wire:loading.remove>
                 <form wire:submit.prevent="submitEdit">
                     <div class="d-flex">
                         <div class="mb-2"><i>Put "n/a" if not applicable</i></div>
@@ -199,7 +204,7 @@
                                     <label class="form-label me-3">Result</label>
                                 </div>
                                 <div>
-                                    <select class="form-select" aria-label="Default select example" wire:model.live="result">
+                                    <select class="form-select" aria-label="Default select example" wire:model="result">
                                         <option value="Signed / Executed">Signed / Executed</option>
                                         <option value="Return by Client">Return by Client</option>
                                         <option value="DQ - Criteria">DQ - Criteria</option>

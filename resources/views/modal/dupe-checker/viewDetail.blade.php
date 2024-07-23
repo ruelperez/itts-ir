@@ -1,12 +1,14 @@
-<div wire:ignore.self class="modal fade" id="viewDetail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="viewDetail">
     <div class="modal-dialog">
-        <div class="modal-content" >
+        <div class="modal-content pb-3" >
             <div class="modal-header">
                 <h5 class="modal-title">{{ucfirst($claimant)}} ({{$phoneNumber}})</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" id="formClose" aria-label="Close"></button>
             </div>
-            <div wire:loading>
-                Saving post...
+            <div class="text-center">
+                <div class="spinner-border mt-3" role="status" wire:loading>
+                    <span class="visually-hidden">Loading...</span>
+                </div>
             </div>
             <div class="ms-3 mt-3"  wire:loading.remove>
                 @if($caseType == "obo")

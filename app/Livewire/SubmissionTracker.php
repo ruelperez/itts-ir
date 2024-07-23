@@ -28,7 +28,7 @@ class SubmissionTracker extends Component
 {
 
     public $registrationSwitch, $toChecked = false, $caseType = "self", $is_success = false, $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $clientList, $campaignList = [], $campaign, $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
-            $date, $client, $remarks = [], $claimant, $injuredParty, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "Dialer", $resultsVerifier = [], $showSearchVerifier = false ;
+            $date, $client, $remarks = [], $claimant, $checkboxTO = [], $injuredParty, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "Dialer", $resultsVerifier = [], $showSearchVerifier = false ;
 
     public function render()
     {
@@ -117,9 +117,7 @@ class SubmissionTracker extends Component
                 'user_name' => $this->fullname,
                 'user_id' => $this->user_id,
             ]);
-            $this->date = "";
-            $this->campaign = "";
-            $this->client = "";
+            $this->clearInput();
             \App\Models\Logs::create([
                 'action' => "Add submission with a customer phone number ".$this->phoneNumber,
                 'user_id' => $this->user_id,
@@ -132,6 +130,30 @@ class SubmissionTracker extends Component
             $this->is_success = false;
             $this->dispatch('subSubmitted');
         }
+    }
+
+    public function clearInput(){
+        $this->date = "";
+        $this->caseType = "self";
+        $this->claimant = "";
+        $this->injuredParty = "";
+        $this->phoneNumber = "";
+        $this->altPhoneNumber = "";
+        $this->dob = "";
+        $this->email = "";
+        $this->address = "";
+        $this->ssn = "";
+        $this->agent = "";
+        $this->coach = "";
+        $this->verifier = "";
+        $this->source = "Dialer";
+        $this->remarks = [];
+        $this->toChecked = false;
+        $this->checkboxTO = [];
+        $this->turnover = "";
+    }
+    public function clear(){
+        $this->clearInput();
     }
 
     public function removeSearch(){

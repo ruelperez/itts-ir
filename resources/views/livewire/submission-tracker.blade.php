@@ -251,7 +251,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox"  wire:click="clickTO" id="flexCheckChecked" @if($toChecked == true) checked @endif>
+                                            <input class="form-check-input" type="checkbox" wire:model="checkboxTO"  wire:click="clickTO" value="turnover">
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 Turnover
                                             </label>
@@ -263,7 +263,10 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-4" style="width: 30%; margin-left: 35%;">Submit</button>
+                        <div class="d-flex">
+                            <button type="submit" class="btn btn-warning mt-4" style="width: 30%; margin-left: 35%; margin-right: 10%;">Submit</button>
+                            <button type="submit" class="btn btn-primary mt-4" style="width: 15%;" wire:click="clear">Clear</button>
+                        </div>
                     </form>
                     <button id="btn123" data-bs-toggle="modal" data-bs-target="#loading" style="display: none"></button>
                 </div>
