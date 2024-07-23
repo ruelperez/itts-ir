@@ -27,8 +27,8 @@ use function Laravel\Prompts\table;
 class SubmissionTracker extends Component
 {
 
-    public $registrationSwitch, $caseType = "self", $is_success = false, $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $clientList, $campaignList = [], $campaign, $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
-            $date, $client, $remarks = [], $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "Dialer", $resultsVerifier = [], $showSearchVerifier = false ;
+    public $registrationSwitch, $toChecked = false, $caseType = "self", $is_success = false, $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $clientList, $campaignList = [], $campaign, $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
+            $date, $client, $remarks = [], $claimant, $injuredParty, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "Dialer", $resultsVerifier = [], $showSearchVerifier = false ;
 
     public function render()
     {
@@ -89,8 +89,12 @@ class SubmissionTracker extends Component
                 'source' => 'required',
             ]);
         }
-
-        $res = implode(', ', $this->remarks);
+        if ($this->toChecked == true){
+           $res = "(TO) - ".$this->turnover;
+        }
+        else{
+            $res = implode(', ', $this->remarks);
+        }
         try {
             Submission::create([
                 'date' => $this->date,
@@ -113,6 +117,9 @@ class SubmissionTracker extends Component
                 'user_name' => $this->fullname,
                 'user_id' => $this->user_id,
             ]);
+            $this->date = "";
+            $this->campaign = "";
+            $this->client = "";
             \App\Models\Logs::create([
                 'action' => "Add submission with a customer phone number ".$this->phoneNumber,
                 'user_id' => $this->user_id,
@@ -430,6 +437,16 @@ class SubmissionTracker extends Component
         }
     }
 
+    public function clickTO(){
+       if ($this->toChecked == false){
+           $this->toChecked = true;
+           $this->remarks = [];
+       }
+       else{
+           $this->toChecked = false;
+       }
+
+    }
     public function updated($field){
         if ($field == "verifier"){
             if ($this->verifier != ""){

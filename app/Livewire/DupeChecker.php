@@ -60,6 +60,10 @@ class DupeChecker extends Component
         return view('livewire.dupe-checker');
     }
 
+    public function clearCheck(){
+        $this->checkBox = [];
+    }
+
     public function edit(){
         for ($i=0; count($this->checkBox) > $i; $i++){
             $this->ids = $this->checkBox[$i];

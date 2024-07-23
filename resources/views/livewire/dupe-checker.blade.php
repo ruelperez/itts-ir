@@ -23,7 +23,8 @@
                                 <i class="fa-solid fa-eye" style="cursor: pointer" title="View details" wire:loading.attr="disabled" wire:click="viewDetail" data-bs-toggle="modal" data-bs-target="#viewDetail"></i>
                                 <i class="fa-solid fa-pen-to-square ms-3" style="cursor: pointer" title="Edit" wire:click="edit" data-bs-toggle="modal" data-bs-target="#edit"></i>
                                 <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer" title="Delete" wire:click="delete" wire:confirm="Are you sure you want to delete?"></i>
-                            @elseif(count($checkBox) > 1)
+                            @endif
+                            @if(count($checkBox) > 1)
                                 <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer;" title="Delete" wire:click="delete" wire:confirm="Are you sure you want to delete?"></i>
                             @endif
                         </div>
@@ -31,9 +32,11 @@
                     <div class="col-3">
 
                     </div>
-                    <div class="col-3">
-
-                    </div>
+                    @if(count($checkBox) > 0)
+                        <div class="col-2 pt-3 ms-auto">
+                            <button type="button" class="btn btn-primary" wire:click="clearCheck"><i class="fa-solid fa-broom me-2"></i>Clear checks</button>
+                        </div>
+                    @endif
                 </div>
                 <div class="text-center">
                     <div class="spinner-border mt-5" role="status" wire:loading>
@@ -46,12 +49,12 @@
                         <tr>
                             <th scope="col">Date</th>
                             <th scope="col">Agent</th>
-                            <th scope="col">Case type</th>
                             <th scope="col">Claimant</th>
                             <th scope="col">Injured party</th>
                             <th scope="col">Phone number</th>
                             <th scope="col">Alt. Phone number</th>
                             <th scope="col">Campaign</th>
+                            <th scope="col">Client</th>
                             <th scope="col">Coach</th>
                             <th scope="col">Remarks</th>
                             <th scope="col">Result</th>
@@ -66,15 +69,12 @@
                                 <td>
                                     {{$data->agent}}
                                 </td>
-                                <td>
-                                    {{$data->caseType}}
-                                </td>
                                 @if($data->caseType == "self")
                                     <td>
-
+                                        {{$data->claimant}}
                                     </td>
                                     <td>
-                                        {{$data->injuredParty}}
+                                        (Claimant)
                                     </td>
                                 @else
                                     <td>
@@ -92,6 +92,9 @@
                                 </td>
                                 <td>
                                     {{ucwords($data->campaign)}}
+                                </td>
+                                <td>
+                                    {{ucwords($data->client)}}
                                 </td>
                                 <td>
                                     {{$data->coach}}

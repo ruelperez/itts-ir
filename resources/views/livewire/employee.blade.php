@@ -331,6 +331,7 @@
                                                 <option selected value="Quality Assurance">Quality Assurance</option>
                                                 <option value="Recording & Editor">Recording & Editor </option>
                                                 <option value="BO - IT">BO - IT</option>
+                                                <option value="Retainer">Retainer</option>
                                             </select>
                                         </div>
                                     @endif

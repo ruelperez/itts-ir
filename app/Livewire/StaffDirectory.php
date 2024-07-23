@@ -7,6 +7,7 @@ use App\Models\Comment;
 use App\Models\CommentHeart;
 use App\Models\Dtr;
 use App\Models\DtrContent;
+use App\Models\DtrPermanent;
 use App\Models\IsRegistration;
 use App\Models\Note;
 use App\Models\SuperadminShow;
@@ -24,7 +25,10 @@ class StaffDirectory extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $stat = [], $checkBox = [], $employeeData, $search, $dtrData = [], $staffData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $stat = [], $checkBox = [], $id_user, $ids, $ng = 0, $employeeData, $search, $dtrData = [], $staffData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
+        $fname, $mname, $lname, $mi, $suffix, $age, $phone_number, $dob, $gender_preference, $civil_status, $religion, $personal_email, $current_house, $current_street,
+        $current_brgy, $current_city, $current_working_email, $same_current_permanent = false, $permanent_house, $permanent_street, $is_success = true, $full_name,
+        $permanent_brgy, $permanent_city, $sss, $philhealth, $tin, $hire_date, $yot, $designation = "Agent / Sale Associate", $department = "Admin - Production", $contact_number, $address, $relationship;
 
     public function render()
     {
@@ -85,6 +89,131 @@ class StaffDirectory extends Component
             }
         }
         return view('livewire.staff-directory');
+    }
+
+    public function updateForm(){
+        $this->ng = 1;
+        $this->is_success = false;
+    }
+
+    public function submitForm(){
+        $this->ng = 1;
+        $this->is_success = false;
+        try {
+            $pp = \App\Models\Employee::find($this->ids);
+            $pp->fname = $this->fname;
+            $pp->lname = $this->lname;
+            $pp->mi = $this->mi;
+            $pp->mname = $this->mname;
+            $pp->suffix = $this->suffix;
+            $pp->age = $this->age;
+            $pp->phone_number = $this->phone_number;
+            $pp->dob = $this->dob;
+            $pp->gender_preference = $this->gender_preference;
+            $pp->civil_status = $this->civil_status;
+            $pp->religion = $this->religion;
+            $pp->personal_email = $this->personal_email;
+            $pp->current_house = $this->current_house;
+            $pp->current_street = $this->current_street;
+            $pp->current_brgy = $this->current_brgy;
+            $pp->current_city = $this->current_city;
+            $pp->current_working_email = $this->current_working_email;
+            $pp->permanent_house = $this->permanent_house;
+            $pp->permanent_street = $this->permanent_street;
+            $pp->permanent_brgy = $this->permanent_brgy;
+            $pp->permanent_city = $this->permanent_city;
+            $pp->sss = $this->sss;
+            $pp->philhealth = $this->philhealth;
+            $pp->tin = $this->tin;
+            $pp->hire_date = $this->hire_date;
+            $pp->yot = $this->yot;
+            $pp->designation = $this->designation;
+            $pp->department = $this->department;
+            $pp->branch = $this->branch;
+            $pp->contact_number = $this->contact_number;
+            $pp->address = $this->address;
+            $pp->relationship = $this->relationship;
+            $pp->fullname = $this->full_name;
+            $pp->save();
+
+            $ff = User::find($this->user_id);
+            $ff->branch = $this->branch;
+            $ff->save();
+
+            $ff = User::find($this->user_id)->dtr;
+            foreach ($ff as $gg){
+                $aa = Dtr::find($gg->id);
+                $aa->branch = $this->branch;
+                $aa->save();
+            }
+
+            $ff = User::find($this->user_id)->dtr_permanent;
+            foreach ($ff as $gg){
+                $aa = DtrPermanent::find($gg->id);
+                $aa->branch = $this->branch;
+                $aa->save();
+            }
+
+            $ff = User::find($this->user_id)->dtr_content;
+            foreach ($ff as $gg){
+                $aa = DtrContent::find($gg->id);
+                $aa->branch = $this->branch;
+                $aa->save();
+            }
+            if ($this->is_create == true){
+                return redirect('/');
+            }
+            $this->getInfo();
+            $this->is_success = true;
+            // Emit event to trigger modal
+            $this->dispatch('formSubmitted');
+        }catch (\Exception $e){
+            $this->is_success = false;
+        }
+    }
+    public function clickView(){
+        for ($i=0; $i<count($this->checkBox); $i++){
+            $this->ids = $this->checkBox[$i];
+            $pp = \App\Models\Employee::find($this->ids);
+            $this->branch = $pp->branch;
+            $this->fname = $pp->fname;
+            $this->lname = $pp->lname;
+            $this->mi = $pp->mi;
+            $this->mname = $pp->mname;
+            $this->suffix = $pp->suffix;
+            $this->age = $pp->age;
+            $this->phone_number = $pp->phone_number;
+            $this->dob = $pp->dob;
+            $this->gender_preference = $pp->gender_preference;
+            $this->civil_status = $pp->civil_status;
+            $this->religion = $pp->religion;
+            $this->personal_email = $pp->personal_email;
+            $this->current_house = $pp->current_house;
+            $this->current_street = $pp->current_street;
+            $this->current_brgy = $pp->current_brgy;
+            $this->current_city = $pp->current_city;
+            $this->current_working_email = $pp->current_working_email;
+            $this->permanent_house = $pp->permanent_house;
+            $this->permanent_street = $pp->permanent_street;
+            $this->permanent_brgy = $pp->permanent_brgy;
+            $this->permanent_city = $pp->permanent_city;
+            $this->sss = $pp->sss;
+            $this->philhealth = $pp->philhealth;
+            $this->tin = $pp->tin;
+            $this->hire_date = $pp->hire_date;
+            $this->yot = $pp->yot;
+            $this->designation = $pp->designation;
+            $this->department = $pp->department;
+            $this->contact_number = $pp->contact_number;
+            $this->address = $pp->address;
+            $this->relationship = $pp->relationship;
+            $this->full_name = $pp->fullname;
+            $this->id_user = $pp->id_user;
+            if ($this->department == "" or $this->department == null){
+                $this->department = "Admin - Production";
+                $this->designation = "Agent/ Sale Associate";
+            }
+        }
     }
 
     public function viewInfo(){

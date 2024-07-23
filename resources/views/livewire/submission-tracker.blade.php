@@ -148,7 +148,7 @@
                             </div>
                             <div class="col-3">
                                 <label  class="form-label">Verifier*</label>
-                                <input type="text" class="form-control" wire:model.live="verifier" wire:blur="removeSearchVerifier" wire:click="clickSearchVerifier" required>
+                                <input type="text" class="form-control" wire:model.live="verifier" wire:blur="removeSearchVerifier" wire:click="clickSearchVerifier">
                                 @if($showSearchVerifier == true)
                                     <div style="position: absolute; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);">
                                         <ul class="list-group">
@@ -186,25 +186,25 @@
                             <div class="col-10">
                                 <div class="row mb-3">
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Submitted" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Submitted" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Submitted
                                         </label>
                                     </div>
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Litigator" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Litigator" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Litigator
                                         </label>
                                     </div>
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Warm XFER" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Warm XFER" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Warm XFER
                                         </label>
                                     </div>
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Federal DNC" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Federal DNC" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Federal DNC
                                         </label>
@@ -212,42 +212,53 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="TCPA" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="TCPA" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
                                         <label class="form-check-label" for="flexCheckDefault">
                                             TCPA
                                         </label>
                                     </div>
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Already REP" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Already REP" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Already REP
                                         </label>
                                     </div>
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Blacklist" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Blacklist" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Blacklist
+                                        </label>
+                                    </div>
+                                    <div class="col-3">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Plaintiff" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Plaintiff
                                         </label>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Plaintiff" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Plaintiff
-                                        </label>
-                                    </div>
-                                    <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Thatsthem issue-not found" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Thatsthem issue-not found" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Thatsthem issue-not found
                                         </label>
                                     </div>
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Felony charge" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Felony charge" id="flexCheckDefault" @if($toChecked == true) disabled @endif >
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Felony charge
                                         </label>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox"  wire:click="clickTO" id="flexCheckChecked" @if($toChecked == true) checked @endif>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Turnover
+                                            </label>
+                                        </div>
+                                        @if($toChecked == true)
+                                            <textarea class="form-control" rows="2" id="reason" wire:model="turnover"  style="border: none;" placeholder="Reason:" required></textarea>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

@@ -24,8 +24,6 @@ window.addEventListener('DOMContentLoaded', function () {
     //     dateHire.value = value;
     // });
 });
-
-
 function hoverStaff(id){
     var fwe = $('#idStaff'+id);
     fwe.show();
@@ -35,16 +33,6 @@ function hoverOutStaff(id){
     var fwe = $('#idStaff'+id);
     fwe.hide();
 }
-
-// function hoverDupe(id){
-//     var fws = $('#idDupe'+id);
-//     fws.show();
-// }
-//
-// function hoverOutDupe(id){
-//     var fws = $('#idDupe'+id);
-//     fws.hide();
-// }
 
 function clickEllipsis(){
     var an = $(".div100");

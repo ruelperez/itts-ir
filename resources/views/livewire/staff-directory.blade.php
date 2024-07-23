@@ -4,6 +4,7 @@
     @include('partial.header')
     @include('modal.click-settings')
     @include('modal.news-update.show-photo')
+    @include('modal.staff-directory.viewDetail')
 
     <div style="display: flex; width: 100%; margin-top: 105px;">
         <div style="width: 81%; margin-left: 19%;">
@@ -17,7 +18,7 @@
                     </div>
                     <div class="w-25 ps-5">
                         @if(count($checkBox) == 1)
-                            <i class="fa-solid fa-eye text-primary" style="cursor: pointer"></i>
+                            <i class="fa-solid fa-eye text-primary" style="cursor: pointer" wire:click="clickView" data-bs-toggle="modal" data-bs-target="#viewDetail"></i>
                             <i class="fa-solid fa-pen-to-square ms-3" style="cursor: pointer"></i>
                             <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer"></i>
                         @elseif(count($checkBox) > 1)
