@@ -14,34 +14,53 @@
                     <form wire:submit.prevent="submit">
                         <div class="mb-2"><i>Put "n/a" if not applicable</i></div>
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-3">
                                 <label class="form-label">Date*</label>
                                 <input type="text" id="datepicker" class="form-control" wire:model="date" required>
                             </div>
-                            <div class="col-4">
+                            <div class="col-3">
                                 <div>
                                     <label class="form-label">Campaign*</label>
                                 </div>
                                 <div>
                                     <select class="form-select" aria-label="Default select example" wire:model.live="campaign">
+                                        <option value="selectCampaign">Select Campaign</option>
+                                        <option value="naCampaign">n/a</option>
                                         @foreach($campaignList as $list)
-                                            <option value="{{$list->campaign}}">{{$list->campaign}}</option>
+                                            <option @if($campaign == $list->campaign) selected @else @endif value="{{$list->campaign}}">{{$list->campaign}}</option>
                                         @endforeach
                                     </select>
                                     @error('campaign') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-3">
                                 <div>
                                     <label class="form-label">Client*</label>
                                 </div>
                                 <div>
-                                    <select class="form-select" aria-label="Default select example" wire:model="client">
+                                    <select class="form-select" aria-label="Default select example" wire:model.live="client" @if($campaign == "selectCampaign" or $campaign == "naCampaign") disabled @endif>
+                                        <option value="selectClient">Select Client</option>
+                                        <option value="naClient">n/a</option>
                                         @foreach($clientList as $list)
                                             <option value="{{$list->client}}">{{$list->client}}</option>
                                         @endforeach
                                     </select>
                                     @error('client') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div>
+                                    <label class="form-label">Lawfirm*</label>
+                                </div>
+                                <div>
+                                    <select class="form-select" aria-label="Default select example" wire:model="lawfirm" @if($client == "selectClient" or $campaign == "naClient") disabled @endif>
+                                        <option selected value="selectLawfirm">Select Lawfirm</option>
+                                        <option selected value="naLawfirm">n/a</option>
+                                        @foreach($lawfirmList as $list)
+                                            <option value="{{$list->lawfirm}}">{{$list->lawfirm}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('lawfirm') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                         </div>
@@ -265,7 +284,7 @@
                         </div>
                         <div class="d-flex">
                             <button type="submit" class="btn btn-warning mt-4" style="width: 30%; margin-left: 35%; margin-right: 10%;">Submit</button>
-                            <button type="submit" class="btn btn-primary mt-4" style="width: 15%;" wire:click="clear">Clear</button>
+                            <button type="button" class="btn btn-primary mt-4" style="width: 15%;" wire:click="clear">Clear</button>
                         </div>
                     </form>
                     <button id="btn123" data-bs-toggle="modal" data-bs-target="#loading" style="display: none"></button>

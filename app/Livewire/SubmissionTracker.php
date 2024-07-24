@@ -27,8 +27,8 @@ use function Laravel\Prompts\table;
 class SubmissionTracker extends Component
 {
 
-    public $registrationSwitch, $toChecked = false, $caseType = "self", $is_success = false, $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $clientList, $campaignList = [], $campaign, $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
-            $date, $client, $remarks = [], $claimant, $checkboxTO = [], $injuredParty, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "Dialer", $resultsVerifier = [], $showSearchVerifier = false ;
+    public $registrationSwitch, $toChecked = false, $caseType = "self", $is_success = false, $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $clientList = [], $campaignList = [], $campaign = "selectCampaign", $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
+            $date, $client = "selectClient", $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $lawfirm, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "Dialer", $resultsVerifier = [], $showSearchVerifier = false ;
 
     public function render()
     {
@@ -41,9 +41,6 @@ class SubmissionTracker extends Component
             $this->employeeData = $emp->designation;
         }
         $this->photo = auth()->user()->photo;
-        $this->campaignList = Note::select('campaign')
-            ->distinct('campaign')
-            ->get();
         return view('livewire.submission-tracker');
     }
 
@@ -248,18 +245,27 @@ class SubmissionTracker extends Component
         $this->campaignList = Note::select('campaign')
             ->distinct('campaign')
             ->get();
-        foreach ($this->campaignList as $hh){
-            $this->campaign = $hh->campaign;
-            break;
-        }
-        foreach ($this->campaignList as $list){
-            $this->clientList = DB::table('notes')->select('client')->where('campaign',$list->campaign)->distinct()->get();
-            break;
-        }
-        foreach ($this->clientList as $hh){
-            $this->client = $hh->client;
-            break;
-        }
+//        foreach ($this->campaignList as $hh){
+//            $this->campaign = $hh->campaign;
+//            break;
+//        }
+//        foreach ($this->campaignList as $list){
+//            $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+//            break;
+//        }
+//        foreach ($this->clientList as $hh){
+//            $this->client = $hh->client;
+//            break;
+//        }
+//        foreach ($this->campaignList as $man){
+//            $this->lawfirmList = DB::table('notes')->select('lawfirm')
+//            ->where('campaign',$this->campaign)
+//            ->where('client',$this->client)->distinct()->get();
+//        }
+//        foreach ($this->lawfirmList as $hp){
+//            $this->lawfirm = $hp->lawfirm;
+//            break;
+//        }
     }
 
     public function logout(){
@@ -532,7 +538,41 @@ class SubmissionTracker extends Component
 
         }
         if ($field == "campaign"){
-            $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+            if ($this->campaign == "selectCampaign" or $this->campaign == "naCampaign"){
+                $this->campaignList = Note::select('campaign')
+                    ->distinct('campaign')
+                    ->get();
+                $this->client = "selectClient";
+                $this->lawfirm = "selectLawfirm";
+            }
+            else{
+                $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+                $this->campaignList = Note::select('campaign')
+                    ->distinct('campaign')
+                    ->get();
+                $this->client = "selectClient";
+                $this->lawfirm = "selectLawfirm";
+            }
+
+        }
+        if ($field == "client"){
+            if ($this->campaign == "selectClient" or $this->campaign == "naClient"){
+                $this->campaignList = Note::select('campaign')
+                    ->distinct('campaign')
+                    ->get();
+                $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+                $this->lawfirm = "selectLawfirm";
+            }
+            else{
+                $this->lawfirmList = DB::table('notes')->select('lawfirm')->where('campaign',$this->campaign)
+                    ->where('client',$this->client)->distinct()->get();
+                $this->campaignList = Note::select('campaign')
+                    ->distinct('campaign')
+                    ->get();
+                $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+                $this->lawfirm = "selectLawfirm";
+            }
+
         }
         if ($field == "registrationSwitch"){
             $this->regSwitch();
