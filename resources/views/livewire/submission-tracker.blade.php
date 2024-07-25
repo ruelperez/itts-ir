@@ -25,7 +25,7 @@
                                 <div>
                                     <select class="form-select" aria-label="Default select example" wire:model.live="campaign">
                                         <option value="selectCampaign">Select Campaign</option>
-                                        <option value="naCampaign">n/a</option>
+                                        <option value="n/a">n/a</option>
                                         @foreach($campaignList as $list)
                                             <option @if($campaign == $list->campaign) selected @else @endif value="{{$list->campaign}}">{{$list->campaign}}</option>
                                         @endforeach
@@ -38,9 +38,9 @@
                                     <label class="form-label">Client*</label>
                                 </div>
                                 <div>
-                                    <select class="form-select" aria-label="Default select example" wire:model.live="client" @if($campaign == "selectCampaign" or $campaign == "naCampaign") disabled @endif>
+                                    <select class="form-select" aria-label="Default select example" wire:model.live="client" @if($campaign == "selectCampaign") disabled @endif>
                                         <option value="selectClient">Select Client</option>
-                                        <option value="naClient">n/a</option>
+                                        <option value="n/a">n/a</option>
                                         @foreach($clientList as $list)
                                             <option value="{{$list->client}}">{{$list->client}}</option>
                                         @endforeach
@@ -53,9 +53,9 @@
                                     <label class="form-label">Lawfirm*</label>
                                 </div>
                                 <div>
-                                    <select class="form-select" aria-label="Default select example" wire:model="lawfirm" @if($client == "selectClient" or $campaign == "naClient") disabled @endif>
-                                        <option selected value="selectLawfirm">Select Lawfirm</option>
-                                        <option selected value="naLawfirm">n/a</option>
+                                    <select class="form-select" aria-label="Default select example" wire:model="lawfirm" @if($client == "selectClient") disabled @endif>
+                                        <option value="selectLawfirm">Select Lawfirm</option>
+                                        <option value="n/a">n/a</option>
                                         @foreach($lawfirmList as $list)
                                             <option value="{{$list->lawfirm}}">{{$list->lawfirm}}</option>
                                         @endforeach
@@ -106,7 +106,7 @@
                             </div>
                             <div class="col-4">
                                 <label  class="form-label">Alt. Phone number</label>
-                                <input type="text" class="form-control" wire:model="altPhoneNumber" placeholder="Put &quot;0000&quot; if not applicable">
+                                <input type="text" class="form-control" wire:model="altPhoneNumber" placeholder="Put &quot;0&quot; if not applicable" required>
                                 @error('altPhoneNumber') <span style="color: #8B0000">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-4">
@@ -128,7 +128,7 @@
                             </div>
                             <div class="col-3">
                                 <label  class="form-label">SSN*</label>
-                                <input type="text" class="form-control"  wire:model="ssn" placeholder="Put &quot;0000&quot; if not applicable" required>
+                                <input type="text" class="form-control"  wire:model="ssn" placeholder="Put &quot;0&quot; if not applicable" required>
                                 @error('ssn') <span style="color: #8B0000">{{ $message }}</span> @enderror
                             </div>
                         </div>
@@ -211,61 +211,90 @@
                                         </label>
                                     </div>
                                     <div class="col-3">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Verified - Signed" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Verified - Signed
+                                        </label>
+                                    </div>
+                                    <div class="col-4">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Verified - For Signing" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Verified - For Signing
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-3">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Transferred" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Transferred
+                                        </label>
+                                    </div>
+                                    <div class="col-3">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Qualify for CB" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Qualify for CB
+                                        </label>
+                                    </div>
+                                    <div class="col-3">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Qualify for Xfer" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Qualify for Xfer
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-5 mb-3">
+                                    <div class="col-3">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="DNC" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            DNC
+                                        </label>
+                                    </div>
+                                    <div class="col-3">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="TCPA" id="flexCheckDefault" @if($toChecked == true) disabled @endif >
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            TCPA
+                                        </label>
+                                    </div>
+                                    <div class="col-5">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="ThatsThem Issue - Not found" id="flexCheckDefault" @if($toChecked == true) disabled @endif >
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            ThatsThem Issue - Not found
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-3">
                                         <input class="form-check-input" type="checkbox" wire:model="remarks" value="Litigator" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Litigator
                                         </label>
                                     </div>
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Warm XFER" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Already Rep" id="flexCheckDefault" @if($toChecked == true) disabled @endif >
                                         <label class="form-check-label" for="flexCheckDefault">
-                                            Warm XFER
+                                            Already Rep
                                         </label>
                                     </div>
-                                    <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Federal DNC" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                    <div class="col-4">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Felony" id="flexCheckDefault" @if($toChecked == true) disabled @endif >
                                         <label class="form-check-label" for="flexCheckDefault">
-                                            Federal DNC
+                                            Felony
                                         </label>
                                     </div>
                                 </div>
-                                <div class="row mb-3">
+                                <div class="row">
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="TCPA" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Blackllist" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
                                         <label class="form-check-label" for="flexCheckDefault">
-                                            TCPA
+                                            Blackllist
                                         </label>
                                     </div>
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Already REP" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Already REP
-                                        </label>
-                                    </div>
-                                    <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Blacklist" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Blacklist
-                                        </label>
-                                    </div>
-                                    <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Plaintiff" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Plaintiff" id="flexCheckDefault" @if($toChecked == true) disabled @endif >
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Plaintiff
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Thatsthem issue-not found" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Thatsthem issue-not found
-                                        </label>
-                                    </div>
-                                    <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Felony charge" id="flexCheckDefault" @if($toChecked == true) disabled @endif >
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Felony charge
                                         </label>
                                     </div>
                                     <div class="col-6">
@@ -282,7 +311,92 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex">
+
+{{--                        <div class="mt-4 row">--}}
+{{--                            <div class="col-2">--}}
+{{--                                <label class="form-label">Remarks</label>--}}
+{{--                            </div>--}}
+{{--                            <div class="col-10">--}}
+{{--                                <div class="row mb-3">--}}
+{{--                                    <div class="col-3">--}}
+{{--                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Submitted" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                        <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                            Submitted--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-3">--}}
+{{--                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Litigator" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                        <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                            Litigator--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-3">--}}
+{{--                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Warm XFER" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                        <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                            Warm XFER--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-3">--}}
+{{--                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Federal DNC" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                        <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                            Federal DNC--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="row mb-3">--}}
+{{--                                    <div class="col-3">--}}
+{{--                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="TCPA" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                        <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                            TCPA--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-3">--}}
+{{--                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Already REP" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                        <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                            Already REP--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-3">--}}
+{{--                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Blacklist" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                        <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                            Blacklist--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-3">--}}
+{{--                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Plaintiff" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                        <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                            Plaintiff--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="row mb-3">--}}
+{{--                                    <div class="col-3">--}}
+{{--                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Thatsthem issue-not found" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                        <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                            Thatsthem issue-not found--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-3">--}}
+{{--                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Felony charge" id="flexCheckDefault" @if($toChecked == true) disabled @endif >--}}
+{{--                                        <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                            Felony charge--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-6">--}}
+{{--                                        <div class="form-check">--}}
+{{--                                            <input class="form-check-input" type="checkbox" wire:model="checkboxTO"  wire:click="clickTO" value="turnover">--}}
+{{--                                            <label class="form-check-label" for="flexCheckChecked">--}}
+{{--                                                Turnover--}}
+{{--                                            </label>--}}
+{{--                                        </div>--}}
+{{--                                        @if($toChecked == true)--}}
+{{--                                            <textarea class="form-control" rows="2" id="reason" wire:model="turnover"  style="border: none;" placeholder="Reason:" required></textarea>--}}
+{{--                                        @endif--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+                        <div class="d-flex mt-3">
                             <button type="submit" class="btn btn-warning mt-4" style="width: 30%; margin-left: 35%; margin-right: 10%;">Submit</button>
                             <button type="button" class="btn btn-primary mt-4" style="width: 15%;" wire:click="clear">Clear</button>
                         </div>

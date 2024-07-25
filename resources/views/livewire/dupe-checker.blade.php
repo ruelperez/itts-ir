@@ -44,20 +44,19 @@
                     </div>
                 </div>
                 <div style="font-size: 14px; margin-top: 15px;"  class="px-5" wire:loading.remove>
-                    <table class="table table-hover">
+                    <table class="table table-hover" style="width: 100%;">
                         <thead>
                         <tr>
-                            <th scope="col">Date</th>
-                            <th scope="col">Agent</th>
-                            <th scope="col">Claimant</th>
-                            <th scope="col">Injured party</th>
-                            <th scope="col">Phone number</th>
-                            <th scope="col">Alt. Phone number</th>
-                            <th scope="col">Campaign</th>
-                            <th scope="col">Client</th>
-                            <th scope="col">Coach</th>
-                            <th scope="col">Remarks</th>
-                            <th scope="col">Result</th>
+                            <th scope="col" style="width: 10%;">Date</th>
+                            <th scope="col" style="width: 10%;">Claimant</th>
+                            <th scope="col" style="width: 10%;">Injured party</th>
+                            <th scope="col" style="width: 10%;">Phone number</th>
+                            <th scope="col" style="width: 10%;">Alt. Phone number</th>
+                            <th scope="col" style="width: 9%;">Campaign</th>
+                            <th scope="col" style="width: 9%;">Client</th>
+                            <th scope="col" style="width: 9%;">Lawfirm</th>
+                            <th scope="col" style="width: 15%;">Remarks</th>
+                            <th scope="col" style="width: 9%;">Result</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -65,9 +64,6 @@
                             <tr onmouseover="hoverDupe({{$data->id}})" onmouseout="hoverOutDupe({{$data->id}})">
                                 <td>
                                     {{$data->date}}
-                                </td>
-                                <td>
-                                    {{$data->agent}}
                                 </td>
                                 @if($data->caseType == "self")
                                     <td>
@@ -97,7 +93,7 @@
                                     {{ucwords($data->client)}}
                                 </td>
                                 <td>
-                                    {{$data->coach}}
+                                    {{ucwords($data->lawfirm)}}
                                 </td>
                                 <td>
                                     {{$data->remarks}}

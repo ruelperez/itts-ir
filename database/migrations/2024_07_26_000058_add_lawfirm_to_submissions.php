@@ -12,18 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('submissions', function (Blueprint $table) {
-            $table->string('client');
-            $table->string('caseType');
-            $table->string('injuredParty')->nullable();
-            $table->string('dob');
-            $table->string('email');
-            $table->string('address');
-            $table->integer('ssn');
-            $table->string('verifier');
-            $table->string('source');
-            $table->string('result')->nullable();
-            $table->string('user_name');
-            $table->unsignedBigInteger('user_id');
+            $table->string('lawfirm')->nullable();
         });
     }
 

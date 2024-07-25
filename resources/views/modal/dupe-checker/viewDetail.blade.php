@@ -11,6 +11,19 @@
                 </div>
             </div>
             <div class="ms-3 mt-3"  wire:loading.remove>
+                <div>
+                    <p>Source: <b>{{ucfirst($source)}}</b></p>
+                </div>
+                <div>
+                    <p>Agent: <b>{{ucfirst($agent)}}</b></p>
+                </div>
+                <div>
+                    <p>Coach: <b>{{ucfirst($coach)}}</b></p>
+                </div>
+                <div>
+                    <p>Verifier: <b>{{ucfirst($verifier)}}</b></p>
+                </div>
+                <hr>
                 @if($caseType == "obo")
                     <div>
                         <p>Claimant: <b>{{ucfirst($claimant)}}</b></p>

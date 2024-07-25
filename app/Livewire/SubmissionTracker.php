@@ -28,7 +28,7 @@ class SubmissionTracker extends Component
 {
 
     public $registrationSwitch, $toChecked = false, $caseType = "self", $is_success = false, $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $clientList = [], $campaignList = [], $campaign = "selectCampaign", $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
-            $date, $client = "selectClient", $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $lawfirm, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "Dialer", $resultsVerifier = [], $showSearchVerifier = false ;
+            $date, $lawfirm = "selectLawfirm", $client = "selectClient", $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "Dialer", $resultsVerifier = [], $showSearchVerifier = false ;
 
     public function render()
     {
@@ -41,18 +41,18 @@ class SubmissionTracker extends Component
             $this->employeeData = $emp->designation;
         }
         $this->photo = auth()->user()->photo;
+        $this->campaignList = Note::select('campaign')
+            ->distinct('campaign')
+            ->get();
+        $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
         return view('livewire.submission-tracker');
     }
 
     public function submit(){
-        if ($this->altPhoneNumber != "" or $this->altPhoneNumber != null){
-            $this->validate([
-                'altPhoneNumber' => 'required|numeric',
-            ]);
-        }
         if ($this->caseType == "self"){
             $this->validate([
                 'phoneNumber' => 'required|numeric',
+                'altPhoneNumber' => 'required|numeric',
                 'ssn' => 'required|numeric',
                 'campaign' => 'required',
                 'date' => 'required',
@@ -66,10 +66,12 @@ class SubmissionTracker extends Component
                 'address' => 'required',
                 'verifier' => 'required',
                 'source' => 'required',
+                'lawfirm' => 'required',
             ]);
         }else{
             $this->validate([
                 'phoneNumber' => 'required|numeric',
+                'altPhoneNumber' => 'required|numeric',
                 'ssn' => 'required|numeric',
                 'campaign' => 'required',
                 'date' => 'required',
@@ -84,6 +86,7 @@ class SubmissionTracker extends Component
                 'address' => 'required',
                 'verifier' => 'required',
                 'source' => 'required',
+                'lawfirm' => 'required',
             ]);
         }
         if ($this->toChecked == true){
@@ -91,6 +94,15 @@ class SubmissionTracker extends Component
         }
         else{
             $res = implode(', ', $this->remarks);
+        }
+        if ($this->campaign == "selectCampaign"){
+            $this->campaign = "n/a";
+        }
+        if ($this->client == "selectClient"){
+            $this->client = "n/a";
+        }
+        if ($this->lawfirm == "selectLawfirm"){
+            $this->lawfirm = "n/a";
         }
         try {
             Submission::create([
@@ -113,6 +125,7 @@ class SubmissionTracker extends Component
                 'source' => $this->source,
                 'user_name' => $this->fullname,
                 'user_id' => $this->user_id,
+                'lawfirm' => $this->lawfirm,
             ]);
             $this->clearInput();
             \App\Models\Logs::create([
@@ -148,6 +161,7 @@ class SubmissionTracker extends Component
         $this->toChecked = false;
         $this->checkboxTO = [];
         $this->turnover = "";
+        $this->lawfirm = "";
     }
     public function clear(){
         $this->clearInput();
