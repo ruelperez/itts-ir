@@ -127,13 +127,13 @@ class SubmissionTracker extends Component
                 'user_id' => $this->user_id,
                 'lawfirm' => $this->lawfirm,
             ]);
-            $this->clearInput();
             \App\Models\Logs::create([
                 'action' => "Add submission with a customer phone number ".$this->phoneNumber,
                 'user_id' => $this->user_id,
                 'photo' => $this->photo,
                 'fullname' => $this->fullname,
             ]);
+            $this->clearInput();
             $this->is_success = true;
             $this->dispatch('subSubmitted');
         }catch (\Exception $e){

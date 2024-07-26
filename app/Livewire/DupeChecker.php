@@ -23,7 +23,7 @@ use Livewire\Component;
 class DupeChecker extends Component
 {
     public $registrationSwitch, $is_success = false, $search, $ids, $displayRemarks, $checkBox = [], $submissionData = [], $resultsCoach = [], $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo, $campaignList = [], $campaign,
-        $date, $base = true, $client, $remarks = [], $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $showSearch = false, $showSearchCoach = false, $agent, $coach, $verifier, $source = "Dialer", $caseType = "self", $resultsVerifier = [], $results = [], $clientList= [], $showSearchVerifier = false, $result;
+        $date, $base = true, $toChecked = false, $dqReason, $client, $remarks = [], $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $showSearch = false, $showSearchCoach = false, $agent, $coach, $verifier, $source = "Dialer", $caseType = "self", $resultsVerifier = [], $results = [], $clientList= [], $showSearchVerifier = false, $result;
 
     public function render()
     {
@@ -37,7 +37,7 @@ class DupeChecker extends Component
         }
         $this->photo = auth()->user()->photo;
         if ($this->search == ""){
-            $this->submissionData = Submission::take(20)->latest()->get();
+            $this->submissionData = Submission::take(50)->latest()->get();
         }
         else{
             $this->submissionData = Submission::where('phoneNumber', 'LIKE', '%'.$this->search.'%')
@@ -51,7 +51,7 @@ class DupeChecker extends Component
                 ->orWhere('remarks', 'LIKE', '%'.$this->search.'%')
                 ->orWhere('coach', 'LIKE', '%'.$this->search.'%')
                 ->orWhere('result', 'LIKE', '%'.$this->search.'%')
-                ->take(20)->latest()
+                ->take(50)->latest()
                 ->get();
         }
         $this->campaignList = Note::select('campaign')
@@ -86,6 +86,7 @@ class DupeChecker extends Component
             $this->source = $yr->source;
             $this->displayRemarks = $yr->remarks;
             $this->result = $yr->result;
+
         }
 
         $this->campaignList = Note::select('campaign')
@@ -349,8 +350,14 @@ class DupeChecker extends Component
                     'source' => 'required',
                 ]);
             }
+            if ($this->result == "Pending"){
+                $this->result = "";
+            }
+            if ($this->result == "DQ - Other reason"){
+                $this->result = "DQ - ".$this->dqReason;
+            }
             try {
-                $res = implode(', ', $this->remarks);
+//                $res = implode(', ', $this->remarks);
                 $kk = Submission::find($this->ids);
                 $kk->date = $this->date;
                 $kk->agent = $this->agent;
@@ -359,7 +366,7 @@ class DupeChecker extends Component
                 $kk->altPhoneNumber = $this->altPhoneNumber;
                 $kk->campaign = $this->campaign;
                 $kk->coach = $this->coach;
-                $kk->remarks = $res;
+//                $kk->remarks = $res;
                 $kk->client = $this->client;
                 $kk->caseType = $this->caseType;
                 $kk->injuredParty = $this->injuredParty;
@@ -373,6 +380,7 @@ class DupeChecker extends Component
                 $kk->user_id = $this->user_id;
                 $kk->result = $this->result;
                 $kk->save();
+                $this->dqReason = "";
                 \App\Models\Logs::create([
                     'action' => "Edit dupe checker with a customer phone number ".$this->phoneNumber,
                     'user_id' => $this->user_id,
@@ -387,10 +395,14 @@ class DupeChecker extends Component
             }
         }
         else{
+            if ($this->result == "DQ - Other reason"){
+                $this->result = "DQ - ".$this->dqReason;
+            }
             try {
                 $kk = Submission::find($this->ids);
                 $kk->result = $this->result;
                 $kk->save();
+                $this->dqReason = "";
                 \App\Models\Logs::create([
                     'action' => "Edit dupe checker with a customer phone number ".$this->phoneNumber,
                     'user_id' => $this->user_id,

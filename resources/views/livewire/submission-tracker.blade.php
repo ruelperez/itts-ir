@@ -231,15 +231,21 @@
                                         </label>
                                     </div>
                                     <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Qualify for CB" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="QA Review" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
                                         <label class="form-check-label" for="flexCheckDefault">
-                                            Qualify for CB
+                                            QA Review
                                         </label>
                                     </div>
                                     <div class="col-3">
                                         <input class="form-check-input" type="checkbox" wire:model="remarks" value="Qualify for Xfer" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Qualify for Xfer
+                                        </label>
+                                    </div>
+                                    <div class="col-3">
+                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Qualify for CB" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Qualify for CB
                                         </label>
                                     </div>
                                 </div>
