@@ -29,7 +29,7 @@
                     <i class="fa-solid fa-store" style="margin-right: 7px;"></i>Inventory
                 </div>
             @if($position == "Super Admin")
-                    <div onclick="location.href = '/itts/23/dupe-checker';"  style="margin-top: 5%; color: white; background-color: #0d1321">
+                    <div onclick="location.href = '/itts/23/dupe-checker';" id="dupeID" style="margin-top: 5%; color: white; background-color: #0d1321" >
                         <i class="fa-solid fa-check-to-slot" style="margin-right: 7px;"></i>Dupe checker
                     </div>
             @endif

@@ -179,17 +179,7 @@ function previewImageEdit(event){
     reader.readAsDataURL(input.files[0]);
 }
 
-// $(document).ready(function() {
-//     setInterval(function() {
-//         $.ajax({
-//             url: "{{ route('news-update') }}",
-//             success: function(response) {
-//                 $('.content').html(response);
-//             },
-//             error: function(xhr, status, error) {
-//                 console.error('Error fetching notifications:', error);
-//             }
-//         });
-//     }, 2000); // Poll every 5 seconds (adjust as needed)
-// });
+document.getElementById('dupeID').onclick = function () {
+    window.open(('/itts/23/dupe-checker'), '_blank');
+}
 
