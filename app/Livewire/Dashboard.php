@@ -26,7 +26,7 @@ class Dashboard extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $employeeData, $dtrData = [], $announce, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -54,6 +54,10 @@ class Dashboard extends Component
     public function logout(){
         Auth::logout();
         return redirect()->to('/login');
+    }
+
+    public function submitAdd(){
+        dd('baba');
     }
 
     public function clickSettings(){

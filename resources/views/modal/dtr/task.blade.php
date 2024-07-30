@@ -16,7 +16,7 @@
                 @elseif(session()->has('badTask'))
                     <div class="alert alert-danger" style="width: 100%; " wire:ignore>
                         {{ session('badTask') }}
-                    </div>
+                    </div>1
                 @endif
                 @if(session()->has('goodTask'))
                     <div style="display: none">

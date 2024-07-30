@@ -56,18 +56,6 @@
                 <div wire:loading class="spinner-border spin" style="height: 55px; width: 55px; margin-left:47%; margin-top:5%; color: black">
                     <span class="visually-hidden" style="color: black">Loading...</span>
                 </div>
-{{--                <div wire:loading wire:target="target" class="spinner-border" role="status">--}}
-{{--                    <span class="visually-hidden">Loading...</span>--}}
-{{--                </div>--}}
-{{--                <div wire:loading wire:target="target">--}}
-{{--                    <!-- Loading spinner or message -->--}}
-{{--                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">--}}
-{{--                        <svg class="animate-spin h-8 w-8 text-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">--}}
-{{--                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>--}}
-{{--                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V2.83a1 1 0 00-1.7-.7l-4.6 4.6a1 1 0 00-.3.7V12H4zm2 8a8 8 0 008-8h2.17a1 1 0 00.7-1.7l-4.6-4.6a1 1 0 00-.7-.3H4a8 8 0 000 16zm12-8a8 8 0 01-8 8v2.17a1 1 0 001.7.7l4.6-4.6a1 1 0 00.3-.7V12h2zm-2-8a8 8 0 00-8 8H2.83a1 1 0 00-.7 1.7l4.6 4.6a1 1 0 00.7.3H12a8 8 0 000-16z"></path>--}}
-{{--                        </svg>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
                 <div style="margin-top: 4%; width: 80%; margin-left: 10%;" wire:loading.remove>
                     <table class="table">
                         <thead>
