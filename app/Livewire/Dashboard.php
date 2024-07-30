@@ -50,7 +50,6 @@ class Dashboard extends Component
             return redirect('/itts/15/employee');
         }
     }
-
     public function logout(){
         Auth::logout();
         return redirect()->to('/login');
