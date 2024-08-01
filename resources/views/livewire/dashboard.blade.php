@@ -29,6 +29,7 @@
                         @foreach($announceData as $data)
                             <div style="color: white; @if($position != "Agent") cursor: pointer @endif" class="px-2 rounded" @if($position != "Agent") data-bs-toggle="modal" data-bs-target="#clickData" wire:click="clickData({{$data->id}})" @endif>
                                 <div class="fw-light text-end mb-1"><small>{{$data->updated_at->format('M-d-Y')}}</small></div>
+                                <h5>{{ucwords($data->title)}}</h5>
                                 <p style="white-space: pre-line;" >{{ucfirst($data->text)}}</p>
                             </div>
                             <hr style="color: white">

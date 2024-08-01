@@ -8,7 +8,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-floating mb-2">
-                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 50px" wire:model="announce" required></textarea>
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 50px" wire:model="title" required></textarea>
                         <label for="floatingTextarea2">Title</label>
                     </div>
                     <div class="form-floating">

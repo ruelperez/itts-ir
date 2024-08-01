@@ -28,7 +28,7 @@ class Dashboard extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $ids, $hin, $announceData = [], $is_success = false, $employeeData, $dtrData = [], $announce, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $ids, $title, $hin, $announceData = [], $is_success = false, $employeeData, $dtrData = [], $announce, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -50,6 +50,7 @@ class Dashboard extends Component
         $this->ids = $id;
         $kj = Announcement::find($id);
         $this->announce = $kj->text;
+        $this->title = $kj->title;
     }
     public function delete(){
         $this->hin = "removed";
@@ -62,6 +63,7 @@ class Dashboard extends Component
                 'fullname' => $this->fullname,
             ]);
             $this->announce = "";
+            $this->title = "";
             $this->is_success = true;
             $this->dispatch('remOrUp');
         }catch (\Exception $e){
@@ -76,6 +78,7 @@ class Dashboard extends Component
         $nm = $this->ids;
         try {
             $hd->text = $this->announce;
+            $hd->title = $this->title;
             $hd->save();
             \App\Models\Logs::create([
                 'action' => "Updates an announcement with an id ".$nm,
@@ -84,6 +87,7 @@ class Dashboard extends Component
                 'fullname' => $this->fullname,
             ]);
             $this->announce = "";
+            $this->title = "";
             $this->is_success = true;
             $this->dispatch('remOrUp');
         }catch (\Exception $e){
@@ -110,6 +114,7 @@ class Dashboard extends Component
                 'text' => $this->announce,
                 'user_id' => $this->user_id,
                 'fullname' => $this->fullname,
+                'title' => $this->title,
             ]);
             \App\Models\Logs::create([
                 'action' => "disabled registration",
@@ -118,6 +123,7 @@ class Dashboard extends Component
                 'fullname' => $this->fullname,
             ]);
             $this->announce = "";
+            $this->title = "";
             $this->is_success = true;
             $this->dispatch('subSubmitted');
         }catch (\Exception $e){

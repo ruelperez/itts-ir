@@ -11,6 +11,7 @@ class Announcement extends Model
         'user_id',
         'fullname',
         'text',
+        'title',
     ];
 
     use HasFactory;
