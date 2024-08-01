@@ -7,9 +7,13 @@
                     <button id="addClose" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <div class="form-floating mb-2">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 50px" wire:model="announce" required></textarea>
+                        <label for="floatingTextarea2">Title</label>
+                    </div>
                     <div class="form-floating">
                         <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px" wire:model="announce" required></textarea>
-                        <label for="floatingTextarea2">Write</label>
+                        <label for="floatingTextarea2">Content</label>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -35,7 +35,6 @@
                         @endforeach
                     </div>
                 </div>
-                <button wire:click="clickMe">click</button>
             </div>
         </div>
         <button id="btn123" data-bs-toggle="modal" data-bs-target="#loading" style="display: none"></button>

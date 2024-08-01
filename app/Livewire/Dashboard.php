@@ -70,33 +70,6 @@ class Dashboard extends Component
         }
     }
 
-    public function clickMe(){
-        $hy = \App\Models\Inventory::where('status','pending deployment')->get();
-        foreach ($hy as $hh){
-            $kk = \App\Models\Inventory::find($hh->id);
-            $kk->status = "for approval";
-            $kk->save();
-        }
-        $hy = \App\Models\Inventory::where('status','pending return')->get();
-        foreach ($hy as $hh){
-            $kk = \App\Models\Inventory::find($hh->id);
-            $kk->status = "return approval";
-            $kk->save();
-        }
-        $hy = \App\Models\MyDevice::where('status','pending deployment')->get();
-        foreach ($hy as $hh){
-            $kk = \App\Models\MyDevice::find($hh->id);
-            $kk->status = "for approval";
-            $kk->save();
-        }
-        $hy = \App\Models\MyDevice::where('status','pending return')->get();
-        foreach ($hy as $hh){
-            $kk = \App\Models\MyDevice::find($hh->id);
-            $kk->status = "return approval";
-            $kk->save();
-        }
-    }
-
     public function updateText(){
         $this->hin = "update";
         $hd = Announcement::find($this->ids);
