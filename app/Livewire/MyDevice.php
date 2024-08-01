@@ -338,14 +338,14 @@ class MyDevice extends Component
                         'name' => $this->device_name,
                         'serial' => $this->serial,
                         'quantity' => $this->quantity,
-                        'status' => "pending deployment",
+                        'status' => "for approval",
                         'brand_name' => $this->brand_name,
                         'fullname' => $this->fullname,
                         'inventory_id' => $this->inventory_id,
                         'user_id' => $this->user_id,
                     ]);
                     $aa = \App\Models\Inventory::find($this->inventory_id);
-                    $aa->status = "pending deployment";
+                    $aa->status = "for approval";
                     $aa->save();
                     $this->device_name = "";
                     $this->serial = "";
@@ -373,14 +373,14 @@ class MyDevice extends Component
     public function returnItem(){
         try {
             $tr = \App\Models\MyDevice::find($this->ids);
-            $tr->status = "pending return";
+            $tr->status = "return approval";
             $tr->save();
 
             $ts = \App\Models\MyDevice::find($this->ids);
             $hh = \App\Models\Inventory::find($ts->inventory_id);
-            $hh->status = "pending return";
+            $hh->status = "for approval";
             $hh->save();
-            session()->flash('goodReturn', "Pending return");
+            session()->flash('goodReturn', "for approval");
         }catch (\Exception $e){
             session()->flash('badReturn', "Failed to return");
         }

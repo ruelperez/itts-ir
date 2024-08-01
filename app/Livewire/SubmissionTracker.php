@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\AdminShow;
+use App\Models\Announcement;
 use App\Models\Comment;
 use App\Models\CommentHeart;
 use App\Models\Dtr;
@@ -586,7 +587,6 @@ class SubmissionTracker extends Component
                 $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
                 $this->lawfirm = "selectLawfirm";
             }
-
         }
         if ($field == "registrationSwitch"){
             $this->regSwitch();

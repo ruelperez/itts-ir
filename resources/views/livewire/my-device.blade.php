@@ -49,18 +49,18 @@
                         </thead>
                         <tbody>
                         @foreach($deviceData as $data)
-                            <tr @if($data->status != "pending deployment" and $data->status != "pending return") style=" filter: contrast(75%); cursor: pointer" @else data-bs-toggle="modal" data-bs-target="#cancel" wire:click="cancelApproval({{$data->id}})" style=" cursor: pointer;" @endif @if($data->status == "deployed") data-bs-toggle="modal" data-bs-target="#return" wire:click="return({{$data->id}})" @endif>
+                            <tr @if($data->status != "for approval" and $data->status != "return approval") style=" filter: contrast(75%); cursor: pointer" @else data-bs-toggle="modal" data-bs-target="#cancel" wire:click="cancelApproval({{$data->id}})" style=" cursor: pointer;" @endif @if($data->status == "deployed") data-bs-toggle="modal" data-bs-target="#return" wire:click="return({{$data->id}})" @endif>
                                 <td>
-                                    @if($data->status != "pending deployment"  and $data->status != "pending return") {{ucfirst($data->name)}}  @else <b>{{ucfirst($data->name)}}</b> @endif
+                                    @if($data->status != "for approval"  and $data->status != "return approval") {{ucfirst($data->name)}}  @else <b>{{ucfirst($data->name)}}</b> @endif
                                 </td>
                                 <td>
-                                    @if($data->status != "pending deployment" and $data->status != "pending return") {{ucfirst($data->brand_name)}}  @else <b>{{ucfirst($data->brand_name)}}</b> @endif
+                                    @if($data->status != "for approval" and $data->status != "return approval") {{ucfirst($data->brand_name)}}  @else <b>{{ucfirst($data->brand_name)}}</b> @endif
                                 </td>
                                 <td>
-                                    @if($data->status != "pending deployment" and $data->status != "pending return") {{ucfirst($data->serial)}}  @else <b>{{ucfirst($data->serial)}}</b> @endif
+                                    @if($data->status != "for approval" and $data->status != "return approval") {{ucfirst($data->serial)}}  @else <b>{{ucfirst($data->serial)}}</b> @endif
                                 </td>
                                 <td>
-                                    @if($data->status != "pending deployment" and $data->status != "pending return") {{ucfirst($data->quantity)}}  @else <b>{{ucfirst($data->quantity)}}</b> @endif
+                                    @if($data->status != "for approval" and $data->status != "return approval") {{ucfirst($data->quantity)}}  @else <b>{{ucfirst($data->quantity)}}</b> @endif
                                 </td>
                                 <td>
                                     @if($data->status == "deployed") <i class="fa-solid fa-circle" style="color: green"></i> @elseif($data->status == "declined") <i class="fa-solid fa-circle" style="color: blue"></i> @elseif($data->status == "returned") <i class="fa-solid fa-circle" style="color: red"></i> @else <b>{{ucfirst($data->status)}}</b> @endif

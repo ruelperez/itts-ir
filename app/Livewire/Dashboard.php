@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\AdminShow;
+use App\Models\Announcement;
 use App\Models\Comment;
 use App\Models\CommentHeart;
 use App\Models\Dtr;
@@ -20,13 +21,14 @@ use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use function Laravel\Prompts\text;
 
 class Dashboard extends Component
 {
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $employeeData, $dtrData = [], $announce, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $ids, $hin, $announceData = [], $is_success = false, $employeeData, $dtrData = [], $announce, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -40,7 +42,81 @@ class Dashboard extends Component
         }
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
+        $this->announceData = Announcement::orderBy('created_at', 'desc')->get();
         return view('livewire.dashboard')->title('Dashboard');
+    }
+
+    public function clickData($id){
+        $this->ids = $id;
+        $kj = Announcement::find($id);
+        $this->announce = $kj->text;
+    }
+    public function delete(){
+        $this->hin = "removed";
+        try {
+            Announcement::find($this->ids)->delete();
+            \App\Models\Logs::create([
+                'action' => "Removed an announcement",
+                'user_id' => $this->user_id,
+                'photo' => $this->photo,
+                'fullname' => $this->fullname,
+            ]);
+            $this->announce = "";
+            $this->is_success = true;
+            $this->dispatch('remOrUp');
+        }catch (\Exception $e){
+            $this->is_success = false;
+            $this->dispatch('remOrUp');
+        }
+    }
+
+    public function clickMe(){
+        $hy = \App\Models\Inventory::where('status','pending deployment')->get();
+        foreach ($hy as $hh){
+            $kk = \App\Models\Inventory::find($hh->id);
+            $kk->status = "for approval";
+            $kk->save();
+        }
+        $hy = \App\Models\Inventory::where('status','pending return')->get();
+        foreach ($hy as $hh){
+            $kk = \App\Models\Inventory::find($hh->id);
+            $kk->status = "return approval";
+            $kk->save();
+        }
+        $hy = \App\Models\MyDevice::where('status','pending deployment')->get();
+        foreach ($hy as $hh){
+            $kk = \App\Models\MyDevice::find($hh->id);
+            $kk->status = "for approval";
+            $kk->save();
+        }
+        $hy = \App\Models\MyDevice::where('status','pending return')->get();
+        foreach ($hy as $hh){
+            $kk = \App\Models\MyDevice::find($hh->id);
+            $kk->status = "return approval";
+            $kk->save();
+        }
+    }
+
+    public function updateText(){
+        $this->hin = "update";
+        $hd = Announcement::find($this->ids);
+        $nm = $this->ids;
+        try {
+            $hd->text = $this->announce;
+            $hd->save();
+            \App\Models\Logs::create([
+                'action' => "Updates an announcement with an id ".$nm,
+                'user_id' => $this->user_id,
+                'photo' => $this->photo,
+                'fullname' => $this->fullname,
+            ]);
+            $this->announce = "";
+            $this->is_success = true;
+            $this->dispatch('remOrUp');
+        }catch (\Exception $e){
+            $this->is_success = false;
+            $this->dispatch('remOrUp');
+        }
     }
     public function mount($name){
         $this->webName = $name;
@@ -56,7 +132,25 @@ class Dashboard extends Component
     }
 
     public function submitAdd(){
-        dd('baba');
+        try {
+            Announcement::create([
+                'text' => $this->announce,
+                'user_id' => $this->user_id,
+                'fullname' => $this->fullname,
+            ]);
+            \App\Models\Logs::create([
+                'action' => "disabled registration",
+                'user_id' => $this->user_id,
+                'photo' => $this->photo,
+                'fullname' => $this->fullname,
+            ]);
+            $this->announce = "";
+            $this->is_success = true;
+            $this->dispatch('subSubmitted');
+        }catch (\Exception $e){
+            $this->is_success = false;
+            $this->dispatch('subSubmitted');
+        }
     }
 
     public function clickSettings(){

@@ -69,7 +69,7 @@ class DeviceApproval extends Component
         $kl= \App\Models\MyDevice::find($this->device_id);
         $ty = \App\Models\Inventory::find($kl->inventory_id);
         try {
-            if ($this->pendingStat == "pending deployment"){
+            if ($this->pendingStat == "for approval"){
                 \App\Models\Logs::create([
                     'action' => "Approved deployment an item with serial number ".$kl->serial." from ".$kl->fullname,
                     'user_id' => $this->user_id,
@@ -82,7 +82,7 @@ class DeviceApproval extends Component
                 $ty->deployed_name = $kl->fullname;
                 $ty->save();
             }
-            elseif ($this->pendingStat == "pending return"){
+            elseif ($this->pendingStat == "return approval"){
                 \App\Models\Logs::create([
                     'action' => "Approved return item with serial number ".$kl->serial." from ".$kl->fullname,
                     'user_id' => $this->user_id,
@@ -105,7 +105,7 @@ class DeviceApproval extends Component
         $kl= \App\Models\MyDevice::find($this->device_id);
         $ty = \App\Models\Inventory::find($kl->inventory_id);
         try {
-            if ($this->pendingStat == "pending deployment"){
+            if ($this->pendingStat == "for approval"){
                 \App\Models\Logs::create([
                     'action' => "Declined deployment an item with serial number ".$kl->serial." from ".$kl->fullname,
                     'user_id' => $this->user_id,
@@ -117,7 +117,7 @@ class DeviceApproval extends Component
                 $ty->status = "stocked";
                 $ty->save();
             }
-            elseif ($this->pendingStat == "pending return"){
+            elseif ($this->pendingStat == "return approval"){
                 \App\Models\Logs::create([
                     'action' => "Declined return an item with serial number ".$kl->serial." from ".$kl->fullname,
                     'user_id' => $this->user_id,

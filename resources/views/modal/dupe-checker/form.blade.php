@@ -220,6 +220,7 @@
                                 </div>
                                 <div class="col-6">
                                     <textarea class="form-control  ms-2" rows="2" wire:model="dqReason"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ - Other reason'"></textarea>
+                                    <textarea class="form-control  ms-2" rows="2" wire:model="returnReason"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'Return by Client'"></textarea>
                                 </div>
                             </div>
                         @else
@@ -247,6 +248,7 @@
                             </div>
                             <div class="col-5">
                                 <textarea class="form-control" rows="2" wire:model="dqReason"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ - Other reason'"></textarea>
+                                <textarea class="form-control  ms-2" rows="2" wire:model="returnReason"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'Return by Client'"></textarea>
                             </div>
                         </div>
                     @endif

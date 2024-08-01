@@ -43,20 +43,21 @@
                         <span class="visually-hidden">Loading...</span>
                     </div>
                 </div>
-                <div style="font-size: 14px; margin-top: 15px;"  class="px-5" wire:loading.remove>
-                    <table class="table table-hover" style="width: 100%;">
+                <div style="font-size: 13px; margin-top: 15px;"  class="px-2" wire:loading.remove>
+                    <table class="table table-striped" style="width: 100%;">
                         <thead>
                         <tr>
-                            <th scope="col" style="width: 10%;">Date</th>
-                            <th scope="col" style="width: 10%;">Claimant</th>
-                            <th scope="col" style="width: 10%;">Injured party</th>
-                            <th scope="col" style="width: 10%;">Phone number</th>
-                            <th scope="col" style="width: 10%;">Alt. Phone number</th>
-                            <th scope="col" style="width: 9%;">Campaign</th>
-                            <th scope="col" style="width: 9%;">Client</th>
-                            <th scope="col" style="width: 9%;">Lawfirm</th>
+                            <th scope="col" style="width: 9%;">Date</th>
+                            <th scope="col" style="width: 9%;">Agent</th>
+                            <th scope="col" style="width: 9%;">Claimant</th>
+                            <th scope="col" style="width: 9%;">Injured party</th>
+                            <th scope="col" style="width: 9%;">Phone number</th>
+                            <th scope="col" style="width: 9%;">Alt. Phone number</th>
+                            <th scope="col" style="width: 8%;">Campaign</th>
+                            <th scope="col" style="width: 8%;">Client</th>
+                            <th scope="col" style="width: 8%;">Lawfirm</th>
                             <th scope="col" style="width: 15%;">Remarks</th>
-                            <th scope="col" style="width: 9%;">Result</th>
+                            <th scope="col" style="width: 15%;">Result</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -64,6 +65,9 @@
                             <tr onmouseover="hoverDupe({{$data->id}})" onmouseout="hoverOutDupe({{$data->id}})">
                                 <td>
                                     {{$data->date}}
+                                </td>
+                                <td>
+                                    {{$data->agent}}
                                 </td>
                                 @if($data->caseType == "self")
                                     <td>
@@ -108,6 +112,10 @@
                         @endforeach
                         </tbody>
                     </table>
+                    <div style="margin-top: 1%; margin-bottom: 5%;">
+                        <button class="btn btn-success" wire:click="previousPage" style="width: 10%;">Previous</button>
+                        <button class="btn btn-primary" wire:click="nextPage" style="width: 10%;">Next</button>
+                    </div>
                 </div>
             </div>
         </div>

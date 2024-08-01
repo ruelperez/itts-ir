@@ -22,7 +22,7 @@ use Livewire\Component;
 
 class DupeChecker extends Component
 {
-    public $registrationSwitch, $is_success = false, $search, $ids, $displayRemarks, $checkBox = [], $submissionData = [], $resultsCoach = [], $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo, $campaignList = [], $campaign,
+    public $registrationSwitch, $returnReason, $currentPage = 1, $perPage = 15, $is_success = false, $search, $ids, $displayRemarks, $checkBox = [], $submissionData = [], $resultsCoach = [], $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo, $campaignList = [], $campaign,
         $date, $base = true, $toChecked = false, $dqReason, $client, $remarks = [], $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $showSearch = false, $showSearchCoach = false, $agent, $coach, $verifier, $source = "Dialer", $caseType = "self", $resultsVerifier = [], $results = [], $clientList= [], $showSearchVerifier = false, $result;
 
     public function render()
@@ -37,7 +37,7 @@ class DupeChecker extends Component
         }
         $this->photo = auth()->user()->photo;
         if ($this->search == ""){
-            $this->submissionData = Submission::take(50)->latest()->get();
+            $this->displayData();
         }
         else{
             $this->submissionData = Submission::where('phoneNumber', 'LIKE', '%'.$this->search.'%')
@@ -51,7 +51,9 @@ class DupeChecker extends Component
                 ->orWhere('remarks', 'LIKE', '%'.$this->search.'%')
                 ->orWhere('coach', 'LIKE', '%'.$this->search.'%')
                 ->orWhere('result', 'LIKE', '%'.$this->search.'%')
-                ->take(50)->latest()
+                ->skip(($this->currentPage - 1) * $this->perPage)
+                ->take($this->perPage)
+                ->latest()
                 ->get();
         }
         $this->campaignList = Note::select('campaign')
@@ -356,6 +358,9 @@ class DupeChecker extends Component
             if ($this->result == "DQ - Other reason"){
                 $this->result = "DQ - ".$this->dqReason;
             }
+            if ($this->result == "Return by Client"){
+                $this->result = "Return by client - ".$this->returnReason;
+            }
             try {
 //                $res = implode(', ', $this->remarks);
                 $kk = Submission::find($this->ids);
@@ -381,6 +386,7 @@ class DupeChecker extends Component
                 $kk->result = $this->result;
                 $kk->save();
                 $this->dqReason = "";
+                $this->returnReason = "";
                 \App\Models\Logs::create([
                     'action' => "Edit dupe checker with a customer phone number ".$this->phoneNumber,
                     'user_id' => $this->user_id,
@@ -398,11 +404,15 @@ class DupeChecker extends Component
             if ($this->result == "DQ - Other reason"){
                 $this->result = "DQ - ".$this->dqReason;
             }
+            if ($this->result == "Return by Client"){
+                $this->result = "Return by client - ".$this->returnReason;
+            }
             try {
                 $kk = Submission::find($this->ids);
                 $kk->result = $this->result;
                 $kk->save();
                 $this->dqReason = "";
+                $this->returnReason = "";
                 \App\Models\Logs::create([
                     'action' => "Edit dupe checker with a customer phone number ".$this->phoneNumber,
                     'user_id' => $this->user_id,
@@ -418,6 +428,25 @@ class DupeChecker extends Component
 
         }
 
+    }
+
+    public function displayData(){
+        $this->submissionData = Submission::query()
+            ->skip(($this->currentPage - 1) * $this->perPage)
+            ->take($this->perPage)
+            ->latest()
+            ->get();
+    }
+
+    public function previousPage(){
+        if ($this->currentPage > 1) {
+            $this->currentPage--;
+        }
+    }
+
+    public function nextPage()
+    {
+        $this->currentPage++;
     }
 
     public function viewDetail(){
