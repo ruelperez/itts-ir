@@ -23,7 +23,7 @@ use Livewire\Component;
 class DupeChecker extends Component
 {
     public $registrationSwitch, $returnReason, $currentPage = 1, $perPage = 15, $is_success = false, $search, $ids, $displayRemarks, $checkBox = [], $submissionData = [], $resultsCoach = [], $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo, $campaignList = [], $campaign,
-        $date, $base = true, $toChecked = false, $dqReason, $client, $remarks = [], $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $showSearch = false, $showSearchCoach = false, $agent, $coach, $verifier, $source = "Dialer", $caseType = "self", $resultsVerifier = [], $results = [], $clientList= [], $showSearchVerifier = false, $result;
+        $date, $base = true, $toChecked = false, $lawfirm, $lawfirmList = [], $dqReason, $client, $remarks = [], $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $showSearch = false, $showSearchCoach = false, $agent, $coach, $verifier, $source = "Dialer", $caseType = "self", $resultsVerifier = [], $results = [], $clientList= [], $showSearchVerifier = false, $result;
 
     public function render()
     {
@@ -73,6 +73,7 @@ class DupeChecker extends Component
             $this->date = $yr->date;
             $this->campaign = $yr->campaign;
             $this->client = $yr->client;
+            $this->lawfirm = $yr->lawfirm;
             $this->caseType = $yr->caseType;
             $this->claimant = $yr->claimant;
             $this->injuredParty = $yr->injuredParty;
@@ -96,6 +97,7 @@ class DupeChecker extends Component
             ->get();
         foreach ($this->campaignList as $list){
             $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+            $this->lawfirmList = DB::table('notes')->select('lawfirm')->where('campaign',$this->campaign)->distinct()->get();
             break;
         }
     }
@@ -310,6 +312,15 @@ class DupeChecker extends Component
     }
 
     public function submitEdit(){
+        if ($this->campaign == "selectCampaign"){
+            $this->campaign = "n/a";
+        }
+        if ($this->client == "selectClient"){
+            $this->client = "n/a";
+        }
+        if ($this->lawfirm == "selectLawfirm"){
+            $this->lawfirm = "n/a";
+        }
         if ($this->base == false){
             if ($this->altPhoneNumber != "" or $this->altPhoneNumber != null){
                 $this->validate([
@@ -326,6 +337,7 @@ class DupeChecker extends Component
                     'claimant' => 'required',
                     'coach' => 'required',
                     'client' => 'required',
+                    'lawfirm' => 'required',
                     'caseType' => 'required',
                     'dob' => 'required',
                     'email' => 'required',
@@ -338,6 +350,7 @@ class DupeChecker extends Component
                     'phoneNumber' => 'required|numeric',
                     'ssn' => 'required|numeric',
                     'campaign' => 'required',
+                    'lawfirm' => 'required',
                     'date' => 'required',
                     'agent' => 'required',
                     'claimant' => 'required',
@@ -373,6 +386,7 @@ class DupeChecker extends Component
                 $kk->coach = $this->coach;
 //                $kk->remarks = $res;
                 $kk->client = $this->client;
+                $kk->lawfirm = $this->lawfirm;
                 $kk->caseType = $this->caseType;
                 $kk->injuredParty = $this->injuredParty;
                 $kk->dob = $this->dob;
@@ -630,8 +644,56 @@ class DupeChecker extends Component
 
         }
         if ($field == "campaign"){
-            $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+            if ($this->campaign == "selectCampaign" or $this->campaign == "na"){
+                $this->campaignList = Note::select('campaign')
+                    ->distinct('campaign')
+                    ->get();
+                $this->client = "selectClient";
+                $this->lawfirm = "selectLawfirm";
+            }
+            else{
+                $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+                $this->campaignList = Note::select('campaign')
+                    ->distinct('campaign')
+                    ->get();
+                $this->client = "selectClient";
+                $this->lawfirm = "selectLawfirm";
+            }
+
         }
+        if ($field == "client"){
+            if ($this->client == "selectClient" or $this->client == "na"){
+                $this->campaignList = Note::select('campaign')
+                    ->distinct('campaign')
+                    ->get();
+                $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+                $this->lawfirm = "selectLawfirm";
+            }
+            else{
+                $this->lawfirmList = DB::table('notes')->select('lawfirm')->where('campaign',$this->campaign)
+                    ->where('client',$this->client)->distinct()->get();
+                $this->campaignList = Note::select('campaign')
+                    ->distinct('campaign')
+                    ->get();
+                $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+                $this->lawfirm = "selectLawfirm";
+            }
+        }
+        if ($field == "lawfirm"){
+            $this->campaignList = Note::select('campaign')
+                ->distinct('campaign')
+                ->get();
+            $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+            $this->lawfirmList = DB::table('notes')->select('lawfirm')->where('campaign',$this->campaign)
+                ->where('client',$this->client)->distinct()->get();
+            $this->bms = Note::where('campaign',$this->campaign)
+                ->where('client',$this->client)
+                ->where('lawfirm',$this->lawfirm)->get();
+
+        }
+//        if ($field == "campaign"){
+//            $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+//        }
         if ($field == "registrationSwitch"){
             $this->regSwitch();
         }

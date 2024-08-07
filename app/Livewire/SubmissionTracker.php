@@ -28,8 +28,8 @@ use function Laravel\Prompts\table;
 class SubmissionTracker extends Component
 {
 
-    public $registrationSwitch, $toChecked = false, $caseType = "self", $is_success = false, $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $clientList = [], $campaignList = [], $campaign = "selectCampaign", $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
-            $date, $lawfirm = "selectLawfirm", $client = "selectClient", $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "Dialer", $resultsVerifier = [], $showSearchVerifier = false ;
+    public $registrationSwitch, $jn, $toChecked = false, $caseType = "self", $is_success = false, $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $clientList = [], $campaignList = [], $campaign = "selectCampaign", $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
+            $date, $lawfirm = "selectLawfirm", $client = "selectClient", $bms, $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "Dialer", $resultsVerifier = [], $showSearchVerifier = false ;
 
     public function render()
     {
@@ -553,7 +553,7 @@ class SubmissionTracker extends Component
 
         }
         if ($field == "campaign"){
-            if ($this->campaign == "selectCampaign" or $this->campaign == "naCampaign"){
+            if ($this->campaign == "selectCampaign" or $this->campaign == "na"){
                 $this->campaignList = Note::select('campaign')
                     ->distinct('campaign')
                     ->get();
@@ -571,7 +571,7 @@ class SubmissionTracker extends Component
 
         }
         if ($field == "client"){
-            if ($this->campaign == "selectClient" or $this->campaign == "naClient"){
+            if ($this->client == "selectClient" or $this->client == "na"){
                 $this->campaignList = Note::select('campaign')
                     ->distinct('campaign')
                     ->get();
@@ -587,6 +587,18 @@ class SubmissionTracker extends Component
                 $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
                 $this->lawfirm = "selectLawfirm";
             }
+        }
+        if ($field == "lawfirm"){
+            $this->campaignList = Note::select('campaign')
+                ->distinct('campaign')
+                ->get();
+            $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+            $this->lawfirmList = DB::table('notes')->select('lawfirm')->where('campaign',$this->campaign)
+                ->where('client',$this->client)->distinct()->get();
+            $this->bms = Note::where('campaign',$this->campaign)
+                ->where('client',$this->client)
+                ->where('lawfirm',$this->lawfirm)->get();
+
         }
         if ($field == "registrationSwitch"){
             $this->regSwitch();

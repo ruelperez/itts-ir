@@ -20,16 +20,18 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-3">
                             <label class="form-label">Date*</label>
                             <input type="text" id="datepickerDupe" class="form-control" wire:model="date" required @if($base == true) disabled @endif >
                         </div>
-                        <div class="col-4">
+                        <div class="col-3">
                             <div>
                                 <label class="form-label">Campaign*</label>
                             </div>
                             <div>
                                 <select class="form-select" aria-label="Default select example" wire:model.live="campaign" @if($base == true) disabled @endif>
+                                    <option value="selectCampaign">Select Campaign</option>
+                                    <option value="n/a">n/a</option>
                                     @foreach($campaignList as $list)
                                         @if($list->campaign == $campaign)
                                             <option selected value="{{$list->campaign}}">{{$list->campaign}}</option>
@@ -42,12 +44,14 @@
                                 @error('campaign') <span style="color: #8B0000">{{ $message }}</span> @enderror
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-3">
                             <div>
                                 <label class="form-label">Client*</label>
                             </div>
                             <div>
-                                <select class="form-select" aria-label="Default select example" wire:model="client" @if($base == true) disabled @endif>
+                                <select class="form-select" aria-label="Default select example" wire:model.live="client" @if($base == true) disabled @endif>
+                                    <option value="selectClient">Select Client</option>
+                                    <option value="n/a">n/a</option>
                                     @foreach($clientList as $list)
                                         @if($list->client == $client)
                                             <option selected value="{{$list->client}}">{{$list->client}}</option>
@@ -57,6 +61,26 @@
                                     @endforeach
                                 </select>
                                 @error('client') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div>
+                                <label class="form-label">Lawfirm*</label>
+                            </div>
+                            <div>
+                                <select class="form-select" aria-label="Default select example" wire:model.live="lawfirm" @if($base == true) disabled @endif>
+                                    <option value="selectLawfirm">Select Lawfirm</option>
+                                    <option value="n/a">n/a</option>
+                                    @foreach($lawfirmList as $list)
+                                        @if($list->lawfirm == $lawfirm)
+                                            <option selected value="{{$list->lawfirm}}">{{$list->lawfirm}}</option>
+                                        @else
+                                            <option value="{{$list->lawfirm}}">{{$list->lawfirm}}</option>
+                                        @endif
+{{--                                        <option value="{{$list->lawfirm}}">{{$list->lawfirm}}</option>--}}
+                                    @endforeach
+                                </select>
+                                @error('lawfirm') <span style="color: #8B0000">{{ $message }}</span> @enderror
                             </div>
                         </div>
                     </div>
