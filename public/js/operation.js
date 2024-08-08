@@ -183,3 +183,7 @@ document.getElementById('dupeID').onclick = function () {
     window.open(('/itts/23/dupe-checker'), '_blank');
 }
 
+document.getElementById('dupeEditID').onclick = function () {
+    window.open(('/itts/25/dupe-checker/edit/{id}'), '_blank');
+}
+

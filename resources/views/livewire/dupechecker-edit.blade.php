@@ -1,0 +1,319 @@
+<div>
+    @include('components.layouts.profile')
+    @include('components.layouts.navigation')
+    @include('modal.click-settings')
+    @include('modal.news-update.show-photo')
+    @include('modal.dashboard.anounce')
+    @include('modal.dashboard.saveOrNot')
+    @include('modal.dashboard.click-data')
+    <div style="display: flex; width: 100%; margin-top: 105px;">
+        <div style="width: 81%; margin-left: 19%;">
+            <div class="container">
+                <div>
+                    <h6 style="margin-left: 2%; margin-top: 3%;">Edit Dupe Checker ({{$phoneNumber}}) </h6>
+                </div>
+                <div style="background-color: #696969; color: white; padding: 15px 40px; width: 96%; margin-left: 2%; border-radius: 2%;" class="mt-4">
+                    <form wire:submit.prevent="submitEdit">
+                        <div class="d-flex">
+                            <div class="mb-2"><i>Put "n/a" if not applicable</i></div>
+                            <div>
+                                <i class="fa-solid fa-pen-to-square ms-4" style="cursor: pointer;" title="Edit" wire:click="clickEdit"></i>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-3">
+                                <label class="form-label">Date*</label>
+                                <input type="text" id="datepickerDupe" class="form-control" wire:model="date" required @if($base == true) disabled @endif >
+                            </div>
+                            <div class="col-3">
+                                <div>
+                                    <label class="form-label">Campaign*</label>
+                                </div>
+                                <div>
+                                    <select class="form-select" aria-label="Default select example" wire:model.live="campaign" @if($base == true) disabled @endif>
+                                        <option value="selectCampaign">Select Campaign</option>
+                                        <option value="n/a">n/a</option>
+                                        @foreach($campaignList as $list)
+                                            @if($list->campaign == $campaign)
+                                                <option selected value="{{$list->campaign}}">{{$list->campaign}}</option>
+                                            @else
+                                                <option value="{{$list->campaign}}">{{$list->campaign}}</option>
+                                            @endif
+
+                                        @endforeach
+                                    </select>
+                                    @error('campaign') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div>
+                                    <label class="form-label">Client*</label>
+                                </div>
+                                <div>
+                                    <select class="form-select" aria-label="Default select example" wire:model.live="client" @if($base == true) disabled @endif>
+                                        <option value="selectClient">Select Client</option>
+                                        <option value="n/a">n/a</option>
+                                        @foreach($clientList as $list)
+                                            @if($list->client == $client)
+                                                <option selected value="{{$list->client}}">{{$list->client}}</option>
+                                            @else
+                                                <option value="{{$list->client}}">{{$list->client}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                    @error('client') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div>
+                                    <label class="form-label">Lawfirm*</label>
+                                </div>
+                                <div>
+                                    <select class="form-select" aria-label="Default select example" wire:model.live="lawfirm" @if($base == true) disabled @endif>
+                                        <option value="selectLawfirm">Select Lawfirm</option>
+                                        <option value="n/a">n/a</option>
+                                        @foreach($lawfirmList as $list)
+                                            @if($list->lawfirm == $lawfirm)
+                                                <option selected value="{{$list->lawfirm}}">{{$list->lawfirm}}</option>
+                                            @else
+                                                <option value="{{$list->lawfirm}}">{{$list->lawfirm}}</option>
+                                            @endif
+                                            {{--                                        <option value="{{$list->lawfirm}}">{{$list->lawfirm}}</option>--}}
+                                        @endforeach
+                                    </select>
+                                    @error('lawfirm') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 row">
+                            <div class="col-4">
+                                <div>
+                                    <label class="form-label">Self / OBO</label>
+                                </div>
+                                <div>
+                                    <select class="form-select" aria-label="Default select example" wire:model.live="caseType" @if($base == true) disabled @endif>
+                                        <option value="self">Self</option>
+                                        <option value="obo">OBO</option>
+                                    </select>
+                                    @error('caseType') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                            @if($caseType == "obo")
+                                <div class="col-4">
+                                    <label class="form-label">Name of Claimant*</label>
+                                    <input type="text" class="form-control"  wire:model="claimant" required @if($base == true) disabled @endif>
+                                    @error('claimant') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="col-4">
+                                    <label class="form-label">Name of Injured Party*</label>
+                                    <input type="text" class="form-control" wire:model="injuredParty" required @if($base == true) disabled @endif>
+                                    @error('injuredParty') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                                </div>
+                            @endif
+                            @if($caseType == "self")
+                                <div class="col-4">
+                                    <label class="form-label">Name of Claimant*</label>
+                                    <input type="text" class="form-control" wire:model="claimant" required @if($base == true) disabled @endif>
+                                    @error('claimant') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                                </div>
+                            @endif
+
+                        </div>
+                        <div class="mt-4 row">
+                            <div class="col-4">
+                                <label class="form-label">Phone Number*</label>
+                                <input type="text" class="form-control"  wire:model="phoneNumber" placeholder="Put &quot;0000&quot; if not applicable" required @if($base == true) disabled @endif>
+                                @error('phoneNumber') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-4">
+                                <label  class="form-label">Alt. Phone number</label>
+                                <input type="text" class="form-control" wire:model="altPhoneNumber" placeholder="Put &quot;0000&quot; if not applicable" @if($base == true) disabled @endif>
+                                @error('altPhoneNumber') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-4">
+                                <label  class="form-label">DOB*</label>
+                                <input type="text" id="datepickerDobDupe" class="form-control" wire:model="dob" required @if($base == true) disabled @endif>
+                                @error('dob') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="mt-4 row">
+                            <div class="col-4">
+                                <label  class="form-label">Email*</label>
+                                <input type="text" class="form-control" wire:model="email" required @if($base == true) disabled @endif>
+                                @error('email') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-5">
+                                <label class="form-label">Address*</label>
+                                <input type="text" class="form-control" wire:model="address" required @if($base == true) disabled @endif>
+                                @error('address') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-3">
+                                <label  class="form-label">SSN*</label>
+                                <input type="text" class="form-control"  wire:model="ssn" placeholder="Put &quot;0000&quot; if not applicable" required @if($base == true) disabled @endif>
+                                @error('ssn') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="mt-4 row">
+                            <div class="col-3">
+                                <label  class="form-label">Agent*</label>
+                                <input type="text" class="form-control" wire:model.live="agent" wire:blur="removeSearch" wire:click="clickSearch" required @if($base == true) disabled @endif>
+                                @if($showSearch == true)
+                                    <div style="position: absolute; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);">
+                                        <ul class="list-group">
+                                            @foreach($results as $data)
+                                                <li class="list-group-item btn text-start" style="background-color: #E0FFFF;" wire:click="click_items({{$data->id}})">
+                                                    <i class="fa-solid fa-magnifying-glass me-3"></i> {{ucfirst($data->fname)}} {{ucfirst($data->lname)}}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                                @error('agent') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-3">
+                                <label  class="form-label">Coach*</label>
+                                <input type="text" class="form-control" wire:model.live="coach" wire:blur="removeSearchCoach" wire:click="clickSearchCoach" required @if($base == true) disabled @endif>
+                                @if($showSearchCoach == true)
+                                    <div style="position: absolute; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);">
+                                        <ul class="list-group">
+                                            @foreach($resultsCoach as $data)
+                                                <li class="list-group-item btn text-start" style="background-color: #E0FFFF;" wire:click="click_itemsCoach({{$data->id}})">
+                                                    <i class="fa-solid fa-magnifying-glass me-3"></i> {{ucfirst($data->fname)}} {{ucfirst($data->lname)}}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                                @error('coach') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-3">
+                                <label  class="form-label">Verifier*</label>
+                                <input type="text" class="form-control" wire:model.live="verifier" wire:blur="removeSearchVerifier" wire:click="clickSearchVerifier" required @if($base == true) disabled @endif>
+                                @if($showSearchVerifier == true)
+                                    <div style="position: absolute; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);">
+                                        <ul class="list-group">
+                                            @foreach($resultsVerifier as $data)
+                                                <li class="list-group-item btn text-start" style="background-color: #E0FFFF;" wire:click="click_itemsVerifier({{$data->id}})">
+                                                    <i class="fa-solid fa-magnifying-glass me-3"></i> {{ucfirst($data->fname)}} {{ucfirst($data->lname)}}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                                @error('verifier') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-3">
+                                <div>
+                                    <label class="form-label">Source*</label>
+                                </div>
+                                <div>
+                                    <select class="form-select" aria-label="Default select example" wire:model="source" required @if($base == true) disabled @endif>
+                                        <option value="Dialer">Dialer</option>
+                                        <option value="Agent callback">Agent callback</option>
+                                        <option value="DQ from other campaign">DQ from other campaign</option>
+                                        <option value="Retransfer">Retransfer</option>
+                                        <option value="Rework">Rework</option>
+                                        <option value="Special lead">Special lead</option>
+                                    </select>
+                                    @error('source') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 row">
+                            @if($base == true)
+                                <div class="col-4">
+                                    <label class="form-label">Remarks : {{$displayRemarks}}</label>
+                                </div>
+                                <div class="col-8 d-flex" x-data="{ selectedOption: '' }">
+                                    <div class="col-1">
+                                        <label class="form-label">Result</label>
+                                    </div>
+                                    <div class="col-5">
+                                        <select class="form-select" aria-label="Default select example" wire:model="result" x-model="selectedOption">
+                                            <option value="">Select Result</option>
+                                            <option value="Signed / Executed">Signed / Executed</option>
+                                            <option value="Return by Client">Return by Client</option>
+                                            <option value="DQ - Other reason">DQ - Other reason</option>
+                                            <option value="DQ - Criteria">DQ - Criteria</option>
+                                            <option value="DQ by Client">DQ by Client</option>
+                                            <option value="DQ by QA">DQ by QA</option>
+                                            <option value="DQ by Manager">DQ By Manager</option>
+                                            <option value="DQ by VER">DQ by VER</option>
+                                            <option value="Pending / On Hold">Pending / On Hold</option>
+                                        </select>
+                                        @error('result') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="col-6">
+                                        <textarea class="form-control  ms-2" rows="2" wire:model="dqReason"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ - Other reason'"></textarea>
+                                        <textarea class="form-control  ms-2" rows="2" wire:model="returnReason"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'Return by Client'"></textarea>
+                                        <textarea class="form-control  ms-2" rows="2" wire:model="dqCriteria"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ - Criteria'"></textarea>
+                                        <textarea class="form-control  ms-2" rows="2" wire:model="dqClient"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ by Client'"></textarea>
+                                        <textarea class="form-control  ms-2" rows="2" wire:model="dqQa"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ by QA'"></textarea>
+                                        <textarea class="form-control  ms-2" rows="2" wire:model="dqManager"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ by Manager'"></textarea>
+                                        <textarea class="form-control  ms-2" rows="2" wire:model="dqVerifier"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ by VER'"></textarea>
+                                    </div>
+                                </div>
+                            @else
+                            @endif
+                        </div>
+                        @if($base == false)
+                            <div class="mt-3 row" x-data="{ selectedOption: '' }">
+                                <div class="col-1">
+                                    <label class="form-label">Remarks :</label>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control"  wire:model="displayRemarks" placeholder="Put &quot;0000&quot; if not applicable" required @if($base == true) disabled @endif>
+                                    @error('$displayRemarks') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                        @endif
+                        @if($base == false)
+                            <div class="mt-3 row" x-data="{ selectedOption: '' }">
+                                <div class="col-1">
+                                    <label class="form-label">Result :</label>
+                                </div>
+                                <div class="col-3">
+                                    <select class="form-select" aria-label="Default select example" wire:model="result" x-model="selectedOption">
+                                        <option value="">Select Result</option>
+                                        <option value="Signed / Executed">Signed / Executed</option>
+                                        <option value="Return by Client">Return by Client</option>
+                                        <option value="DQ - Other reason">DQ - Other reason</option>
+                                        <option value="DQ - Criteria">DQ - Criteria</option>
+                                        <option value="DQ by Client">DQ by Client</option>
+                                        <option value="DQ by QA">DQ by QA</option>
+                                        <option value="DQ by Manager">DQ By Manager</option>
+                                        <option value="DQ by VER">DQ by VER</option>
+                                        <option value="Pending / On Hold">Pending / On Hold</option>
+                                    </select>
+                                    @error('result') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="col-5">
+                                    <textarea class="form-control" rows="2" wire:model="dqReason"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ - Other reason'"></textarea>
+                                    <textarea class="form-control  ms-2" rows="2" wire:model="returnReason"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'Return by Client'"></textarea>
+                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqReason"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ - Other reason'"></textarea>
+                                    <textarea class="form-control  ms-2" rows="2" wire:model="returnReason"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'Return by Client'"></textarea>
+                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqCriteria"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ - Criteria'"></textarea>
+                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqClient"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ by Client'"></textarea>
+                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqQa"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ by QA'"></textarea>
+                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqManager"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ by Manager'"></textarea>
+                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqVerifier"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ by VER'"></textarea>
+                                </div>
+                            </div>
+                        @endif
+                        <button type="submit" class="btn btn-primary mt-4" style="width: 30%; margin-left: 35%;">UPDATE</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <button id="btn12345" data-bs-toggle="modal" data-bs-target="#loading" style="display: none"></button>
+    </div>
+    @include('partial.header')
+    @script
+    <script>
+        $wire.on('dupeEditSubmitted', () => {
+            $('#btn12345').click();
+        });
+    </script>
+    @endscript
+</div>

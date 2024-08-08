@@ -40,6 +40,7 @@ Route::get('/itts/21/deployed-item-record/{userID}', \App\Livewire\DeployedItemR
 Route::get('/itts/22/device-clearance/{userID}', [\App\Http\Controllers\ClearanceController::class, 'pdf'])->middleware('auth');
 Route::get('/itts/23/dupe-checker', \App\Livewire\DupeChecker::class)->middleware('auth');
 Route::get('/itts/24/submission-tracker', \App\Livewire\SubmissionTracker::class)->middleware('auth');
+Route::get('/itts/25/dupe-checker/edit/{id}', \App\Livewire\DupecheckerEdit::class)->middleware('auth');
 Route::get('/', function (){
     return redirect('/itts/5/dashboard');
 });

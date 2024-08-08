@@ -22,7 +22,7 @@ use Livewire\Component;
 
 class DupeChecker extends Component
 {
-    public $registrationSwitch, $returnReason, $currentPage = 1, $perPage = 15, $is_success = false, $search, $ids, $displayRemarks, $checkBox = [], $submissionData = [], $resultsCoach = [], $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo, $campaignList = [], $campaign,
+    public $registrationSwitch, $returnClient, $returnReason, $currentPage = 1, $perPage = 15, $is_success = false, $search, $ids, $displayRemarks, $checkBox = [], $submissionData = [], $resultsCoach = [], $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo, $campaignList = [], $campaign,
         $date, $base = true, $toChecked = false, $lawfirm, $lawfirmList = [], $dqReason, $client, $remarks = [], $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $showSearch = false, $showSearchCoach = false, $agent, $coach, $verifier, $source = "Dialer", $caseType = "self", $resultsVerifier = [], $results = [], $clientList= [], $showSearchVerifier = false, $result;
 
     public function render()
@@ -372,7 +372,7 @@ class DupeChecker extends Component
                 $this->result = "DQ - ".$this->dqReason;
             }
             if ($this->result == "Return by Client"){
-                $this->result = "Return by client - ".$this->returnReason;
+                $this->result = "Return by client - ".$this->returnClient;
             }
             try {
 //                $res = implode(', ', $this->remarks);
@@ -400,7 +400,7 @@ class DupeChecker extends Component
                 $kk->result = $this->result;
                 $kk->save();
                 $this->dqReason = "";
-                $this->returnReason = "";
+                $this->returnClient = "";
                 \App\Models\Logs::create([
                     'action' => "Edit dupe checker with a customer phone number ".$this->phoneNumber,
                     'user_id' => $this->user_id,
@@ -419,14 +419,14 @@ class DupeChecker extends Component
                 $this->result = "DQ - ".$this->dqReason;
             }
             if ($this->result == "Return by Client"){
-                $this->result = "Return by client - ".$this->returnReason;
+                $this->result = "Return by client - ".$this->returnClient;
             }
             try {
                 $kk = Submission::find($this->ids);
                 $kk->result = $this->result;
                 $kk->save();
                 $this->dqReason = "";
-                $this->returnReason = "";
+                $this->returnClient = "";
                 \App\Models\Logs::create([
                     'action' => "Edit dupe checker with a customer phone number ".$this->phoneNumber,
                     'user_id' => $this->user_id,
