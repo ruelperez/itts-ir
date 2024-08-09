@@ -29,7 +29,7 @@ class SubmissionTracker extends Component
 {
 
     public $registrationSwitch, $jn, $toChecked = false, $caseType = "self", $is_success = false, $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $clientList = [], $campaignList = [], $campaign = "selectCampaign", $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
-            $date, $lawfirm = "selectLawfirm", $client = "selectClient", $bms, $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "Dialer", $resultsVerifier = [], $showSearchVerifier = false ;
+            $date, $lawfirm = "selectLawfirm", $bam, $bbb, $client = "selectClient", $bms, $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "Dialer", $resultsVerifier = [], $showSearchVerifier = false ;
 
     public function render()
     {
@@ -260,27 +260,6 @@ class SubmissionTracker extends Component
         $this->campaignList = Note::select('campaign')
             ->distinct('campaign')
             ->get();
-//        foreach ($this->campaignList as $hh){
-//            $this->campaign = $hh->campaign;
-//            break;
-//        }
-//        foreach ($this->campaignList as $list){
-//            $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
-//            break;
-//        }
-//        foreach ($this->clientList as $hh){
-//            $this->client = $hh->client;
-//            break;
-//        }
-//        foreach ($this->campaignList as $man){
-//            $this->lawfirmList = DB::table('notes')->select('lawfirm')
-//            ->where('campaign',$this->campaign)
-//            ->where('client',$this->client)->distinct()->get();
-//        }
-//        foreach ($this->lawfirmList as $hp){
-//            $this->lawfirm = $hp->lawfirm;
-//            break;
-//        }
     }
 
     public function logout(){
@@ -598,6 +577,27 @@ class SubmissionTracker extends Component
             $this->bms = Note::where('campaign',$this->campaign)
                 ->where('client',$this->client)
                 ->where('lawfirm',$this->lawfirm)->get();
+            $num = 0;
+            $ary = [];
+            if (count($this->bms) > 1){
+                foreach ($this->bms as $bm){
+                    $ary[] = $bm->method;
+                }
+                if ($ary[0] == $ary[1]){
+                    $this->bam = 0;
+                }
+                else{
+                    $this->bam = 1;
+                }
+            }else{
+                $this->bam = 0;
+            }
+            if ($this->bam == 0){
+                foreach ($this->bms as $hm){
+                   $this->bbb = Note::find($hm->id);
+                }
+
+            }
 
         }
         if ($field == "registrationSwitch"){
