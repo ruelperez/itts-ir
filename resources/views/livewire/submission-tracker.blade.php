@@ -200,7 +200,7 @@
                         </div>
                         <div class="mt-4 row">
                             <div class="col-2">
-                                <label class="form-label">Remarks</label>
+                                <label class="form-label">Remarks :</label>
                             </div>
                             <div class="col-10">
                                 @if(isset($bbb))
@@ -266,7 +266,7 @@
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-3">
-                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="Transferred" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+{{--                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="Transferred" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
                                                 </div>
                                                 <div class="col-3">
                                                     <input class="form-check-input" type="checkbox" wire:model="remarks" value="Docs Needed" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
