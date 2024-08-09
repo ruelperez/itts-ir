@@ -547,7 +547,8 @@ class SubmissionTracker extends Component
                 $this->client = "selectClient";
                 $this->lawfirm = "selectLawfirm";
             }
-
+            $this->bbb = null;
+            $this->bms = [];
         }
         if ($field == "client"){
             if ($this->client == "selectClient" or $this->client == "na"){
@@ -566,6 +567,8 @@ class SubmissionTracker extends Component
                 $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
                 $this->lawfirm = "selectLawfirm";
             }
+            $this->bbb = null;
+            $this->bms = [];
         }
         if ($field == "lawfirm"){
             $this->campaignList = Note::select('campaign')
@@ -579,7 +582,11 @@ class SubmissionTracker extends Component
                 ->where('lawfirm',$this->lawfirm)->get();
             $num = 0;
             $ary = [];
-            if (count($this->bms) > 1){
+            if(count($this->bms) == 0){
+                $this->bbb = null;
+                $this->bms = [];
+            }
+            elseif (count($this->bms) > 1){
                 foreach ($this->bms as $bm){
                     $ary[] = $bm->method;
                 }

@@ -266,7 +266,7 @@
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-3">
-                                                    {{--                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Transferred" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="Transferred" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
                                                 </div>
                                                 <div class="col-3">
                                                     <input class="form-check-input" type="checkbox" wire:model="remarks" value="Docs Needed" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
