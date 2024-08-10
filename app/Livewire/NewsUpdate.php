@@ -33,7 +33,7 @@ class NewsUpdate extends Component
     #[Validate('image|max:1024')] // 1MB Max
     public $registrationSwitch, $did, $link = [
         ['title' => '', 'textLink' => ''],
-    ],  $schedule, $geo, $restriction, $tcpa = false, $campaignList = [], $campName, $employeeData, $tf = false, $fj = 0, $email= false, $thatsthem= false, $dupe= false, $blacklist = false, $govt= false, $dtrData = [], $campaign_stat = "active", $superAdminSwitch, $position, $edit_comment_id, $editTextComment, $linkData = [], $imagePath, $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name, $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
+    ],  $schedule, $geo, $restriction, $tcpa = false, $client_name, $client_list = [], $campaignList = [], $campName, $employeeData, $tf = false, $fj = 0, $email= false, $thatsthem= false, $dupe= false, $blacklist = false, $govt= false, $dtrData = [], $campaign_stat = "active", $superAdminSwitch, $position, $edit_comment_id, $editTextComment, $linkData = [], $imagePath, $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "all", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
@@ -53,15 +53,26 @@ class NewsUpdate extends Component
         $this->all_comment = Comment::all();
         $this->linkData = Link::all();
         if ($this->searchInput == ""){
-            $this->notes_all = Note::where('campaign',$this->campaign_name)
-                ->orderBy('updated_at', 'desc')
-                ->get();
+            if ($this->campaign_name == "all"){
+                $this->notes_all = Note::where('client',$this->client_name)
+                    ->orderBy('updated_at', 'desc')
+                    ->get();
+            }else{
+                $this->notes_all = Note::where('campaign',$this->campaign_name)
+                    ->where('client',$this->client_name)
+                    ->orderBy('updated_at', 'desc')
+                    ->get();
+            }
+
         }else{
             $this->notes_all = Note::where('id','LIKE', '%'.$this->searchInput.'%')
                 ->orWhere('tags', 'LIKE', '%'.$this->searchInput.'%')
-                ->where('campaign',$this->campaign_name)->get();
+                ->get();
         }
-        $this->campaignList = Campaign::all();
+        $this->client_list = Note::select('client')
+            ->distinct()
+            ->orderBy('updated_at', 'desc')
+            ->get();
         return view('livewire.news-update')->title('Campaign');
     }
 
@@ -182,11 +193,15 @@ class NewsUpdate extends Component
 
     public function mount($name){
         $this->webName = $name;
-        $this->campaignList = Campaign::all();
-        foreach ($this->campaignList as $df){
-            $this->campaign_name = $df->name;
+        $this->client_list = Note::select('client')
+            ->distinct()
+            ->orderBy('updated_at', 'desc')
+            ->get();
+        foreach ($this->client_list as $df){
+            $this->client_name = $df->client;
             break;
         }
+        $this->campaignList = Campaign::all();
     }
 
     public function clickHeart($id){
@@ -646,6 +661,33 @@ class NewsUpdate extends Component
     }
 
     public function updated($field){
+        if ($field == "client_name"){
+            $this->notes_all = Note::where('campaign',$this->campaign_name)
+                ->where('client',$this->client_name)
+                ->orderBy('updated_at', 'desc')
+                ->get();
+            $this->campaignList = Note::select('campaign')->where('client',$this->client_name)
+                ->distinct()
+                ->orderBy('updated_at', 'desc')
+                ->get();
+            $this->campaign_name = "all";
+        }
+        if ($field == "campaign_name"){
+            if ($this->campaign_name == "all"){
+                $this->notes_all = Note::where('client',$this->client_name)
+                    ->orderBy('updated_at', 'desc')
+                    ->get();
+            }else{
+                $this->notes_all = Note::where('campaign',$this->campaign_name)
+                    ->where('client',$this->client_name)
+                    ->orderBy('updated_at', 'desc')
+                    ->get();
+            }
+            $this->campaignList = Note::select('campaign')->where('client',$this->client_name)
+                ->distinct()
+                ->orderBy('updated_at', 'desc')
+                ->get();
+        }
         if ($field == "registrationSwitch"){
             $this->regSwitch();
         }

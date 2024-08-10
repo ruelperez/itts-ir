@@ -17,10 +17,10 @@
 {{--        </div>--}}
         <div style="width: 81%; margin-left: 19%;">
             <div>
-                <div style="position: fixed;top: 15%; left: 19%; width: 85%; z-index: 1000; background-color: #41464b; padding-left: 3%; padding-bottom: 1%;">
+                <div style="position: fixed;top: 15%;width: 81%; z-index: 1000; background-color: #41464b; padding-left: 1%; padding-right: 3%; padding-bottom: 1%; border: solid black 1px">
                     <div class="row mt-4">
                         <div class="col-2">
-                            <h6 style="color: white">{{strtoupper($campaign_name)}}</h6>
+                            <h6 style="color: white">( {{strtoupper($client_name)}}  @if($campaign_name != "all") <i class="fa-solid fa-arrow-right" style="color: #FFFF00"></i> {{strtoupper($campaign_name)}} @endif)</h6>
                         </div>
                         <div class="col-4">
                             <div class="row">
@@ -29,7 +29,7 @@
                                 </div>
                                 @if($position != "Agent")
                                     <div class="col-1">
-                                        <i class="fa-solid fa-circle-plus" data-bs-toggle="modal" data-bs-target="#add" style="color: #00FF00; font-size: 20px;"></i>
+                                        <i class="fa-solid fa-circle-plus" data-bs-toggle="modal" data-bs-target="#add" style="color: #00FF00; font-size: 20px; cursor: pointer"></i>
                                     </div>
                                 @endif
                                 @if($campaign_name == "Camp lejeune" or $campaign_name == "clj")
@@ -40,22 +40,22 @@
                             </div>
                         </div>
                         @if($position != "Agent")
-                            <div class="col-2">
+                            <div class="col-2 text-center">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#arc">+/-  Campaign</button>
                             </div>
-
                         @endif
                         <div class="col-2">
-                            <select class="form-select" aria-label="Default select example" wire:model.live="campaign_name">
-                                @foreach($campaignList as $list)
-                                    <option value="{{$list->name}}">{{strtoupper($list->name)}}</option>
+                            <select class="form-select" aria-label="Default select example" wire:model.live="client_name">
+                                @foreach($client_list as $list)
+                                    <option value="{{$list->client}}">{{strtoupper($list->client)}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-2">
                             <select class="form-select" aria-label="Default select example" wire:model.live="campaign_name">
+                                <option value="all">All</option>
                                 @foreach($campaignList as $list)
-                                    <option value="{{$list->name}}">{{strtoupper($list->name)}}</option>
+                                    <option value="{{$list->campaign}}">{{strtoupper($list->campaign)}}</option>
                                 @endforeach
                             </select>
                         </div>
