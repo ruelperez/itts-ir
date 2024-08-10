@@ -135,6 +135,8 @@ class SubmissionTracker extends Component
                 'fullname' => $this->fullname,
             ]);
             $this->clearInput();
+            $this->bbb = null;
+            $this->bam = null;
             $this->is_success = true;
             $this->dispatch('subSubmitted');
         }catch (\Exception $e){
@@ -605,6 +607,7 @@ class SubmissionTracker extends Component
                 }
 
             }
+            $this->remarks = [];
 
         }
         if ($field == "registrationSwitch"){

@@ -22,6 +22,13 @@
                                 <div>
                                     <label class="form-label">Campaign*</label>
                                 </div>
+{{--                                <label for="checkbox1">Check this to disable the other</label>--}}
+{{--                                <input type="checkbox" id="checkbox1" onclick="toggleCheckbox()">--}}
+
+{{--                                <br><br>--}}
+
+{{--                                <label for="checkbox2">This checkbox will be disabled/enabled</label>--}}
+{{--                                <input type="checkbox" id="checkbox2" onclick="toggleCheckbox2()">--}}
                                 <div>
                                     <select class="form-select" aria-label="Default select example" wire:model.live="campaign">
                                         <option value="selectCampaign">Select Campaign</option>
@@ -200,27 +207,35 @@
                         </div>
                         <div class="mt-4 row">
                             <div class="col-2">
-                                <label class="form-label">Remarks :</label>
+                                <label class="form-label">Remarks : @if(isset($bbb)) @if($bam == 0) <u>{{strtoupper($bbb->method)}}</u> @endif @endif </label>
                             </div>
+                            @if(isset($bbb))
+                                @if($bam == 0)
+                                    <input type="text" id="input1" value="{{$bbb->method}}" style="display: none">
+                                @endif
+                            @else
+                                <input type="text" id="input1" value="none" style="display: none">
+                            @endif
+
                             <div class="col-10">
                                 @if(isset($bbb))
                                     @if($bam == 0)
                                         @if(trim(strtolower($bbb->method)) === trim(strtolower("cpa")))
                                             <div class="row mb-3">
                                                 <div class="col-3">
-                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="Signed" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="Signed" id="checkbox1" onclick="signed()" @if($toChecked == true) disabled @endif>
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         Signed
                                                     </label>
                                                 </div>
                                                 <div class="col-3">
-                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="Callback" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="Callback" id="checkbox2" onclick="Unsigned()" @if($toChecked == true) disabled @endif>
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         For Callback
                                                     </label>
                                                 </div>
                                                 <div class="col-4">
-                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="Not Interested/Declined" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="Not Interested/Declined" id="checkbox3" onclick="Unsigned()" @if($toChecked == true) disabled @endif>
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         Not Interested/Declined
                                                     </label>
@@ -231,13 +246,13 @@
             {{--                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Transferred" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
                                                 </div>
                                                 <div class="col-3">
-                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="Docs Needed" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="Docs Needed" id="checkbox4" onclick="Unsigned()" @if($toChecked == true) disabled @endif>
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         Docs Needed
                                                     </label>
                                                 </div>
                                                 <div class="col-3">
-                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="DQ" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="DQ" id="checkbox5" onclick="Unsigned()" @if($toChecked == true) disabled @endif>
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         DQ
                                                     </label>
@@ -246,19 +261,19 @@
                                         @elseif(trim(strtolower($bbb->method)) === trim(strtolower("cpl")))
                                             <div class="row mb-3">
                                                 <div class="col-3">
-                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="Transferred" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                                    <input class="form-check-input" type="checkbox"  wire:model="remarks" value="Transferred" id="checkbox6" onclick="transferred()" @if($toChecked == true) disabled @endif>
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         Transferred
                                                     </label>
                                                 </div>
                                                 <div class="col-3">
-                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="Need Retransfer" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="Need Retransfer" id="checkbox7" onclick="Untransferred()" @if($toChecked == true) disabled @endif>
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         Need Retransfer
                                                     </label>
                                                 </div>
                                                 <div class="col-4">
-                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="For Callback" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="For Callback" id="checkbox8" onclick="Untransferred()" @if($toChecked == true) disabled @endif>
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         For Callback
                                                     </label>
@@ -269,13 +284,13 @@
 {{--                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="Transferred" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
                                                 </div>
                                                 <div class="col-3">
-                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="Docs Needed" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="Docs Needed" id="checkbox9" onclick="Untransferred()" @if($toChecked == true) disabled @endif>
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         Docs Needed
                                                     </label>
                                                 </div>
                                                 <div class="col-3">
-                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="DQ" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="DQ" id="checkbox10" onclick="Untransferred()" @if($toChecked == true) disabled @endif>
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         DQ
                                                     </label>
@@ -284,129 +299,130 @@
                                         @else
                                             <div class="row mb-3">
                                                 <div class="col-3">
-                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="Transferred" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="Transferred" id="checkbox11" onclick="submitted()" @if($toChecked == true) disabled @endif>
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         Submitted
                                                     </label>
                                                 </div>
                                                 <div class="col-3">
-                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="Need Retransfer" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="Need Retransfer" id="checkbox12" onclick="Notsubmitted()" @if($toChecked == true) disabled @endif>
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         For Callback
                                                     </label>
                                                 </div>
                                                 <div class="col-4">
-                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="For Callback" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
+                                                    <input class="form-check-input" type="checkbox" wire:model="remarks" value="For Callback" id="checkbox13" onclick="Notsubmitted()" @if($toChecked == true) disabled @endif>
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         DQ
                                                     </label>
                                                 </div>
                                             </div>
                                         @endif
-                                    @else
-                                        @foreach($bms as $bb)
-                                            @if(trim(strtolower($bb->method)) === trim(strtolower("cpl")))
-                                                <div class="row mb-3">
-                                                    <div class="col-3">
-                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Transferred" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            Transferred
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Need Retransfer" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            Need Retransfer
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="For Callback" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            For Callback
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-3">
-                                                    <div class="col-3">
-                                                        {{--                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Transferred" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Docs Needed" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            Docs Needed
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="DQ" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            DQ
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            @elseif(trim(strtolower($bb->method)) === trim(strtolower("cpa")))
-                                                <div class="row mb-3">
-                                                    <div class="col-3">
-                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Signed" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            Signed
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Callback" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            For Callback
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Not Interested/Declined" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            Not Interested/Declined
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-3">
-                                                    <div class="col-3">
-                                                        {{--                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Transferred" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Docs Needed" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            Docs Needed
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="DQ" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            DQ
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            @else
-                                                <div class="row mb-3">
-                                                    <div class="col-3">
-                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Transferred" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            Submitted
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Need Retransfer" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            For Callback
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="For Callback" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            DQ
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                        @endforeach
+{{--                                    @else--}}
+{{--                                        @foreach($bms as $bb)--}}
+{{--                                            @if(trim(strtolower($bb->method)) === trim(strtolower("cpl")))--}}
+{{--                                                <div class="row mb-3">--}}
+{{--                                                    <div class="col-3">--}}
+{{--                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Transferred" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                                        <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                                            Transferred--}}
+{{--                                                        </label>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-3">--}}
+{{--                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Need Retransfer" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                                        <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                                            Need Retransfer--}}
+{{--                                                        </label>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-4">--}}
+{{--                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="For Callback" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                                        <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                                            For Callback--}}
+{{--                                                        </label>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="row mb-3">--}}
+{{--                                                    <div class="col-3">--}}
+{{--                                                        --}}{{--                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Transferred" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-3">--}}
+{{--                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Docs Needed" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                                        <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                                            Docs Needed--}}
+{{--                                                        </label>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-3">--}}
+{{--                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="DQ" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                                        <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                                            DQ--}}
+{{--                                                        </label>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            @elseif(trim(strtolower($bb->method)) === trim(strtolower("cpa")))--}}
+{{--                                                <div class="row mb-3">--}}
+{{--                                                    <div class="col-3">--}}
+{{--                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Signed" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                                        <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                                            Signed--}}
+{{--                                                        </label>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-3">--}}
+{{--                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Callback" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                                        <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                                            For Callback--}}
+{{--                                                        </label>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-4">--}}
+{{--                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Not Interested/Declined" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                                        <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                                            Not Interested/Declined--}}
+{{--                                                        </label>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="row mb-3">--}}
+{{--                                                    <div class="col-3">--}}
+{{--                                                        --}}{{--                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Transferred" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-3">--}}
+{{--                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Docs Needed" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                                        <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                                            Docs Needed--}}
+{{--                                                        </label>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-3">--}}
+{{--                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="DQ" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                                        <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                                            DQ--}}
+{{--                                                        </label>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            @else--}}
+{{--                                                <div class="row mb-3">--}}
+{{--                                                    <div class="col-3">--}}
+{{--                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Transferred" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                                        <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                                            Submitted--}}
+{{--                                                        </label>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-3">--}}
+{{--                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Need Retransfer" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                                        <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                                            For Callback--}}
+{{--                                                        </label>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-4">--}}
+{{--                                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="For Callback" id="flexCheckDefault" @if($toChecked == true) disabled @endif>--}}
+{{--                                                        <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                                            DQ--}}
+{{--                                                        </label>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            @endif--}}
+{{--                                        @endforeach--}}
                                     @endif
                                 @endif
-                                <div class="row mt-5 mb-3">
+                                <hr>
+                                <div class="row mt-2 mb-3">
                                     <div class="col-3">
                                         <input class="form-check-input" type="checkbox" wire:model="remarks" value="DNC" id="flexCheckDefault" @if($toChecked == true) disabled @endif>
                                         <label class="form-check-label" for="flexCheckDefault">

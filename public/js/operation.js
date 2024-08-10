@@ -187,3 +187,129 @@ document.getElementById('dupeEditID').onclick = function () {
     window.open(('/itts/25/dupe-checker/edit/{id}'), '_blank');
 }
 
+// function checkCheckbox() {
+//     var checkbox = document.getElementById('myCheckbox');
+//     if (checkbox.checked) {
+//         alert('Checkbox is checked!');
+//     } else {
+//         alert('Checkbox is not checked.');
+//     }
+// }
+
+function signed(){
+    var checkbox1 = document.getElementById('checkbox1');
+    // var checkbox2 = document.getElementById('checkbox2');
+    // var checkbox3 = document.getElementById('checkbox3');
+
+    checkbox2.disabled = checkbox1.checked;
+    checkbox3.disabled = checkbox1.checked;
+    checkbox4.disabled = checkbox1.checked;
+    checkbox5.disabled = checkbox1.checked;
+
+}
+
+function Unsigned(){
+    var checkbox1 = document.getElementById('checkbox1');
+    var checkbox2 = document.getElementById('checkbox2');
+    var checkbox3 = document.getElementById('checkbox3');
+    var checkbox4 = document.getElementById('checkbox4');
+    var checkbox5 = document.getElementById('checkbox5');
+
+    if (checkbox2.checked){
+        checkbox1.disabled = checkbox2.checked;
+    }
+    else if (checkbox3.checked){
+        checkbox1.disabled = checkbox3.checked;
+    }
+    else if (checkbox4.checked){
+        checkbox1.disabled = checkbox4.checked;
+    }
+    else if (checkbox5.checked){
+        checkbox1.disabled = checkbox5.checked;
+    }
+    else{
+        checkbox1.disabled = false;
+    }
+}
+
+function transferred(){
+    var checkbox6 = document.getElementById('checkbox6');
+    // var checkbox2 = document.getElementById('checkbox2');
+    // var checkbox3 = document.getElementById('checkbox3');
+
+    checkbox7.disabled = checkbox6.checked;
+    checkbox8.disabled = checkbox6.checked;
+    checkbox9.disabled = checkbox6.checked;
+    checkbox10.disabled = checkbox6.checked;
+
+}
+function Untransferred(){
+    var checkbox6 = document.getElementById('checkbox6');
+    var checkbox7 = document.getElementById('checkbox7');
+    var checkbox8 = document.getElementById('checkbox8');
+    var checkbox9 = document.getElementById('checkbox9');
+    var checkbox10 = document.getElementById('checkbox10');
+
+    if (checkbox7.checked){
+        checkbox6.disabled = checkbox7.checked;
+    }
+    else if (checkbox8.checked){
+        checkbox6.disabled = checkbox8.checked;
+    }
+    else if (checkbox9.checked){
+        checkbox6.disabled = checkbox9.checked;
+    }
+    else if (checkbox10.checked){
+        checkbox6.disabled = checkbox10.checked;
+    }
+    else{
+        checkbox6.disabled = false;
+    }
+}
+
+function submitted(){
+    var checkbox11 = document.getElementById('checkbox11');
+    // var checkbox2 = document.getElementById('checkbox2');
+    // var checkbox3 = document.getElementById('checkbox3');
+
+    checkbox12.disabled = checkbox11.checked;
+    checkbox13.disabled = checkbox11.checked;
+}
+
+function Notsubmitted(){
+    var checkbox11 = document.getElementById('checkbox11');
+    var checkbox12 = document.getElementById('checkbox12');
+    var checkbox13 = document.getElementById('checkbox13');
+
+    if (checkbox12.checked){
+        checkbox11.disabled = checkbox12.checked;
+    }
+    else if (checkbox13.checked){
+        checkbox11.disabled = checkbox13.checked;
+    }
+    else{
+        checkbox11.disabled = false;
+    }
+}
+
+// function toggleCheckbox() {
+//     var sam = document.getElementById('input1').value;
+//     var checkbox1 = document.getElementById('checkbox1');
+//     var checkbox2 = document.getElementById('checkbox2');
+//
+//     checkbox2.checked = !checkbox1.checked;
+//
+// }
+
+// function toggleCheckbox2() {
+//     var checkbox1 = document.getElementById('checkbox1');
+//     var checkbox2 = document.getElementById('checkbox2');
+//
+//     // Disable or enable checkbox2 based on the state of checkbox1
+//     checkbox1.disabled = checkbox2.checked;
+// }
+
+// if (checkbox1.checked){
+//     checkbox2.checked = false;
+// }
+

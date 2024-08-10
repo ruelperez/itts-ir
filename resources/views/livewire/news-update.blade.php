@@ -18,32 +18,44 @@
         <div style="width: 81%; margin-left: 19%;">
             <div>
                 <div style="position: fixed;top: 15%; left: 19%; width: 85%; z-index: 1000; background-color: #41464b; padding-left: 3%; padding-bottom: 1%;">
-                    <div style="display: flex; margin-top: 2%;">
-                        <div>
+                    <div class="row mt-4">
+                        <div class="col-2">
                             <h6 style="color: white">{{strtoupper($campaign_name)}}</h6>
                         </div>
-                        @if($position != "Agent")
-                            <div style="margin-left: 5%;  margin-right: 1%;">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add">Create <i class="fa-solid fa-plus"></i></button>
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-7">
+                                    <input type="search" class="form-control" placeholder="Search" wire:model.live="searchInput">
+                                </div>
+                                @if($position != "Agent")
+                                    <div class="col-1">
+                                        <i class="fa-solid fa-circle-plus" data-bs-toggle="modal" data-bs-target="#add" style="color: #00FF00; font-size: 20px;"></i>
+                                    </div>
+                                @endif
+                                @if($campaign_name == "Camp lejeune" or $campaign_name == "clj")
+                                    <div class="col-4">
+                                        <a href="/itts/2/age-checker" wire:navigate style="color: white;">Age checker</a>
+                                    </div>
+                                @endif
                             </div>
-                        @endif
-                        <div style="width: 20%; @if($position == "Agent") margin-left: 10%; @endif ">
-                            <input type="text" placeholder="Search" wire:model.live="searchInput" style="padding: 1%;  width: 100%;">
                         </div>
-                        @if($campaign_name == "Camp lejeune")
-                            <div style=" margin-left: 18px; margin-top: 4px;">
-                                <a href="/itts/2/age-checker" wire:navigate style="color: white;">Age checker</a>
-                            </div>
-                        @endif
                         @if($position != "Agent")
-                            <div style=" margin-left: 18px; margin-top: 4px;">
+                            <div class="col-2">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#arc">+/-  Campaign</button>
                             </div>
+
                         @endif
-                        <div style="margin-left: auto; margin-right: 10%;">
+                        <div class="col-2">
                             <select class="form-select" aria-label="Default select example" wire:model.live="campaign_name">
                                 @foreach($campaignList as $list)
-                                    <option value="{{$list->name}}">{{$list->name}}</option>
+                                    <option value="{{$list->name}}">{{strtoupper($list->name)}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-2">
+                            <select class="form-select" aria-label="Default select example" wire:model.live="campaign_name">
+                                @foreach($campaignList as $list)
+                                    <option value="{{$list->name}}">{{strtoupper($list->name)}}</option>
                                 @endforeach
                             </select>
                         </div>
