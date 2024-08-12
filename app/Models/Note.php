@@ -30,6 +30,7 @@ class Note extends Model
         'thatsthem',
         'dupe',
         'email',
+        'felony',
         'govt',
     ];
 
@@ -40,6 +41,7 @@ class Note extends Model
         'thatsthem' => 'boolean',
         'dupe' => 'boolean',
         'email' => 'boolean',
+        'felony' => 'boolean',
         'govt' => 'boolean',
     ];
 

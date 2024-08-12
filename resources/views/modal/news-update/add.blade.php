@@ -23,7 +23,12 @@
                                         <label class="col-form-label">Campaign:</label>
                                     </div>
                                     <div class="col-auto">
-                                        <input type="text" class="form-control" wire:model="campaign_name" disabled>
+                                        <select class="form-select" aria-label="Default select example" wire:model="campaign" required>
+                                            <option value="">Select Campaign</option>
+                                            @foreach($campList as $list)
+                                                <option value="{{$list->name}}">{{strtoupper($list->name)}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row g-3 align-items-center mb-2">
@@ -31,7 +36,12 @@
                                         <label class="col-form-label">Client:</label>
                                     </div>
                                     <div class="col-auto">
-                                        <input type="text" class="form-control" wire:model="client" required>
+                                        <select class="form-select" aria-label="Default select example" wire:model="client" required>
+                                            <option value="">Select Client</option>
+                                            @foreach($clientList as $list)
+                                                <option value="{{$list->name}}">{{strtoupper($list->name)}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row g-3 align-items-center mb-2">
@@ -47,7 +57,12 @@
                                         <label class="col-form-label">Method</label>
                                     </div>
                                     <div class="col-auto">
-                                        <input type="text" class="form-control" wire:model="method" required>
+                                        <select class="form-select" aria-label="Default select example" wire:model="method" required>
+                                            <option value="">Select Client</option>
+                                            <option value="cpa">CPA</option>
+                                            <option value="cpl">CPL</option>
+                                            <option value="posting">POSTING</option>
+                                        </select>
                                     </div>
                                     <div class="col-auto">
                                         <label class="col-form-label">DID</label>
@@ -125,8 +140,8 @@
                                             EMAIL REQUIRED
                                         </label>
                                         <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox" wire:model="email" value="{{$email}}">
-                                            EMAIL REQUIRED
+                                            <input class="form-check-input me-1" type="checkbox" wire:model="felony" value="{{$felony}}">
+                                            Felony
                                         </label>
                                         <label class="list-group-item">
                                             <input class="form-check-input me-1" type="checkbox" wire:model="govt" value="{{$govt}}">

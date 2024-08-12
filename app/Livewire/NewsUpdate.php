@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\AdminShow;
 use App\Models\Campaign;
+use App\Models\Client;
 use App\Models\Comment;
 use App\Models\CommentHeart;
 use App\Models\Dtr;
@@ -33,7 +34,7 @@ class NewsUpdate extends Component
     #[Validate('image|max:1024')] // 1MB Max
     public $registrationSwitch, $did, $link = [
         ['title' => '', 'textLink' => ''],
-    ],  $schedule, $geo, $restriction, $tcpa = false, $client_name, $client_list = [], $campaignList = [], $campName, $employeeData, $tf = false, $fj = 0, $email= false, $thatsthem= false, $dupe= false, $blacklist = false, $govt= false, $dtrData = [], $campaign_stat = "active", $superAdminSwitch, $position, $edit_comment_id, $editTextComment, $linkData = [], $imagePath, $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "all", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
+    ],  $schedule, $geo, $clientList = [], $cntName, $restriction, $campaign, $campList = [], $tcpa = false, $felony = false, $client_name, $client_list = [], $campaignList = [], $campName, $employeeData, $tf = false, $fj = 0, $email= false, $thatsthem= false, $dupe= false, $blacklist = false, $govt= false, $dtrData = [], $campaign_stat = "active", $superAdminSwitch, $position, $edit_comment_id, $editTextComment, $linkData = [], $imagePath, $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "all", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
@@ -73,6 +74,11 @@ class NewsUpdate extends Component
             ->distinct()
             ->orderBy('updated_at', 'desc')
             ->get();
+        $this->campList = Campaign::all();
+        $this->clientList = Client::all();
+        $this->campaignList = Note::select('campaign')
+            ->where('client', $this->client_name)
+            ->distinct()->get();
         return view('livewire.news-update')->title('Campaign');
     }
 
@@ -88,6 +94,18 @@ class NewsUpdate extends Component
         }
     }
 
+    public function submit_client(){
+        try {
+            Client::create([
+                'name' => $this->cntName,
+            ]);
+            $this->cntName = "";
+            session()->flash('goodClient', "Successfully saved");
+        }catch (\Exception $e){
+            session()->flash('badClient', "Failed to save");
+        }
+    }
+
     public function campRemove($id,$name){
         Campaign::find($id)->delete();
         $ha = Note::where('campaign',$name)->get();
@@ -96,6 +114,29 @@ class NewsUpdate extends Component
         }
         \App\Models\Logs::create([
             'action' => "delete campaign named ".$name,
+            'user_id' => $this->user_id,
+            'photo' => $this->photo,
+            'fullname' => $this->fullname,
+        ]);
+    }
+
+    public function clickMe(){
+       $jj = Note::select('client')->distinct()->get();
+       foreach ($jj as $gg){
+           Client::create([
+               'name' => $gg->client,
+           ]);
+       }
+       dd('good');
+    }
+    public function clientRemove($id,$name){
+        Client::find($id)->delete();
+        $ha = Note::where('client',$name)->get();
+        foreach ($ha as $has){
+            Note::find($has->id)->delete();
+        }
+        \App\Models\Logs::create([
+            'action' => "delete client named ".$name,
             'user_id' => $this->user_id,
             'photo' => $this->photo,
             'fullname' => $this->fullname,
@@ -201,7 +242,9 @@ class NewsUpdate extends Component
             $this->client_name = $df->client;
             break;
         }
-        $this->campaignList = Campaign::all();
+        $this->campaignList = Note::select('campaign')
+            ->where('client', $this->client_name)
+            ->distinct()->get();
     }
 
     public function clickHeart($id){
@@ -262,7 +305,7 @@ class NewsUpdate extends Component
                 'user_id' => $this->user_id,
                 'user_fullname' => $this->user_fullname,
                 'tags' => $this->tags,
-                'campaign' => $this->campaign_name,
+                'campaign' => $this->campaign,
                 'photo' => $this->photo,
                 'title' => $this->title,
                 'client' => $this->client,
@@ -281,6 +324,7 @@ class NewsUpdate extends Component
                 'dupe' => $this->dupe,
                 'email' => $this->email,
                 'govt' => $this->govt,
+                'felony' => $this->felony,
             ]);
 
             $v = Note::latest()->first();
@@ -340,7 +384,7 @@ class NewsUpdate extends Component
         $this->tags = $rt->tags;
         $this->text = $rt->text;
         $this->title = $rt->title;
-        $this->campaign_name = $rt->campaign;
+        $this->campaign = $rt->campaign;
         $this->client = $rt->client;
         $this->lawfirm = $rt->lawfirm;
         $this->image = $rt->image;
@@ -356,6 +400,7 @@ class NewsUpdate extends Component
         $this->thatsthem = $rt->thatsthem;
         $this->dupe = $rt->dupe;
         $this->email = $rt->email;
+        $this->felony = $rt->felony;
         $this->govt =$rt->govt;
         $lnk = Link::where('note_id',$id)->get();
         $this->link = [];
@@ -372,7 +417,7 @@ class NewsUpdate extends Component
                 $rt->tags = $this->tags;
                 $rt->text = $this->text;
                 $rt->title = $this->title;
-                $rt->campaign = $this->campaign_name;
+                $rt->campaign = $this->campaign;
                 $rt->client = $this->client;
                 $rt->lawfirm = $this->lawfirm;
                 $rt->method = $this->method;
@@ -388,6 +433,7 @@ class NewsUpdate extends Component
                $rt->thatsthem = $this->thatsthem;
                $rt->dupe= $this->dupe;
                $rt->email = $this->email;
+               $rt->felony = $this->felony;
                $rt->govt = $this->govt;
                 $rt->save();
 
@@ -423,7 +469,7 @@ class NewsUpdate extends Component
                 $rt->tags = $this->tags;
                 $rt->text = $this->text;
                 $rt->title = $this->title;
-                $rt->campaign = $this->campaign_name;
+                $rt->campaign = $this->campaign;
                 $rt->client = $this->client;
                 $rt->lawfirm = $this->lawfirm;
                 $rt->method = $this->method;
@@ -439,6 +485,7 @@ class NewsUpdate extends Component
                 $rt->thatsthem = $this->thatsthem;
                 $rt->dupe= $this->dupe;
                 $rt->email = $this->email;
+                $rt->felony = $this->felony;
                 $rt->govt = $this->govt;
                 $rt->save();
 
@@ -467,11 +514,13 @@ class NewsUpdate extends Component
         $this->text = "";
         $this->title = "";
         $this->client = "";
+        $this->campaign = "";
         $this->lawfirm = "";
         $this->method = "";
         $this->did = "";
         $this->schedule = "";
         $this->geo = "";
+        $this->felony = false;
         $this->restriction = "";
         $this->campaign_stat = "active";
         $this->tcpa = false;

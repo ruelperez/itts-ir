@@ -28,8 +28,8 @@ use function Laravel\Prompts\table;
 class SubmissionTracker extends Component
 {
 
-    public $registrationSwitch, $jn, $toChecked = false, $caseType = "self", $is_success = false, $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $clientList = [], $campaignList = [], $campaign = "selectCampaign", $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
-            $date, $lawfirm = "selectLawfirm", $bam, $bbb, $client = "selectClient", $bms, $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "Dialer", $resultsVerifier = [], $showSearchVerifier = false ;
+    public $registrationSwitch, $hostingTrans, $DQ, $cplTrans, $jn, $toChecked = false, $comment, $caseType = "self", $is_success = false, $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $clientList = [], $campaignList = [], $campaign = "selectCampaign", $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
+            $date, $cplCheck = false, $checkboxDQ, $lawfirm = "selectLawfirm", $bam, $bbb, $client = "selectClient", $bms, $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "Dialer", $resultsVerifier = [], $showSearchVerifier = false ;
 
     public function render()
     {
@@ -471,6 +471,17 @@ class SubmissionTracker extends Component
        }
 
     }
+    public function clickCplTrans(){
+        if ($this->cplCheck == false){
+            $this->cplCheck = true;
+            $this->remarks = [];
+        }
+        else{
+            $this->cplCheck = false;
+        }
+
+    }
+
     public function updated($field){
         if ($field == "verifier"){
             if ($this->verifier != ""){
@@ -608,7 +619,8 @@ class SubmissionTracker extends Component
 
             }
             $this->remarks = [];
-
+            $this->comment = "";
+            $this->cplCheck = false;
         }
         if ($field == "registrationSwitch"){
             $this->regSwitch();

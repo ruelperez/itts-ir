@@ -125,6 +125,10 @@
                                             EMAIL REQUIRED
                                         </label>
                                         <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox" wire:model="felony" value="{{$felony}}">
+                                            FELONY
+                                        </label>
+                                        <label class="list-group-item">
                                             <input class="form-check-input me-1" type="checkbox" wire:model="govt" value="{{$govt}}">
                                             GOVT. ISSUED ID
                                         </label>

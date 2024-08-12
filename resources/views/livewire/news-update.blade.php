@@ -18,6 +18,7 @@
         <div style="width: 81%; margin-left: 19%;">
             <div>
                 <div style="position: fixed;top: 15%;width: 81%; z-index: 1000; background-color: #41464b; padding-left: 1%; padding-right: 3%; padding-bottom: 1%; border: solid black 1px">
+                    <button wire:click="clickMe">click me</button>
                     <div class="row mt-4">
                         <div class="col-2">
                             <h6 style="color: white">( {{strtoupper($client_name)}}  @if($campaign_name != "all") <i class="fa-solid fa-arrow-right" style="color: #FFFF00"></i> {{strtoupper($campaign_name)}} @endif)</h6>
@@ -41,7 +42,7 @@
                         </div>
                         @if($position != "Agent")
                             <div class="col-2 text-center">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#arc">+/-  Campaign</button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#arc"><i class="fa-solid fa-gear"></i> Camp/Client</button>
                             </div>
                         @endif
                         <div class="col-2">
@@ -141,38 +142,54 @@
                                 <b>LEAD COMPLIANCE</b>
                                 <div style="margin-top: 1%; margin-bottom: 2%;">
                                     <div class="list-group">
-                                        <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox" disabled {{ $data->tcpa ? 'checked' : '' }}>
-                                            TCPA/ LITIGATOR CHECK
-                                        </label>
-                                        <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox"  {{ $data->tf ? 'checked' : '' }} disabled>
-                                            TF
-                                        </label>
-                                        <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox"  {{ $data->blacklist ? 'checked' : '' }} disabled>
-                                            BLACKLIST
-                                        </label>
-                                        <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox" {{ $data->thatsthem ? 'checked' : '' }} disabled>
-                                            SMARTBACKGROUND - THATSTHEM
-                                        </label>
-                                        <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox" {{ $data->dupe ? 'checked' : '' }} disabled>
-                                            DUPE CHECK
-                                        </label>
-                                        <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox"  {{ $data->email ? 'checked' : '' }} disabled>
-                                            EMAIL REQUIRED
-                                        </label>
-                                        <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox"  {{ $data->email ? 'checked' : '' }} disabled>
-                                            FELONY
-                                        </label>
-                                        <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox" {{ $data->govt ? 'checked' : '' }} disabled>
-                                            GOVT. ISSUED ID
-                                        </label>
+                                        @if($data->tcpa == 1)
+                                            <label class="list-group-item">
+                                                <input class="form-check-input me-1" type="checkbox" disabled {{ $data->tcpa ? 'checked' : '' }}>
+                                                TCPA/ LITIGATOR CHECK
+                                            </label>
+                                        @endif
+                                        @if($data->tf == 1)
+                                            <label class="list-group-item">
+                                                <input class="form-check-input me-1" type="checkbox"  {{ $data->tf ? 'checked' : '' }} disabled>
+                                                TF
+                                            </label>
+                                        @endif
+                                        @if($data->blacklist == 1)
+                                            <label class="list-group-item">
+                                                <input class="form-check-input me-1" type="checkbox"  {{ $data->blacklist ? 'checked' : '' }} disabled>
+                                                BLACKLIST
+                                            </label>
+                                        @endif
+                                        @if($data->thatsthem == 1)
+                                            <label class="list-group-item">
+                                                <input class="form-check-input me-1" type="checkbox" {{ $data->thatsthem ? 'checked' : '' }} disabled>
+                                                SMARTBACKGROUND - THATSTHEM
+                                            </label>
+                                        @endif
+                                        @if($data->dupe == 1)
+                                            <label class="list-group-item">
+                                                <input class="form-check-input me-1" type="checkbox" {{ $data->dupe ? 'checked' : '' }} disabled>
+                                                DUPE CHECK
+                                            </label>
+                                        @endif
+                                        @if($data->email == 1)
+                                            <label class="list-group-item">
+                                                <input class="form-check-input me-1" type="checkbox"  {{ $data->email ? 'checked' : '' }} disabled>
+                                                EMAIL REQUIRED
+                                            </label>
+                                        @endif
+                                        @if($data->felony == 1)
+                                            <label class="list-group-item">
+                                                <input class="form-check-input me-1" type="checkbox"  {{ $data->felony ? 'checked' : '' }} disabled>
+                                                FELONY
+                                            </label>
+                                        @endif
+                                        @if($data->govt == 1)
+                                            <label class="list-group-item">
+                                                <input class="form-check-input me-1" type="checkbox" {{ $data->govt ? 'checked' : '' }} disabled>
+                                                GOVT. ISSUED ID
+                                            </label>
+                                        @endif
                                     </div>
                                 </div>
                                 <img src="{{asset('photos/photos/'.$data->image)}}" style="max-width: 60%; max-height: 65%;">
