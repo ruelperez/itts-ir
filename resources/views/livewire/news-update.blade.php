@@ -18,7 +18,6 @@
         <div style="width: 81%; margin-left: 19%;">
             <div>
                 <div style="position: fixed;top: 15%;width: 81%; z-index: 1000; background-color: #41464b; padding-left: 1%; padding-right: 3%; padding-bottom: 1%; border: solid black 1px">
-                    <button wire:click="clickMe">click me</button>
                     <div class="row mt-4">
                         <div class="col-2">
                             <h6 style="color: white">( {{strtoupper($client_name)}}  @if($campaign_name != "all") <i class="fa-solid fa-arrow-right" style="color: #FFFF00"></i> {{strtoupper($campaign_name)}} @endif)</h6>

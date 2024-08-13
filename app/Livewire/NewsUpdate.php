@@ -119,16 +119,6 @@ class NewsUpdate extends Component
             'fullname' => $this->fullname,
         ]);
     }
-
-    public function clickMe(){
-       $jj = Note::select('client')->distinct()->get();
-       foreach ($jj as $gg){
-           Client::create([
-               'name' => $gg->client,
-           ]);
-       }
-       dd('good');
-    }
     public function clientRemove($id,$name){
         Client::find($id)->delete();
         $ha = Note::where('client',$name)->get();

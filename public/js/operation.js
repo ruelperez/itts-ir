@@ -295,9 +295,6 @@ function Untransferred(){
         hm.hide();
     }
 
-// if (!checkbox10.checked){
-//         hm.hide();
-//     }
 }
 
 function submitted(){
