@@ -41,28 +41,6 @@ function clickEllipsis(){
     gh.css("margin-top", "30%");
 }
 
-function clickCamp(){
-    var al = $("#cnt");
-    $("#clientForm").hide();
-    var ap = $("#cmp");
-    $("#campForm").show();
-    ap.css("background-color", "#008000");
-    ap.css("color", "white");
-    al.css("background-color", "");
-    al.css("color", "black");
-}
-
-function clickClient(){
-    var ap = $("#cmp");
-    $("#campForm").hide();
-    var al = $("#cnt");
-    $("#clientForm").show();
-    al.css("background-color", "#008000");
-    al.css("color", "white");
-    ap.css("background-color", "");
-    ap.css("color", "black");
-}
-
 function clickOrderItemName(id){
     window.livewire.emit('qwe',id);
 }
@@ -236,22 +214,22 @@ function Unsigned(){
     var checkbox3 = document.getElementById('checkbox3');
     var checkbox4 = document.getElementById('checkbox4');
     var checkbox5 = document.getElementById('checkbox5');
-    var hm = $('#hm1');
+    var hm = document.getElementById('hm1');
 
     if (checkbox2.checked){
-        checkbox1.disabled = checkbox2.checked;hm.show();
+        checkbox1.disabled = checkbox2.checked;hm.style.display = "block";
     }
     else if (checkbox3.checked){
-        checkbox1.disabled = checkbox3.checked;hm.show();
+        checkbox1.disabled = checkbox3.checked;hm.style.display = "block";
     }
     else if (checkbox4.checked){
-        checkbox1.disabled = checkbox4.checked;hm.show();
+        checkbox1.disabled = checkbox4.checked;hm.style.display = "block";
     }
     else if (checkbox5.checked){
-        checkbox1.disabled = checkbox5.checked;hm.show();
+        checkbox1.disabled = checkbox5.checked;hm.style.display = "block";
     }
     else{
-        checkbox1.disabled = false;hm.hide();
+        checkbox1.disabled = false;hm.style.display = "none";
     }
 }
 
@@ -272,27 +250,27 @@ function Untransferred(){
     var checkbox8 = document.getElementById('checkbox8');
     var checkbox9 = document.getElementById('checkbox9');
     var checkbox10 = document.getElementById('checkbox10');
-    var hm = $('#hm1');
+    var hm = document.getElementById('hm2');
 
     if (checkbox7.checked){
         checkbox6.disabled = checkbox7.checked;
-        hm.show();
+        hm.style.display = "block";
     }
     else if (checkbox8.checked){
         checkbox6.disabled = checkbox8.checked;
-        hm.show();
+        hm.style.display = "block";
     }
     else if (checkbox9.checked){
         checkbox6.disabled = checkbox9.checked;
-        hm.show();
+        hm.style.display = "block";
     }
     else if (checkbox10.checked){
         checkbox6.disabled = checkbox10.checked;
-        hm.show();
+        hm.style.display = "block";
     }
     else{
         checkbox6.disabled = false;
-        hm.hide();
+        hm.style.display = "none";
     }
 
 }
@@ -310,16 +288,16 @@ function Notsubmitted(){
     var checkbox11 = document.getElementById('checkbox11');
     var checkbox12 = document.getElementById('checkbox12');
     var checkbox13 = document.getElementById('checkbox13');
-    var hm = $('#hm1');
+    var hm = document.getElementById('hm3');
 
     if (checkbox12.checked){
-        checkbox11.disabled = checkbox12.checked;hm.show();
+        checkbox11.disabled = checkbox12.checked;hm.style.display = "block";
     }
     else if (checkbox13.checked){
-        checkbox11.disabled = checkbox13.checked;hm.show();
+        checkbox11.disabled = checkbox13.checked;hm.style.display = "block";
     }
     else{
-        checkbox11.disabled = false;hm.hide();
+        checkbox11.disabled = false;hm.style.display = "none";
     }
 }
 

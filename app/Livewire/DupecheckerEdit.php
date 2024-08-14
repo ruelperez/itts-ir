@@ -191,7 +191,7 @@ class DupecheckerEdit extends Component
                 $this->result = "DQ - ".$this->dqReason;
             }
             if ($this->result == "Return by Client"){
-                $this->result = "Return by client - ".$this->returnClient;
+                $this->result = "Return by client - ".$this->returnReason;
             }
             if ($this->result == "DQ - Criteria"){
                 $this->result = "DQ by Criteria - ".$this->dqCriteria;
@@ -233,8 +233,6 @@ class DupecheckerEdit extends Component
                 $kk->user_id = $this->user_id;
                 $kk->result = $this->result;
                 $kk->save();
-                $this->dqReason = "";
-                $this->returnCriteria = "";
                 \App\Models\Logs::create([
                     'action' => "Edit dupe checker with a customer phone number ".$this->phoneNumber,
                     'user_id' => $this->user_id,
@@ -253,7 +251,7 @@ class DupecheckerEdit extends Component
                 $this->result = "DQ - ".$this->dqReason;
             }
             if ($this->result == "Return by Client"){
-                $this->result = "Return by client - ".$this->returnCriteria;
+                $this->result = "Return by client - ".$this->returnReason;
             }
             if ($this->result == "DQ - Criteria"){
                 $this->result = "DQ by Criteria - ".$this->dqCriteria;
@@ -274,8 +272,6 @@ class DupecheckerEdit extends Component
                 $kk = Submission::find($this->ids);
                 $kk->result = $this->result;
                 $kk->save();
-                $this->dqReason = "";
-                $this->returnClient= "";
                 \App\Models\Logs::create([
                     'action' => "Edit dupe checker with a customer phone number ".$this->phoneNumber,
                     'user_id' => $this->user_id,

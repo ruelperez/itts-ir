@@ -29,7 +29,7 @@ class SubmissionTracker extends Component
 {
 
     public $registrationSwitch, $hostingTrans, $DQ, $jn, $toChecked = false, $comment, $caseType = "self", $is_success = false, $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $clientList = [], $campaignList = [], $campaign = "selectCampaign", $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
-            $date, $cplCheck = false, $submission = [], $checkboxDQ, $lawfirm = "selectLawfirm", $bam, $bbb, $client = "selectClient", $bms, $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "", $resultsVerifier = [], $showSearchVerifier = false ;
+            $date, $cplCheck = false, $displayComment = false, $submission = [], $checkboxDQ, $lawfirm = "selectLawfirm", $bam, $bbb, $client = "selectClient", $bms, $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "", $resultsVerifier = [], $showSearchVerifier = false ;
 
     public function render()
     {
@@ -47,6 +47,29 @@ class SubmissionTracker extends Component
             ->get();
         $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
         return view('livewire.submission-tracker');
+    }
+
+    public function clickBox(){
+        $num = 0;
+        if (count($this->remarks) > 0){
+            $sub = ['DQ','For Callback','Callback','Not Interested/Declined','Docs Needed','Need Retransfer'];
+
+            foreach ($this->remarks as $name) {
+                if (in_array($name, $sub)) {
+                    $num++;
+
+                }
+            }
+            if ($num > 0){
+                $this->displayComment = true;
+            }
+            else{
+                $this->displayComment = false;
+            }
+        }
+        else{
+            $this->displayComment = false;
+        }
     }
 
     public function submit(){
@@ -145,6 +168,7 @@ class SubmissionTracker extends Component
                 'fullname' => $this->fullname,
             ]);
             $this->clearInput();
+            $this->displayComment = false;
             $this->bbb = null;
             $this->bam = null;
             $this->is_success = true;

@@ -269,12 +269,12 @@
                             </div>
                         @endif
                         @if($base == false)
-                            <div class="mt-3 row" x-data="{ selectedOption: '' }">
+                            <div class="mt-3 row" x-data="{ selectedOptions: '' }">
                                 <div class="col-1">
                                     <label class="form-label">Result :</label>
                                 </div>
                                 <div class="col-3">
-                                    <select class="form-select" aria-label="Default select example" wire:model="result" x-model="selectedOption">
+                                    <select class="form-select" aria-label="Default select example" wire:model="result" x-model="selectedOptions">
                                         <option value="">Select Result</option>
                                         <option value="Signed / Executed">Signed / Executed</option>
                                         <option value="Return by Client">Return by Client</option>
@@ -289,15 +289,13 @@
                                     @error('result') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="col-5">
-                                    <textarea class="form-control" rows="2" wire:model="dqReason"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ - Other reason'"></textarea>
-                                    <textarea class="form-control  ms-2" rows="2" wire:model="returnReason"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'Return by Client'"></textarea>
-                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqReason"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ - Other reason'"></textarea>
-                                    <textarea class="form-control  ms-2" rows="2" wire:model="returnReason"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'Return by Client'"></textarea>
-                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqCriteria"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ - Criteria'"></textarea>
-                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqClient"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ by Client'"></textarea>
-                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqQa"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ by QA'"></textarea>
-                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqManager"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ by Manager'"></textarea>
-                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqVerifier"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ by VER'"></textarea>
+                                    <textarea class="form-control" rows="2" wire:model="dqReason"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOptions === 'DQ - Other reason'"></textarea>
+                                    <textarea class="form-control  ms-2" rows="2" wire:model="returnReason"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOptions === 'Return by Client'"></textarea>
+                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqCriteria"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOptions === 'DQ - Criteria'"></textarea>
+                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqClient"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOptions === 'DQ by Client'"></textarea>
+                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqQa"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOptions === 'DQ by QA'"></textarea>
+                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqManager"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOptions === 'DQ by Manager'"></textarea>
+                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqVerifier"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOptions === 'DQ by VER'"></textarea>
                                 </div>
                             </div>
                         @endif

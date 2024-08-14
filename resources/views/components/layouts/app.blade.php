@@ -41,6 +41,28 @@
                     dateFormat: 'm/d/Y',
                 });
             });
+
+            function clickCamp(){
+                var al = $("#cnt");
+                $("#clientForm").hide();
+                var ap = $("#cmp");
+                $("#campForm").show();
+                ap.css("background-color", "#008000");
+                ap.css("color", "white");
+                al.css("background-color", "");
+                al.css("color", "black");
+            }
+
+            function clickClient(){
+                var ap = $("#cmp");
+                $("#campForm").hide();
+                var al = $("#cnt");
+                $("#clientForm").show();
+                al.css("background-color", "#008000");
+                al.css("color", "white");
+                ap.css("background-color", "");
+                ap.css("color", "black");
+            }
         </script>
     </body>
 </html>
