@@ -28,7 +28,7 @@ use function Laravel\Prompts\table;
 class SubmissionTracker extends Component
 {
 
-    public $registrationSwitch, $hostingTrans, $DQ, $jn, $toChecked = false, $comment, $caseType = "self", $is_success = false, $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $clientList = [], $campaignList = [], $campaign = "selectCampaign", $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
+    public $registrationSwitch, $hostingTrans, $gm = 0, $DQ, $jn, $toChecked = false, $comment, $caseType = "self", $is_success = false, $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $clientList = [], $campaignList = [], $campaign = "selectCampaign", $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
             $date, $cplCheck = false, $displayComment = false, $submission = [], $checkboxDQ, $lawfirm = "selectLawfirm", $bam, $bbb, $client = "selectClient", $bms, $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "", $resultsVerifier = [], $showSearchVerifier = false ;
 
     public function render()
@@ -73,6 +73,10 @@ class SubmissionTracker extends Component
     }
 
     public function submit(){
+        if ($this->gm == 0){
+            session()->flash('badAgent', "Successfully saved");
+            return;
+        }
         if ($this->caseType == "self"){
             $this->validate([
                 'phoneNumber' => 'required|numeric',
@@ -267,6 +271,7 @@ class SubmissionTracker extends Component
         $gh = Employee::find($id);
         $this->agent = $gh->fname.' '.$gh->lname;
         $this->showSearchCoach = false;
+        $this->gm = 1;
     }
 
     public function click_itemsVerifier($id){
@@ -566,6 +571,7 @@ class SubmissionTracker extends Component
 
         }
         if ($field == "agent"){
+            $this->gm = 0;
             if ($this->agent != ""){
                 $this->results = Employee::where('fname','LIKE','%'. $this->agent. '%')
                     ->orWhere('lname','LIKE','%'. $this->agent. '%')->take(5)

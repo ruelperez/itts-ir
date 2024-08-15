@@ -143,7 +143,10 @@
                             <div class="col-3">
                                 <label  class="form-label">Agent*</label>
                                 <input type="text" class="form-control" wire:model.live="agent" wire:blur="removeSearch" wire:click="clickSearch" required>
-                                @if($showSearch == true)
+                                @if(session()->has('badAgent'))
+                                    <small style="color: #800000">Agent's name should be selected from the search suggestions.</small>
+                                @endif
+                            @if($showSearch == true)
                                     <div style="position: absolute; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);">
                                         <ul class="list-group">
                                             @foreach($results as $data)
