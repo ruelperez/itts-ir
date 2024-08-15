@@ -65,6 +65,9 @@
                 <div onclick="location.href = '/itts/17/my-device';" style="@if($webName == "my-device") background-color: #023e8a; @endif  padding-left: 10%;" >
                     MY DEVICE
                 </div>
+                <div onclick="location.href = '/itts/26/my-production-lead';" style="@if($webName == "my-production-lead") background-color: #023e8a; @endif  padding-left: 10%;" >
+                    MY PRODUCTION LEAD
+                </div>
                 @if($position == "Agent")
                     <div style="margin-left: auto; text-align: right; padding-right: 5%;" wire:click="logout">
                         <i class="fa-solid fa-right-from-bracket" style=" color: white; margin-right: 5px; "></i>Log Out

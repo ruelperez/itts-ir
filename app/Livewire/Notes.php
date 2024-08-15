@@ -26,7 +26,6 @@ class Notes extends Component
 
     #[Validate('image|max:1024')] // 1MB Max
     public $registrationSwitch, $search = "", $employeeData, $editInputTitle, $noteId, $editInputNotes, $myNotesData, $addInputNotes, $inputBase = 0, $baseId, $addInputTitle, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
-
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
