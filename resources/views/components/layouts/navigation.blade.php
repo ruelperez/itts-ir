@@ -1,4 +1,4 @@
-    <div class="navig" wire:ignore>
+    <div class="navig overflow-auto scrollable-div" wire:ignore style="height: 320px;">
         @if($webName == "employee")
             @if(count($empData) < 1)
                 <div style="@if($webName == "dashboard") background-color: #023e8a; @endif  padding-left: 10%; " data-bs-toggle="modal" data-bs-target="#disclick">
@@ -101,6 +101,9 @@
             </div>
             <div onclick="location.href = '/itts/17/my-device';" style="@if($webName == "my-device") background-color: #023e8a; @endif  padding-left: 10%;" >
                 MY DEVICE
+            </div>
+            <div onclick="location.href = '/itts/26/my-production-lead';" style="@if($webName == "my-production-lead") background-color: #023e8a; @endif  padding-left: 10%;" >
+                MY PRODUCTION LEAD
             </div>
             @if($position == "Agent")
                 <div style="margin-left: auto; text-align: right; padding-right: 5%;" wire:click="logout">

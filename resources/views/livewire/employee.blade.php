@@ -5,8 +5,8 @@
     @include('modal.news-update.show-photo')
     @include('modal.employee.loading')
     @include('modal.employee.disclick')
-    <div style="display: flex; width: 100%; margin-top: 105px; ">
-        <div style="width: 81%; margin-left: 19%;">
+    <div style="display: flex; width: 100%; margin-top: 105px; border: solid black 5px">
+        <div style="width: 81%; margin-left: 19%; ">
             <div>
                 <div style="display: flex;" class="align-items-center">
                     <div class="w-50 ps-4 mt-4">
