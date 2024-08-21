@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css')}}">
         <link rel="stylesheet" href="{{ asset('css/design.css')}}">
         <link rel="stylesheet" href="{{ asset('flatpickr/dist/flatpickr.css') }}">
+        <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 {{--        @vite(['resources/css/app.css', 'resources/js/app.js'])--}}
         <title>{{ $title ?? 'Page Title' }}</title>
     </head>
@@ -20,6 +21,7 @@
         <script src="{{asset('js/cdn.js')}}"></script>
         <script src="{{asset('js/operation.js')}}"></script>
         <script src="{{ asset('flatpickr/dist/flatpickr.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function(){
                 flatpickr('#datepicker', {
@@ -63,6 +65,7 @@
                 ap.css("background-color", "");
                 ap.css("color", "black");
             }
+
         </script>
     </body>
 </html>
