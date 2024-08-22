@@ -46,7 +46,7 @@
                 @else
                     <div>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" wire:click="submitEdit" wire:confirm="Are you sure you want to reset weekly DTR?">Submit</button>
+                        <button type="button" class="btn btn-primary" wire:click="submitEdit" wire:confirm="To proceed, click submit">Submit</button>
                     </div>
                 @endif
             </div>
