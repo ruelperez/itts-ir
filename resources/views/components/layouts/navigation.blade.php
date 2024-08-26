@@ -7,9 +7,9 @@
                 <div style="@if($webName == "dtr") background-color: #023e8a; @endif  padding-left: 10%;" data-bs-toggle="modal" data-bs-target="#disclick">
                     DTR
                 </div>
-                {{--    <div href="/itts/3/zip-checker" style="@if($webName == "zip-checker") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>--}}
-                {{--        ZIP CODE CHECKER--}}
-                {{--    </div>--}}
+                <div href="/itts/3/zip-checker" style="@if($webName == "zip-checker") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>
+                    ZIP CODE CHECKER
+                </div>
                 <div style="@if($webName == "news-feed") background-color: #023e8a; @endif  padding-left: 10%;" data-bs-toggle="modal" data-bs-target="#disclick">
                     CAMPAIGN
                 </div>
@@ -45,9 +45,9 @@
                 <div onclick="location.href = '/itts/8/dtr';" style="@if($webName == "dtr") background-color: #023e8a; @endif  padding-left: 10%;">
                     DTR
                 </div>
-                {{--    <div href="/itts/3/zip-checker" style="@if($webName == "zip-checker") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>--}}
-                {{--        ZIP CODE CHECKER--}}
-                {{--    </div>--}}
+                <div href="/itts/3/zip-checker" style="@if($webName == "zip-checker") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>
+                    ZIP CODE CHECKER
+                </div>
                 <div onclick="location.href = '/itts/4/news-feed';" style="@if($webName == "news-feed") background-color: #023e8a; @endif  padding-left: 10%;" >
                     CAMPAIGN
                 </div>
@@ -85,9 +85,9 @@
             <div onclick="location.href = '/itts/8/dtr';" style="@if($webName == "dtr") background-color: #023e8a; @endif  padding-left: 10%;">
                 DTR
             </div>
-            {{--    <div href="/itts/3/zip-checker" style="@if($webName == "zip-checker") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>--}}
-            {{--        ZIP CODE CHECKER--}}
-            {{--    </div>--}}
+            <div href="/itts/3/zip-checker" style="@if($webName == "zip-checker") background-color: #023e8a; @endif  padding-left: 10%;" wire:navigate>
+                ZIP CODE CHECKER
+            </div>
             <div onclick="location.href = '/itts/4/news-feed';" style="@if($webName == "news-feed") background-color: #023e8a; @endif  padding-left: 10%;" >
                 CAMPAIGN
             </div>

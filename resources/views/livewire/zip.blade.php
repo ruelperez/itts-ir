@@ -3,11 +3,11 @@
     @include('components.layouts.navigation')
     @include('modal.click-settings')
     @include('modal.news-update.show-photo')
-    <div style="display: flex; width: 100%; margin-top: 105px;">
-        <div style="width: 81%; margin-left: 19%;">
-            <div class="container">
-                <div>
-                    <h6 style="margin-top: 3%;margin-left: 2%;">ZIP CODE CHECKER</h6>
+    <div class="mt-5" style="display: flex; width: 100%;">
+        <div style="width: 81%; margin-left: 19%;" class="mt-5" >
+            <div class="container mt-5">
+                <div class="mt-lg-4 mt-md-5 mt-sm-5">
+                    <h6>ZIP CODE CHECKER</h6>
                 </div>
                 <div style="margin-left: 3%; margin-top: 2%; background-color: #F5F5F5; border-radius: 2%; padding-left: 3%;">
                     <div style="display: flex; margin-top: 3%; padding-top: 2%;">
@@ -15,7 +15,12 @@
                             <input type="text" placeholder="Search zip code" wire:model.live="searchInput" style="width: 100%; padding: 1%; margin-top: 2%;">
                         </div>
                     </div>
-                    <table class="table table-hover" style="margin-top: 0.5%; width: 96.5%; margin-bottom: 2%;">
+                    <div class="text-center">
+                        <div class="spinner-border mt-5 mb-5" role="status" wire:loading>
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    <table class="table table-hover" style="margin-top: 0.5%; width: 96.5%; margin-bottom: 2%;" wire:loading.remove>
                         <thead>
                         <tr class="inv">
                             <th style="text-align: left">
