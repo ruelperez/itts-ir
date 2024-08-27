@@ -2,10 +2,7 @@
     <div style="display: flex; ">
         <div style="width: 50%; margin-left: 6%;" class="d-flex">
             <div>
-                <img src="{{asset('photo/logo.jpg')}}" width="80">
-            </div>
-            <div class="d-none d-sm-none d-md-block mt-4 ms-2">
-                <b style="color: white; font-size: 17px;">ITTS Services</b>
+                <img src="{{asset('photo/logo-banner.png')}}" width="80">
             </div>
         </div>
         <div style="width: 50%; text-align: right; padding-right: 3%; padding-top: 25px;">
