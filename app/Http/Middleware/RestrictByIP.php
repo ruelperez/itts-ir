@@ -24,6 +24,7 @@ class RestrictByIP
     {
         // Fetch the public IP address using an external service like ipify
         $publicIp = $this->getClientIp($request);
+        dd($publicIp);
         // Check if the public IP is allowed
         if ($publicIp != $this->allowedIps) {
 //            return response()->json([
