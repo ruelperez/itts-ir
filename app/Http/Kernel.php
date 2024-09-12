@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'isAdmin' =>AdminMiddleware::class,
         'restrict.ip' => \App\Http\Middleware\RestrictByIP::class,
+        \App\Http\Middleware\TrustProxies::class, // Make sure this middleware is included
     ];
 }

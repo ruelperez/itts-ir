@@ -23,8 +23,7 @@ class RestrictByIP
     public function handle(Request $request, Closure $next): Response
     {
         // Fetch the public IP address using an external service like ipify
-        $publicIp = $this->getPublicIP();
-        dd($publicIp);
+        $publicIp = $this->getClientIp($request);
         // Check if the public IP is allowed
         if ($publicIp != $this->allowedIps) {
 //            return response()->json([
@@ -42,16 +41,19 @@ class RestrictByIP
      *
      * @return string|null
      */
-    protected function getPublicIP()
+    protected function getClientIp(Request $request)
     {
-        try {
-            $client = new Client();
-            $response = $client->request('GET', 'https://api.ipify.org?format=json');
-            $data = json_decode($response->getBody()->getContents(), true);
-
-            return $data['ip'] ?? null;
-        } catch (\Exception $e) {
-            return null;
+        // Check for the IP address from common proxy headers
+        if ($request->hasHeader('X-Forwarded-For')) {
+            // X-Forwarded-For can contain a list of IPs, we need the first one
+            return trim(explode(',', $request->header('X-Forwarded-For'))[0]);
         }
+
+        if ($request->hasHeader('X-Real-IP')) {
+            return $request->header('X-Real-IP');
+        }
+
+        // Fallback to Laravel's default IP detection method
+        return $request->ip();
     }
 }
