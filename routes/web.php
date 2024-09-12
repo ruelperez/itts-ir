@@ -42,8 +42,10 @@ Route::get('/itts/23/dupe-checker', \App\Livewire\DupeChecker::class)->middlewar
 Route::get('/itts/24/submission-tracker', \App\Livewire\SubmissionTracker::class)->middleware('auth');
 Route::get('/itts/25/dupe-checker/edit/{id}', \App\Livewire\DupecheckerEdit::class)->middleware('auth');
 Route::get('/itts/26/{name}', \App\Livewire\ProductionLead::class)->middleware('auth');
-Route::get('/', function (){
-    return redirect('/itts/5/dashboard');
+Route::middleware('restrict.ip')->group(function () {
+    Route::get('/', function (){
+        return redirect('/itts/5/dashboard');
+    });
+    Route::get('/login', \App\Livewire\Login::class)->name('login')->middleware('guest');
+    Route::get('/register', \App\Livewire\Register::class);
 });
-Route::get('/login', \App\Livewire\Login::class)->name('login')->middleware('guest');
-Route::get('/register', \App\Livewire\Register::class);
