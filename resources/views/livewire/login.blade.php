@@ -11,7 +11,7 @@
                 <form wire:submit.prevent="submit_login"  class="mt-3">
                     <div class="form-outline mb-4">
                         <input type="text" id="form3Example3cg" class="form-control form-control-md" wire:model="username"/>
-                        <label class="form-label" for="form3Example3cg"><b>Username</b></label>
+                        <label class="form-label" for="form3Example3cg">Username</label>
                         @error('username') <span style="color: red">{{ $message }}</span> @enderror
                     </div>
 
@@ -25,7 +25,7 @@
                             @endif
                         </div>
                         {{--                        <input type="password" id="form3Example4cg" class="form-control form-control-md" wire:model="password"/>--}}
-                        <label class="form-label" for="form3Example4cg"><b>Password</b></label>
+                        <label class="form-label" for="form3Example4cg">Password</label>
                         @error('password') <span style="color: red">{{ $message }}</span> @enderror
                     </div>
 

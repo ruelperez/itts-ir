@@ -55,7 +55,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" @if($is_reg == 0) disabled @endif >Register</button>
+                        <button type="submit" class="btn btn-outline-success btn-md text-white" style="background-color: rgba(0, 128, 0, 0.9); width: 70%;" @if($is_reg == 0) disabled @endif >Register</button>
                     </div>
                     @if($is_reg == 0)
                         <p style="color: red">The registration is disabled, Contact admin user to enable.</p>
