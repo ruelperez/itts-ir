@@ -14,7 +14,8 @@ class RestrictByIP
      *
      * @var array
      */
-    protected $allowedIps = '122.54.211.23'; // Replace with your allowed IP
+    protected $allowedIps = '122.54.211.23';
+//    protected $allowedIps = '127.0.0.1';
     /**
      * Handle an incoming request.
      *
@@ -24,6 +25,7 @@ class RestrictByIP
     {
         // Fetch the public IP address using an external service like ipify
         $publicIp = $this->getClientIp($request);
+
         // Check if the public IP is allowed
         if ($publicIp != $this->allowedIps) {
 //            return response()->json([

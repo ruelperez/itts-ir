@@ -1,37 +1,42 @@
-<div class="row">
-    <div class="col-lg-8 border border-dark vh-100">
-        <img src="{{asset('photo/cover.jpg')}}" class="img-fluid">
-    </div>
+<div style="background-image: url('photo/cover.jpg'); background-size: cover;  background-position: center;width: 100vw; position: relative;  height: 100vh;">
+    <div class="container">
+        <div class="row ">
+            <div class="col-xl-4 col-lg-3 col-md-3">
 
-    <div class="col-lg-4 border border-dark">
-        <form wire:submit.prevent="submit_login">
-
-            <div class="form-outline mb-4">
-                <input type="text" id="form3Example3cg" class="form-control form-control-md" wire:model="username"/>
-                <label class="form-label" for="form3Example3cg">Username</label>
-                @error('username') <span style="color: red">{{ $message }}</span> @enderror
             </div>
-
-            <div class="form-outline mb-4">
-                <div style="display: flex">
-                    <input @if($eye == 0) type="password" @else type="text" @endif id="form3Example4cg" class="form-control form-control-md" wire:model="password"/>
-                    @if($eye == 0)
-                        <i class="fa-regular fa-eye-slash" style="font-size: 18px; margin-left: 2%;margin-top: 2%;" wire:click="clickEyes(1)"></i>
-                    @else
-                        <i class="fa-solid fa-eye" style="font-size: 18px; margin-left: 2%;margin-top: 2%;" wire:click="clickEyes(0)"></i>
-                    @endif
+            <div class="col-xl-4 col-lg-6 col-md-6 px-4 py-4" style="border-radius: 7px; background-color: rgba(255, 255, 255, 0.7); margin-top: 80px;">
+                <div class="d-flex justify-content-center">
+                    <img src="{{asset('photo/apple-touch-icon.png')}}" width="120">
                 </div>
-                {{--                        <input type="password" id="form3Example4cg" class="form-control form-control-md" wire:model="password"/>--}}
-                <label class="form-label" for="form3Example4cg">Password</label>
-                @error('password') <span style="color: red">{{ $message }}</span> @enderror
-            </div>
+                <form wire:submit.prevent="submit_login"  class="mt-3">
+                    <div class="form-outline mb-4">
+                        <input type="text" id="form3Example3cg" class="form-control form-control-md" wire:model="username"/>
+                        <label class="form-label" for="form3Example3cg"><b>Username</b></label>
+                        @error('username') <span style="color: red">{{ $message }}</span> @enderror
+                    </div>
 
-            <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
-            </div>
+                    <div class="form-outline mb-4">
+                        <div style="display: flex">
+                            <input @if($eye == 0) type="password" @else type="text" @endif id="form3Example4cg" class="form-control form-control-md" wire:model="password"/>
+                            @if($eye == 0)
+                                <i class="fa-regular fa-eye-slash" style="font-size: 18px; margin-left: 2%;margin-top: 2%;" wire:click="clickEyes(1)"></i>
+                            @else
+                                <i class="fa-solid fa-eye" style="font-size: 18px; margin-left: 2%;margin-top: 2%;" wire:click="clickEyes(0)"></i>
+                            @endif
+                        </div>
+                        {{--                        <input type="password" id="form3Example4cg" class="form-control form-control-md" wire:model="password"/>--}}
+                        <label class="form-label" for="form3Example4cg"><b>Password</b></label>
+                        @error('password') <span style="color: red">{{ $message }}</span> @enderror
+                    </div>
 
-            <p class="text-center text-muted mt-3 mb-0">Have already an account? <a href="/register" wire:navigate class="fw-bold text-body"><u>Register here</u></a></p>
-        </form>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-outline-success btn-md text-white" style="background-color: rgba(0, 128, 0, 0.8); width: 70%;">Login</button>
+                    </div>
+
+                    <p class="text-center text-muted mt-3 mb-0">Have already an account? <a href="/register" wire:navigate class="fw-bold text-body"><u>Register here</u></a></p>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 
