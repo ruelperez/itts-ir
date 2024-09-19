@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('logs', function (Blueprint $table) {
-            $table->string('photo');
-            $table->string('fullname');
+        Schema::create('dtv_trackers', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -22,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('logs', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('dtv_trackers');
     }
 };
