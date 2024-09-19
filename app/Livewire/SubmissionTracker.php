@@ -29,7 +29,7 @@ class SubmissionTracker extends Component
 {
 
     public $registrationSwitch, $hostingTrans, $gm = 0, $DQ, $jn, $toChecked = false, $comment, $caseType = "self", $is_success = false, $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $clientList = [], $campaignList = [], $campaign = "selectCampaign", $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
-            $date, $cplCheck = false, $displayComment = false, $submission = [], $checkboxDQ, $lawfirm = "selectLawfirm", $bam, $bbb, $client = "selectClient", $bms, $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "", $resultsVerifier = [], $showSearchVerifier = false ;
+            $date, $cplCheck = false, $displayComment = false, $subject = "Mass Tort", $submission = [], $checkboxDQ, $lawfirm = "selectLawfirm", $bam, $bbb, $client = "selectClient", $bms, $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "", $resultsVerifier = [], $showSearchVerifier = false ;
 
     public function render()
     {
@@ -70,6 +70,10 @@ class SubmissionTracker extends Component
         else{
             $this->displayComment = false;
         }
+    }
+
+    public function submitDTV(){
+
     }
 
     public function submit(){
@@ -593,12 +597,22 @@ class SubmissionTracker extends Component
                 $this->lawfirm = "selectLawfirm";
             }
             else{
-                $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
-                $this->campaignList = Note::select('campaign')
-                    ->distinct('campaign')
-                    ->get();
-                $this->client = "selectClient";
-                $this->lawfirm = "selectLawfirm";
+                if ($this->campaign == "Direct TV"){
+                    $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+                    $this->campaignList = Note::select('campaign')
+                        ->distinct('campaign')
+                        ->get();
+                    $this->client = "Freddy";
+                    $this->lawfirm = "selectLawfirm";
+                }
+                else{
+                    $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+                    $this->campaignList = Note::select('campaign')
+                        ->distinct('campaign')
+                        ->get();
+                    $this->client = "selectClient";
+                    $this->lawfirm = "selectLawfirm";
+                }
             }
             $this->bbb = null;
             $this->bms = [];
