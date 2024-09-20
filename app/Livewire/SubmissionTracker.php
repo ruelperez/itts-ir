@@ -31,7 +31,7 @@ class SubmissionTracker extends Component
 {
 
     public $registrationSwitch, $hostingTrans, $gm = 0, $DQ, $jn, $toChecked = false, $comment, $caseType = "self", $is_success = false, $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $clientList = [], $campaignList = [], $campaign = "selectCampaign", $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
-            $date, $cplCheck = false, $displayComment = false, $orderNumber, $subject = "Direct TV", $desciption, $service, $package, $dateSales, $submission = [], $checkboxDQ, $lawfirm = "selectLawfirm", $bam, $bbb, $client = "selectClient", $bms, $dtvRemarks, $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "", $resultsVerifier = [], $showSearchVerifier = false ;
+            $date, $cplCheck = false, $displayComment = false, $orderNumber, $desciption, $service, $package, $dateSales, $submission = [], $checkboxDQ, $lawfirm = "selectLawfirm", $bam, $bbb, $client = "selectClient", $bms, $dtvRemarks, $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "", $resultsVerifier = [], $showSearchVerifier = false ;
 
     public function render()
     {
@@ -71,40 +71,6 @@ class SubmissionTracker extends Component
         }
         else{
             $this->displayComment = false;
-        }
-    }
-
-    public function submitDTV(){
-        $this->validate([
-            'phoneNumber' => ['required', 'regex:/^[0-9]+$/'],
-            'altPhoneNumber' => ['required', 'regex:/^[0-9]+$/'],
-            'orderNumber' => ['required', 'regex:/^[a-zA-Z0-9]+$/'],
-        ]);
-        try {
-            DtvTracker::create([
-                'name' => $this->claimant,
-                'phone_num' => $this->phoneNumber,
-                'alt_num' => $this->altPhoneNumber,
-                'email' => $this->email,
-                'address' => $this->address,
-                'service' => $this->service,
-                'package' => $this->package,
-                'disposition' => $this->dtvRemarks,
-                'agent' => $this->agent,
-                'coach' => $this->coach,
-                'description' => $this->desciption,
-                'orderNumber' => $this->orderNumber,
-                'date' => $this->date,
-            ]);
-            $this->clearInput();
-            $this->displayComment = false;
-            $this->bbb = null;
-            $this->bam = null;
-            $this->is_success = true;
-            $this->dispatch('subSubmitted');
-        }catch (\Exception $e){
-            $this->is_success = false;
-            $this->dispatch('subSubmitted');
         }
     }
 
@@ -244,6 +210,7 @@ class SubmissionTracker extends Component
         $this->dtvRemarks = "";
         $this->desciption = "";
         $this->orderNumber = "";
+        $this->date = "";
     }
     public function clear(){
         $this->clearInput();
@@ -563,7 +530,7 @@ class SubmissionTracker extends Component
     }
 
     public function updated($field){
-        if ($field == "Subject"){
+        if ($field == "subject"){
             $this->clearInput();
             $this->displayComment = false;
             $this->bbb = null;

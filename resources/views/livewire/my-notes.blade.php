@@ -15,7 +15,7 @@
                 <div style="margin-left: 3%; margin-top: 1%; margin-bottom: 3%;">
                     <i class="fa-solid fa-circle-plus" style="font-size: 30px;cursor: pointer" data-bs-toggle="modal" data-bs-target="#addForm"></i>
                 </div>
-                <a style="margin-left: 3%; " href="/itts/24/submission-tracker">Submission Tracker</a>
+                <a style="margin-left: 3%; " href="/itts/24/mass-tort-form">Submission Tracker</a>
                 @foreach($dataLink as $daty)
                     <div style="margin-left: 3%;margin-top: 2%;" onmouseover="hoverLink({{$daty->id}})" onmouseout="hoverOutLink({{$daty->id}})">
                         {{ucfirst($daty->title)}} <br> <a href="{{$daty->textLink}}" target="_blank">{{$daty->textLink}}</a>

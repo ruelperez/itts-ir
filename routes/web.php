@@ -39,11 +39,12 @@ Route::get('/itts/20/deployed-item', \App\Livewire\DeployedByname::class)->middl
 Route::get('/itts/21/deployed-item-record/{userID}', \App\Livewire\DeployedItemRecord::class)->middleware('auth');
 Route::get('/itts/22/device-clearance/{userID}', [\App\Http\Controllers\ClearanceController::class, 'pdf'])->middleware('auth');
 Route::get('/itts/23/mass-tort-tracker', \App\Livewire\DupeChecker::class)->middleware('auth');
-Route::get('/itts/24/submission-tracker', \App\Livewire\SubmissionTracker::class)->middleware('auth');
+Route::get('/itts/24/mass-tort-form', \App\Livewire\SubmissionTracker::class)->middleware('auth');
 Route::get('/itts/25/mass-tort-tracker/edit/{id}', \App\Livewire\DupecheckerEdit::class)->middleware('auth');
 Route::get('/itts/26/{name}', \App\Livewire\ProductionLead::class)->middleware('auth');
 Route::get('/itts/27/dtv-tracker', \App\Livewire\DtvTracker::class)->middleware('auth');
 Route::get('/itts/28/dtv-tracker/edit/{id}', \App\Livewire\DtvEdit::class)->middleware('auth');
+Route::get('/itts/24/dtv-form', \App\Livewire\DtvForm::class)->middleware('auth');
 Route::middleware('restrict.ip')->group(function () {
     Route::get('/', function (){
         return redirect('/itts/5/dashboard');
