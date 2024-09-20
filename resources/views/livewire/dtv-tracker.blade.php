@@ -51,8 +51,8 @@
                             <th scope="col" style="width: 9%;">Customer's Name</th>
                             <th scope="col" style="width: 9%;">Phone number</th>
                             <th scope="col" style="width: 9%;">Alt. Phone number</th>
-                            <th scope="col" style="width: 9%;">DOB</th>
                             <th scope="col" style="width: 8%;">Email</th>
+                            <th scope="col" style="width: 8%;">Order number</th>
                             <th scope="col" style="width: 9%;">Service Addr.</th>
                             <th scope="col" style="width: 9%;">Service</th>
                             <th scope="col" style="width: 9%;">Package</th>
@@ -78,10 +78,10 @@
                                     {{$data->alt_num}}
                                 </td>
                                 <td>
-                                    {{$data->dob}}
+                                    {{$data->email}}
                                 </td>
                                 <td>
-                                    {{$data->email}}
+                                    {{$data->orderNumber}}
                                 </td>
                                 <td>
                                     {{ucfirst($data->address)}}

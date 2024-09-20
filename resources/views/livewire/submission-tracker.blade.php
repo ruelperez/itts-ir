@@ -518,7 +518,7 @@
                                 </div>
                                 <div class="col-xl-4 col-lg-4 col-md-12 mb-md-2 mb-sm-1">
                                     <div>
-                                        <label class="form-label">Remarks*</label>
+                                        <label class="form-label">General Inquiry*</label>
                                     </div>
                                     <div>
                                         <select class="form-select" aria-label="Default select example" wire:model.live="dtvRemarks" x-model="selectedOption" required>
@@ -583,9 +583,9 @@
                                     @error('coach') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="col-xl-4 col-lg-4 col-md-12 mb-md-4 mb-sm-4">
-                                    <label class="form-label">Date of Birth*</label>
-                                    <input type="text" id="datepicker" class="form-control" wire:model="dob" required>
-                                    @error('dob') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                                    <label class="form-label">Order ID*</label>
+                                    <input type="text" class="form-control" wire:model="orderNumber" placeholder="Enter &quot;0&quot; if not applicable" required>
+                                    @error('orderNumber') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="mt-lg-3 mt-md-3 row">
