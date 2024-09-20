@@ -78,7 +78,7 @@ class SubmissionTracker extends Component
         $this->validate([
             'phoneNumber' => ['required', 'regex:/^[0-9]+$/'],
             'altPhoneNumber' => ['required', 'regex:/^[0-9]+$/'],
-            'orderNumber' => ['required', 'regex:/^[0-9]+$/'],
+            'orderNumber' => ['required', 'regex:/^[a-zA-Z0-9]+$/'],
         ]);
         try {
             DtvTracker::create([
