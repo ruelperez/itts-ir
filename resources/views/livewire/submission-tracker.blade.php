@@ -584,7 +584,7 @@
                                 </div>
                                 <div class="col-xl-4 col-lg-4 col-md-12 mb-md-4 mb-sm-4">
                                     <label class="form-label">Date of Birth*</label>
-                                    <input type="text" class="form-control" wire:model="dob" required>
+                                    <input type="text" id="datepicker" class="form-control" wire:model="dob" required>
                                     @error('dob') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
                             </div>

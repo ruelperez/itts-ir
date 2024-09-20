@@ -47,6 +47,7 @@
                     <table class="table table-striped" style="width: 100%;">
                         <thead>
                         <tr>
+                            <th scope="col" style="width: 9%;">Date</th>
                             <th scope="col" style="width: 9%;">Customer's Name</th>
                             <th scope="col" style="width: 9%;">Phone number</th>
                             <th scope="col" style="width: 9%;">Alt. Phone number</th>
@@ -64,6 +65,9 @@
                         <tbody>
                         @foreach($submissionData as $data)
                             <tr onmouseover="hoverDupe({{$data->id}})" onmouseout="hoverOutDupe({{$data->id}})">
+                                <td>
+                                    {{$data->updated_at->format('m/d/Y')}}
+                                </td>
                                 <td>
                                     {{ucwords($data->name)}}
                                 </td>
