@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('dtv_trackers', function (Blueprint $table) {
-            //
+            $table->string('date')->nullable();
         });
     }
 
