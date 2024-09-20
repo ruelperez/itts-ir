@@ -518,11 +518,12 @@
                                 </div>
                                 <div class="col-xl-4 col-lg-4 col-md-12 mb-md-2 mb-sm-1">
                                     <div>
-                                        <label class="form-label">General Inquiry*</label>
+                                        <label class="form-label">Disposition*</label>
                                     </div>
                                     <div>
                                         <select class="form-select" aria-label="Default select example" wire:model.live="dtvRemarks" x-model="selectedOption" required>
-                                            <option value="">Select Remarks</option>
+                                            <option value="">Select Disposition</option>
+                                            <option value="General Inquiry">General Inquiry</option>
                                             <option value="Sale">Sale</option>
                                             <option value="Callback">Callback</option>
                                             <option value="Not Serviceable">Not Serviceable</option>
