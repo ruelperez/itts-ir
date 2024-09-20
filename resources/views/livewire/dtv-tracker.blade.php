@@ -99,7 +99,7 @@
                                     {{ucwords($data->coach)}}
                                 </td>
                                 <td>
-                                    {{ucfirst($data->disposition)}} - {{ucfirst($data->description)}}
+                                    @if($data->disposition == "Sale") <b>{{ucfirst($data->disposition)}} - {{ucfirst($data->description)}}</b> @else {{ucfirst($data->disposition)}} - {{ucfirst($data->description)}} @endif
                                 </td>
                                 <td>
                                     {{ucfirst($data->result)}}
