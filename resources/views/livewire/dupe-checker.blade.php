@@ -10,7 +10,7 @@
         <div style="width: 81%; margin-left: 19%;">
             <div class="container">
                 <div>
-                    <h6 style="margin-left: 2%; margin-top: 3%;">Dupe Checker</h6>
+                    <h6 style="margin-left: 2%; margin-top: 3%;">Mass Tort Tracker</h6>
                 </div>
                 <hr>
                 <div class="row">

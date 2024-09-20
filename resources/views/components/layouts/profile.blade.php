@@ -1,3 +1,4 @@
+@include('modal.click-lead')
 <div style="width: 19%; background-color: #0077b6;  height: 100%;" class="position-fixed start-0">
     <div style="position: relative;" wire:ignore>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#show_photo" id="show_photo" hidden>
@@ -29,8 +30,8 @@
                     <i class="fa-solid fa-store" style="margin-right: 7px;"></i>Inventory
                 </div>
             @if($position == "Super Admin")
-                    <div onclick="location.href = '/itts/23/dupe-checker';" id="dupeID" style="margin-top: 5%; color: white; background-color: #0d1321" >
-                        <i class="fa-solid fa-check-to-slot" style="margin-right: 7px;"></i>Dupe checker
+                    <div style="margin-top: 5%; color: white; background-color: #0d1321" data-bs-toggle="modal" data-bs-target="#lead">
+                        <i class="fa-solid fa-check-to-slot" style="margin-right: 7px;"></i>Lead Tracker
                     </div>
             @endif
                 <div wire:click="clickSettings" data-bs-toggle="modal" data-bs-target="#clickSettings" id="settings" style="margin-top: 5%; color: white; background-color: #0d1321">

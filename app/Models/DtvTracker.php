@@ -18,6 +18,9 @@ class DtvTracker extends Model
         'disposition',
         'agent',
         'coach',
+        'result',
+        'description',
+        'dob'
     ];
 
     use HasFactory;

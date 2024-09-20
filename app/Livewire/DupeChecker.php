@@ -573,7 +573,7 @@ class DupeChecker extends Component
             $gn = $jk->phoneNumber;
             $jk->delete();
             \App\Models\Logs::create([
-                'action' => "Delete phone number ".$gn." from dupe checker",
+                'action' => "Delete phone number ".$gn." from Mass tort tracker",
                 'user_id' => $this->user_id,
                 'photo' => $this->photo,
                 'fullname' => $this->fullname,

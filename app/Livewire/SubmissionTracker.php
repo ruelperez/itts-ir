@@ -8,6 +8,7 @@ use App\Models\Comment;
 use App\Models\CommentHeart;
 use App\Models\Dtr;
 use App\Models\DtrContent;
+use App\Models\DtvTracker;
 use App\Models\Employee;
 use App\Models\IsRegistration;
 use App\Models\Note;
@@ -16,6 +17,7 @@ use App\Models\SuperadminShow;
 use App\Models\TimeSetting;
 use App\Models\User;
 use App\Models\UserPassword;
+use Illuminate\Queue\Failed\DynamoDbFailedJobProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -29,7 +31,7 @@ class SubmissionTracker extends Component
 {
 
     public $registrationSwitch, $hostingTrans, $gm = 0, $DQ, $jn, $toChecked = false, $comment, $caseType = "self", $is_success = false, $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $clientList = [], $campaignList = [], $campaign = "selectCampaign", $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
-            $date, $cplCheck = false, $displayComment = false, $subject = "Mass Tort", $submission = [], $checkboxDQ, $lawfirm = "selectLawfirm", $bam, $bbb, $client = "selectClient", $bms, $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "", $resultsVerifier = [], $showSearchVerifier = false ;
+            $date, $cplCheck = false, $displayComment = false, $subject = "Direct TV", $desciption, $service, $package, $dateSales, $submission = [], $checkboxDQ, $lawfirm = "selectLawfirm", $bam, $bbb, $client = "selectClient", $bms, $dtvRemarks, $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "", $resultsVerifier = [], $showSearchVerifier = false ;
 
     public function render()
     {
@@ -73,7 +75,35 @@ class SubmissionTracker extends Component
     }
 
     public function submitDTV(){
-
+        $this->validate([
+            'phoneNumber' => 'required|numeric',
+            'altPhoneNumber' => 'required|numeric',
+        ]);
+        try {
+            DtvTracker::create([
+                'name' => $this->claimant,
+                'phone_num' => $this->phoneNumber,
+                'alt_num' => $this->altPhoneNumber,
+                'email' => $this->email,
+                'address' => $this->address,
+                'service' => $this->service,
+                'package' => $this->package,
+                'disposition' => $this->dtvRemarks,
+                'agent' => $this->agent,
+                'coach' => $this->coach,
+                'description' => $this->desciption,
+                'dob' => $this->dob,
+            ]);
+            $this->clearInput();
+            $this->displayComment = false;
+            $this->bbb = null;
+            $this->bam = null;
+            $this->is_success = true;
+            $this->dispatch('subSubmitted');
+        }catch (\Exception $e){
+            $this->is_success = false;
+            $this->dispatch('subSubmitted');
+        }
     }
 
     public function submit(){
@@ -207,6 +237,10 @@ class SubmissionTracker extends Component
         $this->checkboxTO = [];
         $this->turnover = "";
         $this->lawfirm = "";
+        $this->service = "";
+        $this->package = "";
+        $this->dtvRemarks = "";
+        $this->desciption = "";
     }
     public function clear(){
         $this->clearInput();
@@ -526,6 +560,15 @@ class SubmissionTracker extends Component
     }
 
     public function updated($field){
+        if ($field == "Subject"){
+            $this->clearInput();
+            $this->displayComment = false;
+            $this->bbb = null;
+            $this->bam = null;
+        }
+        if ($field == "dtvRemarks"){
+            $this->desciption = "";
+        }
         if ($field == "verifier"){
             if ($this->verifier != ""){
                 $this->resultsVerifier = Employee::where('fname','LIKE','%'. $this->verifier. '%')

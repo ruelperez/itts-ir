@@ -1,0 +1,127 @@
+<div>
+    @include('components.layouts.profile')
+    @include('components.layouts.navigation')
+    @include('modal.click-settings')
+    @include('modal.news-update.show-photo')
+    @include('modal.dupe-checker.form')
+    @include('modal.dupe-checker.saveOrNot')
+{{--    @include('modal.dupe-checker.viewDetail')--}}
+    <div style="display: flex; width: 100%; margin-top: 105px;">
+        <div style="width: 81%; margin-left: 19%;">
+            <div class="container">
+                <div>
+                    <h6 style="margin-left: 2%; margin-top: 3%;">Direct TV Tracker</h6>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-6 ps-5 d-flex ms-2 mt-3">
+                        <div class="w-50">
+                            <input class="form-control" type="search" placeholder="Search" aria-label="Search" wire:model.live="search">
+                        </div>
+                        <div class="ms-5 pt-2">
+                            @if(count($checkBox) == 1)
+{{--                                <i class="fa-solid fa-eye" style="cursor: pointer" title="View details" wire:loading.attr="disabled" wire:click="viewDetail" data-bs-toggle="modal" data-bs-target="#viewDetail"></i>--}}
+                                <i class="fa-solid fa-pen-to-square ms-3" style="cursor: pointer" title="Edit" onclick="location.href = '/itts/28/dtv-tracker/edit/{{$checkBox[0]}}';" id="dupeEditID" target="_blank"></i>
+                                <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer" title="Delete" wire:click="delete" wire:confirm="Are you sure you want to delete?"></i>
+                            @endif
+                            @if(count($checkBox) > 1)
+                                <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer;" title="Delete" wire:click="delete" wire:confirm="Are you sure you want to delete?"></i>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-3">
+
+                    </div>
+                    @if(count($checkBox) > 0)
+                        <div class="col-2 pt-3 ms-auto">
+                            <button type="button" class="btn btn-primary" wire:click="clearCheck"><i class="fa-solid fa-broom me-2"></i>Clear checks</button>
+                        </div>
+                    @endif
+                </div>
+                <div class="text-center">
+                    <div class="spinner-border mt-5" role="status" wire:loading>
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <div style="font-size: 13px; margin-top: 15px;"  class="px-2" wire:loading.remove>
+                    <table class="table table-striped" style="width: 100%;">
+                        <thead>
+                        <tr>
+                            <th scope="col" style="width: 9%;">Customer's Name</th>
+                            <th scope="col" style="width: 9%;">Phone number</th>
+                            <th scope="col" style="width: 9%;">Alt. Phone number</th>
+                            <th scope="col" style="width: 9%;">DOB</th>
+                            <th scope="col" style="width: 8%;">Email</th>
+                            <th scope="col" style="width: 9%;">Service Addr.</th>
+                            <th scope="col" style="width: 9%;">Service</th>
+                            <th scope="col" style="width: 9%;">Package</th>
+                            <th scope="col" style="width: 9%;">Agent</th>
+                            <th scope="col" style="width: 9%;">Coach</th>
+                            <th scope="col" style="width: 15%;">Remarks</th>
+                            <th scope="col" style="width: 15%;">Result</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($submissionData as $data)
+                            <tr onmouseover="hoverDupe({{$data->id}})" onmouseout="hoverOutDupe({{$data->id}})">
+                                <td>
+                                    {{ucwords($data->name)}}
+                                </td>
+                                <td>
+                                    {{$data->phone_num}}
+                                </td>
+                                <td>
+                                    {{$data->alt_num}}
+                                </td>
+                                <td>
+                                    {{$data->dob}}
+                                </td>
+                                <td>
+                                    {{$data->email}}
+                                </td>
+                                <td>
+                                    {{ucfirst($data->address)}}
+                                </td>
+                                <td>
+                                    {{ucfirst($data->service)}}
+                                </td>
+                                <td>
+                                    {{ucfirst($data->package)}}
+                                </td>
+                                <td>
+                                    {{ucwords($data->agent)}}
+                                </td>
+                                <td>
+                                    {{ucwords($data->coach)}}
+                                </td>
+                                <td>
+                                    {{ucfirst($data->disposition)}} - {{ucfirst($data->description)}}
+                                </td>
+                                <td>
+                                    {{ucfirst($data->result)}}
+                                </td>
+                                <td>
+                                    <input class="form-check-input" type="checkbox" wire:model.live="checkBox" value="{{$data->id}}" id="flexCheckDefault{{$data->id}}" style="font-size: 18px; cursor: pointer" wire:loading.attr="disabled">
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                    <div style="margin-top: 1%; margin-bottom: 5%;">
+                        <button class="btn btn-success" wire:click="previousPage" style="width: 10%;">Previous</button>
+                        <button class="btn btn-primary" wire:click="nextPage" style="width: 10%;">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @include('partial.header')
+    @script
+    <script>
+        $wire.on('dupeSubmitted', () => {
+            $('#formClose').click();
+            $('#btn123456').click();
+        });
+    </script>
+    @endscript
+</div>
