@@ -94,6 +94,7 @@ class SubmissionTracker extends Component
                 'coach' => $this->coach,
                 'description' => $this->desciption,
                 'orderNumber' => $this->orderNumber,
+                'date' => $this->date,
             ]);
             $this->clearInput();
             $this->displayComment = false;

@@ -454,17 +454,21 @@
                         <button id="btn123" data-bs-toggle="modal" data-bs-target="#loading" style="display: none"></button>
                     @elseif($subject == "Direct TV")
                         <form wire:submit.prevent="submitDTV">
-                            <div class="row">
-                                <div class="col-xl-4 col-lg-4 col-md-12 mb-md-4 mb-sm-4">
+                            <div class="mt-lg-2 row">
+                                <div class="col-xl-3 col-lg-3 col-md-12 mb-md-4 mb-sm-4">
+                                    <label class="form-label">Date (U.S Time)*</label>
+                                    <input type="text" id="datepicker" class="form-control" wire:model="date" required>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-12 mb-md-4 mb-sm-4">
                                     <label class="form-label">Name of Customer*</label>
                                     <input type="text" class="form-control" wire:model="claimant" required>
                                 </div>
-                                <div class="col-xl-4 col-lg-4 col-md-12 mb-md-4 mb-sm-4">
+                                <div class="col-xl-3 col-lg-3 col-md-12 mb-md-4 mb-sm-4">
                                     <label class="form-label">Phone Number*</label>
                                     <input type="text" class="form-control" wire:model="phoneNumber" required>
                                     @error('phoneNumber') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
-                                <div class="col-xl-4 col-lg-4 col-md-12 mb-md-4 mb-sm-4">
+                                <div class="col-xl-3 col-lg-3 col-md-12 mb-md-4 mb-sm-4">
                                     <label class="form-label">Alt. Phone Number*</label>
                                     <input type="text" class="form-control" wire:model="altPhoneNumber" placeholder="Enter &quot;0&quot; if not applicable" required>
                                     @error('altPhoneNumber') <span style="color: #8B0000">{{ $message }}</span> @enderror

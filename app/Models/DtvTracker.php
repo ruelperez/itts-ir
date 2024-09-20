@@ -20,7 +20,8 @@ class DtvTracker extends Model
         'coach',
         'result',
         'description',
-        'orderNumber'
+        'orderNumber',
+        'date',
     ];
 
     use HasFactory;
