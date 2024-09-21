@@ -73,5 +73,4 @@
             </div>
         </div>
     </div>
-    @include('partial.header')
 </div>

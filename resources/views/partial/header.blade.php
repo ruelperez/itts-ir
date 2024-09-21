@@ -8,8 +8,5 @@
         <div style="width: 50%; text-align: right; padding-right: 3%; padding-top: 25px;">
             <h4 style="color: black; font-size: 18px;">Knowledge Based Tool</h4>
         </div>
-{{--        <div style="width: 50%; text-align: right; padding-right: 3%; padding-top: 25px;">--}}
-{{--            <livewire:clock />--}}
-{{--        </div>--}}
     </div>
 </div>

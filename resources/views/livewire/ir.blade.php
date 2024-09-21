@@ -14,5 +14,4 @@
             @include('components.layouts.navigation')
         </div>
     </div>
-    @include('partial.header')
 </div>

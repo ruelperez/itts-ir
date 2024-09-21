@@ -15,6 +15,7 @@
         <link href="{{ asset('photo/apple-touch-icon.png') }}?v{{ \Illuminate\Support\Str::random() }}" type="image/png">
     </head>
     <body style="background-color: #E6E6FA;">
+    @include('partial.header')
         {{ $slot }}
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
@@ -24,6 +25,7 @@
         <script src="{{asset('js/operation.js')}}"></script>
         <script src="{{ asset('flatpickr/dist/flatpickr.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function(){
                 flatpickr('#datepicker', {
@@ -67,7 +69,7 @@
                 ap.css("background-color", "");
                 ap.css("color", "black");
             }
-
         </script>
+    @stack('js')
     </body>
 </html>

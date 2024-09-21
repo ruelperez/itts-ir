@@ -75,7 +75,6 @@
         </div>
         <button id="btn2" data-bs-toggle="modal" data-bs-target="#hasAct" style="display: none"></button>
     </div>
-    @include('partial.header')
     @script
     <script>
         $wire.on('hasActive', () => {

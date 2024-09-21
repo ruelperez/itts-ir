@@ -304,14 +304,36 @@
                 </div>
             </div>
         </div>
-        <button id="btn12345" data-bs-toggle="modal" data-bs-target="#loading" style="display: none"></button>
+        <button id="btn12345" style="display: none"></button>
+        <button id="btn678" style="display: none"></button>
     </div>
-    @include('partial.header')
     @script
     <script>
-        $wire.on('dupeEditSubmitted', () => {
+        $wire.on('editGood', () => {
             $('#btn12345').click();
+        });
+        $wire.on('editBad', () => {
+            $('#btn678').click();
         });
     </script>
     @endscript
+    @push('js')
+        <script>
+            document.getElementById('btn12345').addEventListener('click', function() {
+                Swal.fire({
+                    title: 'Successfully Updated!',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            });
+            document.getElementById('btn678').addEventListener('click', function() {
+                Swal.fire({
+                    title: 'Failed to Updated!',
+                    text: 'This is a SweetAlert popup.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            });
+        </script>
+    @endpush
 </div>

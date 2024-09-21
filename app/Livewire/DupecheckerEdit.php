@@ -279,10 +279,10 @@ class DupecheckerEdit extends Component
                     'fullname' => $this->fullname,
                 ]);
                 $this->is_success = true;
-                $this->dispatch('dupeEditSubmitted');
+                $this->dispatch('editGood');
             }catch (\Exception $e){
                 $this->is_success = false;
-                $this->dispatch('dupeEditSubmitted');
+                $this->dispatch('editBad');
             }
 
         }

@@ -196,7 +196,6 @@
             </div>
         </div>
     </div>
-    @include('partial.header')
     @script
     <script>
         $wire.on('subSubmitted', () => {
