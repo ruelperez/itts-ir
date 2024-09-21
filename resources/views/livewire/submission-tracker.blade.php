@@ -24,7 +24,7 @@
                     </div>
                     <div class="mb-2"><i>Put "n/a" if not applicable</i></div>
                     <div class="row mb-4 mt-4">
-                        <div class="col-lg-4 col-md-4">
+                        <div class="col-lg-3 col-md-3">
                             <button class="btn btn-primary dropdown-toggle w-100" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 MASS TORT
                             </button>
