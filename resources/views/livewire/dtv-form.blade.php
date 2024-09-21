@@ -126,10 +126,10 @@
                                     <textarea class="form-control" rows="2" wire:model="desciption"  style="border: none;" placeholder="Reason:" x-show="selectedOption === 'Declined Offer'" @if($dtvRemarks == "Declined Offer") required @endif></textarea>
                                     <select class="form-select" aria-label="Default select example" wire:model="desciption" x-show="selectedOption === 'Not Qualify'" @if($dtvRemarks == "Not Qualify") required @endif>
                                         <option value="">Select</option>
-                                        <option value="Sale">High Risk</option>
-                                        <option value="Callback">Med Risk</option>
-                                        <option value="Callback">Bank Reject</option>
-                                        <option value="Not Serviceable">Already has the same service</option>
+                                        <option value="High Risk">High Risk</option>
+                                        <option value="Med Risk">Med Risk</option>
+                                        <option value="Bank Reject">Bank Reject</option>
+                                        <option value="Already has the same service">Already has the same service</option>
                                     </select>
                                 </div>
                             </div>
