@@ -129,6 +129,7 @@
                                         <option value="High Risk">High Risk</option>
                                         <option value="Med Risk">Med Risk</option>
                                         <option value="Bank Reject">Bank Reject</option>
+                                        <option value="Reject Payment">Reject Payment</option>
                                         <option value="Already has the same service">Already has the same service</option>
                                     </select>
                                 </div>
