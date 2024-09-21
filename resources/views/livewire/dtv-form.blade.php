@@ -128,6 +128,7 @@
                                         <option value="">Select</option>
                                         <option value="Sale">High Risk</option>
                                         <option value="Callback">Med Risk</option>
+                                        <option value="Callback">Bank Reject</option>
                                         <option value="Not Serviceable">Already has the same service</option>
                                     </select>
                                 </div>
