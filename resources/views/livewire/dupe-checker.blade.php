@@ -21,7 +21,7 @@
                         <div class="ms-5 pt-2">
                             @if(count($checkBox) == 1)
                                 <i class="fa-solid fa-eye" style="cursor: pointer" title="View details" wire:loading.attr="disabled" wire:click="viewDetail" data-bs-toggle="modal" data-bs-target="#viewDetail"></i>
-                                <i class="fa-solid fa-pen-to-square ms-3" style="cursor: pointer" title="Edit" onclick="location.href = '/itts/25/dupe-checker/edit/{{$checkBox[0]}}';" id="dupeEditID" target="_blank"></i>
+                                <i class="fa-solid fa-pen-to-square ms-3" style="cursor: pointer" title="Edit" onclick="location.href = '/itts/25/mass-tort-tracker/edit/{{$checkBox[0]}}';" id="dupeEditID" target="_blank"></i>
                                 <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer" title="Delete" wire:click="delete" wire:confirm="Are you sure you want to delete?"></i>
                             @endif
                             @if(count($checkBox) > 1)
