@@ -43,6 +43,7 @@ class Register extends Component
                 $this->super_admin_show = $datas->on_off;
             }
         }
+
         return view('livewire.register');
     }
 

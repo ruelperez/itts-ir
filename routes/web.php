@@ -49,6 +49,10 @@ Route::middleware('restrict.ip')->group(function () {
     Route::get('/', function (){
         return redirect('/itts/5/dashboard');
     });
-    Route::get('/login', \App\Livewire\Login::class)->name('login')->middleware('guest');
+    Route::get('/login', function (){
+        return view('login');
+    })->name('login');
+    Route::post('/login/auth', [\App\Http\Controllers\LoginController::class, 'auth']);
+//    Route::get('/login', \App\Livewire\Login::class)->name('login')->middleware('guest');
     Route::get('/register', \App\Livewire\Register::class);
 });
