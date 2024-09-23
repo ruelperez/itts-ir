@@ -12,12 +12,13 @@
     {{--        @vite(['resources/css/app.css', 'resources/js/app.js'])--}}
     <link href="{{ asset('photo/favicon.png') }}?v{{ \Illuminate\Support\Str::random() }}" rel="icon" type="image/png">
     <link href="{{ asset('photo/apple-touch-icon.png') }}?v{{ \Illuminate\Support\Str::random() }}" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
     <title>{{ $title ?? 'Page Title' }}</title>
 </head>
 <body style="background-color: #E6E6FA;">
 
-@include('partials.header')
-
+{{--@include('partials.header')--}}
+@include('partials.side-nav')
 <div>
     @yield('content')
 </div>
@@ -32,6 +33,7 @@
 <script src="{{ asset('flatpickr/dist/flatpickr.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function(){
         flatpickr('#datepicker', {
