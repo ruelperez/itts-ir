@@ -45,14 +45,23 @@ Route::get('/itts/26/{name}', \App\Livewire\ProductionLead::class)->middleware('
 Route::get('/itts/27/dtv-tracker', \App\Livewire\DtvTracker::class)->middleware('auth');
 Route::get('/itts/28/dtv-tracker/edit/{id}', \App\Livewire\DtvEdit::class)->middleware('auth');
 Route::get('/itts/24/dtv-form', \App\Livewire\DtvForm::class)->middleware('auth');
+
+Route::middleware('auth')->group(function () {
+    Route::controller(\App\Http\Controllers\PageController::class)->prefix('user')->group(function () {
+        Route::get('{page}', 'pages');
+    });
+});
+
 Route::middleware('restrict.ip')->group(function () {
     Route::get('/', function (){
         return redirect('/itts/5/dashboard');
     });
     Route::get('/login', function (){
-        return view('login');
+        return view('pages.login');
     })->name('login');
     Route::post('/login/auth', [\App\Http\Controllers\LoginController::class, 'auth']);
 //    Route::get('/login', \App\Livewire\Login::class)->name('login')->middleware('guest');
     Route::get('/register', \App\Livewire\Register::class);
 });
+
+

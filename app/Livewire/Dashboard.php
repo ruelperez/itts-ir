@@ -95,8 +95,8 @@ class Dashboard extends Component
             $this->dispatch('remOrUp');
         }
     }
-    public function mount($name){
-        $this->webName = $name;
+    public function mount(){
+//        $this->webName = $name;
         $usrId = auth()->user()->id;
         $sd = \App\Models\Employee::where('user_id',$usrId)->get();
         if (count($sd) < 1){
