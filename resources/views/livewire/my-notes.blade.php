@@ -23,8 +23,6 @@
                         @if($daty->title == "PTO - Leave Form" or $daty->title == "COC")
                             <div style="margin-left: 3%;margin-top: 2%;" onmouseover="hoverLink({{$daty->id}})" onmouseout="hoverOutLink({{$daty->id}})">
                                 {{ucfirst($daty->title)}} <br> <a href="{{$daty->textLink}}" target="_blank">{{$daty->textLink}}</a>
-                                <i class="fa-solid fa-pen-to-square" style="display: none; font-size: 17px; margin-left: 20px; cursor: pointer" id="myLink{{$daty->id}}" data-bs-toggle="modal" data-bs-target="#editForm" wire:click="edit({{$daty->id}})"></i>
-                                <i class="fa-solid fa-trash" style="display: none; color: red; font-size: 17px; margin-left: 10px; cursor: pointer" id="myLinks{{$daty->id}}" wire:click="delete({{$daty->id}})" wire:confirm="Are you sure you want to delete? if yes click (OK)"></i>
                             </div>
                         @endif
                     @endforeach
