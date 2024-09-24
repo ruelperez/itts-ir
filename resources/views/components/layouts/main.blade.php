@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css')}}">
     <link rel="stylesheet" href="{{ asset('css/design.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/side-nav.css')}}">
     <link rel="stylesheet" href="{{ asset('flatpickr/dist/flatpickr.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     {{--        @vite(['resources/css/app.css', 'resources/js/app.js'])--}}
@@ -17,7 +18,9 @@
 </head>
 <body style="background-color: #E6E6FA;">
 
-{{--@include('partials.header')--}}
+@include('partials.header')
+@include('components.layouts.profile')
+@include('components.layouts.navigation')
 @include('partials.side-nav')
 <div>
     @yield('content')

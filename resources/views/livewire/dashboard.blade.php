@@ -1,13 +1,11 @@
 <div>
-    @include('components.layouts.profile')
-    @include('components.layouts.navigation')
     @include('modal.click-settings')
     @include('modal.news-update.show-photo')
     @include('modal.dashboard.anounce')
     @include('modal.dashboard.saveOrNot')
     @include('modal.dashboard.click-data')
     @include('modal.dashboard.removedOrUpdate')
-    <div style="display: flex; width: 100%; margin-top: 105px;">
+    <div style="display: flex; width: 100%;">
         <div style="width: 81%; margin-left: 19%;">
             <div class="container">
                 <div class="row">

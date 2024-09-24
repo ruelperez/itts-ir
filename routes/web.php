@@ -46,24 +46,21 @@ Route::get('/itts/27/dtv-tracker', \App\Livewire\DtvTracker::class)->middleware(
 Route::get('/itts/28/dtv-tracker/edit/{id}', \App\Livewire\DtvEdit::class)->middleware('auth');
 Route::get('/itts/24/dtv-form', \App\Livewire\DtvForm::class)->middleware('auth');
 
-
-Route::middleware('auth')->prefix('user')->group(function () {
-    Route::controller(\App\Http\Controllers\PageController::class)->prefix('pages')->group(function () {
-        Route::get('{page}', 'page');
-    });
+Route::middleware('auth')->group(function () {
+    Route::get('/{page}', [\App\Http\Controllers\PageController::class, 'page']);
 });
-
 
 Route::middleware('restrict.ip')->group(function () {
     Route::get('/', function (){
-        return redirect('/user/pages/dashboard');
+        return redirect('/dashboard');
     });
-    Route::get('/login', function (){
-        return view('pages.login');
+    Route::get('/user/login', function (){
+        return view('user.login');
     })->name('login')->middleware('guest');
     Route::post('/login/auth', [\App\Http\Controllers\LoginController::class, 'auth']);
-//    Route::get('/login', \App\Livewire\Login::class)->name('login')->middleware('guest');
-    Route::get('/register', \App\Livewire\Register::class);
+    Route::get('/user/register', function (){
+        return view('user.register');
+    });
 });
 
 

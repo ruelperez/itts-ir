@@ -21,10 +21,10 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Authentication passed, redirect to intended location
-            return redirect()->intended('/'); // Change to your dashboard route
+            return redirect('/'); // Change to your dashboard route
         }
         else{
-            return redirect('/login')->withErrors(['loginError' => 'Incorrect email or password!']);
+            return redirect('/user/login')->withErrors(['loginError' => 'Incorrect email or password!']);
         }
     }
 }
