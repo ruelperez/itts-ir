@@ -1,5 +1,5 @@
 @include('modal.click-lead')
-<div style="width: 18%; background-color: #0077b6;  height: 100%; margin-top: 105px;" class="position-fixed start-0 border border-dark">
+<div style="width: 220px; background-color: #F5F5F5; height: 100%; margin-top: 75px;" class="position-fixed start-0">
     <div style="position: relative;" wire:ignore>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#show_photo" id="show_photo" hidden>
             Launch demo modal
@@ -54,7 +54,7 @@
 
 
 
-    <div class="navig overflow-auto scrollable-div" wire:ignore style="height: 320px;">
+    <div class="navig overflow-auto scrollable-div" wire:ignore style="height: 320px; color: black">
         @if($webName == "employee")
             @if(count($empData) < 1)
                 <div style="@if($webName == "dashboard") background-color: #023e8a; @endif  padding-left: 10%; " data-bs-toggle="modal" data-bs-target="#disclick">

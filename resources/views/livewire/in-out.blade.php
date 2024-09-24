@@ -1,6 +1,4 @@
 <div>
-    @include('components.layouts.profile')
-    @include('components.layouts.navigation')
     @include('modal.click-settings')
     @include('modal.news-update.show-photo')
     @include('modal.dtr.resetDtr')

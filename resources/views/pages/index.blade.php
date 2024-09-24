@@ -1,7 +1,7 @@
 @extends('components.layouts.main')
 
 @section('content')
-    @livewire($page)
+    @livewire($page,['name' => $page])
 @endsection
 @push('js')
     <script>

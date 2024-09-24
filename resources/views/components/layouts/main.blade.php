@@ -19,10 +19,9 @@
 <body style="background-color: #E6E6FA;">
 
 @include('partials.header')
-@include('components.layouts.profile')
-@include('components.layouts.navigation')
+{{--@include('components.layouts.navigation')--}}
 @include('partials.side-nav')
-<div>
+<div style="margin-left: 270px; margin-top: 95px;">
     @yield('content')
 </div>
 
