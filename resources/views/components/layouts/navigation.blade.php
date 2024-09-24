@@ -13,11 +13,9 @@
                 <div style="@if($webName == "news-feed") background-color: #023e8a; @endif  padding-left: 10%;" data-bs-toggle="modal" data-bs-target="#disclick">
                     MASS TORT
                 </div>
-                @if($position != "Agent")
-                    <div style="@if($webName == "my-notes") background-color: #023e8a; @endif  padding-left: 10%;" data-bs-toggle="modal" data-bs-target="#disclick">
-                        FORM LINK
-                    </div>
-                @endif
+                <div style="@if($webName == "my-notes") background-color: #023e8a; @endif  padding-left: 10%;" data-bs-toggle="modal" data-bs-target="#disclick">
+                    FORM LINK
+                </div>
                 <div style="@if($webName == "notes") background-color: #023e8a; @endif  padding-left: 10%;" data-bs-toggle="modal" data-bs-target="#disclick">
                     MY NOTES
                 </div>
@@ -51,11 +49,9 @@
                 <div onclick="location.href = '/itts/4/news-feed';" style="@if($webName == "news-feed") background-color: #023e8a; @endif  padding-left: 10%;" >
                     MASS TORT
                 </div>
-                @if($position != "Agent")
-                    <div onclick="location.href = '/itts/6/my-notes';" style="@if($webName == "my-notes") background-color: #023e8a; @endif  padding-left: 10%;" >
-                        FORM LINK
-                    </div>
-                @endif
+                <div onclick="location.href = '/itts/6/my-notes';" style="@if($webName == "my-notes") background-color: #023e8a; @endif  padding-left: 10%;" >
+                    FORM LINK
+                </div>
                 <div onclick="location.href = '/itts/14/notes';" style="@if($webName == "notes") background-color: #023e8a; @endif  padding-left: 10%;" >
                     MY NOTES
                 </div>
@@ -91,11 +87,9 @@
             <div onclick="location.href = '/itts/4/news-feed';" style="@if($webName == "news-feed") background-color: #023e8a; @endif  padding-left: 10%;" >
                 MASS TORT
             </div>
-            @if($position != "Agent")
-                <div onclick="location.href = '/itts/6/form-link';" style="@if($webName == "form-link") background-color: #023e8a; @endif  padding-left: 10%;" >
-                    FORM LINK
-                </div>
-            @endif
+            <div onclick="location.href = '/itts/6/form-link';" style="@if($webName == "form-link") background-color: #023e8a; @endif  padding-left: 10%;" >
+                FORM LINK
+            </div>
             <div onclick="location.href = '/itts/14/notes';" style="@if($webName == "notes") background-color: #023e8a; @endif  padding-left: 10%;" >
                 MY NOTES
             </div>
