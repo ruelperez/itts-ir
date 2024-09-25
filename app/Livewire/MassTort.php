@@ -27,7 +27,7 @@ use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class NewsUpdate extends Component
+class MassTort extends Component
 {
     use WithFileUploads;
 
@@ -79,7 +79,7 @@ class NewsUpdate extends Component
         $this->campaignList = Note::select('campaign')
             ->where('client', $this->client_name)
             ->distinct()->get();
-        return view('livewire.news-update')->title('Campaign');
+        return view('livewire.mass-tort')->title('Campaign');
     }
 
     public function submit_campaign(){

@@ -17,16 +17,14 @@
     <title>{{ $title ?? 'Page Title' }}</title>
 </head>
 <body>
-<div class="wrapper">
+<div class="wrapper" x-data="{ marginLeftVar: 1 }">
     @include('partials.side-nav')
     <!-- Main Component -->
-    <div class="main">
+    <div class="main" :style="{ marginLeft: marginLeftVar === 1 ? '265px' : '0px' }">
         @include('partials.header')
         <main class="content px-3 py-2">
-            <div class="container-fluid">
-                <div class="mb-3 mt-3">
-                    @yield('content')
-                </div>
+            <div class="container-fluid border border-dark">
+                @yield('content')
             </div>
         </main>
     </div>
