@@ -22,8 +22,8 @@
     <!-- Main Component -->
     <div class="main" :style="{ marginLeft: marginLeftVar === 1 ? '265px' : '0px' }">
         @include('partials.header')
-        <main class="content px-3 py-2">
-            <div class="container-fluid border border-dark">
+        <main class="content px-3 py-2" style="margin-top: 80px;">
+            <div class="container-fluid">
                 @yield('content')
             </div>
         </main>
