@@ -10,7 +10,7 @@
     @include('modal.news-update.edit_comment')
     @include('modal.news-update.add_remove_campaign')
         <div style="z-index: 1000; background-color: #41464b; padding-left: 1%; padding-right: 3%; padding-bottom: 1%;">
-            <div class="row mt-4">
+            <div class="row">
                 <div class="col-2">
                     <h6 style="color: white">( {{strtoupper($client_name)}}  @if($campaign_name != "all") <i class="fa-solid fa-arrow-right" style="color: #FFFF00"></i> {{strtoupper($campaign_name)}} @endif)</h6>
                 </div>
