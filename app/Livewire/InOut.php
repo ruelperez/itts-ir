@@ -22,7 +22,7 @@ use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class EmployeeDtr extends Component
+class InOut extends Component
 {
     use WithFileUploads;
 
@@ -46,7 +46,7 @@ class EmployeeDtr extends Component
         $this->dtrData = Dtr::all();
         $this->dtrAll = DtrPermanent::all();
         $this->timeSched = TimeSetting::latest()->first();
-        return view('livewire.employee-dtr')->title('Dtr');
+        return view('livewire.in-out')->title('Dtr');
     }
 
     public function clickTimeEdit1(){
