@@ -4,21 +4,21 @@
     @include('modal.dtr.resetDtr')
     @include('modal.dtr.task')
     @include('modal.dtr.setTime')
-    <div class="border border-dark">
-        <h6 style="margin-left: 2%; margin-top: 3%;">DTR</h6>
+    <div>
+        <h5>DTR</h5>
         @if($position == "Super Admin")
             <div class="row">
-{{--                <div class="col-lg-">--}}
+                <div class="col-lg-3 col-xl-6">
 
-{{--                </div>--}}
-                <div class="col-sm-4">
-                    <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onclick="location.href = '/itts/9/dtr-name';"><i class="fa-solid fa-arrows-to-circle" style="margin-right: 8px; font-size: 20px;"></i>View all record</button>
                 </div>
-                <div class="col-md-4" data-bs-toggle="modal" data-bs-target="#setTime">
-                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"><i class="fa-regular fa-clock" style="margin-right: 8px; font-size: 20px;"></i>Set time schedule</button>
+                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-2">
+                    <button type="button" class="btn btn-dark w-100" onclick="location.href = '/itts/9/dtr-name';"><i class="fa-solid fa-arrows-to-circle" style="margin-right: 8px;"></i>Record</button>
                 </div>
-                <div class="col-md-4">
-                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" @if(count($dtrAll) != 0) style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#resetDtr" @endif >@if(count($dtrAll) == 0) <i class="fa-solid fa-check" style="color: green;font-size: 20px; margin-left: 3%;"></i>  @else <i class="fa-solid fa-rotate" style="margin-right: 5%; font-size: 20px;" type="button"></i> @endif Reset DTR</button>
+                <div class="col-sm-12 col-md-4 mt-1 mt-md-0 col-lg-3 col-xl-2" data-bs-toggle="modal" data-bs-target="#setTime">
+                    <button type="button" class="btn btn-primary w-100"><i class="fa-regular fa-clock" style="margin-right: 8px; font-size: 20px;"></i>Schedule</button>
+                </div>
+                <div class="col-sm-12 col-md-4 mt-1 mt-md-0 col-lg-3 col-xl-2">
+                    <button type="button" class="btn btn-secondary w-100" @if(count($dtrAll) != 0) style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#resetDtr" @endif >@if(count($dtrAll) == 0) <i class="fa-solid fa-check" style="color: green;font-size: 20px;"></i>  @else <i class="fa-solid fa-rotate" style="font-size: 20px;" type="button"></i> @endif Reset DTR</button>
                 </div>
             </div>
             <hr>

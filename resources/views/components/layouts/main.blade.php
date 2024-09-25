@@ -6,23 +6,30 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('css/design.css')}}">
-    <link rel="stylesheet" href="{{ asset('css/side-nav.css')}}">
+{{--    <link rel="stylesheet" href="{{ asset('css/design.css')}}">--}}
+{{--    <link rel="stylesheet" href="{{ asset('css/side-nav.css')}}">--}}
+    <link rel="stylesheet" href="{{ asset('css/sidebar.css')}}">
     <link rel="stylesheet" href="{{ asset('flatpickr/dist/flatpickr.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     {{--        @vite(['resources/css/app.css', 'resources/js/app.js'])--}}
     <link href="{{ asset('photo/favicon.png') }}?v{{ \Illuminate\Support\Str::random() }}" rel="icon" type="image/png">
     <link href="{{ asset('photo/apple-touch-icon.png') }}?v{{ \Illuminate\Support\Str::random() }}" type="image/png">
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
     <title>{{ $title ?? 'Page Title' }}</title>
 </head>
-<body style="background-color: #E6E6FA;">
-
-@include('partials.header')
-{{--@include('components.layouts.navigation')--}}
-@include('partials.side-nav')
-<div style="margin-left: 270px; margin-top: 95px;">
-    @yield('content')
+<body>
+<div class="wrapper">
+    @include('partials.side-nav')
+    <!-- Main Component -->
+    <div class="main">
+        @include('partials.header')
+        <main class="content px-3 py-2">
+            <div class="container-fluid">
+                <div class="mb-3 mt-3">
+                    @yield('content')
+                </div>
+            </div>
+        </main>
+    </div>
 </div>
 
 
@@ -30,12 +37,13 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 <script defer src="{{asset('css/bootstrap.bundle.min.js')}}"></script>
 <script src="{{ asset('css/bootstrap.min.js') }}"></script>
+<script src="{{ asset('css/sidebar.css') }}"></script>
 <script src="{{asset('js/cdn.js')}}"></script>
 <script src="{{asset('js/operation.js')}}"></script>
 <script src="{{ asset('flatpickr/dist/flatpickr.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+<script src="{{ asset('js/sidebar.js') }}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function(){
         flatpickr('#datepicker', {
