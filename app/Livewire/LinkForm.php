@@ -20,7 +20,7 @@ use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class MyNotes extends Component
+class LinkForm extends Component
 {
     use WithFileUploads;
 
@@ -40,7 +40,7 @@ class MyNotes extends Component
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
         $this->dataLink = FormLink::all();
-        return view('livewire.my-notes')->title('Form link');
+        return view('livewire.link-form')->title('Form link');
     }
 
     public function edit($id){
