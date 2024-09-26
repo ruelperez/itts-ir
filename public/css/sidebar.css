@@ -1,6 +1,16 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
+.dropup .dropdown-menu {
+    top: auto;
+    bottom: 100%;
+    display: none; /* initially hidden */
+}
+
+.dropup.show .dropdown-menu {
+    display: block;
+}
+
 *,
 ::after,
 ::before {

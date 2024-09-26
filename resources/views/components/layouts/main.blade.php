@@ -6,14 +6,15 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css')}}">
-{{--    <link rel="stylesheet" href="{{ asset('css/design.css')}}">--}}
+    <link rel="stylesheet" href="{{ asset('css/design.css')}}">
 {{--    <link rel="stylesheet" href="{{ asset('css/side-nav.css')}}">--}}
     <link rel="stylesheet" href="{{ asset('css/sidebar.css')}}">
     <link rel="stylesheet" href="{{ asset('flatpickr/dist/flatpickr.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-    {{--        @vite(['resources/css/app.css', 'resources/js/app.js'])--}}
+            @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="{{ asset('photo/favicon.png') }}?v{{ \Illuminate\Support\Str::random() }}" rel="icon" type="image/png">
     <link href="{{ asset('photo/apple-touch-icon.png') }}?v{{ \Illuminate\Support\Str::random() }}" type="image/png">
+    @stack('css')
     <title>{{ $title ?? 'Page Title' }}</title>
 </head>
 <body>

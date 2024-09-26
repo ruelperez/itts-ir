@@ -499,13 +499,55 @@
     <!-- Sidebar -->
     <aside id="sidebar" class="position-fixed">
         <div class="h-100">
-            <div class="sidebar-logo">
+            <div class="sidebar-logo mb-3">
                 <div>
                     <img src="{{asset('photo/logo-banner.png')}}" width="150">
                 </div>
             </div>
+{{--            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#show_photo" id="show_photo" hidden>--}}
+{{--                Launch demo modal--}}
+{{--            </button>--}}
+{{--            <div style="text-align: center; margin-top: 5%;width: 100%;">--}}
+{{--                <div style="display: flex;">--}}
+{{--                    @if($position != "Agent")--}}
+{{--                        <i onclick="clickEllipsis()" class="fa-solid fa-ellipsis-vertical" id="ellip" style="color: white; margin-left: 10%;font-size: 23px; cursor: pointer; margin-right: 11%;"></i>--}}
+{{--                    @endif--}}
+{{--                    <div class="profile" style="@if($position == "Agent") margin-left: 22%; @endif">--}}
+{{--                        <img src="{{asset('photos/photos/'.$photo)}}" alt="Profile Picture">--}}
+{{--                        <div style="background-color:#C0C0C0; position: absolute; top: 70%; left: 65%; border-radius: 80%; padding: 1%; width: 20%; cursor: pointer" onclick="chooseFile()">--}}
+{{--                            <i class="fa-solid fa-camera" style="font-size: 17px;"></i>--}}
+{{--                            <input type="file" id="fileInput" accept="image/*" hidden wire:model.live="photo">--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <h6 style="color: white;">@if($employeeData == null or $employeeData == "") @else {{$employeeData}} @endif</h6>--}}
+{{--                <p class="text-white">{{ucwords($fullname)}}<br><small class="user-select-all">ITTS-00{{$user_id}}</small></p>--}}
+{{--            </div>--}}
             <!-- Sidebar Navigation -->
             <ul class="sidebar-nav">
+                <li class="mb-3">
+{{--                    <div class="card border border-0">--}}
+{{--                        <div class="card-body text-center">--}}
+{{--                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"--}}
+{{--                                 class="rounded-circle img-fluid" style="width: 80px;">--}}
+{{--                            <h6 class="my-2">{{ucwords($fullname)}}</h6>--}}
+{{--                            <p class="mb-1 "><small>@if($employeeData == null or $employeeData == "") @else {{$employeeData}} @endif</small></p>--}}
+{{--                            <p><small>ITTS-00{{$user_id}}</small></p>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+                    <div class="d-flex align-items-center ps-3">
+                        <div class="flex-shrink-0">
+                            <img src="{{asset('photos/photos/'.$photo)}}"
+                                 alt="Generic placeholder image" class="img-fluid rounded-circle border border-dark border-3"
+                                 style="width: 70px;">
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <p class="mb-0 me-1">{{ucwords($fullname)}}</p>
+                            <p class="mb-0 me-1 text-muted"><small>@if($employeeData == null or $employeeData == "") @else {{$employeeData}} @endif</small></p>
+                            <p class="mb-0 me-1 text-muted user-select-all"><small>ITTS-00{{$user_id}}</small></p>
+                        </div>
+                    </div>
+                </li>
                 <li class="sidebar-header">
                     Tools & Components
                 </li>
@@ -576,7 +618,18 @@
                     </a>
                 </li>
                 <li class="sidebar-header">
-                    Admin Access
+
+                    <div class="dropup">
+                        <a class="dropdown-toggle" id="dropupLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Admin access
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropupLink">
+                            <a class="dropdown-item" href="#">Option 1</a>
+                            <a class="dropdown-item" href="#">Option 2</a>
+                            <a class="dropdown-item" href="#">Option 3</a>
+                        </div>
+                    </div>
+
                 </li>
                 <li class="sidebar-item">
                     <a href="/employee-dtr"  class="sidebar-link">
