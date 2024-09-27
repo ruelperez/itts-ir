@@ -499,7 +499,7 @@
     <!-- Sidebar -->
     <aside id="sidebar" class="position-fixed">
         <div class="h-100">
-            <div class="sidebar-logo mb-3">
+            <div class="sidebar-logo mb-3 text-center">
                 <div>
                     <img src="{{asset('photo/logo-banner.png')}}" width="150">
                 </div>
@@ -618,43 +618,25 @@
                     </a>
                 </li>
                 <li class="sidebar-header">
-
                     <div class="dropup">
                         <a class="dropdown-toggle" id="dropupLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Admin access
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropupLink">
-                            <a class="dropdown-item" href="#">Option 1</a>
-                            <a class="dropdown-item" href="#">Option 2</a>
-                            <a class="dropdown-item" href="#">Option 3</a>
+                            <a class="dropdown-item" href="#"><i class="fa-solid fa-tent-arrow-left-right pe-2"></i>
+                                Logs</a>
+                            <a class="dropdown-item" href="#"><i class="fa-solid fa-store pe-2"></i>
+                                Inventory</a>
+                            <a class="dropdown-item" href="#"><i class="fa-solid fa-check-to-slot pe-2"></i>
+                                Lead Tracker</a>
+                            <a class="dropdown-item" href="#"><i class="fa-solid fa-gear pe-2"></i>
+                                Settings</a>
                         </div>
                     </div>
-
                 </li>
-                <li class="sidebar-item">
-                    <a href="/employee-dtr"  class="sidebar-link">
-                        <i class="fa-solid fa-tent-arrow-left-right pe-2"></i>
-                        Logs
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="/employee-dtr"  class="sidebar-link">
-                        <i class="fa-solid fa-store pe-2"></i>
-                        Inventory
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="/employee-dtr"  class="sidebar-link">
-                        <i class="fa-solid fa-check-to-slot pe-2"></i>
-                        Lead Tracker
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="/employee-dtr"  class="sidebar-link">
-                        <i class="fa-solid fa-gear pe-2"></i>
-                        Settings
-                    </a>
-                </li>
+                <div class="text-end pe-3">
+                    <p wire:click="logout"><small style="cursor: pointer"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Log Out</small></p>
+                </div>
 {{--                <li class="sidebar-item">--}}
 {{--                    <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi"--}}
 {{--                       aria-expanded="false" aria-controls="multi">--}}
