@@ -3,7 +3,7 @@
     <div>
         <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" wire:model.live="registrationSwitch" value="{{$registrationSwitch}}">
-            <label class="form-check-label" for="flexSwitchCheckChecked">Registration</label>
+            <label class="form-check-label" for="flexSwitchCheckChecked">Agent registration</label>
         </div>
         <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" wire:model.live="adminSwitch" value="{{$adminSwitch}}">

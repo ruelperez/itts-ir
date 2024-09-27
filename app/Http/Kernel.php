@@ -69,5 +69,6 @@ class Kernel extends HttpKernel
         'isAdmin' =>AdminMiddleware::class,
         'restrict.ip' => \App\Http\Middleware\RestrictByIP::class,
         \App\Http\Middleware\TrustProxies::class, // Make sure this middleware is included
+        'checkEmployee' => \App\Http\Middleware\CheckEmployeeCompletion::class,
     ];
 }

@@ -76,7 +76,7 @@
                         </a>
                         <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="mass-tort" class="sidebar-link">Mass Tort</a>
+                                <a href="/mass-tort" class="sidebar-link">Mass Tort</a>
                             </li>
                             <li class="sidebar-item">
                                 <a href="#" class="sidebar-link">DTV</a>

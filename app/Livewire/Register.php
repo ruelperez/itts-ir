@@ -64,11 +64,8 @@ class Register extends Component
             'position' => 'required',
             'photo' => 'required'
         ]);
-
         UserPassword::create($validated);
-
         $validated['password'] = bcrypt($validated['password']);
-
         $user = User::create($validated);
         auth()->login($user);
         return redirect('/');

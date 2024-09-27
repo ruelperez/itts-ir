@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class RestrictByIP
@@ -15,7 +16,7 @@ class RestrictByIP
      * @var array
      */
 //    protected $allowedIps = '122.54.211.23';
-    protected $allowedIps = '127.0.0.1';
+    protected $allowedIps = '127.0.0.2';
     /**
      *
      * Handle an incoming request.
@@ -24,15 +25,18 @@ class RestrictByIP
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Fetch the public IP address using an external service like ipify
         $publicIp = $this->getClientIp($request);
-
-        // Check if the public IP is allowed
         if ($publicIp != $this->allowedIps) {
-//            return response()->json([
-//                'message' => 'Unable to access. Your public IP is not allowed.',
-//            ], 403);
-            abort(404);
+            if (Auth::check()) {
+                $user = Auth::user();
+
+                if ($user->is_special != 1) {
+                    abort(404);
+                }
+            }
+            else{
+                abort(404);
+            }
         }
 
         // Proceed with the request if the IP is allowed

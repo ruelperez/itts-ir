@@ -49,11 +49,7 @@ class DeployedByname extends Component
         return redirect()->to('itts/21/deployed-item-record/'.$userids);
     }
     public function mount(){
-        $usrId = auth()->user()->id;
-        $sd = \App\Models\Employee::where('user_id',$usrId)->get();
-        if (count($sd) < 1){
-            return redirect('/itts/15/employee');
-        }
+
     }
     public function logout(){
         Auth::logout();

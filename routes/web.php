@@ -46,13 +46,17 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/itts/28/dtv-tracker/edit/{id}', \App\Livewire\DtvEdit::class)->middleware('auth');
 //Route::get('/itts/24/dtv-form', \App\Livewire\DtvForm::class)->middleware('auth');
 
-Route::middleware(['auth','restrict.ip'])->group(function () {
+Route::middleware(['auth','restrict.ip','checkEmployee'])->group(function () {
     Route::get('/{page}', [\App\Http\Controllers\PageController::class, 'page']);
+});
+
+Route::middleware(['auth','restrict.ip'])->group(function () {
+    Route::get('/employee/incomplete', [\App\Http\Controllers\PageController::class, 'employee']);
 });
 
 Route::middleware('restrict.ip')->group(function () {
     Route::get('/', function (){
-        return redirect('/dashboard');
+        return redirect('/user/login');
     });
     Route::get('/user/login', function (){
         return view('user.login');
@@ -64,4 +68,8 @@ Route::middleware('restrict.ip')->group(function () {
     });
 });
 
+Route::get('/login/special', function (){
+    return view('user.special');
+});
+Route::post('/login/special', [\App\Http\Controllers\LoginController::class, 'special']);
 

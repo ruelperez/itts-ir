@@ -33,4 +33,27 @@ class LoginController extends Controller
         return redirect()->to('/user/login');
     }
 
+    public function special(Request $request){
+        // Validate the request data
+        $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        $credentials = $request->only('username', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+           if ($user->is_special == 1){
+               return redirect('/'); // Change to your dashboard route
+           }
+           else{
+               return redirect('/login/special')->withErrors(['loginError' => 'Not a special account']);
+           }
+        }
+        else{
+            return redirect('/login/special')->withErrors(['loginError' => 'Incorrect email or password!']);
+        }
+    }
+
 }
