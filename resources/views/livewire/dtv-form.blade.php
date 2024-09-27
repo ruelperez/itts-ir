@@ -1,12 +1,7 @@
 <div>
-    @include('components.layouts.profile')
-    @include('components.layouts.navigation')
     @include('modal.click-settings')
     @include('modal.news-update.show-photo')
     @include('modal.submission.saveOrNot')
-    <div style="display: flex; width: 100%; margin-top: 105px;">
-        <div style="width: 81%; margin-left: 19%;">
-            <div class="container">
                 <div>
                     <h5 style="margin-left: 2%; margin-top: 3%;">Lead Form</h5>
                 </div>
@@ -193,9 +188,6 @@
                         </form>
                         <button id="btn123" data-bs-toggle="modal" data-bs-target="#loading" style="display: none"></button>
                 </div>
-            </div>
-        </div>
-    </div>
     @script
     <script>
         $wire.on('subSubmitted', () => {

@@ -39,7 +39,7 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/itts/21/deployed-item-record/{userID}', \App\Livewire\DeployedItemRecord::class)->middleware('auth');
 //Route::get('/itts/22/device-clearance/{userID}', [\App\Http\Controllers\ClearanceController::class, 'pdf'])->middleware('auth');
 //Route::get('/itts/23/mass-tort-tracker', \App\Livewire\MasstortTracker::class)->middleware('auth');
-//Route::get('/itts/24/mass-tort-form', \App\Livewire\SubmissionTracker::class)->middleware('auth');
+//Route::get('/itts/24/mass-tort-form', \App\Livewire\MasstortForm::class)->middleware('auth');
 //Route::get('/itts/25/mass-tort-tracker/edit/{id}', \App\Livewire\DupecheckerEdit::class)->middleware('auth');
 //Route::get('/itts/26/{name}', \App\Livewire\ProductionLead::class)->middleware('auth');
 //Route::get('/itts/27/dtv-tracker', \App\Livewire\DtvTracker::class)->middleware('auth');

@@ -27,7 +27,7 @@ use Livewire\WithFileUploads;
 use function Laravel\Prompts\select;
 use function Laravel\Prompts\table;
 
-class SubmissionTracker extends Component
+class MasstortForm extends Component
 {
 
     public $registrationSwitch, $hostingTrans, $gm = 0, $DQ, $jn, $toChecked = false, $comment, $caseType = "self", $is_success = false, $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $clientList = [], $campaignList = [], $campaign = "selectCampaign", $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
@@ -48,7 +48,7 @@ class SubmissionTracker extends Component
             ->distinct('campaign')
             ->get();
         $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
-        return view('livewire.submission-tracker');
+        return view('livewire.masstort-form');
     }
 
     public function clickBox(){
