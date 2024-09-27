@@ -25,7 +25,9 @@
         @endif
         <div wire:loading.flex class="absolute inset-0 bg-gray-200 opacity-75"></div>
 
-        <div class="center-dtr-btn" style="@if($dtr_data == null )  @elseif($dtr_data->in != null and $dtr_data->out != null) display: none @endif">
+        <div style="display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */@if($dtr_data == null )  @elseif($dtr_data->in != null and $dtr_data->out != null) display: none @endif">
             <div class="py-5" style=" width: 120px;
     height: 120px;
     background-color: #4CAF50; /* Any background color */
@@ -38,7 +40,9 @@
     /*padding-top: 20px;*/@if($dtr_data == null or $dtr_data->in == null) color: white; cursor: pointer @endif" @if($dtr_data == null or $dtr_data->in == null) wire:click="in" wire:loading.attr="disabled" @endif ><h5>Time In</h5></div>
 {{--                    <div style="border-radius: 100px; background-color: #6B8E23; padding: 2%; width: 9%; text-align: center; margin-left: 1%; @if($dtr_data == null or $dtr_data->in == null) color: black; @elseif($dtr_data->in != null) color: white; cursor: pointer @endif" @if($dtr_data == null or $dtr_data->in == null) @elseif($dtr_data->in != null) wire:click="out" @endif ><h5>Time Out</h5></div>--}}
         </div>
-        <div class="center-dtr-btn" style="@if($dtr_data == null ) display: none @elseif($dtr_data->in != null and $dtr_data->out != null)  @else display: none @endif">
+        <div style="display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */@if($dtr_data == null ) display: none @elseif($dtr_data->in != null and $dtr_data->out != null)  @else display: none @endif">
             <div class="py-5" style=" width: 120px;
     height: 120px;
     background-color: #4CAF50; /* Any background color */
