@@ -1,13 +1,8 @@
 <div>
-    @include('components.layouts.profile')
-    @include('components.layouts.navigation')
     @include('modal.click-settings')
     @include('modal.news-update.show-photo')
     @include('modal.employee.loading')
     @include('modal.employee.disclick')
-    <div style="display: flex; width: 100%; margin-top: 105px; border: solid black 5px">
-        <div style="width: 81%; margin-left: 19%; ">
-            <div>
                 <div style="display: flex;" class="align-items-center">
                     <div class="w-50 ps-4 mt-4">
                         <h6>EMPLOYEE</h6>
@@ -414,9 +409,7 @@
                     </form>
                 </div>
 <button id="btn1" data-bs-toggle="modal" data-bs-target="#loading" style="display: none"></button>
-            </div>
-        </div>
-    </div>
+
         @script
         <script>
             $wire.on('formSubmitted', () => {

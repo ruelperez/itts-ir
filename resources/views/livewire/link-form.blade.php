@@ -1,13 +1,8 @@
 <div>
-    @include('components.layouts.profile')
-    @include('components.layouts.navigation')
     @include('modal.click-settings')
     @include('modal.news-update.show-photo')
     @include('modal.form_link.add')
     @include('modal.form_link.edit')
-    <div style="display: flex; width: 100%; margin-top: 105px;">
-        <div style="width: 81%; margin-left: 19%;">
-            <div class="container">
                 <div>
                     <h6 style="margin-left: 2%; margin-top: 3%;">FORM LINK</h6>
                 </div>
@@ -16,7 +11,7 @@
                 <div style="margin-left: 3%; margin-top: 1%; margin-bottom: 3%;">
                     <i class="fa-solid fa-circle-plus" style="font-size: 30px;cursor: pointer" data-bs-toggle="modal" data-bs-target="#addForm"></i>
                 </div>
-                    <a style="margin-left: 3%; " href="/itts/24/mass-tort-form">Submission Tracker</a>
+                <a style="margin-left: 3%; " href="/masstort-form">Submission Form</a>
                 @endif
                 @if($position == "Agent")
                     @foreach($dataLink as $daty)
@@ -38,5 +33,4 @@
             </div>
         </div>
 
-    </div>
 </div>

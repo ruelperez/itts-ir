@@ -1,4 +1,4 @@
-<div style="background-image: url('photo/cover.jpg'); background-size: cover;  background-position: center;width: 100vw; position: relative;  height: 100vh;">
+<div style="background-image: url('{{ asset('photo/cover.jpg') }}'); background-size: cover;  background-position: center;width: 100vw; position: relative;  height: 100vh;">
     <div class="container">
         <div class="row ">
             <div class="col-xl-4 col-lg-3 col-md-3">
@@ -60,7 +60,7 @@
                     @if($is_reg == 0)
                         <p style="color: red">The registration is disabled, Contact admin user to enable.</p>
                     @endif
-                    <p class="text-center mt-2 mb-0">Have already an account? <a href="/login" class="fw-bold text-body"><u>Login here</u></a></p>
+                    <p class="text-center mt-2 mb-0">Have already an account? <a href="/user/login" class="fw-bold text-body"><u>Login here</u></a></p>
                 </form>
             </div>
         </div>

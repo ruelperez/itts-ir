@@ -1,3 +1,22 @@
+.dtr-btn{
+    width: 120px;
+    height: 120px;
+    background-color: #4CAF50; /* Any background color */
+    border-radius: 50%; /* Makes it a circle */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
+    /*padding-top: 20px;*/
+}
+
+.center-dtr-btn{
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+}
+
 .invs{
     color: white;
 }
@@ -68,12 +87,12 @@
 
 
 
-.content{
-    margin-top: 8%;
-    margin-left: 5%;
-    width: 90%;
-    height: 1000px;
-}
+/*.content{*/
+/*    margin-top: 8%;*/
+/*    margin-left: 5%;*/
+/*    width: 90%;*/
+/*    height: 1000px;*/
+/*}*/
 
 .modal-body{
     overflow-y: scroll;
@@ -114,7 +133,7 @@
 }
 
 .navig div{
-    color: white;
+    color: black;
     padding-top: 6px;
     padding-bottom: 6px;
     cursor: pointer;

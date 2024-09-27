@@ -16,7 +16,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body style="background-color: #E6E6FA;">
-<div style="background-image: url('photo/cover.jpg'); background-size: cover;  background-position: center;width: 100vw; position: relative;  height: 100vh;">
+<div style="background-image: url('{{ asset('photo/cover.jpg') }}'); background-size: cover;  background-position: center;width: 100vw; position: relative;  height: 100vh;">
     <div class="container">
         <div class="row ">
             <div class="col-xl-4 col-lg-3 col-md-3">
@@ -28,7 +28,7 @@
                 </div>
                 @if ($errors->has('loginError'))
                     <div class="alert alert-danger mt-3" role="alert">
-                        Incorrect username or password!
+                        Incorrect username or password!!
                     </div>
                 @endif
                 <form method="POST" action="/login/auth"  class="mt-3">
@@ -54,7 +54,7 @@
                     <div class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-outline-success btn-md text-white" style="background-color: rgba(0, 128, 0, 0.8); width: 70%;">Login</button>
                     </div>
-                    <p class="text-center mt-3 mb-0">Have already an account? <a href="/register" class="fw-bold text-body"><u>Register here</u></a></p>
+                    <p class="text-center mt-3 mb-0">Have already an account? <a href="/user/register" class="fw-bold text-body"><u>Register here</u></a></p>
                 </form>
             </div>
         </div>

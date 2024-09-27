@@ -1,14 +1,9 @@
 <div>
-    @include('components.layouts.profile')
-    @include('components.layouts.navigation')
     @include('modal.click-settings')
     @include('modal.news-update.show-photo')
     @include('modal.my_device.add')
     @include('modal.my_device.cancel')
     @include('modal.my_device.return')
-    <div style="display: flex; width: 100%; margin-top: 105px;">
-        <div style="width: 81%; margin-left: 19%;">
-            <div class="container">
                 <div style="display: flex;">
                     <h6 style="margin-left: 2%; margin-top: 3%;">MY DEVICE</h6>
                     <div style="margin-left: 3%; margin-top: 2.5%; width: 25%;">
@@ -70,7 +65,4 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-    </div>
 </div>

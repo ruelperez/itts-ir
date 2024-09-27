@@ -7,8 +7,8 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <a href="/itts/23/mass-tort-tracker">Mass tort</a><br><br>
-                    <a href="/itts/27/dtv-tracker">Direct TV</a>
+                    <a href="/masstort-tracker">Mass tort</a><br><br>
+                    <a href="/dtv-tracker">Direct TV</a>
                 </div>
             </div>
         </div>

@@ -1,14 +1,9 @@
 <div>
-    @include('components.layouts.profile')
-    @include('components.layouts.navigation')
     @include('modal.click-settings')
     @include('modal.news-update.show-photo')
     @include('modal.dupe-checker.form')
     @include('modal.dupe-checker.saveOrNot')
 {{--    @include('modal.dupe-checker.viewDetail')--}}
-    <div style="display: flex; width: 100%; margin-top: 105px;">
-        <div style="width: 81%; margin-left: 19%;">
-            <div class="container">
                 <div>
                     <h6 style="margin-left: 2%; margin-top: 3%;">Direct TV Tracker</h6>
                 </div>
@@ -116,9 +111,6 @@
                         <button class="btn btn-primary" wire:click="nextPage" style="width: 10%;">Next</button>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
     @script
     <script>
         $wire.on('dupeSubmitted', () => {
