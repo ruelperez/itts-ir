@@ -1,6 +1,37 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
+/* Scrollbar width */
+::-webkit-scrollbar {
+    width: 12px; /* Width of the entire scrollbar */
+}
+
+/* Scrollbar track (background of the scrollbar) */
+
+/* Scrollbar thumb (the draggable part of the scrollbar) */
+::-webkit-scrollbar-thumb {
+    background-color: #DCDCDC; /* Darker gray thumb */
+    border-radius: 10px; /* Rounded corners for the thumb */
+    /*border: 2px solid #f1f1f1; !* Space between the thumb and track *!*/
+}
+
+/* Scrollbar buttons (arrows or up/down buttons) */
+::-webkit-scrollbar-button {
+    display: none; /* Hide the buttons if not needed */
+}
+
+.scrollable-div:hover::-webkit-scrollbar-thumb {
+    background-color: #555; /* Change color on hover */
+}
+
+/* Example scrollable content */
+
+.scrollable-div {
+    height: 530px; /* Set a fixed height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    /*border: 1px solid #ccc;*/
+}
+
 .dropup .dropdown-menu {
     top: auto;
     bottom: 100%;
