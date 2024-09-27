@@ -47,45 +47,47 @@
         <div wire:loading class="spinner-border spin" style="height: 55px; width: 55px; margin-left:47%; margin-top:5%; color: black">
             <span class="visually-hidden" style="color: black">Loading...</span>
         </div>
-        <div style="margin-top: 30px;" wire:loading.remove>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Day</th>
-                    <th scope="col">In</th>
-                    <th scope="col">Out</th>
-                    <th scope="col">In</th>
-                    <th scope="col">Out</th>
-                    <th scope="col">Total</th>
-                    @if($position != "Agent") <th scope="col">Task</th> @endif
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($dtr_permanent_data as $data)
+        <div class="row justify-content-center" style="margin-top: 30px;" wire:loading.remove>
+            <div class="col-12 col-xl-8 col-lg-10">
+                <table class="table">
+                    <thead>
                     <tr>
-                        <th disabled scope="row">@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('D') }} @endif</th>
-                        <td disabled>@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('h:i A') }} @endif</td>
-                        <td>@if($data->out == null) @else {{Carbon\Carbon::parse($data->out)->format('h:i A') }} @endif</td>
-                        <td>@if($data->in2 == null) @else {{Carbon\Carbon::parse($data->in2)->format('h:i A') }} @endif</td>
-                        <td>@if($data->out2 == null) @else {{Carbon\Carbon::parse($data->out2)->format('h:i A') }} @endif</td>
-                        <td>
-                            @php
-                                $hours = floor($data->minute / 60);
-                                $totalHours = floor($hours + $data->hour);
-                                $remainingMinutes = $data->minute % 60;
-                                $result = $totalHours . ':' . $remainingMinutes;
-                            @endphp
-                            {{$result}}
-                        </td>
-                        @if($position != "Agent")
-                            <td>
-                                <i class="fa-solid fa-list-check" style="margin-right: 3%; cursor: pointer" data-bs-toggle="modal" data-bs-target="#task" wire:click="clickTask({{$data->id}})"></i>
-                            </td>
-                        @endif
+                        <th scope="col">Day</th>
+                        <th scope="col">In</th>
+                        <th scope="col">Out</th>
+                        <th scope="col">In</th>
+                        <th scope="col">Out</th>
+                        <th scope="col">Total</th>
+                        @if($position != "Agent") <th scope="col">Task</th> @endif
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach($dtr_permanent_data as $data)
+                        <tr>
+                            <th disabled scope="row">@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('D') }} @endif</th>
+                            <td disabled>@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('h:i A') }} @endif</td>
+                            <td>@if($data->out == null) @else {{Carbon\Carbon::parse($data->out)->format('h:i A') }} @endif</td>
+                            <td>@if($data->in2 == null) @else {{Carbon\Carbon::parse($data->in2)->format('h:i A') }} @endif</td>
+                            <td>@if($data->out2 == null) @else {{Carbon\Carbon::parse($data->out2)->format('h:i A') }} @endif</td>
+                            <td>
+                                @php
+                                    $hours = floor($data->minute / 60);
+                                    $totalHours = floor($hours + $data->hour);
+                                    $remainingMinutes = $data->minute % 60;
+                                    $result = $totalHours . ':' . $remainingMinutes;
+                                @endphp
+                                {{$result}}
+                            </td>
+                            @if($position != "Agent")
+                                <td>
+                                    <i class="fa-solid fa-list-check" style="margin-right: 3%; cursor: pointer" data-bs-toggle="modal" data-bs-target="#task" wire:click="clickTask({{$data->id}})"></i>
+                                </td>
+                            @endif
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
