@@ -6,13 +6,13 @@
         <h6>DTR CURRENT SHIFT</h6>
     </div>
     <div class="row mt-4">
-        <div class="">
+        <div class="col-md-4 col-lg-2">
             <b style="font-size: 15px; ">@if(isset($date)) {{Carbon\Carbon::parse($date->in)->format('m-d-Y')}}@endif</b>
         </div>
-        <div class="mt-2">
+        <div class="mt-2 mt-md-0 col-md-4 col-lg-6 col-xl-4">
             <input class="form-control" type="search" placeholder="Search" aria-label="Search" wire:model.live="search">
         </div>
-        <div class="mt-2">
+        <div class="mt-2 mt-md-0 col-md-4 col-lg-4 col-xl-2">
             <select class="form-select" aria-label="Default select example" wire:model.live="branch">
                 <option value="all">All</option>
                 <option value="mindoro">Mindoro</option>
@@ -52,9 +52,11 @@
                         @endphp
                         {{$result}}
                     </td>
-                    <td style="width: 15%;padding-right: 60px;" id="uiy{{$data->id}}">
+                    <td id="uiy{{$data->id}}">
                         {{ucfirst($data->branch)}}
-                        <i class="fa-solid fa-pen-to-square" style="cursor: pointer; margin-left: 20%; display: none" wire:click="clickTimeEdit({{$data->id}})" id="timeEdit{{$data->id}}"  data-bs-toggle="modal" data-bs-target="#current"></i>
+                    </td>
+                    <td>
+                        <i class="fa-solid fa-pen-to-square" style="cursor: pointer; display: none" wire:click="clickTimeEdit({{$data->id}})" id="timeEdit{{$data->id}}"  data-bs-toggle="modal" data-bs-target="#current"></i>
                     </td>
                  </tr>
             @endforeach
