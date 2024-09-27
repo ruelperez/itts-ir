@@ -9,41 +9,32 @@
     @include('modal.news-update.comment_reactor')
     @include('modal.news-update.edit_comment')
     @include('modal.news-update.add_remove_campaign')
-        <div style="z-index: 1000; background-color: #41464b; padding-left: 1%; padding-right: 3%; padding-bottom: 1%;">
-            <div class="row">
-                <div class="col-2">
+        <div class="px-2 py-2 px-lg-3 py-lg-3" style="background-color: #41464b;">
+            <div class="row text-center">
+                <div class="col-12 text-md-start">
                     <h6 style="color: white">( {{strtoupper($client_name)}}  @if($campaign_name != "all") <i class="fa-solid fa-arrow-right" style="color: #FFFF00"></i> {{strtoupper($campaign_name)}} @endif)</h6>
                 </div>
-                <div class="col-4">
-                    <div class="row">
-                        <div class="col-7">
-                            <input type="search" class="form-control" placeholder="Search" wire:model.live="searchInput">
-                        </div>
-                        @if($position != "Agent")
-                            <div class="col-1">
-                                <i class="fa-solid fa-circle-plus" data-bs-toggle="modal" data-bs-target="#add" style="color: #00FF00; font-size: 20px; cursor: pointer"></i>
-                            </div>
-                        @endif
-                        @if($campaign_name == "Camp lejeune" or $campaign_name == "clj")
-                            <div class="col-4">
-                                <a href="/itts/2/age-checker" wire:navigate style="color: white;">Age checker</a>
-                            </div>
-                        @endif
-                    </div>
+                <div class="col-12  col-lg-4 col-md-6 col-xl-4 mt-2">
+                    <input type="search" class="form-control w-100" placeholder="Search" wire:model.live="searchInput">
                 </div>
+{{--                        @if($campaign_name == "Camp lejeune" or $campaign_name == "clj")--}}
+{{--                            <div class="col-4">--}}
+{{--                                <a href="/itts/2/age-checker" wire:navigate style="color: white;">Age checker</a>--}}
+{{--                            </div>--}}
+{{--                        @endif--}}
                 @if($position != "Agent")
-                    <div class="col-2 text-center">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#arc"><i class="fa-solid fa-gear"></i> Camp/Client</button>
+                    <div class="col-12 col-lg-4 col-md-6 col-xl-2 mt-2 text-center">
+                        <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#arc"><i class="fa-solid fa-gear"></i> Camp/Client</button>
                     </div>
                 @endif
-                <div class="col-2">
+                <div class="col-12 col-md-6 col-lg-4 col-xl-2 mt-2">
                     <select class="form-select" aria-label="Default select example" wire:model.live="client_name">
                         @foreach($client_list as $list)
                             <option value="{{$list->client}}">{{strtoupper($list->client)}}</option>
                         @endforeach
                     </select>
                 </div>
-                <div class="col-2">
+                <div class="col-12 col-md-6 col-lg-4 col-xl-2 mt-2">
                     <select class="form-select" aria-label="Default select example" wire:model.live="campaign_name">
                         <option value="all">All</option>
                         @foreach($campaignList as $list)
@@ -51,11 +42,16 @@
                         @endforeach
                     </select>
                 </div>
+                @if($position != "Agent")
+                    <div class="col-12 col-lg-4 col-xl-2 text-md-start mt-2">
+                        <i class="fa-solid fa-circle-plus" data-bs-toggle="modal" data-bs-target="#add" style="color: #00FF00; font-size: 20px; cursor: pointer"></i>
+                    </div>
+                @endif
             </div>
         </div>
-        <div style="margin-top: 8%;margin-left: 5%;width: 90%;height: 1000px;">
+        <div style="margin-top: 20px ;">
             @foreach($notes_all as $data)
-                <div style="box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);width: 100%; background-color: white; padding-left: 3%; padding-right: 3%; padding-top: 1.5%; padding-bottom: 2%; margin-bottom: 3%;">
+                <div style="box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);background-color: white; padding-left: 3%; padding-right: 3%; padding-top: 1.5%; padding-bottom: 2%; margin-bottom: 3%;">
                     <div class="fw-light" style="display: flex;">
                         <div class="profile-picture">
                             <img src="{{asset('photos/photos/'.$data->photo)}}" alt="Profile Picture">

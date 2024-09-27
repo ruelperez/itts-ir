@@ -582,7 +582,7 @@
                     </ul>
                 </li>
                 <li class="sidebar-item">
-                    <a href="/employee-dtr"  class="sidebar-link">
+                    <a href="/production-lead"  class="sidebar-link">
                         <i class="fa-solid fa-money-bill pe-2"></i>
                         Prod. Leads
                     </a>

@@ -1,4 +1,4 @@
-<nav class="px-3 position-fixed w-100 bg-white" style=" border-bottom: 1px solid rgba(0, 0, 0, 0.3);">
+<nav class="px-3 py-2 position-fixed w-100 bg-white" style=" border-bottom: 1px solid rgba(0, 0, 0, 0.3);">
 {{--    <div class="container-fluid border border-dark">--}}
         <div class="row">
             <div class="col-2 col-sm-1 btn" @click="marginLeftVar = marginLeftVar === 1 ? 0 : 1">
