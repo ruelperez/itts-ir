@@ -14,9 +14,10 @@ class RestrictByIP
      *
      * @var array
      */
-//    protected $allowedIps = '122.54.211.23';
-    protected $allowedIps = '127.0.0.1';
+    protected $allowedIps = '122.54.211.23';
+//    protected $allowedIps = '127.0.0.1';
     /**
+     *
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
