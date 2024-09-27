@@ -7,7 +7,7 @@
     @include('modal.dashboard.removedOrUpdate')
     <div class="container">
         <div class="row">
-            <div class="col-4 pb-3" style="background-color: #2F4F4F">
+            <div class="col-12 col-lg-8 col-xl-6 pb-3" style="background-color: #2F4F4F">
                 <div style="width: 200px; /* Set the desired width of the container */
                                     height: 150px; /* Set the desired height of the container */
                                     overflow: hidden;

@@ -25,38 +25,38 @@
         @endif
         <div wire:loading.flex class="absolute inset-0 bg-gray-200 opacity-75"></div>
 
-        <div style="display: flex; @if($dtr_data == null )  @elseif($dtr_data->in != null and $dtr_data->out != null) display: none @endif">
-            <div style="border-radius: 100px; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9); background-color: #008000; padding: 2%; width: 9%; text-align: center; margin-left: 44%; @if($dtr_data == null or $dtr_data->in == null) color: white; cursor: pointer @endif" @if($dtr_data == null or $dtr_data->in == null) wire:click="in" wire:loading.attr="disabled" @endif ><h5>Time In</h5></div>
+        <div class="center-dtr-btn" style="@if($dtr_data == null )  @elseif($dtr_data->in != null and $dtr_data->out != null) display: none @endif">
+            <div class="dtr-btn py-5" style="@if($dtr_data == null or $dtr_data->in == null) color: white; cursor: pointer @endif" @if($dtr_data == null or $dtr_data->in == null) wire:click="in" wire:loading.attr="disabled" @endif ><h5>Time In</h5></div>
 {{--                    <div style="border-radius: 100px; background-color: #6B8E23; padding: 2%; width: 9%; text-align: center; margin-left: 1%; @if($dtr_data == null or $dtr_data->in == null) color: black; @elseif($dtr_data->in != null) color: white; cursor: pointer @endif" @if($dtr_data == null or $dtr_data->in == null) @elseif($dtr_data->in != null) wire:click="out" @endif ><h5>Time Out</h5></div>--}}
         </div>
-        <div style="display: flex; @if($dtr_data == null ) display: none @elseif($dtr_data->in != null and $dtr_data->out != null)  @else display: none @endif">
-            <div style="border-radius: 100px; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9); background-color: #008000; padding: 2%; width: 11%; text-align: center; margin-left: 44%; @if($dtr_data == null) display: none @elseif($dtr_data->in != null and $dtr_data->out != null and $dtr_data->in2 != null) color: black; @elseif($dtr_data->in != null and $dtr_data->out != null ) color: white; cursor: pointer @endif" @if($dtr_data == null) @elseif($dtr_data->in != null and $dtr_data->out != null and $dtr_data->in2 != null)  @elseif($dtr_data->in != null and $dtr_data->out != null) wire:click="in2" wire:loading.attr="disabled" @endif><h5>Time In</h5> <p style="font-size: 14px;">(After lunch)</p></div>
+        <div class="center-dtr-btn" style="@if($dtr_data == null ) display: none @elseif($dtr_data->in != null and $dtr_data->out != null)  @else display: none @endif">
+            <div class="dtr-btn py-5" style="@if($dtr_data == null) display: none @elseif($dtr_data->in != null and $dtr_data->out != null and $dtr_data->in2 != null) color: black; @elseif($dtr_data->in != null and $dtr_data->out != null ) color: white; cursor: pointer @endif" @if($dtr_data == null) @elseif($dtr_data->in != null and $dtr_data->out != null and $dtr_data->in2 != null)  @elseif($dtr_data->in != null and $dtr_data->out != null) wire:click="in2" wire:loading.attr="disabled" @endif><h5>Time In</h5> <p style="font-size: 14px;">(After lunch)</p></div>
 {{--                    <div style="border-radius: 100px; background-color: #6B8E23; padding: 2%; width: 9%; text-align: center; margin-left: 1%;  @if($dtr_data == null) display: none @elseif($dtr_data->in != null and $dtr_data->out != null and $dtr_data->in2 != null and $dtr_data->out2 != null) color: black; @elseif($dtr_data->in != null and $dtr_data->out != null and $dtr_data->in2 != null) color: white; cursor: pointer @endif" @if($dtr_data == null) @elseif($dtr_data->in != null and $dtr_data->out != null and $dtr_data->in2 != null and $dtr_data->out2 != null)  @elseif($dtr_data->in != null and $dtr_data->out != null and $dtr_data->in2 != null) wire:click="out2"  @endif><h5>Time Out</h5></div>--}}
         </div>
-        <div style="margin-top: 2%;">
-            <input class="form-control" placeholder="User id" type="text" style="width: 20%; margin-left: 40%;" wire:model="designated_id">
+        <div style="margin-top: 15px" class="d-flex justify-content-center">
+            <input class="form-control" placeholder="User id" type="text" style="width: 250px;" wire:model="designated_id">
             @error('designated_id') <span style="color: red; margin-left: 40%;">{{ $message }}</span> @enderror
-            <div style="margin-top: 1%;">
-                @if (session('good'))
-                    <p style="color: blue; text-align: center; font-size: 19px;">{{ session('good') }}</p>
-                @elseif(session('bad'))
-                    <p style="color: red; text-align: center; font-size: 17px;">{{ session('bad') }}</p>
-                @endif
-            </div>
+        </div>
+        <div style="margin-top: 15px">
+            @if (session('good'))
+                <p style="color: blue; text-align: center; font-size: 19px;">{{ session('good') }}</p>
+            @elseif(session('bad'))
+                <p style="color: red; text-align: center; font-size: 17px;">{{ session('bad') }}</p>
+            @endif
         </div>
         <div wire:loading class="spinner-border spin" style="height: 55px; width: 55px; margin-left:47%; margin-top:5%; color: black">
             <span class="visually-hidden" style="color: black">Loading...</span>
         </div>
-        <div style="margin-top: 4%; width: 80%; margin-left: 10%;" wire:loading.remove>
+        <div style="margin-top: 30px;" wire:loading.remove>
             <table class="table">
                 <thead>
                 <tr>
                     <th scope="col">Day</th>
-                    <th scope="col">Time in</th>
-                    <th scope="col">Time out</th>
-                    <th scope="col">Time in</th>
-                    <th scope="col">Time out</th>
-                    <th scope="col">Total time</th>
+                    <th scope="col">In</th>
+                    <th scope="col">Out</th>
+                    <th scope="col">In</th>
+                    <th scope="col">Out</th>
+                    <th scope="col">Total</th>
                     @if($position != "Agent") <th scope="col">Task</th> @endif
                 </tr>
                 </thead>
