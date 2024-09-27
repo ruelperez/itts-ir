@@ -1,14 +1,9 @@
 <div>
-    @include('components.layouts.profile')
-    @include('components.layouts.navigation')
     @include('modal.click-settings')
     @include('modal.news-update.show-photo')
     @include('modal.dashboard.anounce')
     @include('modal.dashboard.saveOrNot')
     @include('modal.dashboard.click-data')
-    <div style="display: flex; width: 100%; margin-top: 105px;">
-        <div style="width: 81%; margin-left: 19%;">
-            <div class="container">
                 <div>
                     <h6 style="margin-left: 2%; margin-top: 3%;">Edit Dupe Checker ({{$phoneNumber}}) </h6>
                 </div>
@@ -302,11 +297,10 @@
                         <button type="submit" class="btn btn-primary mt-4" style="width: 30%; margin-left: 35%;">UPDATE</button>
                     </form>
                 </div>
-            </div>
-        </div>
+
         <button id="btn12345" style="display: none"></button>
         <button id="btn678" style="display: none"></button>
-    </div>
+
     @script
     <script>
         $wire.on('editGood', () => {

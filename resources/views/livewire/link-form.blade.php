@@ -1,13 +1,8 @@
 <div>
-    @include('components.layouts.profile')
-    @include('components.layouts.navigation')
     @include('modal.click-settings')
     @include('modal.news-update.show-photo')
     @include('modal.form_link.add')
     @include('modal.form_link.edit')
-    <div style="display: flex; width: 100%; margin-top: 105px;">
-        <div style="width: 81%; margin-left: 19%;">
-            <div class="container">
                 <div>
                     <h6 style="margin-left: 2%; margin-top: 3%;">FORM LINK</h6>
                 </div>
@@ -23,8 +18,5 @@
                         <i class="fa-solid fa-trash" style="display: none; color: red; font-size: 17px; margin-left: 10px; cursor: pointer" id="myLinks{{$daty->id}}" wire:click="delete({{$daty->id}})" wire:confirm="Are you sure you want to delete? if yes click (OK)"></i>
                     </div>
                 @endforeach
-            </div>
-        </div>
 
-    </div>
 </div>

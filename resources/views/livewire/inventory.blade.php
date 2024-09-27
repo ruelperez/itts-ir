@@ -1,14 +1,9 @@
 <div>
-    @include('components.layouts.profile')
-    @include('components.layouts.navigation')
     @include('modal.click-settings')
     @include('modal.news-update.show-photo')
     @include('modal.inventory.add')
     @include('modal.inventory.edit')
-    <div style="display: flex; width: 100%; margin-top: 105px;">
-        <div style="width: 81%; margin-left: 19%;">
-            <div class="container">
-                <div style="position: fixed;top: 15%; left: 19%; width: 81%; background-color: #41464b; color: white; padding-bottom: 20px;">
+                <div style="position: fixed;top: 10%; background-color: #41464b; color: white; padding-bottom: 20px;">
                     <div style="display: flex; width: 100%;">
                         <div class="dropdown">
                             <i class="btn btn-secondary dropdown-toggle ps-2 py-0 ms-2 mt-4" data-bs-toggle="dropdown"  style="color: white; font-size: 23px; cursor: pointer; "> </i>
@@ -51,7 +46,7 @@
                     </div>
                 </div>
 
-                <div style="font-size: 14px; margin-top: 9%; width: 92%; margin-left: 4%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); "  class="px-4 py-3" >
+                <div style="font-size: 14px; margin-top: 15%;  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); "  class="px-4 py-3" >
                     <table class="table table-hover">
                         <thead>
                         <tr>
@@ -93,7 +88,5 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-    </div>
+
 </div>
