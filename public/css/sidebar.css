@@ -24,6 +24,9 @@
     background-color: #555; /* Change color on hover */
 }
 
+.emp-dtr-table:hover::-webkit-scrollbar-thumb {
+    background-color: #555; /* Change color on hover */
+}
 /* Example scrollable content */
 
 .scrollable-div {
