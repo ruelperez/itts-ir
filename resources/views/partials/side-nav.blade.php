@@ -1,8 +1,8 @@
 @include('modal.click-lead')
 {{--@include('modal.click-settings')--}}
     <!-- Sidebar -->
-    <aside id="sidebar" class="position-fixed">
-        <div class="h-100">
+    <aside id="sidebar" class="position-fixed vh-100">
+        <div>
             <div class="sidebar-logo mb-3 text-center">
                 <div>
                     <img src="{{asset('photo/logo-banner.png')}}" width="150">
@@ -52,94 +52,96 @@
                         </div>
                     </div>
                 </li>
-                <li class="sidebar-header">
-                    Tools & Components
-                </li>
-                <li class="sidebar-item">
-                    <a href="/dashboard"  class="sidebar-link">
-                        <i class="fa-solid fa-sliders pe-2"></i>
-                        Dashboard
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="/employee-dtr"  class="sidebar-link">
-                        <i class="fa-solid fa-business-time pe-2"></i>
-                        DTR
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#pages"
-                       aria-expanded="false" aria-controls="pages">
-                        <i class="fa-regular fa-file-lines pe-2"></i>
-                        Campaign
-                    </a>
-                    <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                        <li class="sidebar-item">
-                            <a href="mass-tort" class="sidebar-link">Mass Tort</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">DTV</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">Home Security</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="sidebar-item">
-                    <a href="/production-lead"  class="sidebar-link">
-                        <i class="fa-solid fa-money-bill pe-2"></i>
-                        Prod. Leads
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="/employee"  class="sidebar-link">
-                        <i class="fa-regular fa-user pe-2"></i>
-                        Employee
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="/my-device"  class="sidebar-link">
-                        <i class="fa-solid fa-laptop pe-2"></i>
-                        My Device
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="/notes"  class="sidebar-link">
-                        <i class="fa-solid fa-list pe-2"></i>
-                        Notes
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="/link-form"  class="sidebar-link">
-                        <i class="fa-solid fa-share-nodes pe-2"></i>
-                        Form Link
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="/faq"  class="sidebar-link">
-                        <i class="fa-solid fa-question pe-2"></i>
-                        FAQ
-                    </a>
-                </li>
-                <li class="sidebar-header">
-                    <div class="dropup">
-                        <a class="dropdown-toggle" id="dropupLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Admin access
+                <div class="scrollable-div mt-4">
+                    <li class="sidebar-header">
+                        Tools & Components
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="/dashboard"  class="sidebar-link">
+                            <i class="fa-solid fa-sliders pe-2"></i>
+                            Dashboard
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="dropupLink">
-                            <a class="dropdown-item" href="/logs"><i class="fa-solid fa-tent-arrow-left-right pe-2"></i>
-                                Logs</a>
-                            <a class="dropdown-item" href="inventory"><i class="fa-solid fa-store pe-2"></i>
-                                Inventory</a>
-                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#lead"><i class="fa-solid fa-check-to-slot pe-2" ></i>
-                                Lead Tracker</a>
-                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#clickSettings" id="settings"><i class="fa-solid fa-gear pe-2"></i>
-                                Settings</a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="/employee-dtr"  class="sidebar-link">
+                            <i class="fa-solid fa-business-time pe-2"></i>
+                            DTR
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#pages"
+                           aria-expanded="false" aria-controls="pages">
+                            <i class="fa-regular fa-file-lines pe-2"></i>
+                            Campaign
+                        </a>
+                        <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <a href="mass-tort" class="sidebar-link">Mass Tort</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link">DTV</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link">Home Security</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="/production-lead"  class="sidebar-link">
+                            <i class="fa-solid fa-money-bill pe-2"></i>
+                            Prod. Leads
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="/employee"  class="sidebar-link">
+                            <i class="fa-regular fa-user pe-2"></i>
+                            Employee
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="/my-device"  class="sidebar-link">
+                            <i class="fa-solid fa-laptop pe-2"></i>
+                            My Device
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="/notes"  class="sidebar-link">
+                            <i class="fa-solid fa-list pe-2"></i>
+                            Notes
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="/link-form"  class="sidebar-link">
+                            <i class="fa-solid fa-share-nodes pe-2"></i>
+                            Form Link
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="/faq"  class="sidebar-link">
+                            <i class="fa-solid fa-question pe-2"></i>
+                            FAQ
+                        </a>
+                    </li>
+                    <li class="sidebar-header">
+                        <div class="dropup">
+                            <a class="dropdown-toggle" id="dropupLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Admin access
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropupLink">
+                                <a class="dropdown-item" href="/logs"><i class="fa-solid fa-tent-arrow-left-right pe-2"></i>
+                                    Logs</a>
+                                <a class="dropdown-item" href="inventory"><i class="fa-solid fa-store pe-2"></i>
+                                    Inventory</a>
+                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#lead"><i class="fa-solid fa-check-to-slot pe-2" ></i>
+                                    Lead Tracker</a>
+                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#clickSettings" id="settings"><i class="fa-solid fa-gear pe-2"></i>
+                                    Settings</a>
+                            </div>
                         </div>
+                    </li>
+                    <div class="text-end pe-3">
+                        <p onclick="location.href = '/user/logout';"><small style="cursor: pointer"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Log Out</small></p>
                     </div>
-                </li>
-                <div class="text-end pe-3">
-                    <p onclick="location.href = '/user/logout';"><small style="cursor: pointer"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Log Out</small></p>
                 </div>
 {{--                <li class="sidebar-item">--}}
 {{--                    <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi"--}}
