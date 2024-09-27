@@ -21,7 +21,7 @@
 <div class="wrapper" x-data="{ marginLeftVar: 1 }">
     @include('partials.side-nav')
     <!-- Main Component -->
-    <div class="main" :style="{ marginLeft: marginLeftVar === 1 ? '265px' : '0px' }">
+    <div class="main border border-dark" :style="{ marginLeft: marginLeftVar === 1 ? '265px' : '0px' }">
         @include('partials.header')
         <main class="content px-3 py-2 border border-dark" style="margin-top: 80px;">
             <div class="container-fluid">
