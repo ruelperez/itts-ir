@@ -18,8 +18,10 @@
     <title>{{ $title ?? 'Page Title' }}</title>
 </head>
 <body>
-<div class="wrapper" x-data="{ marginLeftVar: 1 }">
-    @include('partials.side-nav')
+<div class="wrapper" x-data="{ marginLeftVar: 0 }">
+    <div>
+        @include('partials.side-nav')
+    </div>
     <!-- Main Component -->
     <div class="main" :style="{ marginLeft: marginLeftVar === 1 ? '265px' : '0px' }">
         @include('partials.header')
