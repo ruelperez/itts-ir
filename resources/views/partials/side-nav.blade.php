@@ -1,4 +1,5 @@
 @include('modal.click-lead')
+{{--@include('modal.click-settings')--}}
     <!-- Sidebar -->
     <aside id="sidebar" class="position-fixed">
         <div class="h-100">
@@ -132,13 +133,13 @@
                                 Inventory</a>
                             <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#lead"><i class="fa-solid fa-check-to-slot pe-2" ></i>
                                 Lead Tracker</a>
-                            <a class="dropdown-item" href="#"><i class="fa-solid fa-gear pe-2"></i>
+                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#clickSettings" id="settings"><i class="fa-solid fa-gear pe-2"></i>
                                 Settings</a>
                         </div>
                     </div>
                 </li>
                 <div class="text-end pe-3">
-                    <p wire:click="logout"><small style="cursor: pointer"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Log Out</small></p>
+                    <p onclick="location.href = '/user/logout';"><small style="cursor: pointer"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Log Out</small></p>
                 </div>
 {{--                <li class="sidebar-item">--}}
 {{--                    <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi"--}}

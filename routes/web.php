@@ -58,6 +58,7 @@ Route::middleware('restrict.ip')->group(function () {
         return view('user.login');
     })->name('login')->middleware('guest');
     Route::post('/login/auth', [\App\Http\Controllers\LoginController::class, 'auth']);
+    Route::get('/user/logout', [\App\Http\Controllers\LoginController::class, 'logout']);
     Route::get('/user/register', function (){
         return view('user.register');
     });
