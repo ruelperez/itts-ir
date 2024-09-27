@@ -130,11 +130,11 @@
                             <div class="dropdown-menu" aria-labelledby="dropupLink">
                                 <a class="dropdown-item" href="/logs"><i class="fa-solid fa-tent-arrow-left-right pe-2"></i>
                                     Logs</a>
-                                <a class="dropdown-item" href="inventory"><i class="fa-solid fa-store pe-2"></i>
+                                <a class="dropdown-item" href="/inventory"><i class="fa-solid fa-store pe-2"></i>
                                     Inventory</a>
                                 <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#lead"><i class="fa-solid fa-check-to-slot pe-2" ></i>
                                     Lead Tracker</a>
-                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#clickSettings" id="settings"><i class="fa-solid fa-gear pe-2"></i>
+                                <a class="dropdown-item" href="/settings"><i class="fa-solid fa-gear pe-2"></i>
                                     Settings</a>
                             </div>
                         </div>
