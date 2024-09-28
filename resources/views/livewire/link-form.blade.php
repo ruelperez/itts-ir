@@ -4,7 +4,7 @@
     @include('modal.form_link.add')
     @include('modal.form_link.edit')
                 <div>
-                    <h6 style="margin-left: 2%; margin-top: 3%;">FORM LINK</h6>
+                    <h6>FORM LINK</h6>
                 </div>
                 <hr>
                 @if($position != "Agent")

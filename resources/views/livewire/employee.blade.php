@@ -1,5 +1,4 @@
 <div>
-    @include('modal.click-settings')
     @include('modal.news-update.show-photo')
     @include('modal.employee.loading')
     @include('modal.employee.disclick')
@@ -409,7 +408,6 @@
                     </form>
                 </div>
 <button id="btn1" data-bs-toggle="modal" data-bs-target="#loading" style="display: none"></button>
-
         @script
         <script>
             $wire.on('formSubmitted', () => {
@@ -417,5 +415,17 @@
             });
         </script>
         @endscript
+    @if (session('alert'))
+        @push('js')
+            <script>
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Oopss',
+                    text: '{{ session('alert') }}',
+                    confirmButtonText: 'OK'
+                });
+            </script>
+        @endpush
+    @endif
 </div>
 
