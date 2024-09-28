@@ -103,11 +103,6 @@ class MasstortTracker extends Component
     }
 
     public function mount(){
-        $usrId = auth()->user()->id;
-        $sd = \App\Models\Employee::where('user_id',$usrId)->get();
-        if (count($sd) < 1){
-            return redirect('/itts/15/employee');
-        }
         $pst = auth()->user()->position;
         if ($pst != "Super Admin"){
             return redirect('/');

@@ -48,6 +48,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth','restrict.ip','checkEmployee'])->group(function () {
     Route::get('/{page}', [\App\Http\Controllers\PageController::class, 'page']);
+    Route::get('/per-shift-pdf/{month}/{day}/{year}/{role}', [\App\Http\Controllers\ShiftController::class, 'pdf']);
 });
 
 Route::middleware(['auth','restrict.ip'])->group(function () {

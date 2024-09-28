@@ -29,6 +29,10 @@ class Settings extends Component
     }
 
     public function mount(){
+        $pst = auth()->user()->position;
+        if ($pst != "Super Admin"){
+            return redirect('/');
+        }
         $data = IsRegistration::all();
         if (count($data) == 0){
             IsRegistration::create([
