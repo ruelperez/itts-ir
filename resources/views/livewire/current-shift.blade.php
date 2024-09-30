@@ -20,7 +20,7 @@
             </select>
         </div>
     </div>
-    <div class="table-responsive">
+    <div class="table-responsive mt-4">
         <table class="table table-hover">
             <thead>
             <tr>
