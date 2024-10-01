@@ -1,13 +1,12 @@
 <div>
-    @include('modal.click-settings')
     @include('modal.news-update.show-photo')
     @include('modal.dashboard.anounce')
     @include('modal.dashboard.saveOrNot')
     @include('modal.dashboard.click-data')
                 <div>
-                    <h6 style="margin-left: 2%; margin-top: 3%;">Edit Dupe Checker ({{$phoneNumber}}) </h6>
+                    <h6>Edit Dupe Checker ({{$phoneNumber}}) </h6>
                 </div>
-                <div style="background-color: #696969; color: white; padding: 15px 40px; width: 96%; margin-left: 2%; border-radius: 2%;" class="mt-4">
+                <div style="background-color: #696969; color: white; padding: 15px 40px;  border-radius: 2%;" class="mt-4">
                     <form wire:submit.prevent="submitEdit">
                         <div class="d-flex">
                             <div class="mb-2"><i>Put "n/a" if not applicable</i></div>
@@ -318,6 +317,10 @@
                     title: 'Successfully Updated!',
                     icon: 'success',
                     confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.history.back();
+                    }
                 });
             });
             document.getElementById('btn678').addEventListener('click', function() {
@@ -326,6 +329,10 @@
                     text: 'This is a SweetAlert popup.',
                     icon: 'success',
                     confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.history.back();
+                    }
                 });
             });
         </script>

@@ -71,14 +71,6 @@
             @endforeach
             </tbody>
         </table>
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-3 col-xl-3">
-                <button class="btn btn-success w-100" wire:click="previousPage">Previous</button>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3 col-xl-3 mt-2 mt-md-0">
-                <button class="btn btn-primary w-100" wire:click="nextPage">Next</button>
-            </div>
-        </div>
     </div>
 
 </div>

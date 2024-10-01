@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
-class DupecheckerEdit extends Component
+class MasstortTrackerEdit extends Component
 {
     public $registrationSwitch, $ids, $dtrData = [], $position, $is_success = false, $employeeData, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
             $date, $campaign, $base = true, $client, $lawfirm, $caseType, $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source, $displayRemarks, $result,
@@ -43,7 +43,7 @@ class DupecheckerEdit extends Component
         $this->campaignList = Note::select('campaign')
             ->distinct('campaign')
             ->get();
-        return view('livewire.dupechecker-edit');
+        return view('livewire.masstort-tracker-edit');
     }
 
     public function clickSearch(){

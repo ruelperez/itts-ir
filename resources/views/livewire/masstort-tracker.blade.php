@@ -1,45 +1,39 @@
 <div>
-    @include('modal.click-settings')
     @include('modal.news-update.show-photo')
     @include('modal.dupe-checker.form')
     @include('modal.dupe-checker.saveOrNot')
     @include('modal.dupe-checker.viewDetail')
-                <div>
+                <div class="mb-3">
                     <h6>Mass Tort Tracker</h6>
                 </div>
-
                 <div class="row">
-                    <div class="col-6 d-flex mt-3">
-                        <div class="w-50">
-                            <input class="form-control" type="search" placeholder="Search" aria-label="Search" wire:model.live="search">
-                        </div>
-                        <div class="ms-5 pt-2">
-                            @if(count($checkBox) == 1)
-                                <i class="fa-solid fa-eye" style="cursor: pointer" title="View details" wire:loading.attr="disabled" wire:click="viewDetail" data-bs-toggle="modal" data-bs-target="#viewDetail"></i>
-                                <i class="fa-solid fa-pen-to-square ms-3" style="cursor: pointer" title="Edit" onclick="location.href = '/itts/25/mass-tort-tracker/edit/{{$checkBox[0]}}';" id="dupeEditID" target="_blank"></i>
-                                <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer" title="Delete" wire:click="delete" wire:confirm="Are you sure you want to delete?"></i>
-                            @endif
-                            @if(count($checkBox) > 1)
-                                <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer;" title="Delete" wire:click="delete" wire:confirm="Are you sure you want to delete?"></i>
-                            @endif
-                        </div>
+                    <div class="col-md-6 col-lg-5 col-xl-4">
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search" wire:model.live="search">
                     </div>
-                    <div class="col-3">
-
+                    <div class="mt-3 col-6 col-sm-3 col-md-3 col-lg-5 col-xl-6 text-md-center pe-lg-5 text-lg-end">
+                        @if(count($checkBox) == 1)
+                            <i class="fa-solid fa-eye" style="cursor: pointer" title="View details" wire:loading.attr="disabled" wire:click="viewDetail" data-bs-toggle="modal" data-bs-target="#viewDetail"></i>
+                            <i class="fa-solid fa-pen-to-square ms-3" style="cursor: pointer" title="Edit" onclick="location.href = '/edit-leads/masstort-tracker-edit/{{$checkBox[0]}}';" id="dupeEditID" target="_blank"></i>
+                            <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer" title="Delete" wire:click="delete" wire:confirm="Are you sure you want to delete?"></i>
+                        @endif
+                        @if(count($checkBox) > 1)
+                            <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer;" title="Delete" wire:click="delete" wire:confirm="Are you sure you want to delete?"></i>
+                        @endif
                     </div>
                     @if(count($checkBox) > 0)
-                        <div class="col-2 pt-3 ms-auto">
-                            <button type="button" class="btn btn-primary" wire:click="clearCheck"><i class="fa-solid fa-broom me-2"></i>Clear checks</button>
+                        <div class="mt-3 mt-md-0 col-6 col-sm-5 col-md-3 col-lg-2">
+                            <button type="button" class="btn btn-primary w-100" wire:click="clearCheck"><i class="fa-solid fa-broom me-2"></i>Uncheck</button>
                         </div>
                     @endif
                 </div>
+    <hr>
                 <div class="text-center">
                     <div class="spinner-border mt-5" role="status" wire:loading>
                         <span class="visually-hidden">Loading...</span>
                     </div>
                 </div>
-                <div style="font-size: 13px; margin-top: 15px;"  class="px-2" wire:loading.remove>
-                    <table class="table table-striped" style="width: 100%;">
+                <div style="font-size: 13px;" class="table-responsive " wire:loading.remove>
+                    <table class="table table-striped">
                         <thead>
                         <tr>
                             <th scope="col" style="width: 9%;">Date</th>
