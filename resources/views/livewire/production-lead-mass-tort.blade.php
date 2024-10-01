@@ -1,19 +1,19 @@
 <div>
-    @include('modal.click-settings')
-    @include('modal.news-update.show-photo')
-    @include('modal.Notes.add')
-    @include('modal.Notes.edit')
     @include('modal.dupe-checker.viewDetail')
-
     <div>
         <h6>MY PRODUCTION LEAD</h6>
     </div>
-    <hr>
-    <div class="row">
-        <div class="col-12 col-lg-2">
-            <p>{{ucwords($agentName)}}</p>
+    <div class="row  mt-3 mt-md-4">
+        <div class="col-sm-5 col-lg-3 col-xl-2">
+            <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                MASS TORT
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="/production-lead-mass-tort">Mass Tort</a></li>
+                <li><a class="dropdown-item" href="/production-lead-dtv">Direct TV</a></li>
+            </ul>
         </div>
-        <div class="col-12 col-md- col-lg-4">
+        <div class="col-sm-7 col-md- col-lg-5 col-xl-5 mt-2 mt-sm-0">
             <input class="form-control w-100" type="search" placeholder="Search" aria-label="Search" wire:model.live="search">
         </div>
     </div>
@@ -22,7 +22,7 @@
             <span class="visually-hidden">Loading...</span>
         </div>
     </div>
-    <div style="font-size: 13px; margin-top: 30px;"  class="px-2" wire:loading.remove>
+    <div class="table-responsive mt-sm-4" wire:loading.remove>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -30,8 +30,8 @@
                 <th scope="col" style="width: 9%;">Agent</th>
                 <th scope="col" style="width: 9%;">Claimant</th>
                 <th scope="col" style="width: 9%;">Injured party</th>
-                <th scope="col" style="width: 9%;">Phone number</th>
-                <th scope="col" style="width: 9%;">Alt. Phone number</th>
+                <th scope="col" style="width: 9%;">Phone #</th>
+{{--                <th scope="col" style="width: 9%;">Alt. Phone #</th>--}}
                 <th scope="col" style="width: 8%;">Campaign</th>
                 <th scope="col" style="width: 8%;">Client</th>
                 <th scope="col" style="width: 8%;">Lawfirm</th>
@@ -89,10 +89,10 @@
             </tbody>
         </table>
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+            <div class="col-12 col-md-6 col-lg-3 col-xl-3">
                 <button class="btn btn-success w-100" wire:click="previousPage">Previous</button>
             </div>
-            <div class="col-12 col-md-6 col-lg-4 col-xl-3 mt-2 mt-md-0">
+            <div class="col-12 col-md-6 col-lg-3 col-xl-3 mt-2 mt-md-0">
                 <button class="btn btn-primary w-100" wire:click="nextPage">Next</button>
             </div>
         </div>

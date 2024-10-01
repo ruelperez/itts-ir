@@ -43,17 +43,17 @@
                         <thead>
                         <tr>
                             <th scope="col" style="width: 9%;">Date (U.S time)</th>
-                            <th scope="col" style="width: 9%;">Customer's Name</th>
-                            <th scope="col" style="width: 9%;">Phone number</th>
-                            <th scope="col" style="width: 9%;">Alt. Phone number</th>
+                            <th scope="col" style="width: 9%;">Customer</th>
+                            <th scope="col" style="width: 9%;">Phone #</th>
+                            <th scope="col" style="width: 9%;">Alt. Phone #</th>
                             <th scope="col" style="width: 8%;">Email</th>
-                            <th scope="col" style="width: 8%;">Order number</th>
+                            <th scope="col" style="width: 8%;">Order #</th>
                             <th scope="col" style="width: 9%;">Service Addr.</th>
                             <th scope="col" style="width: 9%;">Service</th>
                             <th scope="col" style="width: 9%;">Package</th>
                             <th scope="col" style="width: 9%;">Agent</th>
                             <th scope="col" style="width: 9%;">Coach</th>
-                            <th scope="col" style="width: 15%;">Remarks</th>
+                            <th scope="col" style="width: 15%;">Disposition</th>
                             <th scope="col" style="width: 15%;">Result</th>
                         </tr>
                         </thead>
@@ -94,7 +94,7 @@
                                     {{ucwords($data->coach)}}
                                 </td>
                                 <td>
-                                    @if($data->disposition == "Sale") <b>{{ucfirst($data->disposition)}} - {{ucfirst($data->description)}}</b> @else {{ucfirst($data->disposition)}} - {{ucfirst($data->description)}} @endif
+                                    <b>{{ucfirst($data->disposition)}} - {{ucfirst($data->description)}}</b>
                                 </td>
                                 <td>
                                     {{ucfirst($data->result)}}
@@ -106,9 +106,13 @@
                         @endforeach
                         </tbody>
                     </table>
-                    <div style="margin-top: 1%; margin-bottom: 5%;">
-                        <button class="btn btn-success" wire:click="previousPage" style="width: 10%;">Previous</button>
-                        <button class="btn btn-primary" wire:click="nextPage" style="width: 10%;">Next</button>
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-3 col-xl-3">
+                            <button class="btn btn-success w-100" wire:click="previousPage">Previous</button>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3 col-xl-3 mt-2 mt-md-0">
+                            <button class="btn btn-primary w-100" wire:click="nextPage">Next</button>
+                        </div>
                     </div>
                 </div>
     @script
