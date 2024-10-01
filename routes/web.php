@@ -41,14 +41,14 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/itts/23/mass-tort-tracker', \App\Livewire\MasstortTracker::class)->middleware('auth');
 //Route::get('/itts/24/mass-tort-form', \App\Livewire\MasstortForm::class)->middleware('auth');
 //Route::get('/itts/25/mass-tort-tracker/edit/{id}', \App\Livewire\DupecheckerEdit::class)->middleware('auth');
-//Route::get('/itts/26/{name}', \App\Livewire\ProductionLeadMassTort::class)->middleware('auth');
+//Route::get('/itts/26/{name}', \App\Livewire\ProductionLead::class)->middleware('auth');
 //Route::get('/itts/27/dtv-tracker', \App\Livewire\DtvTracker::class)->middleware('auth');
 //Route::get('/itts/28/dtv-tracker/edit/{id}', \App\Livewire\DtvEdit::class)->middleware('auth');
 //Route::get('/itts/24/dtv-form', \App\Livewire\DtvForm::class)->middleware('auth');
 
 Route::middleware(['auth','restrict.ip','checkEmployee'])->group(function () {
     Route::get('/{page}', [\App\Http\Controllers\PageController::class, 'page']);
-    Route::get('/per-shift-pdf/{moproduction-lead-mass-tortnth}/{day}/{year}/{role}', [\App\Http\Controllers\ShiftController::class, 'pdf']);
+    Route::get('/per-shift-pdf/{month}/{day}/{year}/{role}', [\App\Http\Controllers\ShiftController::class, 'pdf']);
 });
 
 Route::middleware(['auth','restrict.ip'])->group(function () {

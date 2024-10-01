@@ -24,8 +24,8 @@
                                 DIRECT TV
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="/masstort-form">Mass Tort</a></li>
-                                <li><a class="dropdown-item" href="/dtv-form">Direct TV</a></li>
+                                <li><a class="dropdown-item" href="/itts/24/mass-tort-form">Mass Tort</a></li>
+                                <li><a class="dropdown-item" href="/itts/24/dtv-form">Direct TV</a></li>
                             </ul>
                         </div>
                     </div>

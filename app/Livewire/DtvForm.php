@@ -68,10 +68,6 @@ class DtvForm extends Component
     }
 
     public function submitDTV(){
-        if ($this->gm == 0){
-            session()->flash('badAgent', "Successfully saved");
-            return;
-        }
         $this->validate([
             'phoneNumber' => ['required', 'regex:/^[0-9]+$/'],
             'altPhoneNumber' => ['required', 'regex:/^[0-9]+$/'],

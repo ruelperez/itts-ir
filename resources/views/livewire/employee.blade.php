@@ -8,7 +8,7 @@
                     </div>
                     @if($position == "Super Admin")
                         <div class="w-50 mt-4 text-end pe-5">
-                            <button class="btn btn-primary" style="width: 40%;" onclick="location.href = '/staff-directory';"><i class="fa-solid fa-arrows-to-circle me-2" ></i>Staff Directory</button>
+                            <button class="btn btn-primary" style="width: 40%;" onclick="location.href = '/itts/16/staff-directory';"><i class="fa-solid fa-arrows-to-circle me-2" ></i>Staff Directory</button>
                         </div>
                     @endif
                 </div>
