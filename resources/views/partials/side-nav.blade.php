@@ -51,6 +51,12 @@
                             <p class="mb-0 me-1 text-muted user-select-all"><small>ITTS-00{{$user_id}}</small></p>
                         </div>
                     </div>
+                    <div class="text-end pe-3">
+                        <p><small style="cursor: pointer" onclick="location.href = '/user/logout';" x-data="{ hover: false }"
+                                  x-on:mouseover="hover = true"
+                                  x-on:mouseleave="hover = false"
+                                  :class="hover ? 'text-primary' : 'text-dark'"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Log Out</small></p>
+                    </div>
                 </li>
                 <div class="scrollable-div mt-4">
                     <li class="sidebar-header">
@@ -139,9 +145,6 @@
                             </div>
                         </div>
                     </li>
-                    <div class="text-end pe-3">
-                        <p onclick="location.href = '/user/logout';"><small style="cursor: pointer"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Log Out</small></p>
-                    </div>
                 </div>
 {{--                <li class="sidebar-item">--}}
 {{--                    <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi"--}}
