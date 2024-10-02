@@ -574,6 +574,7 @@ class MasstortTracker extends Component
                 'fullname' => $this->fullname,
             ]);
         }
+        $this->checkBox = [];
     }
 
     public function updated($field){
