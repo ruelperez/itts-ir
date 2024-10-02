@@ -29,7 +29,7 @@
 {{--            </div>--}}
             <!-- Sidebar Navigation -->
             <ul class="sidebar-nav">
-                <li class="mb-3">
+                <li>
 {{--                    <div class="card border border-0">--}}
 {{--                        <div class="card-body text-center">--}}
 {{--                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"--}}
@@ -51,16 +51,16 @@
                             <p class="mb-0 me-1 text-muted user-select-all"><small>ITTS-00{{$user_id}}</small></p>
                         </div>
                     </div>
-                    <div class="text-end pe-3">
+                    <div class="text-end pe-3 mt-3">
                         <p><small style="cursor: pointer" onclick="location.href = '/user/logout';" x-data="{ hover: false }"
                                   x-on:mouseover="hover = true"
                                   x-on:mouseleave="hover = false"
                                   :class="hover ? 'text-primary' : 'text-dark'"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Log Out</small></p>
                     </div>
                 </li>
-                <div class="scrollable-div mt-4">
-                    <li class="sidebar-header">
-                        Tools & Components
+                <div class="scrollable-div">
+                    <li class="sidebar-item ps-4">
+                        <small>Tools & Components</small>
                     </li>
                     <li class="sidebar-item">
                         <a href="/dashboard"  class="sidebar-link">
