@@ -3,7 +3,7 @@
     @include('modal.dupe-checker.form')
     @include('modal.dupe-checker.saveOrNot')
     @include('modal.dupe-checker.viewDetail')
-                <div class="mb-3">
+                <div class="mb-4">
                     <h6>Mass Tort Tracker</h6>
                 </div>
                 <div class="row">
@@ -101,9 +101,13 @@
                         @endforeach
                         </tbody>
                     </table>
-                    <div style="margin-top: 1%; margin-bottom: 5%;">
-                        <button class="btn btn-success" wire:click="previousPage" style="width: 10%;">Previous</button>
-                        <button class="btn btn-primary" wire:click="nextPage" style="width: 10%;">Next</button>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-3 col-xl-3">
+                        <button class="btn btn-success w-100" wire:click="previousPage">Previous</button>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 col-xl-3 mt-2 mt-md-0">
+                        <button class="btn btn-primary w-100" wire:click="nextPage">Next</button>
                     </div>
                 </div>
 

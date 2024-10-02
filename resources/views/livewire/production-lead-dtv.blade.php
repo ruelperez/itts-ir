@@ -22,7 +22,11 @@
             <span class="visually-hidden">Loading...</span>
         </div>
     </div>
-    <div class="table-responsive mt-sm-4" wire:loading.remove>
+    <div class="mt-2 mt-sm-4 text-danger">
+        <i class="fa-solid fa-circle-exclamation me-2"></i><small>To view <b>complete details</b>, click the record.</small>
+    </div>
+    <hr>
+    <div style="font-size: 14px;" class="table-responsive" wire:loading.remove>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -30,7 +34,6 @@
                 <th scope="col" >Customer</th>
                 <th scope="col" >Phone #</th>
                 <th scope="col" >Alt. Phone #</th>
-                <th scope="col" >Email</th>
                 <th scope="col" >Service Addr.</th>
                 <th scope="col" >Order #</th>
                 <th scope="col" >Disposition</th>
@@ -51,9 +54,6 @@
                     </td>
                     <td>
                         {{$data->alt_num}}
-                    </td>
-                    <td>
-                        {{$data->email}}
                     </td>
                     <td>
                         {{ucfirst($data->address)}}

@@ -47,10 +47,10 @@
                     <p>Package: <b>{{$package}}</b></p>
                 </div>
                 <div>
-                    <p>Disposition: <b>{{$disposition}} - {{$description}}</b></p>
+                    <p>Order #: <b>{{$orderNumber}}</b></p>
                 </div>
                 <div>
-                    <p>Order #: <b>{{$orderNumber}}</b></p>
+                    <p>Disposition: <b>{{$disposition}} - {{$description}}</b></p>
                 </div>
                 <div>
                     <p>Result: <b>{{$result}}</b></p>

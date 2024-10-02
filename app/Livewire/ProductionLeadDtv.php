@@ -43,7 +43,7 @@ class ProductionLeadDtv extends Component
                 ->where('agent', $this->agentName)
                 ->orWhere('description', 'LIKE', '%' . $this->search . '%')
                 ->where('agent', $this->agentName)
-                ->orWhere('oderNumber', 'LIKE', '%' . $this->search . '%')
+                ->orWhere('orderNumber', 'LIKE', '%' . $this->search . '%')
                 ->where('agent', $this->agentName)
                 ->orWhere('date', 'LIKE', '%' . $this->search . '%')
                 ->where('agent', $this->agentName)

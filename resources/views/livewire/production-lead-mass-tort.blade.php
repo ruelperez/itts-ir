@@ -22,7 +22,11 @@
             <span class="visually-hidden">Loading...</span>
         </div>
     </div>
-    <div class="table-responsive mt-sm-4" wire:loading.remove>
+    <div class="mt-2 mt-sm-4 text-danger" wire:loading.remove>
+        <i class="fa-solid fa-circle-exclamation me-2"></i><small>To view <b>complete details</b>, click the record.</small>
+    </div>
+    <hr>
+    <div style="font-size: 14px;" class="table-responsive" wire:loading.remove>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -66,9 +70,9 @@
                     <td>
                         {{$data->phoneNumber}}
                     </td>
-                    <td>
-                        {{$data->altPhoneNumber}}
-                    </td>
+{{--                    <td>--}}
+{{--                        {{$data->altPhoneNumber}}--}}
+{{--                    </td>--}}
                     <td>
                         {{ucwords($data->campaign)}}
                     </td>
@@ -89,10 +93,10 @@
             </tbody>
         </table>
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-3 col-xl-3">
+            <div class="col-12 col-md-6 col-lg-3 col-xl-2">
                 <button class="btn btn-success w-100" wire:click="previousPage">Previous</button>
             </div>
-            <div class="col-12 col-md-6 col-lg-3 col-xl-3 mt-2 mt-md-0">
+            <div class="col-12 col-md-6 col-lg-3 col-xl-2 mt-2 mt-md-0">
                 <button class="btn btn-primary w-100" wire:click="nextPage">Next</button>
             </div>
         </div>

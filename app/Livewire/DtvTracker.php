@@ -458,30 +458,22 @@ class DtvTracker extends Component
         $this->currentPage++;
     }
 
-//    public function viewDetail(){
-//        for ($i=0; count($this->checkBox) > $i; $i++){
-//            $this->ids = $this->checkBox[$i];
-//        }
-//        $dv = Submission::find($this->ids);
-//        $this->caseType = $dv->caseType;
-//        if ($this->caseType == "obo"){
-//            $this->claimant = $dv->claimant;
-//            $this->injuredParty = $dv->injuredParty;
-//        }
-//        else{
-//            $this->claimant = $dv->claimant;
-//        }
-//        $this->phoneNumber = $dv->phoneNumber;
-//        $this->altPhoneNumber = $dv->altPhoneNumber;
-//        $this->dob = $dv->dob;
-//        $this->email = $dv->email;
-//        $this->address = $dv->address;
-//        $this->ssn = $dv->ssn;
-//        $this->agent = $dv->agent;
-//        $this->coach = $dv->coach;
-//        $this->verifier = $dv->verifier;
-//        $this->source = $dv->source;
-//    }
+    public function viewDetail(){
+        for ($i=0; count($this->checkBox) > $i; $i++){
+            $this->ids = $this->checkBox[$i];
+        }
+        $dv = \App\Models\DtvTracker::find($this->ids);
+        $this->phoneNumber = $dv->phoneNumber;
+        $this->altPhoneNumber = $dv->altPhoneNumber;
+        $this->dob = $dv->dob;
+        $this->email = $dv->email;
+        $this->address = $dv->address;
+        $this->ssn = $dv->ssn;
+        $this->agent = $dv->agent;
+        $this->coach = $dv->coach;
+        $this->verifier = $dv->verifier;
+        $this->source = $dv->source;
+    }
     public function clickSearch(){
         if ($this->agent != ""){
             $this->results = Employee::where('fname','LIKE','%'. $this->agent. '%')
@@ -574,6 +566,7 @@ class DtvTracker extends Component
                 'fullname' => $this->fullname,
             ]);
         }
+        $this->checkBox = [];
     }
 
     public function updated($field){
