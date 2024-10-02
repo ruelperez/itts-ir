@@ -1,9 +1,8 @@
 <div>
-    @include('modal.click-settings')
     @include('modal.news-update.show-photo')
     @include('modal.submission.saveOrNot')
                 <div>
-                    <h5 style="margin-left: 2%; margin-top: 3%;">Lead Form</h5>
+                    <h5>Lead Form</h5>
                 </div>
                 <div style="background-color: #696969; color: white;border-radius: 2%;" class="px-sm-5 py-sm-5">
                     <div class="row">
