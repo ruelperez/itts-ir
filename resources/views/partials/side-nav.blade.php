@@ -55,7 +55,7 @@
                         <p><small style="cursor: pointer" onclick="location.href = '/user/logout';" x-data="{ hover: false }"
                                   x-on:mouseover="hover = true"
                                   x-on:mouseleave="hover = false"
-                                  :class="hover ? 'text-primary' : 'text-dark'"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Log Out</small></p>
+                                  :class="hover ? 'text-info' : 'text-primary'"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Log Out</small></p>
                     </div>
                 </li>
                 <div class="scrollable-div">
@@ -128,10 +128,10 @@
                             FAQ
                         </a>
                     </li>
-                    <li class="sidebar-header">
+                    <li class="sidebar-item ps-4 mt-2">
                         <div class="dropup">
                             <a class="dropdown-toggle" id="dropupLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Admin access
+                                <small>Admin access</small>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropupLink">
                                 <a class="dropdown-item" href="/logs"><i class="fa-solid fa-tent-arrow-left-right pe-2"></i>
