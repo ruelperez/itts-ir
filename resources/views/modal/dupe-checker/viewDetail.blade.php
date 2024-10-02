@@ -65,12 +65,12 @@
                     <p>SSN: <b>{{$ssn}}</b></p>
                 </div>
                 <hr>
-                <div>
-                    <p>Remarks: <b>{{$remarks}}</b></p>
-                </div>
-                <div>
-                    <p>Result: <b>{{$result}}</b></p>
-                </div>
+{{--                <div>--}}
+{{--                    <p>Remarks: <b>{{$remarks}}</b></p>--}}
+{{--                </div>--}}
+{{--                <div>--}}
+{{--                    <p>Result: <b>{{$result}}</b></p>--}}
+{{--                </div>--}}
             </div>
         </div>
     </div>
