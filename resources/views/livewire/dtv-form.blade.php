@@ -3,18 +3,12 @@
     @include('modal.news-update.show-photo')
     @include('modal.submission.saveOrNot')
                 <div>
-                    <h5 style="margin-left: 2%; margin-top: 3%;">Lead Form</h5>
+                    <h5>Lead Form</h5>
                 </div>
-                <div style="background-color: #696969; color: white;border-radius: 2%;" class="px-sm-4 py-sm-4">
+                <div style="background-color: #696969; color: white;border-radius: 2%;" class="px-3 py-2 px-sm-4 py-sm-4 mt-4">
                     <div class="row">
-                        <div class="">
-
-                        </div>
-                        <div class="col-sm-12 mb-2 text-center">
+                        <div class="mb-2 text-center">
                             <h4>Direct TV</h4>
-                        </div>
-                        <div class="">
-
                         </div>
                     </div>
                     <div class="mb-2"><i>Put "n/a" if not applicable</i></div>
@@ -30,38 +24,38 @@
                         </div>
                     </div>
                         <form wire:submit.prevent="submitDTV">
-                            <div class="mt-lg-2 row">
-                                <div class="col-xl-3 col-lg-3 col-md-12 mb-md-4 mb-sm-4">
+                            <div class="row">
+                                <div class="col-xl-3 col-lg-3 col-md-6 mb-md-4 mb-sm-4 mt-sm-2">
                                     <label class="form-label">Date (U.S Time)*</label>
                                     <input type="text" id="datepicker" class="form-control" wire:model="date" required>
                                 </div>
-                                <div class="col-xl-3 col-lg-3 col-md-12 mb-md-4 mb-sm-4">
+                                <div class="col-xl-3 col-lg-3 col-md-6 mb-md-4 mb-sm-4 mt-4 mt-md-2">
                                     <label class="form-label">Name of Customer*</label>
                                     <input type="text" class="form-control" wire:model="claimant" required>
                                 </div>
-                                <div class="col-xl-3 col-lg-3 col-md-12 mb-md-4 mb-sm-4">
+                                <div class="col-xl-3 col-lg-3 col-md-6 mb-md-4 mb-sm-4 mt-4 mt-lg-2">
                                     <label class="form-label">Phone Number*</label>
                                     <input type="text" class="form-control" wire:model="phoneNumber" required>
                                     @error('phoneNumber') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
-                                <div class="col-xl-3 col-lg-3 col-md-12 mb-md-4 mb-sm-4">
+                                <div class="col-xl-3 col-lg-3 col-md-6 mb-md-4 mb-sm-4 mt-4 mt-lg-2">
                                     <label class="form-label">Alt. Phone Number*</label>
                                     <input type="text" class="form-control" wire:model="altPhoneNumber" placeholder="Enter &quot;0&quot; if not applicable" required>
                                     @error('altPhoneNumber') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="mt-lg-2 row">
-                                <div class="col-xl-4 col-lg-4 col-md-12 mb-md-4 mb-sm-4">
+                                <div class="col-xl-4 col-lg-4 col-md-6 mb-md-4 mb-sm-4 mt-4 mt-lg-2">
                                     <label class="form-label">Email*</label>
                                     <input type="email" class="form-control" wire:model="email" required>
                                     @error('email') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
-                                <div class="col-xl-4 col-lg-4 col-md-12 mb-md-4 mb-sm-4">
+                                <div class="col-xl-4 col-lg-4 col-md-6 mb-md-4 mb-sm-4 mt-4 mt-lg-2">
                                     <label class="form-label">Service Address*</label>
                                     <input type="text" class="form-control" wire:model="address" required>
                                     @error('address') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
-                                <div class="col-xl-4 col-lg-4 col-md-12 mb-md-4 mb-sm-4">
+                                <div class="col-xl-4 col-lg-4 col-md-6 mb-md-4 mb-sm-4 mt-4 mt-lg-2">
                                     <div>
                                         <label class="form-label">Service*</label>
                                     </div>
@@ -76,9 +70,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mt-lg-2 row" x-data="{ selectedOption: '' }">
-                                <div class="col-xl-4 col-lg-4 col-md-12 mb-md-4 mb-sm-4">
-                                    <div>
+                            <div class="row" x-data="{ selectedOption: '' }">
+                                <div class="col-xl-4 col-lg-4 col-md-6 mb-md-4 mb-sm-4">
+                                    <div class="mt-4">
                                         <label class="form-label">Package*</label>
                                     </div>
                                     <div>
@@ -96,7 +90,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-xl-4 col-lg-4 col-md-12 mb-md-2 mb-sm-1">
+                                <div class="col-xl-4 col-lg-4 col-md-6 mb-md-2 mb-sm-1 mt-4">
                                     <div>
                                         <label class="form-label">Disposition*</label>
                                     </div>
@@ -115,7 +109,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-xl-4 col-lg-4 col-md-12 mb-md-4 mb-sm-4 mt-lg-4">
+                                <div class="col-xl-4 col-lg-4 col-md-6 mb-md-4 mb-sm-4 mt-lg-5 mt-2">
                                     <input type="text" id="datepicker" class="form-control" wire:model="desciption" placeholder="Date of Sales" x-show="selectedOption === 'Sale'" @if($dtvRemarks == "Sale") required @endif >
                                     <input type="text" id="datepicker" class="form-control" wire:model="desciption" placeholder="Date of Callback" x-show="selectedOption === 'Callback'" @if($dtvRemarks == "Callback") required @endif>
                                     <textarea class="form-control" rows="2" wire:model="desciption"  style="border: none;" placeholder="Reason:" x-show="selectedOption === 'Declined Offer'" @if($dtvRemarks == "Declined Offer") required @endif></textarea>
@@ -130,7 +124,7 @@
                                 </div>
                             </div>
                             <div class="mt-lg-2 row">
-                                <div class="col-xl-4 col-lg-4 col-md-12 mb-md-4 mb-sm-4">
+                                <div class="col-xl-4 col-lg-4 col-md-6 mb-md-4 mb-sm-4 mt-4 mt-md-0">
                                     <label  class="form-label">Agent*</label>
                                     <input type="text" class="form-control" wire:model.live="agent" wire:blur="removeSearch" wire:click="clickSearch" required>
                                     @if(session()->has('badAgent'))
@@ -149,7 +143,7 @@
                                     @endif
                                     @error('agent') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
-                                <div class="col-xl-4 col-lg-4 col-md-12 mb-md-4 mb-sm-4">
+                                <div class="col-xl-4 col-lg-4 col-md-6 mb-md-4 mb-sm-4 mt-4 mt-md-0 mt-lg-1">
                                     <label  class="form-label">Coach*</label>
                                     <input type="text" class="form-control" wire:model.live="coach" wire:blur="removeSearchCoach" wire:click="clickSearchCoach" required>
                                     @if($showSearchCoach == true)
@@ -165,23 +159,17 @@
                                     @endif
                                     @error('coach') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
-                                <div class="col-xl-4 col-lg-4 col-md-12 mb-md-4 mb-sm-4">
+                                <div class="col-xl-4 col-lg-4 col-md-6 mb-md-4 mb-sm-4 mt-4 mt-lg-1">
                                     <label class="form-label">Order ID*</label>
                                     <input type="text" class="form-control" wire:model="orderNumber" placeholder="Enter &quot;0&quot; if not applicable" required>
                                     @error('orderNumber') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
                             </div>
-                            <div class="mt-lg-3 mt-md-3 row">
-                                <div class="col-lg-4 mb-sm-4">
-
-                                </div>
-                                <div class="col-lg-4 col-md-12 mb-md-3 mb-sm-2">
+                            <div class="mt-lg-3 mt-md-0 row">
+                                <div class="col-lg-4 col-md-8 mb-md-3 mb-sm-2 mt-4 mt-lg-2" >
                                     <button type="submit" class="btn btn-warning w-100">Submit</button>
                                 </div>
-                                <div class="col-lg-1 mb-sm-2">
-
-                                </div>
-                                <div class="col-lg-3 col-md-12 mb-sm-4">
+                                <div class="col-lg-3 col-md-4 mb-sm-4 mt-3 mt-md-4 mt-lg-2">
                                     <button type="button" class="btn btn-primary w-100" wire:click="clear">Clear</button>
                                 </div>
                             </div>

@@ -4,16 +4,10 @@
                 <div>
                     <h5>Lead Form</h5>
                 </div>
-                <div style="background-color: #696969; color: white;border-radius: 2%;" class="px-sm-5 py-sm-5">
+                <div style="background-color: #696969; color: white;border-radius: 2%;" class="px-sm-5 py-sm-4 mt-4">
                     <div class="row">
-                        <div class="">
-
-                        </div>
                         <div class="col-sm-12 mb-2 text-center">
                             <h4>Mass Tort</h4>
-                        </div>
-                        <div class="">
-
                         </div>
                     </div>
                     <div class="mb-2"><i>Put "n/a" if not applicable</i></div>
