@@ -10,9 +10,9 @@
                     <form wire:submit.prevent="submitEdit">
                         <div class="d-flex">
                             <div class="mb-2"><i>Put "n/a" if not applicable</i></div>
-                            <div>
-                                <i class="fa-solid fa-pen-to-square ms-4" style="cursor: pointer;" title="Edit" wire:click="clickEdit"></i>
-                            </div>
+{{--                            <div>--}}
+{{--                                <i class="fa-solid fa-pen-to-square ms-4" style="cursor: pointer;" title="Edit" wire:click="clickEdit"></i>--}}
+{{--                            </div>--}}
                         </div>
 
                         <div class="row">
