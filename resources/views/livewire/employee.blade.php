@@ -26,7 +26,7 @@
                                         <label class="col-form-label">First Name</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="fname" title="{{ucwords($fname)}}" required>
+                                        <input type="text"  class="form-control" wire:model="fname" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($fname)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -34,7 +34,7 @@
                                         <label class="col-form-label">Middle Name</label>
                                     </div>
                                     <div >
-                                        <input type="text"  class="form-control" wire:model="mname" title="{{ucwords($mname)}}" required>
+                                        <input type="text"  class="form-control" wire:model="mname" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($mname)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -42,7 +42,7 @@
                                         <label class="col-form-label">M.I</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="mi" title="{{ucwords($mi)}}" required>
+                                        <input type="text"  class="form-control" wire:model="mi" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($mi)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -50,7 +50,7 @@
                                         <label class="col-form-label">Last Name</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="lname" title="{{ucwords($lname)}}" required>
+                                        <input type="text"  class="form-control" wire:model="lname" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($lname)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -58,7 +58,7 @@
                                         <label class="col-form-label">Suffix</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="suffix" title="{{ucwords($suffix)}}" required>
+                                        <input type="text"  class="form-control" wire:model="suffix" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($suffix)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -66,7 +66,7 @@
                                         <label class="col-form-label">Age</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="age" title="{{ucwords($age)}}" required>
+                                        <input type="text"  class="form-control" wire:model="age" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($age)}}" required>
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                                         <label class="col-form-label">Phone Number</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="phone_number" title="{{ucwords($phone_number)}}" required>
+                                        <input type="text"  class="form-control" wire:model="phone_number" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($phone_number)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -84,7 +84,7 @@
                                         <label class="col-form-label">Date of Birth</label>
                                     </div>
                                     <div >
-                                        <input type="text" id="date-input" placeholder="mm/dd/yyyy"  class="form-control" wire:model="dob" title="{{ucwords($dob)}}" required>
+                                        <input type="text" id="date-input" placeholder="mm/dd/yyyy"  class="form-control" wire:model="dob" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($dob)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -92,7 +92,7 @@
                                         <label class="col-form-label">Gender Preference</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="gender_preference" title="{{ucwords($gender_preference)}}" required>
+                                        <input type="text"  class="form-control" wire:model="gender_preference" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($gender_preference)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -100,7 +100,7 @@
                                         <label class="col-form-label">Civil Status</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="civil_status" title="{{ucwords($civil_status)}}" required>
+                                        <input type="text"  class="form-control" wire:model="civil_status" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($civil_status)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -108,7 +108,7 @@
                                         <label class="col-form-label">Religion</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="religion" title="{{ucwords($religion)}}" required>
+                                        <input type="text"  class="form-control" wire:model="religion" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($religion)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -116,7 +116,7 @@
                                         <label class="col-form-label">Personal Email</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="personal_email" title="{{$personal_email}}" required>
+                                        <input type="text"  class="form-control" wire:model="personal_email" data-bs-toggle="tooltip" data-bs-placement="top" title="{{$personal_email}}" required>
                                     </div>
                                 </div>
                             </div>
@@ -131,7 +131,7 @@
                                         <label class="col-form-label">House/Apartment/Floor</label>
                                     </div>
                                     <div >
-                                        <input type="text"  class="form-control" wire:model="current_house" title="{{ucwords($current_house)}}" required>
+                                        <input type="text"  class="form-control" wire:model="current_house" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($current_house)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -139,7 +139,7 @@
                                         <label class="col-form-label">Street Name</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="current_street" title="{{ucwords($current_street)}}" required>
+                                        <input type="text"  class="form-control" wire:model="current_street" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($current_street)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -147,7 +147,7 @@
                                         <label class="col-form-label">Baranggay</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="current_brgy" title="{{ucwords($current_brgy)}}" required>
+                                        <input type="text"  class="form-control" wire:model="current_brgy" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($current_brgy)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -155,7 +155,7 @@
                                         <label class="col-form-label">City</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="current_city" title="{{ucwords($current_city)}}" required>
+                                        <input type="text"  class="form-control" wire:model="current_city" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($current_city)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -163,7 +163,7 @@
                                         <label class="col-form-label">Working Email</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="current_working_email" title="{{ucwords($current_working_email)}}" required>
+                                        <input type="text"  class="form-control" wire:model="current_working_email" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($current_working_email)}}" required>
                                     </div>
                                 </div>
                             </div>
@@ -189,7 +189,7 @@
                                         <label class="col-form-label">House/Apartment/Floor</label>
                                     </div>
                                     <div >
-                                        <input type="text"  class="form-control" wire:model="permanent_house" title="{{ucwords($permanent_house)}}" required>
+                                        <input type="text"  class="form-control" wire:model="permanent_house" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($permanent_house)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -197,7 +197,7 @@
                                         <label class="col-form-label">Street Name</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="permanent_street" title="{{ucwords($permanent_street)}}" required>
+                                        <input type="text"  class="form-control" wire:model="permanent_street" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($permanent_street)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -205,7 +205,7 @@
                                         <label class="col-form-label">Baranggay</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="permanent_brgy" title="{{ucwords($permanent_brgy)}}" required>
+                                        <input type="text"  class="form-control" wire:model="permanent_brgy" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($permanent_brgy)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -213,7 +213,7 @@
                                         <label class="col-form-label">City</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="permanent_city" title="{{ucwords($permanent_city)}}" required>
+                                        <input type="text"  class="form-control" wire:model="permanent_city" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($permanent_city)}}" required>
                                     </div>
                                 </div>
                             </div>
@@ -226,7 +226,7 @@
                                         <label class="col-form-label">SSS Number</label>
                                     </div>
                                     <div >
-                                        <input type="text"  class="form-control" wire:model="sss" title="{{ucwords($sss)}}" required>
+                                        <input type="text"  class="form-control" wire:model="sss" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($sss)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -234,7 +234,7 @@
                                         <label class="col-form-label">Phil Health Number</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="philhealth" title="{{ucwords($philhealth)}}" required>
+                                        <input type="text"  class="form-control" wire:model="philhealth" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($philhealth)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -242,7 +242,7 @@
                                         <label class="col-form-label">TIN Number</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="tin" title="{{ucwords($tin)}}" required>
+                                        <input type="text"  class="form-control" wire:model="tin" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($tin)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -250,7 +250,7 @@
                                         <label class="col-form-label">Hire Date</label>
                                     </div>
                                     <div>
-                                        <input type="text" id="hire-date" class="form-control" wire:model="hire_date" title="{{ucwords($hire_date)}}" placeholder="mm/dd/yyyy" required>
+                                        <input type="text" id="hire-date" class="form-control" wire:model="hire_date" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($hire_date)}}" placeholder="mm/dd/yyyy" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -258,7 +258,7 @@
                                         <label class="col-form-label">Years of Tenure</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="yot" title="{{ucwords($yot)}}" required>
+                                        <input type="text"  class="form-control" wire:model="yot" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($yot)}}" required>
                                     </div>
                                 </div>
                             </div>
@@ -273,7 +273,7 @@
                                         <label class="col-form-label">Department</label>
                                     </div>
                                     <div>
-                                        <select class="form-select" aria-label="Default select example" wire:model.live="department" required>
+                                        <select class="form-select" aria-label="Default select example" wire:model.live="department" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($department)}}" required>
                                             <option value="Management">Management</option>
                                             <option value="Admin">Admin </option>
                                             <option value="Admin - Production">Admin - Production</option>
@@ -287,7 +287,7 @@
                                             <label class="col-form-label">Designation / Position</label>
                                         </div>
                                         <div>
-                                            <select class="form-select" aria-label="Default select example" wire:model="designation">
+                                            <select class="form-select" aria-label="Default select example" wire:model="designation" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($designation)}}">
                                                 <option selected value="Chief Executive Officer">Chief Executive Officer</option>
                                                 <option value="President">President</option>
                                             </select>
@@ -297,7 +297,7 @@
                                             <label class="col-form-label">Designation / Position</label>
                                         </div>
                                         <div>
-                                            <select class="form-select" aria-label="Default select example" wire:model="designation">
+                                            <select class="form-select" aria-label="Default select example" wire:model="designation" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($designation)}}">
                                                 <option selected value="Accounts and Back Office Manager">Accounts and Back Office Manager</option>
                                                 <option value="Production Floor Manager/ Process Lead">Production Floor Manager/ Process Lead</option>
                                                 <option value="Human Resource Officer">Human Resource Officer</option>
@@ -308,7 +308,7 @@
                                             <label class="col-form-label">Designation / Position</label>
                                         </div>
                                         <div>
-                                            <select class="form-select" aria-label="Default select example" wire:model="designation">
+                                            <select class="form-select" aria-label="Default select example" wire:model="designation" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($designation)}}">
                                                 <option selected value="Agent / Sale Associate">Agent/ Sale Associate</option>
                                                 <option value="Senior Team Leader">Senior Team Leader</option>
                                                 <option value="Team Leader">Team Leader</option>
@@ -321,7 +321,7 @@
                                             <label class="col-form-label">Designation / Position</label>
                                         </div>
                                         <div>
-                                            <select class="form-select" aria-label="Default select example" wire:model="designation">
+                                            <select class="form-select" aria-label="Default select example" wire:model="designation" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($designation)}}">
                                                 <option selected value="Quality Assurance">Quality Assurance</option>
                                                 <option value="Recording & Editor">Recording & Editor </option>
                                                 <option value="BO - IT">BO - IT</option>
@@ -335,7 +335,7 @@
                                         <label class="col-form-label">Site</label>
                                     </div>
                                     <div>
-                                        <select class="form-select" aria-label="Default select example" wire:model="branch">
+                                        <select class="form-select" aria-label="Default select example" wire:model="branch" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($branch)}}">
                                             <option value="mindoro">Mindoro</option>
                                             <option value="bicol">Bicol</option>
                                         </select>
@@ -353,7 +353,7 @@
                                         <label class="col-form-label">Fullname</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="full_name" title="{{ucwords($contact_number)}}" required>
+                                        <input type="text"  class="form-control" wire:model="full_name" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($contact_number)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -361,7 +361,7 @@
                                         <label class="col-form-label">Contact Number</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="contact_number" title="{{ucwords($contact_number)}}" required>
+                                        <input type="text"  class="form-control" wire:model="contact_number" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($contact_number)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-4">
@@ -369,7 +369,7 @@
                                         <label class="col-form-label">Address</label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="address" title="{{ucwords($address)}}" required>
+                                        <input type="text"  class="form-control" wire:model="address" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($address)}}" required>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -377,7 +377,7 @@
                                         <label class="col-form-label">Relationship </label>
                                     </div>
                                     <div>
-                                        <input type="text"  class="form-control" wire:model="relationship" title="{{ucwords($relationship)}}" required>
+                                        <input type="text"  class="form-control" wire:model="relationship" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($relationship)}}" required>
                                     </div>
                                 </div>
                             </div>
