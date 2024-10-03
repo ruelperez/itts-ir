@@ -25,7 +25,7 @@
                 <thead>
                 <tr>
                     <th scope="col">Fullname</th>
-                    <th scope="col">Email</th>
+                    <th scope="col">Work email</th>
                     <th scope="col">Phone number</th>
                     <th scope="col">ID</th>
                     <th scope="col">Date of birth</th>
@@ -43,7 +43,7 @@
                             {{ucwords($data->fname.' '.$data->mi.' '.$data->lname)}}
                         </td>
                         <td>
-                            {{$data->personal_email}}
+                            {{$data->current_working_email}}
                         </td>
                         <td>
                             {{$data->phone_number}}

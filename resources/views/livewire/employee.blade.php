@@ -160,7 +160,7 @@
                                 </div>
                                 <div class="col-2">
                                     <div>
-                                        <label class="col-form-label">Working Email</label>
+                                        <label class="col-form-label">Work Email</label>
                                     </div>
                                     <div>
                                         <input type="text"  class="form-control" wire:model="current_working_email" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ucwords($current_working_email)}}" required>
