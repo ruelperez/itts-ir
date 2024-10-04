@@ -50,6 +50,8 @@ Route::middleware(['auth','restrict.ip','checkEmployee'])->group(function () {
     Route::get('/{page}', [\App\Http\Controllers\PageController::class, 'page']);
     Route::get('/edit-leads/{page}/{lead_id}', [\App\Http\Controllers\PageController::class, 'edit_leads']);
     Route::get('/per-shift-pdf/{moproduction-lead-mass-tortnth}/{day}/{year}/{role}', [\App\Http\Controllers\ShiftController::class, 'pdf']);
+    Route::get('eod/{page}', [\App\Http\Controllers\PageController::class, 'eod']);
+    Route::get('/dtr-record/{id}', [\App\Http\Controllers\PageController::class, 'dtr_employee_record']);
 });
 
 Route::middleware(['auth','restrict.ip'])->group(function () {

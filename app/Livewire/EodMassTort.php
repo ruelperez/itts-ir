@@ -4,10 +4,10 @@ namespace App\Livewire;
 
 use Livewire\Component;
 
-class SubmissionReport extends Component
+class EodMassTort extends Component
 {
     public function render()
     {
-        return view('livewire.submission-report');
+        return view('livewire.eod-mass-tort');
     }
 }

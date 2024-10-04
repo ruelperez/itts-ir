@@ -50,7 +50,7 @@ class DtrName extends Component
         return view('livewire.dtr-name');
     }
     public function clickName($userids){
-        return redirect()->to('itts/10/dtr-all-record/'.$userids);
+        return redirect()->to('/dtr-record/'.$userids);
     }
     public function mount($name){
         $pst = auth()->user()->position;

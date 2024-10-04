@@ -136,7 +136,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropupLink">
                                 <a class="dropdown-item" href="/logs"><i class="fa-solid fa-tent-arrow-left-right pe-2"></i>
                                     Logs</a>
-                                <a class="dropdown-item" href="/eod"><i class="fa-solid fa-universal-access pe-2"></i>
+                                <a class="dropdown-item" href="/eod/masstort-tracker"><i class="fa-solid fa-universal-access pe-2"></i>
                                     EOD</a>
                                 <a class="dropdown-item" href="/inventory"><i class="fa-solid fa-store pe-2"></i>
                                     Inventory</a>
