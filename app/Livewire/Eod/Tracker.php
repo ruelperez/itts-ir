@@ -6,11 +6,12 @@ use App\Models\DtvTracker;
 use App\Models\Submission;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class Tracker extends Component
 {
-    public $start, $end, $submissionData = [], $salesData = [], $pages, $campaignName;
+    public $start, $end, $submissionData = [], $salesData = [], $pages, $campaignName, $subject;
 
     public function render()
     {
@@ -18,6 +19,7 @@ class Tracker extends Component
     }
 
     public function mount($page){
+        $this->subject = preg_replace('/[^A-Za-z0-9]+.*/', '', $page);
         if ($page == "masstort-tracker"){
             $this->pages = "submission";
         }
