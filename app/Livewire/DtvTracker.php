@@ -23,7 +23,7 @@ use Livewire\Component;
 class DtvTracker extends Component
 {
     public $registrationSwitch, $returnClient, $returnReason, $currentPage = 1, $perPage = 15, $is_success = false, $search, $ids, $displayRemarks, $checkBox = [], $submissionData = [], $resultsCoach = [], $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo, $campaignList = [], $campaign,
-        $date, $base = true, $toChecked = false, $lawfirm, $lawfirmList = [], $dqReason, $client, $remarks = [], $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $showSearch = false, $showSearchCoach = false, $agent, $coach, $verifier, $source = "Dialer", $caseType = "self", $resultsVerifier = [], $results = [], $clientList= [], $showSearchVerifier = false, $result;
+        $date, $base = true, $toChecked = false, $package, $disposition, $description, $orderNumber, $service, $customer, $lawfirm, $lawfirmList = [], $dqReason, $client, $remarks = [], $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $showSearch = false, $showSearchCoach = false, $agent, $coach, $verifier, $source = "Dialer", $caseType = "self", $resultsVerifier = [], $results = [], $clientList= [], $showSearchVerifier = false, $result;
 
     public function render()
     {
@@ -463,16 +463,20 @@ class DtvTracker extends Component
             $this->ids = $this->checkBox[$i];
         }
         $dv = \App\Models\DtvTracker::find($this->ids);
-        $this->phoneNumber = $dv->phoneNumber;
-        $this->altPhoneNumber = $dv->altPhoneNumber;
-        $this->dob = $dv->dob;
+        $this->customer = $dv->name;
+        $this->phoneNumber = $dv->phone_num;
+        $this->altPhoneNumber = $dv->alt_num;
         $this->email = $dv->email;
         $this->address = $dv->address;
-        $this->ssn = $dv->ssn;
+        $this->service = $dv->service;
+        $this->package = $dv->package;
+        $this->disposition = $dv->disposition;
+        $this->result = $dv->result;
+        $this->description = $dv->description;
+        $this->orderNumber = $dv->orderNumber;
+        $this->date = $dv->date;
         $this->agent = $dv->agent;
         $this->coach = $dv->coach;
-        $this->verifier = $dv->verifier;
-        $this->source = $dv->source;
     }
     public function clickSearch(){
         if ($this->agent != ""){

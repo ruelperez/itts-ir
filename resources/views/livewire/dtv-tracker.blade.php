@@ -1,9 +1,8 @@
 <div>
-    @include('modal.click-settings')
     @include('modal.news-update.show-photo')
     @include('modal.dupe-checker.form')
     @include('modal.dupe-checker.saveOrNot')
-    @include('modal.dupe-checker.viewDetail')
+    @include('modal.dtv.view-details')
                 <div class="mb-4">
                     <h6>Direct TV Tracker</h6>
                 </div>
@@ -13,8 +12,8 @@
                     </div>
                     <div class="mt-3 col-6 col-sm-3 col-md-3 col-lg-5 col-xl-6 text-md-center pe-lg-5 text-lg-end">
                         @if(count($checkBox) == 1)
-                            <i class="fa-solid fa-eye" style="cursor: pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="View details" wire:loading.attr="disabled" wire:click="viewDetail" data-bs-toggle="modal" data-bs-target="#viewDetail"></i>
-                            <i class="fa-solid fa-pen-to-square ms-3" style="cursor: pointer" title="Edit" onclick="location.href = '/edit-leads/dtv-edit/{{$checkBox[0]}}';" id="dupeEditID" target="_blank"></i>
+                            <i class="fa-solid fa-eye" style="cursor: pointer" title="View details" wire:loading.attr="disabled" wire:click="viewDetail" data-bs-toggle="modal" data-bs-target="#viewDetail"></i>
+{{--                            <i class="fa-solid fa-pen-to-square ms-3" style="cursor: pointer" title="Edit" onclick="location.href = '/edit-leads/dtv-tracker-edit/{{$checkBox[0]}}';" id="dupeEditID" target="_blank"></i>--}}
                             <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer" title="Delete" wire:click="delete" wire:confirm="Are you sure you want to delete?"></i>
                         @endif
                         @if(count($checkBox) > 1)
@@ -44,12 +43,9 @@
                             <th scope="col" style="width: 8%;">Email</th>
                             <th scope="col" style="width: 8%;">Order #</th>
                             <th scope="col" style="width: 9%;">Service Addr.</th>
-                            <th scope="col" style="width: 9%;">Service</th>
-                            <th scope="col" style="width: 9%;">Package</th>
                             <th scope="col" style="width: 9%;">Agent</th>
-                            <th scope="col" style="width: 9%;">Coach</th>
                             <th scope="col" style="width: 15%;">Disposition</th>
-                            <th scope="col" style="width: 15%;">Result</th>
+{{--                            <th scope="col" style="width: 15%;">Result</th>--}}
                         </tr>
                         </thead>
                         <tbody>
@@ -77,23 +73,14 @@
                                     {{ucfirst($data->address)}}
                                 </td>
                                 <td>
-                                    {{ucfirst($data->service)}}
-                                </td>
-                                <td>
-                                    {{ucfirst($data->package)}}
-                                </td>
-                                <td>
                                     {{ucwords($data->agent)}}
-                                </td>
-                                <td>
-                                    {{ucwords($data->coach)}}
                                 </td>
                                 <td>
                                     <b>{{ucfirst($data->disposition)}} - {{ucfirst($data->description)}}</b>
                                 </td>
-                                <td>
-                                    {{ucfirst($data->result)}}
-                                </td>
+{{--                                <td>--}}
+{{--                                    {{ucfirst($data->result)}}--}}
+{{--                                </td>--}}
                                 <td>
                                     <input class="form-check-input" type="checkbox" wire:model.live="checkBox" value="{{$data->id}}" id="flexCheckDefault{{$data->id}}" style="font-size: 18px; cursor: pointer" wire:loading.attr="disabled">
                                 </td>
