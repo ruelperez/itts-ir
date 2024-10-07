@@ -40,13 +40,13 @@ class EmployeeSalesReport extends Component
             $start = Carbon::createFromFormat('m/d/Y', $this->start)->startOfDay();
             $end = Carbon::createFromFormat('m/d/Y', $this->end)->endOfDay();
 
-            $this->salesData = $model::select('agent', DB::raw('COUNT(agent) as count'))
+            $this->salesData = $model::select('agent','campaign', DB::raw('COUNT(*) as count'))
                 ->whereBetween(
                     DB::raw('STR_TO_DATE(date, "%m/%d/%Y")'),
                     [$start, $end]
                 )
                 ->where('result', 'Signed / Executed')
-                ->groupBy('agent')
+                ->groupBy('agent','campaign')
                 ->get();
         }
     }
