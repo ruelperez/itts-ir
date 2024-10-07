@@ -11,9 +11,9 @@
         </div>
     </div>
     <div class="row justify-content-center">
-        <div class="px-2 py-2 mt-3 mt-sm-4 col-lg-5 me-lg-3" style="background-color: #006400	; color: white; border-radius: 10px;">
-            @livewire('eod.'.$subject.'.sales-report',['pages' => $pages])
-        </div>
+{{--        <div class="px-2 py-2 mt-3 mt-sm-4 col-lg-5 me-lg-3" style="background-color: #006400	; color: white; border-radius: 10px;">--}}
+{{--            @livewire('eod.'.$subject.'.sales-report',['pages' => $pages])--}}
+{{--        </div>--}}
         <div class="px-2 py-2 mt-3 mt-sm-4 col-lg-5" style="background-color: #008000	; color: white; border-radius: 10px;">
             @livewire('eod.'.$subject.'.employee-sales-report',['pages' => $pages])
         </div>
