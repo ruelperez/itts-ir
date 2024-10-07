@@ -49,6 +49,7 @@ class SubmissionReport extends Component
                     $query->where('result', '!=', 'Signed / Executed')
                         ->orWhereNull('result'); // Allow for null values
                 })
+                ->where('remarks','!=',"Invalid TO")
                 ->groupBy('campaign')
                 ->get();
         }
