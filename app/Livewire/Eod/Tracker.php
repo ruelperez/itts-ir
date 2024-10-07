@@ -10,7 +10,7 @@ use Livewire\Component;
 
 class Tracker extends Component
 {
-    public $start, $end, $submissionData = [], $pages, $campaignName;
+    public $start, $end, $submissionData = [], $salesData = [], $pages, $campaignName;
 
     public function render()
     {
@@ -40,61 +40,37 @@ class Tracker extends Component
 
         $start_date = Carbon::createFromFormat('m/d/Y', $this->start)->startOfDay();
         $end_date = Carbon::createFromFormat('m/d/Y', $this->end)->endOfDay();
-        
+
 
         if ($end_date->lt($start_date)) {
             $this->submissionData = [];
             $this->dispatch('error');
         }
         else{
-            if ($this->pages == "submission"){
-                $this->submissionData = DB::table('submissions')
-                    ->select('result', DB::raw('count(result) as count'))
-                    ->whereBetween('date', [
-                        $start_date->format('m/d/Y'),
-                        $end_date->format('m/d/Y'),
-                    ])
-                    ->where('result', '!=', 'Signed / Executed')  // Add condition for 'signed'
-                    ->orWhere('result',null)
-                    ->whereBetween('date', [
-                        $start_date->format('m/d/Y'),
-                        $end_date->format('m/d/Y'),
-                    ])
-                    ->groupBy('result')
+            if ($this->pages == "submission") {
+                $start = Carbon::createFromFormat('m/d/Y', $this->start)->startOfDay();
+                $end = Carbon::createFromFormat('m/d/Y', $this->end)->endOfDay();
+
+                $this->salesData = $model::select('campaign', DB::raw('COUNT(campaign) as count'))
+                    ->whereBetween(
+                    DB::raw('STR_TO_DATE(date, "%m/%d/%Y")'),
+                    [$start, $end]
+                    )
+                    ->where('result', 'Signed / Executed')
+                    ->groupBy('campaign')
                     ->get();
-                dd($this->submissionData);
-                // Retrieve records based on date range
-//                $this->submissionData = Submission::whereBetween('date', [
-//                    $start_date->format('m/d/Y'),
-//                    $end_date->format('m/d/Y'),
-//                ])
-//                ->where('result','!=',"Signed / Executed")
-//                ->orWhere('result',null)
-//                ->whereBetween('date', [
-//                    $start_date->format('m/d/Y'),
-//                    $end_date->format('m/d/Y'),
-//                ])
-////                ->orWhere('result', '')
-////                ->whereBetween('date', [
-////                    $start_date->format('m/d/Y'),
-////                    $end_date->format('m/d/Y'),
-////                ])
-//                ->get();
             }
             elseif ($this->pages == "dtv-tracker"){
-                $data = DtvTracker::whereDate('date', '>=', $start_date)
-                    ->whereDate('date', '<=', $end_date)
-//                ->where('disposition','!=',"Sale")
-                    ->get();
-                dd($data);
-                foreach ($data as $datas) {
-                    $contain[] = $model::where('date', $datas->date)
-                        ->where('result', '!=', 'Signed')
-                        ->get();
+                $start = Carbon::createFromFormat('m/d/Y', $this->start)->startOfDay();
+                $end = Carbon::createFromFormat('m/d/Y', $this->end)->endOfDay();
 
-                }
-                $this->submissionData = $contain;
-                dd($this->submissionData);
+                $this->salesData = $model::whereBetween(
+                        DB::raw('STR_TO_DATE(date, "%m/%d/%Y")'),
+                        [$start, $end]
+                    )
+                    ->where('result', 'Signed / Executed')
+                    ->groupBy('campaign')
+                    ->get();
             }
 
         }
