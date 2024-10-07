@@ -184,9 +184,6 @@ class MasstortTrackerEdit extends Component
                     'source' => 'required',
                 ]);
             }
-            if ($this->result == "Pending"){
-                $this->result = "";
-            }
             if ($this->result == "DQ - Other reason"){
                 $this->result = "DQ - ".$this->dqReason;
             }

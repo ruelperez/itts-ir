@@ -5,6 +5,7 @@ namespace App\Livewire\Eod;
 use App\Models\DtvTracker;
 use App\Models\Submission;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Tracker extends Component
@@ -39,9 +40,7 @@ class Tracker extends Component
 
         $start_date = Carbon::createFromFormat('m/d/Y', $this->start)->startOfDay();
         $end_date = Carbon::createFromFormat('m/d/Y', $this->end)->endOfDay();
-
-//        $start_date = Carbon::parse($this->start);
-//        $end_date = Carbon::parse($this->end);
+        
 
         if ($end_date->lt($start_date)) {
             $this->submissionData = [];
@@ -49,16 +48,38 @@ class Tracker extends Component
         }
         else{
             if ($this->pages == "submission"){
-                // Retrieve records based on date range
-                $this->submissionData = Submission::whereBetween('date', [
-                    $start_date->format('m/d/Y'),
-                    $end_date->format('m/d/Y'),
-                ])
-                    ->where('result','!=', "Signed / Executed")
-                    ->orWhere('result', '')
-                    ->whereBetween
-                    ->where
+                $this->submissionData = DB::table('submissions')
+                    ->select('result', DB::raw('count(result) as count'))
+                    ->whereBetween('date', [
+                        $start_date->format('m/d/Y'),
+                        $end_date->format('m/d/Y'),
+                    ])
+                    ->where('result', '!=', 'Signed / Executed')  // Add condition for 'signed'
+                    ->orWhere('result',null)
+                    ->whereBetween('date', [
+                        $start_date->format('m/d/Y'),
+                        $end_date->format('m/d/Y'),
+                    ])
+                    ->groupBy('result')
                     ->get();
+                dd($this->submissionData);
+                // Retrieve records based on date range
+//                $this->submissionData = Submission::whereBetween('date', [
+//                    $start_date->format('m/d/Y'),
+//                    $end_date->format('m/d/Y'),
+//                ])
+//                ->where('result','!=',"Signed / Executed")
+//                ->orWhere('result',null)
+//                ->whereBetween('date', [
+//                    $start_date->format('m/d/Y'),
+//                    $end_date->format('m/d/Y'),
+//                ])
+////                ->orWhere('result', '')
+////                ->whereBetween('date', [
+////                    $start_date->format('m/d/Y'),
+////                    $end_date->format('m/d/Y'),
+////                ])
+//                ->get();
             }
             elseif ($this->pages == "dtv-tracker"){
                 $data = DtvTracker::whereDate('date', '>=', $start_date)

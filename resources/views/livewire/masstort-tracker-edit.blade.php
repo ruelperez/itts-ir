@@ -224,7 +224,7 @@
                                         <label class="form-label">Result</label>
                                     </div>
                                     <div class="col-5">
-                                        <select class="form-select" aria-label="Default select example" wire:model="result" x-model="selectedOption">
+                                        <select class="form-select" aria-label="Default select example" wire:model="result" x-model="selectedOption" required>
                                             <option value="">Select Result</option>
                                             <option value="Signed / Executed">Signed / Executed</option>
                                             <option value="Return by Client">Return by Client</option>
@@ -268,7 +268,7 @@
                                     <label class="form-label">Result :</label>
                                 </div>
                                 <div class="col-3">
-                                    <select class="form-select" aria-label="Default select example" wire:model="result" x-model="selectedOptions">
+                                    <select class="form-select" aria-label="Default select example" wire:model="result" x-model="selectedOptions" required>
                                         <option value="">Select Result</option>
                                         <option value="Signed / Executed">Signed / Executed</option>
                                         <option value="Return by Client">Return by Client</option>
