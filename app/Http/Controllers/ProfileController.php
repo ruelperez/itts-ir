@@ -20,7 +20,7 @@ class ProfileController extends Controller
             $filename = time() . '_' . $file->getClientOriginalName();
 
             // Store the file in the public/profile_pictures directory
-            $file->move(public_path('profile_pictures'), $filename);
+            $file->move(public_path('photos/photos'), $filename);
 
             // Optionally, update the user's profile picture in the database
             $user = Auth::user();

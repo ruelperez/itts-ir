@@ -41,7 +41,7 @@
 {{--                    </div>--}}
                     <div class="d-flex align-items-center ps-3">
                         <div class="flex-shrink-0 text-center prof_pic">
-                            <img src="{{asset('profile_pictures/'.$photo)}}"
+                            <img src="{{asset('photos/photos/'.$photo)}}"
                                  alt="Generic placeholder image" class="img-fluid rounded-circle border border-dark border-3"
                                  style="width: 70px;">
                         </div>
