@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,6 +53,7 @@ Route::middleware(['auth','restrict.ip','checkEmployee'])->group(function () {
     Route::get('/per-shift-pdf/{moproduction-lead-mass-tortnth}/{day}/{year}/{role}', [\App\Http\Controllers\ShiftController::class, 'pdf']);
     Route::get('eod/{page}', [\App\Http\Controllers\PageController::class, 'eod']);
     Route::get('/dtr-record/{id}', [\App\Http\Controllers\PageController::class, 'dtr_employee_record']);
+    Route::post('/profile/upload', [ProfileController::class, 'uploadProfilePicture'])->name('profile.upload');
 });
 
 Route::middleware(['auth','restrict.ip'])->group(function () {

@@ -60,6 +60,26 @@ body {
     background-size: cover;
 }
 
+.prof_pic{
+    width: 80px; /* Fixed width */
+    height: 80px; /* Fixed height */
+    overflow: hidden; /* Hide any overflow */
+    border-radius: 50%; /* Optional: Makes it circular */
+    display: flex; /* Center the image */
+    justify-content: center;
+    align-items: center;
+    border: solid blue 2px;
+}
+
+.profile-picture img {
+    width: 100%; /* Make image fill the container */
+    height: 100%; /* Make image fill the container */
+    object-fit: cover; /* Crop the image to fit the container while maintaining the aspect ratio */
+    /* Ensures the image is fixed in the dimensions of the parent */
+    max-width: none; /* Prevents the image from scaling down */
+    max-height: none; /* Prevents the image from scaling down */
+}
+
 h3 {
     font-size: 1.2375rem;
     color: black;

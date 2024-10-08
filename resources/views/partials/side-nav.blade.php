@@ -40,8 +40,8 @@
 {{--                        </div>--}}
 {{--                    </div>--}}
                     <div class="d-flex align-items-center ps-3">
-                        <div class="flex-shrink-0">
-                            <img src="{{asset('photos/photos/'.$photo)}}"
+                        <div class="flex-shrink-0 text-center prof_pic">
+                            <img src="{{asset('profile_pictures/'.$photo)}}"
                                  alt="Generic placeholder image" class="img-fluid rounded-circle border border-dark border-3"
                                  style="width: 70px;">
                         </div>
@@ -49,6 +49,18 @@
                             <p class="mb-0 me-1">{{ucwords($fullname)}}</p>
                             <p class="mb-0 me-1 text-muted"><small>@if($employeeData == null or $employeeData == "") @else {{$employeeData}} @endif</small></p>
                             <p class="mb-0 me-1 text-muted user-select-all"><small>ITTS-00{{$user_id}}</small></p>
+                        </div>
+                    </div>
+                    <div class="text-center" style="width: 28%; margin-left: 6%;">
+                        <form action="{{ route('profile.upload') }}" method="POST" enctype="multipart/form-data" id="profile-upload-form">
+                            @csrf
+                            <input type="file" name="profile_picture" id="profile-picture-input" style="display: none;" onchange="handleFileUpload()">
+                            <!-- Camera Icon -->
+                            <i class="fas fa-camera camera-icon" onclick="document.getElementById('profile-picture-input').click()" style="cursor: pointer"></i>
+                        </form>
+                        <!-- Loading Spinner -->
+                        <div class="spinner-border" id="loading-spinner" role="status" style="display: none">
+                            <span class="sr-only">Loading...</span>
                         </div>
                     </div>
                     <div class="text-end pe-3 mt-3">
