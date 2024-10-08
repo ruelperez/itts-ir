@@ -70,7 +70,7 @@
                                   :class="hover ? 'text-info' : 'text-primary'"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Log Out</small></p>
                     </div>
                 </li>
-                <div class="scrollable-div">
+                <div class="scrollable-div sidebar-hover-in-out">
                     <li class="sidebar-item ps-4">
                         <small>Tools & Components</small>
                     </li>

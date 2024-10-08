@@ -147,6 +147,19 @@ li {
     padding: 1.5rem 1.5rem .375rem;
 }
 
+.sidebar-hover-in-out a {
+    color: #333; /* Default text color */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.2s ease; /* Smooth transition for hover effect */
+}
+
+/* Hover Effect */
+.sidebar-hover-in-out a:hover {
+    background-color: #006400	;
+    color: white;
+    border-radius: 10px;
+}
+
 a.sidebar-link {
     padding: .625rem 1.625rem;
     color: black;
