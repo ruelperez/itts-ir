@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Campaign;
 
 use App\Models\AdminShow;
 use App\Models\Campaign;
@@ -9,7 +9,6 @@ use App\Models\Comment;
 use App\Models\CommentHeart;
 use App\Models\Dtr;
 use App\Models\DtrContent;
-use App\Models\DtrPermanent;
 use App\Models\Heart;
 use App\Models\IsRegistration;
 use App\Models\Link;
@@ -18,10 +17,7 @@ use App\Models\SuperadminShow;
 use App\Models\TimeSetting;
 use App\Models\User;
 use App\Models\UserPassword;
-use Dflydev\DotAccessData\Data;
-use FontLib\Table\Type\name;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -79,7 +75,7 @@ class MassTort extends Component
         $this->campaignList = Note::select('campaign')
             ->where('client', $this->client_name)
             ->distinct()->get();
-        return view('livewire.mass-tort')->title('Campaign');
+        return view('livewire.campaign.mass-tort')->title('Campaign');
     }
 
     public function submit_campaign(){

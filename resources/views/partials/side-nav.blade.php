@@ -59,7 +59,7 @@
                             <i class="fas fa-camera camera-icon" onclick="document.getElementById('profile-picture-input').click()" style="cursor: pointer"></i>
                         </form>
                         <!-- Loading Spinner -->
-                        <div class="spinner-border" id="loading-spinner" role="status" style="display: none">
+                        <div class="spinner-border ms-3" id="loading-spinner" role="status" style="display: none">
                             <span class="sr-only">Loading...</span>
                         </div>
                     </div>
@@ -94,13 +94,13 @@
                         </a>
                         <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="/mass-tort" class="sidebar-link">Mass Tort</a>
+                                <a href="/campaign/mass-tort" class="sidebar-link">Mass Tort</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">DTV</a>
+                                <a href="/campaign/dtv" class="sidebar-link">DTV</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">Home Security</a>
+                                <a href="/campaign/home-security" class="sidebar-link">Home Security</a>
                             </li>
                         </ul>
                     </li>

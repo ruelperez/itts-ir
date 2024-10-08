@@ -54,6 +54,7 @@ Route::middleware(['auth','restrict.ip','checkEmployee'])->group(function () {
     Route::get('eod/{page}', [\App\Http\Controllers\PageController::class, 'eod']);
     Route::get('/dtr-record/{id}', [\App\Http\Controllers\PageController::class, 'dtr_employee_record']);
     Route::post('/profile/upload', [ProfileController::class, 'uploadProfilePicture'])->name('profile.upload');
+    Route::get('/campaign/{page}', [\App\Http\Controllers\Campaign\PageController::class, 'page']);
 });
 
 Route::middleware(['auth','restrict.ip'])->group(function () {
