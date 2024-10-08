@@ -142,7 +142,7 @@
                     </li>
                     <li class="sidebar-item ps-4 mt-2">
                         <div class="dropup">
-                            <a class="dropdown-toggle" id="dropupLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="dropdown-toggle px-3 py-1" id="dropupLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <small>Admin access</small>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropupLink">
