@@ -421,20 +421,26 @@
                                     </div>
                                     <div class="col-3">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" wire:model="checkboxTO"  wire:click="clickTO" value="turnover" @if($cplCheck == true) disabled @endif>
+                                            <input class="form-check-input" type="checkbox" wire:model="checkboxTO"  wire:click="clickTO" value="TO" @if($cplCheck == true) disabled @endif @if($mll == 2) disabled @endif>
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 Turnover
                                             </label>
                                         </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" wire:model="checkboxTO" wire:click="clickTO" value="Invalid TO" @if($cplCheck == true) disabled @endif @if($mll == 1) disabled @endif>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Invalid TO
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-end">
+                                    <div class="col-6">
                                         @if($toChecked == true)
                                             <textarea class="form-control" rows="2" id="reason" wire:model="turnover"  style="border: none;" placeholder="Reason:"></textarea>
                                         @endif
-                                    </div>
-                                    <div class="col-3">
-                                        <input class="form-check-input" type="checkbox" wire:model="remarks" value="Invalid TO"  @if($cplCheck == true) disabled @elseif($toChecked == true) disabled @endif>
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Invalid TO
-                                        </label>
                                     </div>
                                 </div>
                             </div>

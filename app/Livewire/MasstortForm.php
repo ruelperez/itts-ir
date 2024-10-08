@@ -24,6 +24,7 @@ use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Monolog\Handler\IFTTTHandler;
 use function Laravel\Prompts\select;
 use function Laravel\Prompts\table;
 
@@ -31,7 +32,7 @@ class MasstortForm extends Component
 {
 
     public $registrationSwitch, $hostingTrans, $gm = 0, $DQ, $jn, $toChecked = false, $comment, $caseType = "self", $is_success = false, $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $clientList = [], $campaignList = [], $campaign = "selectCampaign", $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
-            $date, $cplCheck = false, $displayComment = false, $orderNumber, $desciption, $service, $package, $dateSales, $submission = [], $checkboxDQ, $lawfirm = "selectLawfirm", $bam, $bbb, $client = "selectClient", $bms, $dtvRemarks, $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "", $resultsVerifier = [], $showSearchVerifier = false ;
+            $date, $cplCheck = false, $mll = 0, $displayComment = false, $orderNumber, $desciption, $service, $package, $dateSales, $submission = [], $checkboxDQ, $lawfirm = "selectLawfirm", $bam, $bbb, $client = "selectClient", $bms, $dtvRemarks, $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $checkboxInvalidTO, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "", $resultsVerifier = [], $showSearchVerifier = false ;
 
     public function render()
     {
@@ -120,7 +121,7 @@ class MasstortForm extends Component
             ]);
         }
         if ($this->toChecked == true){
-           $res = "(TO) - ".$this->turnover;
+           $res = $this->checkboxTO[0].' - '.$this->turnover;
         }
         elseif ($this->cplCheck == true){
             $res = implode(', ', $this->submission);
@@ -199,7 +200,7 @@ class MasstortForm extends Component
         $this->agent = "";
         $this->coach = "";
         $this->verifier = "";
-        $this->source = "Dialer";
+        $this->source = "";
         $this->remarks = [];
         $this->toChecked = false;
         $this->checkboxTO = [];
@@ -211,6 +212,7 @@ class MasstortForm extends Component
         $this->desciption = "";
         $this->orderNumber = "";
         $this->date = "";
+        $this->mll = 0;
     }
     public function clear(){
         $this->clearInput();
@@ -509,14 +511,31 @@ class MasstortForm extends Component
     }
 
     public function clickTO(){
-       if ($this->toChecked == false){
-           $this->toChecked = true;
-           $this->remarks = [];
-       }
-       else{
-           $this->toChecked = false;
-       }
+        if ($this->checkboxTO == []){
+           $this->mll = 0;
+            $this->toChecked = false;
+        }
+        elseif ($this->checkboxTO[0] == "TO"){
+            $this->mll = 1;
+            if ($this->toChecked == false){
+                $this->toChecked = true;
+                $this->remarks = [];
+            }
+            else{
+                $this->toChecked = false;
 
+            }
+        }
+        elseif ($this->checkboxTO[0] == "Invalid TO"){
+            $this->mll = 2;
+            if ($this->toChecked == false){
+                $this->toChecked = true;
+                $this->remarks = [];
+            }
+            else{
+                $this->toChecked = false;
+            }
+        }
     }
     public function clickCplTrans(){
         if ($this->cplCheck == false){
