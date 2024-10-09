@@ -68,14 +68,14 @@ class DeployedItemRecord extends Component
                 return;
             }
         }
-        return redirect()->to('itts/22/device-clearance/'.$usrid);
+        return redirect()->to('/inventory/pdf/device-clearance/'.$usrid);
     }
 
     public function clickName($userids){
         return redirect()->to('itts/21/deployed-item-record/'.$userids);
     }
-    public function mount($userID){
-        $this->deviceUserID = $userID;
+    public function mount($emp_id){
+        $this->deviceUserID = $emp_id;
         $usrId = auth()->user()->id;
         $sd = \App\Models\Employee::where('user_id',$usrId)->get();
         if (count($sd) < 1){

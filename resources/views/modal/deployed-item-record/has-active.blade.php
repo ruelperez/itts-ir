@@ -9,7 +9,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-outline-dark" data-bs-dismiss="modal" aria-label="Close">CANCEL</button>
-                <button class="btn btn-warning" onclick="location.href = '/itts/22/device-clearance/{{$deviceUserID}}';">YES</button>
+                <button class="btn btn-warning" onclick="location.href = '/inventory/pdf/device-clearance/{{$deviceUserID}}';">YES</button>
             </div>
         </div>
     </div>

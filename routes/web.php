@@ -55,7 +55,15 @@ Route::middleware(['auth','restrict.ip','checkEmployee'])->group(function () {
     Route::get('/dtr-record/{id}', [\App\Http\Controllers\PageController::class, 'dtr_employee_record']);
     Route::post('/profile/upload', [ProfileController::class, 'uploadProfilePicture'])->name('profile.upload');
     Route::get('/campaign/{page}', [\App\Http\Controllers\Campaign\PageController::class, 'page']);
+    Route::get('/deployed-item-record/{id}', [\App\Http\Controllers\Campaign\PageController::class, 'page']);
 });
+
+Route::middleware(['auth','restrict.ip','checkEmployee'])
+    ->prefix('inventory')
+    ->group(function () {
+        Route::get('/{page}/{emp_id}', [\App\Http\Controllers\InventoryController::class, 'page']);
+        Route::get('/pdf/device-clearance/{userID}', [\App\Http\Controllers\InventoryController::class, 'clearance']);
+    });
 
 Route::middleware(['auth','restrict.ip'])->group(function () {
     Route::get('/employee/incomplete', [\App\Http\Controllers\PageController::class, 'employee']);
