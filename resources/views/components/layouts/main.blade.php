@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@700&display=swap" rel="stylesheet">
     @stack('css')
     <title>{{ $title ?? 'Page Title' }}</title>
+    @livewireStyles
 </head>
 <body>
 <div class="wrapper" x-data="{ marginLeftVar: 0 }">
@@ -95,5 +96,6 @@
     }
 </script>
 @stack('js')
+@livewireScripts
 </body>
 </html>
