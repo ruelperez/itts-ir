@@ -1,15 +1,14 @@
 <div>
-    @include('modal.click-settings')
     @include('modal.news-update.show-photo')
     @include('modal.inventory.add')
     @include('modal.inventory.edit')
-                <div style="position: fixed;top: 10%; background-color: #41464b; color: white; padding-bottom: 20px;">
+                <div class="px-2 py-2 px-lg-3 py-lg-3 text-white" style="background-color: #41464b;">
                     <div style="display: flex; width: 100%;">
                         <div class="dropdown">
                             <i class="btn btn-secondary dropdown-toggle ps-2 py-0 ms-2 mt-4" data-bs-toggle="dropdown"  style="color: white; font-size: 23px; cursor: pointer; "> </i>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li onclick="location.href = '/itts/19/device-approval';" style="cursor: pointer"><a class="dropdown-item" ><i class="fa-solid fa-thumbs-up me-2" ></i>Device approval</a></li>
-                                <li onclick="location.href = '/itts/20/deployed-item';" style="cursor: pointer"><a class="dropdown-item" ><i class="fa-solid fa-person-walking-luggage me-2"></i>Deployed device</a></li>
+                                <li onclick="location.href = '/device-approval';" style="cursor: pointer"><a class="dropdown-item" ><i class="fa-solid fa-thumbs-up me-2" ></i>Device approval</a></li>
+                                <li onclick="location.href = '/deployed-byname';" style="cursor: pointer"><a class="dropdown-item" ><i class="fa-solid fa-person-walking-luggage me-2"></i>Deployed device</a></li>
                             </ul>
                         </div>
                         <h6 style="margin-left: 1%; margin-top: 3%;">INVENTORY</h6>
@@ -46,7 +45,7 @@
                     </div>
                 </div>
 
-                <div style="font-size: 14px; margin-top: 15%;  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); "  class="px-4 py-3" >
+                <div style="margin-top: 20px;"  class="px-4 py-3" >
                     <table class="table table-hover">
                         <thead>
                         <tr>

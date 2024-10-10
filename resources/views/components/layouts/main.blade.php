@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@700&display=swap" rel="stylesheet">
     @stack('css')
     <title>{{ $title ?? 'Page Title' }}</title>
+    @livewireStyles
 </head>
 <body>
 <div class="wrapper" x-data="{ marginLeftVar: 0 }">
@@ -47,7 +48,6 @@
 <script src="{{ asset('js/sidebar.js') }}"></script>
 <script src="{{ asset('js/change_user_profile.js') }}"></script>
 <script>
-    <sc
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl);
@@ -96,5 +96,6 @@
     }
 </script>
 @stack('js')
+@livewireScripts
 </body>
 </html>

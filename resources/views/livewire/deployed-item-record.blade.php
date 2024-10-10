@@ -1,14 +1,11 @@
 <div>
-    @include('components.layouts.profile')
-    @include('components.layouts.navigation')
-    @include('modal.click-settings')
     @include('modal.news-update.show-photo')
     @include('modal.deployed-item-record.has-active')
-    <div style="display: flex; width: 100%; margin-top: 105px;">
-        <div style="width: 81%; margin-left: 19%;">
-            <div class="container">
+{{--    @include('modal.my_device.add')--}}
+{{--    @include('modal.my_device.cancel')--}}
+    @include('modal.inventory.return')
                 <div style="display: flex;">
-                    <i style="margin-left: 2%; margin-top: 3%; cursor: pointer" class="fa-solid fa-backward" onclick="location.href = '/itts/20/deployed-item';" title="back"></i>
+                    <i style="margin-left: 2%; margin-top: 3%; cursor: pointer" class="fa-solid fa-backward" onclick="location.href = '/deployed-byname';" title="back"></i>
                     <h6 style="margin-left: 2%; margin-top: 3%;">DEPLOYED DEVICE</h6>
                     <div style="display: flex; font-size: 14px;" class="mt-4 align-items-center ms-5 w-75">
                         <div style="margin-top: 20px;">
@@ -50,7 +47,7 @@
                         </thead>
                         <tbody>
                         @foreach($deviceData as $data)
-                            <tr>
+                            <tr @if($data->status != "for approval" and $data->status != "return approval") style=" filter: contrast(75%); cursor: pointer" @else data-bs-toggle="modal" data-bs-target="#cancel" wire:click="cancelApproval({{$data->id}})" style=" cursor: pointer;" @endif @if($data->status == "deployed") data-bs-toggle="modal" data-bs-target="#return" wire:click="return({{$data->id}})" @endif>
                                 <td>
                                     @if($data->status != "for approval"  and $data->status != "return approval") {{ucfirst($data->name)}}  @else <b>{{ucfirst($data->name)}}</b> @endif
                                 </td>
@@ -71,10 +68,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
         <button id="btn2" data-bs-toggle="modal" data-bs-target="#hasAct" style="display: none"></button>
-    </div>
     @script
     <script>
         $wire.on('hasActive', () => {

@@ -9,14 +9,14 @@
         </td>
     </tr>
 </table>
-<table style="width: 100%; text-align: center; margin-top: 15px;">
+<table style="width: 100%; text-align: center; margin-top: 15px; font-size: 15px;">
     <tr>
         <td>
             <h4>EXIT CLEARANCE FORM</h4>
         </td>
     </tr>
 </table>
-<table style="width: 100%; border: 1px solid; border-collapse: collapse; margin-bottom: 15px;" >
+<table style="width: 100%; border: 1px solid; border-collapse: collapse; margin-bottom: 15px; font-size: 13px" >
     <tr style="border: 1px solid;">
         <td style="border: 1px solid; padding: 8px;">
             <b>Name:</b> {{strtoupper($userInfo->fname)}} {{strtoupper($userInfo->lname)}}
@@ -51,14 +51,14 @@
     </tr>
 </table>
 <i>Before your departure, please ensure that you surrender to and clear with your immediate supervisor, relevant parties, and the Finance and Administration Office. The following items</i>
-<table style="width: 100%; margin-top: 25px;">
+<table style="width: 100%; margin-top: 25px; font-size: 13px">
     <tr>
         <td>
             <h4>IT Department</h4>
         </td>
     </tr>
 </table>
-<table style="width: 100%; text-align: center;border: 1px solid; border-collapse: collapse;" >
+<table style="width: 100%; text-align: center;border: 1px solid; border-collapse: collapse; font-size: 13px" >
     <tr style="border: 1px solid;">
         <td style="border: 1px solid; padding: 8px;">
             <b>Device</b>
@@ -86,14 +86,14 @@
         </tr>
     @endforeach
 </table>
-<table style="width: 100%; margin-top: 25px;">
+<table style="width: 100%; margin-top: 25px; font-size: 13px">
     <tr>
         <td>
             <h4>IT Officer</h4>
         </td>
     </tr>
 </table>
-<table style="width: 100%; text-align: center;border: 1px solid; border-collapse: collapse; margin-bottom: 15px;" >
+<table style="width: 100%; text-align: center;border: 1px solid; border-collapse: collapse; margin-bottom: 15px; font-size: 13px" >
     <tr style="border: 1px solid;">
         <td style="border: 1px solid; padding: 8px; width: 30%;">
 

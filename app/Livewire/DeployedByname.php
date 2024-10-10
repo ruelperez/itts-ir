@@ -46,7 +46,7 @@ class DeployedByname extends Component
     }
 
     public function clickName($userids){
-        return redirect()->to('itts/21/deployed-item-record/'.$userids);
+        return redirect()->to('/inventory/deployed-item-record/'.$userids);
     }
     public function mount(){
 

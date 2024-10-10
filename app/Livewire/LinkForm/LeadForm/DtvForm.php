@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\LinkForm\LeadForm;
 
 use App\Models\AdminShow;
-use App\Models\Announcement;
 use App\Models\Comment;
 use App\Models\CommentHeart;
 use App\Models\Dtr;
@@ -12,27 +11,19 @@ use App\Models\DtvTracker;
 use App\Models\Employee;
 use App\Models\IsRegistration;
 use App\Models\Note;
-use App\Models\Submission;
 use App\Models\SuperadminShow;
 use App\Models\TimeSetting;
 use App\Models\User;
 use App\Models\UserPassword;
-use Illuminate\Queue\Failed\DynamoDbFailedJobProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
-use Livewire\WithFileUploads;
-use Monolog\Handler\IFTTTHandler;
-use function Laravel\Prompts\select;
-use function Laravel\Prompts\table;
 
-class MasstortForm extends Component
+class DtvForm extends Component
 {
-
     public $registrationSwitch, $hostingTrans, $gm = 0, $DQ, $jn, $toChecked = false, $comment, $caseType = "self", $is_success = false, $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $clientList = [], $campaignList = [], $campaign = "selectCampaign", $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
-            $date, $cplCheck = false, $mll = 0, $displayComment = false, $orderNumber, $desciption, $service, $package, $dateSales, $submission = [], $checkboxDQ, $lawfirm = "selectLawfirm", $bam, $bbb, $client = "selectClient", $bms, $dtvRemarks, $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $checkboxInvalidTO, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "", $resultsVerifier = [], $showSearchVerifier = false ;
+        $date, $cplCheck = false, $campaignName, $displayComment = false, $orderNumber, $desciption, $service, $package, $dateSales, $submission = [], $checkboxDQ, $lawfirm = "selectLawfirm", $bam, $bbb, $client = "selectClient", $bms, $dtvRemarks, $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "", $resultsVerifier = [], $showSearchVerifier = false ;
 
     public function render()
     {
@@ -49,7 +40,7 @@ class MasstortForm extends Component
             ->distinct('campaign')
             ->get();
         $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
-        return view('livewire.masstort-form');
+        return view('livewire.link-form.lead-form.dtv-form');
     }
 
     public function clickBox(){
@@ -75,104 +66,31 @@ class MasstortForm extends Component
         }
     }
 
-    public function submit(){
+    public function submitDTV(){
         if ($this->gm == 0){
             session()->flash('badAgent', "Successfully saved");
             return;
         }
-        if ($this->caseType == "self"){
-            $this->validate([
-                'phoneNumber' => 'required|numeric',
-                'altPhoneNumber' => 'required|numeric',
-                'ssn' => 'required|numeric',
-                'campaign' => 'required',
-                'date' => 'required',
-                'agent' => 'required',
-                'claimant' => 'required',
-                'coach' => 'required',
-                'client' => 'required',
-                'caseType' => 'required',
-                'dob' => 'required',
-                'email' => 'required',
-                'address' => 'required',
-                'verifier' => 'required',
-                'source' => 'required',
-                'lawfirm' => 'required',
-            ]);
-        }else{
-            $this->validate([
-                'phoneNumber' => 'required|numeric',
-                'altPhoneNumber' => 'required|numeric',
-                'ssn' => 'required|numeric',
-                'campaign' => 'required',
-                'date' => 'required',
-                'agent' => 'required',
-                'claimant' => 'required',
-                'injuredParty' => 'required',
-                'coach' => 'required',
-                'client' => 'required',
-                'caseType' => 'required',
-                'dob' => 'required',
-                'email' => 'required',
-                'address' => 'required',
-                'verifier' => 'required',
-                'source' => 'required',
-                'lawfirm' => 'required',
-            ]);
-        }
-        if ($this->toChecked == true){
-           $res = $this->checkboxTO[0].' - '.$this->turnover;
-        }
-        elseif ($this->cplCheck == true){
-            $res = implode(', ', $this->submission);
-        }
-        else{
-            $jk = implode(', ', $this->remarks);
-            if ($this->comment != null or $this->comment != ""){
-                $res = $jk.' - '.$this->comment;
-            }
-            else{
-                $res = $jk;
-            }
-
-        }
-        if ($this->campaign == "selectCampaign"){
-            $this->campaign = "n/a";
-        }
-        if ($this->client == "selectClient"){
-            $this->client = "n/a";
-        }
-        if ($this->lawfirm == "selectLawfirm"){
-            $this->lawfirm = "n/a";
-        }
+        $this->validate([
+            'phoneNumber' => ['required', 'regex:/^[0-9]+$/'],
+            'altPhoneNumber' => ['required', 'regex:/^[0-9]+$/'],
+            'orderNumber' => ['required', 'regex:/^[a-zA-Z0-9]+$/'],
+        ]);
         try {
-            Submission::create([
-                'date' => $this->date,
-                'agent' => $this->agent,
-                'claimant' => $this->claimant,
-                'phoneNumber' => $this->phoneNumber,
-                'altPhoneNumber' => $this->altPhoneNumber,
-                'campaign' => $this->campaign,
-                'coach' => $this->coach,
-                'remarks' => $res,
-                'client' => $this->client,
-                'caseType' => $this->caseType,
-                'injuredParty' => $this->injuredParty,
-                'dob' => $this->dob,
+            DtvTracker::create([
+                'name' => $this->claimant,
+                'phone_num' => $this->phoneNumber,
+                'alt_num' => $this->altPhoneNumber,
                 'email' => $this->email,
                 'address' => $this->address,
-                'ssn' => $this->ssn,
-                'verifier' => $this->verifier,
-                'source' => $this->source,
-                'user_name' => $this->fullname,
-                'user_id' => $this->user_id,
-                'lawfirm' => $this->lawfirm,
-            ]);
-            \App\Models\Logs::create([
-                'action' => "Add submission with a customer phone number ".$this->phoneNumber,
-                'user_id' => $this->user_id,
-                'photo' => $this->photo,
-                'fullname' => $this->fullname,
+                'service' => $this->service,
+                'package' => $this->package,
+                'disposition' => $this->dtvRemarks,
+                'agent' => $this->agent,
+                'coach' => $this->coach,
+                'description' => $this->desciption,
+                'orderNumber' => $this->orderNumber,
+                'date' => $this->date,
             ]);
             $this->clearInput();
             $this->displayComment = false;
@@ -185,7 +103,6 @@ class MasstortForm extends Component
             $this->dispatch('subSubmitted');
         }
     }
-
     public function clearInput(){
         $this->date = "";
         $this->caseType = "self";
@@ -200,7 +117,7 @@ class MasstortForm extends Component
         $this->agent = "";
         $this->coach = "";
         $this->verifier = "";
-        $this->source = "";
+        $this->source = "Dialer";
         $this->remarks = [];
         $this->toChecked = false;
         $this->checkboxTO = [];
@@ -212,7 +129,6 @@ class MasstortForm extends Component
         $this->desciption = "";
         $this->orderNumber = "";
         $this->date = "";
-        $this->mll = 0;
     }
     public function clear(){
         $this->clearInput();
@@ -295,7 +211,8 @@ class MasstortForm extends Component
         $this->showSearchCoach = false;
     }
 
-    public function mount(){
+    public function mount($page){
+        $this->campaignName = explode('-', $page)[0];
         $usrId = auth()->user()->id;
         $sd = \App\Models\Employee::where('user_id',$usrId)->get();
         if (count($sd) < 1){
@@ -511,31 +428,14 @@ class MasstortForm extends Component
     }
 
     public function clickTO(){
-        if ($this->checkboxTO == []){
-           $this->mll = 0;
+        if ($this->toChecked == false){
+            $this->toChecked = true;
+            $this->remarks = [];
+        }
+        else{
             $this->toChecked = false;
         }
-        elseif ($this->checkboxTO[0] == "TO"){
-            $this->mll = 1;
-            if ($this->toChecked == false){
-                $this->toChecked = true;
-                $this->remarks = [];
-            }
-            else{
-                $this->toChecked = false;
 
-            }
-        }
-        elseif ($this->checkboxTO[0] == "Invalid TO"){
-            $this->mll = 2;
-            if ($this->toChecked == false){
-                $this->toChecked = true;
-                $this->remarks = [];
-            }
-            else{
-                $this->toChecked = false;
-            }
-        }
     }
     public function clickCplTrans(){
         if ($this->cplCheck == false){
@@ -549,12 +449,6 @@ class MasstortForm extends Component
     }
 
     public function updated($field){
-        if ($field == "subject"){
-            $this->clearInput();
-            $this->displayComment = false;
-            $this->bbb = null;
-            $this->bam = null;
-        }
         if ($field == "dtvRemarks"){
             $this->desciption = "";
         }
@@ -700,7 +594,7 @@ class MasstortForm extends Component
             }
             if ($this->bam == 0){
                 foreach ($this->bms as $hm){
-                   $this->bbb = Note::find($hm->id);
+                    $this->bbb = Note::find($hm->id);
                 }
 
             }
