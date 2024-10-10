@@ -6,23 +6,7 @@
                     <h5>Lead Form</h5>
                 </div>
                 <div style="background-color: #696969; color: white;border-radius: 2%;" class="px-3 py-2 px-sm-4 py-sm-4 mt-4">
-                    <div class="row">
-                        <div class="mb-2 text-center">
-                            <h4>Direct TV</h4>
-                        </div>
-                    </div>
-                    <div class="mb-2"><i>Put "n/a" if not applicable</i></div>
-                    <div class="row mb-4 mt-4">
-                        <div class="col-lg-3 col-md-3">
-                            <button class="btn btn-primary dropdown-toggle w-100" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                DIRECT TV
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="/masstort-form">Mass Tort</a></li>
-                                <li><a class="dropdown-item" href="/dtv-form">Direct TV</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    @include('components.submission-form.campaign-link')
                         <form wire:submit.prevent="submitDTV">
                             <div class="row">
                                 <div class="col-xl-3 col-lg-3 col-md-6 mb-md-4 mb-sm-4 mt-sm-2">

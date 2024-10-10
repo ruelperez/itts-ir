@@ -11,7 +11,7 @@
                 <div style="margin-left: 3%; margin-top: 1%; margin-bottom: 3%;">
                     <i class="fa-solid fa-circle-plus" style="font-size: 30px;cursor: pointer" data-bs-toggle="modal" data-bs-target="#addForm"></i>
                 </div>
-                <a style="margin-left: 3%; " href="/masstort-form">Submission Form</a>
+                <a style="margin-left: 3%; " href="/link-form/lead-form/masstort-form">Submission Form</a>
                 @endif
                 @if($position == "Agent")
                     @foreach($dataLink as $daty)

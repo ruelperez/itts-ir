@@ -63,6 +63,12 @@ Route::middleware(['auth','restrict.ip','checkEmployee'])
     ->group(function () {
         Route::get('/{page}/{emp_id}', [\App\Http\Controllers\InventoryController::class, 'page']);
         Route::get('/pdf/device-clearance/{userID}', [\App\Http\Controllers\InventoryController::class, 'clearance']);
+});
+
+Route::middleware(['auth','restrict.ip','checkEmployee'])
+    ->prefix('link-form')
+    ->group(function () {
+        Route::get('/lead-form/{page}', [\App\Http\Controllers\LinkForm\LeadForm\PageController::class, 'page']);
     });
 
 Route::middleware(['auth','restrict.ip'])->group(function () {

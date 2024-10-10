@@ -1,6 +1,9 @@
 <div>
     @include('modal.news-update.show-photo')
     @include('modal.deployed-item-record.has-active')
+{{--    @include('modal.my_device.add')--}}
+{{--    @include('modal.my_device.cancel')--}}
+    @include('modal.inventory.return')
                 <div style="display: flex;">
                     <i style="margin-left: 2%; margin-top: 3%; cursor: pointer" class="fa-solid fa-backward" onclick="location.href = '/deployed-byname';" title="back"></i>
                     <h6 style="margin-left: 2%; margin-top: 3%;">DEPLOYED DEVICE</h6>
@@ -44,7 +47,7 @@
                         </thead>
                         <tbody>
                         @foreach($deviceData as $data)
-                            <tr>
+                            <tr @if($data->status != "for approval" and $data->status != "return approval") style=" filter: contrast(75%); cursor: pointer" @else data-bs-toggle="modal" data-bs-target="#cancel" wire:click="cancelApproval({{$data->id}})" style=" cursor: pointer;" @endif @if($data->status == "deployed") data-bs-toggle="modal" data-bs-target="#return" wire:click="return({{$data->id}})" @endif>
                                 <td>
                                     @if($data->status != "for approval"  and $data->status != "return approval") {{ucfirst($data->name)}}  @else <b>{{ucfirst($data->name)}}</b> @endif
                                 </td>
