@@ -154,6 +154,8 @@
                                     Inventory</a>
                                 <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#lead"><i class="fa-solid fa-check-to-slot pe-2" ></i>
                                     Lead Tracker</a>
+                                <a class="dropdown-item" href="/admin-access/user-credential"><i class="fa-solid fa-receipt pe-2" ></i>
+                                    User Credential</a>
                                 <a class="dropdown-item" href="/settings"><i class="fa-solid fa-gear pe-2"></i>
                                     Settings</a>
                             </div>
