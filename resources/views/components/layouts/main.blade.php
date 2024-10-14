@@ -14,12 +14,24 @@
     <link href="{{ asset('photo/favicon.png') }}?v{{ \Illuminate\Support\Str::random() }}" rel="icon" type="image/png">
     <link href="{{ asset('photo/apple-touch-icon.png') }}?v{{ \Illuminate\Support\Str::random() }}" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @stack('css')
     <title>{{ $title ?? 'Page Title' }}</title>
     @livewireStyles
 </head>
 <body>
 <div class="wrapper" x-data="{ marginLeftVar: 0 }">
+    @if (session('success'))
+        <script>
+            console.log('baba');
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: '{{ session('success') }}',
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
     <div>
         @include('partials.side-nav')
     </div>
@@ -34,7 +46,7 @@
     </div>
 </div>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 <script defer src="{{asset('css/bootstrap.bundle.min.js')}}"></script>
@@ -44,7 +56,6 @@
 <script src="{{asset('js/operation.js')}}"></script>
 <script src="{{ asset('flatpickr/dist/flatpickr.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ asset('js/sidebar.js') }}"></script>
 <script src="{{ asset('js/change_user_profile.js') }}"></script>
 <script>
