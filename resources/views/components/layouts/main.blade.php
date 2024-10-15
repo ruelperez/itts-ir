@@ -15,6 +15,25 @@
     <link href="{{ asset('photo/apple-touch-icon.png') }}?v{{ \Illuminate\Support\Str::random() }}" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .icon-pdf{
+            color: #4169E1; /* Initial color of the icon */
+            font-size: 23px; /* Adjust icon size */
+            transition: color 0.2s; /* Smooth transition for color change */
+            cursor: pointer;
+        }
+
+        .icon-pdf:hover {
+            color: #00008B; /* Color when the icon is hovered */
+        }
+
+        .center-dtr-btn{
+            display: flex;
+            justify-content: center; /* Horizontally center */
+            align-items: center; /* Vertically center */
+        }
+
+    </style>
     @stack('css')
     <title>{{ $title ?? 'Page Title' }}</title>
     @livewireStyles
