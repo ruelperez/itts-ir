@@ -38,8 +38,8 @@
             </select>
         </div>
     </div>
-    <div style="cursor: pointer" onclick="window.open('/pdf/eod/{{$otherUserID}}/{{$year}}/{{$month}}/{{$week}}', '_blank');" class="mt-4 text-md-end mt-lg-5">
-        <i class="fa-solid fa-file-pdf" style="color: #0c63e4; font-size: 22px; margin-right: 1%;"></i> Save as PDF
+    <div class="mt-4 text-md-end mt-lg-5">
+        <i class="fa-solid fa-file-pdf icon-pdf" onclick="window.open('/pdf/eod/{{$otherUserID}}/{{$year}}/{{$month}}/{{$week}}', '_blank');"></i>
     </div>
     <div class="table-responsive mt-2 mt-xl-3">
         <table class="table table-hover">
