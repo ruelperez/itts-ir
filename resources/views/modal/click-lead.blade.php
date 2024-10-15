@@ -8,8 +8,8 @@
             <div class="modal-body">
                 <div>
                     <a href="/masstort-tracker">Mass tort</a><br><br>
-                    <a href="/dtv-tracker">Direct TV</a>
-                    <a href="/homesec-tracker">Direct TV</a>
+                    <a href="/dtv-tracker">Direct TV</a> <br><br>
+                    <a href="/homesec-tracker">Home Security</a>
                 </div>
             </div>
         </div>
