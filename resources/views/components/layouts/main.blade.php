@@ -33,6 +33,7 @@
     @endif
     <div>
         @include('partials.side-nav')
+        
     </div>
     <!-- Main Component -->
     <div class="main" :style="{ marginLeft: marginLeftVar === 1 ? '265px' : '0px' }">
