@@ -74,7 +74,7 @@
                     <select class="form-select" aria-label="Default select example" wire:model="desciption" x-show="selectedOption === 'Transfered'" @if($dtvRemarks == "Transfered") required @endif>
                         <option value="">Name Of Closer</option>
                         <option value="High Risk">Gabriel </option>
-                        <option value="Med Risk">Roberto</option>
+                        <option value="Med Risk">Rodrigo</option>
                     </select>
                     <select class="form-select" aria-label="Default select example" wire:model="desciption" x-show="selectedOption === 'Need To Retransfer'" @if($dtvRemarks == "Need To Retransfer") required @endif>
                         <option value="">Reason For Retransfer</option>
