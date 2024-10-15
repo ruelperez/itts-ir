@@ -23,7 +23,6 @@
 <div class="wrapper" x-data="{ marginLeftVar: 0 }">
     @if (session('success'))
         <script>
-            console.log('baba');
             Swal.fire({
                 icon: 'success',
                 title: 'Success',
