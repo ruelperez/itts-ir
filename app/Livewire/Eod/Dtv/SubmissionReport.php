@@ -48,7 +48,7 @@ class SubmissionReport extends Component
                     $query->where('disposition', '!=', 'Sale')
                         ->orWhereNull('result'); // Allow for null values
                 })
-                ->where('disposition','!=',"Invalid TO")
+                ->where('disposition', 'not like', '%Invalid TO%')
                 ->groupBy('campaign')
                 ->get();
         }

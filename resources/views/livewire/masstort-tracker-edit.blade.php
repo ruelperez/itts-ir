@@ -327,7 +327,7 @@
                 Swal.fire({
                     title: 'Failed to Updated!',
                     text: 'This is a SweetAlert popup.',
-                    icon: 'success',
+                    icon: 'error',
                     confirmButtonText: 'OK'
                 }).then((result) => {
                     if (result.isConfirmed) {

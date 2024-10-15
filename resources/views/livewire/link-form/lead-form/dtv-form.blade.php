@@ -1,6 +1,4 @@
 <div>
-    @include('modal.click-settings')
-    @include('modal.news-update.show-photo')
     @include('modal.submission.saveOrNot')
                 <div>
                     <h5>Lead Form</h5>
@@ -106,6 +104,7 @@
                                         <option value="Reject Payment">Reject Payment</option>
                                         <option value="Already has the same service">Already has the same service</option>
                                     </select>
+                                    <textarea class="form-control" rows="2" id="reason" wire:model="desciption"  style="border: none;" placeholder="Reason:" x-show="selectedOption === 'Invalid TO'" @if($dtvRemarks == "Invalid TO") required @endif></textarea>
                                 </div>
                             </div>
                             <div class="mt-lg-2 row">
