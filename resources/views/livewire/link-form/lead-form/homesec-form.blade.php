@@ -70,7 +70,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-6 mb-md-4 mb-sm-4 mt-lg-5 mt-2 mt-md-5">
+                <div class="col-xl-4 col-lg-4 col-md-6 mb-md-4 mb-sm-4 mt-2 mt-md-5">
                     <select class="form-select" aria-label="Default select example" wire:model="desciption" x-show="selectedOption === 'Transfered'" @if($dtvRemarks == "Transfered") required @endif>
                         <option value="">Name Of Closer</option>
                         <option value="High Risk">Gabriel </option>
@@ -83,6 +83,11 @@
                     </select>
                     <input type="text" id="datepicker" class="form-control" wire:model="desciption" placeholder="Date of Callback" x-show="selectedOption === 'Callback'" @if($dtvRemarks == "Callback") required @endif>
                     <textarea class="form-control" rows="2" id="reason" wire:model="desciption"  style="border: none;" placeholder="Reason:" x-show="selectedOption === 'Invalid TO'" @if($dtvRemarks == "Invalid TO") required @endif></textarea>
+                    <textarea class="form-control" rows="2" id="reason" wire:model="desciption"  style="border: none;" placeholder="Reason:" x-show="selectedOption === 'Not Serviceable'" @if($dtvRemarks == "Not Serviceable") required @endif></textarea>
+                    <textarea class="form-control mt-2" rows="2" id="reason" wire:model="callbackReason"  style="border: none;" placeholder="Reason:" x-show="selectedOption === 'Callback'" @if($dtvRemarks == "Callback") required @endif></textarea>
+                    <textarea class="form-control" rows="2" id="reason" wire:model="desciption"  style="border: none;" placeholder="Reason:" x-show="selectedOption === 'Not Qualified'" @if($dtvRemarks == "Not Qualified") required @endif></textarea>
+                    <textarea class="form-control" rows="2" id="reason" wire:model="desciption"  style="border: none;" placeholder="Reason:" x-show="selectedOption === 'Declined'" @if($dtvRemarks == "Declined") required @endif></textarea>
+                    <textarea class="form-control" rows="2" id="reason" wire:model="desciption"  style="border: none;" placeholder="Reason:" x-show="selectedOption === 'HU'" @if($dtvRemarks == "HU") required @endif></textarea>
                 </div>
             </div>
             <div class="mt-lg-2 row">

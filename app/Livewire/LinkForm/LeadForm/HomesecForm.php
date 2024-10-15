@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class HomesecForm extends Component
 {
-    public $campaignName, $results = [], $date, $referenceCityZip, $distanceTimeDiff, $claimant, $phoneNumber, $email, $address, $desciption, $altPhoneNumber, $coach, $source = "", $gm = 0, $resultsCoach = [], $showSearch = false, $showSearchCoach = false, $dtvRemarks, $agent;
+    public $campaignName, $results = [], $date, $referenceCityZip, $callbackReason, $distanceTimeDiff, $claimant, $phoneNumber, $email, $address, $desciption, $altPhoneNumber, $coach, $source = "", $gm = 0, $resultsCoach = [], $showSearch = false, $showSearchCoach = false, $dtvRemarks, $agent;
     public function render()
     {
         return view('livewire.link-form.lead-form.homesec-form');
@@ -24,6 +24,9 @@ class HomesecForm extends Component
             'phoneNumber' => ['required', 'regex:/^[0-9]+$/'],
             'altPhoneNumber' => ['required', 'regex:/^[0-9]+$/'],
         ]);
+        if ($this->dtvRemarks == "Callback"){
+            $this->desciption = $this->desciption.' - '.$this->callbackReason;
+        }
         try {
             HomesecTracker::create([
                 'date' => $this->date,
@@ -87,6 +90,7 @@ class HomesecForm extends Component
         $this->referenceCityZip= "";
         $this->distanceTimeDiff= "";
         $this->claimant = "";
+        $this->callbackReason = "";
     }
 
     public function clickSearchCoach(){
