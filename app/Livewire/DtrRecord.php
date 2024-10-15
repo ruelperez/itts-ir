@@ -25,7 +25,7 @@ class DtrRecord extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $ids, $task, $employeeData, $dtrFullName, $empPosition, $week = "1", $dtrData = [], $year = "2024", $month = "05", $position, $otherUserID, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $ids, $task, $employeeData, $dtrFullName, $empPosition, $week = "all", $dtrData = [], $year = "2024", $month, $position, $otherUserID, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -38,9 +38,20 @@ class DtrRecord extends Component
             $this->employeeData = $emp->designation;
         }
         $this->photo = auth()->user()->photo;
-        $this->dtrData = DtrContent::where('user_id',$this->otherUserID)
-            ->where('week',$this->week)
-            ->get();
+        if ($this->week == "all"){
+            $this->dtrData = DtrContent::where('user_id',$this->otherUserID)
+                ->whereYear('in', $this->year)
+                ->whereMonth('in', $this->month)
+                ->get();
+        }
+        else{
+            $this->dtrData = DtrContent::where('user_id',$this->otherUserID)
+                ->whereYear('in', $this->year)
+                ->whereMonth('in', $this->month)
+                ->where('week',$this->week)
+                ->get();
+        }
+
         $ds = DtrContent::where('user_id',$this->otherUserID)->get();
         foreach ($ds as $dtr){
             $this->dtrFullName = $dtr->fullname;
@@ -58,6 +69,8 @@ class DtrRecord extends Component
     public function mount($name){
         $this->otherUserID = $name;
         $this->webName = $name;
+        $this->month = date('m');
+        $this->year = date('Y');
     }
     public function logout(){
         Auth::logout();
@@ -270,12 +283,6 @@ class DtrRecord extends Component
         }
         if ($field == "superAdminSwitch"){
             $this->super_admin_Switch();
-        }
-        if ($field == "month"){
-
-        }
-        if ($field == "week"){
-
         }
         if ($field == "photo"){
             $filename = Str::random(40) . '.' . $this->photo->getClientOriginalExtension();

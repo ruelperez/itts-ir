@@ -4,37 +4,44 @@
     <div>
         <h6>DTR RECORD</h6>
     </div>
-    <div>
+    <div class="mt-3 mt-lg-4">
         <h6>{{$dtrFullName}}</h6>
     </div>
-    <div style="margin-top: 2%; width: 80%; margin-left: 4%; display: flex">
-        <input type="text" class="form-control" placeholder="Year" wire:model.live="year" style="width: 15%;">
-        <select class="form-select" aria-label="Default select example" wire:model.live="month" style="width: 15%; margin-left: 1%;">
-            <option value="01">January</option>
-            <option value="02">February</option>
-            <option value="03">March</option>
-            <option value="04">April</option>
-            <option value="05">May</option>
-            <option value="06">June</option>
-            <option value="07">July</option>
-            <option value="08">August</option>
-            <option value="09">September</option>
-            <option value="10">October</option>
-            <option value="11">November</option>
-            <option value="12">December</option>
-        </select>
-        <select class="form-select" aria-label="Default select example" wire:model.live="week" style="width: 15%; margin-left: 1%;">
-            <option value="1">Week 1</option>
-            <option value="2">Week 2</option>
-            <option value="3">Week 3</option>
-            <option value="4">Week 4</option>
-            <option value="5">Week 5</option>
-        </select>
-    </div>
-    <div style="margin-left: 4%; margin-top: 2%; width: 92%;">
-        <div style="margin-left: auto; width: 120px; margin-bottom: 1%; cursor: pointer" onclick="location.href = '/itts/save-eod/{{$otherUserID}}/{{$week}}';">
-            <i class="fa-solid fa-file-pdf" style="color: #0c63e4; font-size: 22px; margin-right: 1%;"></i> Save as PDF
+    <div class="row mt-3">
+        <div class="col-md-4 col-xl-3">
+            <input type="text" class="form-control" placeholder="Year" wire:model.live="year">
         </div>
+        <div class="mt-2 mt-md-0 col-md-4 col-xl-3">
+            <select class="form-select" aria-label="Default select example" wire:model.live="month">
+                <option value="01">January</option>
+                <option value="02">February</option>
+                <option value="03">March</option>
+                <option value="04">April</option>
+                <option value="05">May</option>
+                <option value="06">June</option>
+                <option value="07">July</option>
+                <option value="08">August</option>
+                <option value="09">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+        </div>
+        <div class="mt-2 mt-md-0 col-md-4 col-xl-3">
+            <select class="form-select" aria-label="Default select example" wire:model.live="week">
+                <option value="all">Week (1 - 5)</option>
+                <option value="1">Week 1</option>
+                <option value="2">Week 2</option>
+                <option value="3">Week 3</option>
+                <option value="4">Week 4</option>
+                <option value="5">Week 5</option>
+            </select>
+        </div>
+    </div>
+    <div style="cursor: pointer" onclick="window.open('/pdf/eod/{{$otherUserID}}/{{$year}}/{{$month}}/{{$week}}', '_blank');" class="mt-4 text-md-end mt-lg-5">
+        <i class="fa-solid fa-file-pdf" style="color: #0c63e4; font-size: 22px; margin-right: 1%;"></i> Save as PDF
+    </div>
+    <div class="table-responsive mt-2 mt-xl-3">
         <table class="table table-hover">
             <thead>
             <tr>
@@ -52,7 +59,7 @@
             </thead>
             <tbody>
             @foreach($dtrData as $data)
-                @if(Carbon\Carbon::parse($data->in)->format('Y') == $year and Carbon\Carbon::parse($data->in)->format('m') == $month)
+{{--                @if(Carbon\Carbon::parse($data->in)->format('Y') == $year and Carbon\Carbon::parse($data->in)->format('m') == $month)--}}
                     <tr>
                         <td>{{Carbon\Carbon::parse($data->in)->format('M/d/Y')}}</td>
                         <th scope="row">@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('D') }} @endif</th>
@@ -75,7 +82,7 @@
                             </td>
                         @endif
                     </tr>
-                @endif
+{{--                @endif--}}
             @endforeach
             </tbody>
         </table>

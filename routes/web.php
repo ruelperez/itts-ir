@@ -48,6 +48,13 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/itts/24/dtv-form', \App\Livewire\DtvForm::class)->middleware('auth');
 
 Route::middleware(['auth','restrict.ip','checkEmployee'])->group(function () {
+    Route::prefix('inventory')->group(function () {
+        Route::get('/{page}/{emp_id}', [\App\Http\Controllers\InventoryController::class, 'page']);
+        Route::get('/pdf/device-clearance/{userID}', [\App\Http\Controllers\InventoryController::class, 'clearance']);
+    });
+    Route::prefix('pdf')->group(function () {
+        Route::get('/eod/{user_id}/{year}/{month}/{week}', [\App\Http\Controllers\Pdf\EodController::class, 'pdf']);
+    });
     Route::get('/{page}', [\App\Http\Controllers\PageController::class, 'page']);
     Route::get('/edit-leads/{page}/{lead_id}', [\App\Http\Controllers\PageController::class, 'edit_leads']);
     Route::get('/per-shift-pdf/{moproduction-lead-mass-tortnth}/{day}/{year}/{role}', [\App\Http\Controllers\ShiftController::class, 'pdf']);
@@ -56,13 +63,6 @@ Route::middleware(['auth','restrict.ip','checkEmployee'])->group(function () {
     Route::post('/profile/upload', [ProfileController::class, 'uploadProfilePicture'])->name('profile.upload');
     Route::get('/campaign/{page}', [\App\Http\Controllers\Campaign\PageController::class, 'page']);
     Route::get('/deployed-item-record/{id}', [\App\Http\Controllers\Campaign\PageController::class, 'page']);
-});
-
-Route::middleware(['auth','restrict.ip','checkEmployee'])
-    ->prefix('inventory')
-    ->group(function () {
-        Route::get('/{page}/{emp_id}', [\App\Http\Controllers\InventoryController::class, 'page']);
-        Route::get('/pdf/device-clearance/{userID}', [\App\Http\Controllers\InventoryController::class, 'clearance']);
 });
 
 Route::middleware(['auth','restrict.ip','checkEmployee'])
