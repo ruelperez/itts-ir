@@ -270,7 +270,11 @@
                                 <div class="col-3">
                                     <select class="form-select" aria-label="Default select example" wire:model="result" x-model="selectedOptions" required>
                                         <option value="">Select Result</option>
-                                        <option value="Signed / Executed">Signed / Executed</option>
+                                        @if($displayRemarks == "transferred")
+                                            <option value="transferred">Transferred</option>
+                                        @else
+                                            <option value="Signed / Executed">Signed / Executed</option>
+                                        @endif
                                         <option value="Return by Client">Return by Client</option>
                                         <option value="DQ - Other reason">DQ - Other reason</option>
                                         <option value="DQ - Criteria">DQ - Criteria</option>

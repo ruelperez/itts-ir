@@ -127,7 +127,6 @@ class MasstortTrackerEdit extends Component
         $this->source = $yr->source;
         $this->displayRemarks = $yr->remarks;
         $this->result = $yr->result;
-
     }
 
     public function submitEdit(){
