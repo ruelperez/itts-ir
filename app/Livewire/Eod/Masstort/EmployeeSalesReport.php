@@ -45,7 +45,7 @@ class EmployeeSalesReport extends Component
                     DB::raw('STR_TO_DATE(date, "%m/%d/%Y")'),
                     [$start, $end]
                 )
-                ->where('result', 'Signed / Executed')
+                ->whereIn('result', ['Signed / Executed', 'Transferred']) // Use whereIn for multiple conditions
                 ->groupBy('agent','campaign')
                 ->get();
         }
