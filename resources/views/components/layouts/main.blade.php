@@ -3,24 +3,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        .icon-pdf{
-            color: #4169E1; /* Initial color of the icon */
-            font-size: 23px; /* Adjust icon size */
-            transition: color 0.2s; /* Smooth transition for color change */
-            cursor: pointer;
-        }
-
-        .icon-pdf:hover {
-            color: #00008B; /* Color when the icon is hovered */
-        }
-
-        .center-dtr-btn{
-            display: flex;
-            justify-content: center; /* Horizontally center */
-            align-items: center; /* Vertically center */
-        }
-    </style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
