@@ -4,14 +4,14 @@
     </div>
     <div class="px-lg-3 px-xl-5">
         <div class="mt-4 col-md-6 col-xl-4">
-            <input class="form-control w-100" type="search" placeholder="Search" aria-label="Search" wire:model.live="search">
+            <input class="form-control w-100" id="searchInput" type="search" placeholder="Search" aria-label="Search" wire:model.live="search">
         </div>
-        <div class="text-center">
-            <div class="spinner-border mt-5" role="status" wire:loading>
+        <div class="text-center" id="spinnerContainer" style="display: none; min-height: 50px;">
+            <div class="spinner-border mt-5" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
         </div>
-        <div class="mt-4" wire:loading.remove>
+        <div class="mt-4" id="resultContainer">
             <ul class="list-group w-100">
                 @foreach($logsData as $data)
                     <li class="list-group-item">
@@ -43,4 +43,28 @@
             </div>
         </div>
     </div>
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const spinnerContainer = document.getElementById('spinnerContainer');
+        const resultContainer = document.getElementById('resultContainer');
+
+        searchInput.addEventListener('input', function () {
+            showLoadingSpinner();
+            // Simulate an asynchronous action (e.g., fetching data)
+            setTimeout(() => {
+                hideLoadingSpinner();
+                // Here, you would typically fetch and update your results dynamically
+            }, 2000); // Simulating a delay of 2 seconds for the search
+        });
+
+        function showLoadingSpinner() {
+            spinnerContainer.style.display = 'block';
+            resultContainer.style.display = 'none';
+        }
+
+        function hideLoadingSpinner() {
+            spinnerContainer.style.display = 'none';
+            resultContainer.style.display = 'block';
+        }
+    </script>
 </div>
