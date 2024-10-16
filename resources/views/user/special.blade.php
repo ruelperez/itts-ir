@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ asset('flatpickr/dist/flatpickr.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     {{--        @vite(['resources/css/app.css', 'resources/js/app.js'])--}}
-    <title>{{ $title ?? 'Page Title' }}</title>
+    <title>itts-kbtool login</title>
     <link href="{{ asset('photo/favicon.png') }}?v{{ \Illuminate\Support\Str::random() }}" rel="icon" type="image/png">
     <link href="{{ asset('photo/apple-touch-icon.png') }}?v{{ \Illuminate\Support\Str::random() }}" type="image/png">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -54,7 +54,7 @@
                     <div class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-outline-success btn-md text-white" style="background-color: rgba(0, 128, 0, 0.8); width: 70%;">Login</button>
                     </div>
-                    <p class="text-center mt-3 mb-0">Have already an account? <a href="/user/register" class="fw-bold text-body"><u>Register here</u></a></p>
+{{--                    <p class="text-center mt-3 mb-0">Have already an account? <a href="/user/register" class="fw-bold text-body"><u>Register here</u></a></p>--}}
                 </form>
             </div>
         </div>
