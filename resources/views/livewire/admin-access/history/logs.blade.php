@@ -6,13 +6,13 @@
         <div class="mt-4 col-md-6 col-xl-4">
             <input class="form-control w-100" type="search" placeholder="Search" aria-label="Search" wire:model.live="search">
         </div>
-{{--        <div class="text-center">--}}
-{{--            <div class="spinner-border mt-5" role="status" wire:loading>--}}
-{{--                <span class="visually-hidden">Loading...</span>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-        <div class="mt-4">
-            <ul class="list-group">
+        <div class="text-center">
+            <div class="spinner-border mt-5" role="status" wire:loading>
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <div class="mt-4 border" wire:loading.remove>
+            <ul class="list-group border">
                 @foreach($logsData as $data)
                     <li class="list-group-item">
                         <div class="row">
