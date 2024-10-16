@@ -146,17 +146,17 @@
                                 <small>Admin access</small>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropupLink">
-                                <a class="dropdown-item" href="/logs"><i class="fa-solid fa-tent-arrow-left-right pe-2"></i>
+                                <a class="dropdown-item" href="/admin-access/history/logs"><i class="fa-solid fa-tent-arrow-left-right pe-2"></i>
                                     Logs</a>
-                                <a class="dropdown-item" href="/eod/masstort-tracker"><i class="fa-solid fa-universal-access pe-2"></i>
+                                <a class="dropdown-item" href="/admin-access/eod/masstort-tracker"><i class="fa-solid fa-universal-access pe-2"></i>
                                     EOD</a>
-                                <a class="dropdown-item" href="/inventory"><i class="fa-solid fa-store pe-2"></i>
+                                <a class="dropdown-item" href="/admin-access/inventory/inventory"><i class="fa-solid fa-store pe-2"></i>
                                     Inventory</a>
                                 <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#lead"><i class="fa-solid fa-check-to-slot pe-2" ></i>
                                     Lead Tracker</a>
-                                <a class="dropdown-item" href="/admin-access/user-credential"><i class="fa-solid fa-receipt pe-2" ></i>
+                                <a class="dropdown-item" href="/admin-access/user-credential/kbtool-account"><i class="fa-solid fa-receipt pe-2" ></i>
                                     User Credential</a>
-                                <a class="dropdown-item" href="/settings"><i class="fa-solid fa-gear pe-2"></i>
+                                <a class="dropdown-item" href="/admin-access/settings/registration-option"><i class="fa-solid fa-gear pe-2"></i>
                                     Settings</a>
                             </div>
                         </div>

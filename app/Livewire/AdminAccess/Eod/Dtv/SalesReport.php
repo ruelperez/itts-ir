@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Livewire\Eod\Dtv;
+namespace App\Livewire\AdminAccess\Eod\Dtv;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class SubmissionReport extends Component
+class SalesReport extends Component
 {
     public $start, $end, $submissionData = [], $salesData = [], $pages, $campaignName, $subject;
     public function render()
     {
-        return view('livewire.eod.dtv.submission-report');
+        return view('livewire.admin-access.eod.dtv.sales-report');
     }
 
     public function mount($pages){
@@ -44,11 +44,7 @@ class SubmissionReport extends Component
                     DB::raw('STR_TO_DATE(date, "%m/%d/%Y")'),
                     [$start, $end]
                 )
-                ->where(function($query) {
-                    $query->where('disposition', '!=', 'Sale')
-                        ->orWhereNull('result'); // Allow for null values
-                })
-                ->where('disposition', 'not like', '%Invalid TO%')
+                ->where('disposition','Sale')
                 ->groupBy('campaign')
                 ->get();
         }

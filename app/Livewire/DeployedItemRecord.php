@@ -60,14 +60,14 @@ class DeployedItemRecord extends Component
     }
 
 //    public function submitAdd(){
-//        $fg = \App\Models\Inventory::where('serial',$this->serial)
+//        $fg = \App\Models\inventory::where('serial',$this->serial)
 //            ->where('status','stocked')->get();
 //        if (count($fg) == 0){
 //            session()->flash('notExist', "Serial number does not exist");
 //            return;
 //        }
 //        else{
-//            $yu = \App\Models\Inventory::where('serial',$this->serial)->get();
+//            $yu = \App\Models\inventory::where('serial',$this->serial)->get();
 //            if (count($yu) != 0){
 //                try {
 //                    \App\Models\MyDevice::create([
@@ -80,7 +80,7 @@ class DeployedItemRecord extends Component
 //                        'inventory_id' => $this->inventory_id,
 //                        'user_id' => $this->user_id,
 //                    ]);
-//                    $aa = \App\Models\Inventory::find($this->inventory_id);
+//                    $aa = \App\Models\inventory::find($this->inventory_id);
 //                    $aa->status = "for approval";
 //                    $aa->save();
 //                    $this->device_name = "";
@@ -103,7 +103,7 @@ class DeployedItemRecord extends Component
 //    public function cancelItemApproval(){
 //        try {
 //            $tr = \App\Models\MyDevice::find($this->ids);
-//            $hh = \App\Models\Inventory::find($tr->inventory_id);
+//            $hh = \App\Models\inventory::find($tr->inventory_id);
 //            $hh->status = "stocked";
 //            $hh->save();
 //            \App\Models\MyDevice::find($this->ids)->delete();

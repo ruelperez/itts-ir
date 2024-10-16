@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Eod\Dtv;
+namespace App\Livewire\AdminAccess\Eod\Masstort;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -9,9 +9,10 @@ use Livewire\Component;
 class SalesReport extends Component
 {
     public $start, $end, $submissionData = [], $salesData = [], $pages, $campaignName, $subject;
+
     public function render()
     {
-        return view('livewire.eod.dtv.sales-report');
+        return view('livewire.admin-access.eod.masstort.sales-report');
     }
 
     public function mount($pages){
@@ -44,7 +45,7 @@ class SalesReport extends Component
                     DB::raw('STR_TO_DATE(date, "%m/%d/%Y")'),
                     [$start, $end]
                 )
-                ->where('disposition','Sale')
+                ->where('result', 'Signed / Executed')
                 ->groupBy('campaign')
                 ->get();
         }

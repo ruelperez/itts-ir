@@ -34,7 +34,7 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/itts/15/{name}', \App\Livewire\Employee::class)->middleware('auth');
 //Route::get('/itts/16/staff-directory', \App\Livewire\StaffDirectory::class)->middleware('auth');
 //Route::get('/itts/17/{name}', \App\Livewire\MyDevice::class)->middleware('auth');
-//Route::get('/itts/18/inventory', \App\Livewire\Inventory::class)->middleware('auth');
+//Route::get('/itts/18/inventory', \App\Livewire\inventory::class)->middleware('auth');
 //Route::get('/itts/19/device-approval', \App\Livewire\DeviceApproval::class)->middleware('auth');
 //Route::get('/itts/20/deployed-item', \App\Livewire\DeployedByname::class)->middleware('auth');
 //Route::get('/itts/21/deployed-item-record/{userID}', \App\Livewire\DeployedItemRecord::class)->middleware('auth');
@@ -55,10 +55,13 @@ Route::middleware(['auth','restrict.ip','checkEmployee'])->group(function () {
     Route::prefix('pdf')->group(function () {
         Route::get('/eod/{user_id}/{year}/{month}/{week}', [\App\Http\Controllers\Pdf\EodController::class, 'pdf']);
     });
+    Route::prefix('admin-access')->group(function () {
+        Route::get('eod/{page}', [\App\Http\Controllers\AdminAccess\PageController::class, 'eod']);
+        Route::get('/{folder}/{page}', [\App\Http\Controllers\AdminAccess\PageController::class, 'page']);
+    });
     Route::get('/{page}', [\App\Http\Controllers\PageController::class, 'page']);
     Route::get('/edit-leads/{page}/{lead_id}', [\App\Http\Controllers\PageController::class, 'edit_leads']);
     Route::get('/per-shift-pdf/{moproduction-lead-mass-tortnth}/{day}/{year}/{role}', [\App\Http\Controllers\ShiftController::class, 'pdf']);
-    Route::get('eod/{page}', [\App\Http\Controllers\PageController::class, 'eod']);
     Route::get('/dtr-record/{id}', [\App\Http\Controllers\PageController::class, 'dtr_employee_record']);
     Route::post('/profile/upload', [ProfileController::class, 'uploadProfilePicture'])->name('profile.upload');
     Route::get('/campaign/{page}', [\App\Http\Controllers\Campaign\PageController::class, 'page']);

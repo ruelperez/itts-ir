@@ -1,12 +1,9 @@
 <?php
 
-namespace App\Livewire\Eod;
+namespace App\Livewire\AdminAccess\Eod;
 
-use App\Models\DtvTracker;
-use App\Models\Submission;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Livewire\Component;
 
 class Tracker extends Component
@@ -15,7 +12,7 @@ class Tracker extends Component
 
     public function render()
     {
-        return view('livewire.eod.tracker');
+        return view('livewire.admin-access.eod.tracker');
     }
 
     public function mount($page){

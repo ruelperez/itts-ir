@@ -1,7 +1,7 @@
 @extends('components.layouts.main')
 
 @section('content')
-    @livewire('eod.tracker',['page' => $page])
+    @livewire('admin-access.eod.tracker',['page' => $page])
 @endsection
 {{--@push('js')--}}
 {{--    <script>--}}

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\AdminAccess\LeadTracker;
 
 use App\Models\AdminShow;
 use App\Models\Comment;
@@ -10,7 +10,6 @@ use App\Models\DtrContent;
 use App\Models\Employee;
 use App\Models\IsRegistration;
 use App\Models\Note;
-use App\Models\Submission;
 use App\Models\SuperadminShow;
 use App\Models\TimeSetting;
 use App\Models\User;
@@ -23,7 +22,7 @@ use Livewire\Component;
 class DtvTracker extends Component
 {
     public $registrationSwitch, $returnClient, $returnReason, $currentPage = 1, $perPage = 15, $is_success = false, $search, $ids, $displayRemarks, $checkBox = [], $submissionData = [], $resultsCoach = [], $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo, $campaignList = [], $campaign,
-        $date, $base = true, $toChecked = false, $package, $disposition, $description, $orderNumber, $service, $customer, $lawfirm, $lawfirmList = [], $dqReason, $client, $remarks = [], $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $showSearch = false, $showSearchCoach = false, $agent, $coach, $verifier, $source = "Dialer", $caseType = "self", $resultsVerifier = [], $results = [], $clientList= [], $showSearchVerifier = false, $result;
+        $date, $base = true, $toChecked = false, $folderName, $package, $disposition, $description, $orderNumber, $service, $customer, $lawfirm, $lawfirmList = [], $dqReason, $client, $remarks = [], $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $showSearch = false, $showSearchCoach = false, $agent, $coach, $verifier, $source = "Dialer", $caseType = "self", $resultsVerifier = [], $results = [], $clientList= [], $showSearchVerifier = false, $result;
 
     public function render()
     {
@@ -59,7 +58,7 @@ class DtvTracker extends Component
                 ->latest()
                 ->get();
         }
-        return view('livewire.dtv-tracker');
+        return view('livewire.admin-access.'.$this->folderName.'.dtv-tracker');
     }
 
     public function clearCheck(){
@@ -102,7 +101,8 @@ class DtvTracker extends Component
         }
     }
 
-    public function mount(){
+    public function mount($page,$folder){
+        $this->folderName = $folder;
         $pst = auth()->user()->position;
         if ($pst != "Super Admin"){
             return redirect('/');

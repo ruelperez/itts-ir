@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Livewire\AdminAccess;
+namespace App\Livewire\AdminAccess\UserCredential;
 
 use App\Models\UserPassword;
 use Livewire\Component;
 
-class UserCredential extends Component
+class KbtoolAccount extends Component
 {
     public $staffData = [], $search;
 
@@ -20,6 +20,6 @@ class UserCredential extends Component
                 ->orWhere('username','LIKE','%'.$this->search.'%')
                 ->get();
         }
-        return view('livewire.admin-access.user-credential');
+        return view('livewire.admin-access.user-credential.kbtool-account');
     }
 }

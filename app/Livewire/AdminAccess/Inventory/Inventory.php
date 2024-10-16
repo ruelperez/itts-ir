@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\AdminAccess\Inventory;
 
 use App\Models\AdminShow;
 use App\Models\Comment;
@@ -47,7 +47,7 @@ class Inventory extends Component
                 ->get();
         }
 
-        return view('livewire.inventory');
+        return view('livewire.admin-access.inventory.inventory');
     }
 
     public function dispose(){

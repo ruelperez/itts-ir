@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Eod\Masstort;
+namespace App\Livewire\AdminAccess\Eod\Masstort;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +12,7 @@ class EmployeeSalesReport extends Component
 
     public function render()
     {
-        return view('livewire.eod.masstort.employee-sales-report');
+        return view('livewire.admin-access.eod.masstort.employee-sales-report');
     }
 
     public function mount($pages){

@@ -1,7 +1,7 @@
 @extends('components.layouts.main')
 
 @section('content')
-    @livewire('admin-access.'.$page,['page' => $page])
+    @livewire('admin-access.'.$folder.'.'.$page,['page' => $page, 'folder' => $folder])
 @endsection
 {{--@push('js')--}}
 {{--    <script>--}}

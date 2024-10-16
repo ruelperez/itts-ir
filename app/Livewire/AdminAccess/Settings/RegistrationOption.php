@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\AdminAccess\Settings;
 
 use App\Models\AdminShow;
-use App\Models\Announcement;
-use App\Models\Dtr;
 use App\Models\Employee;
 use App\Models\IsRegistration;
 use App\Models\SuperadminShow;
 use Livewire\Component;
 
-class Settings extends Component
+class RegistrationOption extends Component
 {
     public $registrationSwitch, $adminSwitch, $superAdminSwitch, $fullname, $user_id, $position, $employeeData, $photo;
 
@@ -25,7 +23,7 @@ class Settings extends Component
             $this->employeeData = $emp->designation;
         }
         $this->photo = auth()->user()->photo;
-        return view('livewire.settings');
+        return view('livewire.admin-access.settings.registration-option');
     }
 
     public function mount(){

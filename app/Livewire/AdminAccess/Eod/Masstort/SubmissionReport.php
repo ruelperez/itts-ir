@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Eod\Masstort;
+namespace App\Livewire\AdminAccess\Eod\Masstort;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +12,7 @@ class SubmissionReport extends Component
 
     public function render()
     {
-        return view('livewire.eod.masstort.submission-report');
+        return view('livewire.admin-access.eod.masstort.submission-report');
     }
 
     public function mount($pages){

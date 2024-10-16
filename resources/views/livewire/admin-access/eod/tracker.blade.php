@@ -5,20 +5,20 @@
                 {{$campaignName}}
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="/eod/masstort-tracker">Mass Tort</a></li>
-                <li><a class="dropdown-item" href="/eod/dtv-tracker">Direct TV</a></li>
+                <li><a class="dropdown-item" href="/admin-access/eod/masstort-tracker">Mass Tort</a></li>
+                <li><a class="dropdown-item" href="/admin-access/eod/dtv-tracker">Direct TV</a></li>
             </ul>
         </div>
     </div>
     <div class="row justify-content-center">
         <div class="px-3 py-3 mt-3 mt-sm-4 col-lg-5 me-lg-3" style="background-color: #2F4F4F		; color: white; border-radius: 10px;">
-            @livewire('eod.'.$subject.'.sales-report',['pages' => $pages])
+            @livewire('admin-access.eod.'.$subject.'.sales-report',['pages' => $pages])
         </div>
         <div class="px-3 py-3 mt-3 mt-sm-4 col-lg-5" style="background-color: #2F4F4F		; color: white; border-radius: 10px;">
-            @livewire('eod.'.$subject.'.employee-sales-report',['pages' => $pages])
+            @livewire('admin-access.eod.'.$subject.'.employee-sales-report',['pages' => $pages])
         </div>
         <div class="px-3 py-3 mt-3 mt-sm-4 col-lg-6" style="background-color: #2F4F4F		; color: white; border-radius: 10px;">
-            @livewire('eod.'.$subject.'.submission-report',['pages' => $pages])
+            @livewire('admin-access.eod.'.$subject.'.submission-report',['pages' => $pages])
         </div>
     </div>
     @script
