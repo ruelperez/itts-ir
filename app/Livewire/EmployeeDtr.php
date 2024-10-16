@@ -46,7 +46,7 @@ class EmployeeDtr extends Component
         $this->dtrData = Dtr::all();
         $this->dtrAll = DtrPermanent::all();
         $this->timeSched = TimeSetting::latest()->first();
-        return view('livewire.employee-dtr')->title('Dtr');
+        return view('livewire.employee-dtr')->title('DtrAllRecord');
     }
 
     public function clickTimeEdit1(){
@@ -677,7 +677,7 @@ class EmployeeDtr extends Component
             $user = UserPassword::find($this->user_id);
             $user->photo = $filename;
             $user->save();
-            return redirect('/itts/8/dtr');
+            return redirect('/itts/8/dtr-all-record');
         }
     }
 }

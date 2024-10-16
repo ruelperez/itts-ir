@@ -39,12 +39,12 @@
             </select>
         </div>
     </div>
-    <div class="row mt-4">
+    <div class="row mt-4 mt-xl-5">
         <div class="col-6">
             <b style="font-size: 15px; ">{{$month}}-{{$day}}-{{$year}}</b>
         </div>
-        <div class="col-6 text-end" onclick="location.href = '/per-shift-pdf/{{$month}}/{{$day}}/{{$year}}/{{$role}}'; ">
-            <i class="fa-solid fa-file-pdf" style="color: #0c63e4; font-size: 15px;"></i> Save as PDF
+        <div class="col-6 text-end">
+            <i class="fa-solid fa-file-pdf icon-pdf" onclick="window.open('/pdf/daily-shift/{{$month}}/{{$day}}/{{$year}}/{{$role}}', '_blank');"></i>
         </div>
     </div>
     <div class="table-responsive mt-4">

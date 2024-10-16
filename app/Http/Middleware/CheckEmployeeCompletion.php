@@ -20,10 +20,10 @@ class CheckEmployeeCompletion
         // Check if the user is authenticated
         if (Auth::check()) {
             $user = Auth::user();
-            // Check if the user has a corresponding employee record in the employees table
+            // Check if the user has a corresponding employee all-record in the employees table
             $employee = Employee::where('user_id', $user->id)->first();
 
-            // If no employee record is found
+            // If no employee all-record is found
             if (!$employee) {
                 // Redirect to the employee form page with an alert
                 return redirect('/employee/incomplete')

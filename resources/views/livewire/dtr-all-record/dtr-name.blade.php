@@ -9,7 +9,7 @@
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search Name" wire:model.live="search" style="width: 100%;">
         </div>
         <div class="mt-2 mt-md-0 col-md-3 col-xl-2">
-            <button class="btn btn-info" style="width: 100%" onclick="location.href = '/per-shift';">Daily Shift</button>
+            <button class="btn btn-info" style="width: 100%" onclick="location.href = '/dtr/all-record/daily-shift';">Daily Shift</button>
         </div>
         <div class="mt-2 mt-md-0 col-md-3 col-xl-2">
             <button class="btn btn-warning" style="width: 100%" onclick="location.href = '/current-shift';">Current Shift</button>

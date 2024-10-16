@@ -56,7 +56,7 @@ class DeployedItemRecord extends Component
         foreach ($rh as $hr){
             $this->deviceUserFullname = $hr->fname.' '.$hr->lname;
         }
-        return view('livewire.deployed-item-record')->title('deployed device');
+        return view('livewire.deployed-item-all-record')->title('deployed device');
     }
 
 //    public function submitAdd(){
@@ -153,7 +153,7 @@ class DeployedItemRecord extends Component
     }
 
     public function clickName($userids){
-        return redirect()->to('itts/21/deployed-item-record/'.$userids);
+        return redirect()->to('itts/21/deployed-item-all-record/'.$userids);
     }
     public function mount($emp_id){
         $this->deviceUserID = $emp_id;

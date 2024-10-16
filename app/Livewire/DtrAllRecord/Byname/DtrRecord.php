@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\DtrAllRecord\Byname;
 
 use App\Models\AdminShow;
 use App\Models\Comment;
 use App\Models\CommentHeart;
 use App\Models\Dtr;
 use App\Models\DtrContent;
+use App\Models\Employee;
 use App\Models\IsRegistration;
 use App\Models\Note;
 use App\Models\SuperadminShow;
@@ -19,37 +20,36 @@ use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class PerShift extends Component
+class DtrRecord extends Component
 {
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $ids, $task, $userID = [], $employeeData, $role = "all", $year = "2024", $month="05", $day = "13", $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
-
+    public $registrationSwitch, $ids, $task, $employeeData, $dtrFullName, $empPosition, $week = "all", $dtrData = [], $year = "2024", $month, $position, $otherUserID, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
-        $this->fullname = auth()->user()->fullname;
-        $this->user_id = auth()->user()->id;
-        $this->position = auth()->user()->position;
-        $jj = \App\Models\Employee::where('user_id',$this->user_id)->get();
-        foreach ($jj as $yy){
-            $emp = \App\Models\Employee::find($yy->id);
-            $this->employeeData = $emp->designation;
-        }
-        $this->photo = auth()->user()->photo;
-        $this->dtrData = DtrContent::all();
-        if ($this->role == "all"){
-            $this->userID = [];
-        }
-        elseif ($this->role == "agent"){
-            $this->userID = User::where('position',"Agent")->get();
-
+        if ($this->week == "all"){
+            $this->dtrData = DtrContent::where('user_id',$this->otherUserID)
+                ->whereYear('in', $this->year)
+                ->whereMonth('in', $this->month)
+                ->get();
         }
         else{
-            $this->userID = User::where('position','!=',"Agent")->get();
+            $this->dtrData = DtrContent::where('user_id',$this->otherUserID)
+                ->whereYear('in', $this->year)
+                ->whereMonth('in', $this->month)
+                ->where('week',$this->week)
+                ->get();
         }
-        return view('livewire.per-shift');
+
+        $ds = DtrContent::where('user_id',$this->otherUserID)->get();
+        foreach ($ds as $dtr){
+            $this->dtrFullName = $dtr->fullname;
+        }
+        $this->empPosition = User::find($this->otherUserID)->position;
+
+        return view('livewire.dtr-all-record.byname.dtr-record');
     }
 
     public function clickTask($id){
@@ -58,17 +58,12 @@ class PerShift extends Component
         $this->task = $data->task;
     }
 
-    public function mount($name){
-        $pst = auth()->user()->position;
-        if ($pst == "Super Admin"){
-
-        }
-        else{
-            return redirect('/');
-        }
-        $this->webName = $name;
+    public function mount($page,$emp_id){
+        $this->otherUserID = $emp_id;
+//        $this->webName = $page;
+        $this->month = date('m');
+        $this->year = date('Y');
     }
-
     public function logout(){
         Auth::logout();
         return redirect()->to('/login');
@@ -281,15 +276,6 @@ class PerShift extends Component
         if ($field == "superAdminSwitch"){
             $this->super_admin_Switch();
         }
-        if ($field == "day"){
-
-        }
-        if ($field == "month"){
-
-        }
-        if ($field == "year"){
-
-        }
         if ($field == "photo"){
             $filename = Str::random(40) . '.' . $this->photo->getClientOriginalExtension();
             $this->photo->storeAs('photos', $filename, 'public_photos');
@@ -341,7 +327,7 @@ class PerShift extends Component
             $user = UserPassword::find($this->user_id);
             $user->photo = $filename;
             $user->save();
-            return redirect('/itts/12/per-shift');
+            return redirect('/itts/10/dtr-all-record-all-all-record/'.$this->otherUserID);
         }
     }
 }

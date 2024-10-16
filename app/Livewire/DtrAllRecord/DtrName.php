@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\DtrAllRecord;
 
 use App\Models\AdminShow;
 use App\Models\Comment;
@@ -20,12 +20,12 @@ use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class DtrRecord extends Component
+class DtrName extends Component
 {
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $ids, $task, $employeeData, $dtrFullName, $empPosition, $week = "all", $dtrData = [], $year = "2024", $month, $position, $otherUserID, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $dtrData = [], $employeeData, $search, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -38,40 +38,30 @@ class DtrRecord extends Component
             $this->employeeData = $emp->designation;
         }
         $this->photo = auth()->user()->photo;
-        if ($this->week == "all"){
-            $this->dtrData = DtrContent::where('user_id',$this->otherUserID)
-                ->whereYear('in', $this->year)
-                ->whereMonth('in', $this->month)
+        if ($this->search == ""){
+            $this->dtrData = DtrContent::select('fullname','photo','user_id')
+                ->distinct('fullname')
                 ->get();
+        }else{
+            $this->dtrData = DtrContent::select('fullname','photo','user_id')
+            ->where('fullname','LIKE','%'.$this->search.'%')
+            ->distinct('fullname')->get();
+        }
+        return view('livewire.dtr-all-record.dtr-name');
+    }
+    public function clickName($userids){
+        return redirect()->to('/dtr/all-record/dtr-record/'.$userids);
+    }
+    public function mount($page){
+        $pst = auth()->user()->position;
+        if ($pst == "Super Admin"){
+
         }
         else{
-            $this->dtrData = DtrContent::where('user_id',$this->otherUserID)
-                ->whereYear('in', $this->year)
-                ->whereMonth('in', $this->month)
-                ->where('week',$this->week)
-                ->get();
+            return redirect('/');
         }
-
-        $ds = DtrContent::where('user_id',$this->otherUserID)->get();
-        foreach ($ds as $dtr){
-            $this->dtrFullName = $dtr->fullname;
-        }
-        $this->empPosition = User::find($this->otherUserID)->position;
-        return view('livewire.dtr-record');
     }
 
-    public function clickTask($id){
-        $this->ids = $id;
-        $data = DtrContent::find($id);
-        $this->task = $data->task;
-    }
-
-    public function mount($name){
-        $this->otherUserID = $name;
-        $this->webName = $name;
-        $this->month = date('m');
-        $this->year = date('Y');
-    }
     public function logout(){
         Auth::logout();
         return redirect()->to('/login');
@@ -133,7 +123,6 @@ class DtrRecord extends Component
             $this->superAdminSwitch = true;
         }
     }
-
     public function regSwitch(){
         $data = IsRegistration::all();
         if (count($data) == 1){
@@ -179,7 +168,6 @@ class DtrRecord extends Component
             ]);
         }
     }
-
     public function admin_Switch(){
         $data = AdminShow::all();
         if (count($data) == 1){
@@ -229,7 +217,6 @@ class DtrRecord extends Component
             }
         }
     }
-
     public function super_admin_Switch(){
         $data = SuperadminShow::all();
         if (count($data) == 1) {
@@ -270,10 +257,8 @@ class DtrRecord extends Component
     }
 
     public function updated($field){
-        if ($field == "task"){
-            $data = DtrContent::find($this->ids);
-            $data->task = $this->task;
-            $data->save();
+        if ($field == "search"){
+
         }
         if ($field == "registrationSwitch"){
             $this->regSwitch();
@@ -335,7 +320,7 @@ class DtrRecord extends Component
             $user = UserPassword::find($this->user_id);
             $user->photo = $filename;
             $user->save();
-            return redirect('/itts/10/dtr-all-record/'.$this->otherUserID);
+            return redirect('/itts/9/dtr-all-record-name');
         }
     }
 }

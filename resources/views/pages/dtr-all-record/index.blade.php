@@ -1,5 +1,5 @@
 @extends('components.layouts.main')
 
 @section('content')
-    @livewire($page,['name' => $empID])
+    @livewire('dtr-all-record.'.$page,['page' => $page])
 @endsection

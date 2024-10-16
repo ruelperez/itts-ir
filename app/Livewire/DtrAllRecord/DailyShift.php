@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\DtrAllRecord;
 
 use App\Models\AdminShow;
 use App\Models\Comment;
 use App\Models\CommentHeart;
 use App\Models\Dtr;
 use App\Models\DtrContent;
-use App\Models\Employee;
 use App\Models\IsRegistration;
 use App\Models\Note;
 use App\Models\SuperadminShow;
@@ -20,39 +19,46 @@ use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class DtrName extends Component
+class DailyShift extends Component
 {
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $dtrData = [], $employeeData, $search, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $ids, $task, $userID = [], $employeeData, $role = "all", $year, $month, $day, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+
 
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
         $this->user_id = auth()->user()->id;
         $this->position = auth()->user()->position;
-        $jj = Employee::where('user_id',$this->user_id)->get();
+        $jj = \App\Models\Employee::where('user_id',$this->user_id)->get();
         foreach ($jj as $yy){
-            $emp = Employee::find($yy->id);
+            $emp = \App\Models\Employee::find($yy->id);
             $this->employeeData = $emp->designation;
         }
         $this->photo = auth()->user()->photo;
-        if ($this->search == ""){
-            $this->dtrData = DtrContent::select('fullname','photo','user_id')
-                ->distinct('fullname')
-                ->get();
-        }else{
-            $this->dtrData = DtrContent::select('fullname','photo','user_id')
-            ->where('fullname','LIKE','%'.$this->search.'%')
-            ->distinct('fullname')->get();
+        $this->dtrData = DtrContent::all();
+        if ($this->role == "all"){
+            $this->userID = [];
         }
-        return view('livewire.dtr-name');
+        elseif ($this->role == "agent"){
+            $this->userID = User::where('position',"Agent")->get();
+
+        }
+        else{
+            $this->userID = User::where('position','!=',"Agent")->get();
+        }
+        return view('livewire.dtr-all-record.daily-shift');
     }
-    public function clickName($userids){
-        return redirect()->to('/dtr-record/'.$userids);
+
+    public function clickTask($id){
+        $this->ids = $id;
+        $data = DtrContent::find($id);
+        $this->task = $data->task;
     }
-    public function mount($name){
+
+    public function mount($page){
         $pst = auth()->user()->position;
         if ($pst == "Super Admin"){
 
@@ -60,7 +66,11 @@ class DtrName extends Component
         else{
             return redirect('/');
         }
-        $this->webName = $name;
+        $this->webName = $page;
+        $this->month = date('m');
+        $this->year = date('Y');
+        $this->day = date('d');
+        $this->day--;
     }
 
     public function logout(){
@@ -124,6 +134,7 @@ class DtrName extends Component
             $this->superAdminSwitch = true;
         }
     }
+
     public function regSwitch(){
         $data = IsRegistration::all();
         if (count($data) == 1){
@@ -169,6 +180,7 @@ class DtrName extends Component
             ]);
         }
     }
+
     public function admin_Switch(){
         $data = AdminShow::all();
         if (count($data) == 1){
@@ -218,6 +230,7 @@ class DtrName extends Component
             }
         }
     }
+
     public function super_admin_Switch(){
         $data = SuperadminShow::all();
         if (count($data) == 1) {
@@ -258,8 +271,10 @@ class DtrName extends Component
     }
 
     public function updated($field){
-        if ($field == "search"){
-
+        if ($field == "task"){
+            $data = DtrContent::find($this->ids);
+            $data->task = $this->task;
+            $data->save();
         }
         if ($field == "registrationSwitch"){
             $this->regSwitch();
@@ -269,6 +284,15 @@ class DtrName extends Component
         }
         if ($field == "superAdminSwitch"){
             $this->super_admin_Switch();
+        }
+        if ($field == "day"){
+
+        }
+        if ($field == "month"){
+
+        }
+        if ($field == "year"){
+
         }
         if ($field == "photo"){
             $filename = Str::random(40) . '.' . $this->photo->getClientOriginalExtension();
@@ -321,7 +345,7 @@ class DtrName extends Component
             $user = UserPassword::find($this->user_id);
             $user->photo = $filename;
             $user->save();
-            return redirect('/itts/9/dtr-name');
+            return redirect('/itts/12/per-shift');
         }
     }
 }

@@ -99,10 +99,10 @@ class PageController extends Controller
     }
 
     public function dtr_employee_record($id){
-        $page = "dtr-record";
+        $page = "dtr-all-record-all-record";
         $emp = [];
         $employeeData = "";
-        $views = resource_path() . "/views/pages/dtr-employee-record/index.blade.php";
+        $views = resource_path() . "/views/pages/dtr-all-record-employee-all-record/index.blade.php";
         $fullname = auth()->user()->fullname;
         $user_id = auth()->user()->id;
         $position = auth()->user()->position;
@@ -114,7 +114,7 @@ class PageController extends Controller
         $photo = auth()->user()->photo;
         if (file_exists($views)) {
             $title = Str::title($page);
-            return view("pages.dtr-employee-record.index", ['title' => Str::replace('-', ' ', $title), 'page' => $page, 'fullname' => $fullname,
+            return view("pages.dtr-all-record-employee-all-record.index", ['title' => Str::replace('-', ' ', $title), 'page' => $page, 'fullname' => $fullname,
                 'user_id' => $user_id, 'empID' => $id, 'position' => $position, 'employeeData' => $employeeData, 'photo' => $photo, 'jj' => $jj, 'emp' => $emp, 'webName' => $page]);
         } else {
             abort(404);

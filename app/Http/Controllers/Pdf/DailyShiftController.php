@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Pdf;
 
+use App\Http\Controllers\Controller;
 use App\Models\DtrContent;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
-class ShiftController extends Controller
+class DailyShiftController extends Controller
 {
     public function pdf($month, $day, $year, $role){
         $dtrData = DtrContent::all();
@@ -23,6 +24,6 @@ class ShiftController extends Controller
 
         $pdf = PDF::loadView('form.shift', compact('dtrData','month','day','year','userID','role'))
             ->setPaper('legal','landscape');
-        return $pdf->download('load.pdf');
+        return $pdf->stream('load.pdf');
     }
 }
