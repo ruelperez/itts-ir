@@ -11,8 +11,8 @@
                 <span class="visually-hidden">Loading...</span>
             </div>
         </div>
-        <div class="mt-4 border" wire:loading.remove>
-            <ul class="list-group border">
+        <div class="mt-4" wire:loading.remove>
+            <ul class="list-group w-100">
                 @foreach($logsData as $data)
                     <li class="list-group-item">
                         <div class="row">
