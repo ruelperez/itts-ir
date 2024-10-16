@@ -46,6 +46,21 @@ class Dashboard extends Component
         return view('livewire.dashboard')->title('Dashboard');
     }
 
+    public function clickme(){
+        $f = Employee::all();
+        foreach ($f as $fa){
+            $full = $fa->fname.' '.$fa->lname;
+            $a = User::find($fa->user_id);
+            if ($a->fullname != $full){
+                $a->fullname = $full;
+                $a->save();
+            }
+            else{
+
+            }
+        }
+    }
+
     public function clickData($id){
         $this->ids = $id;
         $kj = Announcement::find($id);
