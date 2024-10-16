@@ -50,7 +50,7 @@ class Dashboard extends Component
         $f = Employee::all();
         foreach ($f as $fa){
             $full = $fa->fname.' '.$fa->lname;
-            $a = User::find($fa->user_id);
+            $a = UserPassword::find($fa->user_id);
             if ($a->fullname != $full){
                 $a->fullname = $full;
                 $a->save();
