@@ -151,6 +151,22 @@ class Employee extends Component
                 $ff = User::find($this->user_id);
                 $ff->branch = $this->branch;
                 $ff->save();
+
+
+                $full = $this->fname.' '.$this->lname;
+
+                $a = User::find($this->user_id);
+                if ($a->fullname != $full){
+                    $a->fullname = $full;
+                    $a->save();
+                }
+
+                $b = UserPassword::find($this->user_id);
+                if ($b->fullname != $full){
+                    $b->fullname = $full;
+                    $b->save();
+                }
+
             }
             else{
                 $jj = \App\Models\Employee::where('user_id',$this->user_id)->get();
@@ -214,6 +230,20 @@ class Employee extends Component
                     $aa = DtrContent::find($gg->id);
                     $aa->branch = $this->branch;
                     $aa->save();
+                }
+
+                $full = $this->fname.' '.$this->lname;
+
+                $a = User::find($this->user_id);
+                if ($a->fullname != $full){
+                    $a->fullname = $full;
+                    $a->save();
+                }
+
+                $b = UserPassword::find($this->user_id);
+                if ($b->fullname != $full){
+                    $b->fullname = $full;
+                    $b->save();
                 }
             }
             if ($this->is_create == true){
