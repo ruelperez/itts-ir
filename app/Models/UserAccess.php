@@ -7,5 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserAccess extends Model
 {
+    protected $fillable = [
+        'user_id',
+        'can_login',
+        'dtr_record',
+        'campaign_settings',
+        'staff_directory',
+        'logs',
+        'eod',
+        'inventory',
+        'lead_tracker',
+        'user_credential',
+        'settings',
+    ];
+
     use HasFactory;
 }
