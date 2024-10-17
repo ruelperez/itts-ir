@@ -35,7 +35,6 @@
     </div>
     <button id="btn123" data-bs-toggle="modal" data-bs-target="#loading" style="display: none"></button>
     <button id="btn456" data-bs-toggle="modal" data-bs-target="#removedOrUpdate" style="display: none"></button>
-{{--    <button wire:click="click">Do not click me!!!!</button>--}}
     @script
     <script>
         $wire.on('subSubmitted', () => {

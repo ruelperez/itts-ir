@@ -15,7 +15,6 @@ use App\Models\Note;
 use App\Models\SuperadminShow;
 use App\Models\TimeSetting;
 use App\Models\User;
-use App\Models\UserAccess;
 use App\Models\UserPassword;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -52,31 +51,6 @@ class Dashboard extends Component
         $kj = Announcement::find($id);
         $this->announce = $kj->text;
         $this->title = $kj->title;
-    }
-
-    public function click(){
-        $a = User::all();
-        foreach ($a as $b){
-            if ($b->position == "Super Admin"){
-                UserAccess::create([
-                    'user_id' => $b->id,
-                    'can_login' => true,
-                    'dtr_record' => true,
-                    'campaign_settings' => true,
-                    'staff_directory' => true,
-                    'logs' => true,
-                    'eod' => true,
-                    'inventory' => true,
-                    'lead_tracker' => true,
-                    'user_credential' => true,
-                    'settings' => true,
-                ]);
-            }else{
-                UserAccess::create([
-                    'user_id' => $b->id,
-                ]);
-            }
-        }
     }
     public function delete(){
         $this->hin = "removed";
