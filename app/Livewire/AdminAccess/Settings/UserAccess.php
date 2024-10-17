@@ -2,11 +2,12 @@
 
 namespace App\Livewire\AdminAccess\Settings;
 
+use App\Models\User;
 use Livewire\Component;
 
 class UserAccess extends Component
 {
-    public $datas = [], $currentPage = 1, $perPage = 15, $search;
+    public $datas = [], $currentPage = 1, $user_id, $user_fullname, $perPage = 15, $search, $user_position;
     public function render()
     {
         $this->dispatch('acc');
@@ -30,9 +31,29 @@ class UserAccess extends Component
         return view('livewire.admin-access.settings.user-access');
     }
 
+    protected $listeners = ['openPositionModal'=>'mod'];
+
+    public function mod($id){
+        $this->user_id = $id;
+        $userAccess = User::find($this->user_id);
+        $this->user_position = $userAccess->position;
+        $this->user_fullname = $userAccess->fullname; // Assuming 'fullname' exists in the User model
+        $this->dispatch('show-position-modal');
+    }
     public function previousPage(){
         if ($this->currentPage > 1) {
             $this->currentPage--;
+        }
+    }
+
+    public function submitEditRole(){
+        $ng = User::find($this->user_id);
+        try {
+            $ng->position = $this->user_position;
+            $ng->save();
+            $this->dispatch('success');
+        }catch (\Exception $e){
+            $this->dispatch('error');
         }
     }
 
@@ -49,7 +70,4 @@ class UserAccess extends Component
         $this->dispatch('accessUpdated');
     }
 
-    public function updateData(){
-        dd('cacaca');
-    }
 }

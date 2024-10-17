@@ -1,4 +1,27 @@
 <div>
+    <div class="modal fade" id="positionModal" tabindex="-1" aria-labelledby="positionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="positionModalLabel">Update Role ({{$user_fullname}})</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form wire:submit.prevent="submitEditRole">
+                    <div class="modal-body">
+                        <select id="positionSelect" class="form-select" wire:model="user_position">
+                            <option value="Super Admin">Super Admin</option>
+                            <option value="Admin">Admin</option>
+                            <option value="Agent">Agent</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                    <button type="button" class="btn-close d-none" data-bs-dismiss="modal" id="btnclose122" aria-label="Close"></button>
+                </form>
+            </div>
+        </div>
+    </div>
     <div>
         <div class="row">
             <div class="col-lg-3 pt-lg-2">
@@ -40,10 +63,11 @@
                                 <img src="{{asset('photos/photos/'.$data->user->photo)}}" alt="Profile Picture">
                             </div>
                         </td>
-                        <td>
+                        <td class="text-capitalize" >
                             {{$data->user->fullname}}
                         </td>
-                        <td>
+                        <td x-data
+                            @dblclick="$dispatch('openPositionModal', { id: {{ $data->user_id }} })">
                             {{$data->user->position}}
                         </td>
                         <td
@@ -121,6 +145,7 @@
             </div>
         </div>
     </div>
+
     @script
     <script>
         $wire.on('accessUpdated', () => {
@@ -128,6 +153,23 @@
                 'Updated!',
                 'The value has been updated successfully.',
                 'success'
+            );
+        });
+
+        $wire.on('success', () => {btnclose122
+            $('#btnclose122').click();
+            Swal.fire(
+                'Updated!',
+                'Successfully Updated .',
+                'success'
+            );
+        });
+        $wire.on('error', () => {
+            $('#btnclose122').click();
+            Swal.fire(
+                'Updated!',
+                'Failed to Update.',
+                'error'
             );
         });
     </script>
@@ -158,4 +200,9 @@
             }
         });
     }
+
+    document.addEventListener('show-position-modal', function () {
+        const positionModal = new bootstrap.Modal(document.getElementById('positionModal'));
+        positionModal.show();
+    });
 </script>
