@@ -6,6 +6,7 @@ use App\Models\AdminShow;
 use App\Models\IsRegistration;
 use App\Models\SuperadminShow;
 use App\Models\User;
+use App\Models\UserAccess;
 use App\Models\UserPassword;
 use Livewire\Component;
 
@@ -68,6 +69,27 @@ class Register extends Component
         $validated['password'] = bcrypt($validated['password']);
         $user = User::create($validated);
         auth()->login($user);
+        $position = auth()->user()->position;
+        $user_id = auth()->user()->id;
+        if ($position == "Super Admin"){
+            UserAccess::create([
+                'user_id' => $user_id,
+                'can_login' => true,
+                'dtr_record' => true,
+                'campaign_settings' => true,
+                'staff_directory' => true,
+                'logs' => true,
+                'eod' => true,
+                'inventory' => true,
+                'lead_tracker' => true,
+                'user_credential' => true,
+                'settings' => true,
+            ]);
+        }else{
+            UserAccess::create([
+                'user_id' => $user_id,
+            ]);
+        }
         return redirect('/');
     }
 }
