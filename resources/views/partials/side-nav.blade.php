@@ -1,5 +1,5 @@
 @include('modal.click-lead')
-{{--@include('modal.click-settings')--}}
+@include('modal.click-settings')
     <!-- Sidebar -->
     <aside id="sidebar" class="position-fixed vh-100">
         <div>
@@ -156,7 +156,7 @@
                                     Lead Tracker</a>
                                 <a class="dropdown-item" href="/admin-access/user-credential/kbtool-account"><i class="fa-solid fa-receipt pe-2" ></i>
                                     User Credential</a>
-                                <a class="dropdown-item" href="/admin-access/settings/registration-option"><i class="fa-solid fa-gear pe-2"></i>
+                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#settings"><i class="fa-solid fa-gear pe-2"></i>
                                     Settings</a>
                             </div>
                         </div>
