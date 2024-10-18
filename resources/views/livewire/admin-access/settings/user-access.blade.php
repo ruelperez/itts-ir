@@ -36,7 +36,7 @@
                 <span class="visually-hidden">Loading...</span>
             </div>
         </div>
-        <div class="table-responsive mt-lg-4" style="font-size: 13px" wire:loading.remove>
+        <div class="table-responsive mt-lg-4" style="font-size: 13px">
             <table class="table table-hover">
                 <thead>
                 <tr>
