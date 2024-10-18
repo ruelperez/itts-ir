@@ -20,7 +20,7 @@
             <span class="visually-hidden">Loading...</span>
         </div>
     </div>
-    <div style="font-size: 13px;" class="table-responsive mt-3" wire:loading.remove>
+    <div style="font-size: 13px;" class="table-responsive mt-3">
         <table class="table text-white">
             <thead>
             <tr>

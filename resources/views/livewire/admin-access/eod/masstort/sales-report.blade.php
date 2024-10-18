@@ -2,7 +2,7 @@
     <div class="text-center h5">Sales Report</div>
     <div class="row">
         <div class="text-end">
-            <i class="fa-solid fa-rotate" style="font-size: 20px; cursor: pointer" wire:click="generate" wire:loading.remove></i>
+            <i class="fa-solid fa-rotate" style="font-size: 20px; cursor: pointer" wire:click="generate"></i>
         </div>
         <div class="mt-3 col-md-6 col-lg-12">
             <label class="form-label">From</label>
