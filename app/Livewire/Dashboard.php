@@ -58,8 +58,9 @@ class Dashboard extends Component
         $ba = Submission::all();
         foreach ($ba as $b){
             if ($b->result == "Transferred" or $b->result == "transferred"){
-                $b->result = "Transferred / Pending";
-                $b->save();
+                $as = Submission::find($b->id);
+                $as->result = "Transferred / Pending";
+                $as->save();
             }
         }
     }
