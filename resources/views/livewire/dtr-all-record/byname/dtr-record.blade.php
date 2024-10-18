@@ -41,6 +41,11 @@
     <div class="mt-4 text-md-end mt-lg-5">
         <i class="fa-solid fa-file-pdf icon-pdf" onclick="window.open('/pdf/eod/{{$otherUserID}}/{{$year}}/{{$month}}/{{$week}}', '_blank');"></i>
     </div>
+    <div class="text-center">
+        <div class="spinner-border" role="status" wire:loading>
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
     <div class="table-responsive mt-2 mt-xl-3">
         <table class="table table-hover">
             <thead>

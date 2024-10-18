@@ -39,13 +39,10 @@ class DtrName extends Component
         }
         $this->photo = auth()->user()->photo;
         if ($this->search == ""){
-            $this->dtrData = DtrContent::select('fullname','photo','user_id')
-                ->distinct('fullname')
-                ->get();
+            $this->dtrData = User::all();
         }else{
-            $this->dtrData = DtrContent::select('fullname','photo','user_id')
-            ->where('fullname','LIKE','%'.$this->search.'%')
-            ->distinct('fullname')->get();
+            $this->dtrData = User::where('fullname','LIKE','%'.$this->search.'%')
+                ->get();
         }
         return view('livewire.dtr-all-record.dtr-name');
     }
@@ -257,9 +254,6 @@ class DtrName extends Component
     }
 
     public function updated($field){
-        if ($field == "search"){
-
-        }
         if ($field == "registrationSwitch"){
             $this->regSwitch();
         }

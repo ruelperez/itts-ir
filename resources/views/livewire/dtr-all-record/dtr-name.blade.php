@@ -19,18 +19,20 @@
     <div class="mt-3">
         <ul class="list-group">
             @foreach($dtrData as $data)
-                <li class="list-group-item" style="padding: 2%; cursor: pointer" wire:click="clickName({{$data->user_id}})">
+                <li class="list-group-item" style="padding: 2%; cursor: pointer" wire:click="clickName({{$data->id}})">
                     <div style="display: flex;">
                         <div class="profile-picture-logs">
                             <img src="{{asset('photos/photos/'.$data->photo)}}" alt="Profile Picture">
                         </div>
                         <div style="display: flex">
                             <div>
-                                <b>{{ucwords($data->fullname)}}</b>
+                                <b>{{$data->fullname}}</b>
                             </div>
                         </div>
                     </div>
+
                 </li>
+                {{$data->user_id}}
             @endforeach
         </ul>
     </div>
