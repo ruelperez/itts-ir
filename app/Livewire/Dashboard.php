@@ -55,13 +55,12 @@ class Dashboard extends Component
     }
 
     public function click(){
-        $ba = Submission::all();
+        $ba = Submission::where('result',"transferred")
+            ->orWhere('result', 'Transferred')->get();
         foreach ($ba as $b){
-            if ($b->result == "transferred"){
-                $as = Submission::find($b->id);
-                $as->result = "Transferred / Pending";
-                $as->save();
-            }
+            $as = Submission::find($b->id);
+            $as->result = "Transferred / Pending";
+            $as->save();
         }
     }
     public function delete(){
