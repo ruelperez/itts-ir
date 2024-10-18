@@ -222,10 +222,12 @@ class EmployeeDtr extends Component
     }
 
     public function in(){
-        $this->validate([
-            'designated_id' => 'required'
-        ]);
-        if ($this->designated_id == "ITTS-00".$this->user_id){
+        if ($this->designated_id == "" or $this->designated_id == null){
+            session()->flash('bad', 'User id is required!');
+            sleep(2);
+            $this->dispatch('remove-loading');
+        }
+        elseif ($this->designated_id == "ITTS-00".$this->user_id){
             if ($this->dtr_data != null){
                 $gf = Dtr::find($this->dtr_data->id);
             }
@@ -284,62 +286,29 @@ class EmployeeDtr extends Component
                         'branch' => $this->branch,
                     ]);
             }
-
             $this->designated_id = "";
             session()->flash('good', 'Successfully Time in');
+            sleep(2);
+            $this->dispatch('remove-loading');
         }
         else{
             session()->flash('bad', 'Wrong user id!!. Please retry');
+            sleep(2);
+            $this->dispatch('remove-loading');
         }
-
     }
 
-    public function out(){
-        $this->validate([
-            'designated_id' => 'required'
-        ]);
-        if ($this->designated_id == "ITTS-00".$this->user_id){
-            $gf = Dtr::find($this->dtr_data->id);
-            $gf->out = Carbon::now();
-            $gf->save();
-
-            $gs = Dtr::find($this->dtr_data->id)->dtr_permanent;
-            foreach ($gs as $gg){
-                $gg->out = Carbon::now();
-                $gg->save();
-            }
-            $gd = Dtr::find($this->dtr_data->id)->dtr_permanent;
-            foreach ($gd as $gg){
-                $rr = $gg->in;
-                $ss = "";
-            }
-            $ss = "1:30 am";
-            $time1 = Carbon::parse($rr);
-            $time2 = Carbon::parse($ss);
-            if ($time2->lessThan($time1)) {
-                $time2->addDay(); // Add a day to the end time
-            }
-            $interval = $time1->diff($time2);
-            $gk = Dtr::find($this->dtr_data->id)->dtr_permanent;
-            foreach ($gk as $gg){
-                $gg->hour = $interval->h;
-                $gg->minute = $interval->i + 2;
-                $gg->save();
-            }
-            $this->designated_id = "";
-            session()->flash('good', 'Successfully Time out');
-        }
-        else{
-            session()->flash('bad', 'Wrong user id!!. Please retry');
-        }
-
+    public function needToReset(){
+        sleep(2);
+        $this->dispatch('remove-loading-need-to-reset');
     }
-
     public function in2(){
-        $this->validate([
-            'designated_id' => 'required'
-        ]);
-        if ($this->designated_id == "ITTS-00".$this->user_id){
+        if ($this->designated_id == "" or $this->designated_id == null){
+            session()->flash('bad', 'User id is required!');
+            sleep(2);
+            $this->dispatch('remove-loading');
+        }
+        elseif ($this->designated_id == "ITTS-00".$this->user_id){
             $gf = Dtr::find($this->dtr_data->id);
             $gf->in2 = Carbon::now();
             $gf->save();
@@ -387,10 +356,55 @@ class EmployeeDtr extends Component
 
             $this->designated_id = "";
             session()->flash('good', 'Successfully Time in');
+            sleep(2);
+            $this->dispatch('remove-loading');
+        }
+        else{
+            session()->flash('bad', 'Wrong user id!!. Please retry');
+            sleep(2);
+            $this->dispatch('remove-loading');
+        }
+    }
+
+    public function out(){
+        $this->validate([
+            'designated_id' => 'required'
+        ]);
+        if ($this->designated_id == "ITTS-00".$this->user_id){
+            $gf = Dtr::find($this->dtr_data->id);
+            $gf->out = Carbon::now();
+            $gf->save();
+
+            $gs = Dtr::find($this->dtr_data->id)->dtr_permanent;
+            foreach ($gs as $gg){
+                $gg->out = Carbon::now();
+                $gg->save();
+            }
+            $gd = Dtr::find($this->dtr_data->id)->dtr_permanent;
+            foreach ($gd as $gg){
+                $rr = $gg->in;
+                $ss = "";
+            }
+            $ss = "1:30 am";
+            $time1 = Carbon::parse($rr);
+            $time2 = Carbon::parse($ss);
+            if ($time2->lessThan($time1)) {
+                $time2->addDay(); // Add a day to the end time
+            }
+            $interval = $time1->diff($time2);
+            $gk = Dtr::find($this->dtr_data->id)->dtr_permanent;
+            foreach ($gk as $gg){
+                $gg->hour = $interval->h;
+                $gg->minute = $interval->i + 2;
+                $gg->save();
+            }
+            $this->designated_id = "";
+            session()->flash('good', 'Successfully Time out');
         }
         else{
             session()->flash('bad', 'Wrong user id!!. Please retry');
         }
+
     }
 
     public function out2(){

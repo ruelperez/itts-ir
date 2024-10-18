@@ -162,9 +162,7 @@
     @script
     <script>
         $wire.on('loadingsss', (event) => {
-            Livewire.on('loadingsss', (event) => {
                 JsLoadingOverlay.hide();
-            });
         });
     </script>
     @endscript
@@ -182,18 +180,7 @@
             });
 
             Livewire.dispatch('gen')
-            //
-            // // Wait for the Livewire event to hide the overlay
-            // window.addEventListener('livewire:load-complete', () => {
-            //     // Hide loading overlay after backend request is completed
-            //     JsLoadingOverlay.hide();
-            // });
         });
-        // document.addEventListener('livewire:init', () => {
-        //     Livewire.on('loadingsss', (event) => {
-        //         JsLoadingOverlay.hide();
-        //     });
-        // });
     </script>
 @endpush
 

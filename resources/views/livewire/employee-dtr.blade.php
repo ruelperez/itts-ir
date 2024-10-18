@@ -23,7 +23,6 @@
             </div>
             <hr>
         @endif
-        <div wire:loading.flex class="absolute inset-0 bg-gray-200 opacity-75"></div>
         <div>
             <div style="display: flex;
             justify-content: center; /* Horizontally center */
@@ -37,7 +36,7 @@
             text-align: center;
             color: white;
             box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
-            /*padding-top: 20px;*/@if($dtr_data == null or $dtr_data->in == null) color: white; cursor: pointer @endif" @if($dtr_data == null or $dtr_data->in == null) wire:click="in" wire:loading.attr="disabled" @endif ><h5>Time In</h5></div>
+            /*padding-top: 20px;*/@if($dtr_data == null or $dtr_data->in == null) color: white; cursor: pointer @endif" @if($dtr_data == null or $dtr_data->in == null) wire:click="in" @endif id="dtr-in-btn"><h5>Time In</h5></div>
                 {{--                    <div style="border-radius: 100px; background-color: #6B8E23; padding: 2%; width: 9%; text-align: center; margin-left: 1%; @if($dtr_data == null or $dtr_data->in == null) color: black; @elseif($dtr_data->in != null) color: white; cursor: pointer @endif" @if($dtr_data == null or $dtr_data->in == null) @elseif($dtr_data->in != null) wire:click="out" @endif ><h5>Time Out</h5></div>--}}
             </div>
             <div style="display: flex;
@@ -52,20 +51,16 @@
             text-align: center;
             color: white;
             box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
-            /*padding-top: 20px;*/@if($dtr_data == null) display: none @elseif($dtr_data->in != null and $dtr_data->out != null and $dtr_data->in2 != null) color: black; @elseif($dtr_data->in != null and $dtr_data->out != null ) color: white; cursor: pointer @endif" @if($dtr_data == null) @elseif($dtr_data->in != null and $dtr_data->out != null and $dtr_data->in2 != null)  @elseif($dtr_data->in != null and $dtr_data->out != null) wire:click="in2" wire:loading.attr="disabled" @endif><h5>Time In</h5> <p style="font-size: 14px;">(After lunch)</p></div>
+            /*padding-top: 20px;*/@if($dtr_data == null) display: none @elseif($dtr_data->in != null and $dtr_data->out != null and $dtr_data->in2 != null) color: black; @elseif($dtr_data->in != null and $dtr_data->out != null ) color: white; cursor: pointer @endif" @if($dtr_data == null) @elseif($dtr_data->in != null and $dtr_data->out != null and $dtr_data->in2 != null) wire:click="needToReset"  @elseif($dtr_data->in != null and $dtr_data->out != null) wire:click="in2" @endif id="dtr-in2-btn"><h5>Time In</h5> <p style="font-size: 14px;">(After lunch)</p></div>
                 {{--                    <div style="border-radius: 100px; background-color: #6B8E23; padding: 2%; width: 9%; text-align: center; margin-left: 1%;  @if($dtr_data == null) display: none @elseif($dtr_data->in != null and $dtr_data->out != null and $dtr_data->in2 != null and $dtr_data->out2 != null) color: black; @elseif($dtr_data->in != null and $dtr_data->out != null and $dtr_data->in2 != null) color: white; cursor: pointer @endif" @if($dtr_data == null) @elseif($dtr_data->in != null and $dtr_data->out != null and $dtr_data->in2 != null and $dtr_data->out2 != null)  @elseif($dtr_data->in != null and $dtr_data->out != null and $dtr_data->in2 != null) wire:click="out2"  @endif><h5>Time Out</h5></div>--}}
             </div>
-        </div>
-        <div wire:loading class="spinner-border spin" style="height: 55px; width: 55px; margin-left:47%; margin-top:5%; color: black">
-            <span class="visually-hidden" style="color: black">Loading...</span>
         </div>
         <div class="row justify-content-center">
             <div class="col-sm-6 col-lg-4 col-xl-3" style="margin-top: 15px">
                 <input class="form-control" placeholder="User id" type="text" wire:model="designated_id">
-                @error('designated_id') <span style="color: red;">{{ $message }}</span> @enderror
             </div>
         </div>
-        <div style="margin-top: 15px">
+        <div style="margin-top: 5px">
             @if (session('good'))
                 <p style="color: blue; text-align: center; font-size: 19px;">{{ session('good') }}</p>
             @elseif(session('bad'))
@@ -113,4 +108,44 @@
                 </table>
             </div>
     </div>
+    @script
+    <script>
+        $wire.on('remove-loading', (event) => {
+            JsLoadingOverlay.hide();
+        });
+        $wire.on('remove-loading-need-to-reset', (event) => {
+            JsLoadingOverlay.hide();
+            Swal.fire({
+                title: 'Please reset the DTR',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        });
+    </script>
+    @endscript
 </div>
+@push('js')
+    <script>
+        document.getElementById('dtr-in-btn').addEventListener('click', function () {
+            JsLoadingOverlay.show({
+                overlayBackgroundColor: '#666666',
+                overlayOpacity: 0.6,
+                spinnerIcon: 'ball-pulse',  // Choose your spinner icon
+                spinnerColor: '#ffffff',
+                spinnerSize: '2x'
+            });
+
+        });
+
+        document.getElementById('dtr-in2-btn').addEventListener('click', function () {
+            JsLoadingOverlay.show({
+                overlayBackgroundColor: '#666666',
+                overlayOpacity: 0.6,
+                spinnerIcon: 'ball-pulse',  // Choose your spinner icon
+                spinnerColor: '#ffffff',
+                spinnerSize: '2x'
+            });
+
+        });
+    </script>
+@endpush
