@@ -24,7 +24,7 @@ class DailyShift extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $ids, $task, $userID = [], $employeeData, $role = "all", $year, $month, $day, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $ids, $isLoading = false, $task, $userID = [], $employeeData, $role = "all", $year, $month, $day, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
 
     public function render()
@@ -38,6 +38,15 @@ class DailyShift extends Component
             $this->employeeData = $emp->designation;
         }
         $this->photo = auth()->user()->photo;
+        return view('livewire.dtr-all-record.daily-shift');
+    }
+
+    protected $listeners = [
+        'gen' => 'generate',
+    ];
+
+    public function generate()
+    {
         $this->dtrData = DtrContent::all();
         if ($this->role == "all"){
             $this->userID = [];
@@ -49,11 +58,8 @@ class DailyShift extends Component
         else{
             $this->userID = User::where('position','!=',"Agent")->get();
         }
-        return view('livewire.dtr-all-record.daily-shift');
-    }
 
-    public function generate(){
-
+        $this->dispatch('loadingsss');
     }
 
     public function clickTask($id){
@@ -61,9 +67,6 @@ class DailyShift extends Component
         $data = DtrContent::find($id);
         $this->task = $data->task;
     }
-
-
-
     public function mount($page){
         $pst = auth()->user()->position;
         if ($pst == "Super Admin"){
@@ -77,6 +80,17 @@ class DailyShift extends Component
         $this->year = date('Y');
         $this->day = date('d');
         $this->day--;
+        $this->dtrData = DtrContent::all();
+        if ($this->role == "all"){
+            $this->userID = [];
+        }
+        elseif ($this->role == "agent"){
+            $this->userID = User::where('position',"Agent")->get();
+
+        }
+        else{
+            $this->userID = User::where('position','!=',"Agent")->get();
+        }
     }
 
     public function logout(){

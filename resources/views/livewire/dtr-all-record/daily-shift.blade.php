@@ -39,7 +39,7 @@
             </select>
         </div>
         <div class="text-center mt-3">
-            <i class="fa-solid fa-rotate" style="font-size: 20px; cursor: pointer" wire:click="generate" id="generateButton"></i>
+            <i class="fa-solid fa-rotate" style="font-size: 20px; cursor: pointer" id="generateButton"></i>
         </div>
     </div>
     <div class="row mt-4 mt-xl-5">
@@ -167,16 +167,25 @@
             JsLoadingOverlay.show({
                 overlayBackgroundColor: '#666666',
                 overlayOpacity: 0.6,
-                spinnerIcon: 'ball-pulse',
+                spinnerIcon: 'ball-pulse',  // Choose your spinner icon
                 spinnerColor: '#ffffff',
                 spinnerSize: '2x'
             });
 
-            // Simulate a loading process (e.g., API call)
-            setTimeout(() => {
-                // Hide loading overlay after 3 seconds
+            Livewire.dispatch('gen')
+            //
+            // // Wait for the Livewire event to hide the overlay
+            // window.addEventListener('livewire:load-complete', () => {
+            //     // Hide loading overlay after backend request is completed
+            //     JsLoadingOverlay.hide();
+            // });
+        });
+        document.addEventListener('livewire:init', () => {
+            Livewire.on('loadingsss', (event) => {
                 JsLoadingOverlay.hide();
-            }, 2000);
+            });
         });
     </script>
 @endpush
+
+
