@@ -52,11 +52,17 @@ class DailyShift extends Component
         return view('livewire.dtr-all-record.daily-shift');
     }
 
+    public function generate(){
+
+    }
+
     public function clickTask($id){
         $this->ids = $id;
         $data = DtrContent::find($id);
         $this->task = $data->task;
     }
+
+
 
     public function mount($page){
         $pst = auth()->user()->position;
@@ -275,77 +281,6 @@ class DailyShift extends Component
             $data = DtrContent::find($this->ids);
             $data->task = $this->task;
             $data->save();
-        }
-        if ($field == "registrationSwitch"){
-            $this->regSwitch();
-        }
-        if ($field == "adminSwitch"){
-            $this->admin_Switch();
-        }
-        if ($field == "superAdminSwitch"){
-            $this->super_admin_Switch();
-        }
-        if ($field == "day"){
-
-        }
-        if ($field == "month"){
-
-        }
-        if ($field == "year"){
-
-        }
-        if ($field == "photo"){
-            $filename = Str::random(40) . '.' . $this->photo->getClientOriginalExtension();
-            $this->photo->storeAs('photos', $filename, 'public_photos');
-            $user = User::find($this->user_id);
-            $user->photo = $filename;
-            $user->save();
-            $user = User::find($this->user_id)->comment;
-            foreach ($user as $usr){
-                $jn = Comment::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->comment_heart;
-            foreach ($user as $usr){
-                $jn = CommentHeart::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->dtr;
-            foreach ($user as $usr){
-                $jn =Dtr::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->dtr_content;
-            foreach ($user as $usr){
-                $jn =DtrContent::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->log;
-            foreach ($user as $usr){
-                $jn =\App\Models\Logs::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->note;
-            foreach ($user as $usr){
-                $jn = Note::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->time_setting;
-            foreach ($user as $usr){
-                $jn = TimeSetting::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = UserPassword::find($this->user_id);
-            $user->photo = $filename;
-            $user->save();
-            return redirect('/itts/12/per-shift');
         }
     }
 }

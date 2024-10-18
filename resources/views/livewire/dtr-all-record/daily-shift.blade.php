@@ -6,10 +6,10 @@
     </div>
     <div class="row">
         <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-            <input type="text" class="form-control" placeholder="Year" wire:model.live="year">
+            <input type="text" class="form-control" placeholder="Year" wire:model="year">
         </div>
         <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mt-2 mt-sm-0">
-            <select class="form-select" aria-label="Default select example" wire:model.live="month">
+            <select class="form-select" aria-label="Default select example" wire:model="month">
                 <option value="01">January</option>
                 <option value="02">February</option>
                 <option value="03">March</option>
@@ -25,18 +25,21 @@
             </select>
         </div>
         <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mt-2 mt-lg-0">
-            <select class="form-select" aria-label="Default select example" wire:model.live="day">
+            <select class="form-select" aria-label="Default select example" wire:model="day">
                 @for($n=1; $n<=31; $n++)
                     <option value={{$n}}>{{$n}}</option>
                 @endfor
             </select>
         </div>
         <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mt-2 mt-xl-0">
-            <select class="form-select" aria-label="Default select example" wire:model.live="role">
+            <select class="form-select" aria-label="Default select example" wire:model="role">
                 <option value="all">All</option>
                 <option value="agent">Agent</option>
                 <option value="admin">Admin</option>
             </select>
+        </div>
+        <div class="text-center mt-3">
+            <i class="fa-solid fa-rotate" style="font-size: 20px; cursor: pointer" wire:click="generate" id="generateButton"></i>
         </div>
     </div>
     <div class="row mt-4 mt-xl-5">
@@ -157,3 +160,23 @@
         </table>
     </div>
 </div>
+@push('js')
+    <script>
+        document.getElementById('generateButton').addEventListener('click', function () {
+            // Show loading overlay
+            JsLoadingOverlay.show({
+                overlayBackgroundColor: '#666666',
+                overlayOpacity: 0.6,
+                spinnerIcon: 'ball-pulse',
+                spinnerColor: '#ffffff',
+                spinnerSize: '2x'
+            });
+
+            // Simulate a loading process (e.g., API call)
+            setTimeout(() => {
+                // Hide loading overlay after 3 seconds
+                JsLoadingOverlay.hide();
+            }, 2000);
+        });
+    </script>
+@endpush
