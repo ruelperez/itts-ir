@@ -54,15 +54,15 @@ class Dashboard extends Component
         $this->title = $kj->title;
     }
 
-    public function click(){
-        $ba = Submission::where('result',"transferred")
-            ->orWhere('result', 'Transferred')->get();
-        foreach ($ba as $b){
-            $as = Submission::find($b->id);
-            $as->result = "Transferred / Pending";
-            $as->save();
-        }
-    }
+//    public function click(){
+//        $ba = Submission::where('result',"transferred")
+//            ->orWhere('result', 'Transferred')->get();
+//        foreach ($ba as $b){
+//            $as = Submission::find($b->id);
+//            $as->result = "Transferred / Pending";
+//            $as->save();
+//        }
+//    }
     public function delete(){
         $this->hin = "removed";
         try {
