@@ -24,7 +24,7 @@
             <hr>
         @endif
         <div wire:loading.flex class="absolute inset-0 bg-gray-200 opacity-75"></div>
-        <div wire:loading.remove>
+        <div>
             <div style="display: flex;
             justify-content: center; /* Horizontally center */
             align-items: center; /* Vertically center */@if($dtr_data == null )  @elseif($dtr_data->in != null and $dtr_data->out != null) display: none @endif">
