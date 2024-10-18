@@ -227,7 +227,8 @@
                                         <select class="form-select" aria-label="Default select example" wire:model="result" x-model="selectedOption" required>
                                             <option value="">Select Result</option>
                                             @if($displayRemarks == "transferred")
-                                                <option value="transferred">Transferred</option>
+                                                <option value="Transferred / Pending">Transferred / Pending</option>
+                                                <option value="Signed / Executed">Signed / Executed</option>
                                             @else
                                                 <option value="Signed / Executed">Signed / Executed</option>
                                             @endif
@@ -275,7 +276,8 @@
                                     <select class="form-select" aria-label="Default select example" wire:model="result" x-model="selectedOptions" required>
                                         <option value="">Select Result</option>
                                         @if($displayRemarks == "transferred")
-                                            <option value="transferred">Transferred</option>
+                                            <option value="Transferred / Pending">Transferred / Pending</option>
+                                            <option value="Signed / Executed">Signed / Executed</option>
                                         @else
                                             <option value="Signed / Executed">Signed / Executed</option>
                                         @endif

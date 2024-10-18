@@ -12,6 +12,7 @@ use App\Models\DtrPermanent;
 use App\Models\Employee;
 use App\Models\IsRegistration;
 use App\Models\Note;
+use App\Models\Submission;
 use App\Models\SuperadminShow;
 use App\Models\TimeSetting;
 use App\Models\User;
@@ -51,6 +52,16 @@ class Dashboard extends Component
         $kj = Announcement::find($id);
         $this->announce = $kj->text;
         $this->title = $kj->title;
+    }
+
+    public function click(){
+        $ba = Submission::all();
+        foreach ($ba as $b){
+            if ($b->result == "Transferred" or $b->result == "transferred"){
+                $b->result = "Transferred / Pending";
+                $b->save();
+            }
+        }
     }
     public function delete(){
         $this->hin = "removed";

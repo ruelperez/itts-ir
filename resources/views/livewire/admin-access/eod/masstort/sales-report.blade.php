@@ -26,6 +26,7 @@
             <tr>
                 <th scope="col">Campaign</th>
                 <th scope="col">Counts</th>
+                <th scope="col">Result</th>
             </tr>
             </thead>
             <tbody>
@@ -36,6 +37,9 @@
                     </td>
                     <td>
                         {{$data->count}}
+                    </td>
+                    <td>
+                        {{$data->result}}
                     </td>
                 </tr>
             @endforeach
