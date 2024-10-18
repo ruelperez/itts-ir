@@ -4,6 +4,11 @@
         <div class="text-end">
             <i class="fa-solid fa-rotate" style="font-size: 20px; cursor: pointer" wire:click="generate" wire:loading.remove></i>
         </div>
+        <div class="text-end">
+            <div class="spinner-border" role="status" wire:loading>
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
         <div class="mt-3 col-md-6 col-lg-12">
             <label class="form-label">From</label>
             <input type="text" id="datepicker" class="form-control" wire:model="start" required>
@@ -15,11 +20,7 @@
             @error('end') <span style="color: #8B0000">{{ $message }}</span> @enderror
         </div>
     </div>
-    <div class="text-center">
-        <div class="spinner-border mt-5" role="status" wire:loading>
-            <span class="visually-hidden">Loading...</span>
-        </div>
-    </div>
+
     <div style="font-size: 13px;" class="table-responsive mt-3">
         <table class="table text-white">
             <thead>
