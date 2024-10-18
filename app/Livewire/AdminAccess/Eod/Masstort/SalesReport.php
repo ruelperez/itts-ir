@@ -45,7 +45,7 @@ class SalesReport extends Component
                     DB::raw('STR_TO_DATE(date, "%m/%d/%Y")'),
                     [$start, $end]
                 )
-                ->where('result', 'Signed / Executed')
+                ->where('result', ['Signed / Executed', 'Transferred'])
                 ->groupBy('campaign')
                 ->get();
         }
