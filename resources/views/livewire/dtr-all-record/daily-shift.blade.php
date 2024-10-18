@@ -159,6 +159,15 @@
             </tbody>
         </table>
     </div>
+    @script
+    <script>
+        $wire.on('loadingsss', (event) => {
+            Livewire.on('loadingsss', (event) => {
+                JsLoadingOverlay.hide();
+            });
+        });
+    </script>
+    @endscript
 </div>
 @push('js')
     <script>
@@ -180,11 +189,11 @@
             //     JsLoadingOverlay.hide();
             // });
         });
-        document.addEventListener('livewire:init', () => {
-            Livewire.on('loadingsss', (event) => {
-                JsLoadingOverlay.hide();
-            });
-        });
+        // document.addEventListener('livewire:init', () => {
+        //     Livewire.on('loadingsss', (event) => {
+        //         JsLoadingOverlay.hide();
+        //     });
+        // });
     </script>
 @endpush
 
