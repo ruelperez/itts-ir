@@ -57,7 +57,7 @@ class Dashboard extends Component
     public function click(){
         $ba = Submission::all();
         foreach ($ba as $b){
-            if ($b->result == "Transferred" or $b->result == "transferred"){
+            if ($b->result === "Transferred" or $b->result === "transferred"){
                 $as = Submission::find($b->id);
                 $as->result = "Transferred / Pending";
                 $as->save();
