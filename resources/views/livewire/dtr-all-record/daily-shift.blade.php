@@ -5,10 +5,10 @@
         <h6>DTR PER SHIFT</h6>
     </div>
     <div class="row">
-        <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+        <div class="col-12 col-sm-6 col-lg-3 col-xl-3">
             <input type="text" class="form-control" placeholder="Year" wire:model="year">
         </div>
-        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mt-2 mt-sm-0">
+        <div class="col-12 col-sm-6 col-lg-3 col-xl-3 mt-2 mt-sm-0">
             <select class="form-select" aria-label="Default select example" wire:model="month">
                 <option value="01">January</option>
                 <option value="02">February</option>
@@ -24,21 +24,21 @@
                 <option value="12">December</option>
             </select>
         </div>
-        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mt-2 mt-lg-0">
+        <div class="col-12 col-sm-6 col-lg-3 col-xl-3 mt-2 mt-lg-0">
             <select class="form-select" aria-label="Default select example" wire:model="day">
                 @for($n=1; $n<=31; $n++)
                     <option value={{$n}}>{{$n}}</option>
                 @endfor
             </select>
         </div>
-        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mt-2 mt-xl-0">
+        <div class="col-12 col-sm-6 col-lg-3 col-xl-3 mt-2 mt-lg-0">
             <select class="form-select" aria-label="Default select example" wire:model="role">
                 <option value="all">All</option>
                 <option value="agent">Agent</option>
                 <option value="admin">Admin</option>
             </select>
         </div>
-        <div class="text-center mt-3">
+        <div class="text-start mt-4 col-4">
             <i class="fa-solid fa-rotate" style="font-size: 20px; cursor: pointer" id="generateButton"></i>
         </div>
     </div>
