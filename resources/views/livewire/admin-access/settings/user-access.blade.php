@@ -44,6 +44,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Role</th>
                     <th scope="col">Can login</th>
+                    <th scope="col">Login spec.</th>
                     <th scope="col">Dash. crud</th>
                     <th scope="col">Dtr record</th>
                     <th scope="col">Camp crud</th>
@@ -77,6 +78,12 @@
                             data-original-value="{{ $data->can_login }}"
                         class="user-select-none">
                             {{ $data->can_login ? '1' : '0' }}
+                        </td>
+                        <td
+                            ondblclick="confirmEdit({{ $data->id }},{{$data->login_special}},'login_special')"
+                            data-original-value="{{ $data->login_special }}"
+                            class="user-select-none">
+                            {{ $data->login_special ? '1' : '0' }}
                         </td>
                         <td
                             ondblclick="confirmEdit({{ $data->id }},{{$data->dashboard_crud}},'dashboard_crud')"

@@ -84,7 +84,7 @@ Route::middleware(['auth','restrict.ip','checkEmployee'])
     ->prefix('admin-access')
     ->group(function () {
         Route::get('/{page}', [\App\Http\Controllers\AdminAccess\PageController::class, 'page']);
-    });
+});
 
 Route::middleware(['auth','restrict.ip'])->group(function () {
     Route::get('/employee/incomplete', [\App\Http\Controllers\PageController::class, 'employee']);
@@ -104,6 +104,9 @@ Route::middleware('restrict.ip')->group(function () {
     });
 });
 
+
+
+// NO RESTRICT IP MIDDLEWARE
 Route::get('/login/special', function (){
     return view('user.special');
 });

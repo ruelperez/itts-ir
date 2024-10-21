@@ -21,6 +21,7 @@ class UserAccess extends Model
         'settings',
         'dashboard_crud',
         'faq_crud',
+        'login_special',
     ];
 
     public function user()

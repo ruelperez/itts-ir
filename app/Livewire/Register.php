@@ -86,6 +86,7 @@ class Register extends Component
                 'user_credential' => true,
                 'settings' => true,
                 'faq_crud'=> true,
+                'login_special' => true,
             ]);
         }else{
             UserAccess::create([

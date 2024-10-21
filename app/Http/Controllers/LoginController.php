@@ -18,10 +18,14 @@ class LoginController extends Controller
         ]);
 
         $credentials = $request->only('username', 'password');
-
         if (Auth::attempt($credentials)) {
-            // Authentication passed, redirect to intended location
-            return redirect('/'); // Change to your dashboard route
+            $jj = auth()->user()->id;
+            $dada = User::find($jj)->user_access->first();
+            if ($dada->can_login){
+                return redirect('/');
+            }
+            Auth::logout();
+            return redirect('/user/login')->withErrors(['loginError' => 'You are no longer authorized to login, Please coordinate to admin user!']);
         }
         else{
             return redirect('/user/login')->withErrors(['loginError' => 'Incorrect email or password!']);
@@ -43,13 +47,13 @@ class LoginController extends Controller
         $credentials = $request->only('username', 'password');
 
         if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-           if ($user->is_special == 1){
-               return redirect('/'); // Change to your dashboard route
-           }
-           else{
-               return redirect('/login/special')->withErrors(['loginError' => 'Not a special account']);
-           }
+            $jj = auth()->user()->id;
+            $dada = User::find($jj)->user_access->first();
+            if ($dada->login_special){
+                return redirect('/');
+            }
+            Auth::logout();
+            return redirect('/login/special')->withErrors(['loginError' => 'Not a special account!']);
         }
         else{
             return redirect('/login/special')->withErrors(['loginError' => 'Incorrect email or password!']);

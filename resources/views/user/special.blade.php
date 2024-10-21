@@ -28,7 +28,7 @@
                 </div>
                 @if ($errors->has('loginError'))
                     <div class="alert alert-danger mt-3" role="alert">
-                        Incorrect username or password!!
+                        {{ $errors->first('loginError') }}
                     </div>
                 @endif
                 <form method="POST" action="/login/special"  class="mt-3">

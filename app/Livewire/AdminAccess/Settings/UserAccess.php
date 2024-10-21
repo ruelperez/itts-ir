@@ -59,9 +59,26 @@ class UserAccess extends Component
 
     public function submitEditRole(){
         $ng = User::find($this->user_id);
+        $hh = User::find($this->user_id)->user_access->first();
         try {
             $ng->position = $this->user_position;
             $ng->save();
+            if ($this->user_position == "Super Admin"){
+                $hh->can_login = true;
+                $hh->dashboard_crud= true;
+                $hh->dtr_record= true;
+                $hh->campaign_settings= true;
+                $hh->staff_directory= true;
+                $hh->logs= true;
+                $hh->eod= true;
+                $hh->inventory= true;
+                $hh->lead_tracker= true;
+                $hh->user_credential= true;
+                $hh->settings= true;
+                $hh->faq_crud= true;
+                $hh->login_special= true;
+                $hh->save();
+            }
             $this->dispatch('success');
         }catch (\Exception $e){
             $this->dispatch('error');
