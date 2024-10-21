@@ -19,6 +19,8 @@ class UserAccess extends Model
         'lead_tracker',
         'user_credential',
         'settings',
+        'dashboard_crud',
+        'faq_crud',
     ];
 
     public function user()

@@ -44,15 +44,17 @@
                     <th scope="col">Name</th>
                     <th scope="col">Role</th>
                     <th scope="col">Can login</th>
+                    <th scope="col">Dash. crud</th>
                     <th scope="col">Dtr record</th>
-                    <th scope="col">Camp CRUD</th>
+                    <th scope="col">Camp crud</th>
                     <th scope="col">Staff Direct.</th>
                     <th scope="col">Logs</th>
                     <th scope="col">EOD</th>
-                    <th scope="col">Inventory</th>
+                    <th scope="col">Inv.</th>
                     <th scope="col">Lead tracker</th>
-                    <th scope="col">User credential</th>
+                    <th scope="col">User cred.</th>
                     <th scope="col">Settings</th>
+                    <th scope="col">FAQ crud</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -73,62 +75,74 @@
                         <td
                             ondblclick="confirmEdit({{ $data->id }},{{$data->can_login}},'can_login')"
                             data-original-value="{{ $data->can_login }}"
-                        >
+                        class="user-select-none">
                             {{ $data->can_login ? '1' : '0' }}
+                        </td>
+                        <td
+                            ondblclick="confirmEdit({{ $data->id }},{{$data->dashboard_crud}},'dashboard_crud')"
+                            data-original-value="{{ $data->dashboard_crud }}"
+                            class="user-select-none">
+                            {{ $data->dashboard_crud ? '1' : '0' }}
                         </td>
                         <td
                             ondblclick="confirmEdit({{ $data->id }},{{$data->dtr_record}},'dtr_record')"
                             data-original-value="{{ $data->dtr_record }}"
-                        >
+                            class="user-select-none">
                             {{ $data->dtr_record ? '1' : '0' }}
                         </td>
                         <td
                             ondblclick="confirmEdit({{ $data->id }},{{$data->campaign_settings}},'campaign_settings')"
                             data-original-value="{{ $data->campaign_settings }}"
-                        >
+                            class="user-select-none">
                             {{ $data->campaign_settings ? '1' : '0' }}
                         </td>
                         <td
                             ondblclick="confirmEdit({{ $data->id }},{{$data->staff_directory}},'staff_directory')"
                             data-original-value="{{ $data->staff_directory }}"
-                        >
+                            class="user-select-none">
                             {{ $data->staff_directory ? '1' : '0' }}
                         </td>
                         <td
                             ondblclick="confirmEdit({{ $data->id }},{{$data->logs}},'logs')"
                             data-original-value="{{ $data->logs }}"
-                        >
+                            class="user-select-none">
                             {{ $data->logs ? '1' : '0' }}
                         </td>
                         <td
                             ondblclick="confirmEdit({{ $data->id }},{{$data->eod}},'eod')"
                             data-original-value="{{ $data->eod }}"
-                        >
+                            class="user-select-none">
                             {{ $data->eod ? '1' : '0' }}
                         </td>
                         <td
                             ondblclick="confirmEdit({{ $data->id }},{{$data->inventory}},'inventory')"
                             data-original-value="{{ $data->inventory }}"
-                        >
+                            class="user-select-none">
                             {{ $data->inventory ? '1' : '0' }}
                         </td>
                         <td
                             ondblclick="confirmEdit({{ $data->id }},{{$data->lead_tracker}},'lead_tracker')"
                             data-original-value="{{ $data->lead_tracker }}"
-                        >
+                            class="user-select-none">
                             {{ $data->lead_tracker ? '1' : '0' }}
                         </td>
                         <td
                             ondblclick="confirmEdit({{ $data->id }},{{$data->user_credential}},'user_credential')"
                             data-original-value="{{ $data->user_credential }}"
-                        >
+                            class="user-select-none">
                             {{ $data->user_credential ? '1' : '0' }}
                         </td>
                         <td
                             ondblclick="confirmEdit({{ $data->id }},{{$data->settings}},'settings')"
                             data-original-value="{{ $data->settings }}"
-                        >
+                            class="user-select-none">
                             {{ $data->settings ? '1' : '0' }}
+                        </td>
+                        <td
+                            ondblclick="confirmEdit({{ $data->id }},{{$data->faq_crud}},'faq_crud')"
+                            data-original-value="{{ $data->faq_crud }}"
+                            class="user-select-none">
+                            {{ $data->faq_crud ? '1' : '0' }}
                         </td>
                     </tr>
                     <button class="d-none" id="btn200_{{$data->id}}" wire:click="update_data({{$data->id}}, $('#btn200_{{$data->id}}').data('column'))"></button>

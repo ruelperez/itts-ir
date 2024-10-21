@@ -6,7 +6,7 @@
     @include('modal.dtr.setTime')
     <div>
         <h5>DTR</h5>
-        @if($position == "Super Admin")
+        @if($authorizer)
             <div class="row">
                 <div class="col-lg-3 col-xl-6">
 
@@ -77,7 +77,7 @@
                         <th scope="col">In</th>
                         <th scope="col">Out</th>
                         <th scope="col">Total</th>
-                        @if($position != "Agent") <th scope="col">Task</th> @endif
+                        @if($authorizer) <th scope="col">Task</th> @endif
                     </tr>
                     </thead>
                     <tbody>
@@ -97,7 +97,7 @@
                                 @endphp
                                 {{$result}}
                             </td>
-                            @if($position != "Agent")
+                            @if($authorizer)
                                 <td>
                                     <i class="fa-solid fa-list-check" style="margin-right: 3%; cursor: pointer" data-bs-toggle="modal" data-bs-target="#task" wire:click="clickTask({{$data->id}})"></i>
                                 </td>

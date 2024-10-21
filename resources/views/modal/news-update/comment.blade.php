@@ -92,7 +92,7 @@
                                                 {{$coms->text}}
                                             </div>
                                         </div>
-                                        @if($position == "Super Admin")
+                                        @if($authorizer)
                                         <div style="display: flex">
                                             <div>
                                                 <i class="fa-solid fa-pen-to-square" style="cursor: pointer" title="edit" data-bs-toggle="modal" data-bs-target="#edit_comment" wire:click="edit_comment({{$coms->id}})" data-bs-dismiss="modal" aria-label="Close"></i>

@@ -46,6 +46,17 @@ class UserAccess extends Component
         }
     }
 
+    public function mount(){
+        $fe = User::find(auth()->user()->id)->user_access->first();
+        $authorizer = $fe->settings;
+        if ($authorizer){
+
+        }
+        else{
+            return redirect('/');
+        }
+    }
+
     public function submitEditRole(){
         $ng = User::find($this->user_id);
         try {

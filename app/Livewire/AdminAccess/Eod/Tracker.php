@@ -2,13 +2,14 @@
 
 namespace App\Livewire\AdminAccess\Eod;
 
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Tracker extends Component
 {
-    public $start, $end, $submissionData = [], $salesData = [], $pages, $campaignName, $subject;
+    public $start, $end, $authorizer, $submissionData = [], $salesData = [], $pages, $campaignName, $subject;
 
     public function render()
     {
@@ -16,6 +17,14 @@ class Tracker extends Component
     }
 
     public function mount($page){
+        $fe = User::find(auth()->user()->id)->user_access->first();
+        $this->authorizer = $fe->eod;
+        if ($this->authorizer){
+
+        }
+        else{
+            return redirect('/');
+        }
         $this->subject = preg_replace('/[^A-Za-z0-9]+.*/', '', $page);
         if ($page == "masstort-tracker"){
             $this->pages = "submission";

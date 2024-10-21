@@ -57,7 +57,7 @@
                 <th scope="col">Time in</th>
                 <th scope="col">Time out</th>
                 <th scope="col">Total time</th>
-                @if($empPosition != "Agent")
+                @if($authorizer)
                     <th scope="col">Task</th>
                 @endif
             </tr>
@@ -81,7 +81,7 @@
                             @endphp
                             {{$result}}
                         </td>
-                        @if($empPosition != "Agent")
+                        @if($authorizer)
                             <td>
                                 <i class="fa-solid fa-list-check" style="margin-right: 3%; cursor: pointer" data-bs-toggle="modal" data-bs-target="#taskRecord" wire:click="clickTask({{$data->id}})"></i>
                             </td>

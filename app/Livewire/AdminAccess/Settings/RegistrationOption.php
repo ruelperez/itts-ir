@@ -6,6 +6,7 @@ use App\Models\AdminShow;
 use App\Models\Employee;
 use App\Models\IsRegistration;
 use App\Models\SuperadminShow;
+use App\Models\User;
 use Livewire\Component;
 
 class RegistrationOption extends Component
@@ -27,8 +28,12 @@ class RegistrationOption extends Component
     }
 
     public function mount(){
-        $pst = auth()->user()->position;
-        if ($pst != "Super Admin"){
+        $fe = User::find(auth()->user()->id)->user_access->first();
+        $authorizer = $fe->settings;
+        if ($authorizer){
+
+        }
+        else{
             return redirect('/');
         }
         $data = IsRegistration::all();

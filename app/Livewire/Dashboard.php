@@ -16,6 +16,7 @@ use App\Models\Submission;
 use App\Models\SuperadminShow;
 use App\Models\TimeSetting;
 use App\Models\User;
+use App\Models\UserAccess;
 use App\Models\UserPassword;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -29,13 +30,14 @@ class Dashboard extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $ids, $title, $hin, $announceData = [], $is_success = false, $employeeData, $dtrData = [], $announce, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $authorizer, $ids, $title, $hin, $announceData = [], $is_success = false, $employeeData, $dtrData = [], $announce, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
         $this->user_id = auth()->user()->id;
-        $this->position = auth()->user()->position;
+        $fe = User::find($this->user_id)->user_access->first();
+        $this->authorizer = $fe->dashboard_crud;
         $jj = Employee::where('user_id',$this->user_id)->get();
         foreach ($jj as $yy){
             $emp = Employee::find($yy->id);

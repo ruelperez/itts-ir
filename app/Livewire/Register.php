@@ -75,6 +75,7 @@ class Register extends Component
             UserAccess::create([
                 'user_id' => $user_id,
                 'can_login' => true,
+                'dashboard_crud' => true,
                 'dtr_record' => true,
                 'campaign_settings' => true,
                 'staff_directory' => true,
@@ -84,6 +85,7 @@ class Register extends Component
                 'lead_tracker' => true,
                 'user_credential' => true,
                 'settings' => true,
+                'faq_crud'=> true,
             ]);
         }else{
             UserAccess::create([

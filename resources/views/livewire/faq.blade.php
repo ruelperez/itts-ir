@@ -1,6 +1,4 @@
 <div>
-    @include('modal.click-settings')
-    @include('modal.news-update.show-photo')
     @include('modal.faq.add')
     @include('modal.faq.edit')
                 <div>
@@ -17,7 +15,7 @@
                     <div style="margin-left: 1%; width: 30%;">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" wire:model.live="search">
                     </div>
-                    @if($position == "Super Admin")
+                    @if($authorizer)
                         <div style="padding-top: 7px; margin-left: 2%">
                             <i class="fa-solid fa-circle-plus" style="font-size: 25px;cursor: pointer" data-bs-toggle="modal" data-bs-target="#addFaq"></i>
                         </div>

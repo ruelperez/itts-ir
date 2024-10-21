@@ -30,13 +30,14 @@ class MassTort extends Component
     #[Validate('image|max:1024')] // 1MB Max
     public $registrationSwitch, $did, $link = [
         ['title' => '', 'textLink' => ''],
-    ],  $schedule, $geo, $clientList = [], $cntName, $restriction, $campaign, $campList = [], $tcpa = false, $felony = false, $client_name, $client_list = [], $campaignList = [], $campName, $employeeData, $tf = false, $fj = 0, $email= false, $thatsthem= false, $dupe= false, $blacklist = false, $govt= false, $dtrData = [], $campaign_stat = "active", $superAdminSwitch, $position, $edit_comment_id, $editTextComment, $linkData = [], $imagePath, $adminSwitch, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "all", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
+    ],  $schedule, $geo, $clientList = [], $authorizer, $cntName, $restriction, $campaign, $campList = [], $tcpa = false, $felony = false, $client_name, $client_list = [], $campaignList = [], $campName, $employeeData, $tf = false, $fj = 0, $email= false, $thatsthem= false, $dupe= false, $blacklist = false, $govt= false, $dtrData = [], $campaign_stat = "active", $edit_comment_id, $editTextComment, $linkData = [], $imagePath, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "all", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
         $this->user_id = auth()->user()->id;
-        $this->position = auth()->user()->position;
+        $fe = User::find($this->user_id)->user_access->first();
+        $this->authorizer = $fe->campaign_settings;
         $jj = \App\Models\Employee::where('user_id',$this->user_id)->get();
         foreach ($jj as $yy){
             $emp = \App\Models\Employee::find($yy->id);
@@ -527,174 +528,6 @@ class MassTort extends Component
         return redirect()->to('/login');
     }
 
-    public function clickSettings(){
-        $data = IsRegistration::all();
-
-        if (count($data) == 0){
-            IsRegistration::create([
-                'user_id' => auth()->user()->id,
-                'on_off' => true,
-            ]);
-        }
-        $an = IsRegistration::all();
-        foreach ($an as $ans){
-            $this->registrationSwitch = $ans->on_off;
-        }
-        if ($this->registrationSwitch == "0"){
-            $this->registrationSwitch = false;
-        }
-        else{
-            $this->registrationSwitch = true;
-        }
-
-        $data = AdminShow::all();
-        if (count($data) == 0){
-            AdminShow::create([
-                'user_id' => auth()->user()->id,
-                'on_off' => true,
-            ]);
-        }
-        $an = AdminShow::all();
-        foreach ($an as $ans){
-            $this->adminSwitch = $ans->on_off;
-        }
-        if ($this->adminSwitch == "0"){
-            $this->adminSwitch = false;
-        }
-        else{
-            $this->adminSwitch = true;
-        }
-
-        $data = SuperadminShow::all();
-        if (count($data) == 0){
-            SuperadminShow::create([
-                'user_id' => auth()->user()->id,
-                'on_off' => true,
-            ]);
-        }
-        $an = SuperadminShow::all();
-        foreach ($an as $ans){
-            $this->superAdminSwitch = $ans->on_off;
-        }
-        if ($this->superAdminSwitch == "0"){
-            $this->superAdminSwitch = false;
-        }
-        else{
-            $this->superAdminSwitch = true;
-        }
-    }
-
-    public function regSwitch(){
-        $data = IsRegistration::all();
-        if (count($data) == 1){
-            if ($this->registrationSwitch == false){
-                foreach ($data as $datas){
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = false;
-                    $datas->save();
-                }
-                $an = IsRegistration::all();
-                foreach ($an as $ans){
-                    $this->registrationSwitch = $ans->on_off;
-                }
-            }
-            else{
-                foreach ($data as $datas){
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = true;
-                    $datas->save();
-                }
-                $an = IsRegistration::all();
-                foreach ($an as $ans){
-                    $this->registrationSwitch = $ans->on_off;
-                }
-            }
-        }
-        else{
-            IsRegistration::create([
-                'user_id' => auth()->user()->id,
-                'on_off' => true,
-            ]);
-        }
-    }
-
-    public function admin_Switch(){
-        $data = AdminShow::all();
-        if (count($data) == 1){
-            if ($this->adminSwitch == false){
-                foreach ($data as $datas){
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = false;
-                    $datas->save();
-                }
-                $an = AdminShow::all();
-                foreach ($an as $ans){
-                    $this->adminSwitch = $ans->on_off;
-                }
-            }
-            else{
-                foreach ($data as $datas){
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = true;
-                    $datas->save();
-                }
-                $an = AdminShow::all();
-                foreach ($an as $ans){
-                    $this->adminSwitch = $ans->on_off;
-                }
-            }
-        }
-        else{
-            AdminShow::create([
-                'user_id' => auth()->user()->id,
-                'on_off' => true,
-            ]);
-            $an = AdminShow::all();
-            foreach ($an as $ans){
-                $this->adminSwitch = $ans->on_off;
-            }
-        }
-    }
-
-    public function super_admin_Switch(){
-        $data = SuperadminShow::all();
-        if (count($data) == 1) {
-            if ($this->superAdminSwitch == false) {
-                foreach ($data as $datas) {
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = false;
-                    $datas->save();
-                }
-                $an = SuperadminShow::all();
-                foreach ($an as $ans) {
-                    $this->superAdminSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "disabled super admin registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            } else {
-                foreach ($data as $datas) {
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = true;
-                    $datas->save();
-                }
-                $an = SuperadminShow::all();
-                foreach ($an as $ans) {
-                    $this->superAdminSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "enabled super admin registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            }
-        }
-    }
-
     public function updated($field){
         if ($field == "client_name"){
             $this->notes_all = Note::where('campaign',$this->campaign_name)
@@ -722,15 +555,6 @@ class MassTort extends Component
                 ->distinct()
                 ->orderBy('updated_at', 'desc')
                 ->get();
-        }
-        if ($field == "registrationSwitch"){
-            $this->regSwitch();
-        }
-        if ($field == "adminSwitch"){
-            $this->admin_Switch();
-        }
-        if ($field == "superAdminSwitch"){
-            $this->super_admin_Switch();
         }
         if ($field == "image"){
             $this->fj = 1;

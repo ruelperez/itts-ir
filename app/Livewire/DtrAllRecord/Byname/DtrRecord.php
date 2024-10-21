@@ -25,7 +25,7 @@ class DtrRecord extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $ids, $task, $employeeData, $dtrFullName, $empPosition, $week = "all", $dtrData = [], $year = "2024", $month, $position, $otherUserID, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $authorizer, $ids, $task, $employeeData, $dtrFullName, $empPosition, $week = "all", $dtrData = [], $year = "2024", $month, $position, $otherUserID, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -47,7 +47,9 @@ class DtrRecord extends Component
         foreach ($ds as $dtr){
             $this->dtrFullName = $dtr->fullname;
         }
-        $this->empPosition = User::find($this->otherUserID)->position;
+        $this->user_id = auth()->user()->id;
+        $fe = User::find($this->user_id)->user_access->first();
+        $this->authorizer = $fe->dtr_record;
 
         return view('livewire.dtr-all-record.byname.dtr-record');
     }
@@ -59,6 +61,14 @@ class DtrRecord extends Component
     }
 
     public function mount($page,$emp_id){
+        $fe = User::find(auth()->user()->id)->user_access->first();
+        $this->authorizer = $fe->dtr_record;
+        if ($this->authorizer){
+
+        }
+        else{
+            return redirect('/');
+        }
         $this->otherUserID = $emp_id;
 //        $this->webName = $page;
         $this->month = date('m');

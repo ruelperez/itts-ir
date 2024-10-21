@@ -1,5 +1,4 @@
 <div>
-    @include('modal.news-update.show-photo')
     @include('modal.news-update.add')
     @include('modal.news-update.edit_tags')
     @include('modal.news-update.edit')
@@ -21,7 +20,7 @@
 {{--                                <a href="/itts/2/age-checker" wire:navigate style="color: white;">Age checker</a>--}}
 {{--                            </div>--}}
 {{--                        @endif--}}
-                @if($position != "Agent")
+                @if($authorizer)
                     <div class="col-12 col-lg-4 col-md-6 col-xl-2 mt-2 text-center">
                         <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#arc"><i class="fa-solid fa-gear"></i> Camp/Client</button>
                     </div>
@@ -41,7 +40,7 @@
                         @endforeach
                     </select>
                 </div>
-                @if($position != "Agent")
+                @if($authorizer)
                     <div class="col-12 col-lg-4 col-xl-2 text-md-start mt-2">
                         <i class="fa-solid fa-circle-plus" data-bs-toggle="modal" data-bs-target="#add" style="color: #00FF00; font-size: 20px; cursor: pointer"></i>
                     </div>
@@ -66,9 +65,9 @@
                             ID: {{$data->id}}
                         </div>
                         <div style="margin-right: 6%;">
-                            {{$data->tags}} @if($position != "Agent" and $data->user_id == $user_id) <i class="fa-solid fa-pen" style="font-size: 14px; margin-left: 5px; cursor: pointer" data-bs-toggle="modal" data-bs-target="#edit_tags" wire:click="edit_tags({{$data->id}})"></i> @endif
+                            {{$data->tags}} @if($authorizer and $data->user_id == $user_id) <i class="fa-solid fa-pen" style="font-size: 14px; margin-left: 5px; cursor: pointer" data-bs-toggle="modal" data-bs-target="#edit_tags" wire:click="edit_tags({{$data->id}})"></i> @endif
                         </div>
-                        @if($position != "Agent" and $data->user_id == $user_id)
+                        @if($authorizer and $data->user_id == $user_id)
                             <div style="margin-left: auto; margin-right: 1.5%;">
                                 <i class="fa-solid fa-pen-to-square" style="cursor: pointer" title="edit" data-bs-toggle="modal" data-bs-target="#edit" wire:click="edit({{$data->id}})"></i>
                             </div>

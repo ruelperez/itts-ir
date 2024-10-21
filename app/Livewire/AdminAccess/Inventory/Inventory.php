@@ -20,7 +20,7 @@ use Livewire\Component;
 
 class Inventory extends Component
 {
-    public $registrationSwitch, $checkBox = [], $InvData = [], $search, $brand_name, $quantity, $serial, $device_name = "laptop", $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $authorizer, $checkBox = [], $InvData = [], $search, $brand_name, $quantity, $serial, $device_name = "laptop", $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -141,8 +141,9 @@ class Inventory extends Component
         }
     }
     public function mount(){
-        $pst = auth()->user()->position;
-        if ($pst == "Super Admin"){
+        $fe = User::find(auth()->user()->id)->user_access->first();
+        $this->authorizer = $fe->inventory;
+        if ($this->authorizer){
 
         }
         else{

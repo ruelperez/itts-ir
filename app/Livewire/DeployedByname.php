@@ -20,7 +20,7 @@ use Livewire\Component;
 
 class DeployedByname extends Component
 {
-    public $registrationSwitch, $employeeData, $deviceData = [], $search, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $authorizer, $employeeData, $deviceData = [], $search, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -49,7 +49,14 @@ class DeployedByname extends Component
         return redirect()->to('/inventory/deployed-item-all-record/'.$userids);
     }
     public function mount(){
+        $fe = User::find(auth()->user()->id)->user_access->first();
+        $this->authorizer = $fe->inventory;
+        if ($this->authorizer){
 
+        }
+        else{
+            return redirect('/');
+        }
     }
     public function logout(){
         Auth::logout();

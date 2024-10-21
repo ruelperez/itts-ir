@@ -18,12 +18,12 @@
                                     margin-left: 2%;">
                     <img src="{{asset('photo/announcement.jpg')}}" alt="Description of image" style="width: 100%;height: 100%;object-fit: cover;border-radius: 50%; /* Makes the image oval */">
                 </div>
-                @if($position != "Agent")
+                @if($authorizer)
                     <i class="fa-solid fa-circle-plus" style="font-size: 20px; cursor: pointer; color: white;" data-bs-toggle="modal" data-bs-target="#add"></i>
                 @endif
                 <hr style="color: white">
                 @foreach($announceData as $data)
-                    <div style="color: white; @if($position != "Agent") cursor: pointer @endif" class="px-2 rounded" @if($position != "Agent") data-bs-toggle="modal" data-bs-target="#clickData" wire:click="clickData({{$data->id}})" @endif>
+                    <div style="color: white; @if($authorizer) cursor: pointer @endif" class="px-2 rounded" @if($authorizer) data-bs-toggle="modal" data-bs-target="#clickData" wire:click="clickData({{$data->id}})" @endif>
                         <div class="fw-light text-end mb-1"><small>{{$data->updated_at->format('M-d-Y')}}</small></div>
                         <h5>{{ucwords($data->title)}}</h5>
                         <p style="white-space: pre-line;" class="text-break">{{ucfirst($data->text)}}</p>

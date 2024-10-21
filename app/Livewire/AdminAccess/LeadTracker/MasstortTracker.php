@@ -104,8 +104,12 @@ class MasstortTracker extends Component
 
     public function mount($page,$folder){
         $this->folderName = $folder;
-        $pst = auth()->user()->position;
-        if ($pst != "Super Admin"){
+        $fe = User::find(auth()->user()->id)->user_access->first();
+        $authorizer = $fe->lead_tracker;
+        if ($authorizer){
+
+        }
+        else{
             return redirect('/');
         }
     }

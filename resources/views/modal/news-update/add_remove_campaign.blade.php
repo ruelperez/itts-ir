@@ -11,7 +11,7 @@
                         <div class="col-6 border border-dark" style="cursor: pointer" onclick="clickClient()" id="cnt">Client</div>
                     </div>
                     <hr>
-                    @if($position != "Agent")
+                    @if($authorizer)
                         <div id="campForm">
                             <form wire:submit.prevent="submit_campaign" class="mt-3">
                                 <div style="margin-left: 2%; display: flex;">
@@ -37,7 +37,7 @@
                             </div>
                         </div>
                     @endif
-                    @if($position != "Agent")
+                    @if($authorizer)
                         <div style="display: none" id="clientForm">
                             <form wire:submit.prevent="submit_client" class="mt-3">
                                 <div style="margin-left: 2%; display: flex;">

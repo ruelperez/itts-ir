@@ -2,6 +2,7 @@
 
 namespace App\Livewire\AdminAccess\UserCredential;
 
+use App\Models\User;
 use App\Models\UserPassword;
 use Livewire\Component;
 
@@ -21,5 +22,16 @@ class KbtoolAccount extends Component
                 ->get();
         }
         return view('livewire.admin-access.user-credential.kbtool-account');
+    }
+
+    public function mount(){
+        $fe = User::find(auth()->user()->id)->user_access->first();
+        $authorizer = $fe->user_credential;
+        if ($authorizer){
+
+        }
+        else{
+            return redirect('/');
+        }
     }
 }

@@ -24,7 +24,7 @@ class DailyShift extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $ids, $isLoading = false, $task, $userID = [], $employeeData, $role = "all", $year, $month, $day, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $ids, $authorizer, $isLoading = false, $task, $userID = [], $employeeData, $role = "all", $year, $month, $day, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
 
     public function render()
@@ -68,8 +68,9 @@ class DailyShift extends Component
         $this->task = $data->task;
     }
     public function mount($page){
-        $pst = auth()->user()->position;
-        if ($pst == "Super Admin"){
+        $fe = User::find(auth()->user()->id)->user_access->first();
+        $this->authorizer = $fe->dtr_record;
+        if ($this->authorizer){
 
         }
         else{

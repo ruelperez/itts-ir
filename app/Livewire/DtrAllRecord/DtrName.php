@@ -25,7 +25,7 @@ class DtrName extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $dtrData = [], $employeeData, $search, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $authorizer, $dtrData = [], $employeeData, $search, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -50,8 +50,9 @@ class DtrName extends Component
         return redirect()->to('/dtr/all-record/dtr-record/'.$userids);
     }
     public function mount($page){
-        $pst = auth()->user()->position;
-        if ($pst == "Super Admin"){
+        $fe = User::find(auth()->user()->id)->user_access->first();
+        $this->authorizer = $fe->dtr_record;
+        if ($this->authorizer){
 
         }
         else{

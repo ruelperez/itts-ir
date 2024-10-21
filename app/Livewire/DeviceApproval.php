@@ -20,7 +20,7 @@ use Livewire\Component;
 
 class DeviceApproval extends Component
 {
-    public $registrationSwitch, $searchApproval, $pendingStat, $showSearch = false, $brand_name, $device_id, $deviceData = [], $inventory_id, $results = [], $device_name, $serial, $quantity = 1, $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $authorizer, $searchApproval, $pendingStat, $showSearch = false, $brand_name, $device_id, $deviceData = [], $inventory_id, $results = [], $device_name, $serial, $quantity = 1, $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -50,14 +50,9 @@ class DeviceApproval extends Component
     }
 
     public function mount(){
-        $usrId = auth()->user()->id;
-        $sd = \App\Models\Employee::where('user_id',$usrId)->get();
-        if (count($sd) < 1){
-            return redirect('/itts/15/employee');
-        }
-
-        $pst = auth()->user()->position;
-        if ($pst == "Super Admin"){
+        $fe = User::find(auth()->user()->id)->user_access->first();
+        $this->authorizer = $fe->inventory;
+        if ($this->authorizer){
 
         }
         else{

@@ -1,5 +1,4 @@
 <div>
-    @include('modal.news-update.show-photo')
     @include('modal.inventory.add')
     @include('modal.inventory.edit')
                 <div class="px-2 py-2 px-lg-3 py-lg-3 text-white" style="background-color: #41464b;">

@@ -23,7 +23,7 @@ class Logs extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $dtrData = [], $currentPage = 1, $perPage = 20, $employeeData, $position, $superAdminSwitch, $search, $logsData = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $authorizer, $dtrData = [], $currentPage = 1, $perPage = 20, $employeeData, $position, $superAdminSwitch, $search, $logsData = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -72,8 +72,9 @@ class Logs extends Component
     }
 
     public function mount(){
-        $pst = auth()->user()->position;
-        if ($pst == "Super Admin"){
+        $fe = User::find(auth()->user()->id)->user_access->first();
+        $this->authorizer = $fe->logs;
+        if ($this->authorizer){
 
         }
         else{

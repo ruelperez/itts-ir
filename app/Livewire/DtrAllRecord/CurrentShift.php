@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\DtrAllRecord;
 
 use App\Models\AdminShow;
 use App\Models\Comment;
@@ -27,12 +27,11 @@ class CurrentShift extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $branch = "all", $search, $employeeData, $unchangeTimeIn1, $unchangeTimeIn2, $timeIn1, $dtrName, $ids, $timeIn2, $timeOut1, $timeOut2, $date, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $branch = "all", $authorizer, $search, $employeeData, $unchangeTimeIn1, $unchangeTimeIn2, $timeIn1, $dtrName, $ids, $timeIn2, $timeOut1, $timeOut2, $date, $dtrData = [], $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
         $this->user_id = auth()->user()->id;
-        $this->position = auth()->user()->position;
         $jj = Employee::where('user_id',$this->user_id)->get();
         foreach ($jj as $yy){
             $emp = Employee::find($yy->id);
@@ -51,7 +50,7 @@ class CurrentShift extends Component
                 ->orWhere('branch', 'LIKE', '%'.$this->search.'%')->get();
         }
         $this->date = DtrPermanent::latest()->first();
-        return view('livewire.current-shift');
+        return view('livewire.dtr-all-record.current-shift');
     }
 
     public function clickTimeEdit($id){
@@ -142,8 +141,9 @@ class CurrentShift extends Component
     }
 
     public function mount(){
-        $pst = auth()->user()->position;
-        if ($pst == "Super Admin"){
+        $fe = User::find(auth()->user()->id)->user_access->first();
+        $this->authorizer = $fe->dtr_record;
+        if ($this->authorizer){
 
         }
         else{
