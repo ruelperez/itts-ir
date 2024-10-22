@@ -61,6 +61,7 @@
     margin-right: 1%;
 }
 
+
 .profile-picture img {
     width: 100%; /* Ensure the image fills the container */
     height: 45px; /* Maintain aspect ratio */
@@ -92,10 +93,35 @@
     border-radius: 100%; /* Ensure the image inside the circle is also circular */
 }
 
+.name-container {
+    position: relative; /* Set the container to relative for positioning the circle */
+    display: inline-block; /* Allow the container to fit the content */
+    padding: 5px; /* Optional: add some padding */
+}
+
+.profile-picture-user-credential{
+    width: 100px; /* Adjust the width of the profile picture */
+    height: 100px; /* Adjust the height of the profile picture */
+    border-radius: 50%; /* Make it circular if needed */
+}
+
+.status-indicator {
+    position: absolute; /* Position the circle relative to the container */
+    bottom: 0; /* Align to the bottom */
+    right: 1; /* Align to the right */
+    width: 12px; /* Set the width of the circle */
+    height: 12px; /* Set the height of the circle */
+    background-color: green; /* Set the circle color */
+    border-radius: 50%; /* Make it a circle */
+    border: 2px solid white; /* Optional: add a border for better visibility */
+}
+
 .profile-picture-logs {
     width: 60px; /* Adjust width and height as needed */
     height: 35px;
     border-radius: 100%; /* Create a circular shape */
+    position: relative; /* Set the container to relative for positioning the circle */
+    display: inline-block; /* Allow the container to fit the content */
 }
 
 .profile-picture-logs img{

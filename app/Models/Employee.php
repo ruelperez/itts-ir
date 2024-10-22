@@ -51,5 +51,9 @@ class Employee extends Model
         'status' => 'boolean',
     ];
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
     use HasFactory;
 }

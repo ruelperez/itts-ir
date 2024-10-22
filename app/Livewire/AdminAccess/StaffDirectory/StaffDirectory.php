@@ -268,64 +268,6 @@ class StaffDirectory extends Component
         Auth::logout();
         return redirect()->to('/login');
     }
-
-    public function clickSettings(){
-        $data = IsRegistration::all();
-        if (count($data) == 0){
-            IsRegistration::create([
-                'user_id' => auth()->user()->id,
-                'on_off' => true,
-            ]);
-        }
-        $an = IsRegistration::all();
-        foreach ($an as $ans){
-            $this->registrationSwitch = $ans->on_off;
-        }
-        if ($this->registrationSwitch == "0"){
-            $this->registrationSwitch = false;
-        }
-        else{
-            $this->registrationSwitch = true;
-        }
-
-
-        $data = AdminShow::all();
-        if (count($data) == 0){
-            AdminShow::create([
-                'user_id' => auth()->user()->id,
-                'on_off' => true,
-            ]);
-        }
-        $an = AdminShow::all();
-        foreach ($an as $ans){
-            $this->adminSwitch = $ans->on_off;
-        }
-        if ($this->adminSwitch == "0"){
-            $this->adminSwitch = false;
-        }
-        else{
-            $this->adminSwitch = true;
-        }
-
-        $data = SuperadminShow::all();
-        if (count($data) == 0){
-            SuperadminShow::create([
-                'user_id' => auth()->user()->id,
-                'on_off' => true,
-            ]);
-        }
-        $an = SuperadminShow::all();
-        foreach ($an as $ans){
-            $this->superAdminSwitch = $ans->on_off;
-        }
-        if ($this->superAdminSwitch == "0"){
-            $this->superAdminSwitch = false;
-        }
-        else{
-            $this->superAdminSwitch = true;
-        }
-    }
-
     public function status($indexNum,$id){
         $jk = \App\Models\Employee::find($id);
         $jk->status = $this->stat[$indexNum];

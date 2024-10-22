@@ -12,20 +12,24 @@ class KbtoolAccount extends Component
 
     public function render()
     {
-        $this->staffData = UserPassword::all();
         if ($this->search == ""){
-            $this->staffData = UserPassword::query()
-                ->skip(($this->currentPage - 1) * $this->perPage)
-                ->take($this->perPage)
-                ->latest()
-                ->get();
+            $this->staffData = User::select('users.*', 'employees.status') // Select all users and the status column
+            ->leftJoin('employees', 'users.id', '=', 'employees.user_id') // Join the employees table
+            ->skip(($this->currentPage - 1) * $this->perPage)
+            ->take($this->perPage)
+            ->latest()
+            ->get();
         }else{
-            $this->staffData = \App\Models\UserPassword::where('fullname','LIKE','%'.$this->search.'%')
-                ->orWhere('password','LIKE','%'.$this->search.'%')
-                ->orWhere('username','LIKE','%'.$this->search.'%')
-                ->skip(($this->currentPage - 1) * $this->perPage)
-                ->take($this->perPage)
-                ->latest()
+            $this->staffData = User::select('users.*', 'employees.status') // Select all users and the status column
+            ->leftJoin('employees', 'users.id', '=', 'employees.user_id') // Join the employees table
+            ->where(function ($query) {
+                $query->where('users.fullname', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('show_pass', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('username', 'LIKE', '%' . $this->search . '%');
+            })
+                ->latest() // Get the latest records first
+                ->skip(($this->currentPage - 1) * $this->perPage) // Pagination logic
+                ->take($this->perPage) // Pagination limit
                 ->get();
         }
         return view('livewire.admin-access.user-credential.kbtool-account');

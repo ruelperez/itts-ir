@@ -16,33 +16,26 @@
                     <th scope="col">Fullname</th>
                     <th scope="col">Username</th>
                     <th scope="col">Password</th>
-                    <th scope="col">Status</th>
                 </tr>
                 </thead>
                 <tbody>
                 @php $i=0; @endphp
                 @foreach($staffData as $data)
                     <tr onmouseover="hoverStaff({{$data->id}})" onmouseout="hoverOutStaff({{$data->id}})">
-                        <td>
+                        <td class="text-end">
                             <div class="profile-picture-logs">
                                 <img src="{{asset('photos/photos/'.$data->photo)}}" alt="Profile Picture">
+                                @if($data->status == 1) <span class="status-indicator"></span> @endif
                             </div>
-
                         </td>
-                        <td>
+                        <td class="p-3">
                             {{$data->fullname}}
                         </td>
                         <td>
                             {{$data->username}}
                         </td>
                         <td>
-                            {{$data->password}}
-                        </td>
-                        <td>
-                            {{$data->status}}
-                        </td>
-                        <td>
-                            {{$data->id}}
+                            {{$data->show_pass}}
                         </td>
                     </tr>
                     @php $i++; @endphp

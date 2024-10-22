@@ -56,6 +56,10 @@ class User extends Authenticatable
         return $this->hasMany(CommentHeart::class);
     }
 
+    public function employee(){
+        return $this->hasMany(Employee::class);
+    }
+
     public function dtr(){
         return $this->hasMany(Dtr::class);
     }
