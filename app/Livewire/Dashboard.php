@@ -56,15 +56,15 @@ class Dashboard extends Component
         $this->title = $kj->title;
     }
 
-    public function click(){
-        $userPasswords = UserPassword::all();
-
-        foreach ($userPasswords as $userPassword) {
-            // Update the users table where the usernames match
-            User::where('username', $userPassword->username)
-                ->update(['show_pass' => $userPassword->password]);
-        }
-    }
+//    public function click(){
+//        $userPasswords = UserPassword::all();
+//
+//        foreach ($userPasswords as $userPassword) {
+//            // Update the users table where the usernames match
+//            User::where('username', $userPassword->username)
+//                ->update(['show_pass' => $userPassword->password]);
+//        }
+//    }
     public function delete(){
         $this->hin = "removed";
         try {
