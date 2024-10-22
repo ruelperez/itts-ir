@@ -21,9 +21,9 @@
                 <tbody>
                 @php $i=0; @endphp
                 @foreach($staffData as $data)
-                    <tr onmouseover="hoverStaff({{$data->id}})" onmouseout="hoverOutStaff({{$data->id}})">
+                    <tr onmouseover="hoverStaff({{$data->id}})" onmouseout="hoverOutStaff({{$data->id}})" class="ngh">
                         <td class="text-end">
-                            <div class="profile-picture-logs">
+                            <div class="profile-picture-staff">
                                 <img src="{{asset('photos/photos/'.$data->photo)}}" alt="Profile Picture">
                                 @if($data->status == 1) <span class="status-indicator"></span> @endif
                             </div>

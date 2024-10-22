@@ -31,6 +31,7 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
+                    <th scope="col"></th>
                     <th scope="col">Fullname</th>
                     <th scope="col">Work email</th>
                     <th scope="col">Phone number</th>
@@ -45,7 +46,13 @@
                 <tbody>
                 @php $i=0; @endphp
                 @foreach($staffData as $data)
-                    <tr onmouseover="hoverStaff({{$data->id}})" onmouseout="hoverOutStaff({{$data->id}})">
+                    <tr onmouseover="hoverStaff({{$data->id}})" onmouseout="hoverOutStaff({{$data->id}})" class="ngh">
+                        <td class="text-end pe-4">
+                            <div class="profile-picture-staff">
+                                <img src="{{asset('photos/photos/'.$data->photo)}}" alt="Profile Picture">
+                                @if($data->status == 1) <span class="status-indicator"></span> @endif
+                            </div>
+                        </td>
                         <td>
                             {{ucwords($data->fname.' '.$data->mi.' '.$data->lname)}}
                         </td>
@@ -66,9 +73,6 @@
                         </td>
                         <td>
                             {{$data->department}}
-                        </td>
-                        <td>
-                            {{$data->user_id}}
                         </td>
 {{--                        <td>--}}
 {{--                            {{ucwords($data->branch)}}--}}

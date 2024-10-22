@@ -44,41 +44,47 @@ class StaffDirectory extends Component
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
         if ($this->search != ""){
+            $this->currentPage = 1;
             $this->empStat = "all";
-            $this->staffData = \App\Models\Employee::where('fname','LIKE', '%'.$this->search.'%')
-                ->orWhere('lname', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('mi', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('mname', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('suffix', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('age', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('phone_number', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('dob', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('gender_preference', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('civil_status', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('religion', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('personal_email', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('current_house', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('current_street', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('current_brgy', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('current_city', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('current_working_email', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('permanent_house', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('permanent_street', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('permanent_brgy', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('permanent_city', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('sss', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('philhealth', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('tin', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('hire_date', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('yot', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('designation', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('department', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('contact_number', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('address', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('relationship', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('branch', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('fullname', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('id_user', 'LIKE', '%'.$this->search.'%')
+            $this->staffData = \App\Models\Employee::select('employees.*', 'users.photo') // Select all users and the status column
+            ->leftJoin('users', 'employees.user_id', '=', 'users.id') // Join the employees table
+            ->where(function ($query) {
+                $query->where('fname', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('lname', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('mi', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('mname', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('suffix', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('age', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('phone_number', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('dob', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('gender_preference', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('civil_status', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('religion', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('personal_email', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('current_house', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('current_street', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('current_brgy', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('current_city', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('current_working_email', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('permanent_house', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('permanent_street', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('permanent_brgy', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('permanent_city', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('sss', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('philhealth', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('tin', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('hire_date', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('yot', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('designation', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('department', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('contact_number', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('address', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('relationship', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('employees.branch', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('employees.fullname', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('id_user', 'LIKE', '%'.$this->search.'%');
+            })
+
                 ->skip(($this->currentPage - 1) * $this->perPage)
                 ->take($this->perPage)
                 ->latest()
@@ -89,22 +95,31 @@ class StaffDirectory extends Component
         }
         else{
             if ($this->empStat == "all"){
-                $this->staffData = Employee::query()
-                    ->skip(($this->currentPage - 1) * $this->perPage)
-                    ->take($this->perPage)
-                    ->latest()
-                    ->get();
+                $this->staffData = Employee::select('employees.*', 'users.photo') // Select all users and the status column
+                ->leftJoin('users', 'employees.user_id', '=', 'users.id') // Join the employees table
+                ->skip(($this->currentPage - 1) * $this->perPage)
+                ->take($this->perPage)
+                ->latest()
+                ->get();
                 foreach ($this->staffData as $index => $staff){
                     $this->stat[$index] = $staff->status;
                 }
                 sleep(1);
                 $this->dispatch('remove-loading');
             }else{
-                $this->staffData = \App\Models\Employee::where('status',$this->empStat)
-                    ->skip(($this->currentPage - 1) * $this->perPage)
+                $this->staffData = Employee::select('employees.*', 'users.photo') // Select all users and the status column
+                ->leftJoin('users', 'employees.user_id', '=', 'users.id') // Join the employees table
+                ->where('status',$this->empStat)
+                ->skip(($this->currentPage - 1) * $this->perPage)
                     ->take($this->perPage)
                     ->latest()
                     ->get();
+
+//                $this->staffData = \App\Models\Employee::where('status',$this->empStat)
+//                    ->skip(($this->currentPage - 1) * $this->perPage)
+//                    ->take($this->perPage)
+//                    ->latest()
+//                    ->get();
                 foreach ($this->staffData as $index => $staff){
                     $this->stat[$index] = $staff->status;
                 }

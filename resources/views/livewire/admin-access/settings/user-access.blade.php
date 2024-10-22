@@ -60,9 +60,9 @@
                 </thead>
                 <tbody>
                 @foreach($datas as $data)
-                    <tr onmouseover="hoverStaff({{$data->id}})" onmouseout="hoverOutStaff({{$data->id}})">
+                    <tr onmouseover="hoverStaff({{$data->id}})" onmouseout="hoverOutStaff({{$data->id}})" class="ngh">
                         <td>
-                            <div class="profile-picture-logs">
+                            <div class="profile-picture-staff">
                                 <img src="{{asset('photos/photos/'.$data->user->photo)}}" alt="Profile Picture">
                             </div>
                         </td>

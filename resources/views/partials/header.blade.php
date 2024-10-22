@@ -1,4 +1,4 @@
-<nav class="px-3 position-fixed w-100 bg-white row pt-2">
+<nav class="px-3 position-fixed w-100 bg-white row pt-2" style=" z-index: 2;">
     <div class="col-8" style=" border-bottom: 1px solid rgba(0, 0, 0, 0.3);">
         <div class="row">
             <div class="col-3 col-sm-1 btn me-sm-2" @click="marginLeftVar = marginLeftVar === 1 ? 0 : 1">

@@ -105,6 +105,10 @@
     border-radius: 50%; /* Make it circular if needed */
 }
 
+.ngh td{
+    vertical-align: middle;
+}
+
 .status-indicator {
     position: absolute; /* Position the circle relative to the container */
     bottom: 0; /* Align to the bottom */
@@ -116,18 +120,20 @@
     border: 2px solid white; /* Optional: add a border for better visibility */
 }
 
-.profile-picture-logs {
+.profile-picture-staff {
     width: 60px; /* Adjust width and height as needed */
     height: 35px;
     border-radius: 100%; /* Create a circular shape */
     position: relative; /* Set the container to relative for positioning the circle */
     display: inline-block; /* Allow the container to fit the content */
+    z-index: 1;
 }
 
-.profile-picture-logs img{
+.profile-picture-staff img{
     width: 75%; /* Ensure the image fills the container */
     height: 40px; /* Maintain aspect ratio */
     border-radius: 100%; /* Ensure the image inside the circle is also circular */
+    z-index: 1;
 }
 .profile {
     width: 55%; /* Adjust width and height as needed */

@@ -12,17 +12,32 @@ class UserAccess extends Component
     {
         $this->dispatch('acc');
         if ($this->search == ""){
-            $this->datas = \App\Models\UserAccess::with('user:id,fullname,position,photo')
+            $this->datas = \App\Models\UserAccess::select('user_accesses.*', 'users.photo','users.position','users.fullname', 'employees.status')
+                ->leftJoin('users', 'user_accesses.user_id', '=', 'users.id') // Join users table
+                ->leftJoin('employees', 'users.id', '=', 'employees.user_id') // Join employees table
+                ->where('employees.status', true)
                 ->skip(($this->currentPage - 1) * $this->perPage)
                 ->take($this->perPage)
                 ->latest()
                 ->get();
+
+
+//            $this->datas = \App\Models\UserAccess::with('user:id,fullname,position,photo')
+//                ->where('status','1')
+//                ->skip(($this->currentPage - 1) * $this->perPage)
+//                ->take($this->perPage)
+//                ->latest()
+//                ->get();
+
         }else{
-            $this->datas = \App\Models\UserAccess::with('user:id,fullname,position,photo')
-                ->whereHas('user', function ($query) {
-                    $query->where('fullname', 'like', '%' . $this->search . '%')
-                        ->orWhere('position', 'like', '%' . $this->search . '%');
+            $this->datas = \App\Models\UserAccess::select('user_accesses.*', 'users.photo','users.position','users.fullname', 'employees.status')
+                ->leftJoin('users', 'user_accesses.user_id', '=', 'users.id') // Join users table
+                ->leftJoin('employees', 'users.id', '=', 'employees.user_id') // Join employees table
+                ->where(function ($query) {
+                    $query->where('users.fullname', 'like', '%' . $this->search . '%')
+                        ->orWhere('users.position', 'like', '%' . $this->search . '%');
                 })
+                ->where('employees.status', true)
                 ->skip(($this->currentPage - 1) * $this->perPage)
                 ->take($this->perPage)
                 ->latest()
@@ -77,6 +92,22 @@ class UserAccess extends Component
                 $hh->settings= true;
                 $hh->faq_crud= true;
                 $hh->login_special= true;
+                $hh->save();
+            }
+            else {
+                $hh->can_login = true;
+                $hh->dashboard_crud= false;
+                $hh->dtr_record= false;
+                $hh->campaign_settings= false;
+                $hh->staff_directory= false;
+                $hh->logs= false;
+                $hh->eod= false;
+                $hh->inventory= false;
+                $hh->lead_tracker= false;
+                $hh->user_credential= false;
+                $hh->settings= false;
+                $hh->faq_crud= false;
+                $hh->login_special= false;
                 $hh->save();
             }
             $this->dispatch('success');
