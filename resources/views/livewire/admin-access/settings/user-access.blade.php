@@ -47,6 +47,7 @@
                     <th scope="col">Login spec.</th>
                     <th scope="col">Dash. crud</th>
                     <th scope="col">Dtr record</th>
+                    <th scope="col">Dtr task</th>
                     <th scope="col">Camp crud</th>
                     <th scope="col">Staff Direct.</th>
                     <th scope="col">Logs</th>
@@ -96,6 +97,12 @@
                             data-original-value="{{ $data->dtr_record }}"
                             class="user-select-none">
                             {{ $data->dtr_record ? '1' : '0' }}
+                        </td>
+                        <td
+                            ondblclick="confirmEdit({{ $data->id }},{{$data->dtr_task}},'dtr_task')"
+                            data-original-value="{{ $data->dtr_task }}"
+                            class="user-select-none">
+                            {{ $data->dtr_task ? '1' : '0' }}
                         </td>
                         <td
                             ondblclick="confirmEdit({{ $data->id }},{{$data->campaign_settings}},'campaign_settings')"
