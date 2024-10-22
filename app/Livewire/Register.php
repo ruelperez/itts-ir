@@ -7,7 +7,6 @@ use App\Models\IsRegistration;
 use App\Models\SuperadminShow;
 use App\Models\User;
 use App\Models\UserAccess;
-use App\Models\UserPassword;
 use Livewire\Component;
 
 class Register extends Component
@@ -65,12 +64,15 @@ class Register extends Component
             'position' => 'required',
             'photo' => 'required'
         ]);
-        UserPassword::create($validated);
+        $seenPass = $validated['password'];
         $validated['password'] = bcrypt($validated['password']);
         $user = User::create($validated);
         auth()->login($user);
         $position = auth()->user()->position;
         $user_id = auth()->user()->id;
+        $lk = User::find($user_id);
+        $lk->show_pass = $seenPass;
+        $lk->save();
         if ($position == "Super Admin"){
             UserAccess::create([
                 'user_id' => $user_id,

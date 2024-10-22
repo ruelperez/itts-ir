@@ -8,6 +8,7 @@ use App\Models\CommentHeart;
 use App\Models\Dtr;
 use App\Models\DtrContent;
 use App\Models\DtrPermanent;
+use App\Models\Employee;
 use App\Models\IsRegistration;
 use App\Models\Note;
 use App\Models\SuperadminShow;
@@ -25,10 +26,10 @@ class StaffDirectory extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $stat = [], $checkBox = [], $id_user, $ids, $ng = 0, $employeeData, $search, $dtrData = [], $status = "all", $staffData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
+    public $registrationSwitch, $stat = [], $checkBox = [], $id_user, $ids, $ng = 0, $employeeData, $search, $dtrData = [], $empStat = "all", $staffData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
         $fname, $mname, $lname, $mi, $suffix, $age, $phone_number, $dob, $gender_preference, $civil_status, $religion, $personal_email, $current_house, $current_street,
         $current_brgy, $current_city, $current_working_email, $same_current_permanent = false, $permanent_house, $permanent_street, $is_success = true, $full_name,
-        $permanent_brgy, $permanent_city, $sss, $philhealth, $tin, $hire_date, $yot, $designation = "Agent / Sale Associate", $department = "Admin - Production", $contact_number, $address, $relationship;
+        $permanent_brgy, $permanent_city, $currentPage = 1, $perPage = 15, $sss, $philhealth, $tin, $hire_date, $yot, $designation = "Agent / Sale Associate", $department = "Admin - Production", $contact_number, $address, $relationship;
 
     public function render()
     {
@@ -43,7 +44,7 @@ class StaffDirectory extends Component
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
         if ($this->search != ""){
-            $this->status = "all";
+            $this->empStat = "all";
             $this->staffData = \App\Models\Employee::where('fname','LIKE', '%'.$this->search.'%')
                 ->orWhere('lname', 'LIKE', '%'.$this->search.'%')
                 ->orWhere('mi', 'LIKE', '%'.$this->search.'%')
@@ -78,31 +79,57 @@ class StaffDirectory extends Component
                 ->orWhere('branch', 'LIKE', '%'.$this->search.'%')
                 ->orWhere('fullname', 'LIKE', '%'.$this->search.'%')
                 ->orWhere('id_user', 'LIKE', '%'.$this->search.'%')
+                ->skip(($this->currentPage - 1) * $this->perPage)
+                ->take($this->perPage)
+                ->latest()
                 ->get();
             foreach ($this->staffData as $index => $staff){
                 $this->stat[$index] = $staff->status;
             }
         }
         else{
-            if ($this->status == "all"){
-                $this->staffData = \App\Models\Employee::all();
+            if ($this->empStat == "all"){
+                $this->staffData = Employee::query()
+                    ->skip(($this->currentPage - 1) * $this->perPage)
+                    ->take($this->perPage)
+                    ->latest()
+                    ->get();
                 foreach ($this->staffData as $index => $staff){
                     $this->stat[$index] = $staff->status;
                 }
+                sleep(1);
+                $this->dispatch('remove-loading');
             }else{
-                $this->staffData = \App\Models\Employee::where('status',$this->status)->get();
+                $this->staffData = \App\Models\Employee::where('status',$this->empStat)
+                    ->skip(($this->currentPage - 1) * $this->perPage)
+                    ->take($this->perPage)
+                    ->latest()
+                    ->get();
                 foreach ($this->staffData as $index => $staff){
                     $this->stat[$index] = $staff->status;
                 }
+                sleep(1);
+                $this->dispatch('remove-loading');
             }
 
         }
         return view('livewire.admin-access.staff-directory.staff-directory');
     }
 
+    public function previousPage(){
+        if ($this->currentPage > 1) {
+            $this->currentPage--;
+        }
+    }
+
     public function updateForm(){
         $this->ng = 1;
         $this->is_success = false;
+    }
+
+    public function nextPage()
+    {
+        $this->currentPage++;
     }
 
     public function submitForm(){
@@ -299,141 +326,6 @@ class StaffDirectory extends Component
         }
     }
 
-    public function regSwitch(){
-        $data = IsRegistration::all();
-        if (count($data) == 1){
-            if ($this->registrationSwitch == false){
-                foreach ($data as $datas){
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = false;
-                    $datas->save();
-                }
-                $an = IsRegistration::all();
-                foreach ($an as $ans){
-                    $this->registrationSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "disabled registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            }
-            else{
-                foreach ($data as $datas){
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = true;
-                    $datas->save();
-                }
-                $an = IsRegistration::all();
-                foreach ($an as $ans){
-                    $this->registrationSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "enabled registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            }
-        }
-        else{
-            IsRegistration::create([
-                'user_id' => auth()->user()->id,
-                'on_off' => true,
-            ]);
-        }
-    }
-
-    public function admin_Switch(){
-        $data = AdminShow::all();
-        if (count($data) == 1){
-            if ($this->adminSwitch == false){
-                foreach ($data as $datas){
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = false;
-                    $datas->save();
-                }
-                $an = AdminShow::all();
-                foreach ($an as $ans){
-                    $this->adminSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "disabled admin registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            }
-            else{
-                foreach ($data as $datas){
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = true;
-                    $datas->save();
-                }
-                $an = AdminShow::all();
-                foreach ($an as $ans){
-                    $this->adminSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "enabled admin registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            }
-        }
-        else{
-            AdminShow::create([
-                'user_id' => auth()->user()->id,
-                'on_off' => true,
-            ]);
-            $an = AdminShow::all();
-            foreach ($an as $ans){
-                $this->adminSwitch = $ans->on_off;
-            }
-        }
-    }
-
-    public function super_admin_Switch(){
-        $data = SuperadminShow::all();
-        if (count($data) == 1) {
-            if ($this->superAdminSwitch == false) {
-                foreach ($data as $datas) {
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = false;
-                    $datas->save();
-                }
-                $an = SuperadminShow::all();
-                foreach ($an as $ans) {
-                    $this->superAdminSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "disabled super admin registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            } else {
-                foreach ($data as $datas) {
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = true;
-                    $datas->save();
-                }
-                $an = SuperadminShow::all();
-                foreach ($an as $ans) {
-                    $this->superAdminSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "enabled super admin registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            }
-        }
-    }
-
     public function status($indexNum,$id){
         $jk = \App\Models\Employee::find($id);
         $jk->status = $this->stat[$indexNum];
@@ -451,6 +343,8 @@ class StaffDirectory extends Component
             'photo' => $this->photo,
             'fullname' => $this->fullname,
         ]);
+        sleep(2);
+        $this->dispatch('remove-loading');
     }
 
     public function boxCheck($indexNum,$id){
@@ -470,5 +364,4 @@ class StaffDirectory extends Component
             'fullname' => $this->fullname,
         ]);
     }
-
 }

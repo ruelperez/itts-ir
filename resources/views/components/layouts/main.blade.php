@@ -105,7 +105,9 @@
         ap.css("color", "black");
     }
 </script>
-@stack('js')
 @livewireScripts
+@stack('js')
+
+
 </body>
 </html>

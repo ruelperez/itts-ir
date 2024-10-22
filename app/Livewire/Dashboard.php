@@ -56,15 +56,15 @@ class Dashboard extends Component
         $this->title = $kj->title;
     }
 
-//    public function click(){
-//        $ba = Submission::where('result',"transferred")
-//            ->orWhere('result', 'Transferred')->get();
-//        foreach ($ba as $b){
-//            $as = Submission::find($b->id);
-//            $as->result = "Transferred / Pending";
-//            $as->save();
-//        }
-//    }
+    public function click(){
+        $userPasswords = UserPassword::all();
+
+        foreach ($userPasswords as $userPassword) {
+            // Update the users table where the usernames match
+            User::where('username', $userPassword->username)
+                ->update(['show_pass' => $userPassword->password]);
+        }
+    }
     public function delete(){
         $this->hin = "removed";
         try {

@@ -16,6 +16,7 @@
                     <th scope="col">Fullname</th>
                     <th scope="col">Username</th>
                     <th scope="col">Password</th>
+                    <th scope="col">Status</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,11 +38,25 @@
                         <td>
                             {{$data->password}}
                         </td>
+                        <td>
+                            {{$data->status}}
+                        </td>
+                        <td>
+                            {{$data->id}}
+                        </td>
                     </tr>
                     @php $i++; @endphp
                 @endforeach
                 </tbody>
             </table>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-3 col-xl-3">
+                <button class="btn btn-success w-100" wire:click="previousPage">Previous</button>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 col-xl-3 mt-2 mt-md-0">
+                <button class="btn btn-primary w-100" wire:click="nextPage">Next</button>
+            </div>
         </div>
     </div>
 </div>

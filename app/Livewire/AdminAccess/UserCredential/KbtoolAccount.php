@@ -8,17 +8,24 @@ use Livewire\Component;
 
 class KbtoolAccount extends Component
 {
-    public $staffData = [], $search;
+    public $staffData = [], $search, $currentPage = 1, $perPage = 15;
 
     public function render()
     {
         $this->staffData = UserPassword::all();
         if ($this->search == ""){
-            $this->staffData = UserPassword::all();
+            $this->staffData = UserPassword::query()
+                ->skip(($this->currentPage - 1) * $this->perPage)
+                ->take($this->perPage)
+                ->latest()
+                ->get();
         }else{
             $this->staffData = \App\Models\UserPassword::where('fullname','LIKE','%'.$this->search.'%')
                 ->orWhere('password','LIKE','%'.$this->search.'%')
                 ->orWhere('username','LIKE','%'.$this->search.'%')
+                ->skip(($this->currentPage - 1) * $this->perPage)
+                ->take($this->perPage)
+                ->latest()
                 ->get();
         }
         return view('livewire.admin-access.user-credential.kbtool-account');
@@ -33,5 +40,16 @@ class KbtoolAccount extends Component
         else{
             return redirect('/');
         }
+    }
+
+    public function previousPage(){
+        if ($this->currentPage > 1) {
+            $this->currentPage--;
+        }
+    }
+
+    public function nextPage()
+    {
+        $this->currentPage++;
     }
 }
