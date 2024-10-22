@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\AdminAccess\StaffDirectory;
+namespace App\Livewire;
 
 use App\Models\AdminShow;
 use App\Models\Comment;
@@ -25,7 +25,7 @@ class StaffDirectory extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $stat = [], $checkBox = [], $id_user, $ids, $ng = 0, $employeeData, $search, $dtrData = [], $status = "all", $staffData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
+    public $registrationSwitch, $stat = [], $checkBox = [], $id_user, $ids, $ng = 0, $employeeData, $search, $dtrData = [], $staffData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
         $fname, $mname, $lname, $mi, $suffix, $age, $phone_number, $dob, $gender_preference, $civil_status, $religion, $personal_email, $current_house, $current_street,
         $current_brgy, $current_city, $current_working_email, $same_current_permanent = false, $permanent_house, $permanent_street, $is_success = true, $full_name,
         $permanent_brgy, $permanent_city, $sss, $philhealth, $tin, $hire_date, $yot, $designation = "Agent / Sale Associate", $department = "Admin - Production", $contact_number, $address, $relationship;
@@ -43,7 +43,6 @@ class StaffDirectory extends Component
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
         if ($this->search != ""){
-            $this->status = "all";
             $this->staffData = \App\Models\Employee::where('fname','LIKE', '%'.$this->search.'%')
                 ->orWhere('lname', 'LIKE', '%'.$this->search.'%')
                 ->orWhere('mi', 'LIKE', '%'.$this->search.'%')
@@ -84,20 +83,12 @@ class StaffDirectory extends Component
             }
         }
         else{
-            if ($this->status == "all"){
-                $this->staffData = \App\Models\Employee::all();
-                foreach ($this->staffData as $index => $staff){
-                    $this->stat[$index] = $staff->status;
-                }
-            }else{
-                $this->staffData = \App\Models\Employee::where('status',$this->status)->get();
-                foreach ($this->staffData as $index => $staff){
-                    $this->stat[$index] = $staff->status;
-                }
+            $this->staffData = \App\Models\Employee::all();
+            foreach ($this->staffData as $index => $staff){
+                $this->stat[$index] = $staff->status;
             }
-
         }
-        return view('livewire.admin-access.staff-directory.staff-directory');
+        return view('livewire.staff-directory');
     }
 
     public function updateForm(){
@@ -471,4 +462,69 @@ class StaffDirectory extends Component
         ]);
     }
 
+    public function updated($field)
+    {
+        if ($field == "registrationSwitch") {
+            $this->regSwitch();
+        }
+        if ($field == "adminSwitch") {
+            $this->admin_Switch();
+        }
+        if ($field == "superAdminSwitch") {
+            $this->super_admin_Switch();
+        }
+        if ($field == "photo") {
+            $filename = Str::random(40) . '.' . $this->photo->getClientOriginalExtension();
+            $this->photo->storeAs('photos', $filename, 'public_photos');
+            $user = User::find($this->user_id);
+            $user->photo = $filename;
+            $user->save();
+            $user = User::find($this->user_id)->comment;
+            foreach ($user as $usr) {
+                $jn = Comment::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->comment_heart;
+            foreach ($user as $usr) {
+                $jn = CommentHeart::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->dtr;
+            foreach ($user as $usr) {
+                $jn = Dtr::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->dtr_content;
+            foreach ($user as $usr) {
+                $jn = DtrContent::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->log;
+            foreach ($user as $usr) {
+                $jn = \App\Models\Logs::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->note;
+            foreach ($user as $usr) {
+                $jn = Note::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = User::find($this->user_id)->time_setting;
+            foreach ($user as $usr) {
+                $jn = TimeSetting::find($usr->id);
+                $jn->photo = $filename;
+                $jn->save();
+            }
+            $user = UserPassword::find($this->user_id);
+            $user->photo = $filename;
+            $user->save();
+            return redirect('/itts/16/staff-directory');
+        }
+    }
 }

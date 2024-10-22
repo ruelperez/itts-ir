@@ -5,6 +5,11 @@
                     <div class="w-50 ps-4 mt-4">
                         <h6>EMPLOYEE</h6>
                     </div>
+                    @if($authorizer)
+                        <div class="w-50 mt-4 text-end pe-5">
+                            <button class="btn btn-primary" style="width: 40%;" onclick="location.href = '/staff-directory';"><i class="fa-solid fa-arrows-to-circle me-2" ></i>Staff Directory</button>
+                        </div>
+                    @endif
                 </div>
                 <hr>
                 <div>

@@ -9,13 +9,6 @@
             <div class="col-sm-6 col-lg-4 mt-1 mt-lg-0">
                 <input class="form-control" type="search" placeholder="Search" aria-label="Search" wire:model.live="search">
             </div>
-            <div class="col-12 col-sm-6 col-lg-3 col-xl-3 mt-2 mt-lg-0">
-                <select class="form-select" aria-label="Default select example" wire:model.live="status">
-                    <option value="all">All</option>
-                    <option value=true>Active</option>
-                    <option value=false>Inactive</option>
-                </select>
-            </div>
             <div class="col-sm-6 col-lg-4 mt-2">
                 @if(count($checkBox) == 1)
                     <i class="fa-solid fa-eye text-primary" style="cursor: pointer" wire:click="clickView"

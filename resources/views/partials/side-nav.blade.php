@@ -145,11 +145,9 @@
                             <a class="dropdown-toggle px-3 py-1" id="dropupLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <small>Admin access</small>
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="dropupLink" style="background-color: #C0C0C0;">
+                            <div class="dropdown-menu" aria-labelledby="dropupLink">
                                 <a class="dropdown-item" href="/admin-access/history/logs"><i class="fa-solid fa-tent-arrow-left-right pe-2"></i>
                                     Logs</a>
-                                <a class="dropdown-item" href="/admin-access/staff-directory/staff-directory"><i class="fa-solid fa-universal-access pe-2"></i>
-                                    Staff Directory</a>
                                 <a class="dropdown-item" href="/admin-access/eod/masstort-tracker"><i class="fa-solid fa-universal-access pe-2"></i>
                                     EOD</a>
                                 <a class="dropdown-item" href="/admin-access/inventory/inventory"><i class="fa-solid fa-store pe-2"></i>
