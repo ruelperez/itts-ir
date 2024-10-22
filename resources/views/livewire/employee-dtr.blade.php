@@ -77,7 +77,7 @@
                         <th scope="col">In</th>
                         <th scope="col">Out</th>
                         <th scope="col">Total</th>
-                        @if($authorizer) <th scope="col">Task</th> @endif
+                        @if($authorizer2) <th scope="col">Task</th> @endif
                     </tr>
                     </thead>
                     <tbody>
