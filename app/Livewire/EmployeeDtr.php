@@ -27,7 +27,7 @@ class EmployeeDtr extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $branch, $authorizer, $employeeData, $timeClick1 = 0, $timeClick2 = 0, $timeSched = [], $selectedMinute2 = "00", $selectedHour2 = "00", $selectedHour = "00", $selectedMinute = "00", $selectedPeriod = "am", $selectedPeriod2 = "am", $permanent_id, $dtrData = [], $dtrAll = [], $task, $position, $superAdminSwitch, $weekNumber = "1", $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $branch, $authorizer, $authorizer2, $employeeData, $timeClick1 = 0, $timeClick2 = 0, $timeSched = [], $selectedMinute2 = "00", $selectedHour2 = "00", $selectedHour = "00", $selectedMinute = "00", $selectedPeriod = "am", $selectedPeriod2 = "am", $permanent_id, $dtrData = [], $dtrAll = [], $task, $position, $superAdminSwitch, $weekNumber = "1", $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -35,6 +35,7 @@ class EmployeeDtr extends Component
         $this->user_id = auth()->user()->id;
         $fe = User::find($this->user_id)->user_access->first();
         $this->authorizer = $fe->dtr_record;
+        $this->authorizer2 = $fe->dtr_task;
         $jj = Employee::where('user_id',$this->user_id)->get();
         foreach ($jj as $yy){
             $emp = Employee::find($yy->id);

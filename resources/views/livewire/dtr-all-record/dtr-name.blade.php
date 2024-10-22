@@ -21,7 +21,7 @@
             @foreach($dtrData as $data)
                 <li class="list-group-item" style="padding: 2%; cursor: pointer" wire:click="clickName({{$data->id}})">
                     <div style="display: flex;">
-                        <div class="profile-picture-logs">
+                        <div class="profile-picture-staff">
                             <img src="{{asset('photos/photos/'.$data->photo)}}" alt="Profile Picture">
                         </div>
                         <div style="display: flex">
