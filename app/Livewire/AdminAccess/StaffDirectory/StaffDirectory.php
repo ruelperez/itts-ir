@@ -104,7 +104,6 @@ class StaffDirectory extends Component
                 foreach ($this->staffData as $index => $staff){
                     $this->stat[$index] = $staff->status;
                 }
-                sleep(1);
                 $this->dispatch('remove-loading');
             }else{
                 $this->staffData = Employee::select('employees.*', 'users.photo') // Select all users and the status column
@@ -123,7 +122,6 @@ class StaffDirectory extends Component
                 foreach ($this->staffData as $index => $staff){
                     $this->stat[$index] = $staff->status;
                 }
-                sleep(1);
                 $this->dispatch('remove-loading');
             }
 
@@ -136,6 +134,12 @@ class StaffDirectory extends Component
             $this->currentPage--;
         }
     }
+
+    protected $listeners = [
+        'previousPage' => 'previousPage',
+        'nextPage'=> 'nextPage',
+        'status' => 'status',
+    ];
 
     public function updateForm(){
         $this->ng = 1;
@@ -283,7 +287,9 @@ class StaffDirectory extends Component
         Auth::logout();
         return redirect()->to('/login');
     }
-    public function status($indexNum,$id){
+    public function status($data){
+        $indexNum = $data['index'];
+        $id = $data['dataId'];
         $jk = \App\Models\Employee::find($id);
         $jk->status = $this->stat[$indexNum];
         $jk->save();
@@ -300,7 +306,7 @@ class StaffDirectory extends Component
             'photo' => $this->photo,
             'fullname' => $this->fullname,
         ]);
-        sleep(2);
+
         $this->dispatch('remove-loading');
     }
 

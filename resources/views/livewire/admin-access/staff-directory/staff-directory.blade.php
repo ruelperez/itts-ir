@@ -79,9 +79,11 @@
 {{--                        </td>--}}
                         <td>
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
-                                       wire:model="stat.{{$i}}" value="{{$stat[$i]}}"
-                                       wire:change="status({{$i}},{{$data->id}})">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked{{$i}}"
+                                   data-index="{{$i}}" data-id="{{$data->id}}" value="{{$stat[$i]}}"
+                                   wire:model="stat.{{$i}}"
+                                   onchange="handleStatusChange(this)"
+                                >
                             </div>
                         </td>
                         <td>
@@ -98,17 +100,18 @@
     </div>
     <div class="row">
         <div class="col-12 col-md-6 col-lg-3 col-xl-3">
-            <button class="btn btn-success w-100" wire:click="previousPage">Previous</button>
+            <button class="btn btn-success w-100" id="staff-prev-btn">Previous</button>
         </div>
         <div class="col-12 col-md-6 col-lg-3 col-xl-3 mt-2 mt-md-0">
-            <button class="btn btn-primary w-100" wire:click="nextPage">Next</button>
+            <button class="btn btn-primary w-100" id="staff-next-btn">Next</button>
         </div>
     </div>
-
     @script
     <script>
         $wire.on('remove-loading', (event) => {
-            JsLoadingOverlay.hide();
+            setTimeout(() => {
+                JsLoadingOverlay.hide();
+            }, 1000); // Delay of 2 seconds (2000 milliseconds)
         });
     </script>
     @endscript
@@ -127,6 +130,47 @@
 
             });
         });
+        function handleStatusChange(element) {
+            JsLoadingOverlay.show({
+                overlayBackgroundColor: '#666666',
+                overlayOpacity: 0.6,
+                spinnerIcon: 'ball-pulse',  // Choose your spinner icon
+                spinnerColor: '#ffffff',
+                spinnerSize: '2x'
+            });
+            // Retrieve the index and data ID from data attributes
+            const index = element.getAttribute('data-index');
+            const dataId = element.getAttribute('data-id');
+            Livewire.dispatch('status',{
+                data: {
+                    index: index,
+                    dataId: dataId
+                }
+            });
+            // Example: Make an AJAX request or trigger other actions
+            // You can pass 'index' and 'dataId' to your backend or handle as needed
+        }
+        document.getElementById('staff-prev-btn').addEventListener('click', function () {
+            // Show loading overlay
+            JsLoadingOverlay.show({
+                overlayBackgroundColor: '#666666',
+                overlayOpacity: 0.6,
+                spinnerIcon: 'ball-pulse',  // Choose your spinner icon
+                spinnerColor: '#ffffff',
+                spinnerSize: '2x'
+            });
+            Livewire.dispatch('previousPage')
+        });
+        document.getElementById('staff-next-btn').addEventListener('click', function () {
+            // Show loading overlay
+            JsLoadingOverlay.show({
+                overlayBackgroundColor: '#666666',
+                overlayOpacity: 0.6,
+                spinnerIcon: 'ball-pulse',  // Choose your spinner icon
+                spinnerColor: '#ffffff',
+                spinnerSize: '2x'
+            });
+            Livewire.dispatch('nextPage')
+        });
     </script>
-
 @endpush
