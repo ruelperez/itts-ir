@@ -293,11 +293,66 @@ class StaffDirectory extends Component
         $jk = \App\Models\Employee::find($id);
         $jk->status = $this->stat[$indexNum];
         $jk->save();
+        $gg = User::find($jk->user_id);
+        $hh = User::find($jk->user_id)->user_access->first();
         if($this->stat[$indexNum] == true){
             $u = "active";
+            if ($gg->position == "Super Admin"){
+                $hh->can_login = true;
+                $hh->dashboard_crud= true;
+                $hh->dtr_record= true;
+                $hh->campaign_settings= true;
+                $hh->staff_directory= true;
+                $hh->logs= true;
+                $hh->eod= true;
+                $hh->inventory= true;
+                $hh->lead_tracker= true;
+                $hh->user_credential= true;
+                $hh->settings= true;
+                $hh->faq_crud= true;
+                $hh->login_special= true;
+                $hh->dtr_task= false;
+                $hh->save();
+            }else{
+                $hh->can_login = true;
+                $hh->dashboard_crud= false;
+                $hh->dtr_record= false;
+                $hh->campaign_settings= false;
+                $hh->staff_directory= false;
+                $hh->logs= false;
+                $hh->eod= false;
+                $hh->inventory= false;
+                $hh->lead_tracker= false;
+                $hh->user_credential= false;
+                $hh->settings= false;
+                $hh->faq_crud= false;
+                $hh->login_special= false;
+                if ($gg->position == "Admin"){
+                    $hh->dtr_task= true;
+                }else{
+                    $hh->dtr_task= false;
+                }
+                $hh->save();
+            }
+
         }
         else{
             $u = "inactive";
+            $hh->can_login = false;
+            $hh->dtr_record= false;
+            $hh->campaign_settings= false;
+            $hh->staff_directory= false;
+            $hh->logs= false;
+            $hh->eod= false;
+            $hh->inventory= false;
+            $hh->lead_tracker= false;
+            $hh->user_credential= false;
+            $hh->settings= false;
+            $hh->dashboard_crud= false;
+            $hh->faq_crud= false;
+            $hh->login_special= false;
+            $hh->dtr_task= false;
+            $hh->save();
         }
 
         \App\Models\Logs::create([
@@ -307,22 +362,6 @@ class StaffDirectory extends Component
             'fullname' => $this->fullname,
         ]);
 
-        $hh = User::find($id)->user_access->first();
-        $hh->can_login = false;
-        $hh->dtr_record= false;
-        $hh->campaign_settings= false;
-        $hh->staff_directory= false;
-        $hh->logs= false;
-        $hh->eod= false;
-        $hh->inventory= false;
-        $hh->lead_tracker= false;
-        $hh->user_credential= false;
-        $hh->settings= false;
-        $hh->dashboard_crud= false;
-        $hh->faq_crud= false;
-        $hh->login_special= false;
-        $hh->dtr_task= false;
-        $hh->save();
         $this->dispatch('remove-loading');
     }
 
