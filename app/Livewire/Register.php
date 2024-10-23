@@ -89,8 +89,29 @@ class Register extends Component
                 'settings' => true,
                 'faq_crud'=> true,
                 'login_special' => true,
+                'dtr_task' => false,
             ]);
-        }else{
+        }
+        elseif ($position == "Admin"){
+            UserAccess::create([
+                'user_id' => $user_id,
+                'can_login' => true,
+                'dashboard_crud' => true,
+                'dtr_record' => true,
+                'campaign_settings' => true,
+                'staff_directory' => true,
+                'logs' => true,
+                'eod' => true,
+                'inventory' => true,
+                'lead_tracker' => true,
+                'user_credential' => true,
+                'settings' => true,
+                'faq_crud'=> true,
+                'login_special' => true,
+                'dtr_task' => true,
+            ]);
+        }
+        else{
             UserAccess::create([
                 'user_id' => $user_id,
             ]);

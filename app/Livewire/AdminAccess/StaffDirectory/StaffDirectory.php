@@ -307,6 +307,22 @@ class StaffDirectory extends Component
             'fullname' => $this->fullname,
         ]);
 
+        $hh = User::find($id)->user_access->first();
+        $hh->can_login = false;
+        $hh->dtr_record= false;
+        $hh->campaign_settings= false;
+        $hh->staff_directory= false;
+        $hh->logs= false;
+        $hh->eod= false;
+        $hh->inventory= false;
+        $hh->lead_tracker= false;
+        $hh->user_credential= false;
+        $hh->settings= false;
+        $hh->dashboard_crud= false;
+        $hh->faq_crud= false;
+        $hh->login_special= false;
+        $hh->dtr_task= false;
+        $hh->save();
         $this->dispatch('remove-loading');
     }
 
