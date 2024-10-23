@@ -34,8 +34,9 @@
         <div class="col-12 col-sm-6 col-lg-3 col-xl-3 mt-2 mt-lg-0">
             <select class="form-select" aria-label="Default select example" wire:model="role">
                 <option value="all">All</option>
-                <option value="agent">Agent</option>
-                <option value="admin">Admin</option>
+                <option value="Agent">Agent</option>
+                <option value="Admin">Admin</option>
+                <option value="task executor">Task Executor</option>
             </select>
         </div>
         <div class="text-start mt-4 col-4">
@@ -62,8 +63,8 @@
                 <th scope="col">Time in</th>
                 <th scope="col">Time out</th>
                 <th scope="col">Total hour</th>
-                <th scope="col">Site</th>
-                @if($role == "admin")
+{{--                <th scope="col">Site</th>--}}
+                @if($role == "task executor")
                     <th scope="col">Task</th>
                 @endif
 
@@ -90,12 +91,12 @@
                                 @endphp
                                 {{$result}}
                             </td>
-                            <td>
-                               {{ucfirst($data->branch)}}
-                            </td>
+{{--                            <td>--}}
+{{--                               {{ucfirst($data->branch)}}--}}
+{{--                            </td>--}}
                         </tr>
                     @endif
-                @elseif($role == "agent")
+                @elseif($role == "Agent")
                     @foreach($userID as $df)
                         @if($df->id == $data->user_id)
                             @if(Carbon\Carbon::parse($data->in)->format('Y') == $year and Carbon\Carbon::parse($data->in)->format('m') == $month and Carbon\Carbon::parse($data->in)->format('d') == $day)
@@ -116,9 +117,37 @@
                                         @endphp
                                         {{$result}}
                                     </td>
+{{--                                    <td>--}}
+{{--                                        {{ucfirst($data->branch)}}--}}
+{{--                                    </td>--}}
+                                </tr>
+                            @endif
+                        @endif
+                    @endforeach
+                @elseif($role == "Admin")
+                    @foreach($userID as $df)
+                        @if($df->id == $data->user_id)
+                            @if(Carbon\Carbon::parse($data->in)->format('Y') == $year and Carbon\Carbon::parse($data->in)->format('m') == $month and Carbon\Carbon::parse($data->in)->format('d') == $day)
+                                <tr>
+                                    <td>{{ucwords($data->fullname)}}</td>
+                                    {{--                                    <td>{{Carbon\Carbon::parse($data->in)->format('M/d/Y')}}</td>--}}
+                                    {{--                                    <th scope="row">@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('D') }} @endif</th>--}}
+                                    <td>@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('h:i A') }} @endif</td>
+                                    <td>@if($data->out == null) @else {{Carbon\Carbon::parse($data->out)->format('h:i A') }} @endif</td>
+                                    <td>@if($data->in2 == null) @else {{Carbon\Carbon::parse($data->in2)->format('h:i A') }} @endif</td>
+                                    <td>@if($data->out2 == null) @else {{Carbon\Carbon::parse($data->out2)->format('h:i A') }} @endif</td>
                                     <td>
-                                        {{ucfirst($data->branch)}}
+                                        @php
+                                            $hours = floor($data->minute / 60);
+                                            $totalHours = floor($hours + $data->hour);
+                                            $remainingMinutes = $data->minute % 60;
+                                            $result = $totalHours . ':' . $remainingMinutes;
+                                        @endphp
+                                        {{$result}}
                                     </td>
+{{--                                    <td>--}}
+{{--                                        {{ucfirst($data->branch)}}--}}
+{{--                                    </td>--}}
                                 </tr>
                             @endif
                         @endif
@@ -144,9 +173,9 @@
                                         @endphp
                                         {{$result}}
                                     </td>
-                                    <td>
-                                        {{ucfirst($data->branch)}}
-                                    </td>
+                                    {{--                                    <td>--}}
+                                    {{--                                        {{ucfirst($data->branch)}}--}}
+                                    {{--                                    </td>--}}
                                     <td>
                                         <i class="fa-solid fa-list-check" style="margin-right: 3%; cursor: pointer" data-bs-toggle="modal" data-bs-target="#taskRecord" wire:click="clickTask({{$data->id}})"></i>
                                     </td>

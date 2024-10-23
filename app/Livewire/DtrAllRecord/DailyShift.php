@@ -12,6 +12,7 @@ use App\Models\Note;
 use App\Models\SuperadminShow;
 use App\Models\TimeSetting;
 use App\Models\User;
+use App\Models\UserAccess;
 use App\Models\UserPassword;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -47,16 +48,20 @@ class DailyShift extends Component
 
     public function generate()
     {
+        $gn = [];
         $this->dtrData = DtrContent::all();
         if ($this->role == "all"){
             $this->userID = [];
         }
-        elseif ($this->role == "agent"){
-            $this->userID = User::where('position',"Agent")->get();
-
+        elseif ($this->role == "task executor"){
+            $jn = UserAccess::where('dtr_task', 1)->get();
+            foreach ($jn as $jj){
+                $gn[] = User::find($jj->user_id);
+            }
+           $this->userID = $gn;
         }
         else{
-            $this->userID = User::where('position','!=',"Agent")->get();
+            $this->userID = User::where('position',$this->role)->get();
         }
 
         $this->dispatch('loadingsss');

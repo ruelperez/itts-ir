@@ -40,10 +40,10 @@
         <td style="border: 1px solid; padding: 8px;">
             <b>Total Hour</b>
         </td>
-        <td style="border: 1px solid; padding: 8px;">
-            <b>Site</b>
-        </td>
-        @if($role == "admin")
+{{--        <td style="border: 1px solid; padding: 8px;">--}}
+{{--            <b>Site</b>--}}
+{{--        </td>--}}
+        @if($role == "task executor")
             <td style="border: 1px solid; padding: 8px; width: 40%;">
                 <b>Task</b>
             </td>
@@ -67,12 +67,12 @@
                         @endphp
                         {{$result}}
                     </td>
-                    <td style="border: 1px solid;">
-                        {{ucfirst($data->branch)}}
-                    </td>
+{{--                    <td style="border: 1px solid;">--}}
+{{--                        {{ucfirst($data->branch)}}--}}
+{{--                    </td>--}}
                 </tr>
             @endif
-        @elseif($role == "agent")
+        @elseif($role == "Agent")
             @foreach($userID as $df)
                 @if($df->id == $data->user_id)
                     @if(Carbon\Carbon::parse($data->in)->format('Y') == $year and Carbon\Carbon::parse($data->in)->format('m') == $month and Carbon\Carbon::parse($data->in)->format('d') == $day)
@@ -91,9 +91,35 @@
                                 @endphp
                                 {{$result}}
                             </td>
+{{--                            <td style="border: 1px solid;">--}}
+{{--                               {{ucfirst($data->branch)}}--}}
+{{--                            </td>--}}
+                        </tr>
+                    @endif
+                @endif
+            @endforeach
+        @elseif($role == "Admin")
+            @foreach($userID as $df)
+                @if($df->id == $data->user_id)
+                    @if(Carbon\Carbon::parse($data->in)->format('Y') == $year and Carbon\Carbon::parse($data->in)->format('m') == $month and Carbon\Carbon::parse($data->in)->format('d') == $day)
+                        <tr style="border: 1px solid;">
+                            <td style="border: 1px solid; text-align: left; padding: 8px;">{{ucwords($data->fullname)}}</td>
+                            <td style="border: 1px solid;">@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('h:i A') }} @endif</td>
+                            <td style="border: 1px solid;">@if($data->out == null) @else {{Carbon\Carbon::parse($data->out)->format('h:i A') }} @endif</td>
+                            <td style="border: 1px solid;">@if($data->in2 == null) @else {{Carbon\Carbon::parse($data->in2)->format('h:i A') }} @endif</td>
+                            <td style="border: 1px solid;">@if($data->out2 == null) @else {{Carbon\Carbon::parse($data->out2)->format('h:i A') }} @endif</td>
                             <td style="border: 1px solid;">
-                               {{ucfirst($data->branch)}}
+                                @php
+                                    $hours = floor($data->minute / 60);
+                                    $totalHours = floor($hours + $data->hour);
+                                    $remainingMinutes = $data->minute % 60;
+                                    $result = $totalHours . ':' . $remainingMinutes;
+                                @endphp
+                                {{$result}}
                             </td>
+{{--                            <td style="border: 1px solid;">--}}
+{{--                                {{ucfirst($data->branch)}}--}}
+{{--                            </td>--}}
                         </tr>
                     @endif
                 @endif
@@ -117,9 +143,9 @@
                                 @endphp
                                 {{$result}}
                             </td>
-                            <td style="border: 1px solid;">
-                                {{ucfirst($data->branch)}}
-                            </td>
+{{--                            <td style="border: 1px solid;">--}}
+{{--                                {{ucfirst($data->branch)}}--}}
+{{--                            </td>--}}
                             <td style="border: 1px solid; white-space: pre-line; text-align: left; padding: 8px;">
                                 {{$data->task}}
                             </td>
