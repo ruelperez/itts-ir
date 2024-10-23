@@ -22,9 +22,9 @@
                 <i class="fa-solid fa-eye text-primary" style="cursor: pointer" wire:click="clickView"
                    data-bs-toggle="modal" data-bs-target="#viewDetail"></i>
                 <i class="fa-solid fa-pen-to-square ms-3" style="cursor: pointer"></i>
-                <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer"></i>
+                <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer;" title="Delete" onclick="delStaffBtn()"></i>
             @elseif(count($checkBox) > 1)
-                <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer"></i>
+                <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer" title="Delete" onclick="delStaffBtn()"></i>
             @endif
         </div>
         <div class="table-responsive" style="font-size: 14px">
@@ -113,11 +113,43 @@
                 JsLoadingOverlay.hide();
             }, 1000); // Delay of 2 seconds (2000 milliseconds)
         });
+        $wire.on('success', (event) => {
+            Swal.fire({
+                title: 'Success!',
+                text: 'Successfully deleted', // Message from the Livewire component
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        });
+        $wire.on('error', (event) => {
+            Swal.fire({
+                title: 'Failed!',
+                text: 'Failed to delete', // Message from the Livewire component
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        });
     </script>
     @endscript
 </div>
 @push('js')
     <script>
+        function delStaffBtn(){
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "This action will permanently delete all data associated with this account and cannot be reversed. Do you wish to continue?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatch('delete')
+                }
+            })
+        }
+
         $(document).ready(function() {
             $('#staffStat').on('change', function() {
                 JsLoadingOverlay.show({

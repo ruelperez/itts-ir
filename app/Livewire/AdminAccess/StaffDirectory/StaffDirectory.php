@@ -10,10 +10,12 @@ use App\Models\DtrContent;
 use App\Models\DtrPermanent;
 use App\Models\Employee;
 use App\Models\IsRegistration;
+use App\Models\Logs;
 use App\Models\Note;
 use App\Models\SuperadminShow;
 use App\Models\TimeSetting;
 use App\Models\User;
+use App\Models\UserAccess;
 use App\Models\UserPassword;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -139,6 +141,7 @@ class StaffDirectory extends Component
         'previousPage' => 'previousPage',
         'nextPage'=> 'nextPage',
         'status' => 'status',
+        'delete' => 'delete',
     ];
 
     public function updateForm(){
@@ -286,6 +289,37 @@ class StaffDirectory extends Component
     public function logout(){
         Auth::logout();
         return redirect()->to('/login');
+    }
+
+    public function delete(){
+        try {
+            for ($i=0; count($this->checkBox) > $i; $i++){
+                $jk = Employee::find($this->checkBox[$i]);
+                $gn = $jk->fullname;
+                Comment::where('user_id', $jk->user_id)->delete();
+                CommentHeart::where('user_id', $jk->user_id)->delete();
+                Dtr::where('user_id', $jk->user_id)->delete();
+                DtrContent::where('user_id', $jk->user_id)->delete();
+                DtrPermanent::where('user_id', $jk->user_id)->delete();
+                Logs::where('user_id', $jk->user_id)->delete();
+                Note::where('user_id', $jk->user_id)->delete();
+                TimeSetting::where('user_id', $jk->user_id)->delete();
+                UserAccess::where('user_id', $jk->user_id)->delete();
+                User::find($jk->user_id)->delete();
+                $jk->delete();
+                \App\Models\Logs::create([
+                    'action' => "Delete employee named ".$gn,
+                    'user_id' => $this->user_id,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
+            }
+            $this->checkBox = [];
+            $this->dispatch('success');
+        }catch (\Exception $e){
+            $this->dispatch('error');
+        }
+
     }
     public function status($data){
         $indexNum = $data['index'];

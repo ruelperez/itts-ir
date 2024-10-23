@@ -27,6 +27,7 @@
                         <div style="display: flex">
                             <div>
                                 <b>{{$data->fullname}}</b>
+                                <b>{{$data->id}}</b>
                             </div>
                         </div>
                     </div>

@@ -78,10 +78,6 @@ class User extends Authenticatable
     public function time_setting(){
         return $this->hasMany(TimeSetting::class);
     }
-    public function user_password(){
-        return $this->hasMany(UserPassword::class);
-    }
-
     public function user_access()
     {
         return $this->hasMany(UserAccess::class, 'user_id');
