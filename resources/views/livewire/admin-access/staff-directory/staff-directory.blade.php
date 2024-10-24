@@ -88,12 +88,12 @@
                             </div>
                         </td>
                         <td>
+                            <i class="fa-solid fa-qrcode" onclick="window.open('/qr-code/create/{{$data->id_user}}', '_blank');" style="cursor: pointer"></i>
+                        </td>
+                        <td>
                             <input class="form-check-input" type="checkbox" wire:model.live="checkBox"
                                    value="{{$data->id}}" id="flexCheckDefault{{$data->id}}"
                                    style="font-size: 18px; cursor: pointer">
-                        </td>
-                        <td>
-                            <button onclick="window.open('/qr-code/create/{{$data->id_user}}', '_blank');">add qr {{$data->id_user}}</button>
                         </td>
                     </tr>
                     @php $i++; @endphp

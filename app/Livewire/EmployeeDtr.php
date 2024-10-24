@@ -226,7 +226,7 @@ class EmployeeDtr extends Component
     public function in(){
         if ($this->designated_id == "" or $this->designated_id == null){
             session()->flash('bad', 'User id is required!');
-            sleep(2);
+            sleep(1);
             $this->dispatch('remove-loading');
         }
         elseif ($this->designated_id == "ITTS-00".$this->user_id){
@@ -290,12 +290,12 @@ class EmployeeDtr extends Component
             }
             $this->designated_id = "";
             session()->flash('good', 'Successfully Time in');
-            sleep(2);
+            sleep(1);
             $this->dispatch('remove-loading');
         }
         else{
             session()->flash('bad', 'Wrong user id!!. Please retry');
-            sleep(2);
+            sleep(1);
             $this->dispatch('remove-loading');
         }
     }
@@ -307,7 +307,7 @@ class EmployeeDtr extends Component
     public function in2(){
         if ($this->designated_id == "" or $this->designated_id == null){
             session()->flash('bad', 'User id is required!');
-            sleep(2);
+            sleep(1);
             $this->dispatch('remove-loading');
         }
         elseif ($this->designated_id == "ITTS-00".$this->user_id){
@@ -358,12 +358,12 @@ class EmployeeDtr extends Component
 
             $this->designated_id = "";
             session()->flash('good', 'Successfully Time in');
-            sleep(2);
+            sleep(1);
             $this->dispatch('remove-loading');
         }
         else{
             session()->flash('bad', 'Wrong user id!!. Please retry');
-            sleep(2);
+            sleep(1);
             $this->dispatch('remove-loading');
         }
     }

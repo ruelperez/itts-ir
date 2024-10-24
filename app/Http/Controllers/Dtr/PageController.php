@@ -12,7 +12,7 @@ class PageController extends Controller
 {
     public function generateQrCode($employeeId)
     {
-        $qrCode = QrCode::size(200)->generate($employeeId);
+        $qrCode = QrCode::size(250)->generate($employeeId);
         return view('employee.qrcode', compact('qrCode', 'employeeId'));
     }
 
