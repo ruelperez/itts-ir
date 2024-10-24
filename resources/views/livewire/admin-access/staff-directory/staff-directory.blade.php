@@ -41,6 +41,7 @@
                     <th scope="col">Department</th>
 {{--                    <th scope="col">Branch</th>--}}
                     <th scope="col">Act/Inact</th>
+                    <th scope="col">QR</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -90,6 +91,9 @@
                             <input class="form-check-input" type="checkbox" wire:model.live="checkBox"
                                    value="{{$data->id}}" id="flexCheckDefault{{$data->id}}"
                                    style="font-size: 18px; cursor: pointer">
+                        </td>
+                        <td>
+                            <button onclick="window.open('/qr-code/create/{{$data->id_user}}', '_blank');">add qr {{$data->id_user}}</button>
                         </td>
                     </tr>
                     @php $i++; @endphp

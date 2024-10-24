@@ -65,6 +65,11 @@ Route::middleware(['auth','restrict.ip','checkEmployee'])->group(function () {
         Route::get('/all-record/{page}', [PageController::class, 'page']);
         Route::get('/all-record/{page}/{emp_id}', [PageController::class, 'employee']);
     });
+    Route::post('/verify-qr-code', [PageController::class, 'verifyQrCode']);
+    Route::prefix('qr-code')->group(function () {
+        Route::get('/create/{employeeId}', [PageController::class, 'generateQrCode']);
+        Route::get('/scanner', [PageController::class, 'scan']);
+    });
     Route::get('/{page}', [\App\Http\Controllers\PageController::class, 'page']);
     Route::get('/edit-leads/{page}/{lead_id}', [\App\Http\Controllers\PageController::class, 'edit_leads']);
     Route::get('/per-shift-pdf/{moproduction-lead-mass-tortnth}/{day}/{year}/{role}', [\App\Http\Controllers\Pdf\ShiftController::class, 'pdf']);

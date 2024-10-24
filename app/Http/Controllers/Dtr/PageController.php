@@ -6,9 +6,51 @@ use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PageController extends Controller
 {
+    public function generateQrCode($employeeId)
+    {
+        $qrCode = QrCode::size(200)->generate($employeeId);
+        return view('employee.qrcode', compact('qrCode', 'employeeId'));
+    }
+
+    public function verifyQrCode(Request $request)
+    {
+        $employee = Employee::where('id_user', $request->qrCode)->first();
+
+        if ($employee) {
+            // Record the time in
+            // You can add time-out logic here if needed
+
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false]);
+    }
+
+    public function scan(){
+        $emp = [];
+        $employeeData = "";
+        $views = resource_path() . "/views/employee/qr-reader.blade.php";
+        $fullname = auth()->user()->fullname;
+        $user_id = auth()->user()->id;
+        $position = auth()->user()->position;
+        $jj = Employee::where('user_id',$user_id)->get();
+        foreach ($jj as $yy){
+            $emp = Employee::find($yy->id);
+            $employeeData = $emp->designation;
+        }
+        $photo = auth()->user()->photo;
+        if (file_exists($views)) {
+            $title = Str::title('qr-reader ');
+            return view("employee.qr-reader", ['title' => Str::replace('-', ' ', $title), 'fullname' => $fullname,
+                'user_id' => $user_id, 'position' => $position, 'employeeData' => $employeeData, 'photo' => $photo, 'jj' => $jj, 'emp' => $emp]);
+        } else {
+            abort(404);
+        }
+    }
     public function page($page){
         $emp = [];
         $employeeData = "";
