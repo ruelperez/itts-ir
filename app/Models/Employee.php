@@ -44,8 +44,6 @@ class Employee extends Model
         'fullname',
         'status',
         'id_user',
-        'qr_code',
-
     ];
 
     protected $casts = [
