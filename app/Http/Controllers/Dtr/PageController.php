@@ -3,13 +3,25 @@
 namespace App\Http\Controllers\Dtr;
 
 use App\Http\Controllers\Controller;
+use App\Models\Dtr;
+use App\Models\DtrPermanent;
 use App\Models\Employee;
+use App\Models\TimeSetting;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PageController extends Controller
 {
+    public $dtr_data, $userData; // A public property in a controller
+
+    public function __construct()
+    {
+        $this->dtr_data = [];
+        $this->userData = [];
+    }
     public function generateQrCode($employeeId)
     {
         $qrCode = QrCode::size(250)->generate($employeeId);
@@ -19,15 +31,95 @@ class PageController extends Controller
     public function verifyQrCode(Request $request)
     {
         $employee = Employee::where('id_user', $request->qrCode)->first();
-
+        $this->dtr_data = Dtr::where('user_id', $employee->user_id)->latest()->first();
+        $this->userData = User::find($employee->user_id);
         if ($employee) {
-            // Record the time in
-            // You can add time-out logic here if needed
-
-            return response()->json(['success' => true]);
+            if ($this->dtr_data == null) {
+                $this->in();
+                $dtrData = DtrPermanent::latest('updated_at')->get();
+                return response()->json(['success' => true, 'dtrData' => $dtrData]);
+            }
+            elseif ($this->dtr_data->out == "" or $this->dtr_data->out == null){
+                $this->out();
+                $dtrData = DtrPermanent::latest('updated_at')->get();
+                return response()->json(['success' => true, 'dtrData' => $dtrData]);
+            }
+            elseif ($this->dtr_data->in2 == "" or $this->dtr_data->in2 == null){
+                $this->in2();
+                $dtrData = DtrPermanent::latest('updated_at')->get();
+                return response()->json(['success' => true, 'dtrData' => $dtrData]);
+            }
+            elseif ($this->dtr_data->out2 == "" or $this->dtr_data->out2 == null){
+                $this->out2();
+                $dtrData = DtrPermanent::latest('updated_at')->get();
+                return response()->json(['success' => true, 'dtrData' => $dtrData]);
+            }
+            else{
+                return response()->json(['success' => false]);
+            }
         }
+        else{
+            return response()->json(['success' => false]);
+        }
+    }
 
-        return response()->json(['success' => false]);
+    public function in(){
+        Dtr::create([
+            'fullname' => $this->userData->fullname,
+            'in' => Carbon::now(),
+            'user_id' => $this->userData->id,
+            'photo' => $this->userData->photo,
+            'branch' => $this->userData->branch,
+        ]);
+        $ss = Dtr::where('fullname', $this->userData->fullname)
+            ->where('user_id', $this->userData->id)->get();
+        foreach ($ss as $s) {
+            $id = $s->id;
+        }
+        DtrPermanent::create([
+            'fullname' => $this->userData->fullname,
+            'in' => Carbon::now(),
+            'user_id' => $this->userData->id,
+            'dtr_id' => $id,
+            'photo' => $this->userData->photo,
+            'branch' => $this->userData->branch,
+        ]);
+    }
+
+    public function out(){
+        $gf = Dtr::find($this->dtr_data->id);
+        $gf->out = Carbon::now();
+        $gf->save();
+
+        $gs = Dtr::find($this->dtr_data->id)->dtr_permanent;
+        foreach ($gs as $gg){
+            $gg->out = Carbon::now();
+            $gg->save();
+        }
+    }
+
+    public function in2(){
+        $gf = Dtr::find($this->dtr_data->id);
+        $gf->in2 = Carbon::now();
+        $gf->save();
+
+        $gs = Dtr::find($this->dtr_data->id)->dtr_permanent;
+        foreach ($gs as $gg){
+            $gg->in2 = Carbon::now();
+            $gg->save();
+        }
+    }
+
+    public function out2(){
+        $gf = Dtr::find($this->dtr_data->id);
+        $gf->out2 = Carbon::now();
+        $gf->save();
+
+        $gs = Dtr::find($this->dtr_data->id)->dtr_permanent;
+        foreach ($gs as $gg){
+            $gg->out2 = Carbon::now();
+            $gg->save();
+        }
     }
 
     public function scan(){
@@ -43,9 +135,10 @@ class PageController extends Controller
             $employeeData = $emp->designation;
         }
         $photo = auth()->user()->photo;
+        $dtrData = DtrPermanent::all();
         if (file_exists($views)) {
             $title = Str::title('qr-reader ');
-            return view("employee.qr-reader", ['title' => Str::replace('-', ' ', $title), 'fullname' => $fullname,
+            return view("employee.qr-reader", ['title' => Str::replace('-', ' ', $title), 'dtrData' => $dtrData, 'fullname' => $fullname,
                 'user_id' => $user_id, 'position' => $position, 'employeeData' => $employeeData, 'photo' => $photo, 'jj' => $jj, 'emp' => $emp]);
         } else {
             abort(404);
