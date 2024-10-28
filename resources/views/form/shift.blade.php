@@ -37,9 +37,9 @@
         <td style="border: 1px solid; padding: 8px;">
             <b>Time Out</b>
         </td>
-        <td style="border: 1px solid; padding: 8px;">
-            <b>Total Hour</b>
-        </td>
+{{--        <td style="border: 1px solid; padding: 8px;">--}}
+{{--            <b>Total Hour</b>--}}
+{{--        </td>--}}
 {{--        <td style="border: 1px solid; padding: 8px;">--}}
 {{--            <b>Site</b>--}}
 {{--        </td>--}}
@@ -58,15 +58,15 @@
                     <td style="border: 1px solid;">@if($data->out == null) @else {{Carbon\Carbon::parse($data->out)->format('h:i A') }} @endif</td>
                     <td style="border: 1px solid;">@if($data->in2 == null) @else {{Carbon\Carbon::parse($data->in2)->format('h:i A') }} @endif</td>
                     <td style="border: 1px solid;">@if($data->out2 == null) @else {{Carbon\Carbon::parse($data->out2)->format('h:i A') }} @endif</td>
-                    <td style="border: 1px solid;">
-                        @php
-                            $hours = floor($data->minute / 60);
-                            $totalHours = floor($hours + $data->hour);
-                            $remainingMinutes = $data->minute % 60;
-                            $result = $totalHours . ':' . $remainingMinutes;
-                        @endphp
-                        {{$result}}
-                    </td>
+{{--                    <td style="border: 1px solid;">--}}
+{{--                        @php--}}
+{{--                            $hours = floor($data->minute / 60);--}}
+{{--                            $totalHours = floor($hours + $data->hour);--}}
+{{--                            $remainingMinutes = $data->minute % 60;--}}
+{{--                            $result = $totalHours . ':' . $remainingMinutes;--}}
+{{--                        @endphp--}}
+{{--                        {{$result}}--}}
+{{--                    </td>--}}
 {{--                    <td style="border: 1px solid;">--}}
 {{--                        {{ucfirst($data->branch)}}--}}
 {{--                    </td>--}}
@@ -82,15 +82,15 @@
                             <td style="border: 1px solid;">@if($data->out == null) @else {{Carbon\Carbon::parse($data->out)->format('h:i A') }} @endif</td>
                             <td style="border: 1px solid;">@if($data->in2 == null) @else {{Carbon\Carbon::parse($data->in2)->format('h:i A') }} @endif</td>
                             <td style="border: 1px solid;">@if($data->out2 == null) @else {{Carbon\Carbon::parse($data->out2)->format('h:i A') }} @endif</td>
-                            <td style="border: 1px solid;">
-                                @php
-                                    $hours = floor($data->minute / 60);
-                                    $totalHours = floor($hours + $data->hour);
-                                    $remainingMinutes = $data->minute % 60;
-                                    $result = $totalHours . ':' . $remainingMinutes;
-                                @endphp
-                                {{$result}}
-                            </td>
+{{--                            <td style="border: 1px solid;">--}}
+{{--                                @php--}}
+{{--                                    $hours = floor($data->minute / 60);--}}
+{{--                                    $totalHours = floor($hours + $data->hour);--}}
+{{--                                    $remainingMinutes = $data->minute % 60;--}}
+{{--                                    $result = $totalHours . ':' . $remainingMinutes;--}}
+{{--                                @endphp--}}
+{{--                                {{$result}}--}}
+{{--                            </td>--}}
 {{--                            <td style="border: 1px solid;">--}}
 {{--                               {{ucfirst($data->branch)}}--}}
 {{--                            </td>--}}
@@ -108,15 +108,15 @@
                             <td style="border: 1px solid;">@if($data->out == null) @else {{Carbon\Carbon::parse($data->out)->format('h:i A') }} @endif</td>
                             <td style="border: 1px solid;">@if($data->in2 == null) @else {{Carbon\Carbon::parse($data->in2)->format('h:i A') }} @endif</td>
                             <td style="border: 1px solid;">@if($data->out2 == null) @else {{Carbon\Carbon::parse($data->out2)->format('h:i A') }} @endif</td>
-                            <td style="border: 1px solid;">
-                                @php
-                                    $hours = floor($data->minute / 60);
-                                    $totalHours = floor($hours + $data->hour);
-                                    $remainingMinutes = $data->minute % 60;
-                                    $result = $totalHours . ':' . $remainingMinutes;
-                                @endphp
-                                {{$result}}
-                            </td>
+{{--                            <td style="border: 1px solid;">--}}
+{{--                                @php--}}
+{{--                                    $hours = floor($data->minute / 60);--}}
+{{--                                    $totalHours = floor($hours + $data->hour);--}}
+{{--                                    $remainingMinutes = $data->minute % 60;--}}
+{{--                                    $result = $totalHours . ':' . $remainingMinutes;--}}
+{{--                                @endphp--}}
+{{--                                {{$result}}--}}
+{{--                            </td>--}}
 {{--                            <td style="border: 1px solid;">--}}
 {{--                                {{ucfirst($data->branch)}}--}}
 {{--                            </td>--}}
@@ -134,15 +134,15 @@
                             <td style="border: 1px solid;">@if($data->out == null) @else {{Carbon\Carbon::parse($data->out)->format('h:i A') }} @endif</td>
                             <td style="border: 1px solid;">@if($data->in2 == null) @else {{Carbon\Carbon::parse($data->in2)->format('h:i A') }} @endif</td>
                             <td style="border: 1px solid;">@if($data->out2 == null) @else {{Carbon\Carbon::parse($data->out2)->format('h:i A') }} @endif</td>
-                            <td style="border: 1px solid;">
-                                @php
-                                    $hours = floor($data->minute / 60);
-                                    $totalHours = floor($hours + $data->hour);
-                                    $remainingMinutes = $data->minute % 60;
-                                    $result = $totalHours . ':' . $remainingMinutes;
-                                @endphp
-                                {{$result}}
-                            </td>
+{{--                            <td style="border: 1px solid;">--}}
+{{--                                @php--}}
+{{--                                    $hours = floor($data->minute / 60);--}}
+{{--                                    $totalHours = floor($hours + $data->hour);--}}
+{{--                                    $remainingMinutes = $data->minute % 60;--}}
+{{--                                    $result = $totalHours . ':' . $remainingMinutes;--}}
+{{--                                @endphp--}}
+{{--                                {{$result}}--}}
+{{--                            </td>--}}
 {{--                            <td style="border: 1px solid;">--}}
 {{--                                {{ucfirst($data->branch)}}--}}
 {{--                            </td>--}}
