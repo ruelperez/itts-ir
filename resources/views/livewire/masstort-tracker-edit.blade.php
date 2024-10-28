@@ -226,7 +226,7 @@
                                     <div class="col-5">
                                         <select class="form-select" aria-label="Default select example" wire:model="result" x-model="selectedOption" required>
                                             <option value="">Select Result</option>
-                                            @if($displayRemarks == "transferred" or $displayRemarks == "Need Retransfer" or $displayRemarks == "For Callback" or $displayRemarks == "Docs Needed")
+                                            @if($displayRem == "transferred" or $displayRem == "Need Retransfer" or $displayRem == "For Callback" or $displayRem == "Docs Needed")
                                                 <option value="Transferred / Pending">Transferred / Pending</option>
                                                 <option value="Signed / Executed">Signed / Executed</option>
                                             @else
@@ -275,7 +275,7 @@
                                 <div class="col-3">
                                     <select class="form-select" aria-label="Default select example" wire:model="result" x-model="selectedOptions" required>
                                         <option value="">Select Result</option>
-                                        @if($displayRemarks == "transferred" or $displayRemarks == "Need Retransfer" or $displayRemarks == "For Callback" or $displayRemarks == "Docs Needed")
+                                        @if($displayRem == "transferred" or $displayRem == "Need Retransfer" or $displayRem == "For Callback" or $displayRem == "Docs Needed")
                                             <option value="Transferred / Pending">Transferred / Pending</option>
                                             <option value="Signed / Executed">Signed / Executed</option>
                                         @else

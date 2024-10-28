@@ -26,7 +26,7 @@ class MasstortTrackerEdit extends Component
     public $registrationSwitch, $ids, $dtrData = [], $position, $is_success = false, $employeeData, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
             $date, $campaign, $base = true, $client, $lawfirm, $caseType, $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source, $displayRemarks, $result,
             $campaignList = [], $dqReason, $returnClient, $returnCriteria, $dqCriteria, $dqClient, $dqQa, $dqManager, $dqVerifier, $returnReason, $lawfirmList = [], $clientList = [], $showSearch = false, $showSearchCoach = false, $showSearchVerifier = false,
-            $results = [], $resultsCoach = [], $resultsVerifier = [];
+            $results = [], $resultsCoach = [], $displayRem, $resultsVerifier = [];
 
     public function render()
     {
@@ -127,6 +127,7 @@ class MasstortTrackerEdit extends Component
         $this->source = $yr->source;
         $this->displayRemarks = $yr->remarks;
         $this->result = $yr->result;
+        $this->displayRem = explode(" -", $yr->remarks)[0];
     }
 
     public function submitEdit(){
