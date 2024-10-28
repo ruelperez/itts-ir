@@ -29,8 +29,8 @@
                 <th scope="col">Time out</th>
                 <th scope="col">Time in</th>
                 <th scope="col">Time out</th>
-                <th scope="col">Total hour</th>
-                <th scope="col">Site</th>
+{{--                <th scope="col">Total hour</th>--}}
+{{--                <th scope="col">Site</th>--}}
             </tr>
             </thead>
             <tbody>
@@ -43,18 +43,18 @@
                     <td>@if($data->out == null) @else {{Carbon\Carbon::parse($data->out)->format('h:i A') }} @endif</td>
                     <td>@if($data->in2 == null) @else {{Carbon\Carbon::parse($data->in2)->format('h:i A') }} @endif</td>
                     <td>@if($data->out2 == null) @else {{Carbon\Carbon::parse($data->out2)->format('h:i A') }} @endif</td>
-                    <td>
-                        @php
-                            $hours = floor($data->minute / 60);
-                            $totalHours = floor($hours + $data->hour);
-                            $remainingMinutes = $data->minute % 60;
-                            $result = $totalHours . ':' . $remainingMinutes;
-                        @endphp
-                        {{$result}}
-                    </td>
-                    <td id="uiy{{$data->id}}">
-                        {{ucfirst($data->branch)}}
-                    </td>
+{{--                    <td>--}}
+{{--                        @php--}}
+{{--                            $hours = floor($data->minute / 60);--}}
+{{--                            $totalHours = floor($hours + $data->hour);--}}
+{{--                            $remainingMinutes = $data->minute % 60;--}}
+{{--                            $result = $totalHours . ':' . $remainingMinutes;--}}
+{{--                        @endphp--}}
+{{--                        {{$result}}--}}
+{{--                    </td>--}}
+{{--                    <td id="uiy{{$data->id}}">--}}
+{{--                        {{ucfirst($data->branch)}}--}}
+{{--                    </td>--}}
                     <td>
                         <i class="fa-solid fa-pen-to-square" style="cursor: pointer; display: none" wire:click="clickTimeEdit({{$data->id}})" id="timeEdit{{$data->id}}"  data-bs-toggle="modal" data-bs-target="#current"></i>
                     </td>

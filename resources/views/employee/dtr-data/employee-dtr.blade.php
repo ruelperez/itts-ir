@@ -1,15 +1,14 @@
-<div class="row">
-    <div id="qr-reader" class="col-sm-4 border border-dark-5" style="width: 350px; height: 350px;"></div>
-    <div class="col-sm-12">
-        <div class="row mt-4">
-            <div class="col-md-4 col-lg-2">
-                {{--            <b style="font-size: 15px; ">@if(isset($date)) {{Carbon\Carbon::parse($date->in)->format('m-d-Y')}}@endif</b>--}}
-            </div>
-            <div class="mt-2 mt-md-0 col-md-4 col-lg-6 col-xl-4">
-                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-            </div>
+<div class="d-xl-flex justify-content-between">
+    <div class="d-md-flex d-xl-block">
+        <div id="qr-reader" style="width: 300px; height: 300px;"></div>
+        <!-- Running U.S. Clock -->
+        <div id="philippine-time" class=" mt-3 mt-md-5 ms-md-5 ms-xl-0" style="font-size: 18px; font-weight: bold;"></div>
+    </div>
+    <div class="col-xl-9 ps-xl-5 mt-4 mt-md-5 mt-xl-0">
+        <div class="col-md-8 col-lg-6">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
         </div>
-        <div class="table-responsive mt-4">
+        <div class="table-responsive mt-3">
             <table class="table table-hover">
                 <thead>
                 <tr>

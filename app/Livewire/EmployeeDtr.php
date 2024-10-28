@@ -180,8 +180,6 @@ class EmployeeDtr extends Component
                     'out2' => $bax->out2,
                     'user_id' => $bax->user_id,
                     'dtr_id' => $bax->dtr_id,
-                    'hour' => $bax->hour,
-                    'minute' => $bax->minute,
                     'week' => $this->weekNumber,
                     'photo' => $bax->photo,
                     'task' => $bax->task,

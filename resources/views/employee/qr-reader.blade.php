@@ -13,9 +13,6 @@
             if (isScanning) return; // If already scanning, skip further scans
             isScanning = true;
 
-            // Show loading indicator
-            $("#loading").show();
-
             // Send the decoded QR code to the backend for verification
             $.ajax({
                 url: "/verify-qr-code",
@@ -48,29 +45,36 @@
                     <tr class="dtr-record">
                         <td>${record.fullname}</td>
                         <td>${record.in ? formatTime(record.in) : ""}</td>
-                        <td>${record.out}</td>
+                        <td>${record.out ? formatTime(record.out) : ""}</td>
                         <td>${record.in2 ? formatTime(record.in2) : ""}</td>
-                        <td>${record.out2}</td>
+                        <td>${record.out2 ? formatTime(record.out2) : ""}</td>
                     </tr>
                 `;
                                 resultsDiv.append(recordHtml);
                             });
-
-                            // Hide loading indicator after processing
-                            setTimeout(() => {
-                                $("#loading").hide(); // Hide loading
-                            }, 2000); // Hide after 2 seconds
                         });
                     } else {
-                        alert("Invalid QR code");
-                        // Re-enable scanning for invalid QR code
-                        isScanning = false;
+                        Swal.fire({
+                            title: 'Failed',
+                            text: 'Report error to IT/Development Team for troubleshooting and resolution.',
+                            icon: 'error',
+                            willClose: () => {
+                                // Re-enable scanning after the alert is closed
+                                isScanning = false;
+                            }
+                        });
                     }
                 },
                 error: function() {
-                    alert("An error occurred while processing the QR code.");
-                    $("#loading").hide(); // Hide loading on error
-                    isScanning = false; // Reset flag in case of error
+                    Swal.fire({
+                        title: 'Failed',
+                        text: 'An error occurred while processing the QR code.',
+                        icon: 'error',
+                        willClose: () => {
+                            // Re-enable scanning after the alert is closed
+                            isScanning = false;
+                        }
+                    });
                 }
             });
         }
@@ -92,5 +96,15 @@
         // Initialize the QR code scanner
         var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", { fps: 10, qrbox: 250 });
         html5QrcodeScanner.render(onScanSuccess);
+
+        function updatePhilippineTime() {
+            // Set the timezone to 'Asia/Manila'
+            const options = { timeZone: 'Asia/Manila', hour12: true, weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+            const now = new Date().toLocaleString('en-US', options);
+            document.getElementById('philippine-time').textContent = now; // Display time
+        }
+
+        // Update every second
+        setInterval(updatePhilippineTime, 1000);
     </script>
 @endpush
