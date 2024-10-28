@@ -26,7 +26,24 @@
                     if (data.success) {
                         // Disable scanning while the alert is shown
                         isScanning = true;
+                        const resultsDiv = $("#qr-reader-results");
+                        resultsDiv.empty(); // Clear any previous results
 
+                        // Loop through each `dtrData` record and display it
+                        data.dtrData.forEach(record => {
+                            const recordHtml = `
+                                    <tr class="dtr-record">
+                                        <td>${record.fullname}</td>
+                                        <td>${record.in ? formatTime(record.in) : ""}</td>
+                                        <td>${record.out ? formatTime(record.out) : ""}</td>
+                                        <td>${record.in2 ? formatTime(record.in2) : ""}</td>
+                                        <td>${record.out2 ? formatTime(record.out2) : ""}</td>
+                                    </tr>
+                                `;
+                            resultsDiv.append(recordHtml);
+                        });
+
+                        // Show SweetAlert after updating the table data
                         Swal.fire({
                             title: 'Success!',
                             text: 'Press (ENTER) to start scan',
@@ -35,24 +52,8 @@
                                 // Re-enable scanning after the alert is closed
                                 isScanning = false;
                             }
-                        }).then(() => {
-                            const resultsDiv = $("#qr-reader-results");
-                            resultsDiv.empty(); // Clear any previous results
-
-                            // Loop through each `dtrData` record and display it
-                            data.dtrData.forEach(record => {
-                                const recordHtml = `
-                    <tr class="dtr-record">
-                        <td>${record.fullname}</td>
-                        <td>${record.in ? formatTime(record.in) : ""}</td>
-                        <td>${record.out ? formatTime(record.out) : ""}</td>
-                        <td>${record.in2 ? formatTime(record.in2) : ""}</td>
-                        <td>${record.out2 ? formatTime(record.out2) : ""}</td>
-                    </tr>
-                `;
-                                resultsDiv.append(recordHtml);
-                            });
                         });
+
                     } else {
                         Swal.fire({
                             title: 'Failed',
