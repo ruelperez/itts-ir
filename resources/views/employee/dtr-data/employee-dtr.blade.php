@@ -6,7 +6,7 @@
     </div>
     <div class="col-xl-9 ps-xl-5 mt-4 mt-md-5 mt-xl-0">
         <div class="col-md-8 col-lg-6">
-            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control" id="searchInput" type="search" placeholder="Search" aria-label="Search">
         </div>
         <div class="table-responsive mt-3">
             <table class="table table-hover">

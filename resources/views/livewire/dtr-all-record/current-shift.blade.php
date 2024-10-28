@@ -6,19 +6,19 @@
         <h6>DTR CURRENT SHIFT</h6>
     </div>
     <div class="row mt-4">
-        <div class="col-md-4 col-lg-2">
+        <div class="col-md-3 col-lg-2">
             <b style="font-size: 15px; ">@if(isset($date)) {{Carbon\Carbon::parse($date->in)->format('m-d-Y')}}@endif</b>
         </div>
-        <div class="mt-2 mt-md-0 col-md-4 col-lg-6 col-xl-4">
+        <div class="mt-2 mt-md-0 col-md-8 col-lg-6 col-xl-5">
             <input class="form-control" type="search" placeholder="Search" aria-label="Search" wire:model.live="search">
         </div>
-        <div class="mt-2 mt-md-0 col-md-4 col-lg-4 col-xl-2">
-            <select class="form-select" aria-label="Default select example" wire:model.live="branch">
-                <option value="all">All</option>
-                <option value="mindoro">Mindoro</option>
-                <option value="bicol">Bicol</option>
-            </select>
-        </div>
+{{--        <div class="mt-2 mt-md-0 col-md-4 col-lg-4 col-xl-2">--}}
+{{--            <select class="form-select" aria-label="Default select example" wire:model.live="branch">--}}
+{{--                <option value="all">All</option>--}}
+{{--                <option value="mindoro">Mindoro</option>--}}
+{{--                <option value="bicol">Bicol</option>--}}
+{{--            </select>--}}
+{{--        </div>--}}
     </div>
     <div class="table-responsive mt-4">
         <table class="table table-hover">

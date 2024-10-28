@@ -106,5 +106,15 @@
 
         // Update every second
         setInterval(updatePhilippineTime, 1000);
+
+        // Search Functionality
+        $(document).ready(function() {
+            $("#searchInput").on("keyup", function() {
+                let value = $(this).val().toLowerCase();
+                $("#qr-reader-results tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
     </script>
 @endpush
