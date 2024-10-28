@@ -57,6 +57,7 @@
                     <th scope="col">User cred.</th>
                     <th scope="col">Settings</th>
                     <th scope="col">FAQ crud</th>
+                    <th scope="col">Scanner</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -157,6 +158,12 @@
                             data-original-value="{{ $data->faq_crud }}"
                             class="user-select-none">
                             {{ $data->faq_crud ? '1' : '0' }}
+                        </td>
+                        <td
+                            ondblclick="confirmEdit({{ $data->id }},{{$data->qr_scanner}},'qr_scanner')"
+                            data-original-value="{{ $data->qr_scanner }}"
+                            class="user-select-none">
+                            {{ $data->qr_scanner ? '1' : '0' }}
                         </td>
                     </tr>
                     <button class="d-none" id="btn200_{{$data->id}}" wire:click="update_data({{$data->id}}, $('#btn200_{{$data->id}}').data('column'))"></button>

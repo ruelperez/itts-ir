@@ -123,6 +123,14 @@ class PageController extends Controller
     }
 
     public function scan(){
+        $fe = User::find(auth()->user()->id)->user_access->first();
+        $authorizer = $fe->qr_scanner;
+        if ($authorizer){
+
+        }
+        else{
+            return redirect('/');
+        }
         $emp = [];
         $employeeData = "";
         $views = resource_path() . "/views/employee/qr-reader.blade.php";
