@@ -143,7 +143,7 @@ class PageController extends Controller
             $employeeData = $emp->designation;
         }
         $photo = auth()->user()->photo;
-        $dtrData = DtrPermanent::latest()->get();
+        $dtrData = DtrPermanent::latest('updated_at')->get();
         if (file_exists($views)) {
             $title = Str::title('qr-reader ');
             return view("employee.qr-reader", ['title' => Str::replace('-', ' ', $title), 'dtrData' => $dtrData, 'fullname' => $fullname,
