@@ -39,15 +39,17 @@ class CurrentShift extends Component
         }
         $this->photo = auth()->user()->photo;
         if ($this->search == ""){
-            if ($this->branch == "all"){
-                $this->dtrData = DtrPermanent::all();
-            }
-            else{
-                $this->dtrData = DtrPermanent::where('branch',$this->branch)->get();
-            }
+//            if ($this->branch == "all"){
+//                $this->dtrData = DtrPermanent::all();
+//            }
+//            else{
+//                $this->dtrData = DtrPermanent::where('branch',$this->branch)->get();
+//            }
+            $this->dtrData = DtrPermanent::latest('updated_at')->get();
         }else{
-            $this->dtrData = DtrPermanent::where('fullname','LIKE', '%'.$this->search.'%')
-                ->orWhere('branch', 'LIKE', '%'.$this->search.'%')->get();
+//            $this->dtrData = DtrPermanent::where('fullname','LIKE', '%'.$this->search.'%')
+//                ->orWhere('branch', 'LIKE', '%'.$this->search.'%')->get();
+            $this->dtrData = DtrPermanent::where('fullname','LIKE', '%'.$this->search.'%')->get();
         }
         $this->date = DtrPermanent::latest()->first();
         return view('livewire.dtr-all-record.current-shift');
