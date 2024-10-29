@@ -29,6 +29,8 @@ class Submission extends Model
         'user_name',
         'user_id',
         'lawfirm',
+        'comment',
+        'method',
     ];
 
     use HasFactory;
