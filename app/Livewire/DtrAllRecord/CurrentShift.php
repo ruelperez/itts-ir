@@ -55,6 +55,11 @@ class CurrentShift extends Component
         return view('livewire.dtr-all-record.current-shift');
     }
 
+    public function remove(){
+        DtrPermanent::find($this->ids)->delete();
+        Dtr::find($this->ids)->delete();
+    }
+
     public function clickTimeEdit($id){
         $this->ids =$id;
         $bn = DtrPermanent::find($id);
