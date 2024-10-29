@@ -40,11 +40,13 @@
                 @endif
                 @if(session()->has('goodSched'))
                     <div style="display: none">
+                        <button type="button" class="btn btn-danger" wire:click="remove" wire:confirm="Click (OK) to remove" data-bs-dismiss="modal">Remove</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary" wire:click="submitEdit">Submit</button>
                     </div>
                 @else
                     <div>
+                        <button type="button" class="btn btn-danger" wire:click="remove" wire:confirm="Click (OK) to remove" data-bs-dismiss="modal">Remove</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary" wire:click="submitEdit" wire:confirm="To proceed, click submit">Submit</button>
                     </div>

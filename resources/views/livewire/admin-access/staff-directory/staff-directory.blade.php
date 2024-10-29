@@ -41,6 +41,7 @@
                     <th scope="col">Department</th>
 {{--                    <th scope="col">Branch</th>--}}
                     <th scope="col">Act/Inact</th>
+                    <th scope="col">QR</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -85,6 +86,9 @@
                                    onchange="handleStatusChange(this)"
                                 >
                             </div>
+                        </td>
+                        <td>
+                            <i class="fa-solid fa-qrcode" onclick="window.open('/qr-code/create/{{$data->id_user}}', '_blank');" style="cursor: pointer"></i>
                         </td>
                         <td>
                             <input class="form-check-input" type="checkbox" wire:model.live="checkBox"

@@ -67,10 +67,10 @@
         <td style="border: 1px solid; padding: 10px;">
             <b>Time Out</b>
         </td>
-        <td style="border: 1px solid; padding: 10px;">
-            <b>Total Working Hour</b>
-        </td>
-        <td style="border: 1px solid; padding: 10px;">
+{{--        <td style="border: 1px solid; padding: 10px;">--}}
+{{--            <b>Total Working Hour</b>--}}
+{{--        </td>--}}
+        <td style="border: 1px solid; padding: 10px;" colspan="2">
             <b>EOD</b>
         </td>
     </tr>
@@ -91,16 +91,16 @@
             <td style="border: 1px solid;">
                 {{$data->out2}}
             </td>
-            <td style="border: 1px solid;">
-                @php
-                    $hours = floor($data->minute / 60);
-                    $totalHours = floor($hours + $data->hour);
-                    $remainingMinutes = $data->minute % 60;
-                    $result = $totalHours . ':' . $remainingMinutes;
-                @endphp
-                {{$result}}
-            </td>
-            <td style="border: 1px solid; white-space: pre-line; text-align: left; padding: 10px;">
+{{--            <td style="border: 1px solid;">--}}
+{{--                @php--}}
+{{--                    $hours = floor($data->minute / 60);--}}
+{{--                    $totalHours = floor($hours + $data->hour);--}}
+{{--                    $remainingMinutes = $data->minute % 60;--}}
+{{--                    $result = $totalHours . ':' . $remainingMinutes;--}}
+{{--                @endphp--}}
+{{--                {{$result}}--}}
+{{--            </td>--}}
+            <td style="border: 1px solid; white-space: pre-line; text-align: left; padding: 10px;" colspan="2">
                 {{$data->task}}
             </td>
         </tr>

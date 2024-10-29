@@ -39,18 +39,25 @@ class CurrentShift extends Component
         }
         $this->photo = auth()->user()->photo;
         if ($this->search == ""){
-            if ($this->branch == "all"){
-                $this->dtrData = DtrPermanent::all();
-            }
-            else{
-                $this->dtrData = DtrPermanent::where('branch',$this->branch)->get();
-            }
+//            if ($this->branch == "all"){
+//                $this->dtrData = DtrPermanent::all();
+//            }
+//            else{
+//                $this->dtrData = DtrPermanent::where('branch',$this->branch)->get();
+//            }
+            $this->dtrData = DtrPermanent::latest('updated_at')->get();
         }else{
-            $this->dtrData = DtrPermanent::where('fullname','LIKE', '%'.$this->search.'%')
-                ->orWhere('branch', 'LIKE', '%'.$this->search.'%')->get();
+//            $this->dtrData = DtrPermanent::where('fullname','LIKE', '%'.$this->search.'%')
+//                ->orWhere('branch', 'LIKE', '%'.$this->search.'%')->get();
+            $this->dtrData = DtrPermanent::where('fullname','LIKE', '%'.$this->search.'%')->get();
         }
         $this->date = DtrPermanent::latest()->first();
         return view('livewire.dtr-all-record.current-shift');
+    }
+
+    public function remove(){
+        DtrPermanent::find($this->ids)->delete();
+        Dtr::find($this->ids)->delete();
     }
 
     public function clickTimeEdit($id){
@@ -67,6 +74,7 @@ class CurrentShift extends Component
 
     public function submitEdit(){
         $bn = DtrPermanent::find($this->ids);
+        $mn = Dtr::find($bn->dtr_id);
         try {
             $bn->in = $this->timeIn1;
             $bn->out = $this->timeOut1;
@@ -74,63 +82,69 @@ class CurrentShift extends Component
             $bn->out2 = $this->timeOut2;
             $bn->save();
 
-            $lk = DtrPermanent::find($this->ids);
-            $pp = $lk->in;
-            $kk = $lk->out;
-            $rr = $lk->in2;
-            $ss = $lk->out2;
-            $name = $lk->fullname;
+            $mn->in = $this->timeIn1;
+            $mn->out = $this->timeOut1;
+            $mn->in2 = $this->timeIn2;
+            $mn->out2 = $this->timeOut2;
+            $mn->save();
 
-            if ($rr != null or $rr != ""){
-                $time1 = Carbon::parse($pp);
-                $time2 = Carbon::parse($kk);
-                if ($time2->lessThan($time1)) {
-                    $time2->addDay(); // Add a day to the end time
-                }
-                $interval1 = $time1->diff($time2);
-
-                $time3 = Carbon::parse($rr);
-                $time4 = Carbon::parse($ss);
-                if ($time4->lessThan($time3)) {
-                    $time4->addDay(); // Add a day to the end time
-                }
-                $interval2 = $time3->diff($time4);
-
-                $resultHour = intval($interval1->h) + intval($interval2->h);
-                $resultMinute = intval($interval1->i) + intval($interval2->i);
-
-                $lk->hour = $resultHour;
-                $lk->minute = $resultMinute + 2;
-                $lk->save();
-                \App\Models\Logs::create([
-                    'action' => "Adjust time in (after lunch) from ".$this->unchangeTimeIn2.' to '.$rr.' for '.$name,
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            }
-            else{
-                $time1 = Carbon::parse($pp);
-                $time2 = Carbon::parse($kk);
-                if ($time2->lessThan($time1)) {
-                    $time2->addDay(); // Add a day to the end time
-                }
-                $interval1 = $time1->diff($time2);
-
-                $resultHour = $interval1->h;
-                $resultMinute = $interval1->i;
-
-                $lk->hour = $resultHour;
-                $lk->minute = $resultMinute + 1;
-                $lk->save();
-
-                \App\Models\Logs::create([
-                    'action' => "Adjust time in from ".$this->unchangeTimeIn1.' to '.$pp.' for '.$name,
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            }
+//            $lk = DtrPermanent::find($this->ids);
+//            $pp = $lk->in;
+//            $kk = $lk->out;
+//            $rr = $lk->in2;
+//            $ss = $lk->out2;
+//            $name = $lk->fullname;
+//
+//            if ($rr != null or $rr != ""){
+//                $time1 = Carbon::parse($pp);
+//                $time2 = Carbon::parse($kk);
+//                if ($time2->lessThan($time1)) {
+//                    $time2->addDay(); // Add a day to the end time
+//                }
+//                $interval1 = $time1->diff($time2);
+//
+//                $time3 = Carbon::parse($rr);
+//                $time4 = Carbon::parse($ss);
+//                if ($time4->lessThan($time3)) {
+//                    $time4->addDay(); // Add a day to the end time
+//                }
+//                $interval2 = $time3->diff($time4);
+//
+//                $resultHour = intval($interval1->h) + intval($interval2->h);
+//                $resultMinute = intval($interval1->i) + intval($interval2->i);
+//
+//                $lk->hour = $resultHour;
+//                $lk->minute = $resultMinute + 2;
+//                $lk->save();
+//                \App\Models\Logs::create([
+//                    'action' => "Adjust time in (after lunch) from ".$this->unchangeTimeIn2.' to '.$rr.' for '.$name,
+//                    'user_id' => $this->user_id,
+//                    'photo' => $this->photo,
+//                    'fullname' => $this->fullname,
+//                ]);
+//            }
+//            else{
+//                $time1 = Carbon::parse($pp);
+//                $time2 = Carbon::parse($kk);
+//                if ($time2->lessThan($time1)) {
+//                    $time2->addDay(); // Add a day to the end time
+//                }
+//                $interval1 = $time1->diff($time2);
+//
+//                $resultHour = $interval1->h;
+//                $resultMinute = $interval1->i;
+//
+//                $lk->hour = $resultHour;
+//                $lk->minute = $resultMinute + 1;
+//                $lk->save();
+//
+//                \App\Models\Logs::create([
+//                    'action' => "Adjust time in from ".$this->unchangeTimeIn1.' to '.$pp.' for '.$name,
+//                    'user_id' => $this->user_id,
+//                    'photo' => $this->photo,
+//                    'fullname' => $this->fullname,
+//                ]);
+//            }
 
 
             session()->flash('goodSched', 'Successfully saved');
