@@ -1,6 +1,8 @@
 @extends('components.layouts.main')
 
 @section('content')
+    <audio id="successSound" src="{{ asset('sounds/dtr_success.wav') }}" preload="auto"></audio>
+    <audio id="errorSound" src="{{ asset('sounds/dtr_error.wav') }}" preload="auto"></audio>
     @include('employee.dtr-data.employee-dtr')
 @endsection
 @push('js')
@@ -24,6 +26,7 @@
                 data: { qrCode: decodedText },
                 success: function(data) {
                     if (data.success) {
+                        document.getElementById('successSound').play();
                         // Disable scanning while the alert is shown
                         isScanning = true;
                         const resultsDiv = $("#qr-reader-results");
@@ -55,6 +58,7 @@
                         });
 
                     } else {
+                        document.getElementById('errorSound').play();
                         Swal.fire({
                             title: 'Failed',
                             text: 'Report error to IT/Development Team for troubleshooting and resolution.',
@@ -67,6 +71,7 @@
                     }
                 },
                 error: function() {
+                    document.getElementById('errorSound').play();
                     Swal.fire({
                         title: 'Failed',
                         text: 'An error occurred while processing the QR code.',
