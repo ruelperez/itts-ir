@@ -146,7 +146,7 @@
                                 <small>Admin access</small>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropupLink" style="background-color: #C0C0C0;">
-                                <a class="dropdown-item" href="/qr-code/scanner"><i class="fa-solid fa-tent-arrow-left-right pe-2"></i>
+                                <a class="dropdown-item" href="/qr-code/scanner"><i class="fa-solid fa-qrcode pe-2"></i>
                                     QR Scanner</a>
                                 <a class="dropdown-item" href="/admin-access/staff-directory/staff-directory"><i class="fa-regular fa-folder pe-2"></i>
                                     Staff Directory</a>
