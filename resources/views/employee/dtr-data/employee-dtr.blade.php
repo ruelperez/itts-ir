@@ -3,7 +3,7 @@
         <div>
             <input id="scannerInput" type="text" placeholder="Scan QR code here" style="width: 300px; height: 50px; font-size: 24px;"/>
         </div>
-        <div id="philippine-time" class="mt-3 mt-md-5 ms-md-5 ms-xl-0" style="font-size: 18px; font-weight: bold;"></div>
+        <div id="clock" class="mt-3 mt-md-5 ms-md-5 ms-xl-0" style="font-size: 18px; font-weight: bold;"></div>
     </div>
     <div class="col-xl-9 ps-xl-5 mt-4 mt-md-5 mt-xl-0">
         <div class="row">

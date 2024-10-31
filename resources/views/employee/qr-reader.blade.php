@@ -107,15 +107,32 @@
             return `${hours}:${minutes} ${ampm}`;
         }
 
-        // Display current Philippine time
-        function updatePhilippineTime() {
-            const options = { timeZone: 'Asia/Manila', hour12: true, hour: 'numeric', minute: 'numeric' };
-            const now = new Date().toLocaleString('en-US', options);
-            document.getElementById('philippine-time').textContent = now; // Display time
+        function updateClock() {
+            const now = new Date();
+
+            // Get the date parts
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = now.toLocaleDateString('en-US', options);
+
+            // Get the time parts
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            // Format time to display in hh:mm:ss AM/PM
+            const formattedTime = `${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)} ${hours >= 12 ? 'PM' : 'AM'}`;
+
+            // Display both date and time
+            document.getElementById('clock').innerText = `${formattedDate} | ${formattedTime}`;
         }
 
-        // Update every second
-        setInterval(updatePhilippineTime, 1000);
+        function formatTime(num) {
+            return num < 10 ? '0' + num : num; // Pad single digit with zero
+        }
+
+        // Initialize clock
+        setInterval(updateClock, 1000);
+        updateClock(); // Call once to set initial time
 
         // Search functionality
         $(document).ready(function() {
