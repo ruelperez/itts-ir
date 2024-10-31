@@ -10,6 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         let isProcessing = false; // Flag to prevent multiple requests
+        let canScan = true; // Flag to enable/disable scanning
 
         $(document).ready(function() {
             // Automatically focus on scanner input and start listening for input
@@ -19,11 +20,13 @@
                 if (event.which === 13) { // Enter key pressed
                     event.preventDefault(); // Prevent form submission
                     const qrCode = $(this).val().trim();
-                    if (qrCode && !isProcessing) {
+                    if (qrCode && canScan && !isProcessing) {
                         isProcessing = true; // Prevent further input processing
                         processQRCode(qrCode); // Call function to process QR code
                     }
                 }
+            }).on("input", function() {
+                $(this).val($(this).val().toUpperCase()); // Convert input to uppercase on input
             });
         });
 
@@ -70,13 +73,17 @@
                     resultsDiv.append(recordHtml);
                 });
 
+                // Disable scanning until the alert is closed
+                canScan = false;
+
                 // Show SweetAlert after updating the table data
                 Swal.fire({
                     title: 'Success!',
                     text: 'Press (ENTER) to scan another QR code',
                     icon: 'success',
                     willClose: () => {
-                        isProcessing = false; // Re-enable processing after the alert is closed
+                        canScan = true; // Re-enable scanning after the alert is closed
+                        isProcessing = false; // Re-enable processing
                         $("#scannerInput").val(''); // Clear the input field for the next scan
                         focusScannerInput(); // Refocus on the input field
                     }
@@ -100,7 +107,8 @@
                 text: message,
                 icon: 'error',
                 willClose: () => {
-                    isProcessing = false; // Re-enable processing after the alert is closed
+                    canScan = true; // Re-enable scanning after the alert is closed
+                    isProcessing = false; // Re-enable processing
                     $("#scannerInput").val(''); // Clear the input field for the next scan
                     focusScannerInput(); // Refocus on the input field
                 }
