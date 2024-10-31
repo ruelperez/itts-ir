@@ -54,7 +54,7 @@
                 resultsDiv.empty(); // Clear existing results first
 
                 // Sort the scanned data from latest to oldest
-                const sortedData = data.dtrData.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)); // Ensure the dtrData has a created_at field
+                const sortedData = data.dtrData.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at)); // Ensure the dtrData has a created_at field
 
                 // Render all scanned users
                 sortedData.forEach(record => {
