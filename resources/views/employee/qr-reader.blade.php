@@ -11,16 +11,17 @@
     <script>
         let isProcessing = false; // Flag to prevent multiple requests
 
-        // Function to handle QR code scanning from the scanner device
         $(document).ready(function() {
-            $("#scannerInput").on("keypress", function(event) {console.log('haha');
+            // Automatically focus on scanner input and start listening for input
+            focusScannerInput();
+
+            $("#scannerInput").on("keypress", function(event) {
                 if (event.which === 13) { // Enter key pressed
                     event.preventDefault(); // Prevent form submission
                     const qrCode = $(this).val().trim();
                     if (qrCode && !isProcessing) {
                         isProcessing = true; // Prevent further input processing
                         processQRCode(qrCode); // Call function to process QR code
-                        $(this).val(''); // Clear the input field
                     }
                 }
             });
@@ -48,10 +49,15 @@
             if (data.success) {
                 document.getElementById('successSound').play();
                 const resultsDiv = $("#qr-reader-results");
-                resultsDiv.empty(); // Clear previous results
 
-                // Loop through each `dtrData` record and display it
-                data.dtrData.forEach(record => {
+                // Clear existing results
+                resultsDiv.empty(); // Clear existing results first
+
+                // Sort the scanned data from latest to oldest
+                const sortedData = data.dtrData.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)); // Ensure the dtrData has a created_at field
+
+                // Render all scanned users
+                sortedData.forEach(record => {
                     const recordHtml = `
                         <tr class="dtr-record">
                             <td>${record.fullname}</td>
@@ -71,6 +77,8 @@
                     icon: 'success',
                     willClose: () => {
                         isProcessing = false; // Re-enable processing after the alert is closed
+                        $("#scannerInput").val(''); // Clear the input field for the next scan
+                        focusScannerInput(); // Refocus on the input field
                     }
                 });
             } else {
@@ -93,6 +101,8 @@
                 icon: 'error',
                 willClose: () => {
                     isProcessing = false; // Re-enable processing after the alert is closed
+                    $("#scannerInput").val(''); // Clear the input field for the next scan
+                    focusScannerInput(); // Refocus on the input field
                 }
             });
         }
@@ -107,9 +117,14 @@
             return `${hours}:${minutes} ${ampm}`;
         }
 
+        // Function to focus on the scanner input field
+        function focusScannerInput() {
+            $("#scannerInput").focus(); // Focus the input field
+        }
+
         // Display current Philippine time
         function updatePhilippineTime() {
-            const options = { timeZone: 'Asia/Manila', hour12: true, hour: 'numeric', minute: 'numeric' };
+            const options = { timeZone: 'Asia/Manila', hour12: true, hour: 'numeric', minute: 'numeric', year: 'numeric', month: 'numeric', day: 'numeric' };
             const now = new Date().toLocaleString('en-US', options);
             document.getElementById('philippine-time').textContent = now; // Display time
         }
