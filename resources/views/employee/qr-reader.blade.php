@@ -76,6 +76,8 @@
                 let countdownValue = seconds;
                 Swal.fire({
                     title: 'Please Wait',
+                    icon: 'success',
+                    showConfirmButton: false,
                     html: `<strong id="countdown" style="font-size: 35px">${countdownValue}</strong>`,
                     timer: seconds * 1000,
                     timerProgressBar: true,
@@ -125,13 +127,12 @@
                         `;
                         resultsDiv.append(recordHtml);
                     });
-
                     // Set photo for the latest scanned employee
                     const latestEmployee = sortedData[0]; // Get the latest scanned employee
                     const employeePhotoUrl = photoBaseUrl + latestEmployee.photo; // Construct full path using `photo`
                     $('#employeePhoto').attr('src', employeePhotoUrl); // Update the employee photo display
-
                     $('#employeeFullName').text(latestEmployee.fullname); // Update the employee full name display
+                    $('#headCount').text(sortedData.length); // Update the employee full name display
                     isProcessing = false; // Reset processing flag
                     $("#scannerInput").val(''); // Clear input
                     focusScannerInput(); // Refocus on the input field
