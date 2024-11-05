@@ -1,5 +1,4 @@
 @extends('components.layouts.main')
-
 @section('content')
     <audio id="successSound" src="{{ asset('sounds/dtr_success.wav') }}" preload="auto"></audio>
     <audio id="errorSound" src="{{ asset('sounds/dtr_error.wav') }}" preload="auto"></audio>
@@ -13,7 +12,7 @@
         let canScan = true; // Flag to enable/disable scanning
         let lastScanTime = null; // Store the time of the last scan
         let lastScannedId = null; // Store the last scanned Employee ID
-
+        const photoBaseUrl = "{{ asset('photos/photos') }}/"; // Base URL for employee photos
         $(document).ready(function() {
             focusScannerInput();
 
@@ -91,7 +90,10 @@
                     `;
                     resultsDiv.append(recordHtml);
                 });
-
+// Set photo for the latest scanned employee
+                const latestEmployee = sortedData[0]; // Get the latest scanned employee
+                const employeePhotoUrl = photoBaseUrl + latestEmployee.photo; // Construct full path using `photo`
+                $('#employeePhoto').attr('src', employeePhotoUrl); // Update the employee photo display
                 canScan = true; // Re-enable scanning
                 isProcessing = false; // Reset processing flag
                 $("#scannerInput").val(''); // Clear input
