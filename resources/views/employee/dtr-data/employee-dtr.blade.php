@@ -1,9 +1,9 @@
 <div class="d-xl-flex justify-content-between">
     <div class="d-md-flex d-xl-block">
-        <div>
+        <div id="philippine-time" class=" ms-md-5 ms-xl-0" style="font-size: 18px; font-weight: bold;"></div>
+        <div class="mt-2 mt-md-4">
             <input id="scannerInput" type="text" placeholder="Employee ID" style="width: 300px; height: 50px; font-size: 24px;" />
         </div>
-        <div id="philippine-time" class="mt-3 mt-md-5 ms-md-5 ms-xl-0" style="font-size: 18px; font-weight: bold;"></div>
         <!-- Employee Photo Section -->
         <div class="mt-5">
             <img id="employeePhoto" src="{{ asset('photos/photos/'.$empPhoto) }}" alt="Employee Photo" style="width: 200px; height: 200px; object-fit: cover; border: 2px solid #ccc;" />
