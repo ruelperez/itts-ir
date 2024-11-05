@@ -37,22 +37,22 @@ class PageController extends Controller
             if ($this->dtr_data == null) {
                 $this->in();
                 $dtrData = DtrPermanent::latest('updated_at')->get();
-                return response()->json(['success' => true, 'dtrData' => $dtrData]);
+                return response()->json(['success' => true, 'dtrData' => $dtrData, 'user' => $this->userData]);
             }
             elseif ($this->dtr_data->out == "" or $this->dtr_data->out == null){
                 $this->out();
                 $dtrData = DtrPermanent::latest('updated_at')->get();
-                return response()->json(['success' => true, 'dtrData' => $dtrData]);
+                return response()->json(['success' => true, 'dtrData' => $dtrData, 'user' => $this->userData]);
             }
             elseif ($this->dtr_data->in2 == "" or $this->dtr_data->in2 == null){
                 $this->in2();
                 $dtrData = DtrPermanent::latest('updated_at')->get();
-                return response()->json(['success' => true, 'dtrData' => $dtrData]);
+                return response()->json(['success' => true, 'dtrData' => $dtrData, 'user' => $this->userData]);
             }
             elseif ($this->dtr_data->out2 == "" or $this->dtr_data->out2 == null){
                 $this->out2();
                 $dtrData = DtrPermanent::latest('updated_at')->get();
-                return response()->json(['success' => true, 'dtrData' => $dtrData]);
+                return response()->json(['success' => true, 'dtrData' => $dtrData, 'user' => $this->userData]);
             }
             else{
                 return response()->json(['success' => false]);
@@ -145,14 +145,22 @@ class PageController extends Controller
         $photo = auth()->user()->photo;
         $dtrData = DtrPermanent::latest('updated_at')->get();
         $ngg = DtrPermanent::latest('updated_at')->first();
-        if (!$ngg){
+        if ($ngg){
+            $mb = User::find($ngg->user_id);
+            if (!$mb){
+                $empPhoto = "default_profile.png";
+                $empFullname = "Full Name";
+            }
+            else{
+                $empPhoto = $mb->photo;
+                $empFullname = $mb->fullname;
+            }
+        }
+        else{
             $empPhoto = "default_profile.png";
             $empFullname = "Full Name";
         }
-        else{
-            $empPhoto = $ngg->photo;
-            $empFullname = $ngg->fullname;
-        }
+
 
         if (file_exists($views)) {
             $title = Str::title('qr-reader ');
