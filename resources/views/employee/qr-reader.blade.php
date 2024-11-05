@@ -11,9 +11,10 @@
     <script>
         let isProcessing = false; // Flag to prevent multiple requests
         let canScan = true; // Flag to enable/disable scanning
+        let lastScanTime = null; // Store the time of the last scan
+        let lastScannedId = null; // Store the last scanned Employee ID
 
         $(document).ready(function() {
-            // Automatically focus on scanner input and start listening for input
             focusScannerInput();
 
             $("#scannerInput").on("keypress", function(event) {
@@ -21,8 +22,8 @@
                     event.preventDefault(); // Prevent form submission
                     const qrCode = $(this).val().trim();
                     if (qrCode && canScan && !isProcessing) {
-                        isProcessing = true; // Prevent further input processing
-                        processQRCode(qrCode); // Call function to process QR code
+                        isProcessing = true;
+                        processQRCode(qrCode);
                     }
                 }
             }).on("input", function() {
@@ -31,35 +32,53 @@
         });
 
         function processQRCode(qrCode) {
-            $.ajax({
-                url: "/verify-qr-code",
-                type: "POST",
-                dataType: "json",
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-                },
-                data: { qrCode: qrCode },
-                success: function(data) {
-                    handleScanResponse(data);
-                },
-                error: function(jqXHR) {
-                    handleErrorResponse(jqXHR);
-                }
-            });
+            const now = new Date();
+
+            // Check if the scanned ID matches the last one and if 60 seconds have passed
+            if (qrCode === lastScannedId && lastScanTime && (now - lastScanTime < 60000)) {
+                document.getElementById('errorSound').play();
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Same Employee ID. Please wait 60 seconds before rescanning.',
+                    icon: 'error',
+                    willClose: () => {
+                        canScan = true;
+                        isProcessing = false;
+                        $("#scannerInput").val(''); // Clear input
+                        focusScannerInput(); // Refocus
+                    }
+                });
+            } else {
+                // Proceed with scanning and store the current ID and time
+                lastScannedId = qrCode;
+                lastScanTime = now;
+
+                $.ajax({
+                    url: "/verify-qr-code",
+                    type: "POST",
+                    dataType: "json",
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: { qrCode: qrCode },
+                    success: function(data) {
+                        handleScanResponse(data);
+                    },
+                    error: function(jqXHR) {
+                        handleErrorResponse(jqXHR);
+                    }
+                });
+            }
         }
 
         function handleScanResponse(data) {
             if (data.success) {
                 document.getElementById('successSound').play();
                 const resultsDiv = $("#qr-reader-results");
-
-                // Clear existing results
                 resultsDiv.empty(); // Clear existing results first
 
-                // Sort the scanned data from latest to oldest
-                const sortedData = data.dtrData.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at)); // Ensure the dtrData has a created_at field
-
-                // Render all scanned users
+                // Sort and display data
+                const sortedData = data.dtrData.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
                 sortedData.forEach(record => {
                     const recordHtml = `
                         <tr class="dtr-record">
@@ -73,21 +92,10 @@
                     resultsDiv.append(recordHtml);
                 });
 
-                // Disable scanning until the alert is closed
-                canScan = false;
-
-                // Show SweetAlert after updating the table data
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'Press (ENTER) to scan another QR code',
-                    icon: 'success',
-                    willClose: () => {
-                        canScan = true; // Re-enable scanning after the alert is closed
-                        isProcessing = false; // Re-enable processing
-                        $("#scannerInput").val(''); // Clear the input field for the next scan
-                        focusScannerInput(); // Refocus on the input field
-                    }
-                });
+                canScan = true; // Re-enable scanning
+                isProcessing = false; // Reset processing flag
+                $("#scannerInput").val(''); // Clear input
+                focusScannerInput(); // Refocus on the input field
             } else {
                 showErrorAlert('Report error to IT/Development Team for troubleshooting and resolution.');
             }
@@ -107,10 +115,10 @@
                 text: message,
                 icon: 'error',
                 willClose: () => {
-                    canScan = true; // Re-enable scanning after the alert is closed
-                    isProcessing = false; // Re-enable processing
-                    $("#scannerInput").val(''); // Clear the input field for the next scan
-                    focusScannerInput(); // Refocus on the input field
+                    canScan = true;
+                    isProcessing = false;
+                    $("#scannerInput").val('');
+                    focusScannerInput();
                 }
             });
         }
@@ -120,27 +128,22 @@
             let hours = date.getHours();
             const minutes = date.getMinutes().toString().padStart(2, '0');
             const ampm = hours >= 12 ? 'pm' : 'am';
-            hours = hours % 12;
-            hours = hours ? hours : 12; // the hour '0' should be '12'
+            hours = hours % 12 || 12;
             return `${hours}:${minutes} ${ampm}`;
         }
 
-        // Function to focus on the scanner input field
         function focusScannerInput() {
-            $("#scannerInput").focus(); // Focus the input field
+            $("#scannerInput").focus();
         }
 
-        // Display current Philippine time
         function updatePhilippineTime() {
             const options = { timeZone: 'Asia/Manila', hour12: true, hour: 'numeric', minute: 'numeric', year: 'numeric', month: 'numeric', day: 'numeric' };
             const now = new Date().toLocaleString('en-US', options);
-            document.getElementById('philippine-time').textContent = now; // Display time
+            document.getElementById('philippine-time').textContent = now;
         }
 
-        // Update every second
         setInterval(updatePhilippineTime, 1000);
 
-        // Search functionality
         $(document).ready(function() {
             $("#searchInput").on("keyup", function() {
                 let value = $(this).val().toLowerCase();
@@ -151,4 +154,3 @@
         });
     </script>
 @endpush
-
