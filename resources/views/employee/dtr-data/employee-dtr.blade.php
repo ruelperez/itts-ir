@@ -15,7 +15,7 @@
                 <input class="form-control" id="searchInput" type="search" placeholder="Search" aria-label="Search">
             </div>
             <div class="col-md-4 col-lg-6 mt-4 mt-md-2">
-                <p><b>Total headcount: {{count($dtrData)}}</b></p>
+                <p><b>Total headcount : {{count($dtrData)}}</b></p>
             </div>
         </div>
         <div class="table-responsive mt-1">
