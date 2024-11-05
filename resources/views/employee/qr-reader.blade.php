@@ -94,6 +94,9 @@
                 const latestEmployee = sortedData[0]; // Get the latest scanned employee
                 const employeePhotoUrl = photoBaseUrl + latestEmployee.photo; // Construct full path using `photo`
                 $('#employeePhoto').attr('src', employeePhotoUrl); // Update the employee photo display
+
+                $('#employeeFullName').text(latestEmployee.fullname); // Update the employee full name display
+
                 canScan = true; // Re-enable scanning
                 isProcessing = false; // Reset processing flag
                 $("#scannerInput").val(''); // Clear input

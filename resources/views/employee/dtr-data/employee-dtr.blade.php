@@ -8,6 +8,9 @@
         <div class="mt-5">
             <img id="employeePhoto" src="{{ asset('photos/photos/'.$empPhoto) }}" alt="Employee Photo" style="width: 200px; height: 200px; object-fit: cover; border: 2px solid #ccc;">
         </div>
+        <div>
+            <p id="employeeFullName" style="font-size: 18px; font-weight: bold; margin-top: 10px;"></p>
+        </div>
     </div>
     <div class="col-xl-9 ps-xl-5 mt-4 mt-md-5 mt-xl-0">
         <div class="row">
