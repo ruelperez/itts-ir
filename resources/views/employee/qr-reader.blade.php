@@ -3,6 +3,23 @@
     <audio id="successSound" src="{{ asset('sounds/dtr_success.wav') }}" preload="auto"></audio>
     <audio id="errorSound" src="{{ asset('sounds/dtr_error.wav') }}" preload="auto"></audio>
     @include('employee.dtr-data.employee-dtr')
+
+    <!-- Countdown Modal -->
+    <div id="countdownModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Please Wait</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="countdownText">Scanning will be enabled in <span id="countdown">2</span> seconds.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('js')
@@ -13,6 +30,7 @@
         let lastScanTime = null; // Store the time of the last scan
         let lastScannedId = null; // Store the last scanned Employee ID
         const photoBaseUrl = "{{ asset('photos/photos') }}/"; // Base URL for employee photos
+        const countdownDuration = 2; // Countdown duration in seconds
 
         $(document).ready(function() {
             focusScannerInput();
@@ -69,12 +87,27 @@
                     }
                 });
 
-                // Disable scanning for 2 seconds after processing
+                // Disable scanning for the countdown duration
                 canScan = false;
-                setTimeout(() => {
-                    canScan = true; // Re-enable scanning after 2 seconds
-                }, 2000);
+                showCountdownModal(countdownDuration);
             }
+        }
+
+        function showCountdownModal(seconds) {
+            $("#countdownModal").modal('show');
+            let countdownValue = seconds;
+            $("#countdown").text(countdownValue);
+
+            const countdownInterval = setInterval(() => {
+                countdownValue--;
+                $("#countdown").text(countdownValue);
+                if (countdownValue <= 0) {
+                    clearInterval(countdownInterval);
+                    $("#countdownModal").modal('hide'); // Hide modal after countdown
+                    canScan = true; // Re-enable scanning
+                    focusScannerInput(); // Refocus input for next scan
+                }
+            }, 1000);
         }
 
         function handleScanResponse(data) {
@@ -164,3 +197,4 @@
         });
     </script>
 @endpush
+
