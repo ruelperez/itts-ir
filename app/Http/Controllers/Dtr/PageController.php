@@ -147,14 +147,16 @@ class PageController extends Controller
         $ngg = DtrPermanent::latest('updated_at')->first();
         if (!$ngg){
             $empPhoto = "default_profile.png";
+            $empFullname = "Full Name";
         }
         else{
             $empPhoto = $ngg->photo;
+            $empFullname = $ngg->fullname;
         }
 
         if (file_exists($views)) {
             $title = Str::title('qr-reader ');
-            return view("employee.qr-reader", ['title' => Str::replace('-', ' ', $title), 'dtrData' => $dtrData, 'empPhoto' => $empPhoto, 'fullname' => $fullname,
+            return view("employee.qr-reader", ['title' => Str::replace('-', ' ', $title), 'dtrData' => $dtrData, 'empPhoto' => $empPhoto, 'empFullname' => $empFullname, 'fullname' => $fullname,
                 'user_id' => $user_id, 'position' => $position, 'employeeData' => $employeeData, 'photo' => $photo, 'jj' => $jj, 'emp' => $emp]);
         } else {
             abort(404);

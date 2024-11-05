@@ -13,6 +13,7 @@
         let lastScanTime = null; // Store the time of the last scan
         let lastScannedId = null; // Store the last scanned Employee ID
         const photoBaseUrl = "{{ asset('photos/photos') }}/"; // Base URL for employee photos
+
         $(document).ready(function() {
             focusScannerInput();
 
@@ -67,6 +68,12 @@
                         handleErrorResponse(jqXHR);
                     }
                 });
+
+                // Disable scanning for 2 seconds after processing
+                canScan = false;
+                setTimeout(() => {
+                    canScan = true; // Re-enable scanning after 2 seconds
+                }, 2000);
             }
         }
 
@@ -90,14 +97,13 @@
                     `;
                     resultsDiv.append(recordHtml);
                 });
-// Set photo for the latest scanned employee
+
+                // Set photo for the latest scanned employee
                 const latestEmployee = sortedData[0]; // Get the latest scanned employee
                 const employeePhotoUrl = photoBaseUrl + latestEmployee.photo; // Construct full path using `photo`
                 $('#employeePhoto').attr('src', employeePhotoUrl); // Update the employee photo display
 
                 $('#employeeFullName').text(latestEmployee.fullname); // Update the employee full name display
-
-                canScan = true; // Re-enable scanning
                 isProcessing = false; // Reset processing flag
                 $("#scannerInput").val(''); // Clear input
                 focusScannerInput(); // Refocus on the input field
@@ -120,8 +126,7 @@
                 text: message,
                 icon: 'error',
                 willClose: () => {
-                    canScan = true;
-                    isProcessing = false;
+                    isProcessing = false; // Reset processing flag
                     $("#scannerInput").val('');
                     focusScannerInput();
                 }

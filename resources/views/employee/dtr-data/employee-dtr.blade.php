@@ -1,3 +1,5 @@
+
+
 <div class="d-xl-flex justify-content-between">
     <div class="d-md-flex d-xl-block">
         <div>
@@ -9,7 +11,7 @@
             <img id="employeePhoto" src="{{ asset('photos/photos/'.$empPhoto) }}" alt="Employee Photo" style="width: 200px; height: 200px; object-fit: cover; border: 2px solid #ccc;">
         </div>
         <div>
-            <p id="employeeFullName" style="font-size: 18px; font-weight: bold; margin-top: 10px;"></p>
+            <p id="employeeFullName" style="font-size: 18px; font-weight: bold; margin-top: 10px;">{{$empFullname}}</p>
         </div>
     </div>
     <div class="col-xl-9 ps-xl-5 mt-4 mt-md-5 mt-xl-0">
@@ -43,8 +45,6 @@
                             <td>@if($data->out2) {{Carbon\Carbon::parse($data->out2)->format('h:i A')}} @endif</td>
                         </tr>
                     @endforeach
-                @else
-                    <p>No records found.</p>
                 @endif
                 </tbody>
             </table>
