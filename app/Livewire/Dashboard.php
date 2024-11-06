@@ -56,15 +56,36 @@ class Dashboard extends Component
         $this->title = $kj->title;
     }
 
-//    public function click(){
-//        $userPasswords = UserPassword::all();
-//
-//        foreach ($userPasswords as $userPassword) {
-//            // Update the users table where the usernames match
-//            User::where('username', $userPassword->username)
-//                ->update(['show_pass' => $userPassword->password]);
-//        }
-//    }
+    public function click(){
+        $ff = Submission::all();
+        foreach ($ff as $f){
+            if ($f->campaign == "RIDESHARE UBER/LYFT" and $f->client == "MOLLIE"){
+                $nn = Submission::find($f->id);
+                $nn->method = "cpl";
+                $nn->save();
+            }
+            elseif ($f->campaign == "NEC" and $f->client == "MOLLIE"){
+                $nn = Submission::find($f->id);
+                $nn->method = "cpl";
+                $nn->save();
+            }
+            elseif ($f->campaign == "RIDESHARE UBER/LYFT" and $f->client == "RYAN"){
+                $nn = Submission::find($f->id);
+                $nn->method = "cpl";
+                $nn->save();
+            }
+            elseif ($f->campaign == "AFFF" and $f->client == "BRUNO"){
+                $nn = Submission::find($f->id);
+                $nn->method = "cpa";
+                $nn->save();
+            }
+            elseif ($f->campaign == "NEC" and $f->client == "BRUNO"){
+                $nn = Submission::find($f->id);
+                $nn->method = "cpl";
+                $nn->save();
+            }
+        }
+    }
     public function delete(){
         $this->hin = "removed";
         try {

@@ -37,6 +37,7 @@
                         <thead>
                         <tr>
                             <th scope="col" style="width: 9%;">id</th>
+                            <th scope="col" style="width: 9%;">method</th>
                             <th scope="col" style="width: 9%;">Date</th>
                             <th scope="col" style="width: 9%;">Agent</th>
                             <th scope="col" style="width: 9%;">Claimant</th>
@@ -55,6 +56,9 @@
                             <tr onmouseover="hoverDupe({{$data->id}})" onmouseout="hoverOutDupe({{$data->id}})">
                                 <td>
                                     {{$data->id}}
+                                </td>
+                                <td>
+                                    {{$data->method}}
                                 </td>
                                 <td>
                                     {{$data->date}}
