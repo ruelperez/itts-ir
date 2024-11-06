@@ -132,7 +132,7 @@ class MasstortTrackerEdit extends Component
     }
 
     public function clickUpdate(){
-        $this->date2 = Carbon::now()->format('m/d/Y');
+//        $this->date2 = Carbon::now()->format('m/d/Y');
         $this->dispatch('showModal');
     }
 

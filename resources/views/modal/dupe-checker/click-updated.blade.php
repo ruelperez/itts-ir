@@ -1,4 +1,4 @@
-<div class="modal fade" tabindex="-1" id="clickUpdated">
+<div class="modal fade" id="clickUpdated">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
