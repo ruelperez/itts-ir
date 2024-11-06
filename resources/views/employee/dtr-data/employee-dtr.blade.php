@@ -6,7 +6,7 @@
         </div>
         <!-- Employee Photo Section -->
         <div class="mt-5">
-            <img id="employeePhoto" src="{{ asset('photos/photos/'.$empPhoto) }}" alt="Employee Photo" style="width: 200px; height: 200px; object-fit: cover; border: 2px solid #ccc;" />
+            <img id="employeePhoto" src="{{ asset('photos/photos/'.$empPhoto) }}" alt="Employee Photo" style="width: 250px; height: 250px; object-fit: cover; border: 2px solid #ccc;" />
         </div>
         <div>
             <p id="employeeFullName" style="font-size: 18px; font-weight: bold; margin-top: 10px;">{{$empFullname}}</p>
