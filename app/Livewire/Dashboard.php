@@ -19,6 +19,7 @@ use App\Models\User;
 use App\Models\UserAccess;
 use App\Models\UserPassword;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -57,7 +58,7 @@ class Dashboard extends Component
     }
 
     public function click(){
-        $ff = Submission::all();
+        $ff = DB::table('submissions')->get();
         foreach ($ff as $f){
             if ($f->campaign == "RIDESHARE UBER/LYFT" and $f->client == "MOLLIE"){
                 $nn = Submission::find($f->id);
