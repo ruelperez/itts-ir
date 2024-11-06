@@ -24,7 +24,10 @@
         <table class="table text-white">
             <thead>
             <tr>
+                <th scope="col">Agent</th>
                 <th scope="col">Campaign</th>
+                <th scope="col">Client</th>
+                <th scope="col">Remarks</th>
                 <th scope="col">Counts</th>
             </tr>
             </thead>
@@ -32,7 +35,16 @@
             @foreach($salesData as $data)
                 <tr>
                     <td>
+                        {{$data->agent}}
+                    </td>
+                    <td>
                         {{$data->campaign}}
+                    </td>
+                    <td>
+                        {{$data->client}}
+                    </td>
+                    <td>
+                        {{$data->remarks}}
                     </td>
                     <td>
                         {{$data->count}}

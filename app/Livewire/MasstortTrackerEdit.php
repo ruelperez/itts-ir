@@ -16,6 +16,7 @@ use App\Models\SuperadminShow;
 use App\Models\TimeSetting;
 use App\Models\User;
 use App\Models\UserPassword;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -26,7 +27,7 @@ class MasstortTrackerEdit extends Component
     public $registrationSwitch, $ids, $dtrData = [], $position, $is_success = false, $employeeData, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
             $date, $campaign, $base = true, $client, $lawfirm, $caseType, $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source, $displayRemarks, $result,
             $campaignList = [], $dqReason, $returnClient, $returnCriteria, $dqCriteria, $dqClient, $dqQa, $dqManager, $dqVerifier, $returnReason, $lawfirmList = [], $clientList = [], $showSearch = false, $showSearchCoach = false, $showSearchVerifier = false,
-            $results = [], $resultsCoach = [], $displayRem, $resultsVerifier = [];
+            $results = [], $method, $resultsCoach = [], $date2, $returnedOther, $displayRem, $resultsVerifier = [];
 
     public function render()
     {
@@ -127,7 +128,12 @@ class MasstortTrackerEdit extends Component
         $this->source = $yr->source;
         $this->displayRemarks = $yr->remarks;
         $this->result = $yr->result;
-        $this->displayRem = explode(" -", $yr->remarks)[0];
+        $this->method = $yr->method;
+    }
+
+    public function clickUpdate(){
+        $this->date2 = Carbon::now()->format('m/d/Y');
+        $this->dispatch('showModal');
     }
 
     public function submitEdit(){
@@ -184,26 +190,8 @@ class MasstortTrackerEdit extends Component
                     'source' => 'required',
                 ]);
             }
-            if ($this->result == "DQ - Other reason"){
-                $this->result = "DQ - ".$this->dqReason;
-            }
-            if ($this->result == "Return by Client"){
-                $this->result = "Return by client - ".$this->returnReason;
-            }
-            if ($this->result == "DQ - Criteria"){
-                $this->result = "DQ by Criteria - ".$this->dqCriteria;
-            }
-            if ($this->result == "DQ by Client"){
-                $this->result = "DQ by Client - ".$this->dqClient;
-            }
-            if ($this->result == "DQ by QA"){
-                $this->result = "DQ by QA - ".$this->dqQa;
-            }
-            if ($this->result == "DQ by Manager"){
-                $this->result = "DQ by Manager - ".$this->dqManager;
-            }
-            if ($this->result == "DQ by VER"){
-                $this->result = "DQ by Verifier - ".$this->dqVerifier;
+            if ($this->result == "Returned - Other"){
+                $this->result = "Returned - ".$this->returnedOther;
             }
             try {
 //                $res = implode(', ', $this->remarks);
@@ -244,30 +232,14 @@ class MasstortTrackerEdit extends Component
             }
         }
         else{
-            if ($this->result == "DQ - Other reason"){
-                $this->result = "DQ - ".$this->dqReason;
-            }
-            if ($this->result == "Return by Client"){
-                $this->result = "Return by client - ".$this->returnReason;
-            }
-            if ($this->result == "DQ - Criteria"){
-                $this->result = "DQ by Criteria - ".$this->dqCriteria;
-            }
-            if ($this->result == "DQ by Client"){
-                $this->result = "DQ by Client - ".$this->dqClient;
-            }
-            if ($this->result == "DQ by QA"){
-                $this->result = "DQ by QA - ".$this->dqQa;
-            }
-            if ($this->result == "DQ by Manager"){
-                $this->result = "DQ by Manager - ".$this->dqManager;
-            }
-            if ($this->result == "DQ by VER"){
-                $this->result = "DQ by Verifier - ".$this->dqVerifier;
+            if ($this->result == "Returned - Other"){
+                $this->result = "Returned";
             }
             try {
                 $kk = Submission::find($this->ids);
                 $kk->result = $this->result;
+                $kk->comment = $this->returnedOther;
+                $kk->date = $this->date2;
                 $kk->save();
                 \App\Models\Logs::create([
                     'action' => "Edit dupe checker with a customer phone number ".$this->phoneNumber,

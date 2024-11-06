@@ -40,13 +40,13 @@ class EmployeeSalesReport extends Component
             $start = Carbon::createFromFormat('m/d/Y', $this->start)->startOfDay();
             $end = Carbon::createFromFormat('m/d/Y', $this->end)->endOfDay();
 
-            $this->salesData = $model::select('agent','campaign', DB::raw('COUNT(*) as count'))
+            $this->salesData = $model::select('agent','campaign','client','result', DB::raw('COUNT(*) as count'))
                 ->whereBetween(
                     DB::raw('STR_TO_DATE(date, "%m/%d/%Y")'),
                     [$start, $end]
                 )
-                ->whereIn('result', ['Signed / Executed', 'Transferred / Pending']) // Use whereIn for multiple conditions
-                ->groupBy('agent','campaign')
+                ->whereIn('result', ['Signed / Pending Result', 'Signed / Executed', 'Transfer / Pending Result', 'Transfer / Executed', 'Posted / Pending Result', 'Posted / Executed']) // Use whereIn for multiple conditions
+                ->groupBy('agent','campaign','client','result')
                 ->get();
         }
     }

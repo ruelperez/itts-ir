@@ -158,6 +158,7 @@ class MasstortForm extends Component
                 'user_name' => $this->fullname,
                 'user_id' => $this->user_id,
                 'lawfirm' => $this->lawfirm,
+                'method' => $this->bbb->method,
             ]);
             \App\Models\Logs::create([
                 'action' => "Add submission with a customer phone number ".$this->phoneNumber,

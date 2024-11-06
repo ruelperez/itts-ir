@@ -40,13 +40,13 @@ class SalesReport extends Component
             $start = Carbon::createFromFormat('m/d/Y', $this->start)->startOfDay();
             $end = Carbon::createFromFormat('m/d/Y', $this->end)->endOfDay();
 
-            $this->salesData = $model::select('campaign', 'result', DB::raw('COUNT(campaign) as count'))
+            $this->salesData = $model::select('campaign', 'client', 'result', DB::raw('COUNT(*) as count'))
                 ->whereBetween(
                     DB::raw('STR_TO_DATE(date, "%m/%d/%Y")'),
                     [$start, $end]
                 )
-                ->whereIn('result', ['Signed / Executed', 'Transferred / Pending'])
-                ->groupBy('campaign','result')
+                ->whereIn('result', ['Signed / Pending Result', 'Signed / Executed', 'Transfer / Pending Result', 'Transfer / Executed', 'Posted / Pending Result', 'Posted / Executed'])
+                ->groupBy('campaign', 'client', 'result')
                 ->get();
         }
     }

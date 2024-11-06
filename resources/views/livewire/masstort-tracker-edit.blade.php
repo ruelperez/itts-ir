@@ -3,11 +3,12 @@
     @include('modal.dashboard.anounce')
     @include('modal.dashboard.saveOrNot')
     @include('modal.dashboard.click-data')
+    @include('modal.dupe-checker.click-updated')
                 <div>
                     <h6>Edit Dupe Checker ({{$phoneNumber}}) </h6>
                 </div>
                 <div style="background-color: #696969; color: white; padding: 15px 40px;  border-radius: 2%;" class="mt-4">
-                    <form wire:submit.prevent="submitEdit">
+                    <form wire:submit.prevent="clickUpdate">
                         <div class="d-flex">
                             <div class="mb-2"><i>Put "n/a" if not applicable</i></div>
 {{--                            <div>--}}
@@ -226,31 +227,51 @@
                                     <div class="col-5">
                                         <select class="form-select" aria-label="Default select example" wire:model="result" x-model="selectedOption" required>
                                             <option value="">Select Result</option>
-                                            @if($displayRem == "transferred" or $displayRem == "Need Retransfer" or $displayRem == "For Callback" or $displayRem == "Docs Needed")
-                                                <option value="Transferred / Pending">Transferred / Pending</option>
+                                            @if($method == "cpa")
+                                                <option value="Signed / Pending Result">Signed / Pending Result</option>
                                                 <option value="Signed / Executed">Signed / Executed</option>
+                                                <option value="Returned - Felony">Returned - Felony</option>
+                                                <option value="Returned - Duplicate">Returned - Duplicate</option>
+                                                <option value="Returned - No Contact">Returned - No Contact</option>
+                                                <option value="Returned - DQ Criteria">Returned - DQ Criteria</option>
+                                                <option value="Returned - Docs Required">Returned - Docs Required</option>
+                                                <option value="Returned - QA Failed">Returned - QA Failed</option>
+                                                <option value="Returned - Don't Want To Proceed">Returned - Don't Want To Proceed</option>
+                                                <option value="Returned - Other">Returned - Other</option>
+                                            @elseif($method == "cpl")
+                                                <option value="Transfer / Pending Result">Transfer / Pending Result</option>
+                                                <option value="Transfer / Executed">Transfer / Executed</option>
+                                                <option value="Returned - Felony">Returned - Felony</option>
+                                                <option value="Returned - Duplicate">Returned - Duplicate</option>
+                                                <option value="Returned - No Contact">Returned - No Contact</option>
+                                                <option value="Returned - DQ Criteria">Returned - DQ Criteria</option>
+                                                <option value="Returned - Docs Required">Returned - Docs Required</option>
+                                                <option value="Returned - QA Failed">Returned - QA Failed</option>
+                                                <option value="Returned - Don't Want To Proceed">Returned - Don't Want To Proceed</option>
+                                                <option value="Returned - Other">Returned - Other</option>
                                             @else
-                                                <option value="Signed / Executed">Signed / Executed</option>
+                                                <option value="Posted / Pending Result">Posted / Pending Result</option>
+                                                <option value="Posted / Executed">Posted / Executed</option>
+                                                <option value="Returned - Felony">Returned - Felony</option>
+                                                <option value="Returned - Duplicate">Returned - Duplicate</option>
+                                                <option value="Returned - No Contact">Returned - No Contact</option>
+                                                <option value="Returned - DQ Criteria">Returned - DQ Criteria</option>
+                                                <option value="Returned - Docs Required">Returned - Docs Required</option>
+                                                <option value="Returned - QA Failed">Returned - QA Failed</option>
+                                                <option value="Returned - Don't Want To Proceed">Returned - Don't Want To Proceed</option>
+                                                <option value="Returned - Other">Returned - Other</option>
                                             @endif
-                                            <option value="Return by Client">Return by Client</option>
-                                            <option value="DQ - Other reason">DQ - Other reason</option>
-                                            <option value="DQ - Criteria">DQ - Criteria</option>
-                                            <option value="DQ by Client">DQ by Client</option>
-                                            <option value="DQ by QA">DQ by QA</option>
-                                            <option value="DQ by Manager">DQ By Manager</option>
-                                            <option value="DQ by VER">DQ by VER</option>
-                                            <option value="Pending / On Hold">Pending / On Hold</option>
                                         </select>
                                         @error('result') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                     </div>
                                     <div class="col-6">
-                                        <textarea class="form-control  ms-2" rows="2" wire:model="dqReason"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ - Other reason'"></textarea>
-                                        <textarea class="form-control  ms-2" rows="2" wire:model="returnReason"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'Return by Client'"></textarea>
-                                        <textarea class="form-control  ms-2" rows="2" wire:model="dqCriteria"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ - Criteria'"></textarea>
-                                        <textarea class="form-control  ms-2" rows="2" wire:model="dqClient"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ by Client'"></textarea>
-                                        <textarea class="form-control  ms-2" rows="2" wire:model="dqQa"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ by QA'"></textarea>
-                                        <textarea class="form-control  ms-2" rows="2" wire:model="dqManager"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ by Manager'"></textarea>
-                                        <textarea class="form-control  ms-2" rows="2" wire:model="dqVerifier"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ by VER'"></textarea>
+                                        <textarea class="form-control  ms-2" rows="2" wire:model="returnedOther"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'Returned - Other'"></textarea>
+{{--                                        <textarea class="form-control  ms-2" rows="2" wire:model="returnReason"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'Return by Client'"></textarea>--}}
+{{--                                        <textarea class="form-control  ms-2" rows="2" wire:model="dqCriteria"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ - Criteria'"></textarea>--}}
+{{--                                        <textarea class="form-control  ms-2" rows="2" wire:model="dqClient"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ by Client'"></textarea>--}}
+{{--                                        <textarea class="form-control  ms-2" rows="2" wire:model="dqQa"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ by QA'"></textarea>--}}
+{{--                                        <textarea class="form-control  ms-2" rows="2" wire:model="dqManager"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ by Manager'"></textarea>--}}
+{{--                                        <textarea class="form-control  ms-2" rows="2" wire:model="dqVerifier"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOption === 'DQ by VER'"></textarea>--}}
                                     </div>
                                 </div>
                             @else
@@ -275,31 +296,51 @@
                                 <div class="col-3">
                                     <select class="form-select" aria-label="Default select example" wire:model="result" x-model="selectedOptions" required>
                                         <option value="">Select Result</option>
-                                        @if($displayRem == "transferred" or $displayRem == "Need Retransfer" or $displayRem == "For Callback" or $displayRem == "Docs Needed")
-                                            <option value="Transferred / Pending">Transferred / Pending</option>
+                                        @if($method == "cpa")
+                                            <option value="Signed / Pending Result">Signed / Pending Result</option>
                                             <option value="Signed / Executed">Signed / Executed</option>
+                                            <option value="Returned - Felony">Returned - Felony</option>
+                                            <option value="Returned - Duplicate">Returned - Duplicate</option>
+                                            <option value="Returned - No Contact">Returned - No Contact</option>
+                                            <option value="Returned - DQ Criteria">Returned - DQ Criteria</option>
+                                            <option value="Returned - Docs Required">Returned - Docs Required</option>
+                                            <option value="Returned - QA Failed">Returned - QA Failed</option>
+                                            <option value="Returned - Don't Want To Proceed">Returned - Don't Want To Proceed</option>
+                                            <option value="Returned - Other">Returned - Other</option>
+                                        @elseif($method == "cpl")
+                                            <option value="Transfer / Pending Result">Transfer / Pending Result</option>
+                                            <option value="Transfer / Executed">Transfer / Executed</option>
+                                            <option value="Returned - Felony">Returned - Felony</option>
+                                            <option value="Returned - Duplicate">Returned - Duplicate</option>
+                                            <option value="Returned - No Contact">Returned - No Contact</option>
+                                            <option value="Returned - DQ Criteria">Returned - DQ Criteria</option>
+                                            <option value="Returned - Docs Required">Returned - Docs Required</option>
+                                            <option value="Returned - QA Failed">Returned - QA Failed</option>
+                                            <option value="Returned - Don't Want To Proceed">Returned - Don't Want To Proceed</option>
+                                            <option value="Returned - Other">Returned - Other</option>
                                         @else
-                                            <option value="Signed / Executed">Signed / Executed</option>
+                                            <option value="Posted / Pending Result">Posted / Pending Result</option>
+                                            <option value="Posted / Executed">Posted / Executed</option>
+                                            <option value="Returned - Felony">Returned - Felony</option>
+                                            <option value="Returned - Duplicate">Returned - Duplicate</option>
+                                            <option value="Returned - No Contact">Returned - No Contact</option>
+                                            <option value="Returned - DQ Criteria">Returned - DQ Criteria</option>
+                                            <option value="Returned - Docs Required">Returned - Docs Required</option>
+                                            <option value="Returned - QA Failed">Returned - QA Failed</option>
+                                            <option value="Returned - Don't Want To Proceed">Returned - Don't Want To Proceed</option>
+                                            <option value="Returned - Other">Returned - Other</option>
                                         @endif
-                                        <option value="Return by Client">Return by Client</option>
-                                        <option value="DQ - Other reason">DQ - Other reason</option>
-                                        <option value="DQ - Criteria">DQ - Criteria</option>
-                                        <option value="DQ by Client">DQ by Client</option>
-                                        <option value="DQ by QA">DQ by QA</option>
-                                        <option value="DQ by Manager">DQ By Manager</option>
-                                        <option value="DQ by VER">DQ by VER</option>
-                                        <option value="Pending / On Hold">Pending / On Hold</option>
                                     </select>
                                     @error('result') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="col-5">
-                                    <textarea class="form-control" rows="2" wire:model="dqReason"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOptions === 'DQ - Other reason'"></textarea>
-                                    <textarea class="form-control  ms-2" rows="2" wire:model="returnReason"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOptions === 'Return by Client'"></textarea>
-                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqCriteria"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOptions === 'DQ - Criteria'"></textarea>
-                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqClient"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOptions === 'DQ by Client'"></textarea>
-                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqQa"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOptions === 'DQ by QA'"></textarea>
-                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqManager"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOptions === 'DQ by Manager'"></textarea>
-                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqVerifier"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOptions === 'DQ by VER'"></textarea>
+                                    <textarea class="form-control" rows="2" wire:model="returnedOther"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOptions === 'Returned - Other'"></textarea>
+{{--                                    <textarea class="form-control  ms-2" rows="2" wire:model="returnReason"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOptions === 'Return by Client'"></textarea>--}}
+{{--                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqCriteria"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOptions === 'DQ - Criteria'"></textarea>--}}
+{{--                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqClient"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOptions === 'DQ by Client'"></textarea>--}}
+{{--                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqQa"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOptions === 'DQ by QA'"></textarea>--}}
+{{--                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqManager"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOptions === 'DQ by Manager'"></textarea>--}}
+{{--                                    <textarea class="form-control  ms-2" rows="2" wire:model="dqVerifier"  style="border: none; display: none" placeholder="Reason:" x-show="selectedOptions === 'DQ by VER'"></textarea>--}}
                                 </div>
                             </div>
                         @endif
@@ -309,6 +350,7 @@
 
         <button id="btn12345" style="display: none"></button>
         <button id="btn678" style="display: none"></button>
+        <button id="btn679" style="display: none" data-bs-toggle="modal" data-bs-target="#clickUpdated"></button>
 
     @script
     <script>
@@ -317,6 +359,9 @@
         });
         $wire.on('editBad', () => {
             $('#btn678').click();
+        });
+        $wire.on('showModal', () => {
+            $('#btn679').click();
         });
     </script>
     @endscript

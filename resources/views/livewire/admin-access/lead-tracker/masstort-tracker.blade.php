@@ -92,7 +92,7 @@
                                     {{$data->remarks}}
                                 </td>
                                 <td>
-                                    {{ucfirst($data->result)}}
+                                    {{ucfirst($data->result)}} @if($data->comment != "") - @endif {{ucfirst($data->comment)}}
                                 </td>
                                 <td>
                                     <input class="form-check-input" type="checkbox" wire:model.live="checkBox" value="{{$data->id}}" id="flexCheckDefault{{$data->id}}" style="font-size: 18px; cursor: pointer" wire:loading.attr="disabled">

@@ -28,6 +28,8 @@
                 <th scope="col">No.</th>
                 <th scope="col">Agent</th>
                 <th scope="col">Campaign</th>
+                <th scope="col">Client</th>
+                <th scope="col">Result</th>
                 <th scope="col">Counts</th>
             </tr>
             </thead>
@@ -43,6 +45,12 @@
                     </td>
                     <td>
                         {{$data->campaign}}
+                    </td>
+                    <td>
+                        {{$data->client}}
+                    </td>
+                    <td>
+                        {{$data->result}}
                     </td>
                     <td>
                         {{$data->count}}

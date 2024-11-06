@@ -25,8 +25,9 @@
             <thead>
             <tr>
                 <th scope="col">Campaign</th>
-                <th scope="col">Counts</th>
+                <th scope="col">Client</th>
                 <th scope="col">Result</th>
+                <th scope="col">Counts</th>
             </tr>
             </thead>
             <tbody>
@@ -36,10 +37,13 @@
                         {{$data->campaign}}
                     </td>
                     <td>
-                        {{$data->count}}
+                        {{$data->client}}
                     </td>
                     <td>
                         {{$data->result}}
+                    </td>
+                    <td>
+                        {{$data->count}}
                     </td>
                 </tr>
             @endforeach

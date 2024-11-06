@@ -30,8 +30,6 @@ class SubmissionReport extends Component
 
         $start_date = Carbon::createFromFormat('m/d/Y', $this->start)->startOfDay();
         $end_date = Carbon::createFromFormat('m/d/Y', $this->end)->endOfDay();
-
-
         if ($end_date->lt($start_date)) {
             $this->submissionData = [];
             $this->dispatch('error');
@@ -40,17 +38,22 @@ class SubmissionReport extends Component
             $start = Carbon::createFromFormat('m/d/Y', $this->start)->startOfDay();
             $end = Carbon::createFromFormat('m/d/Y', $this->end)->endOfDay();
 
-            $this->salesData = $model::select('campaign', DB::raw('COUNT(campaign) as count'))
+            $this->salesData = $model::select('agent', 'campaign', 'client','remarks', DB::raw('COUNT(*) as count'))
                 ->whereBetween(
                     DB::raw('STR_TO_DATE(date, "%m/%d/%Y")'),
                     [$start, $end]
                 )
                 ->where(function($query) {
                     $query->where('result', '!=', 'Signed / Executed')
-                        ->orWhereNull('result'); // Allow for null values
+                        ->orWhere('result', '!=', 'Signed / Pending Result')
+                        ->orWhere('result', '!=', 'Transfer / Pending Result')
+                        ->orWhere('result', '!=', 'Transfer / Executed')
+                        ->orWhere('result', '!=', 'Posted / Pending Result')
+                        ->orWhere('result', '!=', 'Posted / Executed')
+                        ->orWhereNull('result');
                 })
                 ->where('remarks', 'not like', '%Invalid TO%')
-                ->groupBy('campaign')
+                ->groupBy('campaign', 'client', 'remarks', 'agent')
                 ->get();
         }
     }
