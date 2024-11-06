@@ -486,6 +486,9 @@ class MasstortTracker extends Component
         $this->coach = $dv->coach;
         $this->verifier = $dv->verifier;
         $this->source = $dv->source;
+        $this->campaign = $dv->campaign;
+        $this->client = $dv->client;
+        $this->lawfirm = $dv->lawfirm;
     }
     public function clickSearch(){
         if ($this->agent != ""){
