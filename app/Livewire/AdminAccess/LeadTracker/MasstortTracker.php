@@ -489,6 +489,7 @@ class MasstortTracker extends Component
         $this->campaign = $dv->campaign;
         $this->client = $dv->client;
         $this->lawfirm = $dv->lawfirm;
+        $this->date = $dv->date;
     }
     public function clickSearch(){
         if ($this->agent != ""){

@@ -12,6 +12,9 @@
             </div>
             <div class="ms-3 mt-3"  wire:loading.remove>
                 <div>
+                    <p>Date: <b>{{ucfirst($date)}}</b></p>
+                </div>
+                <div>
                     <p>Campaign: <b>{{ucfirst($campaign)}}</b></p>
                 </div>
                 <div>
