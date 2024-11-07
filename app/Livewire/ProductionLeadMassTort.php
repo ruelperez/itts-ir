@@ -23,7 +23,7 @@ class ProductionLeadMassTort extends Component
 {
 
     public $registrationSwitch, $search = "", $currentPage = 1, $caseType, $claimant, $injuredParty, $fname, $lname, $agentName, $perPage = 15, $submissionData = [], $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
-        $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source, $campaign, $lawfirm, $client, $result, $remarks;
+        $phoneNumber, $date, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source, $campaign, $lawfirm, $client, $result, $remarks;
 
     public function render()
     {
@@ -99,6 +99,7 @@ class ProductionLeadMassTort extends Component
         $this->lawfirm = $dv->lawfirm;
         $this->remarks = $dv->remarks;
         $this->result = $dv->result;
+        $this->date = $dv->date;
     }
 
     public function displayData()
