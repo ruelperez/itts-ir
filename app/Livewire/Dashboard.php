@@ -56,58 +56,58 @@ class Dashboard extends Component
         $this->title = $kj->title;
     }
 
-    public function click(){
-
-        $ff = Submission::where(function($query) {
-            $query->where('campaign','RIDESHARE UBER/LYFT')
-                ->where('client', 'MOLLIE');
-            })
-            ->orWhere(function($query) {
-                $query->where('campaign','NEC')
-                    ->where('client', 'MOLLIE');
-            })
-            ->orWhere(function($query) {
-                $query->where('campaign','RIDESHARE UBER/LYFT')
-                    ->where('client', 'RYAN');
-            })
-            ->orWhere(function($query) {
-                $query->where('campaign','AFFF')
-                    ->where('client', 'BRUNO');
-            })
-            ->orWhere(function($query) {
-                $query->where('campaign','NEC')
-                    ->where('client', 'BRUNO');
-            })
-            ->get();
-
-        foreach ($ff as $f){
-            if ($f->campaign == "RIDESHARE UBER/LYFT" and $f->client == "MOLLIE"){
-                $nn = Submission::find($f->id);
-                $nn->method = "cpl";
-                $nn->save();
-            }
-            elseif ($f->campaign == "NEC" and $f->client == "MOLLIE"){
-                $nn = Submission::find($f->id);
-                $nn->method = "cpl";
-                $nn->save();
-            }
-            elseif ($f->campaign == "RIDESHARE UBER/LYFT" and $f->client == "RYAN"){
-                $nn = Submission::find($f->id);
-                $nn->method = "cpl";
-                $nn->save();
-            }
-            elseif ($f->campaign == "AFFF" and $f->client == "BRUNO"){
-                $nn = Submission::find($f->id);
-                $nn->method = "cpa";
-                $nn->save();
-            }
-            elseif ($f->campaign == "NEC" and $f->client == "BRUNO"){
-                $nn = Submission::find($f->id);
-                $nn->method = "cpl";
-                $nn->save();
-            }
-        }
-    }
+//    public function click(){
+//
+//        $ff = Submission::where(function($query) {
+//            $query->where('campaign','RIDESHARE UBER/LYFT')
+//                ->where('client', 'MOLLIE');
+//            })
+//            ->orWhere(function($query) {
+//                $query->where('campaign','NEC')
+//                    ->where('client', 'MOLLIE');
+//            })
+//            ->orWhere(function($query) {
+//                $query->where('campaign','RIDESHARE UBER/LYFT')
+//                    ->where('client', 'RYAN');
+//            })
+//            ->orWhere(function($query) {
+//                $query->where('campaign','AFFF')
+//                    ->where('client', 'BRUNO');
+//            })
+//            ->orWhere(function($query) {
+//                $query->where('campaign','NEC')
+//                    ->where('client', 'BRUNO');
+//            })
+//            ->get();
+//
+//        foreach ($ff as $f){
+//            if ($f->campaign == "RIDESHARE UBER/LYFT" and $f->client == "MOLLIE"){
+//                $nn = Submission::find($f->id);
+//                $nn->method = "cpl";
+//                $nn->save();
+//            }
+//            elseif ($f->campaign == "NEC" and $f->client == "MOLLIE"){
+//                $nn = Submission::find($f->id);
+//                $nn->method = "cpl";
+//                $nn->save();
+//            }
+//            elseif ($f->campaign == "RIDESHARE UBER/LYFT" and $f->client == "RYAN"){
+//                $nn = Submission::find($f->id);
+//                $nn->method = "cpl";
+//                $nn->save();
+//            }
+//            elseif ($f->campaign == "AFFF" and $f->client == "BRUNO"){
+//                $nn = Submission::find($f->id);
+//                $nn->method = "cpa";
+//                $nn->save();
+//            }
+//            elseif ($f->campaign == "NEC" and $f->client == "BRUNO"){
+//                $nn = Submission::find($f->id);
+//                $nn->method = "cpl";
+//                $nn->save();
+//            }
+//        }
+//    }
     public function delete(){
         $this->hin = "removed";
         try {
