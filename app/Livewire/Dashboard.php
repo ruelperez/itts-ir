@@ -19,7 +19,6 @@ use App\Models\User;
 use App\Models\UserAccess;
 use App\Models\UserPassword;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -58,7 +57,29 @@ class Dashboard extends Component
     }
 
     public function click(){
-        $ff = DB::table('submissions')->get();
+
+        $ff = Submission::where(function($query) {
+            $query->where('campaign','RIDESHARE UBER/LYFT')
+                ->where('client', 'MOLLIE');
+            })
+            ->orWhere(function($query) {
+                $query->where('campaign','NEC')
+                    ->where('client', 'MOLLIE');
+            })
+            ->orWhere(function($query) {
+                $query->where('campaign','RIDESHARE UBER/LYFT')
+                    ->where('client', 'RYAN');
+            })
+            ->orWhere(function($query) {
+                $query->where('campaign','AFFF')
+                    ->where('client', 'BRUNO');
+            })
+            ->orWhere(function($query) {
+                $query->where('campaign','NEC')
+                    ->where('client', 'BRUNO');
+            })
+            ->get();
+
         foreach ($ff as $f){
             if ($f->campaign == "RIDESHARE UBER/LYFT" and $f->client == "MOLLIE"){
                 $nn = Submission::find($f->id);
