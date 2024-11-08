@@ -136,7 +136,6 @@ class MasstortForm extends Component
         if ($this->lawfirm == "selectLawfirm"){
             $this->lawfirm = "n/a";
         }
-        dd($this->bbb->method);
         try {
             Submission::create([
                 'date' => $this->date,
