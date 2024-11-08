@@ -230,28 +230,15 @@
                                             @if($method == "CPA" or $method == "cpa")
                                                 <option value="Signed / Pending Result">Signed / Pending Result</option>
                                                 <option value="Signed / Executed">Signed / Executed</option>
-                                                <option value="Returned - Felony">Returned - Felony</option>
-                                                <option value="Returned - Duplicate">Returned - Duplicate</option>
-                                                <option value="Returned - No Contact">Returned - No Contact</option>
-                                                <option value="Returned - DQ Criteria">Returned - DQ Criteria</option>
-                                                <option value="Returned - Docs Required">Returned - Docs Required</option>
-                                                <option value="Returned - QA Failed">Returned - QA Failed</option>
-                                                <option value="Returned - Don't Want To Proceed">Returned - Don't Want To Proceed</option>
-                                                <option value="Returned - Other">Returned - Other</option>
                                             @elseif($method == "cpl")
                                                 <option value="Transfer / Pending Result">Transfer / Pending Result</option>
                                                 <option value="Transfer / Executed">Transfer / Executed</option>
-                                                <option value="Returned - Felony">Returned - Felony</option>
-                                                <option value="Returned - Duplicate">Returned - Duplicate</option>
-                                                <option value="Returned - No Contact">Returned - No Contact</option>
-                                                <option value="Returned - DQ Criteria">Returned - DQ Criteria</option>
-                                                <option value="Returned - Docs Required">Returned - Docs Required</option>
-                                                <option value="Returned - QA Failed">Returned - QA Failed</option>
-                                                <option value="Returned - Don't Want To Proceed">Returned - Don't Want To Proceed</option>
-                                                <option value="Returned - Other">Returned - Other</option>
                                             @else
                                                 <option value="Posted / Pending Result">Posted / Pending Result</option>
                                                 <option value="Posted / Executed">Posted / Executed</option>
+                                            @endif
+                                                <option value="DQ By Manager">DQ By Manager</option>
+                                                <option value="DQ Due to Risk">DQ Due to Risk</option>
                                                 <option value="Returned - Felony">Returned - Felony</option>
                                                 <option value="Returned - Duplicate">Returned - Duplicate</option>
                                                 <option value="Returned - No Contact">Returned - No Contact</option>
@@ -260,7 +247,6 @@
                                                 <option value="Returned - QA Failed">Returned - QA Failed</option>
                                                 <option value="Returned - Don't Want To Proceed">Returned - Don't Want To Proceed</option>
                                                 <option value="Returned - Other">Returned - Other</option>
-                                            @endif
                                         </select>
                                         @error('result') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                     </div>
@@ -296,40 +282,26 @@
                                 <div class="col-3">
                                     <select class="form-select" aria-label="Default select example" wire:model="result" x-model="selectedOptions" required>
                                         <option value="">Select Result</option>
-                                        @if($method == "cpa")
+                                        @if($method == "CPA" or $method == "cpa")
                                             <option value="Signed / Pending Result">Signed / Pending Result</option>
                                             <option value="Signed / Executed">Signed / Executed</option>
-                                            <option value="Returned - Felony">Returned - Felony</option>
-                                            <option value="Returned - Duplicate">Returned - Duplicate</option>
-                                            <option value="Returned - No Contact">Returned - No Contact</option>
-                                            <option value="Returned - DQ Criteria">Returned - DQ Criteria</option>
-                                            <option value="Returned - Docs Required">Returned - Docs Required</option>
-                                            <option value="Returned - QA Failed">Returned - QA Failed</option>
-                                            <option value="Returned - Don't Want To Proceed">Returned - Don't Want To Proceed</option>
-                                            <option value="Returned - Other">Returned - Other</option>
                                         @elseif($method == "cpl")
                                             <option value="Transfer / Pending Result">Transfer / Pending Result</option>
                                             <option value="Transfer / Executed">Transfer / Executed</option>
-                                            <option value="Returned - Felony">Returned - Felony</option>
-                                            <option value="Returned - Duplicate">Returned - Duplicate</option>
-                                            <option value="Returned - No Contact">Returned - No Contact</option>
-                                            <option value="Returned - DQ Criteria">Returned - DQ Criteria</option>
-                                            <option value="Returned - Docs Required">Returned - Docs Required</option>
-                                            <option value="Returned - QA Failed">Returned - QA Failed</option>
-                                            <option value="Returned - Don't Want To Proceed">Returned - Don't Want To Proceed</option>
-                                            <option value="Returned - Other">Returned - Other</option>
                                         @else
                                             <option value="Posted / Pending Result">Posted / Pending Result</option>
                                             <option value="Posted / Executed">Posted / Executed</option>
-                                            <option value="Returned - Felony">Returned - Felony</option>
-                                            <option value="Returned - Duplicate">Returned - Duplicate</option>
-                                            <option value="Returned - No Contact">Returned - No Contact</option>
-                                            <option value="Returned - DQ Criteria">Returned - DQ Criteria</option>
-                                            <option value="Returned - Docs Required">Returned - Docs Required</option>
-                                            <option value="Returned - QA Failed">Returned - QA Failed</option>
-                                            <option value="Returned - Don't Want To Proceed">Returned - Don't Want To Proceed</option>
-                                            <option value="Returned - Other">Returned - Other</option>
                                         @endif
+                                        <option value="DQ By Manager">DQ By Manager</option>
+                                        <option value="DQ Due to Risk">DQ Due to Risk</option>
+                                        <option value="Returned - Felony">Returned - Felony</option>
+                                        <option value="Returned - Duplicate">Returned - Duplicate</option>
+                                        <option value="Returned - No Contact">Returned - No Contact</option>
+                                        <option value="Returned - DQ Criteria">Returned - DQ Criteria</option>
+                                        <option value="Returned - Docs Required">Returned - Docs Required</option>
+                                        <option value="Returned - QA Failed">Returned - QA Failed</option>
+                                        <option value="Returned - Don't Want To Proceed">Returned - Don't Want To Proceed</option>
+                                        <option value="Returned - Other">Returned - Other</option>
                                     </select>
                                     @error('result') <span style="color: #8B0000">{{ $message }}</span> @enderror
                                 </div>
