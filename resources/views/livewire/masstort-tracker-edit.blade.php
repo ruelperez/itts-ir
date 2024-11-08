@@ -227,7 +227,7 @@
                                     <div class="col-5">
                                         <select class="form-select" aria-label="Default select example" wire:model="result" x-model="selectedOption" required>
                                             <option value="">Select Result</option>
-                                            @if($method == "CPA")
+                                            @if($method == "CPA" or $method == "cpa")
                                                 <option value="Signed / Pending Result">Signed / Pending Result</option>
                                                 <option value="Signed / Executed">Signed / Executed</option>
                                                 <option value="Returned - Felony">Returned - Felony</option>
