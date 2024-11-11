@@ -39,7 +39,7 @@ class LinkForm extends Component
         }
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
-        $this->dataLink = FormLink::all();
+        $this->dataLink = FormLink::latest()->get();
         return view('livewire.link-form')->title('Form link');
     }
 
