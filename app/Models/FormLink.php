@@ -10,6 +10,7 @@ class FormLink extends Model
     protected $fillable = [
         'title',
         'textLink',
+        'serveFor'
     ];
 
     use HasFactory;

@@ -5,29 +5,33 @@
                 <h5 class="modal-title" id="exampleModalLabel">Update link</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form wire:submit.prevent="submit_edit">
-                <div class="modal-body">
-                    <div class="user-form mb-2" style="display: flex">
-                        <input class="form-control" type="text" placeholder="Enter title" wire:model="title" style="width: 25%;">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Enter link"  wire:model="textlink" style="width: 60%; margin-left: 1%"></textarea>
+            <div class="modal-body">
+                <form wire:submit.prevent="submit_edit">
+                    <div class="row mt-2">
+                        <div class="col-lg-6">
+                            <input class="form-control" type="text" placeholder="Enter title" wire:model="title" style="width: 100%;">
+                        </div>
+                        <div class="mt-2  col-lg-12  mt-lg-0 order-lg-3 mt-lg-3">
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Enter link"  wire:model="textlink" style="width: 100%;"></textarea>
+                        </div>
+                        <div class="mt-2 col-lg-4 mt-lg-0 order-lg-2">
+                            <select class="form-select" aria-label="Default select example" wire:model="serveFor" required>
+                                <option value="">Select Source</option>
+                                <option value="Admin">Admin</option>
+                                <option value="Agent">Agent</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <div style="width: 50%;">
-                        @if(session()->has('goodEdit'))
-                            <div class="alert alert-success" style="width: 100%; " >
-                                {{ session('goodEdit') }}
-                            </div>
-                        @elseif(session()->has('badEdit'))
-                            <div class="alert alert-danger" style="width: 100%; ">
-                                {{ session('badEdit') }}
-                            </div>
-                        @endif
+                    <div class="row mt-5">
+                        <div class="col-lg-6">
+                            <button type="submit" class="btn btn-primary w-100">Update</button>
+                        </div>
+                        <div class="mt-2 col-lg-4 mt-lg-0">
+                            <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Close</button>
+                        </div>
                     </div>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>

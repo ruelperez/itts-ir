@@ -25,7 +25,7 @@ class LinkForm extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $ids, $title, $employeeData, $textlink, $dataLink = [], $dtrData = [], $adminSwitch, $position, $superAdminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $serveFor, $ids, $title, $employeeData, $textlink, $dataLink = [], $dtrData = [], $adminSwitch, $position, $superAdminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -48,6 +48,7 @@ class LinkForm extends Component
        $mm = FormLink::find($id);
        $this->title = $mm->title;
        $this->textlink = $mm->textLink;
+       $this->serveFor = $mm->serveFor;
     }
 
     public function submit_edit(){
@@ -55,12 +56,14 @@ class LinkForm extends Component
         try {
             $mm->title = $this->title;
             $mm->textLink = $this->textlink;
+            $mm->serveFor = $this->serveFor;
             $mm->save();
             $this->title = "";
             $this->textlink = "";
-            session()->flash('goodEdit', "Successfully updated");
+            $this->serveFor = "";
+            $this->dispatch('successEdit');
         }catch (\Exception $e){
-            session()->flash('badEdit', "Failed to update");
+            $this->dispatch('failedEdit');
         }
     }
     public function delete($id){
@@ -71,12 +74,14 @@ class LinkForm extends Component
             FormLink::create([
                 'title' => $this->title,
                 'textLink' => $this->textlink,
+                'serveFor' => $this->serveFor,
             ]);
             $this->title = "";
             $this->textlink = "";
-            session()->flash('good', "Successfully added");
+            $this->serveFor = "";
+            $this->dispatch('success');
         }catch (\Exception $e){
-            session()->flash('bad', "Failed to add");
+            $this->dispatch('failed');
         }
 
     }
