@@ -13,7 +13,7 @@
                     </div>
                 @endif
                 @foreach($dataLink as $daty)
-                    @if($position == "Admin" or $position == "Super Admin")
+                    @if($position == "Admin" or $position == "Super Admin" or $position == "" or $position == null)
                         <div style="margin-left: 3%;margin-top: 2%;" onmouseover="hoverLink({{$daty->id}})" onmouseout="hoverOutLink({{$daty->id}})">
                             {{ucfirst($daty->title)}} <br> <a href="{{$daty->textLink}}" target="_blank">{{$daty->textLink}}</a>
                             <i class="fa-solid fa-pen-to-square" style="display: none; font-size: 17px; margin-left: 20px; cursor: pointer" id="myLink{{$daty->id}}" data-bs-toggle="modal" data-bs-target="#editForm" wire:click="edit({{$daty->id}})"></i>
