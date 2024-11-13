@@ -213,6 +213,8 @@ class MasstortForm extends Component
         $this->orderNumber = "";
         $this->date = "";
         $this->mll = 0;
+        $this->leadOwnership = "";
+        $this->agent2 = "";
     }
     public function clear(){
         $this->clearInput();
@@ -251,8 +253,8 @@ class MasstortForm extends Component
         $this->showSearchVerifier = false;
     }
     public function click_itemsCoach($id){
-        $gh = User::find($id);
-        $this->coach = $gh->fullname;
+        $gh = Employee::find($id);
+        $this->coach = $gh->employeeFullname;
         $this->showSearchCoach = false;
     }
 

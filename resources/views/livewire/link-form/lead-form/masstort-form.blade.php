@@ -188,7 +188,7 @@
                                         <ul class="list-group">
                                             @foreach($resultsCoach as $data)
                                                 <li class="list-group-item btn text-start" style="background-color: #E0FFFF;" wire:click="click_itemsCoach({{$data->id}})">
-                                                    <i class="fa-solid fa-magnifying-glass me-3"></i> {{ucfirst($data->fname)}} {{ucfirst($data->lname)}}
+                                                    <i class="fa-solid fa-magnifying-glass me-3"></i> {{ucfirst($data->fullname)}}
                                                 </li>
                                             @endforeach
                                         </ul>
