@@ -30,24 +30,22 @@
                 @if($leadOwnership == "1st Touch")
                     <div>
                         <p>Agent (1st Touch): <b>{{ucfirst($agent)}}</b></p>
-                    </div><div>
+                    </div>
+                    <div>
                         <p>Agent (2nd Touch): -------</p>
+                    </div>
+                @elseif($leadOwnership == "2nd Touch")
+                    <div>
+                        <p>Agent (1st Touch): <b>{{ucfirst($agent2)}}</b></p>
+                    </div>
+                    <div>
+                        <p>Agent (2nd Touch): <b>{{ucfirst($agent)}}</b></p>
                     </div>
                 @else
                     <div>
-                        <p>Agent (1st Touch): <b>{{ucfirst($agent2)}}</b></p>
-                    </div><div>
-                        <p>Agent (2nd Touch): <b>{{ucfirst($agent)}}</b></p>
+                        <p>Agent : <b>{{ucfirst($agent)}}</b></p>
                     </div>
                 @endif
-                <div>
-                    <p>Agent (1st Touch): <b>{{ucfirst($agent)}}</b></p>
-                </div><div>
-                    <p>Agent (2nd Touch): <b>{{ucfirst($agent)}}</b></p>
-                </div>
-{{--                <div>--}}
-{{--                    <p>Agent: <b>{{ucfirst($agent)}}</b></p>--}}
-{{--                </div>--}}
                 <div>
                     <p>Coach: <b>{{ucfirst($coach)}}</b></p>
                 </div>
