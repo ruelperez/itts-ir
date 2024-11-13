@@ -22,8 +22,8 @@ use Livewire\Component;
 class MasstortForm extends Component
 {
 
-    public $registrationSwitch, $hostingTrans, $gm = 0, $DQ, $jn, $toChecked = false, $comment, $caseType = "self", $is_success = false, $showSearch = false, $showSearchCoach = false, $results = [], $resultsCoach = [], $clientList = [], $campaignList = [], $campaign = "selectCampaign", $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
-            $date, $cplCheck = false, $mll = 0, $campaignName, $displayComment = false, $orderNumber, $desciption, $service, $package, $dateSales, $submission = [], $checkboxDQ, $lawfirm = "selectLawfirm", $bam, $bbb, $client = "selectClient", $bms, $dtvRemarks, $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $checkboxInvalidTO, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "", $resultsVerifier = [], $showSearchVerifier = false ;
+    public $registrationSwitch, $hostingTrans, $gm = 0, $gm2 = 0, $DQ, $jn, $toChecked = false, $comment, $caseType = "self", $is_success = false, $showSearch = false, $showSearch2 = false, $showSearchCoach = false, $results = [], $results2 = [], $resultsCoach = [], $clientList = [], $campaignList = [], $campaign = "selectCampaign", $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
+            $date, $cplCheck = false, $leadOwnership, $mll = 0, $agent2, $campaignName, $displayComment = false, $orderNumber, $desciption, $service, $package, $dateSales, $submission = [], $checkboxDQ, $lawfirm = "selectLawfirm", $bam, $bbb, $client = "selectClient", $bms, $dtvRemarks, $remarks = [], $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $checkboxInvalidTO, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "", $resultsVerifier = [], $showSearchVerifier = false ;
 
     public function render()
     {
@@ -67,6 +67,10 @@ class MasstortForm extends Component
     }
 
     public function submit(){
+        if ($this->gm2 == 0){
+            session()->flash('badAgent2', "Successfully saved");
+            return;
+        }
         if ($this->gm == 0){
             session()->flash('badAgent', "Successfully saved");
             return;
@@ -89,6 +93,7 @@ class MasstortForm extends Component
                 'verifier' => 'required',
                 'source' => 'required',
                 'lawfirm' => 'required',
+                'leadOwnership' => 'required',
             ]);
         }else{
             $this->validate([
@@ -109,6 +114,7 @@ class MasstortForm extends Component
                 'verifier' => 'required',
                 'source' => 'required',
                 'lawfirm' => 'required',
+                'leadOwnership' => 'required',
             ]);
         }
         if ($this->toChecked == true){
@@ -159,6 +165,8 @@ class MasstortForm extends Component
                 'user_id' => $this->user_id,
                 'lawfirm' => $this->lawfirm,
                 'method' => $this->bbb->method,
+                'leadOwnership' => $this->leadOwnership,
+                'agent2' => $this->agent2,
             ]);
             \App\Models\Logs::create([
                 'action' => "Add submission with a customer phone number ".$this->phoneNumber,
@@ -213,6 +221,9 @@ class MasstortForm extends Component
     public function removeSearch(){
         $this->showSearch = false;
     }
+    public function removeSearch2(){
+        $this->showSearch2 = false;
+    }
 
     public function removeSearchVerifier(){
         $this->showSearchVerifier = false;
@@ -222,68 +233,26 @@ class MasstortForm extends Component
         $this->showSearchCoach = false;
     }
 
-    public function clickSearch(){
-        if ($this->agent != ""){
-            $this->results = Employee::where('fname','LIKE','%'. $this->agent. '%')
-                ->orWhere('lname','LIKE','%'. $this->agent. '%')
-                ->take(5)
-                ->get();
-            $this->showSearch = true;
-        }
-        else{
-            $this->showSearch = false;
-            $this->results = [];
-        }
-    }
-
-    public function clickSearchVerifier(){
-        if ($this->verifier != ""){
-            $this->resultsVerifier = Employee::where('fname','LIKE','%'. $this->verifier. '%')
-                ->orWhere('lname','LIKE','%'. $this->verifier. '%')
-                ->take(5)
-                ->get();
-            $this->showSearchVerifier = true;
-        }
-        else{
-            $this->showSearchVerifier = false;
-            $this->resultsVerifier = [];
-        }
-    }
-
-    public function clickSearchCoach(){
-        if ($this->coach != ""){
-            $this->resultsCoach = Employee::where('fname','LIKE','%'. $this->coach. '%')
-                ->where('designation','Subject Matter Expert')
-                ->where('designation','Team Leader')
-                ->where('designation','Senior Team Leader')
-                ->orWhere('lname','LIKE','%'. $this->coach. '%')
-                ->where('designation','Subject Matter Expert')
-                ->where('designation','Team Leader')
-                ->where('designation','Senior Team Leader')->take(5)
-                ->get();
-            $this->showSearchCoach = true;
-        }
-        else{
-            $this->showSearchCoach = false;
-            $this->resultsCoach = [];
-        }
-    }
-
     public function click_items($id){
-        $gh = Employee::find($id);
-        $this->agent = $gh->fname.' '.$gh->lname;
+        $gh = User::find($id);
+        $this->agent = $gh->fullname;
         $this->showSearchCoach = false;
         $this->gm = 1;
     }
+    public function click_items2($id){
+        $gh = User::find($id);
+        $this->agent2 = $gh->fullname;
+        $this->gm2 = 1;
+    }
 
     public function click_itemsVerifier($id){
-        $gh = Employee::find($id);
-        $this->verifier = $gh->fname.' '.$gh->lname;
+        $gh = User::find($id);
+        $this->verifier = $gh->fullname;
         $this->showSearchVerifier = false;
     }
     public function click_itemsCoach($id){
-        $gh = Employee::find($id);
-        $this->coach = $gh->fname.' '.$gh->lname;
+        $gh = User::find($id);
+        $this->coach = $gh->fullname;
         $this->showSearchCoach = false;
     }
 
@@ -541,7 +510,21 @@ class MasstortForm extends Component
 
     }
 
+    public function handleOwnershipChange(){
+        dd('bbb');
+    }
+
     public function updated($field){
+        if ($field == "leadOwnership"){
+            if ($this->leadOwnership == "1st Touch"){
+                $this->agent2 = "";
+                $this->gm2 = 1;
+            }
+            elseif($this->leadOwnership == "" or $this->leadOwnership == null){
+                $this->agent2 = "";
+                $this->gm2 = 1;
+            }
+        }
         if ($field == "subject"){
             $this->clearInput();
             $this->displayComment = false;
@@ -553,17 +536,11 @@ class MasstortForm extends Component
         }
         if ($field == "verifier"){
             if ($this->verifier != ""){
-                $this->resultsVerifier = Employee::where('fname','LIKE','%'. $this->verifier. '%')
+                $this->resultsVerifier = Employee::where('employeeFullname','LIKE','%'. $this->verifier. '%')
                     ->where('designation','Subject Matter Expert')
-                    ->orWhere('fname','LIKE','%'. $this->verifier. '%')
+                    ->orWhere('employeeFullname','LIKE','%'. $this->verifier. '%')
                     ->where('designation','Team Leader')
-                    ->orWhere('fname','LIKE','%'. $this->verifier. '%')
-                    ->where('designation','Senior Team Leader')
-                    ->orWhere('lname','LIKE','%'. $this->verifier. '%')
-                    ->where('designation','Subject Matter Expert')
-                    ->orWhere('lname','LIKE','%'. $this->verifier. '%')
-                    ->where('designation','Team Leader')
-                    ->orWhere('lname','LIKE','%'. $this->verifier. '%')
+                    ->orWhere('employeeFullname','LIKE','%'. $this->verifier. '%')
                     ->where('designation','Senior Team Leader')
                     ->take(5)
                     ->get();
@@ -577,17 +554,11 @@ class MasstortForm extends Component
         }
         if ($field == "coach"){
             if ($this->coach != ""){
-                $this->resultsCoach = Employee::where('fname','LIKE','%'. $this->coach. '%')
+                $this->resultsCoach = Employee::where('employeeFullname','LIKE','%'. $this->coach. '%')
                     ->where('designation','Subject Matter Expert')
-                    ->orWhere('fname','LIKE','%'. $this->coach. '%')
+                    ->orWhere('employeeFullname','LIKE','%'. $this->coach. '%')
                     ->where('designation','Team Leader')
-                    ->orWhere('fname','LIKE','%'. $this->coach. '%')
-                    ->where('designation','Senior Team Leader')
-                    ->orWhere('lname','LIKE','%'. $this->coach. '%')
-                    ->where('designation','Subject Matter Expert')
-                    ->orWhere('lname','LIKE','%'. $this->coach. '%')
-                    ->where('designation','Team Leader')
-                    ->orWhere('lname','LIKE','%'. $this->coach. '%')
+                    ->orWhere('employeeFullname','LIKE','%'. $this->coach. '%')
                     ->where('designation','Senior Team Leader')
                     ->take(5)
                     ->get();
@@ -602,14 +573,28 @@ class MasstortForm extends Component
         if ($field == "agent"){
             $this->gm = 0;
             if ($this->agent != ""){
-                $this->results = Employee::where('fname','LIKE','%'. $this->agent. '%')
-                    ->orWhere('lname','LIKE','%'. $this->agent. '%')->take(5)
+                $this->results = User::where('fullname','LIKE','%'. $this->agent. '%')
+                    ->take(5)
                     ->get();
                 $this->showSearch = true;
             }
             else{
                 $this->showSearch = false;
                 $this->results = [];
+            }
+
+        }
+        if ($field == "agent2"){
+            $this->gm2 = 0;
+            if ($this->agent2 != ""){
+                $this->results2 = User::where('fullname','LIKE','%'. $this->agent2. '%')
+                    ->take(5)
+                    ->get();
+                $this->showSearch2 = true;
+            }
+            else{
+                $this->showSearch2 = false;
+                $this->results2 = [];
             }
 
         }
@@ -701,68 +686,6 @@ class MasstortForm extends Component
             $this->comment = "";
             $this->cplCheck = false;
             $this->submission = [];
-        }
-        if ($field == "registrationSwitch"){
-            $this->regSwitch();
-        }
-        if ($field == "adminSwitch"){
-            $this->admin_Switch();
-        }
-        if ($field == "superAdminSwitch"){
-            $this->super_admin_Switch();
-        }
-        if ($field == "photo"){
-            $filename = Str::random(40) . '.' . $this->photo->getClientOriginalExtension();
-            $this->photo->storeAs('photos', $filename, 'public_photos');
-            $user = User::find($this->user_id);
-            $user->photo = $filename;
-            $user->save();
-            $user = User::find($this->user_id)->comment;
-            foreach ($user as $usr){
-                $jn = Comment::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->comment_heart;
-            foreach ($user as $usr){
-                $jn = CommentHeart::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->dtr;
-            foreach ($user as $usr){
-                $jn =Dtr::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->dtr_content;
-            foreach ($user as $usr){
-                $jn =DtrContent::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->log;
-            foreach ($user as $usr){
-                $jn =\App\Models\Logs::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->note;
-            foreach ($user as $usr){
-                $jn = Note::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->time_setting;
-            foreach ($user as $usr){
-                $jn = TimeSetting::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = UserPassword::find($this->user_id);
-            $user->photo = $filename;
-            $user->save();
-            return redirect('/itts/5/dashboard');
         }
     }
 }

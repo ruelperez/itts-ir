@@ -31,6 +31,8 @@ class Submission extends Model
         'lawfirm',
         'comment',
         'method',
+        'leadOwnership',
+        'agent2',
     ];
 
     use HasFactory;

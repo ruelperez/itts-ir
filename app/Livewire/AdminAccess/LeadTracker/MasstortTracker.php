@@ -23,7 +23,7 @@ use Livewire\Component;
 class MasstortTracker extends Component
 {
     public $registrationSwitch, $returnClient, $returnReason, $currentPage = 1, $perPage = 15, $is_success = false, $search, $ids, $displayRemarks, $checkBox = [], $submissionData = [], $resultsCoach = [], $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo, $campaignList = [], $campaign,
-        $date, $base = true, $toChecked = false, $folderName, $lawfirm, $lawfirmList = [], $dqReason, $client, $remarks = [], $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $showSearch = false, $showSearchCoach = false, $agent, $coach, $verifier, $source = "Dialer", $caseType = "self", $resultsVerifier = [], $results = [], $clientList= [], $showSearchVerifier = false, $result;
+        $date, $base = true, $toChecked = false, $leadOwnership, $agent2, $folderName, $lawfirm, $lawfirmList = [], $dqReason, $client, $remarks = [], $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $showSearch = false, $showSearchCoach = false, $agent, $coach, $verifier, $source = "Dialer", $caseType = "self", $resultsVerifier = [], $results = [], $clientList= [], $showSearchVerifier = false, $result;
 
     public function render()
     {
@@ -490,6 +490,8 @@ class MasstortTracker extends Component
         $this->client = $dv->client;
         $this->lawfirm = $dv->lawfirm;
         $this->date = $dv->date;
+        $this->leadOwnership = $dv->leadOwnership;
+        $this->agent2 = $dv->agent2;
     }
     public function clickSearch(){
         if ($this->agent != ""){

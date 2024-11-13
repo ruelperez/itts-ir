@@ -7,7 +7,41 @@
                 <div style="background-color: #696969; color: white;border-radius: 2%;" class="px-sm-5 py-sm-4 mt-4">
                     @include('components.submission-form.campaign-link')
                     <form wire:submit.prevent="submit">
-                        <div class="row">
+                        <div class="row" x-data="{ selectedOptions: '' }">
+                            <div class="col-3">
+                                <div>
+                                    <label class="form-label">Lead Ownership</label>
+                                </div>
+                                <div>
+                                    <select class="form-select" aria-label="Default select example" wire:model.live="leadOwnership" x-model="selectedOptions" required>
+                                        <option value="">Select</option>
+                                        <option value="1st Touch">1st Touch</option>
+                                        <option value="2nd Touch">2nd Touch</option>
+                                    </select>
+                                    @error('leadOwnership') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                            <div class="col-5" x-show="selectedOptions === '2nd Touch'">
+                                <label  class="form-label">Agent Name on 1st Touch*</label>
+                                <input type="text" class="form-control" wire:model.live="agent2" wire:blur="removeSearch2" :required="selectedOptions === '2nd Touch'">
+                                @if(session()->has('badAgent2'))
+                                    <small style="color: #800000">Agent's name should be selected from the search suggestions.</small>
+                                @endif
+                                @if($showSearch2 == true)
+                                    <div style="position: absolute; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);">
+                                        <ul class="list-group">
+                                            @foreach($results2 as $data)
+                                                <li class="list-group-item btn text-start" style="background-color: #E0FFFF;" wire:click="click_items2({{$data->id}})">
+                                                    <i class="fa-solid fa-magnifying-glass me-3"></i> {{ucfirst($data->fullname)}}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                                @error('agent2') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="row mt-4">
                             <div class="col-3">
                                 <label class="form-label">Date*</label>
                                 <input type="text" id="datepicker" class="form-control" wire:model="date" required>
@@ -129,7 +163,7 @@
                         <div class="mt-4 row">
                             <div class="col-3">
                                 <label  class="form-label">Agent*</label>
-                                <input type="text" class="form-control" wire:model.live="agent" wire:blur="removeSearch" wire:click="clickSearch" required>
+                                <input type="text" class="form-control" wire:model.live="agent" wire:blur="removeSearch" required>
                                 @if(session()->has('badAgent'))
                                     <small style="color: #800000">Agent's name should be selected from the search suggestions.</small>
                                 @endif
@@ -138,7 +172,7 @@
                                         <ul class="list-group">
                                             @foreach($results as $data)
                                                 <li class="list-group-item btn text-start" style="background-color: #E0FFFF;" wire:click="click_items({{$data->id}})">
-                                                    <i class="fa-solid fa-magnifying-glass me-3"></i> {{ucfirst($data->fname)}} {{ucfirst($data->lname)}}
+                                                    <i class="fa-solid fa-magnifying-glass me-3"></i> {{ucfirst($data->fullname)}}
                                                 </li>
                                             @endforeach
                                         </ul>
@@ -148,7 +182,7 @@
                             </div>
                             <div class="col-3">
                                 <label  class="form-label">Coach*</label>
-                                <input type="text" class="form-control" wire:model.live="coach" wire:blur="removeSearchCoach" wire:click="clickSearchCoach" required>
+                                <input type="text" class="form-control" wire:model.live="coach" wire:blur="removeSearchCoach" required>
                                 @if($showSearchCoach == true)
                                     <div style="position: absolute; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);">
                                         <ul class="list-group">
@@ -164,7 +198,7 @@
                             </div>
                             <div class="col-3">
                                 <label  class="form-label">Verifier*</label>
-                                <input type="text" class="form-control" wire:model.live="verifier" wire:blur="removeSearchVerifier" wire:click="clickSearchVerifier">
+                                <input type="text" class="form-control" wire:model.live="verifier" wire:blur="removeSearchVerifier">
                                 @if($showSearchVerifier == true)
                                     <div style="position: absolute; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);">
                                         <ul class="list-group">
