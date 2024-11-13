@@ -236,20 +236,20 @@ class MasstortForm extends Component
     }
 
     public function click_items($id){
-        $gh = User::find($id);
-        $this->agent = $gh->fullname;
+        $gh = Employee::find($id);
+        $this->agent = $gh->employeeFullname;
         $this->showSearchCoach = false;
         $this->gm = 1;
     }
     public function click_items2($id){
-        $gh = User::find($id);
-        $this->agent2 = $gh->fullname;
+        $gh = Employee::find($id);
+        $this->agent2 = $gh->employeeFullname;
         $this->gm2 = 1;
     }
 
     public function click_itemsVerifier($id){
-        $gh = User::find($id);
-        $this->verifier = $gh->fullname;
+        $gh = Employee::find($id);
+        $this->verifier = $gh->employeeFullname;
         $this->showSearchVerifier = false;
     }
     public function click_itemsCoach($id){
@@ -575,7 +575,7 @@ class MasstortForm extends Component
         if ($field == "agent"){
             $this->gm = 0;
             if ($this->agent != ""){
-                $this->results = User::where('fullname','LIKE','%'. $this->agent. '%')
+                $this->results = Employee::where('employeeFullname','LIKE','%'. $this->agent. '%')
                     ->take(5)
                     ->get();
                 $this->showSearch = true;
@@ -589,7 +589,7 @@ class MasstortForm extends Component
         if ($field == "agent2"){
             $this->gm2 = 0;
             if ($this->agent2 != ""){
-                $this->results2 = User::where('fullname','LIKE','%'. $this->agent2. '%')
+                $this->results2 = Employee::where('employeeFullname','LIKE','%'. $this->agent2. '%')
                     ->take(5)
                     ->get();
                 $this->showSearch2 = true;
