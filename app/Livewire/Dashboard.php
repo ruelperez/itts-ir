@@ -6,6 +6,7 @@ use App\Models\AdminShow;
 use App\Models\Announcement;
 use App\Models\Comment;
 use App\Models\CommentHeart;
+use App\Models\DisplayMonth;
 use App\Models\Dtr;
 use App\Models\DtrContent;
 use App\Models\DtrPermanent;
@@ -15,6 +16,7 @@ use App\Models\Note;
 use App\Models\Submission;
 use App\Models\SuperadminShow;
 use App\Models\TimeSetting;
+use App\Models\TopPerformer;
 use App\Models\User;
 use App\Models\UserAccess;
 use App\Models\UserPassword;
@@ -30,7 +32,7 @@ class Dashboard extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $authorizer, $ids, $title, $hin, $announceData = [], $is_success = false, $employeeData, $dtrData = [], $announce, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $monthView, $performer_data, $authorizer, $ids, $title, $hin, $announceData = [], $is_success = false, $employeeData, $dtrData = [], $announce, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -46,6 +48,13 @@ class Dashboard extends Component
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
         $this->announceData = Announcement::orderBy('created_at', 'desc')->get();
+
+//        Top Performer
+        $this->monthView = DisplayMonth::first()->month;
+        $this->performer_data = TopPerformer::where('month', $this->monthView)
+            ->orderBy('rank', 'asc')
+            ->with(['user:id,photo']) // Eager load user with only id and photo
+            ->get();
         return view('livewire.dashboard')->title('Dashboard');
     }
 

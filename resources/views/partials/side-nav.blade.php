@@ -158,6 +158,8 @@
                                     Lead Tracker</a>
                                 <a class="dropdown-item" href="/admin-access/user-credential/kbtool-account"><i class="fa-solid fa-receipt pe-2" ></i>
                                     User Credential</a>
+                                <a class="dropdown-item" href="/admin-access/monthly-top-performer/agent-top-performer"><i class="fa-solid fa-award pe-2" ></i>
+                                    Top Performer</a>
                                 <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#settings"><i class="fa-solid fa-gear pe-2"></i>
                                     Settings</a>
                                 <a class="dropdown-item" href="/admin-access/history/logs"><i class="fa-solid fa-tent-arrow-left-right pe-2"></i>
