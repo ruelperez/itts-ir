@@ -8,6 +8,7 @@ use App\Models\Dtr;
 use App\Models\DtrContent;
 use App\Models\Employee;
 use App\Models\IsRegistration;
+use App\Models\LeadLog;
 use App\Models\Note;
 use App\Models\Submission;
 use App\Models\SuperadminShow;
@@ -143,7 +144,7 @@ class MasstortForm extends Component
             $this->lawfirm = "n/a";
         }
         try {
-            Submission::create([
+            $sub_id = Submission::create([
                 'date' => $this->date,
                 'agent' => $this->agent,
                 'claimant' => $this->claimant,
@@ -168,6 +169,16 @@ class MasstortForm extends Component
                 'leadOwnership' => $this->leadOwnership,
                 'agent2' => $this->agent2,
             ]);
+            $recentSubId = $sub_id->id;
+
+            // Step 3: Save this ID to lead_logs
+            LeadLog::create([
+                'user_name' => $this->fullname,
+                'submission_id' => $recentSubId,
+                'action' => 'Initial submission',
+                'date' => $this->date,
+            ]);
+
             \App\Models\Logs::create([
                 'action' => "Add submission with a customer phone number ".$this->phoneNumber,
                 'user_id' => $this->user_id,
