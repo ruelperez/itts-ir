@@ -698,5 +698,8 @@ class MasstortTracker extends Component
                 ->where('lawfirm',$this->lawfirm)->get();
 
         }
+        if ($field == "search"){
+            $this->currentPage = 1;
+        }
     }
 }
