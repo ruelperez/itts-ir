@@ -10,6 +10,7 @@ use App\Models\Dtr;
 use App\Models\DtrContent;
 use App\Models\Employee;
 use App\Models\IsRegistration;
+use App\Models\LeadLog;
 use App\Models\Note;
 use App\Models\Submission;
 use App\Models\SuperadminShow;
@@ -218,6 +219,14 @@ class MasstortTrackerEdit extends Component
                 $kk->user_id = $this->user_id;
                 $kk->result = $this->result;
                 $kk->save();
+
+                LeadLog::create([
+                    'user_name' => $this->fullname,
+                    'submission_id' => $this->ids,
+                    'action' => $this->result,
+                    'date' => $this->date,
+                ]);
+
                 \App\Models\Logs::create([
                     'action' => "Edit dupe checker with a customer phone number ".$this->phoneNumber,
                     'user_id' => $this->user_id,
@@ -241,6 +250,12 @@ class MasstortTrackerEdit extends Component
                 $kk->comment = $this->returnedOther;
                 $kk->date = $this->date2;
                 $kk->save();
+                LeadLog::create([
+                    'user_name' => $this->fullname,
+                    'submission_id' => $this->ids,
+                    'action' => $this->result,
+                    'date' => $this->date2,
+                ]);
                 \App\Models\Logs::create([
                     'action' => "Edit dupe checker with a customer phone number ".$this->phoneNumber,
                     'user_id' => $this->user_id,

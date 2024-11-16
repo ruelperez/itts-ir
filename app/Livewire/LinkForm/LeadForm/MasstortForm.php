@@ -170,8 +170,6 @@ class MasstortForm extends Component
                 'agent2' => $this->agent2,
             ]);
             $recentSubId = $sub_id->id;
-
-            // Step 3: Save this ID to lead_logs
             LeadLog::create([
                 'user_name' => $this->fullname,
                 'submission_id' => $recentSubId,

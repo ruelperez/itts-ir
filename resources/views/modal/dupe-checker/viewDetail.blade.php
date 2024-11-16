@@ -10,14 +10,27 @@
                     <span class="visually-hidden">Loading...</span>
                 </div>
             </div>
-            <div class="ms-3 mt-3"  wire:loading.remove>
+            <div class="ms-3 mt-3 me-3"  wire:loading.remove>
                 <div>
-                    <p><b>Logs</b></p>
+                    <ul class="list-group">
+                        @foreach($leadLogsData as $logsData)
+                            <li class="list-group-item p-1">
+                                <div class="row">
+                                    <div class="mt-1 col-sm-3 text-start">
+                                        <p class="mb-1">{{$logsData->date}}</p>
+                                    </div>
+                                    <div class="mt-1 col-sm-5">
+                                        <p class="mb-1">{{$logsData->action}}</p>
+                                    </div>
+                                    <div class="mt-1 fw-light col-sm-4 text-md-end">
+                                        <p class="mb-1">{{$logsData->user_name}}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
-                <div>
-                    <p>Date: <b>{{$date}}</b></p>
-                </div>
-                <hr>
+                <hr style="border: solid black 2px">
                 <div>
                     <p>Campaign: <b>{{ucfirst($campaign)}}</b></p>
                 </div>
@@ -27,7 +40,7 @@
                 <div>
                     <p>Lawfirm: <b>{{ucfirst($lawfirm)}}</b></p>
                 </div>
-                <hr>
+                <hr style="border: solid black 2px">
                 <div>
                     <p>Source: <b>{{ucfirst($source)}}</b></p>
                 </div>
@@ -56,7 +69,7 @@
                 <div>
                     <p>Verifier: <b>{{ucfirst($verifier)}}</b></p>
                 </div>
-                <hr>
+                <hr style="border: solid black 2px">
                 @if($caseType == "obo")
                     <div>
                         <p>Claimant: <b>{{ucfirst($claimant)}}</b></p>
@@ -87,7 +100,7 @@
                 <div>
                     <p>SSN: <b>{{$ssn}}</b></p>
                 </div>
-                <hr>
+                <hr style="border: solid black 2px">
 {{--                <div>--}}
 {{--                    <p>Remarks: <b>{{$remarks}}</b></p>--}}
 {{--                </div>--}}

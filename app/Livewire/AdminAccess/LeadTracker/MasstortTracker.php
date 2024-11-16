@@ -9,12 +9,14 @@ use App\Models\Dtr;
 use App\Models\DtrContent;
 use App\Models\Employee;
 use App\Models\IsRegistration;
+use App\Models\LeadLog;
 use App\Models\Note;
 use App\Models\Submission;
 use App\Models\SuperadminShow;
 use App\Models\TimeSetting;
 use App\Models\User;
 use App\Models\UserPassword;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -23,7 +25,7 @@ use Livewire\Component;
 class MasstortTracker extends Component
 {
     public $registrationSwitch, $returnClient, $returnReason, $currentPage = 1, $perPage = 15, $is_success = false, $search, $ids, $displayRemarks, $checkBox = [], $submissionData = [], $resultsCoach = [], $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo, $campaignList = [], $campaign,
-        $date, $base = true, $toChecked = false, $leadOwnership, $agent2, $folderName, $lawfirm, $lawfirmList = [], $dqReason, $client, $remarks = [], $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $showSearch = false, $showSearchCoach = false, $agent, $coach, $verifier, $source = "Dialer", $caseType = "self", $resultsVerifier = [], $results = [], $clientList= [], $showSearchVerifier = false, $result;
+        $date, $base = true, $logsDate, $logsFullname, $leadLogsData = [], $logsAction, $toChecked = false, $leadOwnership, $agent2, $folderName, $lawfirm, $lawfirmList = [], $dqReason, $client, $remarks = [], $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $showSearch = false, $showSearchCoach = false, $agent, $coach, $verifier, $source = "Dialer", $caseType = "self", $resultsVerifier = [], $results = [], $clientList= [], $showSearchVerifier = false, $result;
 
     public function render()
     {
@@ -492,6 +494,13 @@ class MasstortTracker extends Component
         $this->date = $dv->date;
         $this->leadOwnership = $dv->leadOwnership;
         $this->agent2 = $dv->agent2;
+
+//        lead logs
+//        $this->leadLogsData = Submission::find($this->ids)->lead_log;
+        $this->leadLogsData = Submission::find($this->ids)->lead_log
+            ->sortByDesc(function ($log) {
+                return Carbon::createFromFormat('m/d/Y', $log->date);
+            });
     }
     public function clickSearch(){
         if ($this->agent != ""){

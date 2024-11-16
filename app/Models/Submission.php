@@ -35,5 +35,9 @@ class Submission extends Model
         'agent2',
     ];
 
+    public function lead_log(){
+        return $this->hasMany(LeadLog::class);
+    }
+
     use HasFactory;
 }
