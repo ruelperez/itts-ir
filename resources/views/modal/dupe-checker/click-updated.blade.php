@@ -7,9 +7,15 @@
             </div>
             <form wire:submit.prevent="submitEdit">
                 <div class="modal-body">
-                    <div>
-                        <label class="form-label">Date*</label>
-                        <input type="text" id="datepickerDupe" class="form-control" wire:model="date2" required>
+                    <div class="row">
+                        <div>
+                            <label class="form-label">Date*</label>
+                            <input type="text" class="form-control" value="{{$date}}" disabled>
+                        </div>
+                        <div class="mt-4">
+                            <label class="form-label">Updated Date*</label>
+                            <input type="text" id="datepickerDupe" class="form-control" wire:model="date2" required>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
