@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('lead_logs', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('submission_id');
+            $table->string('date');
+            $table->string('action');
+            $table->string('user_name');
             $table->timestamps();
         });
     }
