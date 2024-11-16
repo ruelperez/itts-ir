@@ -15,6 +15,7 @@ use App\Models\SuperadminShow;
 use App\Models\TimeSetting;
 use App\Models\User;
 use App\Models\UserPassword;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -23,7 +24,7 @@ class ProductionLeadMassTort extends Component
 {
 
     public $registrationSwitch, $search = "", $currentPage = 1, $caseType, $claimant, $injuredParty, $fname, $lname, $agentName, $perPage = 15, $submissionData = [], $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
-        $phoneNumber, $date, $altPhoneNumber, $leadOwnership, $agent2, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source, $campaign, $lawfirm, $client, $result, $remarks;
+        $phoneNumber, $date, $leadLogsData = [], $altPhoneNumber, $leadOwnership, $agent2, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source, $campaign, $lawfirm, $client, $result, $remarks;
 
     public function render()
     {
@@ -102,6 +103,14 @@ class ProductionLeadMassTort extends Component
         $this->date = $dv->date;
         $this->leadOwnership = $dv->leadOwnership;
         $this->agent2 = $dv->agent2;
+
+        //        lead logs
+//        $this->leadLogsData = Submission::find($this->ids)->lead_log;
+        $this->leadLogsData = Submission::find($id)->lead_log
+            ->sortByDesc(function ($log) {
+                return Carbon::createFromFormat('m/d/Y', $log->date);
+            });
+
     }
 
     public function displayData()
