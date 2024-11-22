@@ -8,25 +8,22 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-5 pb-3" style="background-color: #2F4F4F">
-                <div style="width: 200px; /* Set the desired width of the container */
-                                    height: 150px; /* Set the desired height of the container */
-                                    overflow: hidden;
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                    margin-top: 20px;
-                                    margin-left: 2%;">
-                    <img src="{{asset('photo/announcement.jpg')}}" alt="Description of image" style="width: 100%;height: 100%;object-fit: cover;border-radius: 50%; /* Makes the image oval */">
+                <div style="margin-top: 20px;color: white; text-align: center;">
+                    <h4>ANNOUNCEMENT</h4>
                 </div>
                 @if($authorizer)
                     <i class="fa-solid fa-circle-plus" style="font-size: 20px; cursor: pointer; color: white;" data-bs-toggle="modal" data-bs-target="#add"></i>
                 @endif
                 <hr style="color: white">
                 @foreach($announceData as $data)
-                    <div style="color: white; @if($authorizer) cursor: pointer @endif" class="px-2 rounded" @if($authorizer) data-bs-toggle="modal" data-bs-target="#clickData" wire:click="clickData({{$data->id}})" @endif>
+                    <div style="color: black; background-color: #F5F5F5; @if($authorizer) cursor: pointer @endif" class="rounded border border-dark px-3 py-2" @if($authorizer) data-bs-toggle="modal" data-bs-target="#clickData" wire:click="clickData({{$data->id}})" @endif>
                         <div class="fw-light text-end mb-1"><small>{{$data->updated_at->format('M-d-Y')}}</small></div>
-                        <h5>{{ucwords($data->title)}}</h5>
-                        <p style="white-space: pre-line;" class="text-break">{{ucfirst($data->text)}}</p>
+                        <div class="text-center py-2 px-2" style="background-color: #2E8B57;">
+                            <h5 class="text-white">{{ucwords($data->title)}}</h5>
+                        </div>
+                        <div class="px-2 mt-2">
+                            <p style="white-space: pre-line;" class="text-break">{{ucfirst($data->text)}}</p>
+                        </div>
                     </div>
                     <hr style="color: white">
                 @endforeach
