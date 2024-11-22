@@ -30,23 +30,25 @@
             </div>
             <div class="col-lg-7 pb-3 text-center">
                 <div style="box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);" class="px-3 py-1">
-                    <div class="col-lg-4 col-xl-3 mt-2">
-                        <select class="form-select icon-only" aria-label="Default select example" wire:model.live="monthView" required>
-                            <option value="">Month</option>
-                            <option value="January">January</option>
-                            <option value="February">February</option>
-                            <option value="March">March</option>
-                            <option value="April">April</option>
-                            <option value="May">May</option>
-                            <option value="June">June</option>
-                            <option value="July">July</option>
-                            <option value="August">August</option>
-                            <option value="September">September</option>
-                            <option value="October">October</option>
-                            <option value="November">November</option>
-                            <option value="December">December</option>
-                        </select>
-                    </div>
+                    @if($authorizer)
+                        <div class="col-lg-4 col-xl-3 mt-2">
+                            <select class="form-select icon-only" aria-label="Default select example" wire:model.live="monthView" required>
+                                <option value="">Month</option>
+                                <option value="January">January</option>
+                                <option value="February">February</option>
+                                <option value="March">March</option>
+                                <option value="April">April</option>
+                                <option value="May">May</option>
+                                <option value="June">June</option>
+                                <option value="July">July</option>
+                                <option value="August">August</option>
+                                <option value="September">September</option>
+                                <option value="October">October</option>
+                                <option value="November">November</option>
+                                <option value="December">December</option>
+                            </select>
+                        </div>
+                    @endif
                     <div class="mt-2">
                         <h3>{{$monthView}} Top Performer</h3>
                     </div>
