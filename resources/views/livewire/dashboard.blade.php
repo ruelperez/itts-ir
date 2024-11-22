@@ -7,7 +7,7 @@
     @include('modal.dashboard.removedOrUpdate')
     <div class="container">
         <div class="row">
-            <div class="col-lg-5 pb-3" style="background-color: #2F4F4F">
+            <div class="col-lg-5 pb-3" style="background-color: #2F4F4F; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);">
                 <div style="margin-top: 20px;color: white; text-align: center;">
                     <h4>ANNOUNCEMENT</h4>
                 </div>
@@ -29,50 +29,52 @@
                 @endforeach
             </div>
             <div class="col-lg-7 pb-3 text-center">
-                <div><h3>{{$monthView}} Top Performer</h3></div>
-                <div class="table-responsive mt-lg-4" style="font-size: 13px">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Rank</th>
-                            <th scope="col">Agent</th>
-                            <th scope="col">Sale</th>
-                            <th scope="col">Submission</th>
-                            <th scope="col">QA</th>
-                            <th scope="col">Attendance</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($performer_data as $data)
-                            <tr onmouseover="hoverStaff({{$data->id}})" onmouseout="hoverOutStaff({{$data->id}})" class="ngh">
-                                <td>
-                                    <div class="profile-picture-staff">
-                                        <img src="{{asset('photos/photos/'.$data->user->photo)}}" alt="Profile Picture">
-                                    </div>
-                                </td>
-                                <td>
-                                    {{$data->rank}}
-                                </td>
-                                <td class="text-capitalize" >
-                                    {{$data->fullname}}
-                                </td>
-                                <td>
-                                    {{$data->sale}}
-                                </td>
-                                <td>
-                                    {{$data->submission}}
-                                </td>
-                                <td>
-                                    {{$data->qa}}
-                                </td>
-                                <td>
-                                    {{$data->attendance}}
-                                </td>
+                <div style="box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);" class="px-3 py-3">
+                    <div><h3>{{$monthView}} Top Performer</h3></div>
+                    <div class="table-responsive mt-lg-4" style="font-size: 13px">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Rank</th>
+                                <th scope="col">Agent</th>
+                                <th scope="col">Sale</th>
+                                <th scope="col">Submission</th>
+                                <th scope="col">QA</th>
+                                <th scope="col">Attendance</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            @foreach($performer_data as $data)
+                                <tr onmouseover="hoverStaff({{$data->id}})" onmouseout="hoverOutStaff({{$data->id}})" class="ngh">
+                                    <td>
+                                        <div class="profile-picture-staff">
+                                            <img src="{{asset('photos/photos/'.$data->user->photo)}}" alt="Profile Picture">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{$data->rank}}
+                                    </td>
+                                    <td class="text-capitalize" >
+                                        {{$data->fullname}}
+                                    </td>
+                                    <td>
+                                        {{$data->sale}}
+                                    </td>
+                                    <td>
+                                        {{$data->submission}}
+                                    </td>
+                                    <td>
+                                        {{$data->qa}}
+                                    </td>
+                                    <td>
+                                        {{$data->attendance}}
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
