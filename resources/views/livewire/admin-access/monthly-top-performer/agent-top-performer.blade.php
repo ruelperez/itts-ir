@@ -1,20 +1,26 @@
 <div>
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">add</button>
-    <select class="form-select mt-3 mb-5" aria-label="Default select example" wire:model.live="monthView" required>
-        <option value="">Select Month</option>
-        <option value="January">January</option>
-        <option value="February">February</option>
-        <option value="March">March</option>
-        <option value="April">April</option>
-        <option value="May">May</option>
-        <option value="June">June</option>
-        <option value="July">July</option>
-        <option value="August">August</option>
-        <option value="September">September</option>
-        <option value="October">October</option>
-        <option value="November">November</option>
-        <option value="December">December</option>
-    </select>
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-xl-3">
+            <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+        </div>
+        <div class="mt-2 mb-4 col-sm-6 mt-sm-0 col-md-4 col-xl-3">
+            <select class="form-select" aria-label="Default select example" wire:model.live="monthView" required>
+                <option value="">Select Month</option>
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+            </select>
+        </div>
+    </div>
     <!-- Modal -->
     <div class="modal fade" wire:ignore.self id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -176,30 +182,32 @@
         </div>
     </div>
 {{$monthView}}
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Rank</th>
-            <th scope="col">Full Name</th>
-            <th scope="col">Sale</th>
-            <th scope="col">Submission</th>
-            <th scope="col">QA</th>
-            <th scope="col">Attendance</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($data as $datas)
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
             <tr>
-                <td>{{$datas->rank}}</td>
-                <td>{{$datas->fullname}}</td>
-                <td>{{$datas->sale}}</td>
-                <td>{{$datas->submission}}</td>
-                <td>{{$datas->qa}}</td>
-                <td>{{$datas->attendance}}</td>
-                <td><i class="fa-solid fa-pen-to-square" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#edit" wire:click="edit({{$datas->id}})"></i></td>
-                <td><i class="fa-solid fa-trash" style="color: red; cursor: pointer" data-bs-toggle="modal" data-bs-target="#delete" wire:click="delete({{$datas->id}})"></i></td>
+                <th scope="col">Rank</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Sale</th>
+                <th scope="col">Submission</th>
+                <th scope="col">QA</th>
+                <th scope="col">Attendance</th>
             </tr>
-        @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            @foreach($data as $datas)
+                <tr>
+                    <td>{{$datas->rank}}</td>
+                    <td>{{$datas->fullname}}</td>
+                    <td>{{$datas->sale}}</td>
+                    <td>{{$datas->submission}}</td>
+                    <td>{{$datas->qa}}</td>
+                    <td>{{$datas->attendance}}</td>
+                    <td><i class="fa-solid fa-pen-to-square" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#edit" wire:click="edit({{$datas->id}})"></i></td>
+                    <td><i class="fa-solid fa-trash" style="color: red; cursor: pointer" data-bs-toggle="modal" data-bs-target="#delete" wire:click="delete({{$datas->id}})"></i></td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>

@@ -32,7 +32,7 @@ class Dashboard extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $monthView, $performer_data, $authorizer, $ids, $title, $hin, $announceData = [], $is_success = false, $employeeData, $dtrData = [], $announce, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $monthView, $performer_data = [], $authorizer, $ids, $title, $hin, $announceData = [], $is_success = false, $employeeData, $dtrData = [], $announce, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -189,6 +189,22 @@ class Dashboard extends Component
         }catch (\Exception $e){
             $this->is_success = false;
             $this->dispatch('subSubmitted');
+        }
+    }
+
+    public function updated($field){
+        if ($field == "monthView"){
+            $hh = DisplayMonth::all();
+            if (count($hh) > 0){
+                $gh = DisplayMonth::first();
+                $kk = DisplayMonth::find($gh->id);
+                $kk->month = $this->monthView;
+                $kk->save();
+            }else{
+                DisplayMonth::create([
+                    'month' => $this->monthView,
+                ]);
+            }
         }
     }
 }

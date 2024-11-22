@@ -12,7 +12,6 @@ class AgentTopPerformer extends Component
     public $month, $data, $ids, $fullname, $gm = 0, $rank, $empId, $showSearch = false, $results = [], $monthView, $sale, $submission, $qa, $attendance;
     public function render()
     {
-        $this->monthView = DisplayMonth::first()->month;
         $this->data = TopPerformer::where('month',$this->monthView)
             ->orderBy('rank', 'asc')
             ->get();
@@ -105,19 +104,6 @@ class AgentTopPerformer extends Component
     }
 
     public function updated($field){
-        if ($field == "monthView"){
-            $hh = DisplayMonth::all();
-            if (count($hh) > 0){
-                $gh = DisplayMonth::first();
-                $kk = DisplayMonth::find($gh->id);
-                $kk->month = $this->monthView;
-                $kk->save();
-            }else{
-                DisplayMonth::create([
-                    'month' => $this->monthView,
-                ]);
-            }
-        }
         if ($field == "fullname"){
             $this->gm = 0;
             if ($this->fullname != ""){
