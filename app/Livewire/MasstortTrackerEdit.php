@@ -294,12 +294,18 @@ class MasstortTrackerEdit extends Component
                 $kk->result = $this->result;
                 $kk->comment = $this->returnedOther;
                 $kk->date = $this->date2;
+                if($owner == "1st Touch"){
+                    $kk->agent = $this->agent;
+                }
+                else{
+                    $kk->agent2 = $this->agent;
+                    $kk->agent = $this->agent2;
+                }
                 $kk->leadOwnership = $owner;
-                $kk->agent2 = $this->agent;
-                $kk->agent = $this->agent2;
                 $kk->coach = $this->coach;
                 $kk->verifier = $this->verifier;
                 $kk->save();
+
                 LeadLog::create([
                     'user_name' => $this->fullname,
                     'submission_id' => $this->ids,
