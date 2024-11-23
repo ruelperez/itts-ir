@@ -2,16 +2,19 @@
 
 namespace App\Livewire;
 
+use App\Models\Callback;
 use App\Models\Note;
 use Livewire\Component;
 
 class MyCallback extends Component
 {
-    public $submissionData = [], $claimant, $phoneNumber, $campaign, $injuredParty, $altPhoneNumber, $email, $address, $reason,
-            $gm=0, $results = [], $showSearch = false;
+    public $submissionData = [], $dob, $user_id, $claimant, $phoneNumber, $campaign, $injuredParty, $altPhoneNumber, $email, $address, $reason,
+            $gm=0, $results = [], $showSearch = false, $callbackTime;
 
     public function render()
     {
+        $this->user_id = auth()->user()->id;
+        $this->submissionData = Callback::all();
         return view('livewire.my-callback');
     }
 
@@ -24,6 +27,31 @@ class MyCallback extends Component
             'phoneNumber' => 'required|numeric',
             'altPhoneNumber' => 'required|numeric',
         ]);
+
+        Callback::create([
+            'claimant' => $this->claimant,
+            'phoneNumber' => $this->phoneNumber,
+            'altPhoneNumber' => $this->altPhoneNumber,
+            'campaign' => $this->campaign,
+            'injuredParty' => $this->injuredParty,
+            'dob' => $this->dob,
+            'email' => $this->email,
+            'address' => $this->address,
+            'user_id' => $this->user_id,
+            'callbackTime' => $this->callbackTime,
+            'reason' => $this->reason,
+        ]);
+        $this->claimant = "";
+        $this->phoneNumber = "";
+        $this->altPhoneNumber = "";
+        $this->campaign = "";
+        $this->injuredParty = "";
+        $this->dob = "";
+        $this->email = "";
+        $this->address = "";
+        $this->user_id = "";
+        $this->callbackTime = "";
+        $this->reason = "";
     }
 
     public function updated($field){
@@ -81,6 +109,12 @@ class MyCallback extends Component
     public function naInjureParty(){
         if ($this->injuredParty != "n/a"){
             $this->injuredParty = "n/a";
+        }
+    }
+
+    public function naDob(){
+        if ($this->dob != "n/a"){
+            $this->dob = "n/a";
         }
     }
     public function naPhoneNumber(){

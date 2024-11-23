@@ -87,6 +87,17 @@
                             <p class="px-1 py-1" style="background-color: black; color: white; border-radius: 10px; font-size: 12px; cursor: pointer" wire:click="naEmail">na@na</p>
                         </div>
                     </div>
+                    <div class="row mt-3">
+                        <div class="col-auto">
+                            <label class="col-form-label">DOB</label>
+                        </div>
+                        <div class="col-auto">
+                            <input type="text" class="form-control" wire:model="dob" required>
+                        </div>
+                        <div class="col-auto pt-2 ms-auto">
+                            <p class="px-1 py-1" style="background-color: black; color: white; border-radius: 10px; font-size: 12px; cursor: pointer" wire:click="naDob">n/a</p>
+                        </div>
+                    </div>
                    <div class="row mt-3">
                         <div class="col-auto">
                             <label class="col-form-label">Address</label>
@@ -97,6 +108,14 @@
                        <div class="col-auto pt-2 ms-auto">
                            <p class="px-1 py-1" style="background-color: black; color: white; border-radius: 10px; font-size: 12px; cursor: pointer" wire:click="naAddress">n/a</p>
                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-auto">
+                            <label class="col-form-label">Callback time</label>
+                        </div>
+                        <div class="col-auto">
+                            <input type="text" class="form-control" wire:model="callbackTime" required>
+                        </div>
                     </div>
                     <div class="row mt-3 px-3">
                         <textarea class="form-control" rows="3" id="reason" wire:model="reason"  placeholder="Reason:" required></textarea>

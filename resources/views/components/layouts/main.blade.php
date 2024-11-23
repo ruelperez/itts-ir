@@ -64,6 +64,9 @@
         return new bootstrap.Tooltip(tooltipTriggerEl);
     });
     document.addEventListener('DOMContentLoaded', function(){
+        flatpickr('#callbackDOB', {
+            dateFormat: 'm/d/Y',
+        });
         flatpickr('#datepicker', {
             dateFormat: 'm/d/Y',
         });
@@ -108,7 +111,6 @@
 </script>
 @livewireScripts
 @stack('js')
-
 
 </body>
 </html>

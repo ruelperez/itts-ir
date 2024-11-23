@@ -30,14 +30,19 @@
                 <th scope="col" style="width: 9%;">Phone #</th>
                 <th scope="col" style="width: 9%;">Alt Phone #</th>
                 <th scope="col" style="width: 9%;">Email</th>
+                <th scope="col" style="width: 9%;">DOB</th>
                 <th scope="col" style="width: 9%;">Address</th>
+                <th scope="col" style="width: 9%;">Callback time</th>
+                <th scope="col" style="width: 9%;">Reason</th>
+                <th scope="col" style="width: 9%;">Remaining</th>
+                <th scope="col" style="width: 9%;">Is expired</th>
             </tr>
             </thead>
             <tbody>
             @foreach($submissionData as $data)
                 <tr wire:click="viewDetail({{$data->id}})" data-bs-toggle="modal" data-bs-target="#viewDetail" style="cursor: pointer">
                     <td>
-                        {{$data->date}}
+                        {{$data->created_at}}
                     </td>
                     <td>
                         {{$data->campaign}}
@@ -45,21 +50,12 @@
                     <td>
                         {{$data->agent}}
                     </td>
-                    @if($data->caseType == "self")
-                        <td>
-                            {{$data->claimant}}
-                        </td>
-                        <td>
-                            (Claimant)
-                        </td>
-                    @else
-                        <td>
-                            {{$data->claimant}}
-                        </td>
-                        <td>
-                            {{$data->injuredParty}}
-                        </td>
-                    @endif
+                    <td>
+                        {{$data->claimant}}
+                    </td>
+                    <td>
+                        {{$data->injuredParty}}
+                    </td>
                     <td>
                         {{$data->phoneNumber}}
                     </td>
@@ -67,11 +63,23 @@
                         {{$data->altPhoneNumber}}
                     </td>
                     <td>
-                        {{ucwords($data->email)}}
+                        {{$data->email}}
                     </td>
                     <td>
-                        {{ucwords($data->address)}}
+                        {{$data->dob}}
                     </td>
+                    <td>
+                        {{$data->address}}
+                    </td>
+                    <td>
+                        {{$data->callbackTime}}
+                    </td>
+                    <td>
+                        {{$data->hours_remaining}}
+                    </td>
+{{--                    <td>--}}
+{{--                        {{$data->reason->is_expired ? 'Yes' : 'No' }}--}}
+{{--                    </td>--}}
                 </tr>
             @endforeach
             </tbody>
