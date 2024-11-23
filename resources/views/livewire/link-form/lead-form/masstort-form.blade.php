@@ -4,6 +4,13 @@
                 <div>
                     <h5>Lead Form</h5>
                 </div>
+    <div class="alert alert-danger">
+        <h6><u>INSTRUCTION</u> : Filling out the form regarding <u>1st TOUCH & 2nd TOUNCH</u></h6>
+        <div style="font-size: 14px;">
+            <p>Filling out this form is always for the 1st Touch. It can only be used for the 2nd Touch if the campaign for the lead in the 1st Touch is different from the campaign in the 2nd Touch. If the campaigns for the lead in both the 1st Touch and 2nd Touch are the same, simply update the lead's information in the lead tracker under the 1st Touch.</p>
+            <p>Please be aware of the lead ownership, whether it is for the <u>1st Touch or the 2nd Touch.</u></p>
+        </div>
+    </div>
                 <div style="background-color: #696969; color: white;border-radius: 2%;" class="px-sm-5 py-sm-4 mt-4">
                     @include('components.submission-form.campaign-link')
                     <form wire:submit.prevent="submit">

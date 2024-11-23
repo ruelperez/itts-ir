@@ -150,25 +150,118 @@
                             </div>
                         </div>
                         <div class="mt-4 row">
-                            <div class="col-3">
-                                <label  class="form-label">Agent*</label>
-                                <input type="text" class="form-control" wire:model.live="agent" wire:blur="removeSearch" wire:click="clickSearch" required @if($base == true) disabled @endif>
-                                @if($showSearch == true)
-                                    <div style="position: absolute; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);">
-                                        <ul class="list-group">
-                                            @foreach($results as $data)
-                                                <li class="list-group-item btn text-start" style="background-color: #E0FFFF;" wire:click="click_items({{$data->id}})">
-                                                    <i class="fa-solid fa-magnifying-glass me-3"></i> {{ucfirst($data->fname)}} {{ucfirst($data->lname)}}
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
-                                @error('agent') <span style="color: #8B0000">{{ $message }}</span> @enderror
-                            </div>
+                            @if($leadOwnership == "1st Touch")
+                                <div class="col-3">
+                                    <label  class="form-label">Agent (1st touch)</label>
+                                    <input type="text" class="form-control" wire:model.live="agent" wire:blur="removeSearch" wire:click="clickSearch" required @if($base == true) disabled @endif>
+                                    @if($showSearch == true)
+                                        <div style="position: absolute; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);">
+                                            <ul class="list-group">
+                                                @foreach($results as $data)
+                                                    <li class="list-group-item btn text-start" style="background-color: #E0FFFF;" wire:click="click_items({{$data->id}})">
+                                                        <i class="fa-solid fa-magnifying-glass me-3"></i> {{ucfirst($data->fname)}} {{ucfirst($data->lname)}}
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                    @error('agent') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="col-3">
+                                    <label  class="form-label">Agent (2nd touch)</label>
+                                    <input type="text" class="form-control" wire:model.live="agent2" wire:blur="removeSearch2" placeholder="Leave black if not applicable">
+                                    @if(session()->has('badAgent2'))
+                                        <small style="color: #800000">Agent's name should be selected from the search suggestions.</small>
+                                    @endif
+                                    @if($showSearch2 == true)
+                                        <div style="position: absolute; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);">
+                                            <ul class="list-group">
+                                                @foreach($results2 as $data)
+                                                    <li class="list-group-item btn text-start" style="background-color: #E0FFFF;" wire:click="click_items2({{$data->id}})">
+                                                        <i class="fa-solid fa-magnifying-glass me-3"></i> {{ucfirst($data->employeeFullname)}}
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                    @error('agent2') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                                </div>
+                            @elseif($leadOwnership == "2nd Touch")
+                                <div class="col-3">
+                                    <label  class="form-label">Agent (1st touch)</label>
+                                    <input type="text" class="form-control" wire:model.live="agent2" wire:blur="removeSearch" wire:click="clickSearch" required @if($base == true) disabled @endif>
+                                    @if($showSearch == true)
+                                        <div style="position: absolute; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);">
+                                            <ul class="list-group">
+                                                @foreach($results as $data)
+                                                    <li class="list-group-item btn text-start" style="background-color: #E0FFFF;" wire:click="click_items({{$data->id}})">
+                                                        <i class="fa-solid fa-magnifying-glass me-3"></i> {{ucfirst($data->fname)}} {{ucfirst($data->lname)}}
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                    @error('agent') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="col-3">
+                                    <label  class="form-label">Agent (2nd touch)</label>
+                                    <input type="text" class="form-control" wire:model.live="agent" wire:blur="removeSearch" wire:click="clickSearch" required @if($base == true) disabled @endif>
+                                    @if($showSearch == true)
+                                        <div style="position: absolute; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);">
+                                            <ul class="list-group">
+                                                @foreach($results as $data)
+                                                    <li class="list-group-item btn text-start" style="background-color: #E0FFFF;" wire:click="click_items({{$data->id}})">
+                                                        <i class="fa-solid fa-magnifying-glass me-3"></i> {{ucfirst($data->fname)}} {{ucfirst($data->lname)}}
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                    @error('agent') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                                </div>
+                            @else
+                                <div class="col-3">
+                                    <label  class="form-label">Agent (1st touch)</label>
+                                    <input type="text" class="form-control" wire:model.live="agent" wire:blur="removeSearch" required>
+                                    @if(session()->has('badAgent'))
+                                        <small style="color: #800000">Agent's name should be selected from the search suggestions.</small>
+                                    @endif
+                                    @if($showSearch == true)
+                                        <div style="position: absolute; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);">
+                                            <ul class="list-group">
+                                                @foreach($results as $data)
+                                                    <li class="list-group-item btn text-start" style="background-color: #E0FFFF;" wire:click="click_items({{$data->id}})">
+                                                        <i class="fa-solid fa-magnifying-glass me-3"></i> {{ucfirst($data->employeeFullname)}}
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                    @error('agent') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="col-3">
+                                    <label  class="form-label">Agent (2nd touch)</label>
+                                    <input type="text" class="form-control" wire:model.live="agent2" wire:blur="removeSearch2" placeholder="Leave black if not applicable">
+                                    @if(session()->has('badAgent2'))
+                                        <small style="color: #800000">Agent's name should be selected from the search suggestions.</small>
+                                    @endif
+                                    @if($showSearch2 == true)
+                                        <div style="position: absolute; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);">
+                                            <ul class="list-group">
+                                                @foreach($results2 as $data)
+                                                    <li class="list-group-item btn text-start" style="background-color: #E0FFFF;" wire:click="click_items2({{$data->id}})">
+                                                        <i class="fa-solid fa-magnifying-glass me-3"></i> {{ucfirst($data->employeeFullname)}}
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                    @error('agent2') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                                </div>
+                            @endif
                             <div class="col-3">
                                 <label  class="form-label">Coach*</label>
-                                <input type="text" class="form-control" wire:model.live="coach" wire:blur="removeSearchCoach" wire:click="clickSearchCoach" required @if($base == true) disabled @endif>
+                                <input type="text" class="form-control" wire:model.live="coach" wire:blur="removeSearchCoach" wire:click="clickSearchCoach" required>
                                 @if($showSearchCoach == true)
                                     <div style="position: absolute; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);">
                                         <ul class="list-group">
@@ -184,7 +277,7 @@
                             </div>
                             <div class="col-3">
                                 <label  class="form-label">Verifier*</label>
-                                <input type="text" class="form-control" wire:model.live="verifier" wire:blur="removeSearchVerifier" wire:click="clickSearchVerifier" required @if($base == true) disabled @endif>
+                                <input type="text" class="form-control" wire:model.live="verifier" wire:blur="removeSearchVerifier">
                                 @if($showSearchVerifier == true)
                                     <div style="position: absolute; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);">
                                         <ul class="list-group">

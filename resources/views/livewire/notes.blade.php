@@ -1,5 +1,4 @@
 <div>
-    @include('modal.click-settings')
     @include('modal.news-update.show-photo')
     @include('modal.Notes.add')
     @include('modal.Notes.edit')

@@ -26,7 +26,7 @@
                         </div>
                     @endif
                 </div>
-    <hr>
+                <hr>
                 <div class="text-center">
                     <div class="spinner-border mt-5" role="status" wire:loading>
                         <span class="visually-hidden">Loading...</span>

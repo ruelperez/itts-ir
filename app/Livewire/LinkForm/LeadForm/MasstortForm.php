@@ -593,7 +593,6 @@ class MasstortForm extends Component
                 $this->showSearch = false;
                 $this->results = [];
             }
-
         }
         if ($field == "agent2"){
             $this->gm2 = 0;

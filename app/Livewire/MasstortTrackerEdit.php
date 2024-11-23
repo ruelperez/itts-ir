@@ -28,7 +28,7 @@ class MasstortTrackerEdit extends Component
     public $registrationSwitch, $ids, $dtrData = [], $position, $is_success = false, $employeeData, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
             $date, $campaign, $base = true, $client, $lawfirm, $caseType, $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source, $displayRemarks, $result,
             $campaignList = [], $dqReason, $returnClient, $returnCriteria, $dqCriteria, $dqClient, $dqQa, $dqManager, $dqVerifier, $returnReason, $lawfirmList = [], $clientList = [], $showSearch = false, $showSearchCoach = false, $showSearchVerifier = false,
-            $results = [], $method, $resultsCoach = [], $date2, $returnedOther, $displayRem, $resultsVerifier = [];
+            $results = [], $method, $resultsCoach = [], $gm = 0, $results2 = [], $showSearch2 = false, $leadOwnership, $gm2 = 0, $agent2, $date2, $returnedOther, $displayRem, $resultsVerifier = [];
 
     public function render()
     {
@@ -46,6 +46,16 @@ class MasstortTrackerEdit extends Component
             ->distinct('campaign')
             ->get();
         return view('livewire.masstort-tracker-edit');
+    }
+
+    public function removeSearch2(){
+        $this->showSearch2 = false;
+    }
+
+    public function click_items2($id){
+        $gh = Employee::find($id);
+        $this->agent2 = $gh->employeeFullname;
+        $this->gm2 = 1;
     }
 
     public function clickSearch(){
@@ -130,11 +140,36 @@ class MasstortTrackerEdit extends Component
         $this->displayRemarks = $yr->remarks;
         $this->result = $yr->result;
         $this->method = $yr->method;
+        $this->leadOwnership = $yr->leadOwnership;
+        $this->agent2 = $yr->agent2;
     }
 
     public function clickUpdate(){
+        if ($this->agent2 != ""){
+            if ($this->gm2 == 0){
+                session()->flash('badAgent2', "Successfully saved");
+                return;
+            }
+        }
+        if ($this->gm == 0){
+            session()->flash('badAgent', "Successfully saved");
+            return;
+        }
         $this->date2 = Carbon::now()->subDay()->format('m/d/Y');
         $this->dispatch('showModal');
+    }
+    public function click_items($id){
+        $gh = Employee::find($id);
+        $this->agent = $gh->employeeFullname;
+        $this->showSearchCoach = false;
+        $this->gm = 1;
+    }
+
+
+    public function click_itemsCoach($id){
+        $gh = Employee::find($id);
+        $this->coach = $gh->employeeFullname;
+        $this->showSearchCoach = false;
     }
 
     public function submitEdit(){
@@ -244,11 +279,22 @@ class MasstortTrackerEdit extends Component
             if ($this->result == "Returned - Other"){
                 $this->result = "Returned";
             }
+            if ($this->agent2 != ""){
+                $owner = "2nd Touch";
+            }
+            else{
+                $owner = "1st Touch";
+            }
             try {
                 $kk = Submission::find($this->ids);
                 $kk->result = $this->result;
                 $kk->comment = $this->returnedOther;
                 $kk->date = $this->date2;
+                $kk->leadOwnership = $owner;
+                $kk->agent2 = $this->agent;
+                $kk->agent = $this->agent2;
+                $kk->coach = $this->coach;
+                $kk->verifier = $this->verifier;
                 $kk->save();
                 LeadLog::create([
                     'user_name' => $this->fullname,
@@ -474,20 +520,20 @@ class MasstortTrackerEdit extends Component
         }
     }
 
+    public function click_itemsVerifier($id){
+        $gh = Employee::find($id);
+        $this->verifier = $gh->employeeFullname;
+        $this->showSearchVerifier = false;
+    }
+
     public function updated($field){
         if ($field == "verifier"){
             if ($this->verifier != ""){
-                $this->resultsVerifier = Employee::where('fname','LIKE','%'. $this->verifier. '%')
+                $this->resultsVerifier = Employee::where('employeeFullname','LIKE','%'. $this->verifier. '%')
                     ->where('designation','Subject Matter Expert')
-                    ->orWhere('fname','LIKE','%'. $this->verifier. '%')
+                    ->orWhere('employeeFullname','LIKE','%'. $this->verifier. '%')
                     ->where('designation','Team Leader')
-                    ->orWhere('fname','LIKE','%'. $this->verifier. '%')
-                    ->where('designation','Senior Team Leader')
-                    ->orWhere('lname','LIKE','%'. $this->verifier. '%')
-                    ->where('designation','Subject Matter Expert')
-                    ->orWhere('lname','LIKE','%'. $this->verifier. '%')
-                    ->where('designation','Team Leader')
-                    ->orWhere('lname','LIKE','%'. $this->verifier. '%')
+                    ->orWhere('employeeFullname','LIKE','%'. $this->verifier. '%')
                     ->where('designation','Senior Team Leader')
                     ->take(5)
                     ->get();
@@ -501,17 +547,11 @@ class MasstortTrackerEdit extends Component
         }
         if ($field == "coach"){
             if ($this->coach != ""){
-                $this->resultsCoach = Employee::where('fname','LIKE','%'. $this->coach. '%')
+                $this->resultsCoach = Employee::where('employeeFullname','LIKE','%'. $this->coach. '%')
                     ->where('designation','Subject Matter Expert')
-                    ->orWhere('fname','LIKE','%'. $this->coach. '%')
+                    ->orWhere('employeeFullname','LIKE','%'. $this->coach. '%')
                     ->where('designation','Team Leader')
-                    ->orWhere('fname','LIKE','%'. $this->coach. '%')
-                    ->where('designation','Senior Team Leader')
-                    ->orWhere('lname','LIKE','%'. $this->coach. '%')
-                    ->where('designation','Subject Matter Expert')
-                    ->orWhere('lname','LIKE','%'. $this->coach. '%')
-                    ->where('designation','Team Leader')
-                    ->orWhere('lname','LIKE','%'. $this->coach. '%')
+                    ->orWhere('employeeFullname','LIKE','%'. $this->coach. '%')
                     ->where('designation','Senior Team Leader')
                     ->take(5)
                     ->get();
@@ -524,15 +564,29 @@ class MasstortTrackerEdit extends Component
 
         }
         if ($field == "agent"){
+            $this->gm = 0;
             if ($this->agent != ""){
-                $this->results = Employee::where('fname','LIKE','%'. $this->agent. '%')
-                    ->orWhere('lname','LIKE','%'. $this->agent. '%')->take(5)
+                $this->results = Employee::where('employeeFullname','LIKE','%'. $this->agent. '%')
+                    ->take(5)
                     ->get();
                 $this->showSearch = true;
             }
             else{
                 $this->showSearch = false;
                 $this->results = [];
+            }
+        }
+        if ($field == "agent2"){
+            $this->gm2 = 0;
+            if ($this->agent2 != ""){
+                $this->results2 = Employee::where('employeeFullname','LIKE','%'. $this->agent2. '%')
+                    ->take(5)
+                    ->get();
+                $this->showSearch2 = true;
+            }
+            else{
+                $this->showSearch2 = false;
+                $this->results2 = [];
             }
 
         }
@@ -582,71 +636,6 @@ class MasstortTrackerEdit extends Component
             $this->bms = Note::where('campaign',$this->campaign)
                 ->where('client',$this->client)
                 ->where('lawfirm',$this->lawfirm)->get();
-
-        }
-        if ($field == "registrationSwitch"){
-            $this->regSwitch();
-        }
-        if ($field == "adminSwitch"){
-            $this->admin_Switch();
-        }
-        if ($field == "superAdminSwitch"){
-            $this->super_admin_Switch();
-        }
-        if ($field == "photo"){
-            $filename = Str::random(40) . '.' . $this->photo->getClientOriginalExtension();
-            $this->photo->storeAs('photos', $filename, 'public_photos');
-            $user = User::find($this->user_id);
-            $user->photo = $filename;
-            $user->save();
-            $user = User::find($this->user_id)->comment;
-            foreach ($user as $usr){
-                $jn = Comment::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->comment_heart;
-            foreach ($user as $usr){
-                $jn = CommentHeart::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->dtr;
-            foreach ($user as $usr){
-                $jn =Dtr::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->dtr_content;
-            foreach ($user as $usr){
-                $jn =DtrContent::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->log;
-            foreach ($user as $usr){
-                $jn =\App\Models\Logs::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->note;
-            foreach ($user as $usr){
-                $jn = Note::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->time_setting;
-            foreach ($user as $usr){
-                $jn = TimeSetting::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = UserPassword::find($this->user_id);
-            $user->photo = $filename;
-            $user->save();
-            return redirect('/itts/13/faq');
-        }
-        if ($field == "campaign_name"){
 
         }
     }

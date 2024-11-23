@@ -16,9 +16,9 @@
         <div class="col-sm-7 col-lg-5 col-xl-5 mt-2 mt-sm-0">
             <input class="form-control w-100" type="search" placeholder="Search" aria-label="Search" wire:model.live="search">
         </div>
-        <div class="col-sm-5 col-lg-2 col-xl-2 mt-2 mt-sm-2 mt-lg-0 ms-lg-auto">
-            <button class="btn btn-warning w-100" >Callback</button>
-        </div>
+{{--        <div class="col-sm-5 col-lg-2 col-xl-2 mt-2 mt-sm-2 mt-lg-0 ms-lg-auto">--}}
+{{--            <button class="btn btn-warning w-100" onclick="location.href = '/my-callback';">My Callback</button>--}}
+{{--        </div>--}}
     </div>
     <div class="text-center">
         <div class="spinner-border mt-5" role="status" wire:loading>
