@@ -439,7 +439,7 @@
                     confirmButtonText: 'OK'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.history.back();
+                        location.reload();
                     }
                 });
             });

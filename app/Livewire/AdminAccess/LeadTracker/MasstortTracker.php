@@ -114,6 +114,7 @@ class MasstortTracker extends Component
         else{
             return redirect('/');
         }
+        $this->checkBox = [];
     }
 
     public function logout(){
