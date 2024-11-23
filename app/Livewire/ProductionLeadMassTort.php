@@ -44,30 +44,24 @@ class ProductionLeadMassTort extends Component
         if ($this->search == "") {
             $this->displayData();
         } else {
-            $this->submissionData = Submission::where('phoneNumber', 'LIKE', '%' . $this->search . '%')
-                ->where('agent', $this->agentName)
-                ->orWhere('altPhoneNumber', 'LIKE', '%' . $this->search . '%')
-                ->where('agent', $this->agentName)
-                ->orWhere('date', 'LIKE', '%' . $this->search . '%')
-                ->where('agent', $this->agentName)
-                ->orWhere('agent', 'LIKE', '%' . $this->search . '%')
-                ->where('agent', $this->agentName)
-                ->orWhere('caseType', 'LIKE', '%' . $this->search . '%')
-                ->where('agent', $this->agentName)
-                ->orWhere('claimant', 'LIKE', '%' . $this->search . '%')
-                ->where('agent', $this->agentName)
-                ->orWhere('injuredParty', 'LIKE', '%' . $this->search . '%')
-                ->where('agent', $this->agentName)
-                ->orWhere('campaign', 'LIKE', '%' . $this->search . '%')
-                ->where('agent', $this->agentName)
-                ->orWhere('remarks', 'LIKE', '%' . $this->search . '%')
-                ->where('agent', $this->agentName)
-                ->orWhere('coach', 'LIKE', '%' . $this->search . '%')
-                ->where('agent', $this->agentName)
-                ->orWhere('result', 'LIKE', '%' . $this->search . '%')
-                ->where('agent', $this->agentName)
+            $this->submissionData = Submission::where(function ($query) {
+                $query->where('phoneNumber', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('altPhoneNumber', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('date', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('agent', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('caseType', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('claimant', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('injuredParty', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('campaign', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('remarks', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('coach', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('result', 'LIKE', '%' . $this->search . '%');
+            })
+                ->where(function ($query) {
+                    $query->where('agent', $this->agentName)
+                        ->orWhere('agent2', $this->agentName);
+                })
                 ->skip(($this->currentPage - 1) * $this->perPage)
-                ->where('agent', $this->agentName)
                 ->take($this->perPage)
                 ->latest()
                 ->get();
@@ -117,6 +111,7 @@ class ProductionLeadMassTort extends Component
     {
         $this->submissionData = Submission::query()
             ->where('agent', $this->agentName)
+            ->orWhere('agent2', $this->agentName) // Add this line for the additional condition
             ->skip(($this->currentPage - 1) * $this->perPage)
             ->take($this->perPage)
             ->latest()

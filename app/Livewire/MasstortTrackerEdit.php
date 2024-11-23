@@ -151,10 +151,13 @@ class MasstortTrackerEdit extends Component
                 return;
             }
         }
-        if ($this->gm == 0){
-            session()->flash('badAgent', "Successfully saved");
-            return;
+        if ($this->leadOwnership == ""){
+            if ($this->gm == 0){
+                session()->flash('badAgent', "Successfully saved");
+                return;
+            }
         }
+
         $this->date2 = Carbon::now()->subDay()->format('m/d/Y');
         $this->dispatch('showModal');
     }
@@ -285,6 +288,7 @@ class MasstortTrackerEdit extends Component
             else{
                 $owner = "1st Touch";
             }
+
             try {
                 $kk = Submission::find($this->ids);
                 $kk->result = $this->result;
@@ -321,203 +325,6 @@ class MasstortTrackerEdit extends Component
 
     public function clickEdit(){
         $this->base = false;
-    }
-
-    public function logout(){
-        Auth::logout();
-        return redirect()->to('/login');
-    }
-
-    public function clickSettings(){
-        $data = IsRegistration::all();
-        if (count($data) == 0){
-            IsRegistration::create([
-                'user_id' => auth()->user()->id,
-                'on_off' => true,
-            ]);
-        }
-        $an = IsRegistration::all();
-        foreach ($an as $ans){
-            $this->registrationSwitch = $ans->on_off;
-        }
-        if ($this->registrationSwitch == "0"){
-            $this->registrationSwitch = false;
-        }
-        else{
-            $this->registrationSwitch = true;
-        }
-
-
-        $data = AdminShow::all();
-        if (count($data) == 0){
-            AdminShow::create([
-                'user_id' => auth()->user()->id,
-                'on_off' => true,
-            ]);
-        }
-        $an = AdminShow::all();
-        foreach ($an as $ans){
-            $this->adminSwitch = $ans->on_off;
-        }
-        if ($this->adminSwitch == "0"){
-            $this->adminSwitch = false;
-        }
-        else{
-            $this->adminSwitch = true;
-        }
-
-        $data = SuperadminShow::all();
-        if (count($data) == 0){
-            SuperadminShow::create([
-                'user_id' => auth()->user()->id,
-                'on_off' => true,
-            ]);
-        }
-        $an = SuperadminShow::all();
-        foreach ($an as $ans){
-            $this->superAdminSwitch = $ans->on_off;
-        }
-        if ($this->superAdminSwitch == "0"){
-            $this->superAdminSwitch = false;
-        }
-        else{
-            $this->superAdminSwitch = true;
-        }
-    }
-
-    public function regSwitch(){
-        $data = IsRegistration::all();
-        if (count($data) == 1){
-            if ($this->registrationSwitch == false){
-                foreach ($data as $datas){
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = false;
-                    $datas->save();
-                }
-                $an = IsRegistration::all();
-                foreach ($an as $ans){
-                    $this->registrationSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "disabled registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            }
-            else{
-                foreach ($data as $datas){
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = true;
-                    $datas->save();
-                }
-                $an = IsRegistration::all();
-                foreach ($an as $ans){
-                    $this->registrationSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "enabled registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            }
-        }
-        else{
-            IsRegistration::create([
-                'user_id' => auth()->user()->id,
-                'on_off' => true,
-            ]);
-        }
-    }
-
-    public function admin_Switch(){
-        $data = AdminShow::all();
-        if (count($data) == 1){
-            if ($this->adminSwitch == false){
-                foreach ($data as $datas){
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = false;
-                    $datas->save();
-                }
-                $an = AdminShow::all();
-                foreach ($an as $ans){
-                    $this->adminSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "disabled admin registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            }
-            else{
-                foreach ($data as $datas){
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = true;
-                    $datas->save();
-                }
-                $an = AdminShow::all();
-                foreach ($an as $ans){
-                    $this->adminSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "enabled admin registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            }
-        }
-        else{
-            AdminShow::create([
-                'user_id' => auth()->user()->id,
-                'on_off' => true,
-            ]);
-            $an = AdminShow::all();
-            foreach ($an as $ans){
-                $this->adminSwitch = $ans->on_off;
-            }
-        }
-    }
-
-    public function super_admin_Switch(){
-        $data = SuperadminShow::all();
-        if (count($data) == 1) {
-            if ($this->superAdminSwitch == false) {
-                foreach ($data as $datas) {
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = false;
-                    $datas->save();
-                }
-                $an = SuperadminShow::all();
-                foreach ($an as $ans) {
-                    $this->superAdminSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "disabled super admin registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            } else {
-                foreach ($data as $datas) {
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = true;
-                    $datas->save();
-                }
-                $an = SuperadminShow::all();
-                foreach ($an as $ans) {
-                    $this->superAdminSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "enabled super admin registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            }
-        }
     }
 
     public function click_itemsVerifier($id){
