@@ -4,6 +4,9 @@
     @include('modal.dashboard.saveOrNot')
     @include('modal.dashboard.click-data')
     @include('modal.dupe-checker.click-updated')
+                <div class="mb-1" style="font-size: 20px;">
+                    <i class="fa-solid fa-arrow-left-long" style="cursor: pointer" onclick="location.href = '/admin-access/lead-tracker/masstort-tracker';"></i>
+                </div>
                 <div>
                     <h6>Edit Dupe Checker ({{$phoneNumber}}) </h6>
                 </div>
