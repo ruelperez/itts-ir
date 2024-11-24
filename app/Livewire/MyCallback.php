@@ -9,13 +9,36 @@ use Livewire\Component;
 class MyCallback extends Component
 {
     public $submissionData = [], $dob, $user_id, $claimant, $phoneNumber, $campaign, $injuredParty, $altPhoneNumber, $email, $address, $reason,
-            $gm=0, $results = [], $showSearch = false, $callbackTime;
+            $gm=0, $results = [], $showSearch = false, $currentPage = 1, $perPage = 15, $callbackTime;
 
     public function render()
     {
         $this->user_id = auth()->user()->id;
-        $this->submissionData = Callback::all();
+        $this->submissionData = Callback::where('user_id', $this->user_id)
+            ->skip(($this->currentPage - 1) * $this->perPage)
+            ->take($this->perPage)
+            ->latest()
+            ->get();
         return view('livewire.my-callback');
+    }
+    public function previousPage(){
+        if ($this->currentPage > 1) {
+            $this->currentPage--;
+        }
+    }
+
+    public function nextPage()
+    {
+        $this->currentPage++;
+    }
+
+
+    public function mount(){
+        $info = Callback::all();
+        // Loop through each record and update its expiration status
+        foreach ($info as $record) {
+            $record->updateExpirationStatus(); // Update the expiration status
+        }
     }
 
     public function submit(){

@@ -20,15 +20,21 @@ class Callback extends Model
     'address',
     'user_id',
     'reason',
+    'timeRemaining',
+    'is_expired',
 ];
 
-    // Accessor to calculate hours remaining until expiration (336 hours = 14 days)
-    public function getHoursRemainingAttribute()
+    // Update the 'is_expired' and 'timeRemaining' based on the record age
+    public function updateExpirationStatus()
     {
-        $expirationTime = $this->created_at->addHours(336);
+        $expirationTime = $this->created_at->addHours(2); // 336 hours (14 days)
         $remainingHours = Carbon::now()->diffInHours($expirationTime, false);
 
-        return $remainingHours > 0 ? $remainingHours : 0;
+        // Set time remaining and is_expired flag
+        $this->timeRemaining = $remainingHours > 0 ? $remainingHours : 0;
+        $this->is_expired = $remainingHours <= 0;
+
+        $this->save(); // Save the updated values
     }
 
     use HasFactory;

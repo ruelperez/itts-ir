@@ -40,7 +40,8 @@
             </thead>
             <tbody>
             @foreach($submissionData as $data)
-                <tr wire:click="viewDetail({{$data->id}})" data-bs-toggle="modal" data-bs-target="#viewDetail" style="cursor: pointer">
+                <tr @if($data->is_expired == "1") style=" background-color: #FF2828; color: white" @endif>
+{{--                <tr wire:click="viewDetail({{$data->id}})" data-bs-toggle="modal" data-bs-target="#viewDetail" style="cursor: pointer">--}}
                     <td>
                         {{$data->created_at}}
                     </td>
@@ -75,11 +76,11 @@
                         {{$data->callbackTime}}
                     </td>
                     <td>
-                        {{$data->hours_remaining}}
+                        {{$data->timeRemaining }}
                     </td>
-{{--                    <td>--}}
-{{--                        {{$data->reason->is_expired ? 'Yes' : 'No' }}--}}
-{{--                    </td>--}}
+                    <td>
+                        {{$data->is_expired ? 'Yes' : 'No' }}
+                    </td>
                 </tr>
             @endforeach
             </tbody>
