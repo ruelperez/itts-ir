@@ -17,6 +17,17 @@
     color: #00008B; /* Color when the icon is hovered */
 }
 
+/* Initially hide the eye icon */
+.eye-icon i {
+    visibility: hidden;
+}
+
+/* Show the eye icon when the row is hovered */
+tr:hover .eye-icon i {
+    visibility: visible;
+}
+
+
 .center-dtr-btn{
     display: flex;
     justify-content: center; /* Horizontally center */

@@ -11,18 +11,44 @@ use Livewire\Component;
 
 class MyCallback extends Component
 {
-    public $submissionData = [], $dob, $user_id, $date, $claimant, $phoneNumber, $campaign, $injuredParty, $altPhoneNumber, $email, $address, $reason,
+    public $submissionData = [], $search, $dob, $user_id, $date, $claimant, $phoneNumber, $campaign, $injuredParty, $altPhoneNumber, $email, $address, $reason,
             $gm=0, $results = [], $timeRemaining, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15, $callbackTime;
 
     public function render()
     {
         $this->user_id = auth()->user()->id;
+        if ($this->search == ""){
+            $this->displayData();
+        }
+        else{
+            $this->submissionData = Callback::where('user_id', auth()->id()) // Filter by logged-in user ID
+            ->where(function ($query) {
+                $query->where('phoneNumber', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('altPhoneNumber', 'LIKE', '%' . $this->search . '%')
+                    ->orWhereRaw("DATE_FORMAT(created_at, '%m/%d/%Y %h:%i %p') LIKE ?", ['%' . $this->search . '%']) // Civilian time format
+                    ->orWhere('claimant', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('injuredParty', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('campaign', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('email', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('dob', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('reason', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('is_expired', 'LIKE', '%' . (strtolower($this->search) === 'yes' ? 1 : (strtolower($this->search) === 'no' ? 0 : $this->search)) . '%'); // Yes/No to 1/0
+            })
+                ->skip(($this->currentPage - 1) * $this->perPage)
+                ->take($this->perPage)
+                ->latest()
+                ->get();
+        }
+
+        return view('livewire.my-callback');
+    }
+
+    public function displayData(){
         $this->submissionData = Callback::where('user_id', $this->user_id)
             ->skip(($this->currentPage - 1) * $this->perPage)
             ->take($this->perPage)
             ->latest()
             ->get();
-        return view('livewire.my-callback');
     }
     public function previousPage(){
         if ($this->currentPage > 1) {
