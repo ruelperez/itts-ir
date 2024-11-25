@@ -148,6 +148,8 @@
                             <div class="dropdown-menu" aria-labelledby="dropupLink" style="box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);">
                                 <a class="dropdown-item" href="/qr-code/scanner"><i class="fa-solid fa-qrcode pe-2"></i>
                                     QR Scanner</a>
+                                <a class="dropdown-item" href="/admin-access/callback/tracker"><i class="fa-regular fa-folder pe-2"></i>
+                                    Callback Tracker</a>
                                 <a class="dropdown-item" href="/admin-access/staff-directory/staff-directory"><i class="fa-regular fa-folder pe-2"></i>
                                     Staff Directory</a>
                                 <a class="dropdown-item" href="/admin-access/eod/masstort-tracker"><i class="fa-solid fa-universal-access pe-2"></i>
