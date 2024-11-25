@@ -18,7 +18,8 @@ class Tracker extends Component
             $this->displayData();
         }
         else{
-            $this->submissionData = Callback::where(function ($query) {
+            $this->submissionData = Callback::with('user') // Eager load the related user
+            ->where(function ($query) {
                 $query->where('phoneNumber', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('altPhoneNumber', 'LIKE', '%' . $this->search . '%')
                     ->orWhereRaw("DATE_FORMAT(created_at, '%m/%d/%Y %h:%i %p') LIKE ?", ['%' . $this->search . '%']) // Civilian time format
