@@ -27,7 +27,7 @@ class Callback extends Model
     // Update the 'is_expired' and 'timeRemaining' based on the record age
     public function updateExpirationStatus()
     {
-        $expirationTime = $this->created_at->addHours(2); // 336 hours (14 days)
+        $expirationTime = $this->created_at->addHours(5); // 336 hours (14 days)
         $remainingHours = Carbon::now()->diffInHours($expirationTime, false);
 
         // Set time remaining and is_expired flag
