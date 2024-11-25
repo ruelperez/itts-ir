@@ -29,7 +29,10 @@ class Tracker extends Component
                     ->orWhere('email', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('dob', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('reason', 'LIKE', '%' . $this->search . '%')
-                    ->orWhere('is_expired', 'LIKE', '%' . (strtolower($this->search) === 'yes' ? 1 : (strtolower($this->search) === 'no' ? 0 : $this->search)) . '%'); // Yes/No to 1/0
+                    ->orWhere('is_expired', 'LIKE', '%' . (strtolower($this->search) === 'yes' ? 1 : (strtolower($this->search) === 'no' ? 0 : $this->search)) . '%')
+                    ->orWhereHas('user', function ($userQuery) {
+                        $userQuery->where('fullname', 'LIKE', '%' . $this->search . '%'); // Match fullname directly
+                    });
             })
                 ->skip(($this->currentPage - 1) * $this->perPage)
                 ->take($this->perPage)
