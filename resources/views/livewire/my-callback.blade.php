@@ -32,7 +32,7 @@
                 <th scope="col" style="width: 9%;">Email</th>
 {{--                <th scope="col" style="width: 9%;">DOB</th>--}}
 {{--                <th scope="col" style="width: 9%;">Address</th>--}}
-                <th scope="col" style="width: 9%;">Callback time</th>
+{{--                <th scope="col" style="width: 9%;">Callback time</th>--}}
                 <th scope="col" style="width: 9%;">Reason</th>
                 <th scope="col" style="width: 9%;">Time left</th>
                 <th scope="col" style="width: 9%;">Is expired</th>
@@ -69,9 +69,9 @@
 {{--                    <td>--}}
 {{--                        {{$data->address}}--}}
 {{--                    </td>--}}
-                    <td>
-                        {{$data->callbackTime}}
-                    </td>
+{{--                    <td>--}}
+{{--                        {{$data->callbackTime}}--}}
+{{--                    </td>--}}
                     <td>
                         {{$data->reason}}
                     </td>

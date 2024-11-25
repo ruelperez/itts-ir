@@ -49,7 +49,7 @@
                     <p>Time left: <b>{{$timeRemaining}}</b></p>
                 </div>
                 <div>
-                    <p>Time left: <b>{{$is_expired ? 'Yes' : 'No'}}</b></p>
+                    <p>Is expired: <b>{{$is_expired ? 'Yes' : 'No'}}</b></p>
                 </div>
             </div>
         </div>

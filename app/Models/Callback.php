@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 class Callback extends Model
 {
     protected $fillable = [
-    'callbackTime',
     'claimant',
     'phoneNumber',
     'altPhoneNumber',

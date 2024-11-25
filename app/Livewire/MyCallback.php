@@ -12,7 +12,7 @@ use Livewire\Component;
 class MyCallback extends Component
 {
     public $submissionData = [], $search, $dob, $user_id, $date, $claimant, $phoneNumber, $campaign, $injuredParty, $altPhoneNumber, $email, $address, $reason,
-            $gm=0, $results = [], $timeRemaining, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15, $callbackTime;
+            $gm=0, $results = [], $timeRemaining, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15;
 
     public function render()
     {
@@ -90,7 +90,7 @@ class MyCallback extends Component
                 'email' => $this->email,
                 'address' => $this->address,
                 'user_id' => $this->user_id,
-                'callbackTime' => $this->callbackTime,
+//                'callbackTime' => $this->callbackTime,
                 'reason' => $this->reason,
             ]);
             $this->claimant = "";
@@ -102,7 +102,7 @@ class MyCallback extends Component
             $this->email = "";
             $this->address = "";
             $this->user_id = "";
-            $this->callbackTime = "";
+//            $this->callbackTime = "";
             $this->reason = "";
             $this->dispatch('success');
         }catch (\Exception $e){
@@ -120,7 +120,7 @@ class MyCallback extends Component
         $this->dob = "";
         $this->email = "";
         $this->address = "";
-        $this->callbackTime = "";
+//        $this->callbackTime = "";
         $this->reason = "";
         $this->is_expired = "";
         $this->timeRemaining = "";
