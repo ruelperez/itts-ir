@@ -9,9 +9,9 @@
         <div class="col-sm-7 col-lg-5 col-xl-5 mt-2 mt-sm-0">
             <input class="form-control w-100" type="search" placeholder="Search" aria-label="Search" wire:model.live="search">
         </div>
-        <div class="col-sm-3 col-lg-5 col-xl-5 mt-2 ">
-            <i class="fa-solid fa-circle-plus" style="font-size: 18px; cursor: pointer" data-bs-toggle="modal" data-bs-target="#add"></i>
-        </div>
+{{--        <div class="col-sm-3 col-lg-5 col-xl-5 mt-2 ">--}}
+{{--            <i class="fa-solid fa-circle-plus" style="font-size: 18px; cursor: pointer" data-bs-toggle="modal" data-bs-target="#add"></i>--}}
+{{--        </div>--}}
     </div>
     <div class="text-center">
         <div class="spinner-border mt-5" role="status" wire:loading>
