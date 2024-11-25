@@ -80,7 +80,7 @@
                         {{$data->reason}}
                     </td>
                     <td>
-                        {{$data->timeRemaining }}
+                        {{$data->timeRemaining }} hrs.
                     </td>
                     <td style="padding: 0; width: 1%; text-align: center;">
                         <p style="margin: 0; padding: 0;">{{$data->is_expired ? 'Yes' : 'No' }}</p>

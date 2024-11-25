@@ -46,7 +46,7 @@
                     <p>Reason: <b>{{$reason}}</b></p>
                 </div>
                 <div>
-                    <p>Time left: <b>{{$timeRemaining}}</b></p>
+                    <p>Time left: <b>{{$timeRemaining}} hrs.</b></p>
                 </div>
                 <div>
                     <p>Is expired: <b>{{$is_expired ? 'Yes' : 'No'}}</b></p>

@@ -149,7 +149,6 @@ class MyCallback extends Component
             $this->gm = 0;
             if ($this->campaign != ""){
                 $this->results = Note::where('campaign','LIKE','%'. $this->campaign. '%')
-                    ->where('campaign_stat','active')
                     ->take(5)
                     ->get();
                 $this->showSearch = true;
