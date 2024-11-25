@@ -4,12 +4,15 @@ namespace App\Livewire;
 
 use App\Models\Callback;
 use App\Models\Note;
+use App\Models\Submission;
+use App\Models\User;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class MyCallback extends Component
 {
-    public $submissionData = [], $dob, $user_id, $claimant, $phoneNumber, $campaign, $injuredParty, $altPhoneNumber, $email, $address, $reason,
-            $gm=0, $results = [], $showSearch = false, $currentPage = 1, $perPage = 15, $callbackTime;
+    public $submissionData = [], $dob, $user_id, $date, $claimant, $phoneNumber, $campaign, $injuredParty, $altPhoneNumber, $email, $address, $reason,
+            $gm=0, $results = [], $timeRemaining, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15, $callbackTime;
 
     public function render()
     {
@@ -50,20 +53,39 @@ class MyCallback extends Component
             'phoneNumber' => 'required|numeric',
             'altPhoneNumber' => 'required|numeric',
         ]);
+        try {
+            Callback::create([
+                'claimant' => $this->claimant,
+                'phoneNumber' => $this->phoneNumber,
+                'altPhoneNumber' => $this->altPhoneNumber,
+                'campaign' => $this->campaign,
+                'injuredParty' => $this->injuredParty,
+                'dob' => $this->dob,
+                'email' => $this->email,
+                'address' => $this->address,
+                'user_id' => $this->user_id,
+                'callbackTime' => $this->callbackTime,
+                'reason' => $this->reason,
+            ]);
+            $this->claimant = "";
+            $this->phoneNumber = "";
+            $this->altPhoneNumber = "";
+            $this->campaign = "";
+            $this->injuredParty = "";
+            $this->dob = "";
+            $this->email = "";
+            $this->address = "";
+            $this->user_id = "";
+            $this->callbackTime = "";
+            $this->reason = "";
+            $this->dispatch('success');
+        }catch (\Exception $e){
+            $this->dispatch('failed');
+        }
 
-        Callback::create([
-            'claimant' => $this->claimant,
-            'phoneNumber' => $this->phoneNumber,
-            'altPhoneNumber' => $this->altPhoneNumber,
-            'campaign' => $this->campaign,
-            'injuredParty' => $this->injuredParty,
-            'dob' => $this->dob,
-            'email' => $this->email,
-            'address' => $this->address,
-            'user_id' => $this->user_id,
-            'callbackTime' => $this->callbackTime,
-            'reason' => $this->reason,
-        ]);
+    }
+
+    public function closeBtn(){
         $this->claimant = "";
         $this->phoneNumber = "";
         $this->altPhoneNumber = "";
@@ -72,9 +94,28 @@ class MyCallback extends Component
         $this->dob = "";
         $this->email = "";
         $this->address = "";
-        $this->user_id = "";
         $this->callbackTime = "";
         $this->reason = "";
+        $this->is_expired = "";
+        $this->timeRemaining = "";
+    }
+
+    public function viewDetail($id){
+        $dv = Callback::find($id);
+        $this->claimant = $dv->claimant;
+        $this->injuredParty = $dv->injuredParty;
+        $this->phoneNumber = $dv->phoneNumber;
+        $this->altPhoneNumber = $dv->altPhoneNumber;
+        $this->dob = $dv->dob;
+        $this->email = $dv->email;
+        $this->address = $dv->address;
+        $this->campaign = $dv->campaign;
+        $this->timeRemaining = $dv->timeRemaining;
+        $this->reason = $dv->reason;
+        $this->is_expired = $dv->is_expired;
+        $this->date = $dv->created_at->format('m/d/Y h:i A');
+        $ja = User::find($dv->user_id);
+        $this->agent = $ja->fullname;
     }
 
     public function updated($field){

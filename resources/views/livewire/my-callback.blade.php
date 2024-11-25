@@ -1,5 +1,5 @@
 <div>
-{{--    @include('modal.dupe-checker.viewDetail')--}}
+    @include('modal.callback.viewDetail')
     @include('modal.callback.add')
     <div>
         <i class="fa-solid fa-arrow-left" onclick="location.href = '/production-lead-mass-tort';" style="cursor: pointer"></i>
@@ -28,28 +28,25 @@
                 <th scope="col" style="width: 9%;">Claimant</th>
                 <th scope="col" style="width: 9%;">Injured party</th>
                 <th scope="col" style="width: 9%;">Phone #</th>
-                <th scope="col" style="width: 9%;">Alt Phone #</th>
+{{--                <th scope="col" style="width: 9%;">Alt Phone #</th>--}}
                 <th scope="col" style="width: 9%;">Email</th>
-                <th scope="col" style="width: 9%;">DOB</th>
-                <th scope="col" style="width: 9%;">Address</th>
+{{--                <th scope="col" style="width: 9%;">DOB</th>--}}
+{{--                <th scope="col" style="width: 9%;">Address</th>--}}
                 <th scope="col" style="width: 9%;">Callback time</th>
                 <th scope="col" style="width: 9%;">Reason</th>
-                <th scope="col" style="width: 9%;">Remaining</th>
+                <th scope="col" style="width: 9%;">Time left</th>
                 <th scope="col" style="width: 9%;">Is expired</th>
             </tr>
             </thead>
             <tbody>
             @foreach($submissionData as $data)
-                <tr @if($data->is_expired == "1") style=" background-color: #FF2828; color: white" @endif>
+                <tr @if($data->is_expired == "1") style=" background-color: #FF2828; color: white" @endif wire:click="viewDetail({{$data->id}})" data-bs-toggle="modal" data-bs-target="#viewDetail" style="cursor: pointer">
 {{--                <tr wire:click="viewDetail({{$data->id}})" data-bs-toggle="modal" data-bs-target="#viewDetail" style="cursor: pointer">--}}
                     <td>
-                        {{$data->created_at}}
+                        {{ $data->created_at->format('m/d/Y h:i A') }}
                     </td>
                     <td>
                         {{$data->campaign}}
-                    </td>
-                    <td>
-                        {{$data->agent}}
                     </td>
                     <td>
                         {{$data->claimant}}
@@ -60,20 +57,23 @@
                     <td>
                         {{$data->phoneNumber}}
                     </td>
-                    <td>
-                        {{$data->altPhoneNumber}}
-                    </td>
+{{--                    <td>--}}
+{{--                        {{$data->altPhoneNumber}}--}}
+{{--                    </td>--}}
                     <td>
                         {{$data->email}}
                     </td>
-                    <td>
-                        {{$data->dob}}
-                    </td>
-                    <td>
-                        {{$data->address}}
-                    </td>
+{{--                    <td>--}}
+{{--                        {{$data->dob}}--}}
+{{--                    </td>--}}
+{{--                    <td>--}}
+{{--                        {{$data->address}}--}}
+{{--                    </td>--}}
                     <td>
                         {{$data->callbackTime}}
+                    </td>
+                    <td>
+                        {{$data->reason}}
                     </td>
                     <td>
                         {{$data->timeRemaining }}
@@ -94,5 +94,30 @@
             </div>
         </div>
     </div>
-
+    @script
+        <script>
+            $wire.on('success', () => {
+                Swal.fire(
+                    'SUCCESS!',
+                    'Successfully Updated .',
+                    'success'
+                ).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
+            });
+            $wire.on('failed', () => {
+                Swal.fire(
+                    'FAILED!',
+                    'Failed to Update.',
+                    'error'
+                ).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
+            });
+        </script>
+    @endscript
 </div>
