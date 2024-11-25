@@ -148,7 +148,8 @@ class MyCallback extends Component
         if ($field == "campaign"){
             $this->gm = 0;
             if ($this->campaign != ""){
-                $this->results = Note::where('campaign','LIKE','%'. $this->campaign. '%')
+                $this->results = Note::where('campaign', 'LIKE', '%' . $this->campaign . '%')
+                    ->distinct('campaign') // Ensure no duplicates in the 'campaign' column
                     ->take(5)
                     ->get();
                 $this->showSearch = true;
