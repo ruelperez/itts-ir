@@ -43,8 +43,8 @@
         </div>
     </div>
     <hr>
-    <div style="font-size: 14px;" class="table-responsive" wire:loading.remove>
-        <table class="table table-striped">
+    <div style="font-size: 14px;" class="table-responsive border" wire:loading.remove>
+        <table class="table table-striped w-100">
             <thead>
             <tr>
                 <th scope="col" style="width: 9%;">Date</th>
