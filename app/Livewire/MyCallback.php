@@ -12,7 +12,7 @@ use Livewire\Component;
 class MyCallback extends Component
 {
     public $submissionData = [], $search, $dob, $user_id, $date, $claimant, $phoneNumber, $campaign, $injuredParty, $altPhoneNumber, $email, $address, $reason,
-            $gm=0, $results = [], $timeRemaining, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15;
+            $gm=0, $results = [], $countUnmarked, $timeRemaining, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15;
 
     public function render()
     {
@@ -39,7 +39,13 @@ class MyCallback extends Component
                 ->latest()
                 ->get();
         }
-
+        $gb = Callback::where(function ($query) {
+            $query->where('remark', '')
+                ->orWhere('remark', null);
+        })
+            ->where('user_id', $this->user_id)
+            ->get();
+        $this->countUnmarked = count($gb);
         return view('livewire.my-callback');
     }
 

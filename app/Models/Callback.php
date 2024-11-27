@@ -21,6 +21,8 @@ class Callback extends Model
     'reason',
     'timeRemaining',
     'is_expired',
+    'remark',
+    'markBy'
 ];
 
     // Update the 'is_expired' and 'timeRemaining' based on the record age

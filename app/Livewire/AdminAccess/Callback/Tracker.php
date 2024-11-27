@@ -9,11 +9,12 @@ use Livewire\Component;
 class Tracker extends Component
 {
     public $submissionData = [], $search, $dob, $user_id, $date, $claimant, $phoneNumber, $campaign, $injuredParty, $altPhoneNumber, $email, $address, $reason,
-    $gm=0, $results = [], $timeRemaining, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15;
+    $gm=0, $results = [], $timeRemaining, $user_fullname, $countUnmarked, $ids, $remark, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15;
 
     public function render()
     {
         $this->user_id = auth()->user()->id;
+        $this->user_fullname = auth()->user()->fullname;
         if ($this->search == ""){
             $this->displayData();
         }
@@ -39,6 +40,12 @@ class Tracker extends Component
                 ->latest()
                 ->get();
         }
+        $gb = Callback::where(function ($query) {
+            $query->where('remark', '')
+                ->orWhere('remark', null);
+        })
+            ->get();
+        $this->countUnmarked = count($gb);
 
         return view('livewire.admin-access.callback.tracker');
     }
@@ -54,6 +61,30 @@ class Tracker extends Component
         if ($this->currentPage > 1) {
             $this->currentPage--;
         }
+    }
+
+    public function submitEditRemark(){
+        $this->validate([
+            'remark' => 'required',
+        ]);
+        try {
+            $jj = Callback::find($this->ids);
+            $jj->remark = $this->remark;
+            $jj->markBy = $this->user_fullname;
+            $jj->save();
+            $this->dispatch('success');
+        }catch (\Exception $e){
+            $this->dispatch('error');
+        }
+    }
+
+    protected $listeners = ['openRemarksModal'=>'mod'];
+
+    public function mod($id){
+        $this->ids = $id;
+        $gb = Callback::find($id);
+        $this->remark = $gb->remark;
+        $this->dispatch('show-remark-modal');
     }
 
     public function nextPage()

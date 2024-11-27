@@ -13,6 +13,7 @@
             <i class="fa-solid fa-circle-plus" style="font-size: 18px; cursor: pointer" data-bs-toggle="modal" data-bs-target="#add"></i>
         </div>
     </div>
+    <div class="mt-3"><button type="button" class="btn btn-primary">Unremarked <b style="color: red">({{$countUnmarked}})</b> </button></div>
     <div class="text-center">
         <div class="spinner-border mt-5" role="status" wire:loading>
             <span class="visually-hidden">Loading...</span>
@@ -36,6 +37,8 @@
                 <th scope="col" style="width: 9%;">Reason</th>
                 <th scope="col" style="width: 9%;">Time left</th>
                 <th scope="col" style="width: 9%;">Is expired</th>
+                <th scope="col" style="width: 9%;">Remarks</th>
+                <th scope="col" style="width: 9%;">Marked by:</th>
             </tr>
             </thead>
             <tbody>
@@ -80,6 +83,12 @@
                     </td>
                     <td style="padding: 0; width: 1%; text-align: center;">
                         <p style="margin: 0; padding: 0;">{{$data->is_expired ? 'Yes' : 'No' }}</p>
+                    </td>
+                    <td>
+                        <p>@if($data->remark == null)  @elseif($data->remark == "Qualified") <i class="fa-solid fa-circle-check" style="color: green; font-size: 20px"></i>@elseif($data->remark == "Disqualified") <i class="fa-solid fa-circle-xmark" style="color: red; font-size: 20px"></i> @endif</p>
+                    </td>
+                    <td>
+                        {{$data->markBy}}
                     </td>
                     <td class="eye-icon" style="padding: 0; width: 1%; text-align: center;">
                         <i class="fa-regular fa-eye" style="margin: 0; padding: 0; cursor: pointer" wire:click="viewDetail({{$data->id}})" data-bs-toggle="modal" data-bs-target="#viewDetail"></i>

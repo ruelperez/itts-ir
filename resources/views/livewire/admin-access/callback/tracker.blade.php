@@ -1,6 +1,29 @@
 <div>
     @include('modal.callback.viewDetail')
     @include('modal.callback.add')
+    <div class="modal fade" id="remarkModal" tabindex="-1" aria-labelledby="positionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="positionModalLabel">Update Callback Remark</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form wire:submit.prevent="submitEditRemark">
+                    <div class="modal-body">
+                        <select id="positionSelect" class="form-select" wire:model="remark" required>
+                            <option value="">Select remark</option>
+                            <option value="Qualified">Qualified</option>
+                            <option value="Disqualified">Disqualified</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                    <button type="button" class="btn-close d-none" data-bs-dismiss="modal" id="btnclose122" aria-label="Close"></button>
+                </form>
+            </div>
+        </div>
+    </div>
     <div>
         <i class="fa-solid fa-arrow-left" onclick="location.href = '/production-lead-mass-tort';" style="cursor: pointer"></i>
         <h6>CALLBACK TRACKER</h6>
@@ -13,6 +36,7 @@
 {{--            <i class="fa-solid fa-circle-plus" style="font-size: 18px; cursor: pointer" data-bs-toggle="modal" data-bs-target="#add"></i>--}}
 {{--        </div>--}}
     </div>
+    <div class="mt-3"><button type="button" class="btn btn-danger">Unremarked <b>({{$countUnmarked}})</b> </button></div>
     <div class="text-center">
         <div class="spinner-border mt-5" role="status" wire:loading>
             <span class="visually-hidden">Loading...</span>
@@ -37,6 +61,8 @@
                 <th scope="col" style="width: 9%;">Reason</th>
                 <th scope="col" style="width: 9%;">Time left</th>
                 <th scope="col" style="width: 9%;">Is expired</th>
+                <th scope="col" style="width: 9%;">Remarks</th>
+                <th scope="col" style="width: 9%;">Marked by:</th>
             </tr>
             </thead>
             <tbody>
@@ -85,6 +111,16 @@
                     <td style="padding: 0; width: 1%; text-align: center;">
                         <p style="margin: 0; padding: 0;">{{$data->is_expired ? 'Yes' : 'No' }}</p>
                     </td>
+                    <td x-data
+                        @dblclick="$dispatch('openRemarksModal', { id: {{ $data->id }} })" >
+                        <p style="cursor: pointer">@if($data->remark == null)  @elseif($data->remark == "Qualified") <i class="fa-solid fa-circle-check" style="color: green; font-size: 20px"></i>@elseif($data->remark == "Disqualified") <i class="fa-solid fa-circle-xmark" style="color: red; font-size: 20px"></i> @endif</p>
+                    </td>
+                    <td>
+                        {{$data->markBy}}
+                    </td>
+{{--                    <td>--}}
+{{--                        {{$data->remark}}--}}
+{{--                    </td>--}}
                     <td class="eye-icon" style="padding: 0; width: 1%; text-align: center;">
                         <i class="fa-regular fa-eye" style="margin: 0; padding: 0; cursor: pointer" wire:click="viewDetail({{$data->id}})" data-bs-toggle="modal" data-bs-target="#viewDetail"></i>
                     </td>
@@ -101,30 +137,31 @@
             </div>
         </div>
     </div>
-{{--    @script--}}
-{{--    <script>--}}
-{{--        $wire.on('success', () => {--}}
-{{--            Swal.fire(--}}
-{{--                'SUCCESS!',--}}
-{{--                'Successfully Updated .',--}}
-{{--                'success'--}}
-{{--            ).then((result) => {--}}
-{{--                if (result.isConfirmed) {--}}
-{{--                    location.reload();--}}
-{{--                }--}}
-{{--            });--}}
-{{--        });--}}
-{{--        $wire.on('failed', () => {--}}
-{{--            Swal.fire(--}}
-{{--                'FAILED!',--}}
-{{--                'Failed to Update.',--}}
-{{--                'error'--}}
-{{--            ).then((result) => {--}}
-{{--                if (result.isConfirmed) {--}}
-{{--                    location.reload();--}}
-{{--                }--}}
-{{--            });--}}
-{{--        });--}}
-{{--    </script>--}}
-{{--    @endscript--}}
+    @script
+        <script>
+            $wire.on('success', () => {btnclose122
+                $('#btnclose122').click();
+                Swal.fire(
+                    'Updated!',
+                    'Successfully Updated .',
+                    'success'
+                );
+            });
+            $wire.on('error', () => {
+                $('#btnclose122').click();
+                Swal.fire(
+                    'Updated!',
+                    'Failed to Update.',
+                    'error'
+                );
+            });
+        </script>
+    @endscript
 </div>
+<script>
+    document.addEventListener('show-remark-modal', function () {
+        const positionModal = new bootstrap.Modal(document.getElementById('remarkModal'));
+        positionModal.show();
+    });
+
+</script>
