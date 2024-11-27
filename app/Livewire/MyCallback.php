@@ -12,7 +12,7 @@ use Livewire\Component;
 class MyCallback extends Component
 {
     public $submissionData = [], $search, $dob, $user_id, $date, $claimant, $phoneNumber, $campaign, $injuredParty, $altPhoneNumber, $email, $address, $reason,
-            $gm=0, $results = [], $countUnmarked, $timeRemaining, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15;
+            $gm=0, $results = [], $viewDqReason, $countUnmarked, $timeRemaining, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15;
 
     public function render()
     {
@@ -29,6 +29,7 @@ class MyCallback extends Component
                     ->orWhere('claimant', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('injuredParty', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('campaign', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('id', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('email', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('dob', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('reason', 'LIKE', '%' . $this->search . '%')
@@ -146,6 +147,7 @@ class MyCallback extends Component
         $this->reason = $dv->reason;
         $this->is_expired = $dv->is_expired;
         $this->date = $dv->created_at->format('m/d/Y h:i A');
+        $this->viewDqReason = $dv->dqReason;
         $ja = User::find($dv->user_id);
         $this->agent = $ja->fullname;
     }

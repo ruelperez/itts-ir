@@ -24,26 +24,30 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th scope="col" style="width: 9%;">Date</th>
-                <th scope="col" style="width: 8%;">Campaign</th>
-                <th scope="col" style="width: 9%;">Claimant</th>
-                <th scope="col" style="width: 9%;">Injured party</th>
-                <th scope="col" style="width: 9%;">Phone #</th>
+                <th scope="col">ID</th>
+                <th scope="col">Date</th>
+                <th scope="col">Campaign</th>
+                <th scope="col" >Claimant</th>
+                <th scope="col" >Injured party</th>
+                <th scope="col" >Phone #</th>
 {{--                <th scope="col" style="width: 9%;">Alt Phone #</th>--}}
-                <th scope="col" style="width: 9%;">Email</th>
+                <th scope="col" >Email</th>
 {{--                <th scope="col" style="width: 9%;">DOB</th>--}}
 {{--                <th scope="col" style="width: 9%;">Address</th>--}}
 {{--                <th scope="col" style="width: 9%;">Callback time</th>--}}
-                <th scope="col" style="width: 9%;">Reason</th>
-                <th scope="col" style="width: 9%;">Time left</th>
-                <th scope="col" style="width: 9%;">Is expired</th>
-                <th scope="col" style="width: 9%;">Remarks</th>
+                <th scope="col" >Reason</th>
+                <th scope="col" >Time left</th>
+                <th scope="col" >Is expired</th>
+                <th scope="col" >Remarks</th>
             </tr>
             </thead>
             <tbody>
             @foreach($submissionData as $data)
                 <tr @if($data->is_expired == "1") style=" background-color: #FF2828; color: white" @endif>
 {{--                <tr wire:click="viewDetail({{$data->id}})" data-bs-toggle="modal" data-bs-target="#viewDetail" style="cursor: pointer">--}}
+                    <td>
+                        {{ $data->id}}
+                    </td>
                     <td>
                         {{ $data->created_at->format('m/d/Y h:i A') }}
                     </td>
@@ -84,7 +88,7 @@
                         <p style="margin: 0; padding: 0;">{{$data->is_expired ? 'Yes' : 'No' }}</p>
                     </td>
                     <td>
-                        <p>@if($data->remark == null)  @elseif($data->remark == "Qualified") <i class="fa-solid fa-circle-check" style="color: green; font-size: 20px"></i>@elseif($data->remark == "Disqualified") <i class="fa-solid fa-circle-xmark" style="color: red; font-size: 20px"></i> @endif</p>
+                        <p>@if($data->remark == null) None @elseif($data->remark == "Qualified") <i class="fa-solid fa-circle-check" style="color: green; font-size: 20px"></i>@elseif($data->remark == "Disqualified") <i class="fa-solid fa-circle-xmark" style="color: red; font-size: 20px"></i> @endif</p>
                     </td>
                     <td class="eye-icon" style="padding: 0; width: 1%; text-align: center;">
                         <i class="fa-regular fa-eye" style="margin: 0; padding: 0; cursor: pointer" wire:click="viewDetail({{$data->id}})" data-bs-toggle="modal" data-bs-target="#viewDetail"></i>

@@ -43,7 +43,10 @@
                     <p>Agent: <b>{{ucfirst($agent)}}</b></p>
                 </div>
                 <div>
-                    <p>Reason: <b>{{$reason}}</b></p>
+                    <p>Additional Info: <b>{{$reason}}</b></p>
+                </div>
+                <div>
+                    <p>DQ Reason: <b>{{$viewDqReason}}</b></p>
                 </div>
                 <div>
                     <p>Time left: <b>{{$timeRemaining}} hrs.</b></p>

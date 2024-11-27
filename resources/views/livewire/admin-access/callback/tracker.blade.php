@@ -9,12 +9,17 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form wire:submit.prevent="submitEditRemark">
-                    <div class="modal-body">
-                        <select id="positionSelect" class="form-select" wire:model="remark" required>
+                    <div x-data="{ remark: '' }" class="modal-body">
+                        <select id="positionSelect" class="form-select" wire:model="remark" x-model="remark" required>
                             <option value="">Select remark</option>
                             <option value="Qualified">Qualified</option>
                             <option value="Disqualified">Disqualified</option>
                         </select>
+
+                        <!-- Conditionally show textarea if 'remark' is 'Disqualified' -->
+                        <div class="col-12 mt-4" x-show="remark === 'Disqualified'" x-transition>
+                            <textarea class="form-control" rows="3" wire:model="dqReason" placeholder="Reason:"></textarea>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Update</button>
@@ -47,12 +52,13 @@
         <table class="table table-striped w-100">
             <thead>
             <tr>
+                <th scope="col" >Tracker ID</th>
                 <th scope="col" >Date</th>
                 <th scope="col" >Agent</th>
                 <th scope="col" >Campaign</th>
                 <th scope="col" >Claimant</th>
-                <th scope="col" >Injured party</th>
-                <th scope="col" >Phone #</th>
+                <th scope="col" >Injured</th>
+                <th scope="col" >Phone#</th>
                 {{--                <th scope="col" style="width: 9%;">Alt Phone #</th>--}}
                 <th scope="col" >Email</th>
                 {{--                <th scope="col" style="width: 9%;">DOB</th>--}}
@@ -69,6 +75,9 @@
             @foreach($submissionData as $data)
                 <tr @if($data->is_expired == "1") style=" background-color: #FF2828; color: white" @endif>
                     {{--                <tr wire:click="viewDetail({{$data->id}})" data-bs-toggle="modal" data-bs-target="#viewDetail" style="cursor: pointer">--}}
+                    <td>
+                        {{ $data->id}}
+                    </td>
                     <td>
                         {{ $data->created_at->format('m/d/Y h:i A') }}
                     </td>
@@ -113,7 +122,7 @@
                     </td>
                     <td x-data
                         @dblclick="$dispatch('openRemarksModal', { id: {{ $data->id }} })" >
-                        <p style="cursor: pointer">@if($data->remark == null)  @elseif($data->remark == "Qualified") <i class="fa-solid fa-circle-check" style="color: green; font-size: 20px"></i>@elseif($data->remark == "Disqualified") <i class="fa-solid fa-circle-xmark" style="color: red; font-size: 20px"></i> @endif</p>
+                        <p style="cursor: pointer">@if($data->remark == null) None @elseif($data->remark == "Qualified") <i class="fa-solid fa-circle-check" style="color: green; font-size: 20px"></i>@elseif($data->remark == "Disqualified") <i class="fa-solid fa-circle-xmark" style="color: red; font-size: 20px"></i> @endif</p>
                     </td>
                     <td>
                         {{$data->markBy}}

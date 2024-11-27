@@ -9,7 +9,7 @@ use Livewire\Component;
 class Tracker extends Component
 {
     public $submissionData = [], $search, $dob, $user_id, $date, $claimant, $phoneNumber, $campaign, $injuredParty, $altPhoneNumber, $email, $address, $reason,
-    $gm=0, $results = [], $timeRemaining, $user_fullname, $countUnmarked, $ids, $remark, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15;
+    $gm=0, $results = [], $timeRemaining, $dqReason, $user_fullname, $viewDqReason, $countUnmarked, $ids, $remark, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15;
 
     public function render()
     {
@@ -29,6 +29,7 @@ class Tracker extends Component
                     ->orWhere('campaign', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('email', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('dob', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('id', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('reason', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('is_expired', 'LIKE', '%' . (strtolower($this->search) === 'yes' ? 1 : (strtolower($this->search) === 'no' ? 0 : $this->search)) . '%')
                     ->orWhereHas('user', function ($userQuery) {
@@ -71,7 +72,10 @@ class Tracker extends Component
             $jj = Callback::find($this->ids);
             $jj->remark = $this->remark;
             $jj->markBy = $this->user_fullname;
+            $jj->dqReason = $this->dqReason;
             $jj->save();
+            $this->remark = "";
+            $this->dqReason = "";
             $this->dispatch('success');
         }catch (\Exception $e){
             $this->dispatch('error');
@@ -114,6 +118,8 @@ class Tracker extends Component
         $this->reason = "";
         $this->is_expired = "";
         $this->timeRemaining = "";
+        $this->viewDqReason = "";
+        $this->dqReason = "";
     }
 
     public function viewDetail($id){
@@ -130,6 +136,7 @@ class Tracker extends Component
         $this->reason = $dv->reason;
         $this->is_expired = $dv->is_expired;
         $this->date = $dv->created_at->format('m/d/Y h:i A');
+        $this->viewDqReason = $dv->dqReason;
         $ja = User::find($dv->user_id);
         $this->agent = $ja->fullname;
     }
