@@ -115,9 +115,9 @@
                         @dblclick="$dispatch('openRemarksModal', { id: {{ $data->id }} })" >
                         <p style="cursor: pointer">@if($data->remark == null)  @elseif($data->remark == "Qualified") <i class="fa-solid fa-circle-check" style="color: green; font-size: 20px"></i>@elseif($data->remark == "Disqualified") <i class="fa-solid fa-circle-xmark" style="color: red; font-size: 20px"></i> @endif</p>
                     </td>
-                    <td>
-                        {{$data->markBy}}
-                    </td>
+{{--                    <td>--}}
+{{--                        {{$data->markBy}}--}}
+{{--                    </td>--}}
 {{--                    <td>--}}
 {{--                        {{$data->remark}}--}}
 {{--                    </td>--}}
