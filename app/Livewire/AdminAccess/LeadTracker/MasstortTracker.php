@@ -24,7 +24,7 @@ use Livewire\Component;
 
 class MasstortTracker extends Component
 {
-    public $registrationSwitch, $returnClient, $returnReason, $currentPage = 1, $perPage = 15, $is_success = false, $search, $ids, $displayRemarks, $checkBox = [], $submissionData = [], $resultsCoach = [], $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo, $campaignList = [], $campaign,
+    public $registrationSwitch, $returnClient, $pageRange, $returnReason, $currentPage = 1, $totalPages, $perPage = 10, $is_success = false, $search, $ids, $displayRemarks, $checkBox = [], $submissionData = [], $resultsCoach = [], $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo, $campaignList = [], $campaign,
         $date, $base = true, $logsDate, $logsFullname, $leadLogsData = [], $logsAction, $toChecked = false, $leadOwnership, $agent2, $folderName, $lawfirm, $lawfirmList = [], $dqReason, $client, $remarks = [], $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $showSearch = false, $showSearchCoach = false, $agent, $coach, $verifier, $source = "Dialer", $caseType = "self", $resultsVerifier = [], $results = [], $clientList= [], $showSearchVerifier = false, $result;
 
     public function render()
@@ -42,7 +42,7 @@ class MasstortTracker extends Component
             $this->displayData();
         }
         else{
-            $this->submissionData = Submission::where('phoneNumber', 'LIKE', '%'.$this->search.'%')
+            $searchQuery = Submission::where('phoneNumber', 'LIKE', '%'.$this->search.'%')
                 ->orWhere('altPhoneNumber', 'LIKE', '%'.$this->search.'%')
                 ->orWhere('date', 'LIKE', '%'.$this->search.'%')
                 ->orWhere('agent', 'LIKE', '%'.$this->search.'%')
@@ -52,16 +52,31 @@ class MasstortTracker extends Component
                 ->orWhere('campaign', 'LIKE', '%'.$this->search.'%')
                 ->orWhere('remarks', 'LIKE', '%'.$this->search.'%')
                 ->orWhere('coach', 'LIKE', '%'.$this->search.'%')
-                ->orWhere('result', 'LIKE', '%'.$this->search.'%')
+                ->orWhere('result', 'LIKE', '%'.$this->search.'%');
+
+            // Get the results for the current page
+            $this->submissionData = $searchQuery
                 ->skip(($this->currentPage - 1) * $this->perPage)
                 ->take($this->perPage)
                 ->latest()
                 ->get();
+
+            // Count the total number of results for the search
+            $this->totalPages = ceil($searchQuery->count() / $this->perPage);
         }
+        $this->pageRange = $this->calculatePageRange();
         $this->campaignList = Note::select('campaign')
             ->distinct('campaign')
             ->get();
         return view('livewire.admin-access.'.$this->folderName.'.masstort-tracker');
+    }
+
+    public function calculatePageRange()
+    {
+        $rangeStart = max(1, $this->currentPage - 5); // Start range 5 pages before current
+        $rangeEnd = min($this->totalPages, $rangeStart + 9); // End range 5 pages after current, but not more than total pages
+
+        return range($rangeStart, $rangeEnd);
     }
 
     public function clearCheck(){
@@ -115,6 +130,8 @@ class MasstortTracker extends Component
             return redirect('/');
         }
         $this->checkBox = [];
+        $this->totalPages = ceil(Submission::count() / $this->perPage);
+        $this->displayData();
     }
 
     public function logout(){
@@ -176,141 +193,6 @@ class MasstortTracker extends Component
         }
         else{
             $this->superAdminSwitch = true;
-        }
-    }
-
-    public function regSwitch(){
-        $data = IsRegistration::all();
-        if (count($data) == 1){
-            if ($this->registrationSwitch == false){
-                foreach ($data as $datas){
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = false;
-                    $datas->save();
-                }
-                $an = IsRegistration::all();
-                foreach ($an as $ans){
-                    $this->registrationSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "disabled registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            }
-            else{
-                foreach ($data as $datas){
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = true;
-                    $datas->save();
-                }
-                $an = IsRegistration::all();
-                foreach ($an as $ans){
-                    $this->registrationSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "enabled registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            }
-        }
-        else{
-            IsRegistration::create([
-                'user_id' => auth()->user()->id,
-                'on_off' => true,
-            ]);
-        }
-    }
-
-    public function admin_Switch(){
-        $data = AdminShow::all();
-        if (count($data) == 1){
-            if ($this->adminSwitch == false){
-                foreach ($data as $datas){
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = false;
-                    $datas->save();
-                }
-                $an = AdminShow::all();
-                foreach ($an as $ans){
-                    $this->adminSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "disabled admin registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            }
-            else{
-                foreach ($data as $datas){
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = true;
-                    $datas->save();
-                }
-                $an = AdminShow::all();
-                foreach ($an as $ans){
-                    $this->adminSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "enabled admin registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            }
-        }
-        else{
-            AdminShow::create([
-                'user_id' => auth()->user()->id,
-                'on_off' => true,
-            ]);
-            $an = AdminShow::all();
-            foreach ($an as $ans){
-                $this->adminSwitch = $ans->on_off;
-            }
-        }
-    }
-
-    public function super_admin_Switch(){
-        $data = SuperadminShow::all();
-        if (count($data) == 1) {
-            if ($this->superAdminSwitch == false) {
-                foreach ($data as $datas) {
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = false;
-                    $datas->save();
-                }
-                $an = SuperadminShow::all();
-                foreach ($an as $ans) {
-                    $this->superAdminSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "disabled super admin registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            } else {
-                foreach ($data as $datas) {
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = true;
-                    $datas->save();
-                }
-                $an = SuperadminShow::all();
-                foreach ($an as $ans) {
-                    $this->superAdminSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "enabled super admin registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            }
         }
     }
 
@@ -447,23 +329,48 @@ class MasstortTracker extends Component
 
     }
 
-    public function displayData(){
+    public function displayData()
+    {
         $this->submissionData = Submission::query()
             ->skip(($this->currentPage - 1) * $this->perPage)
             ->take($this->perPage)
             ->latest()
             ->get();
+        $this->totalPages = ceil(Submission::count() / $this->perPage);
     }
 
-    public function previousPage(){
+//    public function previousPage(){
+//        if ($this->currentPage > 1) {
+//            $this->currentPage--;
+//        }
+//    }
+//
+//    public function nextPage()
+//    {
+//        $this->currentPage++;
+//    }
+    public function previousPage()
+    {
         if ($this->currentPage > 1) {
             $this->currentPage--;
+            $this->displayData();
         }
     }
 
     public function nextPage()
     {
-        $this->currentPage++;
+        if ($this->currentPage < $this->totalPages) {
+            $this->currentPage++;
+            $this->displayData();
+        }
+    }
+
+    public function goToPage($page)
+    {
+        if ($page <= $this->totalPages) {
+            $this->currentPage = $page;
+            $this->displayData(); // Load data for the selected page
+        }
     }
 
     public function viewDetail(){

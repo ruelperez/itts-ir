@@ -102,14 +102,49 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="row">
-                    <div class="col-12 col-md-6 col-lg-3 col-xl-3">
-                        <button class="btn btn-success w-100" wire:click="previousPage">Previous</button>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-3 col-xl-3 mt-2 mt-md-0">
-                        <button class="btn btn-primary w-100" wire:click="nextPage">Next</button>
-                    </div>
-                </div>
+{{--                <div class="row">--}}
+{{--                    <div class="col-12 col-md-6 col-lg-3 col-xl-3">--}}
+{{--                        <button class="btn btn-success w-100" wire:click="previousPage">Previous</button>--}}
+{{--                    </div>--}}
+{{--                    <div class="col-12 col-md-6 col-lg-3 col-xl-3 mt-2 mt-md-0">--}}
+{{--                        <button class="btn btn-primary w-100" wire:click="nextPage">Next</button>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+    <div>
+        <input type="text" wire:model="search" placeholder="Search..." />
+
+        <!-- Pagination Links -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <!-- Previous Button -->
+                <li class="page-item {{ $currentPage == 1 ? 'disabled' : '' }}">
+                    <a class="page-link" href="#" wire:click.prevent="previousPage">Previous</a>
+                </li>
+
+                <!-- Page Number Links -->
+                @foreach ($pageRange as $page)
+                    <li class="page-item {{ $currentPage == $page ? 'active' : '' }}">
+                        <a class="page-link" href="#" wire:click.prevent="goToPage({{ $page }})">{{ $page }}</a>
+                    </li>
+                @endforeach
+
+                <!-- Show + icon if there are more than 10 pages -->
+                @if ($totalPages > 10)
+                    <li class="page-item">
+                        <a class="page-link" href="#" wire:click.prevent="goToPage({{ $pageRange[count($pageRange)-1] + 1 }})">+{{ $totalPages - 10 }}</a>
+                    </li>
+                @endif
+
+                <!-- Next Button -->
+                <li class="page-item {{ $currentPage == $totalPages ? 'disabled' : '' }}">
+                    <a class="page-link" href="#" wire:click.prevent="nextPage">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+
+
 
     @script
     <script>

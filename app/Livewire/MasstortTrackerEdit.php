@@ -145,7 +145,10 @@ class MasstortTrackerEdit extends Component
     }
 
     public function clickUpdate(){
-        if ($this->agent2 != ""){
+        if ($this->leadOwnership == "2nd Touch"){
+
+        }
+        elseif ($this->agent2 != ""){
             if ($this->gm2 == 0){
                 session()->flash('badAgent2', "Successfully saved");
                 return;
