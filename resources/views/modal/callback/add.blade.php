@@ -1,5 +1,5 @@
 <div wire:ignore.self class="modal fade" id="add" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content" style="height: 550px;">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Add Callback</h5>
@@ -109,6 +109,49 @@
                            <p class="px-1 py-1" style="background-color: black; color: white; border-radius: 10px; font-size: 12px; cursor: pointer" wire:click="naAddress">n/a</p>
                        </div>
                     </div>
+                    <hr>
+                    @if($campName == "NEC")
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Baby's Weight?</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="necQuestion.weight" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Birth year? (must be 2006 or earlier)</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="necQuestion.birth_year" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Did the baby receive a NEC diagnosis before 36 weeks?</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="necQuestion.nec_diagnosis" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Which formula or fortifier did the baby receive?</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="necQuestion.formula" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Was the baby born premature and diagnosed with NEC?</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="necQuestion.premature" required>
+                            </div>
+                        </div>
+                    @endif
 {{--                    <div class="row mt-3">--}}
 {{--                        <div class="col-auto">--}}
 {{--                            <label class="col-form-label">Callback time</label>--}}

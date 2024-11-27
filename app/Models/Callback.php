@@ -24,6 +24,7 @@ class Callback extends Model
     'remark',
     'markBy',
     'dqReason',
+    'answeredQuestion'
 ];
 
     // Update the 'is_expired' and 'timeRemaining' based on the record age

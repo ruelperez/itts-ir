@@ -12,7 +12,11 @@ use Livewire\Component;
 class MyCallback extends Component
 {
     public $submissionData = [], $search, $dob, $user_id, $date, $claimant, $phoneNumber, $campaign, $injuredParty, $altPhoneNumber, $email, $address, $reason,
-            $gm=0, $results = [], $viewDqReason, $countUnmarked, $timeRemaining, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15;
+            $gm=0, $results = [], $viewDqReason, $campName, $necQuestion = ['weight' => '',
+        'birth_year' => '',
+        'nec_diagnosis' => '',
+        'formula' => '',
+        'premature' => ''], $countUnmarked, $timeRemaining, $viewAnswered, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15;
 
     public function render()
     {
@@ -86,6 +90,13 @@ class MyCallback extends Component
             'phoneNumber' => 'required|numeric',
             'altPhoneNumber' => 'required|numeric',
         ]);
+        $formattedAnswers = implode('<br>', [
+            "Weight = " . $this->necQuestion['weight'],
+            "Birth Year = " . $this->necQuestion['birth_year'],
+            "NEC Diagnosis = " . $this->necQuestion['nec_diagnosis'],
+            "Formula = " . $this->necQuestion['formula'],
+            "Premature = " . $this->necQuestion['premature'],
+        ]);
         try {
             Callback::create([
                 'claimant' => $this->claimant,
@@ -99,6 +110,7 @@ class MyCallback extends Component
                 'user_id' => $this->user_id,
 //                'callbackTime' => $this->callbackTime,
                 'reason' => $this->reason,
+                'answeredQuestion' => $formattedAnswers,
             ]);
             $this->claimant = "";
             $this->phoneNumber = "";
@@ -109,6 +121,9 @@ class MyCallback extends Component
             $this->email = "";
             $this->address = "";
             $this->user_id = "";
+            $this->necQuestion = [ 'birth_year' => '',
+                'nec_diagnosis' => '',
+                'formula' => '','premature' => ''];
 //            $this->callbackTime = "";
             $this->reason = "";
             $this->dispatch('success');
@@ -148,6 +163,7 @@ class MyCallback extends Component
         $this->is_expired = $dv->is_expired;
         $this->date = $dv->created_at->format('m/d/Y h:i A');
         $this->viewDqReason = $dv->dqReason;
+        $this->viewAnswered = $dv->answeredQuestion;
         $ja = User::find($dv->user_id);
         $this->agent = $ja->fullname;
     }
@@ -186,6 +202,7 @@ class MyCallback extends Component
         $gh = Note::find($id);
         $this->campaign = $gh->campaign;
         $this->gm = 1;
+        $this->campName = $gh->campaign;
     }
 
     public function removeSearch(){

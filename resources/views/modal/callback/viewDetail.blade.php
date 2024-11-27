@@ -40,6 +40,16 @@
                 </div>
                 <hr style="border: solid black 2px">
                 <div>
+                    @if($viewAnswered)
+                        <!-- Display concatenated answers -->
+                        <div class="mt-3">
+                            <!-- Directly output the content with raw HTML rendering -->
+                            <p>{!! $viewAnswered !!}</p>
+                        </div>
+                    @endif
+                </div>
+                <hr style="border: solid black 2px">
+                <div>
                     <p>Agent: <b>{{ucfirst($agent)}}</b></p>
                 </div>
                 <div>
