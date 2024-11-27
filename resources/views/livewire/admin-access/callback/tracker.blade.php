@@ -47,22 +47,22 @@
         <table class="table table-striped w-100">
             <thead>
             <tr>
-                <th scope="col" style="width: 9%;">Date</th>
-                <th scope="col" style="width: 8%;">Agent</th>
-                <th scope="col" style="width: 8%;">Campaign</th>
-                <th scope="col" style="width: 9%;">Claimant</th>
-                <th scope="col" style="width: 9%;">Injured party</th>
-                <th scope="col" style="width: 9%;">Phone #</th>
+                <th scope="col" >Date</th>
+                <th scope="col" >Agent</th>
+                <th scope="col" >Campaign</th>
+                <th scope="col" >Claimant</th>
+                <th scope="col" >Injured party</th>
+                <th scope="col" >Phone #</th>
                 {{--                <th scope="col" style="width: 9%;">Alt Phone #</th>--}}
-                <th scope="col" style="width: 9%;">Email</th>
+                <th scope="col" >Email</th>
                 {{--                <th scope="col" style="width: 9%;">DOB</th>--}}
                 {{--                <th scope="col" style="width: 9%;">Address</th>--}}
                 {{--                <th scope="col" style="width: 9%;">Callback time</th>--}}
-                <th scope="col" style="width: 9%;">Reason</th>
-                <th scope="col" style="width: 9%;">Time left</th>
-                <th scope="col" style="width: 9%;">Is expired</th>
-                <th scope="col" style="width: 9%;">Remarks</th>
-                <th scope="col" style="width: 9%;">Marked by:</th>
+                <th scope="col">Reason</th>
+                <th scope="col">Time left</th>
+                <th scope="col" >Is expired</th>
+                <th scope="col" >Remarks</th>
+                <th scope="col" >Marked by:</th>
             </tr>
             </thead>
             <tbody>
@@ -115,9 +115,9 @@
                         @dblclick="$dispatch('openRemarksModal', { id: {{ $data->id }} })" >
                         <p style="cursor: pointer">@if($data->remark == null)  @elseif($data->remark == "Qualified") <i class="fa-solid fa-circle-check" style="color: green; font-size: 20px"></i>@elseif($data->remark == "Disqualified") <i class="fa-solid fa-circle-xmark" style="color: red; font-size: 20px"></i> @endif</p>
                     </td>
-{{--                    <td>--}}
-{{--                        {{$data->markBy}}--}}
-{{--                    </td>--}}
+                    <td>
+                        {{$data->markBy}}
+                    </td>
 {{--                    <td>--}}
 {{--                        {{$data->remark}}--}}
 {{--                    </td>--}}
