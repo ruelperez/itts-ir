@@ -1,6 +1,6 @@
 <div>
     @include('modal.callback-tracker.viewDetail')
-    @include('modal.callback-tracker.add')
+    @include('modal.callback.add')
     <div class="modal fade" id="remarkModal" tabindex="-1" aria-labelledby="positionModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
