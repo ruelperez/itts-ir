@@ -16,7 +16,15 @@ class MyCallback extends Component
         'birth_year' => '',
         'nec_diagnosis' => '',
         'formula' => '',
-        'premature' => ''], $countUnmarked, $timeRemaining, $viewAnswered, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15;
+        'premature' => ''], $afffQuestion = ['member' => '',
+        'exposed' => '',
+        'firstExposure' => '',
+        'lastExposure' => '',
+        'howOften' => '',
+        'qualifyingInjuries' => '',
+        'diagnosis' => '',
+        'dateOfDiagnosis' => '',
+        'convicted' => '',], $countUnmarked, $timeRemaining, $viewAnswered, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15;
 
     public function render()
     {
@@ -123,16 +131,28 @@ class MyCallback extends Component
             $this->email = "";
             $this->address = "";
             $this->user_id = "";
-            $this->necQuestion = [ 'birth_year' => '',
-                'nec_diagnosis' => '',
-                'formula' => '','premature' => ''];
-//            $this->callbackTime = "";
             $this->reason = "";
+            $this->resetQuestionnaire();
             $this->dispatch('success');
         }catch (\Exception $e){
             $this->dispatch('failed');
         }
 
+    }
+
+    public function resetQuestionnaire(){
+        $this->necQuestion = [ 'birth_year' => '',
+            'nec_diagnosis' => '',
+            'formula' => '','premature' => ''];
+        $this->afffQuestion = ['member' => '',
+            'exposed' => '',
+            'firstExposure' => '',
+            'lastExposure' => '',
+            'howOften' => '',
+            'qualifyingInjuries' => '',
+            'diagnosis' => '',
+            'dateOfDiagnosis' => '',
+            'convicted' => '',];
     }
 
     public function closeBtn(){
@@ -148,6 +168,7 @@ class MyCallback extends Component
         $this->reason = "";
         $this->is_expired = "";
         $this->timeRemaining = "";
+        $this->resetQuestionnaire();
     }
 
     public function viewDetail($id){
@@ -205,11 +226,18 @@ class MyCallback extends Component
         $gh = Note::find($id);
         $this->campaign = $gh->campaign;
         $this->gm = 1;
-        $this->campName = $gh->campaign;
+        $this->campName = strtolower($gh->campaign);
     }
 
     public function removeSearch(){
         $this->showSearch = false;
+        if (strtolower($this->campaign) == "afff" || strtolower($this->campaign) == "nec"){
+            $this->gm = 1;
+            $this->campName = strtolower($this->campaign);
+        }
+        else{
+            $this->campName = strtolower($this->campaign);
+        }
     }
 
     public function naCampaign(){

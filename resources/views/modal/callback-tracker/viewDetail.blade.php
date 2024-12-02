@@ -41,6 +41,8 @@
                             <!-- Directly output the content with raw HTML rendering -->
                             <p>{!! $viewAnswered !!}</p>
                         </div>
+                    @else
+
                     @endif
                 </div>
                 <hr style="border: solid black 2px">

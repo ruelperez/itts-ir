@@ -110,7 +110,7 @@
                        </div>
                     </div>
                     <hr>
-                    @if($campName == "NEC")
+                    @if($campName == "nec")
                         <div class="row mt-3">
                             <div class="col-auto">
                                 <label class="col-form-label">Baby's Weight?</label>
@@ -151,6 +151,79 @@
                                 <input type="text" class="form-control" wire:model="necQuestion.premature" required>
                             </div>
                         </div>
+                    @elseif($campName == "afff")
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Were you a firefighter, emergency responder, or a member of the military?</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="afffQuestion.member" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Were you exposed to AFFF at any time after 1980? If so, in what year?</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="afffQuestion.exposed" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Is this your first exposure?</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="afffQuestion.firstExposure" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">What was your last exposure?</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="afffQuestion.lastExposure" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Approx. how often are you exposed? </label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="afffQuestion.howOften" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Were you diagnosed with one of the qualifying injuries?</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="afffQuestion.qualifyingInjuries" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Diagnosis: </label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="afffQuestion.diagnosis" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Date of diagnosis (mm/dd/yyyy): </label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="afffQuestion.dateOfDiagnosis" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Were you convicted of a crime within the previous 5 years?</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="afffQuestion.convicted" required>
+                            </div>
+                        </div>
                     @endif
 {{--                    <div class="row mt-3">--}}
 {{--                        <div class="col-auto">--}}
@@ -161,7 +234,7 @@
 {{--                        </div>--}}
 {{--                    </div>--}}
                     <div class="row mt-3 px-3">
-                        <textarea class="form-control" rows="3" id="reason" wire:model="reason"  placeholder="Reason:" required></textarea>
+                        <textarea class="form-control" rows="3" id="reason" wire:model="reason"  placeholder="Callback Reason:" required></textarea>
                     </div>
                     <hr>
                     <div>
