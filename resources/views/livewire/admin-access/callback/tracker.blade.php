@@ -41,14 +41,6 @@
 {{--            <i class="fa-solid fa-circle-plus" style="font-size: 18px; cursor: pointer" data-bs-toggle="modal" data-bs-target="#add"></i>--}}
 {{--        </div>--}}
     </div>
-    <div class="row mt-3">
-        <div class="col-sm-4 col-md-3 col-lg-3 col-xl-2">
-            <button type="button" class="btn btn-danger w-100">Unremarked <b>({{$countUnmarked}})</b> </button>
-        </div>
-{{--        <div class="mt-2 col-sm-6 mt-sm-0 col-md-4 col-lg-3 col-xl-3">--}}
-{{--            <button type="button " class="btn btn-warning w-100" onclick="location.href = '/admin-access/callback/tracker';">Callback Qustionnaire</button>--}}
-{{--        </div>--}}
-    </div>
 {{--    <div class="text-center">--}}
 {{--        <div class="spinner-border mt-5" role="status" wire:loading>--}}
 {{--            <span class="visually-hidden">Loading...</span>--}}

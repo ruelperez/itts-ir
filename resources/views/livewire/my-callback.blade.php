@@ -13,7 +13,6 @@
             <i class="fa-solid fa-circle-plus" style="font-size: 18px; cursor: pointer" data-bs-toggle="modal" data-bs-target="#add"></i>
         </div>
     </div>
-    <div class="mt-3"><button type="button" class="btn btn-primary">Unremarked <b style="color: red">({{$countUnmarked}})</b> </button></div>
     <div class="text-center">
         <div class="spinner-border mt-5" role="status" wire:loading>
             <span class="visually-hidden">Loading...</span>
