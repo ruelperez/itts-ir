@@ -83,11 +83,31 @@ class Tracker extends Component
     }
 
     protected $listeners = ['openRemarksModal'=>'mod',
-        'enablePolling' => 'enablePolling'];
+        'enablePolling' => 'enablePolling', 'openDetailsModal' => 'openDetailsModal'];
 
     public function enablePolling()
     {
         $this->shouldPoll = true;
+    }
+
+    public function openDetailsModal($id){
+        $dv = Callback::find($id);
+        $this->claimant = $dv->claimant;
+        $this->injuredParty = $dv->injuredParty;
+        $this->phoneNumber = $dv->phoneNumber;
+        $this->altPhoneNumber = $dv->altPhoneNumber;
+        $this->dob = $dv->dob;
+        $this->email = $dv->email;
+        $this->address = $dv->address;
+        $this->campaign = $dv->campaign;
+        $this->timeRemaining = $dv->timeRemaining;
+        $this->reason = $dv->reason;
+        $this->is_expired = $dv->is_expired;
+        $this->date = $dv->created_at->format('m/d/Y h:i A');
+        $this->viewDqReason = $dv->dqReason;
+        $ja = User::find($dv->user_id);
+        $this->agent = $ja->fullname;
+        $this->dispatch('show-detail-modal');
     }
 
     public function mod($id){

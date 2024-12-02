@@ -80,7 +80,8 @@
             </thead>
             <tbody>
             @foreach($submissionData as $data)
-                <tr @if($data->is_expired == "1") style=" background-color: #FF2828; color: white" @endif>
+                <tr @if($data->is_expired == "1") style=" background-color: #FF2828; color: white" @endif x-data
+                    @dblclick="$dispatch('openDetailsModal', { id: {{ $data->id }} })" >
                     {{--                <tr wire:click="viewDetail({{$data->id}})" data-bs-toggle="modal" data-bs-target="#viewDetail" style="cursor: pointer">--}}
                     <td>
                         {{ $data->id}}
@@ -128,17 +129,11 @@
                         <p style="margin: 0; padding: 0;">{{$data->is_expired ? 'Yes' : 'No' }}</p>
                     </td>
                     <td x-data
-                        @dblclick="$dispatch('openRemarksModal', { id: {{ $data->id }} })" >
+                        @click="$dispatch('openRemarksModal', { id: {{ $data->id }} })" >
                         <p style="cursor: pointer">@if($data->remark == null) None @elseif($data->remark == "Qualified") <i class="fa-solid fa-circle-check" style="color: green; font-size: 20px"></i>@elseif($data->remark == "Disqualified") <i class="fa-solid fa-circle-xmark" style="color: red; font-size: 20px"></i> @endif</p>
                     </td>
                     <td>
                         {{$data->markBy}}
-                    </td>
-{{--                    <td>--}}
-{{--                        {{$data->remark}}--}}
-{{--                    </td>--}}
-                    <td class="eye-icon" style="padding: 0; width: 1%; text-align: center;">
-                        <i class="fa-regular fa-eye" style="margin: 0; padding: 0; cursor: pointer" wire:click="viewDetail({{$data->id}})" data-bs-toggle="modal" data-bs-target="#viewDetail"></i>
                     </td>
                 </tr>
             @endforeach
@@ -184,6 +179,10 @@
 <script>
     document.addEventListener('show-remark-modal', function () {
         const positionModal = new bootstrap.Modal(document.getElementById('remarkModal'));
+        positionModal.show();
+    });
+    document.addEventListener('show-detail-modal', function () {
+        const positionModal = new bootstrap.Modal(document.getElementById('viewDetailModal'));
         positionModal.show();
     });
 
