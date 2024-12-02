@@ -16,7 +16,8 @@ class MyCallback extends Component
         'birth_year' => '',
         'nec_diagnosis' => '',
         'formula' => '',
-        'premature' => ''], $afffQuestion = ['member' => '',
+        'premature' => ''],
+        $afffQuestion = ['member' => '',
         'exposed' => '',
         'firstExposure' => '',
         'lastExposure' => '',
@@ -91,7 +92,22 @@ class MyCallback extends Component
         }
     }
 
+    public function resetQuestionnaire(){
+        $this->necQuestion = [ 'birth_year' => '',
+            'nec_diagnosis' => '',
+            'formula' => '','premature' => ''];
+        $this->afffQuestion = ['member' => '',
+            'exposed' => '',
+            'firstExposure' => '',
+            'lastExposure' => '',
+            'howOften' => '',
+            'qualifyingInjuries' => '',
+            'diagnosis' => '',
+            'dateOfDiagnosis' => '',
+            'convicted' => '',];
+    }
     public function submit(){
+        $formattedAnswers;
         if ($this->gm == 0){
             session()->flash('badAgent', "");
             return;
@@ -100,13 +116,28 @@ class MyCallback extends Component
             'phoneNumber' => 'required|numeric',
             'altPhoneNumber' => 'required|numeric',
         ]);
-        $formattedAnswers = implode('<br>', [
-            "Weight = " . $this->necQuestion['weight'],
-            "Birth Year = " . $this->necQuestion['birth_year'],
-            "NEC Diagnosis = " . $this->necQuestion['nec_diagnosis'],
-            "Formula = " . $this->necQuestion['formula'],
-            "Premature = " . $this->necQuestion['premature'],
-        ]);
+        if ($this->campaign == "nec" or $this->campaign == "NEC"){
+            $formattedAnswers = implode('<br>', [
+                "Weight = " . $this->necQuestion['weight'],
+                "Birth Year = " . $this->necQuestion['birth_year'],
+                "NEC Diagnosis = " . $this->necQuestion['nec_diagnosis'],
+                "Formula = " . $this->necQuestion['formula'],
+                "Premature = " . $this->necQuestion['premature'],
+            ]);
+        }
+        elseif ($this->campaign == "afff" or $this->campaign == "AFFF"){
+            $formattedAnswers = implode('<br>', [
+                "Were you a FF, ER, or Military = " . $this->afffQuestion['member'],
+                "Exposed to AFFF after 1980? = " . $this->afffQuestion['exposed'],
+                "Is this your first exposure = " . $this->afffQuestion['firstExposure'],
+                "What was your last exposure = " . $this->afffQuestion['lastExposure'],
+                "How often are you exposed? = " . $this->afffQuestion['howOften'],
+                "Diagnosed with a qualifying injury? = " . $this->afffQuestion['qualifyingInjuries'],
+                "Diagnosis = " . $this->afffQuestion['diagnosis'],
+                "Date of diagnosis = " . $this->afffQuestion['dateOfDiagnosis'],
+                "convicted of a crime within the previous 5 years? = " . $this->afffQuestion['convicted'],
+            ]);
+        }
         try {
             Callback::create([
                 'claimant' => $this->claimant,
@@ -138,21 +169,6 @@ class MyCallback extends Component
             $this->dispatch('failed');
         }
 
-    }
-
-    public function resetQuestionnaire(){
-        $this->necQuestion = [ 'birth_year' => '',
-            'nec_diagnosis' => '',
-            'formula' => '','premature' => ''];
-        $this->afffQuestion = ['member' => '',
-            'exposed' => '',
-            'firstExposure' => '',
-            'lastExposure' => '',
-            'howOften' => '',
-            'qualifyingInjuries' => '',
-            'diagnosis' => '',
-            'dateOfDiagnosis' => '',
-            'convicted' => '',];
     }
 
     public function closeBtn(){
