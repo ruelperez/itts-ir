@@ -36,6 +36,7 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
+                            <th scope="col" style="width: 9%;">Tracker ID</th>
                             <th scope="col" style="width: 9%;">Date</th>
                             <th scope="col" style="width: 9%;">Agent</th>
                             <th scope="col" style="width: 9%;">Claimant</th>
@@ -52,6 +53,9 @@
                         <tbody>
                         @foreach($submissionData as $data)
                             <tr onmouseover="hoverDupe({{$data->id}})" onmouseout="hoverOutDupe({{$data->id}})">
+                                <td>
+                                    {{$data->id}}
+                                </td>
                                 <td>
                                     {{$data->date}}
                                 </td>
