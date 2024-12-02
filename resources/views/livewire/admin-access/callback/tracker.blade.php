@@ -47,7 +47,7 @@
 {{--        </div>--}}
 {{--    </div>--}}
     <hr>
-    <div style="font-size: 14px;" class="table-responsive border" @if($shouldPoll) wire:poll.2s @endif>
+    <div style="font-size: 13px;" class="table-responsive border" @if($shouldPoll) wire:poll.2s @endif>
         <table class="table table-striped w-100">
             <thead>
             <tr>
