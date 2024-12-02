@@ -39,7 +39,6 @@
                 <th scope="col" >Reason</th>
                 <th scope="col" >Time left</th>
                 <th scope="col" >Is expired</th>
-                <th scope="col" >Remarks</th>
             </tr>
             </thead>
             <tbody>
@@ -89,12 +88,6 @@
                     <td style="padding: 0; width: 1%; text-align: center;">
                         <p style="margin: 0; padding: 0;">{{$data->is_expired ? 'Yes' : 'No' }}</p>
                     </td>
-                    <td>
-                        <p>@if($data->remark == null) None @elseif($data->remark == "Qualified") <i class="fa-solid fa-circle-check" style="color: green; font-size: 20px"></i>@elseif($data->remark == "Disqualified") <i class="fa-solid fa-circle-xmark" style="color: red; font-size: 20px"></i> @endif</p>
-                    </td>
-{{--                    <td class="eye-icon" style="padding: 0; width: 1%; text-align: center;">--}}
-{{--                        <i class="fa-regular fa-eye" style="margin: 0; padding: 0; cursor: pointer" wire:click="viewDetail({{$data->id}})" data-bs-toggle="modal" data-bs-target="#viewDetail"></i>--}}
-{{--                    </td>--}}
                 </tr>
             @endforeach
             </tbody>
