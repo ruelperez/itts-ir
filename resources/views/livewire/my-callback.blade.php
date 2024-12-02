@@ -19,6 +19,7 @@
             <span class="visually-hidden">Loading...</span>
         </div>
     </div>
+    <div><p style="color: red; margin-top: 10px;">Double click row data to view full details</p></div>
     <hr>
     <div style="font-size: 14px;" class="table-responsive" wire:loading.remove>
         <table class="table table-striped">
