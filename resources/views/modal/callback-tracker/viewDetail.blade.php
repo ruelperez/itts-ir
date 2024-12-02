@@ -35,14 +35,26 @@
                 </div>
                 <hr style="border: solid black 2px">
                 <div>
+                    @if($viewAnswered)
+                        <!-- Display concatenated answers -->
+                        <div class="mt-3">
+                            <!-- Directly output the content with raw HTML rendering -->
+                            <p>{!! $viewAnswered !!}</p>
+                        </div>
+                    @endif
+                </div>
+                <hr style="border: solid black 2px">
+                <div>
                     <p>Agent: <b>{{ucfirst($agent)}}</b></p>
                 </div>
                 <div>
                     <p>Additional Info: <b>{{$reason}}</b></p>
                 </div>
-                <div>
-                    <p>DQ Reason: <b>{{$viewDqReason}}</b></p>
-                </div>
+                @if($viewDqReason != "" or $viewDqReason != null)
+                    <div>
+                        <p>DQ Reason: <b>{{$viewDqReason}}</b></p>
+                    </div>
+                @endif
                 <div>
                     <p>Time left: <b>{{$timeRemaining}} hrs.</b></p>
                 </div>

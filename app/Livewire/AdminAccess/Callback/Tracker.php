@@ -9,7 +9,7 @@ use Livewire\Component;
 class Tracker extends Component
 {
     public $submissionData = [], $search, $dob, $user_id, $date, $claimant, $phoneNumber, $campaign, $injuredParty, $altPhoneNumber, $email, $address, $reason,
-    $gm=0, $results = [], $timeRemaining, $dqReason,  $shouldPoll = true, $user_fullname, $viewDqReason, $countUnmarked, $ids, $remark, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15;
+    $gm=0, $results = [], $timeRemaining,  $dqReason, $viewAnswered, $shouldPoll = true, $user_fullname, $viewDqReason, $countUnmarked, $ids, $remark, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15;
 
     public function render()
     {
@@ -105,6 +105,7 @@ class Tracker extends Component
         $this->is_expired = $dv->is_expired;
         $this->date = $dv->created_at->format('m/d/Y h:i A');
         $this->viewDqReason = $dv->dqReason;
+        $this->viewAnswered = $dv->answeredQuestion;
         $ja = User::find($dv->user_id);
         $this->agent = $ja->fullname;
         $this->dispatch('show-detail-modal');
@@ -164,6 +165,7 @@ class Tracker extends Component
         $this->is_expired = $dv->is_expired;
         $this->date = $dv->created_at->format('m/d/Y h:i A');
         $this->viewDqReason = $dv->dqReason;
+        $this->viewAnswered = $dv->answeredQuestion;
         $ja = User::find($dv->user_id);
         $this->agent = $ja->fullname;
     }
