@@ -74,8 +74,6 @@
                 <th scope="col">Reason</th>
                 <th scope="col">Time left</th>
                 <th scope="col" >Is expired</th>
-                <th scope="col" >Remarks</th>
-                <th scope="col" >Marked by:</th>
             </tr>
             </thead>
             <tbody>
@@ -127,13 +125,6 @@
                     </td>
                     <td style="padding: 0; width: 1%; text-align: center;">
                         <p style="margin: 0; padding: 0;">{{$data->is_expired ? 'Yes' : 'No' }}</p>
-                    </td>
-                    <td x-data
-                        @click="$dispatch('openRemarksModal', { id: {{ $data->id }} })" >
-                        <p style="cursor: pointer">@if($data->remark == null) None @elseif($data->remark == "Qualified") <i class="fa-solid fa-circle-check" style="color: green; font-size: 20px"></i>@elseif($data->remark == "Disqualified") <i class="fa-solid fa-circle-xmark" style="color: red; font-size: 20px"></i> @endif</p>
-                    </td>
-                    <td>
-                        {{$data->markBy}}
                     </td>
                 </tr>
             @endforeach
