@@ -52,9 +52,9 @@
                 <div>
                     <p>Callback reason: <b>{{$reason}}</b></p>
                 </div>
-                <div>
-                    <p>DQ Reason: <b>{{ !empty($viewDqReason) ? $viewDqReason : 'None' }}</b></p>
-                </div>
+{{--                <div>--}}
+{{--                    <p>DQ Reason: <b>{{ !empty($viewDqReason) ? $viewDqReason : 'None' }}</b></p>--}}
+{{--                </div>--}}
                 <div>
                     <p>Time left: <b>{{$timeRemaining}} hrs.</b></p>
                 </div>

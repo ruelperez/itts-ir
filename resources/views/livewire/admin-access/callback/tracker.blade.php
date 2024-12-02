@@ -47,7 +47,7 @@
 {{--        </div>--}}
 {{--    </div>--}}
     <hr>
-    <div style="font-size: 13px;" class="table-responsive border" @if($shouldPoll) wire:poll.2s @endif>
+    <div style="font-size: 13px;" class="table-responsive border">
         <table class="table table-striped w-100">
             <thead>
             <tr>
@@ -168,9 +168,5 @@
         const positionModal = new bootstrap.Modal(document.getElementById('viewDetailModal'));
         positionModal.show();
     });
-
-    function closeRemarkBtn(){
-        Livewire.dispatch('enablePolling')
-    }
 
 </script>
