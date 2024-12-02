@@ -46,6 +46,8 @@
                             <!-- Directly output the content with raw HTML rendering -->
                             <p>{!! $viewAnswered !!}</p>
                         </div>
+                    @else
+                        No qualifying questionnaire, features implement (Nov 27, 2024)
                     @endif
                 </div>
                 <hr style="border: solid black 2px">
@@ -56,7 +58,7 @@
                     <p>Callback reason: <b>{{$reason}}</b></p>
                 </div>
                 <div>
-                    <p>DQ Reason: <b>{{$viewDqReason}}</b></p>
+                    <p>DQ Reason: <b>{{ !empty($viewDqReason) ? $viewDqReason : 'None' }}</b></p>
                 </div>
                 <div>
                     <p>Time left: <b>{{$timeRemaining}} hrs.</b></p>
