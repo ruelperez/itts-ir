@@ -9,7 +9,7 @@ use Livewire\Component;
 class Tracker extends Component
 {
     public $submissionData = [], $search, $dob, $user_id, $date, $claimant, $phoneNumber, $campaign, $injuredParty, $altPhoneNumber, $email, $address, $reason,
-    $gm=0, $results = [], $timeRemaining, $dqReason, $user_fullname, $viewDqReason, $countUnmarked, $ids, $remark, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15;
+    $gm=0, $results = [], $timeRemaining, $dqReason,  $shouldPoll = true, $user_fullname, $viewDqReason, $countUnmarked, $ids, $remark, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15;
 
     public function render()
     {
@@ -82,12 +82,19 @@ class Tracker extends Component
         }
     }
 
-    protected $listeners = ['openRemarksModal'=>'mod'];
+    protected $listeners = ['openRemarksModal'=>'mod',
+        'enablePolling' => 'enablePolling'];
+
+    public function enablePolling()
+    {
+        $this->shouldPoll = true;
+    }
 
     public function mod($id){
         $this->ids = $id;
         $gb = Callback::find($id);
         $this->remark = $gb->remark;
+        $this->shouldPoll = false;
         $this->dispatch('show-remark-modal');
     }
 

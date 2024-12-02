@@ -1,12 +1,12 @@
 <div>
     @include('modal.callback-tracker.viewDetail')
     @include('modal.callback-tracker.add')
-    <div class="modal fade" id="remarkModal" tabindex="-1" aria-labelledby="positionModalLabel" aria-hidden="true">
+    <div class="modal fade" id="remarkModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="positionModalLabel">Update Callback Remark</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeRemarkBtn()"></button>
                 </div>
                 <form wire:submit.prevent="submitEditRemark">
                     <div x-data="{ remark: '' }" class="modal-body">
@@ -55,7 +55,7 @@
 {{--        </div>--}}
 {{--    </div>--}}
     <hr>
-    <div style="font-size: 14px;" class="table-responsive border" wire:poll.2s>
+    <div style="font-size: 14px;" class="table-responsive border" @if($shouldPoll) wire:poll.2s @endif>
         <table class="table table-striped w-100">
             <thead>
             <tr>
@@ -155,13 +155,20 @@
     </div>
     @script
         <script>
-            $wire.on('success', () => {btnclose122
+            $wire.on('success', () => {
                 $('#btnclose122').click();
-                Swal.fire(
-                    'Updated!',
-                    'Successfully Updated .',
-                    'success'
-                );
+                Swal.fire({
+                    title: 'Updated!',
+                    text: 'Successfully Updated.',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false, // Prevent closing by clicking outside
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Livewire.dispatch('enablePolling');
+                        window.location.reload(); // Reload the page
+                    }
+                });
             });
             $wire.on('error', () => {
                 $('#btnclose122').click();
@@ -179,5 +186,9 @@
         const positionModal = new bootstrap.Modal(document.getElementById('remarkModal'));
         positionModal.show();
     });
+
+    function closeRemarkBtn(){
+        Livewire.dispatch('enablePolling')
+    }
 
 </script>
