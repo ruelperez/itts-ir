@@ -47,7 +47,7 @@
                             <p>{!! $viewAnswered !!}</p>
                         </div>
                     @else
-                        No qualifying questionnaire, features implement (Nov 27, 2024)
+                        No qualifying questionnaire, features implement (Nov 28, 2024)
                     @endif
                 </div>
                 <hr style="border: solid black 2px">
