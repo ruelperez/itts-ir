@@ -53,7 +53,7 @@
                     <p>Agent: <b>{{ucfirst($agent)}}</b></p>
                 </div>
                 <div>
-                    <p>Additional Info: <b>{{$reason}}</b></p>
+                    <p>Callback reason: <b>{{$reason}}</b></p>
                 </div>
                 <div>
                     <p>DQ Reason: <b>{{$viewDqReason}}</b></p>

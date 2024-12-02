@@ -54,6 +54,8 @@ class MyCallback extends Component
         return view('livewire.my-callback');
     }
 
+    protected $listeners = ['viewDetail'=>'viewDetail'];
+
     public function displayData(){
         $this->submissionData = Callback::where('user_id', $this->user_id)
             ->skip(($this->currentPage - 1) * $this->perPage)
@@ -166,6 +168,7 @@ class MyCallback extends Component
         $this->viewAnswered = $dv->answeredQuestion;
         $ja = User::find($dv->user_id);
         $this->agent = $ja->fullname;
+        $this->dispatch('show-detailss-modal');
     }
 
     public function updated($field){

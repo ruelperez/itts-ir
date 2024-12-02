@@ -43,7 +43,8 @@
             </thead>
             <tbody>
             @foreach($submissionData as $data)
-                <tr @if($data->is_expired == "1") style=" background-color: #FF2828; color: white" @endif>
+                <tr @if($data->is_expired == "1") style=" background-color: #FF2828; color: white" @endif x-data
+                    @dblclick="$dispatch('viewDetail', { id: {{ $data->id }} })" >
 {{--                <tr wire:click="viewDetail({{$data->id}})" data-bs-toggle="modal" data-bs-target="#viewDetail" style="cursor: pointer">--}}
                     <td>
                         {{ $data->id}}
@@ -90,9 +91,9 @@
                     <td>
                         <p>@if($data->remark == null) None @elseif($data->remark == "Qualified") <i class="fa-solid fa-circle-check" style="color: green; font-size: 20px"></i>@elseif($data->remark == "Disqualified") <i class="fa-solid fa-circle-xmark" style="color: red; font-size: 20px"></i> @endif</p>
                     </td>
-                    <td class="eye-icon" style="padding: 0; width: 1%; text-align: center;">
-                        <i class="fa-regular fa-eye" style="margin: 0; padding: 0; cursor: pointer" wire:click="viewDetail({{$data->id}})" data-bs-toggle="modal" data-bs-target="#viewDetail"></i>
-                    </td>
+{{--                    <td class="eye-icon" style="padding: 0; width: 1%; text-align: center;">--}}
+{{--                        <i class="fa-regular fa-eye" style="margin: 0; padding: 0; cursor: pointer" wire:click="viewDetail({{$data->id}})" data-bs-toggle="modal" data-bs-target="#viewDetail"></i>--}}
+{{--                    </td>--}}
                 </tr>
             @endforeach
             </tbody>
@@ -129,6 +130,10 @@
                         location.reload();
                     }
                 });
+            });
+            $wire.on('show-detailss-modal', () => {
+                const positionModal = new bootstrap.Modal(document.getElementById('viewDetail'));
+                positionModal.show();
             });
         </script>
     @endscript

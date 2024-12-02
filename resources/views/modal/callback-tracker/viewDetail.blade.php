@@ -48,7 +48,7 @@
                     <p>Agent: <b>{{ucfirst($agent)}}</b></p>
                 </div>
                 <div>
-                    <p>Additional Info: <b>{{$reason}}</b></p>
+                    <p>Callback reason: <b>{{$reason}}</b></p>
                 </div>
                 @if($viewDqReason != "" or $viewDqReason != null)
                     <div>
