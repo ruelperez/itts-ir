@@ -29,10 +29,6 @@
             </div>
         </div>
     </div>
-    <div>
-        <i class="fa-solid fa-arrow-left" onclick="location.href = '/production-lead-mass-tort';" style="cursor: pointer"></i>
-        <h6>CALLBACK TRACKER</h6>
-    </div>
     <div class="row  mt-3 mt-md-4">
         <div class="col-sm-7 col-lg-5 col-xl-5 mt-2 mt-sm-0">
             <input class="form-control w-100" type="search" placeholder="Search" aria-label="Search" wire:model.live="search">
