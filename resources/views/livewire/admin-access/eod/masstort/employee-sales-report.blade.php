@@ -55,7 +55,7 @@
                         {{$data->count}}
                     </td>
                 </tr>
-                @php $n++; @endphp
+{{--                @php $n++; @endphp--}}
             @endforeach
             </tbody>
         </table>
