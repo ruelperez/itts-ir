@@ -25,7 +25,6 @@
         <table class="table text-white">
             <thead>
             <tr>
-                <th scope="col">No.</th>
                 <th scope="col">Agent</th>
                 <th scope="col">Campaign</th>
                 <th scope="col">Client</th>
@@ -34,12 +33,12 @@
             </tr>
             </thead>
             <tbody>
-            @php $n=1; @endphp
+{{--            @php $n=1; @endphp--}}
             @foreach($salesData as $data)
                 <tr>
-                    <td>
-                        {{$n}}
-                    </td>
+{{--                    <td>--}}
+{{--                        {{$n}}--}}
+{{--                    </td>--}}
                     <td>
                         {{$data->agent}}
                     </td>
