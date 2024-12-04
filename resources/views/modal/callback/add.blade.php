@@ -251,7 +251,7 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col-auto">
-                                <label class="col-form-label">𝐈𝐧𝐜𝐢𝐝𝐞𝐧𝐭 𝐦𝐮𝐬𝐭 𝐡𝐚𝐯𝐞 𝐡𝐚𝐩𝐩𝐞𝐧𝐞𝐝 𝐢𝐧 𝐭𝐡𝐞 𝐔𝐒?</label>
+                                <label class="col-form-label">Did the incident occur in the United States?</label>
                             </div>
                             <div class="col-auto">
                                 <input type="text" class="form-control" wire:model="rideshareQuestion.incident" required>

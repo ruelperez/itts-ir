@@ -25,7 +25,13 @@ class MyCallback extends Component
         'qualifyingInjuries' => '',
         'diagnosis' => '',
         'dateOfDiagnosis' => '',
-        'convicted' => '',], $countUnmarked, $timeRemaining, $viewAnswered, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15;
+        'convicted' => '',],
+        $rideshareQuestion = ['receipt' => '',
+        'report' => '',
+        'assaulted' => '',
+        'incident' => '',
+        'convicted' => '',
+        'represented' => '',],$countUnmarked, $timeRemaining, $viewAnswered, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15;
 
     public function render()
     {
@@ -118,24 +124,34 @@ class MyCallback extends Component
         ]);
         if ($this->campaign == "nec" or $this->campaign == "NEC"){
             $formattedAnswers = implode('<br>', [
-                "Weight = " . $this->necQuestion['weight'],
-                "Birth Year = " . $this->necQuestion['birth_year'],
-                "NEC Diagnosis = " . $this->necQuestion['nec_diagnosis'],
-                "Formula = " . $this->necQuestion['formula'],
-                "Premature = " . $this->necQuestion['premature'],
+                "Weight - " . $this->necQuestion['weight'],
+                "Birth Year - " . $this->necQuestion['birth_year'],
+                "NEC Diagnosis - " . $this->necQuestion['nec_diagnosis'],
+                "Formula - " . $this->necQuestion['formula'],
+                "Premature - " . $this->necQuestion['premature'],
             ]);
         }
         elseif ($this->campaign == "afff" or $this->campaign == "AFFF"){
             $formattedAnswers = implode('<br>', [
-                "Were you a FF, ER, or Military = " . $this->afffQuestion['member'],
-                "Exposed to AFFF after 1980? = " . $this->afffQuestion['exposed'],
-                "Is this your first exposure = " . $this->afffQuestion['firstExposure'],
-                "What was your last exposure = " . $this->afffQuestion['lastExposure'],
-                "How often are you exposed? = " . $this->afffQuestion['howOften'],
-                "Diagnosed with a qualifying injury? = " . $this->afffQuestion['qualifyingInjuries'],
-                "Diagnosis = " . $this->afffQuestion['diagnosis'],
-                "Date of diagnosis = " . $this->afffQuestion['dateOfDiagnosis'],
-                "convicted of a crime within the previous 5 years? = " . $this->afffQuestion['convicted'],
+                "Were you a FF, ER, or Military - " . $this->afffQuestion['member'],
+                "Exposed to AFFF after 1980? - " . $this->afffQuestion['exposed'],
+                "Is this your first exposure - " . $this->afffQuestion['firstExposure'],
+                "What was your last exposure - " . $this->afffQuestion['lastExposure'],
+                "How often are you exposed? - " . $this->afffQuestion['howOften'],
+                "Diagnosed with a qualifying injury? - " . $this->afffQuestion['qualifyingInjuries'],
+                "Diagnosis - " . $this->afffQuestion['diagnosis'],
+                "Date of diagnosis - " . $this->afffQuestion['dateOfDiagnosis'],
+                "convicted of a crime within the previous 5 years? - " . $this->afffQuestion['convicted'],
+            ]);
+        }
+        elseif ($this->campaign == "rideshare uber/lyft" or $this->campaign == "RIDESHARE UBER/LYFT"){
+            $formattedAnswers = implode('<br>', [
+                "Copy of RS receipt - " . $this->rideshareQuestion['receipt'],
+                "Copy of Police Report/Company Complain - " . $this->rideshareQuestion['report'],
+                "𝐖𝐚𝐬 𝐬𝐞𝐱𝐮𝐚𝐥𝐥𝐲 𝐚𝐬𝐬𝐚𝐮𝐥𝐭𝐞𝐝 𝐛𝐲 𝐚 𝐫𝐢𝐝𝐞𝐬𝐡𝐚𝐫𝐞 𝐝𝐫𝐢𝐯𝐞𝐫? - " . $this->rideshareQuestion['assaulted'],
+                "Did the incident occur in the United States? - " . $this->rideshareQuestion['incident'],
+                "Were you convicted as felony? - " . $this->rideshareQuestion['convicted'],
+                "Are you represented by other LF? - " . $this->rideshareQuestion['represented'],
             ]);
         }
         try {
