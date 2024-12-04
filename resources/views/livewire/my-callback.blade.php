@@ -116,7 +116,7 @@
             $wire.on('failed', () => {
                 Swal.fire(
                     'FAILED!',
-                    'Failed to Update.',
+                    '',
                     'error'
                 ).then((result) => {
                     if (result.isConfirmed) {
