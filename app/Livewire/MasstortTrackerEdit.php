@@ -146,7 +146,6 @@ class MasstortTrackerEdit extends Component
 
     public function clickUpdate(){
         if ($this->leadOwnership == "2nd Touch"){
-
         }
         elseif ($this->agent2 != ""){
             if ($this->gm2 == 0){
@@ -297,12 +296,16 @@ class MasstortTrackerEdit extends Component
                 $kk->result = $this->result;
                 $kk->comment = $this->returnedOther;
                 $kk->date = $this->date2;
-                if($owner == "1st Touch"){
+                if($this->leadOwnership == "1st Touch"){
+                    $kk->agent = $this->agent;
+                }
+                elseif($this->leadOwnership == "2nd Touch"){
+                    $kk->agent2 = $this->agent2;
                     $kk->agent = $this->agent;
                 }
                 else{
-                    $kk->agent2 = $this->agent;
                     $kk->agent = $this->agent2;
+                    $kk->agent2 = $this->agent;
                 }
                 $kk->leadOwnership = $owner;
                 $kk->coach = $this->coach;

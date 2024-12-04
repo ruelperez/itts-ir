@@ -224,77 +224,53 @@
                                 <input type="text" class="form-control" wire:model="afffQuestion.convicted" required>
                             </div>
                         </div>
-                    @elseif($campName == "rideshare")
+                    @elseif($campName == "rideshare uber/lyft")
                         <div class="row mt-3">
                             <div class="col-auto">
-                                <label class="col-form-label">Were you a firefighter, emergency responder, or a member of the military?</label>
+                                <label class="col-form-label">Do you have the copy of RS receipt?</label>
                             </div>
                             <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="afffQuestion.member" required>
+                                <input type="text" class="form-control" wire:model="rideshareQuestion.receipt" required>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-auto">
-                                <label class="col-form-label">Were you exposed to AFFF at any time after 1980? If so, in what year?</label>
+                                <label class="col-form-label">Do you have the copy of Police Report/ Company Complain?</label>
                             </div>
                             <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="afffQuestion.exposed" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Is this your first exposure?</label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="afffQuestion.firstExposure" required>
+                                <input type="text" class="form-control" wire:model="rideshareQuestion.report" required>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-auto">
-                                <label class="col-form-label">What was your last exposure?</label>
+                                <label class="col-form-label">𝐖𝐚𝐬 𝐬𝐞𝐱𝐮𝐚𝐥𝐥𝐲 𝐚𝐬𝐬𝐚𝐮𝐥𝐭𝐞𝐝 𝐛𝐲 𝐚 𝐫𝐢𝐝𝐞𝐬𝐡𝐚𝐫𝐞 𝐝𝐫𝐢𝐯𝐞𝐫?</label>
                             </div>
                             <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="afffQuestion.lastExposure" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Approx. how often are you exposed? </label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="afffQuestion.howOften" required>
+                                <input type="text" class="form-control" wire:model="rideshareQuestion.assaulted" required>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-auto">
-                                <label class="col-form-label">Were you diagnosed with one of the qualifying injuries?</label>
+                                <label class="col-form-label">𝐈𝐧𝐜𝐢𝐝𝐞𝐧𝐭 𝐦𝐮𝐬𝐭 𝐡𝐚𝐯𝐞 𝐡𝐚𝐩𝐩𝐞𝐧𝐞𝐝 𝐢𝐧 𝐭𝐡𝐞 𝐔𝐒?</label>
                             </div>
                             <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="afffQuestion.qualifyingInjuries" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Diagnosis: </label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="afffQuestion.diagnosis" required>
+                                <input type="text" class="form-control" wire:model="rideshareQuestion.incident" required>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-auto">
-                                <label class="col-form-label">Date of diagnosis (mm/dd/yyyy): </label>
+                                <label class="col-form-label">Were you convicted as felony? </label>
                             </div>
                             <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="afffQuestion.dateOfDiagnosis" required>
+                                <input type="text" class="form-control" wire:model="rideshareQuestion.convicted" required>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-auto">
-                                <label class="col-form-label">Were you convicted of a crime within the previous 5 years?</label>
+                                <label class="col-form-label">Are you represented by other LF?</label>
                             </div>
                             <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="afffQuestion.convicted" required>
+                                <input type="text" class="form-control" wire:model="rideshareQuestion.represented" required>
                             </div>
                         </div>
                     @endif

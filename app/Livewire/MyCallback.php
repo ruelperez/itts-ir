@@ -247,7 +247,7 @@ class MyCallback extends Component
 
     public function removeSearch(){
         $this->showSearch = false;
-        if (strtolower($this->campaign) == "afff" || strtolower($this->campaign) == "nec"){
+        if (strtolower($this->campaign) == "afff" || strtolower($this->campaign) == "nec" || strtolower($this->campaign) == "rideshare uber/left"){
             $this->gm = 1;
             $this->campName = strtolower($this->campaign);
         }
