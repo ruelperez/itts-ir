@@ -273,6 +273,39 @@
                                 <input type="text" class="form-control" wire:model="rideshareQuestion.represented" required>
                             </div>
                         </div>
+                    @elseif($campName == "depo-provera")
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Did you or a loved one use the injectable contraceptive brand Depo-Provera for at least one year?</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="depoQuestion.𝐢𝐧𝐣𝐞𝐜𝐭𝐚𝐛𝐥𝐞" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Were you or a loved one diagnosed with meningioma after using Depo-Provera for at least one year?</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="depoQuestion.𝐌𝐞𝐧𝐢𝐧𝐠𝐢𝐨𝐦𝐚" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Are you able to provide proof of your prescription for Depo-Provera?</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="depoQuestion.𝐩𝐫𝐞𝐬𝐜𝐫𝐢𝐩𝐭𝐢𝐨𝐧" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Are you represented by other LF?</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="depoQuestion.represented" required>
+                            </div>
+                        </div>
                     @endif
 {{--                    <div class="row mt-3">--}}
 {{--                        <div class="col-auto">--}}
