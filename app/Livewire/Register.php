@@ -90,6 +90,7 @@ class Register extends Component
                 'faq_crud'=> true,
                 'login_special' => true,
                 'dtr_task' => false,
+                'paySlip' => true,
             ]);
         }
         elseif ($position == "Admin"){
@@ -109,6 +110,7 @@ class Register extends Component
                 'faq_crud'=> true,
                 'login_special' => true,
                 'dtr_task' => true,
+                'paySlip' => false,
             ]);
         }
         else{

@@ -40,7 +40,6 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col"></th>
                     <th scope="col">Name</th>
                     <th scope="col">Role</th>
                     <th scope="col">Can login</th>
@@ -58,16 +57,12 @@
                     <th scope="col">Settings</th>
                     <th scope="col">FAQ crud</th>
                     <th scope="col">Scanner</th>
+                    <th scope="col">Pay slip</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($datas as $data)
                     <tr onmouseover="hoverStaff({{$data->id}})" onmouseout="hoverOutStaff({{$data->id}})" class="ngh">
-                        <td>
-                            <div class="profile-picture-staff">
-                                <img src="{{asset('photos/photos/'.$data->user->photo)}}" alt="Profile Picture">
-                            </div>
-                        </td>
                         <td class="text-capitalize" >
                             {{$data->user->fullname}}
                         </td>
@@ -164,6 +159,12 @@
                             data-original-value="{{ $data->qr_scanner }}"
                             class="user-select-none">
                             {{ $data->qr_scanner ? '1' : '0' }}
+                        </td>
+                        <td
+                            ondblclick="confirmEdit({{ $data->id }},{{$data->paySlip}},'paySlip')"
+                            data-original-value="{{ $data->paySlip }}"
+                            class="user-select-none">
+                            {{ $data->paySlip ? '1' : '0' }}
                         </td>
                     </tr>
                     <button class="d-none" id="btn200_{{$data->id}}" wire:click="update_data({{$data->id}}, $('#btn200_{{$data->id}}').data('column'))"></button>

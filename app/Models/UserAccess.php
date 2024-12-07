@@ -23,6 +23,7 @@ class UserAccess extends Model
         'faq_crud',
         'login_special',
         'dtr_task',
+        'paySlip',
     ];
 
     public function user()

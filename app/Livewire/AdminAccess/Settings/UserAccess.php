@@ -93,6 +93,7 @@ class UserAccess extends Component
                 $hh->faq_crud= true;
                 $hh->login_special= true;
                 $hh->dtr_task= false;
+                $hh->paySlip= true;
                 $hh->save();
             }
             else {
@@ -109,6 +110,7 @@ class UserAccess extends Component
                 $hh->settings= false;
                 $hh->faq_crud= false;
                 $hh->login_special= false;
+                $hh->paySlip= false;
                 if ($this->user_position == "Admin"){
                     $hh->dtr_task= true;
                 }else{
