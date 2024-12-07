@@ -38,11 +38,6 @@ class StaffDirectory extends Component
         $this->fullname = auth()->user()->fullname;
         $this->user_id = auth()->user()->id;
         $this->position = auth()->user()->position;
-        $jj = \App\Models\Employee::where('user_id',$this->user_id)->get();
-        foreach ($jj as $yy){
-            $emp = \App\Models\Employee::find($yy->id);
-            $this->employeeData = $emp->designation;
-        }
         $this->photo = auth()->user()->photo;
         $this->dtrData = Dtr::all();
         if ($this->search != ""){
@@ -278,8 +273,9 @@ class StaffDirectory extends Component
 
     }
     public function mount(){
-        $pst = auth()->user()->position;
-        if ($pst == "Super Admin"){
+        $fe = User::find(auth()->user()->id)->user_access->first();
+        $authorizer = $fe->staff_directory;
+        if ($authorizer){
 
         }
         else{

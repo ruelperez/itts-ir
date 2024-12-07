@@ -262,10 +262,10 @@
                                 </div>
                                 <div>
                                     <select class="form-select" aria-label="Default select example" wire:model.live="department" required>
-                                        <option value="Management">Management</option>
-                                        <option value="Admin">Admin </option>
-                                        <option value="Admin - Production">Admin - Production</option>
-                                        <option value="Admin - Back Office">Admin - Back Office</option>
+                                        <option @if($designation == "Management") selected @endif value="Management">Management</option>
+                                        <option @if($designation == "Admin") selected @endif value="Admin">Admin </option>
+                                        <option @if($designation == "Admin - Production") selected @endif value="Admin - Production">Admin - Production</option>
+                                        <option @if($designation == "Admin - Back Office") selected @endif value="Admin - Back Office">Admin - Back Office</option>
                                     </select>
                                 </div>
                             </div>
@@ -276,8 +276,8 @@
                                     </div>
                                     <div>
                                         <select class="form-select" aria-label="Default select example" wire:model="designation">
-                                            <option selected value="Chief Executive Officer">Chief Executive Officer</option>
-                                            <option value="President">President</option>
+                                            <option @if($designation == "Chief Executive Officer") selected @endif value="Chief Executive Officer">Chief Executive Officer</option>
+                                            <option @if($designation == "President") selected @endif value="President">President</option>
                                         </select>
                                     </div>
                                 @elseif($department == "Admin")
@@ -286,9 +286,9 @@
                                     </div>
                                     <div>
                                         <select class="form-select" aria-label="Default select example" wire:model="designation">
-                                            <option selected value="Accounts and Back Office Manager">Accounts and Back Office Manager</option>
-                                            <option value="Production Floor Manager/ Process Lead">Production Floor Manager/ Process Lead</option>
-                                            <option value="Human Resource Officer">Human Resource Officer</option>
+                                            <option @if($designation == "Accounts and Back Office Manager") @endif selected value="Accounts and Back Office Manager">Accounts and Back Office Manager</option>
+                                            <option @if($designation == "Production Floor Manager/ Process Lead") selected @endif value="Production Floor Manager/ Process Lead">Production Floor Manager/ Process Lead</option>
+                                            <option @if($designation == "Human Resource Officer") selected @endif value="Human Resource Officer">Human Resource Officer</option>
                                         </select>
                                     </div>
                                 @elseif($department == "Admin - Production")
@@ -297,11 +297,11 @@
                                     </div>
                                     <div>
                                         <select class="form-select" aria-label="Default select example" wire:model="designation">
-                                            <option selected value="Agent / Sale Associate">Agent/ Sale Associate</option>
-                                            <option value="Senior Team Leader">Senior Team Leader</option>
-                                            <option value="Team Leader">Team Leader</option>
-                                            <option value="Subject Matter Expert">Subject Matter Expert</option>
-                                            <option value="Receptionist">Receptionist</option>
+                                            <option @if($designation == "Agent / Sale Associate") selected @endif value="Agent / Sale Associate">Agent/ Sale Associate</option>
+                                            <option @if($designation == "Senior Team Leader") selected @endif value="Senior Team Leader">Senior Team Leader</option>
+                                            <option @if($designation == "Team Leader") selected @endif value="Team Leader">Team Leader</option>
+                                            <option @if($designation == "Subject Matter Expert") selected @endif value="Subject Matter Expert">Subject Matter Expert</option>
+                                            <option @if($designation == "Receptionist") selected @endif value="Receptionist">Receptionist</option>
                                         </select>
                                     </div>
                                 @elseif($department == "Admin - Back Office")
@@ -310,9 +310,10 @@
                                     </div>
                                     <div>
                                         <select class="form-select" aria-label="Default select example" wire:model="designation">
-                                            <option selected value="Quality Assurance">Quality Assurance</option>
-                                            <option value="Recording & Editor">Recording & Editor </option>
-                                            <option value="BO - IT">BO - IT</option>
+                                            <option @if($designation == "Quality Assurance") selected @endif value="Quality Assurance">Quality Assurance</option>
+                                            <option @if($designation == "Recording & Editor") selected @endif value="Recording & Editor">Recording & Editor </option>
+                                            <option @if($designation == "BO - IT") selected @endif value="BO - IT">BO - IT</option>
+                                            <option @if($designation == "Retainer") selected @endif value="Retainer">Retainer</option>
                                         </select>
                                     </div>
                                 @endif
