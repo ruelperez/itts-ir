@@ -30,6 +30,13 @@ class Slip extends Component
     }
 
     public function mount(){
+        $fe = User::find(auth()->user()->id)->user_access->first();
+        $authorizer = $fe->paySlip;
+        if ($authorizer){
 
+        }
+        else{
+            return redirect('/');
+        }
     }
 }
