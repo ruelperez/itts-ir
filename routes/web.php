@@ -60,6 +60,7 @@ Route::middleware(['auth','restrict.ip','checkEmployee'])->group(function () {
     Route::prefix('admin-access')->group(function () {
         Route::get('eod/{page}', [\App\Http\Controllers\AdminAccess\PageController::class, 'eod']);
         Route::get('/{folder}/{page}', [\App\Http\Controllers\AdminAccess\PageController::class, 'page']);
+        Route::get('/{folder}/{page}/{id}', [\App\Http\Controllers\AdminAccess\PageController::class, 'salary']);
     });
     Route::prefix('dtr')->group(function () {
         Route::get('/all-record/{page}', [PageController::class, 'page']);

@@ -35,7 +35,7 @@
             <ul class="list-group list-group-flush">
                 @foreach($data as $datas)
                     <li class="list-group-item">
-                        <p class="hover-text">{{$datas->start}} - {{$datas->end}}</p>
+                        <p class="hover-text" onclick="location.href = '/admin-access/salary/agent-salary-statement/{{$datas->id}}';">{{$datas->start}} - {{$datas->end}}</p>
                     </li>
                 @endforeach
             </ul>
