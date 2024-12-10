@@ -11,7 +11,9 @@ class Record extends Component
     public function render()
     {
         if ($this->search != ""){
-
+            $this->data = SalaryDateInterval::where('start',$this->search)
+                ->orWhere('end',$this->search)
+                ->get();
         }else{
             $this->data = SalaryDateInterval::latest()->get();
         }
