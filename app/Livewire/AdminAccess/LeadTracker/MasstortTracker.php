@@ -53,6 +53,7 @@ class MasstortTracker extends Component
                 ->orWhere('remarks', 'LIKE', '%'.$this->search.'%')
                 ->orWhere('coach', 'LIKE', '%'.$this->search.'%')
                 ->orWhere('result', 'LIKE', '%'.$this->search.'%');
+            ->orWhere('id', 'LIKE', '%'.$this->search.'%');
 
             // Get the results for the current page
             $this->submissionData = $searchQuery

@@ -22,9 +22,9 @@
                 <i class="fa-solid fa-eye text-primary" style="cursor: pointer" wire:click="clickView"
                    data-bs-toggle="modal" data-bs-target="#viewDetail"></i>
                 <i class="fa-solid fa-pen-to-square ms-3" style="cursor: pointer"></i>
-                <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer;" title="Delete" onclick="delStaffBtn()"></i>
+{{--                <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer;" title="Delete" onclick="delStaffBtn()"></i>--}}
             @elseif(count($checkBox) > 1)
-                <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer" title="Delete" onclick="delStaffBtn()"></i>
+{{--                <i class="fa-solid fa-trash ms-3 text-danger" style="cursor: pointer" title="Delete" onclick="delStaffBtn()"></i>--}}
             @endif
         </div>
         <div class="table-responsive" style="font-size: 14px">
