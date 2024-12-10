@@ -48,6 +48,15 @@
                 @php $i=0; @endphp
                 @foreach($staffData as $data)
                     <tr onmouseover="hoverStaff({{$data->id}})" onmouseout="hoverOutStaff({{$data->id}})" class="ngh">
+                        <td>
+                            {{$data->id}}
+                        </td>
+                        <td>
+                            {{$data->user_id}}
+                        </td>
+                        <td>
+                            {{$data->id_user}}
+                        </td>
                         <td class="text-end pe-4">
                             <div class="profile-picture-staff">
                                 <img src="{{asset('photos/photos/'.$data->photo)}}" alt="Profile Picture">
