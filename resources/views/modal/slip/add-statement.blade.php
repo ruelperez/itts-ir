@@ -6,7 +6,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                ...
+                <div class="mt-4">
+                    <label class="form-label">Start Date</label>
+                    <input type="text" id="datepicker" class="form-control" wire:model="start" required>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

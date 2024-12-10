@@ -1,5 +1,4 @@
 <div>
-    @include('modal.slip.add-statement')
     <div class="row mb-4">
         <div class="mb-3 col-sm-4 col-md-2 col-lg-3 col-xl-2">
             <select wire:model.live="status" id="status" class="form-control w-100">
@@ -18,8 +17,8 @@
                 class="form-control w-100"
             />
         </div>
-        <div class="col-sm-5 col-md-4 col-lg-3 ms-auto">
-            <button type="button " class="btn btn-warning w-100" data-bs-toggle="modal" data-bs-target="#addStatement">Add salary statement</button>
+        <div class="col-sm-6 col-md-4 col-lg-3 ms-auto">
+            <button type="button " class="btn btn-warning w-100" onclick="location.href = '/admin-access/salary/record';"><i class="fa-solid fa-list me-2"></i>Salary Record</button>
         </div>
     </div>
 <hr>

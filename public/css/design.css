@@ -17,6 +17,19 @@
     color: #00008B; /* Color when the icon is hovered */
 }
 
+/* Custom hover effect */
+.hover-text {
+    color: black; /* Default text color */
+    text-decoration: none; /* Remove underline initially */
+    cursor: pointer; /* Set cursor to pointer */
+    transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth color and underline transition */
+}
+
+.hover-text:hover {
+    color: blue; /* Text color on hover */
+    text-decoration: underline; /* Add underline on hover */
+}
+
 /* Initially hide the eye icon */
 .eye-icon i {
     visibility: hidden;
