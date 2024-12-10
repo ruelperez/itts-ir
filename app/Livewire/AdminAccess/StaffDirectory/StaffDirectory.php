@@ -291,24 +291,24 @@ class StaffDirectory extends Component
         try {
             for ($i=0; count($this->checkBox) > $i; $i++){
                 $jk = Employee::find($this->checkBox[$i]);
-//                $gn = $jk->fullname;
-//                Comment::where('user_id', $jk->user_id)->delete();
-//                CommentHeart::where('user_id', $jk->user_id)->delete();
-//                Dtr::where('user_id', $jk->user_id)->delete();
-//                DtrContent::where('user_id', $jk->user_id)->delete();
-//                DtrPermanent::where('user_id', $jk->user_id)->delete();
-//                Logs::where('user_id', $jk->user_id)->delete();
-//                Note::where('user_id', $jk->user_id)->delete();
-//                TimeSetting::where('user_id', $jk->user_id)->delete();
-//                UserAccess::where('user_id', $jk->user_id)->delete();
-//                User::find($jk->user_id)->delete();
+                $gn = $jk->fullname;
+                Comment::where('user_id', $jk->user_id)->delete();
+                CommentHeart::where('user_id', $jk->user_id)->delete();
+                Dtr::where('user_id', $jk->user_id)->delete();
+                DtrContent::where('user_id', $jk->user_id)->delete();
+                DtrPermanent::where('user_id', $jk->user_id)->delete();
+                Logs::where('user_id', $jk->user_id)->delete();
+                Note::where('user_id', $jk->user_id)->delete();
+                TimeSetting::where('user_id', $jk->user_id)->delete();
+                UserAccess::where('user_id', $jk->user_id)->delete();
+                User::find($jk->user_id)->delete();
                 $jk->delete();
-//                \App\Models\Logs::create([
-//                    'action' => "Delete employee named ".$gn,
-//                    'user_id' => $this->user_id,
-//                    'photo' => $this->photo,
-//                    'fullname' => $this->fullname,
-//                ]);
+                \App\Models\Logs::create([
+                    'action' => "Delete employee named ".$gn,
+                    'user_id' => $this->user_id,
+                    'photo' => $this->photo,
+                    'fullname' => $this->fullname,
+                ]);
             }
             $this->checkBox = [];
             $this->dispatch('success');
