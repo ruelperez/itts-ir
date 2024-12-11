@@ -27,7 +27,7 @@ class CurrentShift extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $branch = "all", $authorizer, $search, $employeeData, $unchangeTimeIn1, $unchangeTimeIn2, $timeIn1, $dtrName, $ids, $timeIn2, $timeOut1, $timeOut2, $date, $dtrData = [], $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $branch = "all", $earl = false, $authorizer, $search, $employeeData, $unchangeTimeIn1, $unchangeTimeIn2, $timeIn1, $dtrName, $ids, $timeIn2, $timeOut1, $timeOut2, $date, $dtrData = [], $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
@@ -70,6 +70,94 @@ class CurrentShift extends Component
         $this->dtrName = $bn->fullname;
         $this->unchangeTimeIn1 = $bn->in;
         $this->unchangeTimeIn2 = $bn->in2;
+        $this->earl = $bn->isEarlyOut;
+    }
+
+    public function submitNotEarly(){
+        if ($this->timeIn1 != "early out"){
+            $this->validate([
+                'timeIn1' => ['nullable', 'date_format:Y-m-d H:i:s'],
+            ]);
+            if ($this->timeIn1 == ""){
+                $this->timeIn1 = null;
+            }
+        }
+        if ($this->timeIn2 != "early out"){
+            $this->validate([
+                'timeIn2' => ['nullable', 'date_format:Y-m-d H:i:s'],
+            ]);
+            if ($this->timeIn2 == ""){
+                $this->timeIn2 = null;
+            }
+        }
+        if ($this->timeOut1 != "early out"){
+            $this->validate([
+                'timeOut1' => ['nullable', 'date_format:Y-m-d H:i:s'],
+            ]);
+            if ($this->timeOut1 == ""){
+                $this->timeOut1 = null;
+            }
+        }
+        if ($this->timeOut2 != "early out"){
+            $this->validate([
+                'timeOut2' => ['nullable', 'date_format:Y-m-d H:i:s'],
+            ]);
+            if ($this->timeOut2 == ""){
+                $this->timeOut2 = null;
+            }
+        }
+        try {
+            $bn = DtrPermanent::find($this->ids);
+            $bn->isEarlyOut = false;
+            $bn->save();
+            session()->flash('goodSched', 'Successfully saved');
+        }catch (\Exception $e){
+            session()->flash('badSched', 'Failed to save');
+        }
+    }
+
+
+    public function submitEarly(){
+        if ($this->timeIn1 != "early out"){
+            $this->validate([
+                'timeIn1' => ['nullable', 'date_format:Y-m-d H:i:s'],
+            ]);
+            if ($this->timeIn1 == ""){
+                $this->timeIn1 = null;
+            }
+        }
+        if ($this->timeIn2 != "early out"){
+            $this->validate([
+                'timeIn2' => ['nullable', 'date_format:Y-m-d H:i:s'],
+            ]);
+            if ($this->timeIn2 == ""){
+                $this->timeIn2 = null;
+            }
+        }
+        if ($this->timeOut1 != "early out"){
+            $this->validate([
+                'timeOut1' => ['nullable', 'date_format:Y-m-d H:i:s'],
+            ]);
+            if ($this->timeOut1 == ""){
+                $this->timeOut1 = null;
+            }
+        }
+        if ($this->timeOut2 != "early out"){
+            $this->validate([
+                'timeOut2' => ['nullable', 'date_format:Y-m-d H:i:s'],
+            ]);
+            if ($this->timeOut2 == ""){
+                $this->timeOut2 = null;
+            }
+        }
+        try {
+            $bn = DtrPermanent::find($this->ids);
+            $bn->isEarlyOut = true;
+            $bn->save();
+            session()->flash('goodSched', 'Successfully saved');
+        }catch (\Exception $e){
+            session()->flash('badSched', 'Failed to save');
+        }
     }
 
     public function submitEdit(){

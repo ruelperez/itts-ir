@@ -50,6 +50,12 @@
                     </div>
                 @else
                     <div>
+                        @if($earl)
+                            <button type="button" class="btn btn-warning" wire:click="submitNotEarly" wire:confirm="Set to not early out? click (OK) to proceed">Not Early Out</button>
+                        @else
+                            <button type="button" class="btn btn-warning" wire:click="submitEarly" wire:confirm="Set to early out? click (OK) to proceed">Early Out</button>
+                        @endif
+
                         <button type="button" class="btn btn-danger" wire:click="remove" wire:confirm="Click (OK) to remove" data-bs-dismiss="modal">Remove</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary" wire:click="submitEdit" wire:confirm="To proceed, click submit">Submit</button>

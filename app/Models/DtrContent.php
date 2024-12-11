@@ -27,6 +27,7 @@ class DtrContent extends Model
         'schedOut',
         'schedIn2',
         'schedOut2',
+        'isEarlyOut'
     ];
 
     use HasFactory;
