@@ -368,6 +368,14 @@
                                     <input type="text"  class="form-control" wire:model="relationship" title="{{ucwords($relationship)}}" required>
                                 </div>
                             </div>
+                            <div class="col-2">
+                                <div>
+                                    <label class="col-form-label">Salary </label>
+                                </div>
+                                <div>
+                                    <input type="text"  class="form-control" wire:model="salary" title="{{ucwords($salary)}}">
+                                </div>
+                            </div>
                         </div>
                     </fieldset>
                     <div class="row align-items-center mb-3 position-fixed bottom-0 w-75" >

@@ -16,6 +16,7 @@
                             <th scope="col">Out</th>
                             <th scope="col">In</th>
                             <th scope="col">Out</th>
+                            <th scope="col">Salary</th>
                             <th scope="col">late in</th>
                             <th scope="col">late out</th>
                             <th scope="col">late in</th>
@@ -41,6 +42,10 @@
                                 </td>
                                 <td class="p-3">
                                     {{ \Carbon\Carbon::parse($datass->out2)->format('m/d/Y, (h:i A)') }}
+                                </td>
+
+                                <td class="p-3">
+                                    {{$datass->dailyRate}}
                                 </td>
 
                                 <td class="p-3">

@@ -297,6 +297,9 @@ class EmployeeDtr extends Component
                 // Format the late time as H:i (e.g., '00:00')
                 $late_out2 = sprintf('%02d:%02d', $hours, $minutes);
 
+                $jk = Employee::where('user_id',$bax->user_id)
+                    ->latest()->first();
+
                 DtrContent::create([
                     'fullname' => $bax->fullname,
                     'in' => $bax->in,
@@ -318,7 +321,7 @@ class EmployeeDtr extends Component
                     'schedOut' => $hh->out,
                     'schedIn2' => $hh->in2,
                     'schedOut2' => $hh->out2,
-
+                    'dailyRate' => $jk->dailyRate,
                 ]);
             }
             foreach ($bas as $bax){

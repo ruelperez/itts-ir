@@ -31,7 +31,7 @@ class StaffDirectory extends Component
     public $registrationSwitch, $stat = [], $checkBox = [], $id_user, $ids, $ng = 0, $employeeData, $search, $dtrData = [], $empStat = "all", $staffData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
         $fname, $mname, $lname, $mi, $suffix, $age, $phone_number, $dob, $gender_preference, $civil_status, $religion, $personal_email, $current_house, $current_street,
         $current_brgy, $current_city, $current_working_email, $same_current_permanent = false, $permanent_house, $permanent_street, $is_success = true, $full_name,
-        $permanent_brgy, $permanent_city, $currentPage = 1, $perPage = 15, $sss, $philhealth, $tin, $hire_date, $yot, $designation = "Agent / Sale Associate", $department = "Admin - Production", $contact_number, $address, $relationship;
+        $permanent_brgy, $salary, $branch, $permanent_city, $currentPage = 1, $perPage = 15, $sss, $philhealth, $tin, $hire_date, $yot, $designation = "Agent / Sale Associate", $department = "Admin - Production", $contact_number, $address, $relationship;
 
     public function render()
     {
@@ -151,7 +151,9 @@ class StaffDirectory extends Component
 
     public function submitForm(){
         $this->ng = 1;
-        $this->is_success = false;
+        if ($this->salary == null or $this->salary == ""){
+            $this->salary = 0;
+        }
         try {
             $pp = \App\Models\Employee::find($this->ids);
             $pp->fname = $this->fname;
@@ -187,6 +189,7 @@ class StaffDirectory extends Component
             $pp->address = $this->address;
             $pp->relationship = $this->relationship;
             $pp->fullname = $this->full_name;
+            $pp->dailyRate = $this->salary;
             $pp->save();
 
             $ff = User::find($this->user_id);
@@ -213,15 +216,10 @@ class StaffDirectory extends Component
                 $aa->branch = $this->branch;
                 $aa->save();
             }
-            if ($this->is_create == true){
-                return redirect('/');
-            }
-            $this->getInfo();
-            $this->is_success = true;
-            // Emit event to trigger modal
-            $this->dispatch('formSubmitted');
+
+            $this->dispatch('save');
         }catch (\Exception $e){
-            $this->is_success = false;
+            $this->dispatch('failed');
         }
     }
     public function clickView(){
@@ -262,6 +260,7 @@ class StaffDirectory extends Component
             $this->relationship = $pp->relationship;
             $this->full_name = $pp->fullname;
             $this->id_user = $pp->id_user;
+            $this->salary = $pp->dailyRate;
             if ($this->department == "" or $this->department == null){
                 $this->department = "Admin - Production";
                 $this->designation = "Agent/ Sale Associate";
