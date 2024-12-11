@@ -20,6 +20,8 @@ class DtrPermanent extends Model
         'photo',
         'task',
         'branch',
+        'lateIn',
+        'earlyOut'
     ];
 
     use HasFactory;

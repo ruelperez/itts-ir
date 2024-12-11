@@ -4,13 +4,15 @@ namespace App\Livewire\AdminAccess\Salary;
 
 use App\Models\DtrContent;
 use App\Models\SalaryDateInterval;
+use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Queue\Failed\DynamoDbFailedJobProvider;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class AgentSalaryStatement extends Component
 {
-    public $ids, $data = [], $interval, $search;
+    public $ids, $data = [], $interval, $search, $dataContents = [], $fullname;
 
     public function render()
     {
@@ -30,6 +32,23 @@ class AgentSalaryStatement extends Component
 
     public function mount($id){
        $this->ids = $id;
+    }
+
+    public function clickName($userID)
+    {
+        $this->fullname = User::find($userID)->fullname;
+
+        // Retrieve the interval based on the IDs property
+        $jj = SalaryDateInterval::find($this->ids);
+
+        // Convert start and end dates to 'Y-m-d H:i:s' format
+        $startDate = Carbon::createFromFormat('m/d/Y', $jj->start)->startOfDay()->format('Y-m-d H:i:s');
+        $endDate = Carbon::createFromFormat('m/d/Y', $jj->end)->endOfDay()->format('Y-m-d H:i:s');
+        // Retrieve records from dtr_contents table that match the conditions
+        $this->dataContents = DB::table('dtr_contents')
+            ->whereBetween('in', [$startDate, $endDate]) // Filter records within the date range
+            ->where('user_id', $userID) // Match the given user ID
+            ->get();
     }
 
     public function getData($startDate, $endDate)

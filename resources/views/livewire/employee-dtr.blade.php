@@ -10,9 +10,9 @@
                 <div class="col-sm-4 col-md-4 col-lg-3 col-xl-2">
                     <button type="button" class="btn btn-dark w-100" onclick="location.href = '/dtr/all-record/dtr-name';"><i class="fa-solid fa-arrows-to-circle" style="margin-right: 8px;"></i>Record</button>
                 </div>
-{{--                <div class="col-12 col-sm-4 col-md-4 mt-1 mt-sm-0 col-lg-3 col-xl-2" data-bs-toggle="modal" data-bs-target="#setTime">--}}
-{{--                    <button type="button" class="btn btn-primary w-100"><i class="fa-regular fa-clock" style="margin-right: 8px; font-size: 20px;"></i>Schedule</button>--}}
-{{--                </div>--}}
+                <div class="col-12 col-sm-4 col-md-4 mt-1 mt-sm-0 col-lg-3 col-xl-2" >
+                    <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#setTime" wire:click="clickSchedule"><i class="fa-regular fa-clock" style="margin-right: 8px; font-size: 20px;"></i>Schedule</button>
+                </div>
                 <div class="col-12 col-sm-4 col-md-4 mt-1 mt-sm-0 col-lg-3 col-xl-2">
                     <button type="button" class="btn btn-secondary w-100" @if(count($dtrAll) != 0) style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#resetDtr" @endif >@if(count($dtrAll) == 0) <i class="fa-solid fa-check" style="color: green;font-size: 20px;"></i>  @else <i class="fa-solid fa-rotate" style="font-size: 20px;" type="button"></i> @endif Reset DTR</button>
                 </div>
@@ -143,3 +143,5 @@
         });
     </script>
 @endpush
+
+

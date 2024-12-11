@@ -17,7 +17,7 @@
                 class="form-control w-100"
             />
         </div>
-        <div class="col-sm-6 col-md-4 col-lg-3 ms-auto">
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 ms-auto">
             <button type="button " class="btn btn-warning w-100" onclick="location.href = '/admin-access/salary/record';"><i class="fa-solid fa-list me-2"></i>Salary Record</button>
         </div>
     </div>

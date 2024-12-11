@@ -27,7 +27,7 @@ class EmployeeDtr extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $branch, $authorizer, $authorizer2, $employeeData, $timeClick1 = 0, $timeClick2 = 0, $timeSched = [], $selectedMinute2 = "00", $selectedHour2 = "00", $selectedHour = "00", $selectedMinute = "00", $selectedPeriod = "am", $selectedPeriod2 = "am", $permanent_id, $dtrData = [], $dtrAll = [], $task, $position, $superAdminSwitch, $weekNumber = "1", $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $timeSetOut2, $timeSetOut, $timeSetIn, $timeSetIn2, $timeSet = [], $branch, $authorizer, $authorizer2, $employeeData, $timeClick1 = 0, $timeClick2 = 0, $timeSched = [], $selectedMinute2 = "00", $selectedHour2 = "00", $selectedHour = "00", $selectedMinute = "00", $selectedPeriod = "am", $selectedPeriod2 = "am", $permanent_id, $dtrData = [], $dtrAll = [], $task, $position, $superAdminSwitch, $weekNumber = "1", $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -61,6 +61,27 @@ class EmployeeDtr extends Component
 
     public function target(){
 
+    }
+
+    public function submitTimeSet(){
+        $validatedData = $this->validate([
+            'timeSetIn'   => ['required', 'regex:/^(0[1-9]|1[0-2]):[0-5][0-9] (AM|PM)$/i'],
+            'timeSetOut'  => ['required', 'regex:/^(0[1-9]|1[0-2]):[0-5][0-9] (AM|PM)$/i'],
+            'timeSetIn2'  => ['required', 'regex:/^(0[1-9]|1[0-2]):[0-5][0-9] (AM|PM)$/i'],
+            'timeSetOut2' => ['required', 'regex:/^(0[1-9]|1[0-2]):[0-5][0-9] (AM|PM)$/i'],
+        ], [
+            'regex' => 'The :attribute must be in the format hh:mm AM/PM (e.g., 05:20 PM).',
+        ]);
+        dd('baba');
+    }
+
+
+    public function clickSchedule(){
+        $hh = TimeSetting::latest()->first();
+        $this->timeSetIn = $hh->in;
+        $this->timeSetOut = $hh->out;
+        $this->timeSetIn2 = $hh->in2;
+        $this->timeSetOut2 = $hh->out2;
     }
 
     public function submitSched(){

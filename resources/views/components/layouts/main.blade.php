@@ -21,7 +21,11 @@
     <title>{{ $title ?? 'Page Title' }}</title>
     @livewireStyles
 </head>
-<body>
+<body onload="removeLoadingOverlay()">
+<!-- Loading Overlay -->
+<div id="loading-overlay">
+    Loading... Please wait
+</div>
 <div class="wrapper" x-data="{ marginLeftVar: 0 }">
     @if (session('success'))
         <script>
@@ -108,6 +112,20 @@
         ap.css("background-color", "");
         ap.css("color", "black");
     }
+</script>
+<script>
+    // Function to remove the loading overlay when page has fully loaded
+    function removeLoadingOverlay() {
+        const overlay = document.getElementById('loading-overlay');
+        if (overlay) {
+            overlay.style.display = 'none';
+        }
+    }
+
+    // Before page unload or reload, show the overlay again
+    window.addEventListener('beforeunload', function () {
+        document.getElementById('loading-overlay').style.display = 'flex';
+    });
 </script>
 @livewireScripts
 @stack('js')

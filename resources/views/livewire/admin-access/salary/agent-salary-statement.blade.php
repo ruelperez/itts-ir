@@ -1,4 +1,5 @@
 <div>
+    @include('modal.slip.dtr-content')
     <div class="row">
         <div class="col-sm-5 col-lg-3">
             <b>{{$interval->start}} - {{$interval->end}}</b>
@@ -20,7 +21,7 @@
             @foreach($data as $datas)
                 <tr>
                     <td class="p-3">
-                        {{$datas->fullname}}
+                        <p class="hover-text" data-bs-toggle="modal" data-bs-target="#showContent" wire:click="clickName({{$datas->user_id}})" >{{$datas->fullname}}</p>
                     </td>
                     <td class="p-3">
                         <i class="fa-solid fa-sliders" style="cursor: pointer"></i>

@@ -17,6 +17,8 @@ class Dtr extends Model
         'photo',
         'task',
         'branch',
+        'lateIn',
+        'earlyOut'
     ];
 
     use HasFactory;
