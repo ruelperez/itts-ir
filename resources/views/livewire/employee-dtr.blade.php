@@ -104,6 +104,46 @@
     </div>
     @script
     <script>
+        $wire.on('success', () => {
+            Swal.fire({
+                title: 'SUCCESS!',
+                text: 'Successfully Saved.',
+                icon: 'success',
+                allowOutsideClick: false, // Prevent closing by clicking outside
+                allowEscapeKey: false // Prevent closing with the escape key
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    location.reload();
+                }
+            });
+        });
+
+        $wire.on('failed', () => {
+            Swal.fire({
+                title: 'FAILED!',
+                text: '',
+                icon: 'error',
+                allowOutsideClick: false, // Prevent closing by clicking outside
+                allowEscapeKey: false // Prevent closing with the escape key
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    location.reload();
+                }
+            });
+        });
+        $wire.on('dtrNull', () => {
+            Swal.fire({
+                title: 'FAILED!',
+                text: 'Incom dtrNullName',
+                icon: 'error',
+                allowOutsideClick: false, // Prevent closing by clicking outside
+                allowEscapeKey: false // Prevent closing with the escape key
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    location.reload();
+                }
+            });
+        });
         $wire.on('remove-loading', (event) => {
             JsLoadingOverlay.hide();
         });

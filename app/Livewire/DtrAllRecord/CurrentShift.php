@@ -73,21 +73,46 @@ class CurrentShift extends Component
     }
 
     public function submitEdit(){
+        if ($this->timeIn1 != "early out"){
+            $this->validate([
+                'timeIn1' => ['nullable', 'date_format:Y-m-d H:i:s'],
+            ]);
+            if ($this->timeIn1 == ""){
+                $this->timeIn1 = null;
+            }
+        }
+        if ($this->timeIn2 != "early out"){
+            $this->validate([
+                'timeIn2' => ['nullable', 'date_format:Y-m-d H:i:s'],
+            ]);
+            if ($this->timeIn2 == ""){
+                $this->timeIn2 = null;
+            }
+        }
+        if ($this->timeOut1 != "early out"){
+            $this->validate([
+                'timeOut1' => ['nullable', 'date_format:Y-m-d H:i:s'],
+            ]);
+            if ($this->timeOut1 == ""){
+                $this->timeOut1 = null;
+            }
+        }
+        if ($this->timeOut2 != "early out"){
+            $this->validate([
+                'timeOut2' => ['nullable', 'date_format:Y-m-d H:i:s'],
+            ]);
+            if ($this->timeOut2 == ""){
+                $this->timeOut2 = null;
+            }
+        }
+
         $bn = DtrPermanent::find($this->ids);
-        $mn = Dtr::find($bn->dtr_id);
         try {
             $bn->in = $this->timeIn1;
             $bn->out = $this->timeOut1;
             $bn->in2 = $this->timeIn2;
             $bn->out2 = $this->timeOut2;
             $bn->save();
-
-            $mn->in = $this->timeIn1;
-            $mn->out = $this->timeOut1;
-            $mn->in2 = $this->timeIn2;
-            $mn->out2 = $this->timeOut2;
-            $mn->save();
-
 //            $lk = DtrPermanent::find($this->ids);
 //            $pp = $lk->in;
 //            $kk = $lk->out;

@@ -21,7 +21,11 @@ class DtrPermanent extends Model
         'task',
         'branch',
         'lateIn',
-        'earlyOut'
+        'earlyOut',
+        'schedIn',
+        'schedOut',
+        'schedIn2',
+        'schedOut2',
     ];
 
     use HasFactory;

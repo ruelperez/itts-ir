@@ -27,7 +27,7 @@ class EmployeeDtr extends Component
     use WithFileUploads;
 
     #[Validate('image|max:1024')] // 1MB Max
-    public $registrationSwitch, $timeSetOut2, $timeSetOut, $timeSetIn, $timeSetIn2, $timeSet = [], $branch, $authorizer, $authorizer2, $employeeData, $timeClick1 = 0, $timeClick2 = 0, $timeSched = [], $selectedMinute2 = "00", $selectedHour2 = "00", $selectedHour = "00", $selectedMinute = "00", $selectedPeriod = "am", $selectedPeriod2 = "am", $permanent_id, $dtrData = [], $dtrAll = [], $task, $position, $superAdminSwitch, $weekNumber = "1", $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $registrationSwitch, $timeSetOut2, $timeSetOut, $dtrNullName, $timeSetIn, $timeSetIn2, $timeSet = [], $branch, $authorizer, $authorizer2, $employeeData, $timeClick1 = 0, $timeClick2 = 0, $timeSched = [], $selectedMinute2 = "00", $selectedHour2 = "00", $selectedHour = "00", $selectedMinute = "00", $selectedPeriod = "am", $selectedPeriod2 = "am", $permanent_id, $dtrData = [], $dtrAll = [], $task, $position, $superAdminSwitch, $weekNumber = "1", $dtr_permanent_data, $designated_id, $dtr_data = [], $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
 
     public function render()
     {
@@ -72,16 +72,32 @@ class EmployeeDtr extends Component
         ], [
             'regex' => 'The :attribute must be in the format hh:mm AM/PM (e.g., 05:20 PM).',
         ]);
-        dd('baba');
+        try {
+            TimeSetting::create([
+                'in' => $this->timeSetIn,
+                'out' => $this->timeSetOut,
+                'in2' => $this->timeSetIn2,
+                'out2' => $this->timeSetOut2,
+                'user_id' => $this->user_id,
+                'fullname' => $this->fullname,
+                'photo' => $this->photo,
+            ]);
+            $this->dispatch('success');
+        }catch (\Exception $e){
+            $this->dispatch('failed');
+        }
     }
 
 
     public function clickSchedule(){
         $hh = TimeSetting::latest()->first();
-        $this->timeSetIn = $hh->in;
-        $this->timeSetOut = $hh->out;
-        $this->timeSetIn2 = $hh->in2;
-        $this->timeSetOut2 = $hh->out2;
+        if ($hh){
+            $this->timeSetIn = $hh->in;
+            $this->timeSetOut = $hh->out;
+            $this->timeSetIn2 = $hh->in2;
+            $this->timeSetOut2 = $hh->out2;
+        }
+
     }
 
     public function submitSched(){
@@ -191,8 +207,91 @@ class EmployeeDtr extends Component
     }
     public function submitWeek(){
         $bas = DtrPermanent::all();
-        try {
+//        CHECK IF HAS NULL
+        foreach ($bas as $bb){
+            if ($bb->in == "" or $bb->out == "" or $bb->out2 == "" or $bb->in2 == ""){
+                $this->dtrNullName = $bb->fullname;
+                $this->dispatch('dtrNull', $this->dtrNullName);
+            }
+        }
+        $hh = TimeSetting::latest()->first();
+        $in = Carbon::createFromFormat('H:i A', $hh->in); // Converts '10:00 PM' to Carbon instance
+        $out = Carbon::createFromFormat('H:i A', $hh->out); // Converts '10:00 PM' to Carbon instance
+        $in2 = Carbon::createFromFormat('H:i A', $hh->in2); // Converts '10:00 PM' to Carbon instance
+        $out2 = Carbon::createFromFormat('H:i A', $hh->out2); // Converts '10:00 PM' to Carbon instance
+
             foreach ($bas as $bax){
+//                LATE IN
+                // Convert $bax->in to a Carbon instance (only the time portion matters)
+                $baxInTime = Carbon::parse($bax->in)->format('H:i'); // Get only time part
+                $baxIn = Carbon::createFromFormat('H:i', $baxInTime); // Create Carbon instance for comparison
+
+                // Calculate the difference in minutes
+                $lateTime = $in->diffInMinutes($baxIn, false); // Negative if $baxIn is earlier than $in
+                // If the result is negative or less than 1 minute, set lateTime to 0
+                $lateTime = ($lateTime <= 0) ? 0 : $lateTime;
+
+                // Convert minutes to hours and minutes, formatted as H:i
+                $hours = floor($lateTime / 60);  // Total hours
+                $minutes = $lateTime % 60;       // Remaining minutes
+
+                // Format the late time as H:i (e.g., '00:00')
+                $late_in = sprintf('%02d:%02d', $hours, $minutes);
+
+//                LATE OUT
+
+                // Convert $bax->in to a Carbon instance (only the time portion matters)
+                $baxInTime = Carbon::parse($bax->out)->format('H:i'); // Get only time part
+                $baxIn = Carbon::createFromFormat('H:i', $baxInTime); // Create Carbon instance for comparison
+
+                // Calculate the difference in minutes
+                $lateTime = $baxIn->diffInMinutes($out, false); // Negative if $baxIn is earlier than $in
+                // If the result is negative or less than 1 minute, set lateTime to 0
+                $lateTime = ($lateTime <= 0) ? 0 : $lateTime;
+
+                // Convert minutes to hours and minutes, formatted as H:i
+                $hours = floor($lateTime / 60);  // Total hours
+                $minutes = $lateTime % 60;       // Remaining minutes
+
+                // Format the late time as H:i (e.g., '00:00')
+                $late_out = sprintf('%02d:%02d', $hours, $minutes);
+
+                //                LATE IN2
+
+                // Convert $bax->in to a Carbon instance (only the time portion matters)
+                $baxInTime = Carbon::parse($bax->in2)->format('H:i'); // Get only time part
+                $baxIn = Carbon::createFromFormat('H:i', $baxInTime); // Create Carbon instance for comparison
+
+                // Calculate the difference in minutes
+                $lateTime = $in2->diffInMinutes($baxIn, false); // Negative if $baxIn is earlier than $in
+                // If the result is negative or less than 1 minute, set lateTime to 0
+                $lateTime = ($lateTime <= 0) ? 0 : $lateTime;
+
+                // Convert minutes to hours and minutes, formatted as H:i
+                $hours = floor($lateTime / 60);  // Total hours
+                $minutes = $lateTime % 60;       // Remaining minutes
+
+                // Format the late time as H:i (e.g., '00:00')
+                $late_in2 = sprintf('%02d:%02d', $hours, $minutes);
+
+                //                LATE OUT2
+
+                // Convert $bax->in to a Carbon instance (only the time portion matters)
+                $baxInTime = Carbon::parse($bax->out2)->format('H:i'); // Get only time part
+                $baxIn = Carbon::createFromFormat('H:i', $baxInTime); // Create Carbon instance for comparison
+
+                // Calculate the difference in minutes
+                $lateTime = $baxIn->diffInMinutes($out2, false); // Negative if $baxIn is earlier than $in
+                // If the result is negative or less than 1 minute, set lateTime to 0
+                $lateTime = ($lateTime <= 0) ? 0 : $lateTime;
+
+                // Convert minutes to hours and minutes, formatted as H:i
+                $hours = floor($lateTime / 60);  // Total hours
+                $minutes = $lateTime % 60;       // Remaining minutes
+
+                // Format the late time as H:i (e.g., '00:00')
+                $late_out2 = sprintf('%02d:%02d', $hours, $minutes);
+dd($late_out2);
                 DtrContent::create([
                     'fullname' => $bax->fullname,
                     'in' => $bax->in,
@@ -205,6 +304,7 @@ class EmployeeDtr extends Component
                     'photo' => $bax->photo,
                     'task' => $bax->task,
                     'branch' => $bax->branch,
+//                    'lateIn' =>
                 ]);
             }
             foreach ($bas as $bax){
@@ -222,9 +322,9 @@ class EmployeeDtr extends Component
                 'fullname' => $this->fullname,
             ]);
             session()->flash('goodWeek', 'Successfully reset weekly DTR');
-        }catch (\Exception $e){
-            session()->flash('badWeek', 'Failed to reset weekly DTR');
-        }
+//        }catch (\Exception $e){
+//            session()->flash('badWeek', 'Failed to reset weekly DTR');
+//        }
 
     }
     public function clickReset(){

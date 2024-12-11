@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content" style="height: 400px;">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Set shift schedule</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit DTR</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -11,20 +11,24 @@
                         <h6>{{$dtrName}}</h6>
                     </div>
                     <div>
-                        <label class="form-label" for="form3Example3cg" style="margin-right: 3%;">Time in -</label>
+                        <label class="form-label" for="form3Example3cg" style="margin-right: 1%;">Time in -</label>
                         <input type="text" wire:model="timeIn1" @if(session()->has('goodSched')) disabled @endif>
                     </div>
-                    <div style="margin-top: 3%;">
-                        <label class="form-label" for="form3Example3cg" style="margin-right: 3%;">Time out -</label>
+                    @error('timeIn1') <span style="color: #8B0000">{{ $message }}</span> @enderror@error('timeIn1') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                    <div class="mt-4">
+                        <label class="form-label" for="form3Example3cg" style="margin-right: 1%;">Time out -</label>
                         <input type="text" wire:model="timeOut1" @if(session()->has('goodSched')) disabled @endif>
+                        @error('timeOut1') <span style="color: #8B0000">{{ $message }}</span> @enderror
                     </div>
-                    <div style="margin-top: 3%;">
-                        <label class="form-label" for="form3Example3cg" style="margin-right: 3%;">Time in (after lunch) -</label>
+                    <div class="mt-4">
+                        <label class="form-label" for="form3Example3cg" style="margin-right: 1%;">Time in (after lunch) -</label>
                         <input type="text" wire:model="timeIn2" @if(session()->has('goodSched')) disabled @endif>
+                        @error('timeIn2') <span style="color: #8B0000">{{ $message }}</span> @enderror
                     </div>
-                    <div style="margin-top: 3%;">
-                        <label class="form-label" for="form3Example3cg" style="margin-right: 3%;">Time out -</label>
+                    <div class="mt-4">
+                        <label class="form-label" for="form3Example3cg" style="margin-right: 1%;">Time out -</label>
                         <input type="text" wire:model="timeOut2" @if(session()->has('goodSched')) disabled @endif>
+                        @error('timeOut2') <span style="color: #8B0000">{{ $message }}</span> @enderror
                     </div>
                 </div>
             </div>
