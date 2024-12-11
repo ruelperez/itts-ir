@@ -205,14 +205,19 @@ class EmployeeDtr extends Component
         $data = DtrPermanent::find($id);
         $this->task = $data->task;
     }
-    public function submitWeek(){
+    public function submitWeek()
+    {
         $bas = DtrPermanent::all();
 //        CHECK IF HAS NULL
-        foreach ($bas as $bb){
-            if ($bb->in == "" or $bb->out == "" or $bb->out2 == "" or $bb->in2 == ""){
-                $this->dtrNullName = $bb->fullname;
-                $this->dispatch('dtrNull', $this->dtrNullName);
+        foreach ($bas as $bb) {
+            if ($bb->isEarlyOut == 0) {
+                if ($bb->in == "" or $bb->out == "" or $bb->out2 == "" or $bb->in2 == "") {
+                    $de = $bb->fullname;
+                    $this->dispatch('dtrNull', $de);
+                    return;
+                }
             }
+
         }
         $hh = TimeSetting::latest()->first();
         $in = Carbon::createFromFormat('H:i A', $hh->in); // Converts '10:00 PM' to Carbon instance
@@ -291,7 +296,7 @@ class EmployeeDtr extends Component
 
                 // Format the late time as H:i (e.g., '00:00')
                 $late_out2 = sprintf('%02d:%02d', $hours, $minutes);
-dd($late_out2);
+
                 DtrContent::create([
                     'fullname' => $bax->fullname,
                     'in' => $bax->in,
@@ -304,7 +309,16 @@ dd($late_out2);
                     'photo' => $bax->photo,
                     'task' => $bax->task,
                     'branch' => $bax->branch,
-//                    'lateIn' =>
+                    'lateIn' => $late_in,
+                    'lateIn2' => $late_in2,
+                    'lateOut' => $late_out,
+                    'lateOut2' => $late_out2,
+                    'isEarlyOut' => $bax->isEarlyOut,
+                    'schedIn' => $hh->in,
+                    'schedOut' => $hh->out,
+                    'schedIn2' => $hh->in2,
+                    'schedOut2' => $hh->out2,
+
                 ]);
             }
             foreach ($bas as $bax){

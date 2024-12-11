@@ -18,8 +18,10 @@ class AgentSalaryStatement extends Component
     {
         $jj = SalaryDateInterval::find($this->ids);
         $this->interval = $jj;
+
+// Format the dates
         $startDate = Carbon::createFromFormat('m/d/Y', $jj->start)->format('Y-m-d');
-        $endDate = Carbon::createFromFormat('m/d/Y', $jj->end)->format('Y-m-d');
+        $endDate = Carbon::createFromFormat('m/d/Y', $jj->end)->endOfDay()->format('Y-m-d H:i:s'); // End of day
         $this->getData($startDate, $endDate);
 //        $this->data = DtrContent::select('dtr_contents.user_id', 'users.fullname', DB::raw('MAX(dtr_contents.in) as latest_in'))
 //            ->join('users', 'dtr_contents.user_id', '=', 'users.id') // Join the users table
@@ -59,7 +61,7 @@ class AgentSalaryStatement extends Component
             ->whereRaw("STR_TO_DATE(dtr_contents.in, '%Y-%m-%d %H:%i:%s') BETWEEN ? AND ?", [$startDate, $endDate])
             ->groupBy('dtr_contents.user_id', 'users.fullname');
 
-        // Apply the search filter if it's not empty
+// Apply the search filter if it's not empty
         if ($this->search) {
             $query->where(function($query) {
                 $query->where('users.fullname', 'like', '%' . $this->search . '%')
@@ -67,7 +69,7 @@ class AgentSalaryStatement extends Component
             });
         }
 
-        // Get the data and assign it to the public property
+// Get the data and assign it to the public property
         $this->data = $query->get();
     }
 }

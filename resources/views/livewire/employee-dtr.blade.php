@@ -81,7 +81,7 @@
                             <td disabled>@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('h:i A') }} @endif</td>
                             <td>@if($data->out == null) @else {{Carbon\Carbon::parse($data->out)->format('h:i A') }} @endif</td>
                             <td>@if($data->in2 == null) @else {{Carbon\Carbon::parse($data->in2)->format('h:i A') }} @endif</td>
-                            <td>@if($data->out2 == null) @else {{Carbon\Carbon::parse($data->out2)->format('h:i A') }} @endif</td>
+                            <td>@if($data->out2 == null) @else {{Carbon\Carbon::parse($data->out2)->format('h:i A') }} @endif @if($data->isEarlyOut == 1)<b style="color: white; background-color: red;" class="px-2">Early out</b> @endif</td>
 {{--                            <td>--}}
 {{--                                @php--}}
 {{--                                    $hours = floor($data->minute / 60);--}}
@@ -131,10 +131,10 @@
                 }
             });
         });
-        $wire.on('dtrNull', () => {
+        $wire.on('dtrNull', (de) => {
             Swal.fire({
                 title: 'FAILED!',
-                text: 'Incom dtrNullName',
+                text: 'Have white space on '+ de,
                 icon: 'error',
                 allowOutsideClick: false, // Prevent closing by clicking outside
                 allowEscapeKey: false // Prevent closing with the escape key

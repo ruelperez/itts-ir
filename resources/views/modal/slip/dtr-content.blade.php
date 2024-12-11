@@ -1,8 +1,8 @@
 <div wire:ignore.self class="modal fade" id="showContent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Basic Salary Date Interval</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Complete DTR Report</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -16,6 +16,15 @@
                             <th scope="col">Out</th>
                             <th scope="col">In</th>
                             <th scope="col">Out</th>
+                            <th scope="col">late in</th>
+                            <th scope="col">late out</th>
+                            <th scope="col">late in</th>
+                            <th scope="col">late out</th>
+                            <th scope="col">Sched in</th>
+                            <th scope="col">Sched out</th>
+                            <th scope="col">Sched in</th>
+                            <th scope="col">Sched out</th>
+                            <th scope="col"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -33,6 +42,36 @@
                                 <td class="p-3">
                                     {{ \Carbon\Carbon::parse($datass->out2)->format('m/d/Y, (h:i A)') }}
                                 </td>
+
+                                <td class="p-3">
+                                    {{$datass->lateIn}}
+                                </td>
+                                <td class="p-3">
+                                    {{$datass->lateIn2}}
+                                </td>
+                                <td class="p-3">
+                                    {{$datass->lateOut}}
+                                </td>
+                                <td class="p-3">
+                                    {{$datass->lateOut2}}
+                                </td>
+
+                                <td class="p-3">
+                                    {{$datass->schedIn}}
+                                </td>
+                                <td class="p-3">
+                                    {{$datass->schedOut}}
+                                </td>
+                                <td class="p-3">
+                                    {{$datass->schedIn2}}
+                                </td>
+                                <td class="p-3">
+                                    {{$datass->schedOut2}}
+                                </td>
+                                <td class="p-3">
+                                    @if($datass->isEarlyOut == 1) <b style="color: white; background-color: red" class="px-2">Early out</b> @endif
+                                </td>
+
                             </tr>
                         @endforeach
                         </tbody>

@@ -21,13 +21,15 @@ class DtrContent extends Model
         'photo',
         'task',
         'branch',
-        'lateIn',
-        'earlyOut',
         'schedIn',
         'schedOut',
         'schedIn2',
         'schedOut2',
-        'isEarlyOut'
+        'isEarlyOut',
+         'lateIn',
+        'lateIn2',
+        'lateOut',
+        'lateOut2',
     ];
 
     use HasFactory;
