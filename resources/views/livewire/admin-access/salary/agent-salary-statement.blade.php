@@ -1,5 +1,6 @@
 <div>
     @include('modal.slip.dtr-content')
+    @include('modal.slip.paper-slip')
     <div class="row">
         <div class="col-sm-5 col-lg-3">
             <b>{{$interval->start}} - {{$interval->end}}</b>
@@ -24,7 +25,7 @@
                         <p class="hover-text" data-bs-toggle="modal" data-bs-target="#showContent" wire:click="clickName({{$datas->user_id}})" >{{$datas->fullname}}</p>
                     </td>
                     <td class="p-3">
-                        <i class="fa-solid fa-sliders" style="cursor: pointer"></i>
+                        <i class="fa-solid fa-sliders" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#paper"></i>
                     </td>
                 </tr>
             @endforeach
