@@ -299,6 +299,10 @@ class EmployeeDtr extends Component
 
                 $jk = Employee::where('user_id',$bax->user_id)
                     ->latest()->first();
+                $fhh = $jk->dailyRate;
+                if ($fhh == null or $fhh == ""){
+                    $fhh = 0;
+                }
 
                 DtrContent::create([
                     'fullname' => $bax->fullname,
@@ -321,7 +325,7 @@ class EmployeeDtr extends Component
                     'schedOut' => $hh->out,
                     'schedIn2' => $hh->in2,
                     'schedOut2' => $hh->out2,
-                    'dailyRate' => $jk->dailyRate,
+                    'dailyRate' => $fhh,
                 ]);
             }
             foreach ($bas as $bax){
