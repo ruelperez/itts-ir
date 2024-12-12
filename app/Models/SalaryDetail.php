@@ -18,4 +18,8 @@ class SalaryDetail extends Model
         'ot',
         'other',
     ];
+
+    public function employee(){
+        return $this->belongsTo(Employee::class);
+    }
 }

@@ -2,7 +2,7 @@
     @include('modal.slip.dtr-content')
     @include('modal.slip.paper-slip')
     <div class="row mb-4">
-        <div class="col-sm-8 col-md-6 col-lg-4 col-xl-3">
+        <div class="col-sm-6 col-md-4 col-lg-4 col-xl-3">
             <select class="form-select" aria-label="Default select example" wire:model.live="selectDate">
                 <option value="">Select date</option>
                 @foreach($dates as $date)
@@ -10,7 +10,7 @@
                 @endforeach
             </select>
         </div>
-        <div class="mb-3 col-sm-8 col-md-6 col-lg-5 col-xl-5">
+        <div class="mt-sm-0 col-sm-6 col-md-8 col-lg-6 col-xl-4 mt-2">
             <input
                 type="text"
                 wire:model.live="search"
@@ -18,8 +18,11 @@
                 class="form-control w-100"
             />
         </div>
-        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 ms-auto">
-            <button type="button " class="btn btn-warning w-100" onclick="location.href = '/admin-access/salary/record';"><i class="fa-solid fa-list me-2"></i>Salary Record</button>
+        <div class="col-sm-6 col-md-4  col-xl-2 mt-2 mt-xl-0">
+            <button type="button " class="btn btn-warning w-100" onclick="location.href = '/admin-access/salary/record';"><i class="fa-solid fa-list me-2"></i>Salary Date</button>
+        </div>
+        <div class="col-sm-6 col-md-4  col-xl-3 mt-2 mt-xl-0">
+            <button type="button " class="btn btn-dark w-100" onclick="location.href = '/admin-access/salary/name';"><i class="fa-solid fa-money-bill me-2"></i>Employee Pay Rate</button>
         </div>
     </div>
 <hr>

@@ -56,5 +56,9 @@ class Employee extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function salary_detail(){
+        return $this->hasMany(SalaryDetail::class);
+    }
+
     use HasFactory;
 }
