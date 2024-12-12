@@ -137,8 +137,53 @@ class StaffDirectory extends Component
         'nextPage'=> 'nextPage',
         'status' => 'status',
         'delete' => 'delete',
+        'openDetailsStaff' => 'openDetailsStaff',
     ];
 
+    public function openDetailsStaff($id){
+        $this->ids = $id;
+        $pp = \App\Models\Employee::find($id);
+        $this->branch = $pp->branch;
+        $this->fname = $pp->fname;
+        $this->lname = $pp->lname;
+        $this->mi = $pp->mi;
+        $this->mname = $pp->mname;
+        $this->suffix = $pp->suffix;
+        $this->age = $pp->age;
+        $this->phone_number = $pp->phone_number;
+        $this->dob = $pp->dob;
+        $this->gender_preference = $pp->gender_preference;
+        $this->civil_status = $pp->civil_status;
+        $this->religion = $pp->religion;
+        $this->personal_email = $pp->personal_email;
+        $this->current_house = $pp->current_house;
+        $this->current_street = $pp->current_street;
+        $this->current_brgy = $pp->current_brgy;
+        $this->current_city = $pp->current_city;
+        $this->current_working_email = $pp->current_working_email;
+        $this->permanent_house = $pp->permanent_house;
+        $this->permanent_street = $pp->permanent_street;
+        $this->permanent_brgy = $pp->permanent_brgy;
+        $this->permanent_city = $pp->permanent_city;
+        $this->sss = $pp->sss;
+        $this->philhealth = $pp->philhealth;
+        $this->tin = $pp->tin;
+        $this->hire_date = $pp->hire_date;
+        $this->yot = $pp->yot;
+        $this->designation = $pp->designation;
+        $this->department = $pp->department;
+        $this->contact_number = $pp->contact_number;
+        $this->address = $pp->address;
+        $this->relationship = $pp->relationship;
+        $this->full_name = $pp->fullname;
+        $this->id_user = $pp->id_user;
+        $this->salary = $pp->dailyRate;
+        if ($this->department == "" or $this->department == null){
+            $this->department = "Admin - Production";
+            $this->designation = "Agent/ Sale Associate";
+        }
+        $this->dispatch('show-detail-staff');
+    }
     public function updateForm(){
         $this->ng = 1;
         $this->is_success = false;

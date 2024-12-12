@@ -46,7 +46,8 @@
                 <tbody>
                 @php $i=0; @endphp
                 @foreach($staffData as $data)
-                    <tr onmouseover="hoverStaff({{$data->id}})" onmouseout="hoverOutStaff({{$data->id}})" class="ngh">
+                    <tr x-data
+                        @dblclick="$dispatch('openDetailsStaff', { id: {{ $data->id }} })"  onmouseover="hoverStaff({{$data->id}})" onmouseout="hoverOutStaff({{$data->id}})" class="ngh">
                         <td>
                             {{$data->id_user}}
                         </td>
@@ -89,11 +90,11 @@
                         <td>
                             <i class="fa-solid fa-qrcode" onclick="window.open('/qr-code/create/{{$data->id_user}}', '_blank');" style="cursor: pointer"></i>
                         </td>
-                        <td>
-                            <input class="form-check-input" type="checkbox" wire:model.live="checkBox"
-                                   value="{{$data->id}}" id="flexCheckDefault{{$data->id}}"
-                                   style="font-size: 18px; cursor: pointer">
-                        </td>
+{{--                        <td>--}}
+{{--                            <input class="form-check-input" type="checkbox" wire:model.live="checkBox"--}}
+{{--                                   value="{{$data->id}}" id="flexCheckDefault{{$data->id}}"--}}
+{{--                                   style="font-size: 18px; cursor: pointer">--}}
+{{--                        </td>--}}
                     </tr>
                     @php $i++; @endphp
                 @endforeach
@@ -164,6 +165,11 @@
 </div>
 @push('js')
     <script>
+        document.addEventListener('show-detail-staff', function () {
+            const positionModal = new bootstrap.Modal(document.getElementById('viewDetail'));
+            positionModal.show();
+        });
+
         function delStaffBtn(){
             Swal.fire({
                 title: 'Are you sure?',
