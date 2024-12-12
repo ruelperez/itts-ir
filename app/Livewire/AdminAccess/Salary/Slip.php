@@ -12,7 +12,7 @@ use Livewire\Component;
 
 class Slip extends Component
 {
-    public $users, $search, $status = '1', $data = [], $selectDate, $dates;
+    public $users, $search, $status = '1', $data = [], $dataContents = [], $ids, $fullname, $selectDate, $dates;
 
     public function render()
     {
@@ -38,6 +38,22 @@ class Slip extends Component
         return view('livewire.admin-access.salary.slip');
     }
 
+    public function clickName($userID)
+    {
+        $this->fullname = User::find($userID)->fullname;
+
+        // Retrieve the interval based on the IDs property
+        $jj = SalaryDateInterval::find($this->selectDate);
+
+        // Convert start and end dates to 'Y-m-d H:i:s' format
+        $startDate = Carbon::createFromFormat('m/d/Y', $jj->start)->startOfDay()->format('Y-m-d H:i:s');
+        $endDate = Carbon::createFromFormat('m/d/Y', $jj->end)->endOfDay()->format('Y-m-d H:i:s');
+        // Retrieve records from dtr_contents table that match the conditions
+        $this->dataContents = DB::table('dtr_contents')
+            ->whereBetween('in', [$startDate, $endDate]) // Filter records within the date range
+            ->where('user_id', $userID) // Match the given user ID
+            ->get();
+    }
     public function mount(){
         $fe = User::find(auth()->user()->id)->user_access->first();
         $authorizer = $fe->paySlip;

@@ -21,10 +21,10 @@
             <tbody>
             @foreach($data as $datas)
                 <tr>
-                    <td class="p-3">
+                    <td>
                         <p class="hover-text" data-bs-toggle="modal" data-bs-target="#showContent" wire:click="clickName({{$datas->user_id}})" >{{$datas->fullname}}</p>
                     </td>
-                    <td class="p-3">
+                    <td>
                         <i class="fa-solid fa-sliders" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#paper"></i>
                     </td>
                 </tr>
