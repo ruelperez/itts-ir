@@ -1,14 +1,13 @@
 <div>
     <div class="row mb-4">
-        <div class="mb-3 col-sm-4 col-md-2 col-lg-3 col-xl-2">
-            <select wire:model.live="status" id="status" class="form-control w-100">
-                <option value="all">All</option>
-                <option value="1">Active</option>
-                <option value="0">Inactive</option>
+        <div class="col-sm-8 col-md-6 col-lg-4 col-xl-3">
+            <select class="form-select" aria-label="Default select example" wire:model.live="selectDate">
+                <option value="">Select date</option>
+                @foreach($dates as $date)
+                    <option value="{{$date->id}}">{{$date->start}} - {{$date->end}}</option>
+                @endforeach
             </select>
         </div>
-
-        <!-- Search Bar -->
         <div class="mb-3 col-sm-8 col-md-6 col-lg-5 col-xl-5">
             <input
                 type="text"
@@ -22,42 +21,25 @@
         </div>
     </div>
 <hr>
-    <div class="table-responsive mt-3" style="font-size: 15px;">
-        <table class="table table-striped">
+    <div class="table-responsive mt-lg-4">
+        <table class="table table-hover">
             <thead>
             <tr>
-                <th class="col-xl-5">Full name</th>
-                <th>Daily rate</th>
-                <th>Status</th>
-                <th>Pay slip</th>
+                <th scope="col">Name</th>
+                <th scope="col">Pay slip</th>
             </tr>
             </thead>
             <tbody>
-            @forelse ($users as $user)
-                @foreach ($user->employee as $directory)
-                    <tr>
-                        <td>
-                            <a href="/admin-access/salary/record/{{ $user->id }}" style="cursor: pointer; text-decoration: none; color: inherit;" onmouseover="this.style.color='blue'; this.style.textDecoration='underline';"
-                               onmouseout="this.style.color='black'; this.style.textDecoration='none';">
-                                {{ $user->fullname }}
-                            </a>
-                        </td>
-                        <td>
-                            {{ $directory->dailyRate ? $directory->dailyRate : 'n/a' }}
-                        </td>
-                        <td class="col-lg-2">
-                            @if($directory->status == 1) <button style="background-color: #C4FFB8; color: darkgreen; border: none">Active</button> @elseif($directory->status == 0) <button style="background-color: #FFCFCF; color: red; border: none">Inactive</button> @else {{$directory->status}} @endif
-                        </td>
-                        <td>
-                            <i class="fa-regular fa-rectangle-list" style="cursor: pointer"></i>
-                        </td>
-                    </tr>
-                @endforeach
-            @empty
+            @foreach($data as $datas)
                 <tr>
-                    <td colspan="3">No users found.</td>
+                    <td class="p-3">
+                        <p class="hover-text" data-bs-toggle="modal" data-bs-target="#showContent" wire:click="clickName({{$datas->user_id}})" >{{$datas->fullname}}</p>
+                    </td>
+                    <td class="p-3">
+                        <i class="fa-solid fa-sliders" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#paper"></i>
+                    </td>
                 </tr>
-            @endforelse
+            @endforeach
             </tbody>
         </table>
     </div>
