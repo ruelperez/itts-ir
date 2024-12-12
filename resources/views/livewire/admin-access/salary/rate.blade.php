@@ -2,7 +2,7 @@
     @include('modal.slip.add-rate')
     <div class="row mb-3">
         <div class="col-sm-6 col-md-4 col-lg-4 col-xl-3">
-           Employee Daily Rate
+           Employee Salary Rate (Per Day)
         </div>
     </div>
     <div class="d-flex">
@@ -21,11 +21,13 @@
                 <th scope="col">Holiday</th>
                 <th scope="col">Overtime</th>
                 <th scope="col">Other</th>
+                <th scope="col">Total</th>
             </tr>
             </thead>
             <tbody>
             @php $n=0; @endphp
             @foreach($data as $datas)
+                @php $b=0; @endphp
                 <tr @if($n >= 1) class="text-muted" @else class="fw-bold" @endif >
                     <td>
                         {{$datas->updated_at->format('m-d-Y (h:i A)')}}
@@ -48,8 +50,14 @@
                     <td>
                         {{$datas->other}}
                     </td>
+                    <td>
+                        @php
+                            $b = $datas->basic + $datas->nightDiff + $datas->allowance + $datas->holiday + $datas->ot + $datas->other;
+                        @endphp
+                        {{$b}}
+                    </td>
                     @if($n >= 1)
-                       
+
                     @else
                         <td>
                             <b style="background-color: green; color: white;" class="px-2">Active</b>

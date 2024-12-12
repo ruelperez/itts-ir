@@ -18,11 +18,11 @@
                 class="form-control w-100"
             />
         </div>
-        <div class="col-sm-6 col-md-4  col-xl-2 mt-2 mt-xl-0">
+        <div class="col-sm-6 col-md-4  col-xl-2 mt-3 mt-xl-0">
             <button type="button " class="btn btn-warning w-100" onclick="location.href = '/admin-access/salary/record';"><i class="fa-solid fa-list me-2"></i>Salary Date</button>
         </div>
-        <div class="col-sm-6 col-md-4  col-xl-3 mt-2 mt-xl-0">
-            <button type="button " class="btn btn-dark w-100" onclick="location.href = '/admin-access/salary/name';"><i class="fa-solid fa-money-bill me-2"></i>Employee Pay Rate</button>
+        <div class="col-sm-6 col-md-4  col-xl-3 mt-3 mt-xl-0">
+            <button type="button " class="btn btn-dark w-100" onclick="location.href = '/admin-access/salary/name';"><i class="fa-solid fa-money-bill me-2"></i>Employee Daily Rate</button>
         </div>
     </div>
 <hr>
