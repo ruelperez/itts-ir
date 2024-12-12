@@ -5,7 +5,7 @@
                 <h5 class="modal-title">{{ucwords($fname)}} {{ucwords($mname)}} {{ucwords($lname)}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" id="formClose" aria-label="Close"></button>
             </div>
-            <div style="color: white; padding: 15px 40px; border-radius: 2%;" class="mt-2">
+            <div style="color: black; padding: 15px 40px; border-radius: 2%;" class="mt-2">
                 <form wire:submit.prevent="submitForm" class="px-2 pt-1 pb-5" >
                     <fieldset @if($is_success == true) disabled @endif>
                         <div class="row g-3 align-items-center">
