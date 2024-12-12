@@ -31,14 +31,13 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col"></th>
+                    <th scope="col">ID</th>
                     <th scope="col">Fullname</th>
                     <th scope="col">Work email</th>
-                    <th scope="col">Phone number</th>
-                    <th scope="col">ID</th>
-                    <th scope="col">Date of birth</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">DOB</th>
                     <th scope="col">Position</th>
-                    <th scope="col">Department</th>
+                    <th scope="col">Depart.</th>
 {{--                    <th scope="col">Branch</th>--}}
                     <th scope="col">Act/Inact</th>
                     <th scope="col">QR</th>
@@ -49,20 +48,14 @@
                 @foreach($staffData as $data)
                     <tr onmouseover="hoverStaff({{$data->id}})" onmouseout="hoverOutStaff({{$data->id}})" class="ngh">
                         <td>
-                            {{$data->id}}
-                        </td>
-                        <td>
-                            {{$data->user_id}}
-                        </td>
-                        <td>
                             {{$data->id_user}}
                         </td>
-                        <td class="text-end pe-4">
-                            <div class="profile-picture-staff">
-                                <img src="{{asset('photos/photos/'.$data->photo)}}" alt="Profile Picture">
-                                @if($data->status == 1) <span class="status-indicator"></span> @endif
-                            </div>
-                        </td>
+{{--                        <td class="text-end pe-4">--}}
+{{--                            <div class="profile-picture-staff">--}}
+{{--                                <img src="{{asset('photos/photos/'.$data->photo)}}" alt="Profile Picture">--}}
+{{--                                @if($data->status == 1) <span class="status-indicator"></span> @endif--}}
+{{--                            </div>--}}
+{{--                        </td>--}}
                         <td>
                             {{ucwords($data->fname.' '.$data->mi.' '.$data->lname)}}
                         </td>
@@ -71,9 +64,6 @@
                         </td>
                         <td>
                             {{$data->phone_number}}
-                        </td>
-                        <td>
-                            {{$data->id_user}}
                         </td>
                         <td>
                             {{$data->dob}}
