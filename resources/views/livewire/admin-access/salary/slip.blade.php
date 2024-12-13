@@ -10,7 +10,7 @@
                 @endforeach
             </select>
         </div>
-        <div class="mt-sm-0 col-sm-6 col-md-8 col-lg-6 col-xl-4 mt-2">
+        <div class="mt-sm-0 col-sm-6 col-md-8 col-lg-6 col-xl-5 mt-2">
             <input
                 type="text"
                 wire:model.live="search"
@@ -18,11 +18,14 @@
                 class="form-control w-100"
             />
         </div>
-        <div class="col-sm-6 col-md-4  col-xl-2 mt-3 mt-xl-0">
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mt-3 mt-xl-0">
             <button type="button " class="btn btn-warning w-100" onclick="location.href = '/admin-access/salary/record';"><i class="fa-solid fa-list me-2"></i>Salary Date</button>
         </div>
-        <div class="col-sm-6 col-md-4  col-xl-3 mt-3 mt-xl-0">
-            <button type="button " class="btn btn-dark w-100" onclick="location.href = '/admin-access/salary/name';"><i class="fa-solid fa-money-bill me-2"></i>Employee Daily Rate</button>
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mt-3 mt-xl-0">
+            <button type="button " class="btn btn-dark w-100" onclick="location.href = '/admin-access/salary/name';"><i class="fa-solid fa-user me-2"></i>Daily Rate</button>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mt-3 mt-xl-3">
+            <button type="button " class="btn btn-primary w-100" onclick="location.href = '/admin-access/salary/daily-dtr';"><i class="fa-solid fa-business-time me-2"></i>Daily DTR</button>
         </div>
     </div>
 <hr>

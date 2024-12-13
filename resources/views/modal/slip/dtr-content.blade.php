@@ -72,6 +72,9 @@
                                     {{$datass->latest_total}}
                                 </td>
                                 <td class="p-3">
+                                    {{$datass->totalLate}}
+                                </td>
+                                <td class="p-3">
                                     @if($datass->isEarlyOut == 1) <b style="color: white; background-color: red" class="px-2">Early out</b> @endif
                                 </td>
                             </tr>
