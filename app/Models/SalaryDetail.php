@@ -17,7 +17,8 @@ class SalaryDetail extends Model
         'holiday',
         'ot',
         'other',
-        'total'
+        'total',
+        'user_id'
     ];
 
     public function employee(){

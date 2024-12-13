@@ -12,8 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('dtr_contents', function (Blueprint $table) {
-            $table->dropColumn('lateIn'); // Remove the column
-            $table->dropColumn('earlyOut'); // Remove the column
+            $table->dropColumn('sss'); // Remove the column
+            $table->dropColumn('ph'); // Remove the column
+            $table->dropColumn('ca'); // Remove the column
+            $table->dropColumn('lateDeduction'); // Remove the column
+            $table->dropColumn('totaDeduction'); // Remove the column
         });
     }
 

@@ -51,10 +51,7 @@
                         {{$datas->other}}
                     </td>
                     <td>
-                        @php
-                            $b = $datas->basic + $datas->nightDiff + $datas->allowance + $datas->holiday + $datas->ot + $datas->other;
-                        @endphp
-                        {{$b}}
+                        {{$datas->total}}
                     </td>
                     @if($n >= 1)
 

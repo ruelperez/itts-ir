@@ -48,11 +48,23 @@ class Slip extends Component
         // Convert start and end dates to 'Y-m-d H:i:s' format
         $startDate = Carbon::createFromFormat('m/d/Y', $jj->start)->startOfDay()->format('Y-m-d H:i:s');
         $endDate = Carbon::createFromFormat('m/d/Y', $jj->end)->endOfDay()->format('Y-m-d H:i:s');
+
         // Retrieve records from dtr_contents table that match the conditions
         $this->dataContents = DB::table('dtr_contents')
             ->whereBetween('in', [$startDate, $endDate]) // Filter records within the date range
             ->where('user_id', $userID) // Match the given user ID
             ->get();
+
+        // Retrieve the latest total column value from salary_details table
+        $latestSalaryDetail = DB::table('salary_details')
+            ->where('user_id', $userID)
+            ->latest('created_at') // Sort by latest created_at
+            ->value('total'); // Retrieve only the 'total' column
+
+        // Append the latest total to the dataContents for display
+        foreach ($this->dataContents as $key => $data) {
+            $this->dataContents[$key]->latest_total = $latestSalaryDetail ?? 0; // Default to 0 if no total found
+        }
     }
     public function mount(){
         $fe = User::find(auth()->user()->id)->user_access->first();

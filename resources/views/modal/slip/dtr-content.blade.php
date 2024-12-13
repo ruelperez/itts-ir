@@ -16,16 +16,16 @@
                             <th scope="col">Out</th>
                             <th scope="col">In</th>
                             <th scope="col">Out</th>
+                            <th scope="col">Late in</th>
+                            <th scope="col">Early out</th>
+                            <th scope="col">Late in</th>
+                            <th scope="col">Early out</th>
+                            <th scope="col">Sched in</th>
+                            <th scope="col">Sched out</th>
+                            <th scope="col">Sched in</th>
+                            <th scope="col">Sched out</th>
                             <th scope="col">Salary</th>
-                            <th scope="col">Late in</th>
-                            <th scope="col">Early out</th>
-                            <th scope="col">Late in</th>
-                            <th scope="col">Early out</th>
-                            <th scope="col">Sched in</th>
-                            <th scope="col">Sched out</th>
-                            <th scope="col">Sched in</th>
-                            <th scope="col">Sched out</th>
-                            <th scope="col"></th>
+                            <th scope="col">Total (Late/early) </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -43,11 +43,6 @@
                                 <td class="p-3">
                                     {{ \Carbon\Carbon::parse($datass->out2)->format('m/d/Y, (h:i A)') }}
                                 </td>
-
-                                <td class="p-3">
-                                    {{$datass->dailyRate}}
-                                </td>
-
                                 <td class="p-3">
                                     {{$datass->lateIn}}
                                 </td>
@@ -72,6 +67,9 @@
                                 </td>
                                 <td class="p-3">
                                     {{$datass->schedOut2}}
+                                </td>
+                                <td class="p-3">
+                                    {{$datass->latest_total}}
                                 </td>
                                 <td class="p-3">
                                     @if($datass->isEarlyOut == 1) <b style="color: white; background-color: red" class="px-2">Early out</b> @endif

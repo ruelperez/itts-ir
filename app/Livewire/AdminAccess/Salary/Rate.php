@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class Rate extends Component
 {
-    public $data = [], $search, $empID, $name, $basic, $nightDiff, $allowance, $holiday, $ot, $other;
+    public $data = [], $search, $empUserId, $empID, $name, $basic, $nightDiff, $allowance, $holiday, $ot, $other;
 
     public function render()
     {
@@ -22,10 +22,12 @@ class Rate extends Component
     public function mount($id){
         $this->empID = $id;
         $this->name = Employee::find($id)->employeeFullname;
+        $this->empUserId = Employee::find($id)->user_id;
     }
 
     public function submit(){
         $validatedData = $this->validate();
+        $total = $this->basic + $this->nightDiff + $this->allowance + $this->holiday + $this->ot + $this->other;
         try {
             SalaryDetail::create([
                 'employee_id' => $this->empID,
@@ -35,6 +37,8 @@ class Rate extends Component
                 'holiday' => $this->holiday,
                 'ot' => $this->ot,
                 'other' => $this->other,
+                'total' => $total,
+                'user_id' => $this->empUserId,
             ]);
             $this->dispatch('success');
         }catch (\Exception $e){
