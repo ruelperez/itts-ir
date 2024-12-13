@@ -297,6 +297,23 @@ class EmployeeDtr extends Component
                 // Format the late time as H:i (e.g., '00:00')
                 $late_out2 = sprintf('%02d:%02d', $hours, $minutes);
 
+
+                // Compute total late time
+                $totalMinutes = 0;
+
+// Add all late times to total minutes
+                $totalMinutes += Carbon::parse($late_in)->hour * 60 + Carbon::parse($late_in)->minute;
+                $totalMinutes += Carbon::parse($late_out)->hour * 60 + Carbon::parse($late_out)->minute;
+                $totalMinutes += Carbon::parse($late_in2)->hour * 60 + Carbon::parse($late_in2)->minute;
+                $totalMinutes += Carbon::parse($late_out2)->hour * 60 + Carbon::parse($late_out2)->minute;
+
+// Convert total minutes back to H:i format
+                $totalHours = floor($totalMinutes / 60); // Total hours
+                $remainingMinutes = $totalMinutes % 60; // Remaining minutes
+
+// Format total late time as H:i
+                $total_late = sprintf('%02d:%02d', $totalHours, $remainingMinutes);
+
                 $jk = Employee::where('user_id',$bax->user_id)
                     ->latest()->first();
                 $fhh = $jk->dailyRate;
@@ -326,6 +343,7 @@ class EmployeeDtr extends Component
                     'schedIn2' => $hh->in2,
                     'schedOut2' => $hh->out2,
                     'dailyRate' => $fhh,
+                    'totalLate' => $total_late,
                 ]);
             }
             foreach ($bas as $bax){

@@ -30,6 +30,7 @@ class DtrContent extends Model
         'lateIn2',
         'lateOut',
         'lateOut2',
+        'totalLate'
     ];
 
     use HasFactory;
