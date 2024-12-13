@@ -27,6 +27,7 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @php $num = 0; @endphp
                         @foreach($dataContents as $datass)
                             <tr>
                                 <td class="p-3">
@@ -68,8 +69,20 @@
                                     {{-- Assuming you want to show total pay here --}}
                                     {{$datass->latest_total - $datass->total_deduction}}
                                 </td>
+                                @php
+                                    $hm = $datass->latest_total - $datass->total_deduction;
+                                    $num += $hm;
+                                @endphp
                             </tr>
                         @endforeach
+                        <tr>
+                            <td colspan="10">
+
+                            </td>
+                            <td colspan="2"  class="text-center" style="font-size: 16px; background-color: black; color: white">
+                                <b>NET PAY - ₱{{$num}}</b>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
