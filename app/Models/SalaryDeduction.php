@@ -15,5 +15,10 @@ class SalaryDeduction extends Model
         'ca',
         'lateDeduction',
         'totalDeduction',
+        'dtr_content_id'
     ];
+
+    public function dtr_content(){
+        return $this->belongsTo(DtrContent::class);
+    }
 }

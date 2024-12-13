@@ -34,4 +34,8 @@ class DtrContent extends Model
     ];
 
     use HasFactory;
+
+    public function salary_deduction(){
+        return $this->hasMany(SalaryDeduction::class);
+    }
 }
