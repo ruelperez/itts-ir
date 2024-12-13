@@ -333,6 +333,7 @@
                                                 <option value="Posted / Pending Result">Posted / Pending Result</option>
                                                 <option value="Posted / Executed">Posted / Executed</option>
                                             @endif
+                                            <option value="Callback For Transfer">Callback For Transfer</option>
                                                 <option value="DQ By Manager">DQ By Manager</option>
                                                 <option value="DQ Due to Risk">DQ Due to Risk</option>
                                                 <option value="Returned - Felony">Returned - Felony</option>
