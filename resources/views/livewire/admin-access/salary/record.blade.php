@@ -37,9 +37,13 @@
         <div class="mt-4 mt-sm-5 order-lg-1 col-lg-7 mt-lg-0">
             <ul class="list-group list-group-flush">
                 @foreach($data as $datas)
+{{--                    <li class="list-group-item">--}}
+{{--                        <p class="hover-text"--}}
+{{--                           onclick="location.href = '/admin-access/salary/agent-salary-statement/{{$datas->id}}';">{{$datas->start}}--}}
+{{--                            - {{$datas->end}}</p>--}}
+{{--                    </li>--}}
                     <li class="list-group-item">
-                        <p class="hover-text"
-                           onclick="location.href = '/admin-access/salary/agent-salary-statement/{{$datas->id}}';">{{$datas->start}}
+                        <p>{{$datas->start}}
                             - {{$datas->end}}</p>
                     </li>
                 @endforeach

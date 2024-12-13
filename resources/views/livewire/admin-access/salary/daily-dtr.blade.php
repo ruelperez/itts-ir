@@ -1,4 +1,6 @@
 <div>
+    @include('modal.slip.deduct')
+    @include('modal.slip.view-more')
 {{--    @include('modal.news-update.show-photo')--}}
 {{--    @include('modal.dtr_record.dtrRecord')--}}
     <div class="mb-4">
@@ -31,15 +33,15 @@
                 @endfor
             </select>
         </div>
-        <div class="col-12 col-sm-6 col-lg-3 col-xl-3 mt-2 mt-lg-0">
-            <select class="form-select" aria-label="Default select example" wire:model="role">
-                <option value="all">All</option>
-                <option value="Agent">Agent</option>
-                <option value="Admin">Admin</option>
-                <option value="task executor">Task Executor</option>
-            </select>
-        </div>
-        <div class="text-start mt-4 col-4">
+{{--        <div class="col-12 col-sm-6 col-lg-3 col-xl-3 mt-2 mt-lg-0">--}}
+{{--            <select class="form-select" aria-label="Default select example" wire:model="role">--}}
+{{--                <option value="all">All</option>--}}
+{{--                <option value="Agent">Agent</option>--}}
+{{--                <option value="Admin">Admin</option>--}}
+{{--                <option value="task executor">Task Executor</option>--}}
+{{--            </select>--}}
+{{--        </div>--}}
+        <div class="text-start mt-4 mt-lg-2 col-sm-4 col-lg-3">
             <i class="fa-solid fa-rotate" style="font-size: 20px; cursor: pointer" id="generateButton"></i>
         </div>
     </div>
@@ -47,143 +49,93 @@
         <div class="col-6">
             <b style="font-size: 15px; ">{{$month}}-{{$day}}-{{$year}}</b>
         </div>
-        <div class="col-6 text-end">
-            <i class="fa-solid fa-file-pdf icon-pdf" onclick="window.open('/pdf/daily-shift/{{$month}}/{{$day}}/{{$year}}/{{$role}}', '_blank');"></i>
-        </div>
     </div>
-    <div class="table-responsive mt-4">
-        <table class="table table-hover">
+    <div class="table-responsive" style="font-size: 13px;">
+        <table class="table table-hover" >
             <thead>
             <tr>
-                <th scope="col">Fullname</th>
-                {{--                            <th scope="col">Date</th>--}}
-                {{--                            <th scope="col">Day</th>--}}
-                <th scope="col">Time in</th>
-                <th scope="col">Time out</th>
-                <th scope="col">Time in</th>
-                <th scope="col">Time out</th>
-                {{--                <th scope="col">Total hour</th>--}}
-                {{--                <th scope="col">Site</th>--}}
-                @if($role == "task executor")
-                    <th scope="col">Task</th>
-                @endif
+                <th scope="col" class="bg-success text-white">Name</th>
+                <th scope="col" class="bg-success text-white">In</th>
+                <th scope="col" class="bg-success text-white">Out</th>
+                <th scope="col" class="bg-success text-white">In</th>
+                <th scope="col" class="bg-success text-white">Out</th>
+                <th scope="col" class="bg-warning text-dark">Late in</th>
+                <th scope="col" class="bg-warning text-dark">Early out</th>
+                <th scope="col" class="bg-warning text-dark">Late in</th>
+                <th scope="col" class="bg-warning text-dark">Early out</th>
+                <th scope="col" class="bg-warning text-dark">Total (Late/early) </th>
+                <th scope="col" class="bg-primary text-white">Rate</th>
+                <th scope="col" class="bg-danger text-white">Total deduct.</th>
+                <th scope="col" class="bg-info text-dark">Total Pay</th>
+{{--                <th scope="col">Sched in</th>--}}
+{{--                <th scope="col">Sched in</th>--}}
+{{--                <th scope="col">Sched out</th>--}}
+{{--                <th scope="col">Sched in</th>--}}
+{{--                <th scope="col">Sched out</th>--}}
 
             </tr>
             </thead>
             <tbody>
-            @foreach($dtrData as $data)
-                @if($role == "all")
-                    @if(Carbon\Carbon::parse($data->in)->format('Y') == $year and Carbon\Carbon::parse($data->in)->format('m') == $month and Carbon\Carbon::parse($data->in)->format('d') == $day)
-                        <tr>
-                            <td>{{ucwords($data->fullname)}}</td>
-                            {{--                                    <td>{{Carbon\Carbon::parse($data->in)->format('M/d/Y')}}</td>--}}
-                            {{--                                    <th scope="row">@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('D') }} @endif</th>--}}
-                            <td>@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('h:i A') }} @endif</td>
-                            <td>@if($data->out == null) @else {{Carbon\Carbon::parse($data->out)->format('h:i A') }} @endif</td>
-                            <td>@if($data->in2 == null) @else {{Carbon\Carbon::parse($data->in2)->format('h:i A') }} @endif</td>
-                            <td>@if($data->out2 == null) @else {{Carbon\Carbon::parse($data->out2)->format('h:i A') }} @endif @if($data->isEarlyOut == 1)<b style="color: white; background-color: red;" class="px-2">Early out</b> @endif</td>
-                            {{--                            <td>--}}
-                            {{--                                @php--}}
-                            {{--                                    $hours = floor($data->minute / 60);--}}
-                            {{--                                    $totalHours = floor($hours + $data->hour);--}}
-                            {{--                                    $remainingMinutes = $data->minute % 60;--}}
-                            {{--                                    $result = $totalHours . ':' . $remainingMinutes;--}}
-                            {{--                                @endphp--}}
-                            {{--                                {{$result}}--}}
-                            {{--                            </td>--}}
-                            {{--                            <td>--}}
-                            {{--                               {{ucfirst($data->branch)}}--}}
-                            {{--                            </td>--}}
-                        </tr>
-                    @endif
-                @elseif($role == "Agent")
-                    @foreach($userID as $df)
-                        @if($df->id == $data->user_id)
-                            @if(Carbon\Carbon::parse($data->in)->format('Y') == $year and Carbon\Carbon::parse($data->in)->format('m') == $month and Carbon\Carbon::parse($data->in)->format('d') == $day)
-                                <tr>
-                                    <td>{{ucwords($data->fullname)}}</td>
-                                    {{--                                    <td>{{Carbon\Carbon::parse($data->in)->format('M/d/Y')}}</td>--}}
-                                    {{--                                    <th scope="row">@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('D') }} @endif</th>--}}
-                                    <td>@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('h:i A') }} @endif</td>
-                                    <td>@if($data->out == null) @else {{Carbon\Carbon::parse($data->out)->format('h:i A') }} @endif</td>
-                                    <td>@if($data->in2 == null) @else {{Carbon\Carbon::parse($data->in2)->format('h:i A') }} @endif</td>
-                                    <td>@if($data->out2 == null) @else {{Carbon\Carbon::parse($data->out2)->format('h:i A') }} @endif @if($data->isEarlyOut == 1)<b style="color: white; background-color: red;" class="px-2">Early out</b> @endif</td>
-                                    {{--                                    <td>--}}
-                                    {{--                                        @php--}}
-                                    {{--                                            $hours = floor($data->minute / 60);--}}
-                                    {{--                                            $totalHours = floor($hours + $data->hour);--}}
-                                    {{--                                            $remainingMinutes = $data->minute % 60;--}}
-                                    {{--                                            $result = $totalHours . ':' . $remainingMinutes;--}}
-                                    {{--                                        @endphp--}}
-                                    {{--                                        {{$result}}--}}
-                                    {{--                                    </td>--}}
-                                    {{--                                    <td>--}}
-                                    {{--                                        {{ucfirst($data->branch)}}--}}
-                                    {{--                                    </td>--}}
-                                </tr>
-                            @endif
-                        @endif
-                    @endforeach
-                @elseif($role == "Admin")
-                    @foreach($userID as $df)
-                        @if($df->id == $data->user_id)
-                            @if(Carbon\Carbon::parse($data->in)->format('Y') == $year and Carbon\Carbon::parse($data->in)->format('m') == $month and Carbon\Carbon::parse($data->in)->format('d') == $day)
-                                <tr>
-                                    <td>{{ucwords($data->fullname)}}</td>
-                                    {{--                                    <td>{{Carbon\Carbon::parse($data->in)->format('M/d/Y')}}</td>--}}
-                                    {{--                                    <th scope="row">@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('D') }} @endif</th>--}}
-                                    <td>@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('h:i A') }} @endif</td>
-                                    <td>@if($data->out == null) @else {{Carbon\Carbon::parse($data->out)->format('h:i A') }} @endif</td>
-                                    <td>@if($data->in2 == null) @else {{Carbon\Carbon::parse($data->in2)->format('h:i A') }} @endif</td>
-                                    <td>@if($data->out2 == null) @else {{Carbon\Carbon::parse($data->out2)->format('h:i A') }} @endif @if($data->isEarlyOut == 1)<b style="color: white; background-color: red;" class="px-2">Early out</b> @endif</td>
-                                    {{--                                    <td>--}}
-                                    {{--                                        @php--}}
-                                    {{--                                            $hours = floor($data->minute / 60);--}}
-                                    {{--                                            $totalHours = floor($hours + $data->hour);--}}
-                                    {{--                                            $remainingMinutes = $data->minute % 60;--}}
-                                    {{--                                            $result = $totalHours . ':' . $remainingMinutes;--}}
-                                    {{--                                        @endphp--}}
-                                    {{--                                        {{$result}}--}}
-                                    {{--                                    </td>--}}
-                                    {{--                                    <td>--}}
-                                    {{--                                        {{ucfirst($data->branch)}}--}}
-                                    {{--                                    </td>--}}
-                                </tr>
-                            @endif
-                        @endif
-                    @endforeach
-                @else
-                    @foreach($userID as $df)
-                        @if($df->id == $data->user_id)
-                            @if(Carbon\Carbon::parse($data->in)->format('Y') == $year and Carbon\Carbon::parse($data->in)->format('m') == $month and Carbon\Carbon::parse($data->in)->format('d') == $day)
-                                <tr>
-                                    <td>{{ucwords($data->fullname)}}</td>
-                                    {{--                                    <td>{{Carbon\Carbon::parse($data->in)->format('M/d/Y')}}</td>--}}
-                                    {{--                                    <th scope="row">@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('D') }} @endif</th>--}}
-                                    <td>@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('h:i A') }} @endif</td>
-                                    <td>@if($data->out == null) @else {{Carbon\Carbon::parse($data->out)->format('h:i A') }} @endif</td>
-                                    <td>@if($data->in2 == null) @else {{Carbon\Carbon::parse($data->in2)->format('h:i A') }} @endif</td>
-                                    <td>@if($data->out2 == null) @else {{Carbon\Carbon::parse($data->out2)->format('h:i A') }} @endif @if($data->isEarlyOut == 1)<b style="color: white; background-color: red;" class="px-2">Early out</b> @endif</td>
-                                    {{--                                    <td>--}}
-                                    {{--                                        @php--}}
-                                    {{--                                            $hours = floor($data->minute / 60);--}}
-                                    {{--                                            $totalHours = floor($hours + $data->hour);--}}
-                                    {{--                                            $remainingMinutes = $data->minute % 60;--}}
-                                    {{--                                            $result = $totalHours . ':' . $remainingMinutes;--}}
-                                    {{--                                        @endphp--}}
-                                    {{--                                        {{$result}}--}}
-                                    {{--                                    </td>--}}
-                                    {{--                                    <td>--}}
-                                    {{--                                        {{ucfirst($data->branch)}}--}}
-                                    {{--                                    </td>--}}
-                                    <td>
-                                        <i class="fa-solid fa-list-check" style="margin-right: 3%; cursor: pointer" data-bs-toggle="modal" data-bs-target="#taskRecord" wire:click="clickTask({{$data->id}})"></i>
-                                    </td>
-                                </tr>
-                            @endif
-                        @endif
-                    @endforeach
-                @endif
+            @foreach($dtrData as $datass)
+                <tr>
+                    <td class="p-3">
+                        {{ $datass->fullname}}
+                    </td>
+                    <td class="p-3">
+                        {{ \Carbon\Carbon::parse($datass->in)->format('h:i A') }}
+                    </td>
+                    <td class="p-3">
+                        {{ \Carbon\Carbon::parse($datass->out)->format('h:i A') }}
+                    </td>
+                    <td class="p-3">
+                        {{ \Carbon\Carbon::parse($datass->in2)->format('h:i A') }}
+                    </td>
+                    <td class="p-3">
+                        {{ \Carbon\Carbon::parse($datass->out2)->format('h:i A') }}
+                        @if($datass->isEarlyOut == 1) <b style="color: white; background-color: red" class="px-2">Early out</b> @endif
+                    </td>
+                    <td class="p-3">
+                        {{$datass->lateIn}}
+                    </td>
+                    <td class="p-3">
+                        {{$datass->lateIn2}}
+                    </td>
+                    <td class="p-3">
+                        {{$datass->lateOut}}
+                    </td>
+                    <td class="p-3">
+                        {{$datass->lateOut2}}
+                    </td>
+                    <td class="p-3">
+                        {{$datass->totalLate}}
+                    </td>
+                    <td class="p-3">
+                        {{$datass->salary_summary['salary_total'] ?? 0 }}
+                    </td>
+{{--                    <td class="p-3">--}}
+{{--                        {{$datass->schedIn}}--}}
+{{--                    </td>--}}
+{{--                    <td class="p-3">--}}
+{{--                        {{$datass->schedOut}}--}}
+{{--                    </td>--}}
+{{--                    <td class="p-3">--}}
+{{--                        {{$datass->schedIn2}}--}}
+{{--                    </td>--}}
+{{--                    <td class="p-3">--}}
+{{--                        {{$datass->schedOut2}}--}}
+{{--                    </td>--}}
+                    <td class="p-3">
+                        {{$datass->salary_summary['total_deduction'] ?? 0 }}
+                    </td>
+                    <td class="p-3">
+                        @php $ff = $datass->salary_summary['salary_total'] - $datass->salary_summary['total_deduction'] @endphp
+{{$ff}}
+                    </td>
+                    <td class="d-flex">
+                        <i class="fa-solid fa-square-minus" style="cursor: pointer; font-size: 15px;" data-bs-toggle="modal" data-bs-target="#deduct" wire:click="deduct({{$datass->id}})"></i>
+                        <i class="fa-solid fa-eye ms-3 text-primary" style="cursor: pointer; font-size: 15px;" data-bs-toggle="modal" data-bs-target="#view_more" wire:click="view_more({{$datass->id}})"></i>
+                    </td>
+                </tr>
             @endforeach
             </tbody>
         </table>

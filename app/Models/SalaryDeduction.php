@@ -13,6 +13,7 @@ class SalaryDeduction extends Model
         'sss',
         'ph',
         'ca',
+        'other',
         'lateDeduction',
         'totalDeduction',
         'dtr_content_id'
