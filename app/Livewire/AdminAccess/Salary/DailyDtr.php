@@ -11,7 +11,7 @@ use Livewire\Component;
 
 class DailyDtr extends Component
 {
-    public $ids, $authorizer, $sss = 0, $ph = 0, $addtional=[], $other = 0, $content_name, $content_id, $ca = 0, $lateDeduction = 0, $totalDeduction = 0, $isLoading = false, $task, $userID = [], $employeeData, $role = "all", $year, $month, $day, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
+    public $ids, $authorizer, $sss = 0, $ph = 0, $salaryDeductID, $fi, $addtional=[], $other = 0, $content_name, $content_id, $ca = 0, $lateDeduction = 0, $totalDeduction = 0, $isLoading = false, $task, $userID = [], $employeeData, $role = "all", $year, $month, $day, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo;
     public function render()
     {
         $this->fullname = auth()->user()->fullname;
@@ -36,19 +36,35 @@ class DailyDtr extends Component
     }
     public function submit(){
         $validatedData = $this->validate();
-        try {
-            SalaryDeduction::create([
-                'sss' => $this->sss,
-                'ph' => $this->ph,
-                'ca' => $this->ca,
-                'other' => $this->other,
-                'lateDeduction' => $this->lateDeduction,
-                'totalDeduction' => $this->totalDeduction,
-                'dtr_content_id' => $this->content_id,
-            ]);
-            session()->flash('success', 'Successfully saved.');
-        }catch (\Exception $e){
-            session()->flash('failed', 'Failed to saved.');
+        if ($this->fi == 1){
+            try {
+                $kk = SalaryDeduction::find($this->salaryDeductID);
+                $kk->sss = $this->sss;
+                $kk->ph = $this->ph;
+                $kk->ca = $this->ca;
+                $kk->other = $this->other;
+                $kk->lateDeduction = $this->lateDeduction;
+                $kk->totalDeduction = $this->totalDeduction;
+                $kk->save();
+                session()->flash('success', 'Successfully saved.');
+            }catch (\Exception $e){
+                session()->flash('failed', 'Failed to saved.');
+            }
+        }else{
+            try {
+                SalaryDeduction::create([
+                    'sss' => $this->sss,
+                    'ph' => $this->ph,
+                    'ca' => $this->ca,
+                    'other' => $this->other,
+                    'lateDeduction' => $this->lateDeduction,
+                    'totalDeduction' => $this->totalDeduction,
+                    'dtr_content_id' => $this->content_id,
+                ]);
+                session()->flash('success', 'Successfully saved.');
+            }catch (\Exception $e){
+                session()->flash('failed', 'Failed to saved.');
+            }
         }
 
     }
@@ -115,14 +131,19 @@ class DailyDtr extends Component
     public function deduct($id){
         $this->content_id = $id;
         $this->content_name = DtrContent::find($id)->fullname;
-        $gg = DtrContent::find($id)->salary_deduction()->latest()->first();
+        $gg = DtrContent::find($id)->salary_deduction;
         if ($gg){
+            $this->salaryDeductID = $gg->id;
+            $this->fi = 1;
             $this->sss = $gg->sss;
             $this->ph = $gg->ph;
             $this->ca = $gg->ca;
             $this->lateDeduction = $gg->lateDeduction;
             $this->totalDeduction = $gg->totalDeduction;
             $this->other = $gg->other;
+        }
+        else{
+            $this->fi = 0;
         }
 
     }

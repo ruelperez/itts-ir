@@ -15,6 +15,7 @@
                                 <th scope="col" class="bg-warning">SSS</th>
                                 <th scope="col" class="bg-warning">Philhealth</th>
                                 <th scope="col" class="bg-warning">CA</th>
+                                <th scope="col" class="bg-warning">Other</th>
                                 <th scope="col" class="bg-warning">Total Deduction</th>
                                 <th scope="col" class="bg-success text-white" >Sched in</th>
                                 <th scope="col" class="bg-success text-white">Sched out</th>
@@ -35,6 +36,9 @@
                                     </td>
                                     <td class="p-3">
                                         {{$addtional->salary_deduction->ca}}
+                                    </td>
+                                    <td class="p-3">
+                                        {{$addtional->salary_deduction->other}}
                                     </td>
                                     <td class="p-3">
                                         {{$addtional->salary_deduction->totalDeduction}}

@@ -12,7 +12,7 @@ use Livewire\Component;
 
 class Slip extends Component
 {
-    public $users, $search, $status = '1', $data = [], $dataContents = [], $ids, $fullname, $selectDate, $dates;
+    public $users, $search, $dts, $status = '1', $data = [], $dataContents = [], $ids, $fullname, $selectDate, $dates;
 
     public function render()
     {
@@ -42,7 +42,8 @@ class Slip extends Component
     {
         $this->fullname = User::find($userID)->fullname;
 
-        // Retrieve the interval based on the IDs property
+        // Retrieve the interval based on the selected date
+        $this->dts = SalaryDateInterval::find($this->selectDate);
         $jj = SalaryDateInterval::find($this->selectDate);
 
         // Convert start and end dates to 'Y-m-d H:i:s' format
@@ -61,11 +62,18 @@ class Slip extends Component
             ->latest('created_at') // Sort by latest created_at
             ->value('total'); // Retrieve only the 'total' column
 
-        // Append the latest total to the dataContents for display
+        // Append the latest total and totalDeduction to the dataContents for display
         foreach ($this->dataContents as $key => $data) {
+            // Retrieve the salary_deduction related to the current dtr_content
+            $totalDeduction = DtrContent::find($data->id)
+                ->salary_deduction() // Relationship method
+                ->value('totalDeduction'); // Get the totalDeduction value
+
             $this->dataContents[$key]->latest_total = $latestSalaryDetail ?? 0; // Default to 0 if no total found
+            $this->dataContents[$key]->total_deduction = $totalDeduction ?? 0; // Default to 0 if no deduction found
         }
     }
+
     public function mount(){
         $fe = User::find(auth()->user()->id)->user_access->first();
         $authorizer = $fe->paySlip;
