@@ -2,6 +2,7 @@
 
 namespace App\Livewire\AdminAccess\LeadTracker;
 
+use App\Exports\SearchResultsExport;
 use App\Models\AdminShow;
 use App\Models\Comment;
 use App\Models\CommentHeart;
@@ -21,6 +22,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MasstortTracker extends Component
 {
@@ -70,6 +72,11 @@ class MasstortTracker extends Component
             ->distinct('campaign')
             ->get();
         return view('livewire.admin-access.'.$this->folderName.'.masstort-tracker');
+    }
+
+    public function export()
+    {
+        return Excel::download(new SearchResultsExport($this->search), 'search_results.xlsx');
     }
 
     public function calculatePageRange()

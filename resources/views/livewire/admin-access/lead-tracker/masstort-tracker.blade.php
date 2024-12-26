@@ -27,6 +27,9 @@
                     @endif
                 </div>
                 <hr>
+    <div class="text-end">
+        <i class="fa-solid fa-circle-down" style="color: green; font-size: 22px; cursor: pointer" wire:click="export"></i>
+    </div>
                 <div class="text-center">
                     <div class="spinner-border mt-5" role="status" wire:loading>
                         <span class="visually-hidden">Loading...</span>
