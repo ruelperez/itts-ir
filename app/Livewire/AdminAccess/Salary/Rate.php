@@ -27,7 +27,9 @@ class Rate extends Component
 
     public function submit(){
         $validatedData = $this->validate();
-        $total = $this->basic + $this->nightDiff + $this->allowance + $this->holiday + $this->ot + $this->other;
+        $hj = ($this->nightDiff * $this->basic) / 100;
+        dd($hj);
+        $total = $this->basic + $hj + $this->allowance + $this->holiday + $this->ot + $this->other;
         try {
             SalaryDetail::create([
                 'employee_id' => $this->empID,
