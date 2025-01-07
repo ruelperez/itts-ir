@@ -194,6 +194,21 @@ class TimeshareTracker extends Component
         }
     }
 
+    public function delete(){
+        for ($i=0; count($this->checkBox) > $i; $i++){
+            $jk = Timeshare::find($this->checkBox[$i]);
+            $gn = $jk->phoneNumber;
+            $jk->delete();
+            \App\Models\Logs::create([
+                'action' => "Delete phone number ".$gn." from Timeshare tracker",
+                'user_id' => $this->user_id,
+                'photo' => $this->photo,
+                'fullname' => $this->fullname,
+            ]);
+        }
+        $this->checkBox = [];
+    }
+
     public function viewDetail(){
         for ($i=0; count($this->checkBox) > $i; $i++){
             $this->ids = $this->checkBox[$i];
