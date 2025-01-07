@@ -105,7 +105,7 @@
                         </ul>
                     </li>
                     <li class="sidebar-item">
-                        <a href="/production-lead-mass-tort"  class="sidebar-link">
+                        <a href="/production-lead-timeshare"  class="sidebar-link">
                             <i class="fa-solid fa-money-bill pe-2"></i>
                             Prod. Leads
                         </a>
