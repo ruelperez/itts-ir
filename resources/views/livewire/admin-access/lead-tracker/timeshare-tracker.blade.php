@@ -99,8 +99,6 @@
     {{--                    </div>--}}
     {{--                </div>--}}
     <div>
-        <input type="text" wire:model="search" placeholder="Search..." />
-
         <!-- Pagination Links -->
         <nav aria-label="Page navigation example">
             <ul class="pagination">
