@@ -74,6 +74,9 @@
                     <p>Guest 2 : <b>{{$guest2}}</b></p>
                 </div>
                 <div>
+                    <p>Gift : <b>{{$gift}}</b></p>
+                </div>
+                <div>
                     <p>Phone Number : <b>{{$phoneNumber}}</b></p>
                 </div>
                 <div>
