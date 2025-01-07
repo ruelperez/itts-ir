@@ -149,15 +149,24 @@
             </ul>
         </nav>
     </div>
-
-
-
-
     @script
     <script>
         $wire.on('dupeSubmitted', () => {
             $('#formClose').click();
             $('#btn123456').click();
+        });
+        $wire.on('exportError', () => {
+            Swal.fire({
+                title: 'Please search keyword',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                allowOutsideClick: false, // Prevent closing by clicking outside
+                allowEscapeKey: false,   // Prevent closing with the Escape key
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Optional: Add any logic here if needed after clicking "OK"
+                }
+            });
         });
     </script>
     @endscript
