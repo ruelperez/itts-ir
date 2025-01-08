@@ -6,6 +6,16 @@
         <h6>MY CALLBACK</h6>
     </div>
     <div class="row  mt-3 mt-md-4">
+        <div class="col-sm-5 col-lg-3 col-xl-2">
+            <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                TIMESHARE
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="/my-callback/timeshare">Timeshare</a></li>
+{{--                <li><a class="dropdown-item" href="/my-callback/masstort">Mass Tort</a></li>--}}
+{{--                <li><a class="dropdown-item" href="/my-callback/homesec">Home Sec</a></li>--}}
+            </ul>
+        </div>
         <div class="col-sm-7 col-lg-5 col-xl-5 mt-2 mt-sm-0">
             <input class="form-control w-100" type="search" placeholder="Search" aria-label="Search" wire:model.live="search">
         </div>

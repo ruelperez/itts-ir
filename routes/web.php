@@ -53,6 +53,9 @@ Route::middleware(['auth','restrict.ip','checkEmployee'])->group(function () {
         Route::get('/{page}/{emp_id}', [\App\Http\Controllers\InventoryController::class, 'page']);
         Route::get('/pdf/device-clearance/{userID}', [\App\Http\Controllers\InventoryController::class, 'clearance']);
     });
+    Route::prefix('my-callback')->group(function () {
+        Route::get('/{page}', [\App\Http\Controllers\MyCallbackController::class, 'page']);
+    });
     Route::prefix('pdf')->group(function () {
         Route::get('/eod/{user_id}/{year}/{month}/{week}', [\App\Http\Controllers\Pdf\EodController::class, 'pdf']);
         Route::get('/daily-shift/{month}/{day}/{year}/{role}', [\App\Http\Controllers\Pdf\DailyShiftController::class, 'pdf']);
