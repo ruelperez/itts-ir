@@ -29,6 +29,7 @@ class Timeshare extends Model
         'agent2',
         'remarks',
         'result',
+        'reason',
     ];
     public function timeshare_log(){
         return $this->hasMany(TimeshareLog::class);

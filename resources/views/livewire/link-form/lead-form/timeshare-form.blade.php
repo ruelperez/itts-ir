@@ -246,26 +246,33 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-lg-3 col-md-6 mb-md-4 mb-sm-4 mt-4 mt-lg-2">
-                <div>
-                    <label class="form-label">Remark*</label>
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-6 mb-md-4 mb-sm-4 mt-sm-2">
+                    <div>
+                        <label class="form-label">Remark*</label>
+                    </div>
+                    <div>
+                        <select class="form-select" aria-label="Default select example" wire:model="remarks" required>
+                            <option value="">Select remark</option>
+                            <option value="Verified - Billable">Verified - Billable</option>
+                            <option value="Verified - Pending Result">Verified - Pending Result</option>
+                            <option value="Verified - Callback">Verified - Callback</option>
+                            <option value="Verified - Reschedule/Rework">Verified - Reschedule/Rework</option>
+                            <option value="No Show">No Show</option>
+                            <option value="DQ by Manager">DQ by Manager</option>
+                            <option value="DQ by QA">DQ by QA</option>
+                            <option value="DQ Criteria">DQ Criteria</option>
+                            <option value="Turnover - For Callback">Turnover - For Callback</option>
+                            <option value="DNC">DNC</option>
+                            <option value="Blacklist">Blacklist</option>
+                        </select>
+                        @error('remarks') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                    </div>
                 </div>
-                <div>
-                    <select class="form-select" aria-label="Default select example" wire:model="remarks" required>
-                        <option value="">Select remark</option>
-                        <option value="Verified - Billable">Verified - Billable</option>
-                        <option value="Verified - Pending Result">Verified - Pending Result</option>
-                        <option value="Verified - Callback">Verified - Callback</option>
-                        <option value="Verified - Reschedule/Rework">Verified - Reschedule/Rework</option>
-                        <option value="No Show">No Show</option>
-                        <option value="DQ by Manager">DQ by Manager</option>
-                        <option value="DQ by QA">DQ by QA</option>
-                        <option value="DQ Criteria">DQ Criteria</option>
-                        <option value="Turnover - For Callback">Turnover - For Callback</option>
-                        <option value="DNC">DNC</option>
-                        <option value="Blacklist">Blacklist</option>
-                    </select>
-                    @error('remarks') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                <div class="col-xl-3 col-lg-3 col-md-6 mb-md-4 mb-sm-4 mt-4 mt-md-2">
+                    <label  class="form-label">Reason*</label>
+                    <textarea type="text" class="form-control" wire:model="reason"> </textarea>
+                    @error('reason') <span style="color: #8B0000">{{ $message }}</span> @enderror
                 </div>
             </div>
             <div class="mt-lg-3 mt-md-0 row">

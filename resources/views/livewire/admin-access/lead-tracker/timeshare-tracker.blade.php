@@ -80,7 +80,11 @@
                         {{ucwords($data->email)}}
                     </td>
                     <td>
-                        {{ucwords($data->remarks)}}
+                        @if($data->reason == "")
+                            {{ucwords($data->remarks)}}
+                        @else
+                            {{ucwords($data->remarks)}} - {{$data->reason}}
+                        @endif
                     </td>
                     <td>
                         <input class="form-check-input" type="checkbox" wire:model.live="checkBox" value="{{$data->id}}" id="flexCheckDefault{{$data->id}}" style="font-size: 18px; cursor: pointer" wire:loading.attr="disabled">
