@@ -59,7 +59,7 @@
                         {{ $data->id}}
                     </td>
                     <td>
-                        {{ $data->created_at->format('m/d/Y h:i A') }}
+                        {{ $data->updated_at->format('m/d/Y (h:i A)') }}
                     </td>
                     <td>
                         {{$data->campaign}}

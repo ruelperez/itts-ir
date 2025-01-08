@@ -87,6 +87,23 @@
                             </select>
                         </div>
                     </div>
+{{--                    <div class="mb-4">--}}
+{{--                        <div>--}}
+{{--                            <label class="form-label">Source*</label>--}}
+{{--                        </div>--}}
+{{--                        <div>--}}
+{{--                            <select class="form-select" aria-label="Default select example" wire:model="source" required>--}}
+{{--                                <option value="">Select Source</option>--}}
+{{--                                <option value="Dialer">Dialer</option>--}}
+{{--                                <option value="Agent callback">Agent callback</option>--}}
+{{--                                <option value="DQ from other campaign">DQ from other campaign</option>--}}
+{{--                                <option value="Retransfer">Retransfer</option>--}}
+{{--                                <option value="Rework">Rework</option>--}}
+{{--                                <option value="Special lead">Special lead</option>--}}
+{{--                            </select>--}}
+{{--                            @error('source') <span style="color: #8B0000">{{ $message }}</span> @enderror--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     <div class="row mt-3 px-3">
                         <textarea class="form-control" rows="3" id="reason" wire:model="reason"  placeholder="Callback Reason:" required></textarea>
                     </div>

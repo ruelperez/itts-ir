@@ -88,15 +88,13 @@ class Timeshare extends Component
                 'gift' => $this->gift,
                 'creditCard' => $this->creditCard,
                 'is_50k' => $this->is_50k,
-                'is_firsTime' => $this->is_firstTime,
+                'is_firsTime' => $this->is_firsTime,
                 'user_id' => $this->user_id,
                 'reason' => $this->reason,
             ]);
             $this->phoneNumber = "";
             $this->altPhoneNumber = "";
-            $this->campaign = "";
             $this->email = "";
-            $this->user_id = "";
             $this->reason = "";
             $this->guest1 = "";
             $this->guest2 = "";
