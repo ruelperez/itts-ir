@@ -23,6 +23,8 @@
                             <option value="DQ by Manager">DQ by Manager</option>
                             <option value="DQ by QA">DQ by QA</option>
                             <option value="DQ Criteria">DQ Criteria</option>
+                            <option value="TO - Declined Offer">TO - Declined Offer</option>
+                            <option value="Verified - Declined Offer">Verified - Declined Offer</option>
                             <option value="Turnover - For Callback">Turnover - For Callback</option>
                             <option value="DNC">DNC</option>
                             <option value="Blacklist">Blacklist</option>
