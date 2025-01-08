@@ -17,7 +17,7 @@ use Maatwebsite\Excel\Facades\Excel;
 class TimeshareTracker extends Component
 {
     public $registrationSwitch, $returnClient, $pageRange, $returnReason, $currentPage = 1, $totalPages, $perPage = 10, $is_success = false, $search, $ids, $displayRemarks, $checkBox = [], $submissionData = [], $resultsCoach = [], $employeeData, $dtrData = [], $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo, $campaignList = [], $campaign,
-        $date, $base = true, $day, $editDate, $editID, $gift, $time, $guest1, $guest2, $logsDate, $logsFullname, $leadLogsData = [], $logsAction, $toChecked = false, $leadOwnership, $agent2, $folderName, $lawfirm, $lawfirmList = [], $dqReason, $client, $remarks, $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $showSearch = false, $showSearchCoach = false, $agent, $coach, $verifier, $source = "Dialer", $caseType = "self", $resultsVerifier = [], $results = [], $clientList= [], $showSearchVerifier = false, $result;
+        $date, $base = true, $day, $editDate, $editID, $gift, $time, $guest1, $reason, $guest2, $logsDate, $logsFullname, $leadLogsData = [], $logsAction, $toChecked = false, $leadOwnership, $agent2, $folderName, $lawfirm, $lawfirmList = [], $dqReason, $client, $remarks, $claimant, $injuredParty, $phoneNumber, $altPhoneNumber, $dob, $email, $address, $ssn, $showSearch = false, $showSearchCoach = false, $agent, $coach, $verifier, $source = "Dialer", $caseType = "self", $resultsVerifier = [], $results = [], $clientList= [], $showSearchVerifier = false, $result;
 
 
     public function render()
@@ -66,6 +66,7 @@ class TimeshareTracker extends Component
         $gg = Timeshare::find($this->editID);
         try {
             $gg->remarks = $this->remarks;
+            $gg->reason = $this->reason;
             $gg->save();
 
             TimeshareLog::create([

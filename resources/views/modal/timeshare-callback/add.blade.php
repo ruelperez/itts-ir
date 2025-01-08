@@ -7,314 +7,86 @@
             </div>
             <div class="modal-body">
                 <form wire:submit.prevent="submit">
-                    <div class="row ">
-                        <div class="col-12 col-sm-3">
-                            <label class="col-form-label">Campaign</label>
+                    <div class="mb-4">
+                        <label class="form-label">Campaign</label>
+                        <input type="text" class="form-control" wire:model="campaign" disabled required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Guest 1</label>
+                        <input type="text" class="form-control" wire:model="guest1" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Guest 2</label>
+                        <input type="text" class="form-control" wire:model="guest2" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Guest 1 (Age)</label>
+                        <input type="text" class="form-control" wire:model="age1" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Guest 2 (Age)</label>
+                        <input type="text" class="form-control" wire:model="age2" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Phone</label>
+                        <input type="text" class="form-control" wire:model="phoneNumber" required>
+                        @error('phoneNumber') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Alt Phone</label>
+                        <input type="text" class="form-control" wire:model="altPhoneNumber" required>
+                        @error('altPhoneNumber') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" wire:model="email" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">State</label>
+                        <input type="text" class="form-control" wire:model="state" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Relationship</label>
+                        <input type="text" class="form-control" wire:model="relationship" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Gift</label>
+                        <input type="text" class="form-control" wire:model="gift" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Day</label>
+                        <input type="text" class="form-control" wire:model="day" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Time</label>
+                        <input type="text" class="form-control" wire:model="time" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Credit Card Provider</label>
+                        <input type="text" class="form-control" wire:model="creditCard" required>
+                    </div>
+                    <div class="mb-4">
+                        <div>
+                            <label class="form-label">Have a combined $50K annual income?</label>
                         </div>
-                        <div class="col-sm-6 col-9">
-                            <input type="text" class="form-control w-100" wire:model.live="campaign" wire:blur="removeSearch" required>
-                            @if(session()->has('badAgent'))
-                                <small style="color: #800000">Campaign name must be form search suggestions.</small>
-                            @endif
-                            @if($showSearch == true)
-                                <div style="position: absolute; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);">
-                                    <ul class="list-group">
-                                        @foreach($results as $data)
-                                            <li class="list-group-item btn text-start" style="background-color: #E0FFFF;" wire:click="click_items({{$data->id}})">
-                                                <i class="fa-solid fa-magnifying-glass me-3"></i> {{ucfirst($data->campaign)}}
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-                            @error('agent') <span style="color: #8B0000">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="col-auto pt-2 ms-auto">
-                            <p class="px-1 py-1" style="background-color: black; color: white; border-radius: 10px; font-size: 12px; cursor: pointer" wire:click="naCampaign">n/a</p>
+                        <div>
+                            <select class="form-select" aria-label="Default select example" wire:model="is_50k" required>
+                                <option value="1">YES</option>
+                                <option value="0">NO</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="row  mt-3">
-                        <div class="col-auto">
-                            <label class="col-form-label">Claimant</label>
+                    <div class="mb-4">
+                        <div>
+                            <label class="form-label">First time to attend a travel webinar?</label>
                         </div>
-                        <div class="col-auto">
-                            <input type="text" class="form-control" wire:model="claimant" required>
-                        </div>
-                        <div class="col-auto pt-2 ms-auto">
-                            <p class="px-1 py-1" style="background-color: black; color: white; border-radius: 10px; font-size: 12px; cursor: pointer" wire:click="naClaimant">n/a</p>
-                        </div>
-                    </div><div class="row mt-3">
-                        <div class="col-auto">
-                            <label class="col-form-label">Injured Party</label>
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" class="form-control" wire:model="injuredParty" required>
-                        </div>
-                        <div class="col-auto pt-2 ms-auto">
-                            <p class="px-1 py-1" style="background-color: black; color: white; border-radius: 10px; font-size: 12px; cursor: pointer" wire:click="naInjureParty">n/a</p>
-                        </div>
-                    </div><div class="row mt-3">
-                        <div class="col-auto">
-                            <label class="col-form-label">Phone #</label>
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" class="form-control" wire:model="phoneNumber" required>
-                            @error('phoneNumber') <span style="color: #8B0000">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="col-auto pt-2 ms-auto">
-                            <p class="px-1 py-1" style="background-color: black; color: white; border-radius: 10px; font-size: 12px; cursor: pointer" wire:click="naPhoneNumber">00000</p>
-                        </div>
-                    </div><div class="row mt-3">
-                        <div class="col-auto">
-                            <label class="col-form-label">Alt. #</label>
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" class="form-control" wire:model="altPhoneNumber" required>
-                            @error('altPhoneNumber') <span style="color: #8B0000">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="col-auto pt-2 ms-auto">
-                            <p class="px-1 py-1" style="background-color: black; color: white; border-radius: 10px; font-size: 12px; cursor: pointer" wire:click="naAltPhoneNumber">00000</p>
+                        <div>
+                            <select class="form-select" aria-label="Default select example" wire:model="is_firsTime" required>
+                                <option value="1">YES</option>
+                                <option value="0">NO</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-auto">
-                            <label class="col-form-label">Email</label>
-                        </div>
-                        <div class="col-auto">
-                            <input type="email" class="form-control" wire:model="email" required>
-                        </div>
-                        <div class="col-auto pt-2 ms-auto">
-                            <p class="px-1 py-1" style="background-color: black; color: white; border-radius: 10px; font-size: 12px; cursor: pointer" wire:click="naEmail">na@na</p>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-auto">
-                            <label class="col-form-label">DOB</label>
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" class="form-control" wire:model="dob" required>
-                        </div>
-                        <div class="col-auto pt-2 ms-auto">
-                            <p class="px-1 py-1" style="background-color: black; color: white; border-radius: 10px; font-size: 12px; cursor: pointer" wire:click="naDob">n/a</p>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-auto">
-                            <label class="col-form-label">Address</label>
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" class="form-control" wire:model="address" required>
-                        </div>
-                        <div class="col-auto pt-2 ms-auto">
-                            <p class="px-1 py-1" style="background-color: black; color: white; border-radius: 10px; font-size: 12px; cursor: pointer" wire:click="naAddress">n/a</p>
-                        </div>
-                    </div>
-                    <hr>
-                    @if($campName == "nec")
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Baby's Weight?</label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="necQuestion.weight" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Birth year? (must be 2006 or earlier)</label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="necQuestion.birth_year" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Did the baby receive a NEC diagnosis before 36 weeks?</label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="necQuestion.nec_diagnosis" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Which formula or fortifier did the baby receive?</label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="necQuestion.formula" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Was the baby born premature and diagnosed with NEC?</label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="necQuestion.premature" required>
-                            </div>
-                        </div>
-                    @elseif($campName == "afff")
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Were you a firefighter, emergency responder, or a member of the military?</label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="afffQuestion.member" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Were you exposed to AFFF at any time after 1980? If so, in what year?</label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="afffQuestion.exposed" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Is this your first exposure?</label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="afffQuestion.firstExposure" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">What was your last exposure?</label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="afffQuestion.lastExposure" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Approx. how often are you exposed? </label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="afffQuestion.howOften" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Were you diagnosed with one of the qualifying injuries?</label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="afffQuestion.qualifyingInjuries" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Diagnosis: </label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="afffQuestion.diagnosis" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Date of diagnosis (mm/dd/yyyy): </label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="afffQuestion.dateOfDiagnosis" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Were you convicted of a crime within the previous 5 years?</label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="afffQuestion.convicted" required>
-                            </div>
-                        </div>
-                    @elseif($campName == "rideshare uber/lyft")
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Do you have the copy of RS receipt?</label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="rideshareQuestion.receipt" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Do you have the copy of Police Report/ Company Complain?</label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="rideshareQuestion.report" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">𝐖𝐚𝐬 𝐬𝐞𝐱𝐮𝐚𝐥𝐥𝐲 𝐚𝐬𝐬𝐚𝐮𝐥𝐭𝐞𝐝 𝐛𝐲 𝐚 𝐫𝐢𝐝𝐞𝐬𝐡𝐚𝐫𝐞 𝐝𝐫𝐢𝐯𝐞𝐫?</label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="rideshareQuestion.assaulted" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Did the incident occur in the United States?</label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="rideshareQuestion.incident" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Were you convicted as felony? </label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="rideshareQuestion.convicted" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Are you represented by other LF?</label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="rideshareQuestion.represented" required>
-                            </div>
-                        </div>
-                    @elseif($campName == "depo-provera")
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Did you or a loved one use the injectable contraceptive brand Depo-Provera for at least one year?</label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="depoQuestion.𝐢𝐧𝐣𝐞𝐜𝐭𝐚𝐛𝐥𝐞" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Were you or a loved one diagnosed with meningioma after using Depo-Provera for at least one year?</label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="depoQuestion.𝐌𝐞𝐧𝐢𝐧𝐠𝐢𝐨𝐦𝐚" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Are you able to provide proof of your prescription for Depo-Provera?</label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="depoQuestion.𝐩𝐫𝐞𝐬𝐜𝐫𝐢𝐩𝐭𝐢𝐨𝐧" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-auto">
-                                <label class="col-form-label">Are you represented by other LF?</label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" wire:model="depoQuestion.represented" required>
-                            </div>
-                        </div>
-                    @endif
-                    {{--                    <div class="row mt-3">--}}
-                    {{--                        <div class="col-auto">--}}
-                    {{--                            <label class="col-form-label">Callback time</label>--}}
-                    {{--                        </div>--}}
-                    {{--                        <div class="col-auto">--}}
-                    {{--                            <input type="text" class="form-control" wire:model="callbackTime" required>--}}
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
                     <div class="row mt-3 px-3">
                         <textarea class="form-control" rows="3" id="reason" wire:model="reason"  placeholder="Callback Reason:" required></textarea>
                     </div>

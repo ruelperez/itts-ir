@@ -30,7 +30,12 @@
                         @error('remarks') <span style="color: #8B0000">{{ $message }}</span> @enderror
                     </div>
                 </div>
-                <div class="mt-5">
+                <div class="mt-4">
+                    <label  class="form-label">Reason*</label>
+                    <textarea type="text" class="form-control" wire:model="reason"> </textarea>
+                    @error('reason') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                </div>
+                <div class="mt-4">
                     <input type="text" class="form-control" placeholder="Select a date" wire:model="editDate"><p class="mt-2">(mm/dd/yyyy)</p>
                 </div>
             </div>

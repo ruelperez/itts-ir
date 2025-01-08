@@ -8,8 +8,8 @@ use Livewire\Component;
 
 class Timeshare extends Component
 {
-    public $submissionData = [], $search, $dob, $user_id, $date, $claimant, $phoneNumber, $campaign, $injuredParty, $altPhoneNumber, $email, $address, $reason,
-        $gm=0, $results = [], $guest1, $guest2, $age1, $age2, $gift, $relationship, $state, $day, $time, $creditCard, $is_50k, $is_firstTime, $viewDqReason, $campName, $countUnmarked, $timeRemaining, $viewAnswered, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15;
+    public $submissionData = [], $search, $dob, $user_id, $date, $claimant, $phoneNumber, $campaign = "Timeshare", $injuredParty, $altPhoneNumber, $email, $address, $reason,
+        $gm=0, $results = [], $guest1, $guest2, $age1, $age2, $gift, $relationship, $state, $day, $time, $creditCard, $is_50k = "1", $is_firsTime = "1", $viewDqReason, $campName, $countUnmarked, $timeRemaining, $viewAnswered, $is_expired, $agent, $showSearch = false, $currentPage = 1, $perPage = 15;
 
     public function render()
     {
@@ -67,11 +67,6 @@ class Timeshare extends Component
         }
     }
     public function submit(){
-        $formattedAnswers;
-        if ($this->gm == 0){
-            session()->flash('badAgent', "");
-            return;
-        }
         $this->validate([
             'phoneNumber' => 'required|numeric',
             'altPhoneNumber' => 'required|numeric',
@@ -84,8 +79,8 @@ class Timeshare extends Component
                 'age2' => $this->age2,
                 'phoneNumber' => $this->phoneNumber,
                 'altPhoneNumber' => $this->altPhoneNumber,
-                'campaign' => $this->campaign,
                 'email' => $this->email,
+                'campaign' => $this->campaign,
                 'relationship' => $this->relationship,
                 'state' => $this->state,
                 'day' => $this->day,
@@ -113,8 +108,8 @@ class Timeshare extends Component
             $this->time = "";
             $this->gift = "";
             $this->creditCard = "";
-            $this->is_50k = "";
-            $this->is_firstTime = "";
+            $this->is_50k = "1";
+            $this->is_firstTime = "1";
             $this->dispatch('success');
         }catch (\Exception $e){
             $this->dispatch('failed');
@@ -157,7 +152,7 @@ class Timeshare extends Component
         $this->gift = $dv->gift;
         $this->creditCard = $dv->creditCard;
         $this->is_50k = $dv->is_50k;
-        $this->is_firstTime = $dv->is_firstTime;
+        $this->is_firsTime = $dv->is_firsTime;
         $this->phoneNumber = $dv->phoneNumber;
         $this->altPhoneNumber = $dv->altPhoneNumber;
         $this->email = $dv->email;
@@ -166,8 +161,6 @@ class Timeshare extends Component
         $this->reason = $dv->reason;
         $this->is_expired = $dv->is_expired;
         $this->date = $dv->created_at->format('m/d/Y h:i A');
-        $this->viewDqReason = $dv->dqReason;
-        $this->viewAnswered = $dv->answeredQuestion;
         $ja = User::find($dv->user_id);
         $this->agent = $ja->fullname;
         $this->dispatch('show-detailss-modal');
