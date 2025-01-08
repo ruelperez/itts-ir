@@ -91,6 +91,7 @@
                             <option value="Tuesday">Tuesday</option>
                             <option value="Wednesday">Wednesday</option>
                             <option value="Thursday">Thursday</option>
+                            <option value="Sunday">Sunday</option>
                         </select>
                         @error('day') <span style="color: #8B0000">{{ $message }}</span> @enderror
                     </div>
