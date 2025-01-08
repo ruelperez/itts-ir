@@ -46,4 +46,5 @@ class Callback extends Model
     }
 
     use HasFactory;
+
 }
