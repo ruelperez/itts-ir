@@ -73,7 +73,11 @@
                         {{ucwords($data->email)}}
                     </td>
                     <td>
-                        {{ucwords($data->remarks)}}
+                        @if($data->reason == "")
+                            {{ucwords($data->remarks)}}
+                        @else
+                            {{ucwords($data->remarks)}} - {{$data->reason}}
+                        @endif
                     </td>
                 </tr>
             @endforeach

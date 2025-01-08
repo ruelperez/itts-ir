@@ -9,7 +9,7 @@ use Livewire\Component;
 class ProductionLeadTimeshare extends Component
 {
     public $registrationSwitch, $search = "", $currentPage = 1, $caseType, $claimant, $injuredParty, $fname, $lname, $agentName, $perPage = 15, $submissionData = [], $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
-        $phoneNumber, $date, $guest1, $guest2, $age1, $age2, $relationship, $gift, $leadLogsData = [], $altPhoneNumber, $leadOwnership, $agent2, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source, $campaign, $lawfirm, $client, $result, $remarks;
+        $phoneNumber, $date, $guest1, $reason, $guest2, $age1, $age2, $relationship, $gift, $leadLogsData = [], $altPhoneNumber, $leadOwnership, $agent2, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source, $campaign, $lawfirm, $client, $result, $remarks;
 
 
     public function render()
@@ -70,6 +70,7 @@ class ProductionLeadTimeshare extends Component
         $this->guest1 = $dv->guest1;
         $this->guest2 = $dv->guest2;
         $this->gift = $dv->gift;
+        $this->reason = $dv->reason;
 
         //        lead logs
 //        $this->leadLogsData = Submission::find($this->ids)->lead_log;
