@@ -88,6 +88,7 @@
                     <div>
                         <select class="form-select" aria-label="Default select example" wire:model="day" required>
                             <option value="">Select Day</option>
+                            <option value="Monday">Monday</option>
                             <option value="Tuesday">Tuesday</option>
                             <option value="Wednesday">Wednesday</option>
                             <option value="Thursday">Thursday</option>
