@@ -33,6 +33,8 @@ class ProductionLeadTimeshare extends Component
             $this->submissionData = Timeshare::where(function ($query) {
                 $query->where('phoneNumber', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('altPhoneNumber', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('guest1', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('guest2', 'LIKE', '%'.$this->search.'%')
                     ->orWhere('date', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('agent', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('campaign', 'LIKE', '%' . $this->search . '%')
