@@ -42,7 +42,7 @@
                             <td>@if($data->in) {{ Carbon\Carbon::parse($data->in)->format('h:i A') }} @endif</td>
                             <td>@if($data->out) {{ Carbon\Carbon::parse($data->out)->format('h:i A') }} @endif</td>
                             <td>@if($data->in2) {{ Carbon\Carbon::parse($data->in2)->format('h:i A') }} @endif</td>
-                            <td>@if($data->out2) {{ Carbon\Carbon::parse($data->out2)->format('h:i A') }} @endif @if($data->isEarlyOut == 1)<b style="color: white; background-color: red;" class="px-2">Early out</b> @endif @if($data->is_edited == 1) <b style="color: blue" class="fst-italic">Edited</b> @endif</td>
+                            <td>@if($data->out2) {{ Carbon\Carbon::parse($data->out2)->format('h:i A') }} @endif @if($data->isEarlyOut == 1)<b style="color: white; background-color: red;" class="px-2">Early out</b> @endif @if($data->is_edited == 1) <b style="color: blue" class="fst-italic"> (Edited)</b> @endif</td>
                         </tr>
                     @endforeach
                 @endif
