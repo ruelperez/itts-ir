@@ -261,6 +261,8 @@
                             <option value="Verified - Callback">Verified - Callback</option>
                             <option value="Verified - Reschedule/Rework">Verified - Reschedule/Rework</option>
                             <option value="No Show">No Show</option>
+                            <option value="Cancel Appt.">Cancel Appt.</option>
+                            <option value="No Contact">No Contact</option>
                             <option value="DQ by Manager">DQ by Manager</option>
                             <option value="DQ by QA">DQ by QA</option>
                             <option value="DQ Criteria">DQ Criteria</option>
