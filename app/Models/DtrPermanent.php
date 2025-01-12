@@ -26,7 +26,8 @@ class DtrPermanent extends Model
         'schedOut',
         'schedIn2',
         'schedOut2',
-        'isEarlyOut'
+        'isEarlyOut',
+        'is_edited'
     ];
 
     use HasFactory;

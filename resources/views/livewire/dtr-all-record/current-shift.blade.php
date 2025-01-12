@@ -41,7 +41,7 @@
                     <td>@if($data->in == null) @else {{Carbon\Carbon::parse($data->in)->format('h:i A') }} @endif</td>
                     <td>@if($data->out == null) @else {{Carbon\Carbon::parse($data->out)->format('h:i A') }} @endif</td>
                     <td>@if($data->in2 == null) @else {{Carbon\Carbon::parse($data->in2)->format('h:i A') }} @endif</td>
-                    <td>@if($data->out2 == 'early out') Early out  @elseif($data->out2 == null) @else {{Carbon\Carbon::parse($data->out2)->format('h:i A') }} @endif @if($data->isEarlyOut == 1)<b style="color: white; background-color: red;" class="px-2">Early out</b> @endif</td>
+                    <td>@if($data->out2 == 'early out') Early out  @elseif($data->out2 == null) @else {{Carbon\Carbon::parse($data->out2)->format('h:i A') }} @endif @if($data->isEarlyOut == 1)<b style="color: white; background-color: red;" class="px-2">Early out</b> @endif @if($data->is_edited == 1) <b style="color: blue" class="fst-italic">Edited</b> @endif</td>
 {{--                    <td>--}}
 {{--                        @php--}}
 {{--                            $hours = floor($data->minute / 60);--}}
