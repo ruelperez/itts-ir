@@ -39,6 +39,7 @@ class ProductionLeadTimeshare extends Component
                     ->orWhere('agent', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('campaign', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('remarks', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('id', 'LIKE', '%'.$this->search.'%')
                     ->orWhere('coach', 'LIKE', '%' . $this->search . '%');
             })
                 ->where(function ($query) {
