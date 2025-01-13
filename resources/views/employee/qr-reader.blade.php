@@ -116,17 +116,27 @@
                     // Sort and display data
                     const sortedData = data.dtrData.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
                     sortedData.forEach(record => {
+                        const earlyOutBadge = record.isEarlyOut === 1
+                            ? `<b style="color: white; background-color: red;" class="px-2">Early out</b>`
+                            : "";
+
+                        const adjustedBadge = record.is_edited === 1
+                            ? `<b style="color: blue" class="fst-italic">(Adjusted)</b>`
+                            : "";
+
                         const recordHtml = `
-                            <tr class="dtr-record">
-                                <td>${record.fullname}</td>
-                                <td>${record.in ? formatTime(record.in) : ""}</td>
-                                <td>${record.out ? formatTime(record.out) : ""}</td>
-                                <td>${record.in2 ? formatTime(record.in2) : ""}</td>
-                                <td>${record.out2 ? formatTime(record.out2) : ""}</td>
-                            </tr>
-                        `;
+        <tr class="dtr-record">
+            <td>${record.fullname}</td>
+            <td>${record.in ? formatTime(record.in) : ""}</td>
+            <td>${record.out ? formatTime(record.out) : ""}</td>
+            <td>${record.in2 ? formatTime(record.in2) : ""}</td>
+            <td>${record.out2 ? formatTime(record.out2) : ""}</td>
+            <td>${earlyOutBadge} ${adjustedBadge}</td>
+        </tr>
+    `;
                         resultsDiv.append(recordHtml);
                     });
+
                     // Set photo for the latest scanned employee
                     const latestEmployee = sortedData[0]; // Get the latest scanned employee
                     const employeePhotoUrl = photoBaseUrl + latestEmployee.photo; // Construct full path using `photo`
