@@ -14,7 +14,6 @@ class DtrContent extends Model
         'in2',
         'out2',
         'user_id',
-        'dtr_id',
         'hour',
         'minute',
         'week',

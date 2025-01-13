@@ -57,7 +57,6 @@ class CurrentShift extends Component
 
     public function remove(){
         DtrPermanent::find($this->ids)->delete();
-        Dtr::find($this->ids)->delete();
     }
 
     public function clickTimeEdit($id){
@@ -193,18 +192,27 @@ class CurrentShift extends Component
                 $this->timeOut2 = null;
             }
         }
-
         $bn = DtrPermanent::find($this->ids);
-        try {
-            $bn->in = $this->timeIn1;
-            $bn->out = $this->timeOut1;
-            $bn->in2 = $this->timeIn2;
-            $bn->out2 = $this->timeOut2;
-            $bn->is_edited = 1;
-            $bn->save();
-            session()->flash('goodSched', 'Successfully saved');
-        }catch (\Exception $e){
-            session()->flash('badSched', 'Failed to save');
+        if ($this->timeIn1 == "" and $this->timeOut1 == "" and $this->timeIn2 == "" and $this->timeOut2 == ""){
+            try {
+                $bn->delete();
+                session()->flash('goodSched', 'Successfully saved');
+            }catch (\Exception $e){
+                session()->flash('badSched', 'Failed to save');
+            }
+        }
+        else{
+            try {
+                $bn->in = $this->timeIn1;
+                $bn->out = $this->timeOut1;
+                $bn->in2 = $this->timeIn2;
+                $bn->out2 = $this->timeOut2;
+                $bn->is_edited = 1;
+                $bn->save();
+                session()->flash('goodSched', 'Successfully saved');
+            }catch (\Exception $e){
+                session()->flash('badSched', 'Failed to save');
+            }
         }
     }
 
@@ -216,268 +224,6 @@ class CurrentShift extends Component
         }
         else{
             return redirect('/');
-        }
-    }
-
-    public function logout(){
-        Auth::logout();
-        return redirect()->to('/login');
-    }
-
-    public function clickSettings(){
-        $data = IsRegistration::all();
-        if (count($data) == 0){
-            IsRegistration::create([
-                'user_id' => auth()->user()->id,
-                'on_off' => true,
-            ]);
-        }
-        $an = IsRegistration::all();
-        foreach ($an as $ans){
-            $this->registrationSwitch = $ans->on_off;
-        }
-        if ($this->registrationSwitch == "0"){
-            $this->registrationSwitch = false;
-        }
-        else{
-            $this->registrationSwitch = true;
-        }
-
-
-        $data = AdminShow::all();
-        if (count($data) == 0){
-            AdminShow::create([
-                'user_id' => auth()->user()->id,
-                'on_off' => true,
-            ]);
-        }
-        $an = AdminShow::all();
-        foreach ($an as $ans){
-            $this->adminSwitch = $ans->on_off;
-        }
-        if ($this->adminSwitch == "0"){
-            $this->adminSwitch = false;
-        }
-        else{
-            $this->adminSwitch = true;
-        }
-
-        $data = SuperadminShow::all();
-        if (count($data) == 0){
-            SuperadminShow::create([
-                'user_id' => auth()->user()->id,
-                'on_off' => true,
-            ]);
-        }
-        $an = SuperadminShow::all();
-        foreach ($an as $ans){
-            $this->superAdminSwitch = $ans->on_off;
-        }
-        if ($this->superAdminSwitch == "0"){
-            $this->superAdminSwitch = false;
-        }
-        else{
-            $this->superAdminSwitch = true;
-        }
-    }
-
-    public function regSwitch(){
-        $data = IsRegistration::all();
-        if (count($data) == 1){
-            if ($this->registrationSwitch == false){
-                foreach ($data as $datas){
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = false;
-                    $datas->save();
-                }
-                $an = IsRegistration::all();
-                foreach ($an as $ans){
-                    $this->registrationSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "disabled registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            }
-            else{
-                foreach ($data as $datas){
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = true;
-                    $datas->save();
-                }
-                $an = IsRegistration::all();
-                foreach ($an as $ans){
-                    $this->registrationSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "enabled registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            }
-        }
-        else{
-            IsRegistration::create([
-                'user_id' => auth()->user()->id,
-                'on_off' => true,
-            ]);
-        }
-    }
-
-    public function admin_Switch(){
-        $data = AdminShow::all();
-        if (count($data) == 1){
-            if ($this->adminSwitch == false){
-                foreach ($data as $datas){
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = false;
-                    $datas->save();
-                }
-                $an = AdminShow::all();
-                foreach ($an as $ans){
-                    $this->adminSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "disabled admin registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            }
-            else{
-                foreach ($data as $datas){
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = true;
-                    $datas->save();
-                }
-                $an = AdminShow::all();
-                foreach ($an as $ans){
-                    $this->adminSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "enabled admin registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            }
-        }
-        else{
-            AdminShow::create([
-                'user_id' => auth()->user()->id,
-                'on_off' => true,
-            ]);
-            $an = AdminShow::all();
-            foreach ($an as $ans){
-                $this->adminSwitch = $ans->on_off;
-            }
-        }
-    }
-
-    public function super_admin_Switch(){
-        $data = SuperadminShow::all();
-        if (count($data) == 1) {
-            if ($this->superAdminSwitch == false) {
-                foreach ($data as $datas) {
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = false;
-                    $datas->save();
-                }
-                $an = SuperadminShow::all();
-                foreach ($an as $ans) {
-                    $this->superAdminSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "disabled super admin registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            } else {
-                foreach ($data as $datas) {
-                    $datas->user_id = auth()->user()->id;
-                    $datas->on_off = true;
-                    $datas->save();
-                }
-                $an = SuperadminShow::all();
-                foreach ($an as $ans) {
-                    $this->superAdminSwitch = $ans->on_off;
-                }
-                \App\Models\Logs::create([
-                    'action' => "enabled super admin registration",
-                    'user_id' => $this->user_id,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-            }
-        }
-    }
-
-    public function updated($field){
-        if ($field == "registrationSwitch"){
-            $this->regSwitch();
-        }
-        if ($field == "adminSwitch"){
-            $this->admin_Switch();
-        }
-        if ($field == "superAdminSwitch"){
-            $this->super_admin_Switch();
-        }
-        if ($field == "photo"){
-            $filename = Str::random(40) . '.' . $this->photo->getClientOriginalExtension();
-            $this->photo->storeAs('photos', $filename, 'public_photos');
-            $user = User::find($this->user_id);
-            $user->photo = $filename;
-            $user->save();
-            $user = User::find($this->user_id)->comment;
-            foreach ($user as $usr){
-                $jn = Comment::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->comment_heart;
-            foreach ($user as $usr){
-                $jn = CommentHeart::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->dtr;
-            foreach ($user as $usr){
-                $jn =Dtr::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->dtr_content;
-            foreach ($user as $usr){
-                $jn =DtrContent::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->log;
-            foreach ($user as $usr){
-                $jn =\App\Models\Logs::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->note;
-            foreach ($user as $usr){
-                $jn = Note::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = User::find($this->user_id)->time_setting;
-            foreach ($user as $usr){
-                $jn = TimeSetting::find($usr->id);
-                $jn->photo = $filename;
-                $jn->save();
-            }
-            $user = UserPassword::find($this->user_id);
-            $user->photo = $filename;
-            $user->save();
-            return redirect('/itts/current-shift');
         }
     }
 }

@@ -31,11 +31,16 @@ class PageController extends Controller
     public function verifyQrCode(Request $request)
     {
         $employee = Employee::where('id_user', $request->qrCode)->first();
-        $this->dtr_data = Dtr::where('user_id', $employee->user_id)->latest()->first();
+        $this->dtr_data = DtrPermanent::where('user_id', $employee->user_id)->latest()->first();
         $this->userData = User::find($employee->user_id);
         if ($employee) {
             if ($this->dtr_data == null) {
                 $this->in();
+                $dtrData = DtrPermanent::latest('updated_at')->get();
+                return response()->json(['success' => true, 'dtrData' => $dtrData, 'user' => $this->userData]);
+            }
+            elseif ($this->dtr_data->in == null){
+                $this->in_null();
                 $dtrData = DtrPermanent::latest('updated_at')->get();
                 return response()->json(['success' => true, 'dtrData' => $dtrData, 'user' => $this->userData]);
             }
@@ -64,62 +69,37 @@ class PageController extends Controller
     }
 
     public function in(){
-        Dtr::create([
-            'fullname' => $this->userData->fullname,
-            'in' => Carbon::now(),
-            'user_id' => $this->userData->id,
-            'photo' => $this->userData->photo,
-            'branch' => $this->userData->branch,
-        ]);
-        $ss = Dtr::where('fullname', $this->userData->fullname)
-            ->where('user_id', $this->userData->id)->get();
-        foreach ($ss as $s) {
-            $id = $s->id;
-        }
         DtrPermanent::create([
             'fullname' => $this->userData->fullname,
             'in' => Carbon::now(),
             'user_id' => $this->userData->id,
-            'dtr_id' => $id,
             'photo' => $this->userData->photo,
             'branch' => $this->userData->branch,
         ]);
     }
 
+    public function in_null(){
+        $gf = DtrPermanent::find($this->dtr_data->id);
+        $gf->in = Carbon::now();
+        $gf->save();
+    }
+
     public function out(){
-        $gf = Dtr::find($this->dtr_data->id);
+        $gf = DtrPermanent::find($this->dtr_data->id);
         $gf->out = Carbon::now();
         $gf->save();
-
-        $gs = Dtr::find($this->dtr_data->id)->dtr_permanent;
-        foreach ($gs as $gg){
-            $gg->out = Carbon::now();
-            $gg->save();
-        }
     }
 
     public function in2(){
-        $gf = Dtr::find($this->dtr_data->id);
+        $gf = DtrPermanent::find($this->dtr_data->id);
         $gf->in2 = Carbon::now();
         $gf->save();
-
-        $gs = Dtr::find($this->dtr_data->id)->dtr_permanent;
-        foreach ($gs as $gg){
-            $gg->in2 = Carbon::now();
-            $gg->save();
-        }
     }
 
     public function out2(){
-        $gf = Dtr::find($this->dtr_data->id);
+        $gf = DtrPermanent::find($this->dtr_data->id);
         $gf->out2 = Carbon::now();
         $gf->save();
-
-        $gs = Dtr::find($this->dtr_data->id)->dtr_permanent;
-        foreach ($gs as $gg){
-            $gg->out2 = Carbon::now();
-            $gg->save();
-        }
     }
 
     public function scan(){
