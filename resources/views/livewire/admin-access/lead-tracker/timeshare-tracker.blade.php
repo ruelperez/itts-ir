@@ -111,19 +111,19 @@
                     <a class="page-link" href="#" wire:click.prevent="previousPage">Previous</a>
                 </li>
 
-                <!-- Page Number Links -->
-                @foreach ($pageRange as $page)
-                    <li class="page-item {{ $currentPage == $page ? 'active' : '' }}">
-                        <a class="page-link" href="#" wire:click.prevent="goToPage({{ $page }})">{{ $page }}</a>
-                    </li>
-                @endforeach
+{{--                <!-- Page Number Links -->--}}
+{{--                @foreach ($pageRange as $page)--}}
+{{--                    <li class="page-item {{ $currentPage == $page ? 'active' : '' }}">--}}
+{{--                        <a class="page-link" href="#" wire:click.prevent="goToPage({{ $page }})">{{ $page }}</a>--}}
+{{--                    </li>--}}
+{{--                @endforeach--}}
 
-                <!-- Show + icon if there are more than 10 pages -->
-                @if ($totalPages > 10)
-                    <li class="page-item">
-                        <a class="page-link" href="#" wire:click.prevent="goToPage({{ $pageRange[count($pageRange)-1] + 1 }})">+{{ $totalPages - 10 }}</a>
-                    </li>
-                @endif
+{{--                <!-- Show + icon if there are more than 10 pages -->--}}
+{{--                @if ($totalPages > 10)--}}
+{{--                    <li class="page-item">--}}
+{{--                        <a class="page-link" href="#" wire:click.prevent="goToPage({{ $pageRange[count($pageRange)-1] + 1 }})">+{{ $totalPages - 10 }}</a>--}}
+{{--                    </li>--}}
+{{--                @endif--}}
 
                 <!-- Next Button -->
                 <li class="page-item {{ $currentPage == $totalPages ? 'disabled' : '' }}">
