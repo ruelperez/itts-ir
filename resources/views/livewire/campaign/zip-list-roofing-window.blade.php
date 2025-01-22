@@ -1,6 +1,6 @@
 <div>
         <div>
-            <h6>ZIP CODE CHECKER</h6>
+            <h6>ZIP CODE CHECKER (Roofing/Window)</h6>
         </div>
         <div style="margin-left: 3%; margin-top: 1%; background-color: #F5F5F5; border-radius: 2%; padding-left: 3%;">
             <div style="display: flex; margin-top: 3%; padding-top: 2%;">
