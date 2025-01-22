@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class ZipListRoofingWindow extends Component
 {
-    public $registrationSwitch, $dtrData = [], $currentPage = 1, $totalPages, $perPage = 20, $employeeData, $superAdminSwitch, $position, $adminSwitch, $is_admin, $webName, $fullname, $user_id, $photo, $searchInput, $request_data=[];
+    public $registrationSwitch, $dtrData = [], $currentPage = 1, $totalPages, $perPage = 50, $employeeData, $superAdminSwitch, $position, $adminSwitch, $is_admin, $webName, $fullname, $user_id, $photo, $searchInput, $request_data=[];
     public function render()
     {
         if ($this->searchInput != ""){
@@ -21,13 +21,9 @@ class ZipListRoofingWindow extends Component
                 ->take($this->perPage)
                 ->get();
         }
-
         return view('livewire.campaign.zip-list-roofing-window');
     }
-
     public function search(){
-
-
         $searchQuery = RoofingWindowZip::where('zip', 'LIKE', '%'.$this->searchInput.'%')
             ->orWhere('city', 'LIKE', '%'.$this->searchInput.'%')
             ->orWhere('state', 'LIKE', '%'.$this->searchInput.'%');
@@ -38,7 +34,6 @@ class ZipListRoofingWindow extends Component
             ->take($this->perPage)
             ->get();
     }
-
     public function previousPage()
     {
         if ($this->currentPage > 1) {
