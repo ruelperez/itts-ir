@@ -96,9 +96,9 @@
                             <li class="sidebar-item">
                                 <a href="/campaign/mass-tort" class="sidebar-link">Mass Tort / Timeshare</a>
                             </li>
-{{--                            <li class="sidebar-item">--}}
-{{--                                <a href="/campaign/dtv" class="sidebar-link">DTV</a>--}}
-{{--                            </li>--}}
+                            <li class="sidebar-item">
+                                <a href="/campaign/zip-list-roofing-window" class="sidebar-link">Zip List (Roofing/Window)</a>
+                            </li>
 {{--                            <li class="sidebar-item">--}}
 {{--                                <a href="/campaign/home-security" class="sidebar-link">Home Security</a>--}}
 {{--                            </li>--}}
