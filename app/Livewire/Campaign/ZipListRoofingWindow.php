@@ -24,11 +24,8 @@ class ZipListRoofingWindow extends Component
         return view('livewire.campaign.zip-list-roofing-window');
     }
     public function search(){
-        $searchQuery = RoofingWindowZip::where('zip', 'LIKE', '%'.$this->searchInput.'%')
-            ->orWhere('city', 'LIKE', '%'.$this->searchInput.'%')
-            ->orWhere('state', 'LIKE', '%'.$this->searchInput.'%');
-
-        // Get the results for the current page
+        $trimmedSearch = trim($this->searchInput);
+        $searchQuery = RoofingWindowZip::where('zip', 'like', "%{$trimmedSearch}%");
         $this->request_data = $searchQuery
             ->skip(($this->currentPage - 1) * $this->perPage)
             ->take($this->perPage)
