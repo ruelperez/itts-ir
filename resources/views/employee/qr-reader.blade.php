@@ -12,7 +12,7 @@
             let lastScanTime = null; // Store the time of the last scan
             let lastScannedId = null; // Store the last scanned Employee ID
             const photoBaseUrl = "{{ asset('photos/photos') }}/"; // Base URL for employee photos
-            const countdownDuration = 2; // Countdown duration in seconds
+            const countdownDuration = 1; // Countdown duration in seconds
 
             $(document).ready(function() {
                 focusScannerInput();
