@@ -258,6 +258,7 @@
                     <div>
                         <select class="form-select" aria-label="Default select example" wire:model="remarks" required>
                             <option value="">Select remark</option>
+                            <option value="For Verification">For Verification</option>
                             <option value="Verified - Billable">Verified - Billable</option>
                             <option value="Verified - Pending Result">Verified - Pending Result</option>
                             <option value="Verified - Callback">Verified - Callback</option>
