@@ -21,6 +21,8 @@
                             <option value="Verified - Callback">Verified - Callback</option>
                             <option value="Verified - Reschedule/Rework">Verified - Reschedule/Rework</option>
                             <option value="No Show">No Show</option>
+                            <option value="VM - Left Message">VM - Left Message</option>
+                            <option value="VM - Mailbox Full">VM - Mailbox Full</option>
                             <option value="Cancel Appt.">Cancel Appt.</option>
                             <option value="No Contact">No Contact</option>
                             <option value="DQ by Manager">DQ by Manager</option>
