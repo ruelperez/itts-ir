@@ -227,6 +227,7 @@
                                     <select class="form-select" aria-label="Default select example" wire:model="source" required>
                                         <option value="">Select Source</option>
                                         <option value="Dialer">Dialer</option>
+                                        <option value="Dialer">Fb ads</option>
                                         <option value="Agent callback">Agent callback</option>
                                         <option value="DQ from other campaign">DQ from other campaign</option>
                                         <option value="Retransfer">Retransfer</option>
