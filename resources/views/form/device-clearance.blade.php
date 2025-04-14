@@ -134,3 +134,7 @@
     </tr>
 </table>
 <i>Return this form to the Finance and Administration Department on completion to facilitate the release of final dues</i>
+
+<div style="page-break-before: always; margin: 0; padding: 0;">
+    <img src="{{ public_path('photo/hr_clearance.png') }}" style="width: 100%; height: 100vh; object-fit: cover; display: block;">
+</div>

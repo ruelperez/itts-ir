@@ -82,6 +82,7 @@ Route::middleware(['auth','restrict.ip','checkEmployee'])->group(function () {
     Route::get('/dtr-all-record-all-record/{id}', [\App\Http\Controllers\PageController::class, 'dtr_employee_record']);
     Route::post('/profile/upload', [ProfileController::class, 'uploadProfilePicture'])->name('profile.upload');
     Route::get('/campaign/{page}', [\App\Http\Controllers\Campaign\PageController::class, 'page']);
+    Route::get('/campaign/mass-tort/{page}', [\App\Http\Controllers\Campaign\MasstortController::class, 'page']);
     Route::get('/deployed-item-all-record/{id}', [\App\Http\Controllers\Campaign\PageController::class, 'page']);
 });
 
