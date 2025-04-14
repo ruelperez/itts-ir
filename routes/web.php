@@ -87,10 +87,10 @@ Route::middleware(['auth','restrict.ip','checkEmployee'])->group(function () {
 });
 
 Route::middleware(['auth','restrict.ip','checkEmployee'])
-    ->prefix('link-form')
-    ->group(function () {
+    ->prefix('link-form')->group(function () {
         Route::get('/lead-form/{page}', [\App\Http\Controllers\LinkForm\LeadForm\PageController::class, 'page']);
-});
+        Route::get('/{page}', [\App\Http\Controllers\LinkForm\LeadForm\LeaveController::class, 'page']);
+    });
 
 Route::middleware(['auth','restrict.ip','checkEmployee'])
     ->prefix('admin-access')
