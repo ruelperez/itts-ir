@@ -93,7 +93,7 @@ class Employee extends Component
             $this->address = $pp->address;
             $this->relationship = $pp->relationship;
             $this->full_name = $pp->fullname;
-            $this->employeeFullname = $pp->employeeFullname;
+            $this->employeeFullname = $pp->fname.' '.$pp->mi.' '.$pp->lname;
             $this->id_user = $pp->id_user;
             if ($this->department == "" or $this->department == null){
                 $this->department = "Admin - Production";
@@ -109,6 +109,7 @@ class Employee extends Component
     {
         $this->ng = 1;
         $this->is_success = false;
+        $this->employeeFullname = $this->fname.' '.$this->mi.' '.$this->lname;
         try {
             if ($this->is_create == true){
                 \App\Models\Employee::create([
