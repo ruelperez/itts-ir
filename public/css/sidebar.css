@@ -33,12 +33,15 @@
     height: 530px; /* Set a fixed height */
     overflow-y: auto; /* Enable vertical scrolling */
     /*border: 1px solid #ccc;*/
+    /*font-size: 1px;*/
 }
 
 .dropup .dropdown-menu {
     top: auto;
     bottom: 100%;
     display: none; /* initially hidden */
+    font-size: 0.9rem;
+
 }
 
 .dropup.show .dropdown-menu {
@@ -161,11 +164,11 @@ li {
 }
 
 a.sidebar-link {
-    padding: .625rem 1.625rem;
+    padding: .450rem 1.625rem;
     color: black;
     position: relative;
     display: block;
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 .sidebar-link[data-bs-toggle="collapse"]::after {

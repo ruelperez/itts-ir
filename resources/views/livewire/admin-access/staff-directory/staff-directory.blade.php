@@ -3,18 +3,21 @@
     @include('modal.staff-directory.viewDetail')
     <div>
         <div class="row">
-            <div class="col-lg-3 col-xl-2 pt-lg-2">
+            <div class="col-lg-2 col-xl-2 pt-lg-2">
                 <h6>STAFF DIRECTORY</h6>
             </div>
-            <div class="col-sm-8 col-lg-6 mt-1 mt-lg-0 col-xl-5">
+            <div class="col-sm-8 col-lg-5 mt-1 mt-lg-0 col-xl-5">
                 <input class="form-control" type="search" placeholder="Search" aria-label="Search" wire:model.live="search">
             </div>
-            <div class="col-12 col-sm-4 col-lg-3 col-xl-3 mt-2 mt-sm-1 mt-lg-0">
+            <div class="col-12 col-sm-4 col-lg-2 col-xl-2 mt-2 mt-sm-1 mt-lg-0">
                 <select class="form-select" aria-label="Default select example" wire:model.live="empStat" id="staffStat">
                     <option value="all">All</option>
                     <option value=1>Active</option>
                     <option value=0>Inactive</option>
                 </select>
+            </div>
+            <div class="col-12 col-sm-4 col-lg-3 col-xl-2 mt-2 mt-sm-1 mt-lg-2">
+                <p class="link-primary" style="cursor: pointer">Leave Approval</p>
             </div>
         </div>
         <div class="mt-3 mt-sm-5 mt-md-4 mt-lg-5 text-end">
