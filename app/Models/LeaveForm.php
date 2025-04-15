@@ -10,6 +10,7 @@ class LeaveForm extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'start',
         'end',
         'numOfDays',

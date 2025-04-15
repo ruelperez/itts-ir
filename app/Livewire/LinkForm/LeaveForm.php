@@ -7,63 +7,57 @@ use App\Models\User;
 use App\Rules\Base64Image;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use Livewire\Attributes\On;
 
 class LeaveForm extends Component
 {
-    public $start, $name, $address, $fullname, $phoneNum, $relationship, $end, $numOfDays, $isEmergency = "NO", $leaveType, $reason, $signature, $page;
+    use WithFileUploads;
+
+    public $start, $end, $numOfDays, $leaveType, $user_id, $reason, $isEmergency = "NO", $name, $fullname, $address, $phoneNum, $relationship;
+    public $signature;
     public function render()
     {
+        $this->user_id = auth()->user()->id;
         $this->fullname = auth()->user()->fullname;
         return view('livewire.link-form.leave-form');
     }
 
-    public function mount($page){
-       $this->page  = $page;
+    #[On('setSignature')]
+    public function setSignature($data)
+    {
+        $this->signature = $data;
     }
-
-    // Handle form submission
     public function submit()
     {
-//        $this->validate([
-//            'start' => 'required|date',
-//            'end' => 'required|date',
-//            'numOfDays' => 'required|numeric',
-//            'leaveType' => 'required|string',
-//            'reason' => 'required|string',
-//            'signature' => ['required', new Base64Image],
-//        ]);
-        if (!$this->signature) {
-            $this->dispatch('signature-missing');
-            return;
-        }
+        $imageData = $this->signature; // This is the base64 data of the signature
+        $image = str_replace('data:image/png;base64,', '', $imageData);
+        $image = str_replace(' ', '+', $image); // Ensure the base64 string is properly formatted
+        $imageName = 'signature_' . time() . '.png';
+        $imagePath = public_path('storage/signatures/' . $imageName);
 
-        $signaturePath = null;
-        if ($this->signature) {
-            $fileName = 'signatures/' . uniqid() . '.png';
-            Storage::disk('public')->put($fileName, base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $this->signature)));
-            $signaturePath = $fileName;
-        }
+// Save the image to the public directory
+        file_put_contents($imagePath, base64_decode($image)); // Decodes and writes the file
 
-        LeaveForm::create([
+
+
+        // Save data in the database (for example in LeaveRequest model)
+        \App\Models\LeaveForm::create([
+            'user_id' => $this->user_id,
             'start' => $this->start,
             'end' => $this->end,
-            'num_of_days' => $this->numOfDays,
-            'leave_type' => $this->leaveType,
+            'numOfDays' => $this->numOfDays,
+            'leaveType' => $this->leaveType,
             'reason' => $this->reason,
-            'signature' => $signaturePath,
-            'is_emergency' => $this->isEmergency,
-            'name' => $this->name,
-            'address' => $this->address,
-            'phone_num' => $this->phoneNum,
-            'relationship' => $this->relationship,
+            'signature' => 'storage/signatures/' . $imageName, // Save the relative path to the signature image
         ]);
 
-        session()->flash('message', 'Leave form submitted successfully!');
-        $this->reset();
+        $this->dispatch('success');
     }
 
     public function clear()
     {
+        // Clear all fields
         $this->reset();
     }
 }
