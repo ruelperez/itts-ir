@@ -18,6 +18,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/gh/muhdfaiz/js-loading-overlay/dist/js-loading-overlay.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.6/dist/signature_pad.umd.min.js"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
     @stack('css')
     <title>{{ $title ?? 'Page Title' }}</title>
     @livewireStyles
@@ -88,6 +90,13 @@
             dateFormat: 'm/d/Y',
         });
         flatpickr('#hire-date', {
+            dateFormat: 'm/d/Y',
+        });
+
+        flatpickr('#startDate', {
+            dateFormat: 'm/d/Y',
+        });
+        flatpickr('#endDate', {
             dateFormat: 'm/d/Y',
         });
     });

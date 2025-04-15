@@ -16,5 +16,11 @@ class LeaveForm extends Model
         'leaveType',
         'reason',
         'signature',  // Add the signature column
+        'name',
+        'address',
+        'phoneNum',
+        'relationship',
+        'remark',
+        'timeAdjust'
     ];
 }
