@@ -65,4 +65,34 @@ class LeaveForm extends Component
         // Clear all fields
         $this->reset();
     }
+
+    public function updatedStart()
+    {
+        $this->calculateLeaveDays();
+    }
+
+    public function updatedEnd()
+    {
+        $this->calculateLeaveDays();
+    }
+
+    public function calculateLeaveDays()
+    {
+        if ($this->start && $this->end) {
+            try {
+                $start = \Carbon\Carbon::parse($this->start);
+                $end = \Carbon\Carbon::parse($this->end);
+
+                if ($start > $end) {
+                    $this->addError('start', 'Start date cannot be after end date.');
+                    $this->numOfDays = null;
+                } else {
+                    $this->resetErrorBag('start');
+                    $this->numOfDays = $start->diffInDays($end) + 1;
+                }
+            } catch (\Exception $e) {
+                $this->addError('start', 'Invalid date format.');
+            }
+        }
+    }
 }

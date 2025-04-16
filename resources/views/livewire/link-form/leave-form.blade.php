@@ -147,6 +147,34 @@
         }
 
         document.addEventListener('DOMContentLoaded', function () {
+
+            const startInput = document.getElementById('startDate');
+            const endInput = document.getElementById('endDate');
+
+            const computeDays = () => {
+                const start = new Date(startInput.value);
+                const end = new Date(endInput.value);
+
+                if (start && end && !isNaN(start) && !isNaN(end)) {
+                    if (start > end) {
+                        Swal.fire({
+                            title: 'Invalid Dates',
+                            text: 'Start date cannot be after end date.',
+                            icon: 'warning',
+                        });
+                        return;
+                    }
+                    const timeDiff = Math.abs(end - start);
+                    const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)) + 1;
+
+                    document.querySelector('[wire\\:model="numOfDays"]').value = daysDiff;
+                @this.set('numOfDays', daysDiff);
+                }
+            };
+
+            startInput.addEventListener('change', computeDays);
+            endInput.addEventListener('change', computeDays);
+
             const canvas = document.getElementById('signature-pad');
 
             const signaturePad = new SignaturePad(canvas, {
