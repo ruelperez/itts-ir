@@ -2,6 +2,7 @@
 
 namespace App\Livewire\LinkForm;
 
+use App\Models\Employee;
 use App\Models\Note;
 use App\Models\User;
 use App\Rules\Base64Image;
@@ -14,7 +15,7 @@ class LeaveForm extends Component
 {
     use WithFileUploads;
 
-    public $start, $end, $numOfDays, $leaveType, $user_id, $reason, $isEmergency = "NO", $name, $fullname, $address, $phoneNum, $relationship;
+    public $start, $end, $numOfDays, $resume, $remark, $timeAdjust, $leaveType, $user_id, $reason, $isEmergency = "NO", $name, $fullname, $address, $phoneNum, $relationship;
     public $signature;
     public function render()
     {
@@ -55,6 +56,13 @@ class LeaveForm extends Component
             'leaveType' => $this->leaveType,
             'reason' => $this->reason,
             'signature' => 'storage/signatures/' . $imageName, // Save the relative path to the signature image
+            'name' => $this->name,
+            'address' => $this->address,
+            'phoneNum' => $this->phoneNum,
+            'relationship' => $this->relationship,
+            'remark' => $this->remark,
+            'timeAdjust' => $this->timeAdjust,
+            'resume' => $this->resume,
         ]);
 
         $this->dispatch('success');

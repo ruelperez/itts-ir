@@ -149,8 +149,10 @@
                                 <small>Admin access</small>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropupLink" style="box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);">
-                                <a class="dropdown-item" href="/admin-access/salary/slip"><i class="fa-solid fa-money-bill pe-2"></i>
-                                    Pay Slip</a>
+                                <a class="dropdown-item" href="/admin-access/employee/leave-approval"><i class="fa-solid fa-hand-point-up pe-2"></i>
+                                    Leave Approval</a>
+{{--                                <a class="dropdown-item" href="/admin-access/salary/slip"><i class="fa-solid fa-money-bill pe-2"></i>--}}
+{{--                                    Pay Slip</a>--}}
                                 <a class="dropdown-item" href="/qr-code/scanner"><i class="fa-solid fa-qrcode pe-2"></i>
                                     QR Scanner</a>
                                 <a class="dropdown-item" href="/admin-access/callback/tracker"><i class="fa-solid fa-chart-gantt pe-2"></i>

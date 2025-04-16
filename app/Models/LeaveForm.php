@@ -22,6 +22,12 @@ class LeaveForm extends Model
         'phoneNum',
         'relationship',
         'remark',
-        'timeAdjust'
+        'timeAdjust',
+        'resume'
     ];
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class, 'user_id', 'user_id');
+    }
 }

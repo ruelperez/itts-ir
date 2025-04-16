@@ -27,6 +27,11 @@
                     @error('numOfDays') <span style="color: #8B0000">{{ $message }}</span> @enderror
                 </div>
                 <div class="col-md-6 mt-4">
+                    <label class="form-label">Resuming Work Date*</label>
+                    <input type="text" class="form-control" id="endDate" wire:model="resume" required>
+                    @error('resume') <span style="color: #8B0000">{{ $message }}</span> @enderror
+                </div>
+                <div class="col-md-6 mt-4">
                     <div>
                         <label class="form-label">Leave Type*</label>
                     </div>
@@ -60,7 +65,7 @@
                         @error('isEmergency') <span style="color: #8B0000">{{ $message }}</span> @enderror
                     </div>
                 </div>
-                <div class="col-md-6 mt-4 mt-md-0" x-show="selectedOptions === 'YES'">
+                <div class="col-md-6 mt-4 mt-md-4 mt-lg-0" x-show="selectedOptions === 'YES'">
                     <label class="form-label">Name*</label>
                     <input type="text" class="form-control" wire:model="name" :required="selectedOptions === 'YES'">
                     @error('name') <span style="color: #8B0000">{{ $message }}</span> @enderror
@@ -147,34 +152,6 @@
         }
 
         document.addEventListener('DOMContentLoaded', function () {
-
-            const startInput = document.getElementById('startDate');
-            const endInput = document.getElementById('endDate');
-
-            const computeDays = () => {
-                const start = new Date(startInput.value);
-                const end = new Date(endInput.value);
-
-                if (start && end && !isNaN(start) && !isNaN(end)) {
-                    if (start > end) {
-                        Swal.fire({
-                            title: 'Invalid Dates',
-                            text: 'Start date cannot be after end date.',
-                            icon: 'warning',
-                        });
-                        return;
-                    }
-                    const timeDiff = Math.abs(end - start);
-                    const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)) + 1;
-
-                    document.querySelector('[wire\\:model="numOfDays"]').value = daysDiff;
-                @this.set('numOfDays', daysDiff);
-                }
-            };
-
-            startInput.addEventListener('change', computeDays);
-            endInput.addEventListener('change', computeDays);
-
             const canvas = document.getElementById('signature-pad');
 
             const signaturePad = new SignaturePad(canvas, {
@@ -222,6 +199,18 @@
                         icon: 'warning',
                     });
                     return; // stop here if not complete
+                }
+
+                // Check if start date is greater than end date
+                const start = new Date(startDate);
+                const end = new Date(endDate);
+                if (start > end) {
+                    Swal.fire({
+                        title: 'Invalid Dates',
+                        text: 'The start date cannot be greater than the end date.',
+                        icon: 'error',
+                    });
+                    return;
                 }
 
                 // Check if signature is empty

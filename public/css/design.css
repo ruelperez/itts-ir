@@ -12,6 +12,15 @@
     border-bottom: 1px solid #dee2e6; /* Add bottom border except on last item */
 }
 
+.edit-icon i {
+    visibility: hidden;
+    transition: visibility 0.2s ease-in-out;
+}
+
+tr:hover .edit-icon i {
+    visibility: visible;
+}
+
 
 .icon-pdf:hover {
     color: #00008B; /* Color when the icon is hovered */
