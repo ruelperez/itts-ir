@@ -1,7 +1,13 @@
 <div>
-    <div>
-        <h5>Leave Form</h5>
+    <div class="row mb-3">
+        <div class="col-sm-6">
+            <h5>Leave Form</h5>
+        </div>
+        <div class="col-sm-6 text-sm-end">
+            <button type="button" class="btn btn-dark" onclick="location.href = '/link-form/leave-approval';"><i class="fa-solid fa-thumbs-up me-2" ></i>Leave Approval</button>
+        </div>
     </div>
+
     <div style="background-color: #696969; color: white; border-radius: 2%;" class="px-2 py-2 px-md-4">
         <form wire:submit.prevent="submit">
             <div class="mt-3 row">
@@ -86,11 +92,12 @@
                     termination or dismissal.
                 </p>
             </div>
+
             <!-- Signature Pad -->
             <div class="mt-4 row">
                 <label class="form-label">Signature*</label>
                 <div class="col-sm-12">
-                    <canvas id="signature-pad" class="signature-pad w-100" height="75" style="background-color: white"></canvas>
+                    <canvas id="signature-pad" style="width: 100%; height: 150px; background-color: white;"></canvas>
                     @error('signature') <span style="color: #8B0000">{{ $message }}</span> @enderror
                 </div>
                 <div class="col">
@@ -100,102 +107,123 @@
 
             <hr>
             <div>
-                <button type="submit" class="btn btn-warning col-12 col-md-7" id="submit-signature">Submit</button>
+                <button type="button" class="btn btn-warning col-12 col-md-7" id="submit-signature">Submit</button>
                 <button type="button" class="btn btn-primary mt-2 mt-md-0 col-12 col-md-4" wire:click="clear">Clear</button>
             </div>
         </form>
         <button id="btn123" data-bs-toggle="modal" data-bs-target="#loading" style="display: none"></button>
     </div>
+
     @script
     <script>
         $wire.on('success', () => {
             Swal.fire({
-                title: 'Updated!',
+                title: 'Submitted!',
                 text: 'Successfully Updated.',
                 icon: 'success',
-                allowOutsideClick: false,  // Prevent closing by clicking outside
-                allowEscapeKey: false      // Prevent closing with ESC
+                allowOutsideClick: false,
+                allowEscapeKey: false
             }).then((result) => {
                 if (result.isConfirmed) {
-                    location.reload(); // Reload the page after clicking OK
+                    location.reload();
                 }
             });
         });
     </script>
     @endscript
 </div>
+
 @push('js')
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.6/dist/signature_pad.umd.min.js"></script>
     <script>
-        // // Initialize Signature Pad
-        // const canvas = document.getElementById('signature-pad');
-        // const signaturePad = new SignaturePad(canvas);
-        //
-        // // Clear Signature
-        // document.getElementById('clear-signature').addEventListener('click', function () {
-        //     signaturePad.clear();
-        // });
-        //
-        // // Capture signature when form is submitted
-        // document.querySelector('form').addEventListener('submit', function (e) {
-        //     if (signaturePad.isEmpty()) {
-        //         e.preventDefault();
-        //         alert('Please provide a signature.');
-        //     } else {
-        //         // Convert signature to base64 and set it to Livewire model
-        //     @this.set('signature', signaturePad.toDataURL());
-        //     }
-        // });
+        function resizeCanvas(canvas, signaturePad) {
+            const ratio = Math.max(window.devicePixelRatio || 1, 1);
+            const width = canvas.offsetWidth;
+            const height = canvas.offsetHeight;
 
+            canvas.width = width * ratio;
+            canvas.height = height * ratio;
+            canvas.getContext("2d").scale(ratio, ratio);
+        }
 
-        // const canvas = document.getElementById('signature-pad');
-        // console.log('Canvas:', canvas);
-        //
-        // const signaturePad = new SignaturePad(canvas);
-        // console.log('SignaturePad initialized.');
-        //
-        // document.getElementById('clear-signature').addEventListener('click', function () {
-        //     signaturePad.clear();
-        //     console.log('Signature cleared.');
-        // });
-        //
-        // document.querySelector('form').addEventListener('submit', function (e) { console.log('qq');
-        //     if (signaturePad.isEmpty()) {
-        //         e.preventDefault();
-        //         alert('Please provide a signature.');
-        //         console.log('Form blocked, signature is empty.');
-        //     } else {
-        //         const signatureData = signaturePad.toDataURL();
-        //         console.log('Captured signature:', signatureData);
-        //     @this.set('signature', signatureData);
-        //     }
-        // });
-
-
-            document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function () {
             const canvas = document.getElementById('signature-pad');
-            const signaturePad = new SignaturePad(canvas);
 
-            // Clear button
+            const signaturePad = new SignaturePad(canvas, {
+                penColor: 'black'
+            });
+
+            // Resize and scale canvas
+            resizeCanvas(canvas, signaturePad);
+
+            // Handle resize
+            window.addEventListener("resize", () => resizeCanvas(canvas, signaturePad));
+
+            // Clear signature
             document.getElementById('clear-signature').addEventListener('click', function () {
-            signaturePad.clear();
-        });
+                signaturePad.clear();
+            });
 
             // Submit button
             document.getElementById('submit-signature').addEventListener('click', function () {
-            if (signaturePad.isEmpty()) {
-            alert('Please provide a signature.');
-        } else {
-            const signatureData = signaturePad.toDataURL();
-            console.log('Captured signature:', signatureData);
+                // Get all required inputs by their IDs or querySelector
+                const startDate = document.getElementById('startDate').value.trim();
+                const endDate = document.getElementById('endDate').value.trim();
+                const numOfDays = document.querySelector('[wire\\:model="numOfDays"]').value.trim();
+                const leaveType = document.querySelector('[wire\\:model="leaveType"]').value.trim();
+                const reason = document.querySelector('[wire\\:model="reason"]').value.trim();
+                const isEmergency = document.querySelector('[wire\\:model="isEmergency"]').value.trim();
 
-            // Send signature to Livewire component
-            Livewire.dispatch('setSignature', { data: signatureData });
-        }
+                // Additional fields only if Emergency is YES
+                let name = '', address = '', phoneNum = '', relationship = '';
+                if (isEmergency === 'YES') {
+                    name = document.querySelector('[wire\\:model="name"]').value.trim();
+                    address = document.querySelector('[wire\\:model="address"]').value.trim();
+                    phoneNum = document.querySelector('[wire\\:model="phoneNum"]').value.trim();
+                    relationship = document.querySelector('[wire\\:model="relationship"]').value.trim();
+                }
+
+                // Validate inputs
+                if (
+                    !startDate || !endDate || !numOfDays || !leaveType || !reason || !isEmergency ||
+                    (isEmergency === 'YES' && (!name || !address || !phoneNum || !relationship))
+                ) {
+                    Swal.fire({
+                        title: 'Incomplete Form',
+                        text: 'Please fill out all required fields before signing.',
+                        icon: 'warning',
+                    });
+                    return; // stop here if not complete
+                }
+
+                // Check if signature is empty
+                if (signaturePad.isEmpty()) {
+                    Swal.fire({
+                        title: 'Missing Signature',
+                        text: 'Please provide your signature before submitting.',
+                        icon: 'warning',
+                    });
+                    return;
+                }
+
+                // Show signature confirmation
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Do you confirm this as your signature?",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, submit it!',
+                    cancelButtonText: 'No, go back'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        const signatureData = signaturePad.toDataURL();
+                        Livewire.dispatch('setSignature', { data: signatureData });
+                    }
+                });
+            });
+
         });
-        });
-
-
     </script>
-
 @endpush

@@ -27,9 +27,14 @@ class LeaveForm extends Component
     public function setSignature($data)
     {
         $this->signature = $data;
+        $this->submit();
     }
     public function submit()
     {
+        $validatedData = $this->validate([
+            'signature'   => 'required'
+        ]);
+
         $imageData = $this->signature; // This is the base64 data of the signature
         $image = str_replace('data:image/png;base64,', '', $imageData);
         $image = str_replace(' ', '+', $image); // Ensure the base64 string is properly formatted

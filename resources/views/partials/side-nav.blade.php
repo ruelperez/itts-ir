@@ -75,6 +75,12 @@
                         <small>Tools & Components</small>
                     </li>
                     <li class="sidebar-item">
+                        <a href="/employee"  class="sidebar-link">
+                            <i class="fa-regular fa-user pe-2"></i>
+                            Profile Info
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
                         <a href="/dashboard"  class="sidebar-link">
                             <i class="fa-solid fa-sliders pe-2"></i>
                             Dashboard
@@ -111,12 +117,6 @@
                         <a href="/production-lead-timeshare"  class="sidebar-link">
                             <i class="fa-solid fa-money-bill pe-2"></i>
                             Prod. Leads
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="/employee"  class="sidebar-link">
-                            <i class="fa-regular fa-user pe-2"></i>
-                            Employee
                         </a>
                     </li>
                     <li class="sidebar-item">
