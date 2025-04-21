@@ -88,7 +88,7 @@
                     </li>
                     <li class="sidebar-item">
                         <a href="/link-form/leave-form"  class="sidebar-link">
-                            <i class="fa-solid fa-sliders pe-2"></i>
+                            <i class="fa-solid fa-leaf pe-2"></i>
                             Leave Request
                         </a>
                     </li>
