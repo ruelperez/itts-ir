@@ -55,12 +55,6 @@
                             <i class="fa-regular fa-file text-primary" style="cursor: pointer" onclick="location.href = '/link-form/leave-form';"></i>
                         </td>
                     @endif
-                    <td class="edit-icon">
-                        <i class="fa-solid fa-marker" style="cursor: pointer"
-                           wire:click="$set('selectedLeaveId', {{ $data->id }})"
-                           data-bs-toggle="modal"
-                           data-bs-target="#updateModal"></i>
-                    </td>
 
                 </tr>
             @endforeach

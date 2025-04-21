@@ -59,6 +59,7 @@ Route::middleware(['auth','restrict.ip','checkEmployee'])->group(function () {
     Route::prefix('pdf')->group(function () {
         Route::get('/eod/{user_id}/{year}/{month}/{week}', [\App\Http\Controllers\Pdf\EodController::class, 'pdf']);
         Route::get('/daily-shift/{month}/{day}/{year}/{role}', [\App\Http\Controllers\Pdf\DailyShiftController::class, 'pdf']);
+        Route::get('/leave-form/{id}', [\App\Http\Controllers\Pdf\LeaveFormController::class, 'pdf']);
     });
     Route::prefix('admin-access')->group(function () {
         Route::get('eod/{page}', [\App\Http\Controllers\AdminAccess\PageController::class, 'eod']);

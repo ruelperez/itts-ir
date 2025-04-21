@@ -89,6 +89,11 @@
                             <p @if($data->remark == "Approved") style="color: green" @endif  @if($data->remark == "Declined") style="color: red" @endif>{{ $data->remark }}</p>
                         @endif
                     </td>
+                    <td>
+                        @if($data->remark == "Approved")
+                            <i class="fa-regular fa-file text-primary" style="cursor: pointer" onclick="location.href = '/pdf/leave-form/{{$data->id}}';"></i>
+                        @endif
+                    </td>
                     <td class="edit-icon">
                         <i class="fa-solid fa-marker" style="cursor: pointer"
                            wire:click="$set('selectedLeaveId', {{ $data->id }})"
