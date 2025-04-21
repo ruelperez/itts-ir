@@ -110,7 +110,7 @@
     <script>
         $wire.on('success', () => {
             Swal.fire({
-                title: 'Submitted!',
+                title: 'Updated!',
                 text: 'Successfully Updated.',
                 icon: 'success',
                 allowOutsideClick: false,

@@ -15,7 +15,7 @@ class LeaveForm extends Component
 {
     use WithFileUploads;
 
-    public $start, $end, $numOfDays, $resume, $remark, $timeAdjust, $leaveType, $user_id, $reason, $isEmergency = "NO", $name, $fullname, $address, $phoneNum, $relationship;
+    public $start, $end, $numOfDays = 1, $resume, $remark, $timeAdjust, $leaveType, $user_id, $reason, $isEmergency = "NO", $name, $fullname, $address, $phoneNum, $relationship;
     public $signature;
     public function render()
     {
@@ -52,7 +52,7 @@ class LeaveForm extends Component
             'user_id' => $this->user_id,
             'start' => $this->start,
             'end' => $this->end,
-            'numOfDays' => $this->numOfDays,
+            'numOfDays' => $this->numOfDays -1,
             'leaveType' => $this->leaveType,
             'reason' => $this->reason,
             'signature' => 'storage/signatures/' . $imageName, // Save the relative path to the signature image

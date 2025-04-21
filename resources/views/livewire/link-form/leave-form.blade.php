@@ -21,7 +21,7 @@
                     <input type="text" class="form-control" id="endDate" wire:model="end" required>
                     @error('end') <span style="color: #8B0000">{{ $message }}</span> @enderror
                 </div>
-                <div class="col-md-6 mt-4">
+                <div class="col-md-6 mt-4" hidden>
                     <label class="form-label">Number Of Days*</label>
                     <input type="text" class="form-control" wire:model="numOfDays" required>
                     @error('numOfDays') <span style="color: #8B0000">{{ $message }}</span> @enderror
@@ -39,7 +39,7 @@
                         <select class="form-select" aria-label="Default select example" wire:model="leaveType">
                             <option value="">Select</option>
                             <option value="LEAVE WITHOUT PAY (LWOP)">LEAVE WITHOUT PAY (LWOP)</option>
-                            <option value="LEAVE WITH PAY (LWP)">LEAVE WITH PAY (LWP)</option>
+                            <option value="SIL">SIL</option>
                         </select>
                         @error('leaveType') <span style="color: #8B0000">{{ $message }}</span> @enderror
                     </div>
