@@ -4,7 +4,7 @@
             <h5>Leave Form</h5>
         </div>
         <div class="col-sm-6 text-sm-end">
-            <button type="button" class="btn btn-dark" onclick="location.href = '/link-form/leave-approval';"><i class="fa-solid fa-thumbs-up me-2" ></i>Leave Approval</button>
+            <button type="button" class="btn btn-dark" onclick="location.href = '/link-form/leave-approval';"><i class="fa-solid fa-thumbs-up me-2" ></i>My Leave Approval</button>
         </div>
     </div>
 

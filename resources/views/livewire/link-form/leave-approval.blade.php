@@ -1,10 +1,10 @@
 <div>
     <div class="row mb-3">
         <div class="col-sm-6">
-            <h5>Leave Approval</h5>
+            <h5>My Leave Approval</h5>
         </div>
         <div class="col-sm-6 text-sm-end">
-            <button type="button" class="btn btn-dark" onclick="location.href = '/link-form/leave-form';"><i class="fa-solid fa-code-pull-request me-2" ></i>Leave Request</button>
+            <button type="button" class="btn btn-dark" onclick="location.href = '/link-form/leave-form';"><i class="fa-solid fa-code-pull-request me-2" ></i>Leave Form</button>
         </div>
     </div>
 
@@ -50,12 +50,18 @@
                             <p @if($data->remark == "Approved") style="color: green" @endif  @if($data->remark == "Declined") style="color: red" @endif>{{ $data->remark }}</p>
                         @endif
                     </td>
+                    @if($data->remark == "Approved")
+                        <td>
+                            <i class="fa-regular fa-file text-primary" style="cursor: pointer" onclick="location.href = '/link-form/leave-form';"></i>
+                        </td>
+                    @endif
                     <td class="edit-icon">
                         <i class="fa-solid fa-marker" style="cursor: pointer"
                            wire:click="$set('selectedLeaveId', {{ $data->id }})"
                            data-bs-toggle="modal"
                            data-bs-target="#updateModal"></i>
                     </td>
+
                 </tr>
             @endforeach
             </tbody>
