@@ -38,7 +38,14 @@
                     <div>
                         <select class="form-select" aria-label="Default select example" wire:model="leaveType">
                             <option value="">Select</option>
-                            <option value="LEAVE WITHOUT PAY (LWOP)">LEAVE WITHOUT PAY (LWOP)</option>
+                            <option value="Vacation Leave">Vacation Leave</option>
+                            <option value="Leave Without Pay (LWOP)">Leave Without Pay (LWOP)</option>
+                            <option value="Sick Leave (Self)">Sick Leave (Self)</option>
+                            <option value="Sick Leave (Family)">Sick Leave (Family)</option>
+                            <option value="Bereavement">Bereavement</option>
+                            <option value="Doctor's Appointment">Doctor's Appointment</option>
+                            <option value="Maternity / Paternity Leave">Maternity / Paternity Leave</option>
+                            <option value="Official Leave">Official Leave</option>
                             <option value="SIL">SIL</option>
                         </select>
                         @error('leaveType') <span style="color: #8B0000">{{ $message }}</span> @enderror
