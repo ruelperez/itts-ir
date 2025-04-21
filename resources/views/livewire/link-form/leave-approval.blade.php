@@ -52,7 +52,7 @@
                     </td>
                     @if($data->remark == "Approved")
                         <td>
-                            <i class="fa-regular fa-file text-primary" style="cursor: pointer" onclick="location.href = '/link-form/leave-form';"></i>
+                            <i class="fa-regular fa-file text-primary" style="cursor: pointer" onclick="location.href = '/pdf/leave-form/{{$data->id}}';" ></i>
                         </td>
                     @endif
 
