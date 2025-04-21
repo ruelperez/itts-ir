@@ -87,6 +87,12 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
+                        <a href="/link-form/leave-form"  class="sidebar-link">
+                            <i class="fa-solid fa-sliders pe-2"></i>
+                            Leave Request
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
                         <a href="/employee-dtr"  class="sidebar-link">
                             <i class="fa-solid fa-business-time pe-2"></i>
                             DTR
