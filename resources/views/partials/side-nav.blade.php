@@ -75,15 +75,15 @@
                         <small>Tools & Components</small>
                     </li>
                     <li class="sidebar-item">
-                        <a href="/employee"  class="sidebar-link">
-                            <i class="fa-regular fa-user pe-2"></i>
-                            Profile Info
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
                         <a href="/dashboard"  class="sidebar-link">
                             <i class="fa-solid fa-sliders pe-2"></i>
                             Dashboard
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="/employee"  class="sidebar-link">
+                            <i class="fa-regular fa-user pe-2"></i>
+                            Profile Info
                         </a>
                     </li>
                     <li class="sidebar-item">
@@ -106,11 +106,17 @@
                         </a>
                         <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="/campaign/mass-tort" class="sidebar-link">Mass Tort / Timeshare</a>
+                                <a href="/campaign/mass-tort" class="sidebar-link">Mass-tort</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="/campaign/zip-list-roofing-window" class="sidebar-link">Zip List (Roofing/Window)</a>
+                                <a href="/campaign/timeshare" class="sidebar-link">Timeshare</a>
                             </li>
+                            <li class="sidebar-item">
+                                <a href="/campaign/green-escapes-travel" class="sidebar-link">GE Travel</a>
+                            </li>
+{{--                            <li class="sidebar-item">--}}
+{{--                                <a href="/campaign/zip-list-roofing-window" class="sidebar-link">Zip List (Roofing/Window)</a>--}}
+{{--                            </li>--}}
 {{--                            <li class="sidebar-item">--}}
 {{--                                <a href="/campaign/home-security" class="sidebar-link">Home Security</a>--}}
 {{--                            </li>--}}
