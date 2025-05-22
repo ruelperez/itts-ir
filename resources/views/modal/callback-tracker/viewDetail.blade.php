@@ -13,10 +13,16 @@
                     <p>Campaign: <b>{{ucfirst($campaign)}}</b></p>
                 </div>
                 <div>
-                    <p>Claimant: <b>{{ucfirst($claimant)}}</b></p>
+                    <p>Guest 1: <b>{{ucfirst($guest1)}}</b></p>
                 </div>
                 <div>
-                    <p>Injured Party: <b>{{ucfirst($injuredParty)}}</b></p>
+                    <p>Guest 2: <b>{{ucfirst($guest2)}}</b></p>
+                </div>
+                <div>
+                    <p>Age 1: <b>{{ucfirst($age1)}}</b></p>
+                </div>
+                <div>
+                    <p>Age 2: <b>{{ucfirst($age2)}}</b></p>
                 </div>
                 <div>
                     <p>Phone Number: <b>{{$phoneNumber}}</b></p>
@@ -25,29 +31,33 @@
                     <p>Alt. Phone Number: <b>{{$altPhoneNumber}}</b></p>
                 </div>
                 <div>
-                    <p>DOB: <b>{{$dob}}</b></p>
-                </div>
-                <div>
                     <p>Email: <b>{{$email}}</b></p>
                 </div>
                 <div>
-                    <p>Address: <b>{{$address}}</b></p>
+                    <p>State: <b>{{$state}}</b></p>
+                </div>
+                <div>
+                    <p>Relationship: <b>{{$relationship}}</b></p>
                 </div>
                 <hr style="border: solid black 2px">
                 <div>
-                    @if($viewAnswered)
-                        <!-- Display concatenated answers -->
-                        <div class="mt-3">
-                            <!-- Directly output the content with raw HTML rendering -->
-                            <p>{!! $viewAnswered !!}</p>
-                        </div>
-                    @else
-                        No qualifying questionnaire, features implement (Nov 28, 2024)
-                    @endif
+                    <p>Gift: <b>{{$gift}}</b></p>
+                </div>
+                <div>
+                    <p>Day: <b>{{$day}}</b></p>
+                </div>
+                <div>
+                    <p>Time: <b>{{$time}}</b></p>
+                </div>
+                <div>
+                    <p>Credit Card Provider: <b>{{$creditCard}}</b></p>
                 </div>
                 <hr style="border: solid black 2px">
                 <div>
-                    <p>Agent: <b>{{ucfirst($agent)}}</b></p>
+                    <p>Have a combined $50K annual income?: <b>{{$is_50k}}</b></p>
+                </div>
+                <div>
+                    <p>First time to attend a travel webinar?: <b>{{$is_firsTime}}</b></p>
                 </div>
                 <div>
                     <p>Callback reason: <b>{{$reason}}</b></p>

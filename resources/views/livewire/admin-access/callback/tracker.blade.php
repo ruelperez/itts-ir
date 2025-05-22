@@ -1,34 +1,6 @@
 <div>
     @include('modal.callback-tracker.viewDetail')
     @include('modal.callback-tracker.add')
-    <div class="modal fade" id="remarkModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="positionModalLabel">Update Callback Remark</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeRemarkBtn()"></button>
-                </div>
-                <form wire:submit.prevent="submitEditRemark">
-                    <div x-data="{ remark: '' }" class="modal-body">
-                        <select id="positionSelect" class="form-select" wire:model="remark" x-model="remark" required>
-                            <option value="">Select remark</option>
-                            <option value="Qualified">Qualified</option>
-                            <option value="Disqualified">Disqualified</option>
-                        </select>
-
-                        <!-- Conditionally show textarea if 'remark' is 'Disqualified' -->
-                        <div class="col-12 mt-4" x-show="remark === 'Disqualified'" x-transition>
-                            <textarea class="form-control" rows="3" wire:model="dqReason" placeholder="Reason:"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Update</button>
-                    </div>
-                    <button type="button" class="btn-close d-none" data-bs-dismiss="modal" id="btnclose122" aria-label="Close"></button>
-                </form>
-            </div>
-        </div>
-    </div>
     <div class="row  mt-3 mt-md-4">
         <div class="col-sm-7 col-lg-5 col-xl-5 mt-2 mt-sm-0">
             <input class="form-control w-100" type="search" placeholder="Search" aria-label="Search" wire:model.live="search">
@@ -47,21 +19,16 @@
         <table class="table table-striped w-100">
             <thead>
             <tr>
-                <th scope="col" >Tracker ID</th>
                 <th scope="col" >Date</th>
                 <th scope="col" >Agent</th>
                 <th scope="col" >Campaign</th>
-                <th scope="col" >Claimant</th>
-                <th scope="col" >Injured</th>
+                <th scope="col" >Guest 1</th>
+                <th scope="col" >Guest 2</th>
                 <th scope="col" >Phone#</th>
-                {{--                <th scope="col" style="width: 9%;">Alt Phone #</th>--}}
                 <th scope="col" >Email</th>
-                {{--                <th scope="col" style="width: 9%;">DOB</th>--}}
-                {{--                <th scope="col" style="width: 9%;">Address</th>--}}
-                {{--                <th scope="col" style="width: 9%;">Callback time</th>--}}
+                <th scope="col" >Email</th>
                 <th scope="col">Reason</th>
                 <th scope="col">Time left</th>
-{{--                <th scope="col" >Is expired</th>--}}
             </tr>
             </thead>
             <tbody>
@@ -69,9 +36,6 @@
                 <tr @if($data->is_expired == "1") style=" background-color: #FF2828; color: white" @endif x-data
                     @dblclick="$dispatch('openDetailsModal', { id: {{ $data->id }} })" >
                     {{--                <tr wire:click="viewDetail({{$data->id}})" data-bs-toggle="modal" data-bs-target="#viewDetail" style="cursor: pointer">--}}
-                    <td>
-                        {{ $data->id}}
-                    </td>
                     <td>
                         {{ $data->created_at->format('m/d/Y h:i A') }}
                     </td>
@@ -82,38 +46,23 @@
                         {{$data->campaign}}
                     </td>
                     <td>
-                        {{$data->claimant}}
+                        {{$data->guest1}}
                     </td>
                     <td>
-                        {{$data->injuredParty}}
+                        {{$data->guest2}}
                     </td>
                     <td>
                         {{$data->phoneNumber}}
                     </td>
-                    {{--                    <td>--}}
-                    {{--                        {{$data->altPhoneNumber}}--}}
-                    {{--                    </td>--}}
                     <td>
                         {{$data->email}}
                     </td>
-                    {{--                    <td>--}}
-                    {{--                        {{$data->dob}}--}}
-                    {{--                    </td>--}}
-                    {{--                    <td>--}}
-                    {{--                        {{$data->address}}--}}
-                    {{--                    </td>--}}
-                    {{--                    <td>--}}
-                    {{--                        {{$data->callbackTime}}--}}
-                    {{--                    </td>--}}
                     <td>
                         {{$data->reason}}
                     </td>
                     <td>
                         {{$data->timeRemaining }} hrs.
                     </td>
-{{--                    <td style="padding: 0; width: 1%; text-align: center;">--}}
-{{--                        <p style="margin: 0; padding: 0;">{{$data->is_expired ? 'Yes' : 'No' }}</p>--}}
-{{--                    </td>--}}
                 </tr>
             @endforeach
             </tbody>

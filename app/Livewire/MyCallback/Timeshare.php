@@ -73,6 +73,7 @@ class Timeshare extends Component
         ]);
         try {
             TimeshareCallback::create([
+                'campaign' => $this->campaign,
                 'guest1' => $this->guest1,
                 'guest2' => $this->guest2,
                 'age1' => $this->age1,
@@ -80,12 +81,11 @@ class Timeshare extends Component
                 'phoneNumber' => $this->phoneNumber,
                 'altPhoneNumber' => $this->altPhoneNumber,
                 'email' => $this->email,
-                'campaign' => $this->campaign,
-                'relationship' => $this->relationship,
                 'state' => $this->state,
+                'relationship' => $this->relationship,
+                'gift' => $this->gift,
                 'day' => $this->day,
                 'time' => $this->time,
-                'gift' => $this->gift,
                 'creditCard' => $this->creditCard,
                 'is_50k' => $this->is_50k,
                 'is_firsTime' => $this->is_firsTime,

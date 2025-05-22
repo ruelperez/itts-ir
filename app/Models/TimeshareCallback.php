@@ -43,5 +43,10 @@ class TimeshareCallback extends Model
         $this->save(); // Save the updated values
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     use HasFactory;
 }
