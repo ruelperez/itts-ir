@@ -50,7 +50,12 @@
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-6 mb-md-4 mb-sm-4 mt-4 mt-lg-2">
                     <label class="form-label">Client*</label>
-                    <input type="text" class="form-control" wire:model="client" required disabled>
+                    <select class="form-control" wire:model="client" required>
+                        <option value="" selected>Select</option>
+                        @foreach ($clients as $option)
+                            <option value="{{ $option }}">{{ ucfirst($option) }}</option>
+                        @endforeach
+                    </select>
                     @error('client') <span style="color: #8B0000">{{ $message }}</span> @enderror
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-6 mb-md-4 mb-sm-4 mt-4 mt-lg-2">
@@ -59,6 +64,7 @@
                     @error('guest1') <span style="color: #8B0000">{{ $message }}</span> @enderror
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-xl-3 col-lg-3 col-md-6 mb-md-4 mb-sm-4 mt-4 mt-md-2">
                     <label class="form-label">Guest 2*</label>
@@ -110,8 +116,11 @@
                     <div>
                         <select class="form-select" aria-label="Default select example" wire:model="gift" required>
                             <option value="">Select Gift</option>
-                            <option value="2 night Marriott Hotel stay with Round Trip Airfare for 2 adults">- 2 night Marriott Hotel stay with Round Trip Airfare for 2 adults</option>
-                            <option value="7 Night Caribbean Cruise for 2 adults">- 7 Night Caribbean Cruise for 2 adults</option>
+                            <option value="Roundtrip airfare to two people, plus hotel for two nights (23 locations)">Roundtrip airfare to two people, plus hotel for two nights (23 locations)</option>
+                            <option value="Up to 7 nights' accommodations at one of 3000 resorts/hotels worldwide.">Up to 7 nights' accommodations at one of 3000 resorts/hotels worldwide.</option>
+                            <option value="3-days all-inclusive in Mexico or Dominican Republic">3-days all-inclusive in Mexico or Dominican Republic</option>
+                            <option value="5-day and 4-night cruise for two people to Mexico or the Bahamas">5-day and 4-night cruise for two people to Mexico or the Bahamas</option>
+                            <option value="Open Choice (Not decided yet)">Open Choice (Not decided yet)</option>
                         </select>
                         @error('gift') <span style="color: #8B0000">{{ $message }}</span> @enderror
                     </div>

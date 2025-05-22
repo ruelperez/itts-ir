@@ -1,18 +1,19 @@
 <div>
-    @include('modal.callback.viewDetail')
-    @include('modal.callback.add')
+    @include('modal.travel-callback.viewDetail')
+    @include('modal.travel-callback.add')
     <div>
         <i class="fa-solid fa-arrow-left" onclick="location.href = '/production-lead-mass-tort';" style="cursor: pointer"></i>
-        <h6>MY CALLBACK</h6>
+        <h6>MY CALLBACK (Timeshare)</h6>
     </div>
     <div class="row  mt-3 mt-md-4">
         <div class="col-sm-5 col-lg-3 col-xl-2">
             <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                MASS TORT
+                TRAVEL
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" href="/my-callback/timeshare">Timeshare</a></li>
-                <li><a class="dropdown-item" href="/my-callback/masstort">Mass Tort</a></li>
+                <li><a class="dropdown-item" href="/my-callback/travel">Travel</a></li>
+                {{--                <li><a class="dropdown-item" href="/my-callback/mass-tort">Mass Tort</a></li>--}}
                 {{--                <li><a class="dropdown-item" href="/my-callback/homesec">Home Sec</a></li>--}}
             </ul>
         </div>
@@ -34,20 +35,15 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Date</th>
-                <th scope="col">Campaign</th>
-                <th scope="col" >Claimant</th>
-                <th scope="col" >Injured party</th>
-                <th scope="col" >Phone #</th>
-                {{--                <th scope="col" style="width: 9%;">Alt Phone #</th>--}}
-                <th scope="col" >Email</th>
-                {{--                <th scope="col" style="width: 9%;">DOB</th>--}}
-                {{--                <th scope="col" style="width: 9%;">Address</th>--}}
-                {{--                <th scope="col" style="width: 9%;">Callback time</th>--}}
-                <th scope="col" >Reason</th>
-                <th scope="col" >Time left</th>
-                {{--                <th scope="col" >Is expired</th>--}}
+                <th scope="col" style="width: 9%;">Tracker ID</th>
+                <th scope="col" style="width: 9%;">Date</th>
+                <th scope="col" style="width: 9%;">Agent</th>
+                <th scope="col" style="width: 9%;">Guest 1</th>
+                <th scope="col" style="width: 9%;">Guest 2</th>
+                <th scope="col" style="width: 9%;">Phone</th>
+                <th scope="col" style="width: 9%;">Alt. Phone</th>
+                <th scope="col" style="width: 9%;">Email</th>
+                <th scope="col" style="width: 15%;">Remarks</th>
             </tr>
             </thead>
             <tbody>
@@ -56,47 +52,35 @@
                     @dblclick="$dispatch('viewDetail', { id: {{ $data->id }} })" >
                     {{--                <tr wire:click="viewDetail({{$data->id}})" data-bs-toggle="modal" data-bs-target="#viewDetail" style="cursor: pointer">--}}
                     <td>
-                        {{ $data->id}}
+                        {{$data->id}}
                     </td>
                     <td>
-                        {{ $data->updated_at->format('m/d/Y (h:i A)') }}
+                        {{ $data->created_at->format('m/d/Y (h:i A)') }}
                     </td>
                     <td>
-                        {{$data->campaign}}
+                        {{$data->agent}}
                     </td>
                     <td>
-                        {{$data->claimant}}
+                        {{$data->guest1}}
                     </td>
                     <td>
-                        {{$data->injuredParty}}
+                        {{$data->guest2}}
                     </td>
                     <td>
                         {{$data->phoneNumber}}
                     </td>
-                    {{--                    <td>--}}
-                    {{--                        {{$data->altPhoneNumber}}--}}
-                    {{--                    </td>--}}
                     <td>
-                        {{$data->email}}
+                        {{$data->altPhoneNumber}}
                     </td>
-                    {{--                    <td>--}}
-                    {{--                        {{$data->dob}}--}}
-                    {{--                    </td>--}}
-                    {{--                    <td>--}}
-                    {{--                        {{$data->address}}--}}
-                    {{--                    </td>--}}
-                    {{--                    <td>--}}
-                    {{--                        {{$data->callbackTime}}--}}
-                    {{--                    </td>--}}
                     <td>
-                        {{$data->reason}}
+                        {{ucwords($data->email)}}
+                    </td>
+                    <td>
+                        {{ucfirst($data->reason)}}
                     </td>
                     <td>
                         {{$data->timeRemaining }} hrs.
                     </td>
-                    {{--                    <td style="padding: 0; width: 1%; text-align: center;">--}}
-                    {{--                        <p style="margin: 0; padding: 0;">{{$data->is_expired ? 'Yes' : 'No' }}</p>--}}
-                    {{--                    </td>--}}
                 </tr>
             @endforeach
             </tbody>
@@ -113,13 +97,15 @@
     @script
     <script>
         $wire.on('success', () => {
-            Swal.fire(
-                'SUCCESS!',
-                'Successfully Updated .',
-                'success'
-            ).then((result) => {
+            Swal.fire({
+                title: 'Successfully Submitted!',
+                icon: 'success',
+                confirmButtonText: 'OK',
+                allowOutsideClick: false, // Prevent closing by clicking outside
+                allowEscapeKey: false,   // Prevent closing with the Escape key
+            }).then((result) => {
                 if (result.isConfirmed) {
-                    location.reload();
+                    location.reload(); // Reload the page when "OK" is clicked
                 }
             });
         });
@@ -128,11 +114,7 @@
                 'FAILED!',
                 '',
                 'error'
-            ).then((result) => {
-                if (result.isConfirmed) {
-                    location.reload();
-                }
-            });
+            )
         });
         $wire.on('show-detailss-modal', () => {
             const positionModal = new bootstrap.Modal(document.getElementById('viewDetail'));
