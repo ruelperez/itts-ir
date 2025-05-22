@@ -198,6 +198,8 @@ class TimeshareForm extends Component
                     ->where('designation','Team Leader')
                     ->orWhere('employeeFullname','LIKE','%'. $this->verifier. '%')
                     ->where('designation','Senior Team Leader')
+                    ->orWhere('employeeFullname','LIKE','%'. $this->verifier. '%')
+                    ->where('designation','Production Floor Manager/ Process Lead')
                     ->take(5)
                     ->get();
                 $this->showSearchVerifier = true;
