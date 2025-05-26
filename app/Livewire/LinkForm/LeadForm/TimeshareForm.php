@@ -11,7 +11,7 @@ use Livewire\Component;
 class TimeshareForm extends Component
 {
     public $registrationSwitch, $hostingTrans, $gm = 0, $gm2 = 0, $DQ, $jn, $toChecked = false, $comment, $caseType = "self", $is_success = false, $showSearch = false, $showSearch2 = false, $showSearchCoach = false, $results = [], $results2 = [], $resultsCoach = [], $client, $clientList = [], $campaignList = [], $campaign = "Timeshare", $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
-        $date, $leadOwnership, $mll = 0, $day, $reason, $gift, $time, $agent2, $campaignName, $guest1, $guest2, $displayComment = false, $orderNumber, $desciption, $service, $package, $dateSales, $submission = [], $checkboxDQ, $lawfirm = "selectLawfirm", $bam, $bbb, $clients = ['webinar','day tour'], $bms, $dtvRemarks, $remarks, $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $checkboxInvalidTO, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "", $resultsVerifier = [], $showSearchVerifier = false ;
+        $date, $leadOwnership, $mll = 0, $day, $reason, $gift, $time, $agent2, $campaignName, $guest1, $guest2, $displayComment = false, $orderNumber, $desciption, $service, $package, $dateSales, $submission = [], $checkboxDQ, $lawfirm = "selectLawfirm", $bam, $bbb, $clients = ['webinar','day tour','day tour (ca)','day tour (nc)'], $bms, $dtvRemarks, $remarks, $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $checkboxInvalidTO, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "", $resultsVerifier = [], $showSearchVerifier = false ;
 
 
     public function render()
