@@ -127,14 +127,6 @@ class TimeshareForm extends Component
 
     public function mount($page){
         $this->campaignName = explode('-', $page)[0];
-        $usrId = auth()->user()->id;
-        $pst = auth()->user()->position;
-        if ($pst != "Agent"){
-
-        }
-        else{
-            return redirect('/');
-        }
         $this->campaignList = Note::select('campaign')
             ->distinct('campaign')
             ->get();
