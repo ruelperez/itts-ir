@@ -27,7 +27,7 @@ class Timeshare extends Component
     #[Validate('image|max:1024')] // 1MB Max
     public $registrationSwitch, $did, $link = [
         ['title' => '', 'textLink' => ''],
-    ],  $schedule, $geo, $clientList = [], $authorizer, $cntName, $restriction, $campaign, $campList = [], $tcpa = false, $felony = false, $client_name, $client_list = [], $campaignList = [], $campName, $employeeData, $tf = false, $fj = 0, $email= false, $thatsthem= false, $dupe= false, $blacklist = false, $govt= false, $dtrData = [], $campaign_stat = "active", $edit_comment_id, $editTextComment, $linkData = [], $imagePath, $title, $image, $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "all", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
+    ],  $schedule, $geo, $clientList = [], $authorizer, $cntName, $restriction, $campaign, $campList = [], $tcpa = false, $felony = false, $client_name, $client_list = [], $campaignList = [], $campName, $employeeData, $tf = false, $fj = 0, $email= false, $thatsthem= false, $dupe= false, $blacklist = false, $govt= false, $dtrData = [], $campaign_stat = "active", $edit_comment_id, $editTextComment, $linkData = [], $imagePath, $title, $images = [], $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "all", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
@@ -273,18 +273,20 @@ class Timeshare extends Component
         $this->image->storeAs('photos', $filename, 'public_photos');
         $this->imagePath = $filename;
     }
-    public function submit(){
-        if ($this->image == null or $this->image == ""){
-            $this->imagePath = "";
-        }
-        else{
-            $this->storeImage();
-//        $this->image->store(path: 'public');
-//        $hashPhoto = $this->image->hashName();
+    public function submit()
+    {
+        $uploadedImages = [];
+
+        if (!empty($this->images)) {
+            foreach ($this->images as $img) {
+                $filename = Str::random(40) . '.' . $img->getClientOriginalExtension();
+                $img->storeAs('photos', $filename, 'public_photos');
+                $uploadedImages[] = $filename;
+            }
         }
 
         try {
-            Note::create([
+            $note = Note::create([
                 'text' => $this->text,
                 'user_id' => $this->user_id,
                 'user_fullname' => $this->user_fullname,
@@ -293,7 +295,7 @@ class Timeshare extends Component
                 'photo' => $this->photo,
                 'title' => $this->title,
                 'client' => $this->client,
-                'image' => $this->imagePath,
+                'image' => json_encode($uploadedImages),
                 'campaign_stat' => $this->campaign_stat,
                 'tcpa' => $this->tcpa,
                 'blacklist' => $this->blacklist,
@@ -302,25 +304,25 @@ class Timeshare extends Component
                 'email' => $this->email,
             ]);
 
-            $v = Note::latest()->first();
-
-            foreach ($this->link as $links){
+            foreach ($this->link as $links) {
                 Link::create([
                     'title' => $links['title'],
                     'link' => $links['textLink'],
-                    'note_id' => $v->id,
+                    'note_id' => $note->id,
                 ]);
             }
-            $this->clearInput();
+
             \App\Models\Logs::create([
                 'action' => "create post",
                 'user_id' => $this->user_id,
-                'note_id' => $v->id,
+                'note_id' => $note->id,
                 'fullname' => $this->fullname,
                 'photo' => $this->photo,
             ]);
+
+            $this->clearInput();
             session()->flash('good', "Successfully added");
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             session()->flash('bad', "Failed to add");
         }
     }
@@ -508,7 +510,7 @@ class Timeshare extends Component
         $this->link = [
             ['title' => '', 'textLink' => ''],
         ];
-        $this->image = "";
+        $this->images = [];
     }
 
     public function logout(){

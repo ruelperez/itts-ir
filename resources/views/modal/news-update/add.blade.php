@@ -310,7 +310,16 @@
                         <div wire:ignore style="padding-left: 2%; padding-right: 2%;" class="mt-4">
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" wire:model="text" required></textarea>
                             <img id="preview" src="#" alt="Image Preview" style="display: none; max-width: 60%; max-height: 60%; margin-top: 3%;">
-                            <input type="file" id="image" wire:model="image" accept="image/*" onchange="previewImage(event)" style="margin-top: 3%;">
+                            <input type="file" wire:model="images" accept="image/*" multiple>
+                            @error('images.*') <span class="text-danger">{{ $message }}</span> @enderror
+
+                            {{-- Optional preview --}}
+                            <div class="mt-3 d-flex flex-wrap gap-3">
+                                @foreach($images as $preview)
+                                    <img src="{{ $preview->temporaryUrl() }}" class="img-thumbnail" style="width: 100px;">
+                                @endforeach
+                            </div>
+
                         </div>
                     </div>
                 </div>

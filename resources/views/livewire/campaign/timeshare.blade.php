@@ -152,17 +152,37 @@
 
                     {{-- Image Section --}}
                     @php $images = json_decode($data->image, true); @endphp
-                    @if(is_array($images))
-                        <div class="mt-4 bg-light rounded shadow-sm p-4 text-center">
-                            <div class="d-flex flex-wrap gap-3 justify-content-center">
-                                @foreach($images as $img)
-                                    <img src="{{ asset('photos/photos/'.$img) }}" alt="Uploaded Image" class="img-thumbnail" style="width: 150px;">
-                                @endforeach
+                    @if(is_array($images) && count($images) > 0)
+                        <div class="mt-4 p-4 bg-light rounded-4 shadow-sm">
+                            <div class="container">
+
+                                {{-- Hero image with slightly smaller width --}}
+                                <div class="row mb-4 justify-content-center">
+                                    <div class="col-12 col-md-8 col-lg-7">
+                                        <div class="overflow-hidden rounded-4 shadow-lg hero-img-wrapper">
+                                            <img src="{{ asset('photos/photos/'.$images[0]) }}"
+                                                 alt="Main"
+                                                 class="hero-img"
+                                                 style="aspect-ratio: 5 / 3;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- Remaining images --}}
+                                <div class="row g-4 justify-content-center">
+                                    @foreach(array_slice($images, 1) as $img)
+                                        <div class="col-6 col-md-5 col-lg-4">
+                                            <div class="overflow-hidden rounded-4 shadow-sm image-thumb-wrapper">
+                                                <img src="{{ asset('photos/photos/'.$img) }}"
+                                                     alt="Thumbnail"
+                                                     class="image-thumb"
+                                                     style="aspect-ratio: 4 / 3;">
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+
                             </div>
-                        </div>
-                    @elseif($data->image)
-                        <div class="mt-4 bg-light rounded shadow-sm p-4 text-center">
-                            <img src="{{ asset('photos/photos/'.$data->image) }}" alt="Uploaded Image" class="img-fluid rounded shadow" style="max-width: 100%; height: auto;">
                         </div>
                     @endif
                 </div>
@@ -224,3 +244,56 @@
     {{--    </script>--}}
     {{--    @endscript--}}
 </div>
+@push('css')
+    <style>
+        /* General animation on load */
+        @keyframes fadeSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.98);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Apply animation to each image wrapper */
+        .hero-img-wrapper,
+        .image-thumb-wrapper {
+            animation: fadeSlideUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        /* Stagger the animation delay */
+        .hero-img-wrapper {
+            animation-delay: 0.1s;
+        }
+        .image-thumb-wrapper:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+        .image-thumb-wrapper:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        /* Hover animation with glow */
+        .hero-img-wrapper:hover img,
+        .image-thumb-wrapper:hover img {
+            transform: scale(1.05);
+            filter: brightness(1.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Image base styles */
+        .hero-img,
+        .image-thumb {
+            transition: all 0.4s ease-in-out;
+            border-radius: 1rem;
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+
+@endpush
