@@ -13,7 +13,7 @@
                     </div>
                 @endif
                 @foreach($dataLink as $daty)
-                    @if($daty->serveFor == $position or $position == "Super Admin")
+                    @if($daty->serveFor == $position or $position == "Super Admin"  or $position == "Admin")
                         <div style="margin-left: 3%;margin-top: 2%;" onmouseover="hoverLink({{$daty->id}})" onmouseout="hoverOutLink({{$daty->id}})">
                             {{ucfirst($daty->title)}} <br> <a href="{{$daty->textLink}}" target="_blank">{{$daty->textLink}}</a>
                             @if($position == "Super Admin")

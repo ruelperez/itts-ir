@@ -27,7 +27,6 @@ class TimeshareForm extends Component
         $this->photo = auth()->user()->photo;
         return view('livewire.link-form.lead-form.timeshare-form');
     }
-
     public function submit(){
         if ($this->gm2 == 0){
             session()->flash('badAgent2', "Successfully saved");
