@@ -92,8 +92,8 @@
                             };
                         @endphp
                         <span class="fw-bold {{ $color }}">
-            <i class="fa-solid fa-circle me-1"></i> {{ strtoupper($data->campaign_stat) }}
-        </span>
+                            <i class="fa-solid fa-circle me-1"></i> {{ strtoupper($data->campaign_stat) }}
+                        </span>
                     </div>
 
                     {{-- Content + Lead Compliance side-by-side --}}
@@ -232,7 +232,6 @@
                         <p style="margin-left: 2%; cursor: pointer" data-bs-toggle="modal" data-bs-target="#comment" wire:click="commented({{$data->id}})">Comment</p>
                     </div>
                 </div>
-                <hr>
             </div>
         @endforeach
     </div>
