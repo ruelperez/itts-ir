@@ -105,9 +105,9 @@
                             Campaign
                         </a>
                         <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                            <li class="sidebar-item">
-                                <a href="/campaign/mass-tort" class="sidebar-link">Mass-tort</a>
-                            </li>
+{{--                            <li class="sidebar-item">--}}
+{{--                                <a href="/campaign/mass-tort" class="sidebar-link">Mass-tort</a>--}}
+{{--                            </li>--}}
                             <li class="sidebar-item">
                                 <a href="/campaign/timeshare" class="sidebar-link">Timeshare</a>
                             </li>
