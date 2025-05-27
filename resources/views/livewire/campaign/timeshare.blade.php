@@ -50,6 +50,7 @@
     {{--    <div class="mt-2"><a href="/campaign/mass-tort/calculator"><i class="fa-solid fa-calculator me-2"></i>Depo Calculator</a> </div>--}}
     <div style="margin-top: 20px;">
         @foreach($notes_all as $data)
+            <p>{{$data->id}}</p>
             <div style="box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9); background-color: white; padding-left: 3%; padding-right: 3%; padding-top: 1.5%; padding-bottom: 2%; margin-bottom: 3%;">
                 <div class="fw-light" style="display: flex;">
                     <div class="profile-picture">
@@ -155,12 +156,11 @@
                     @if(is_array($images) && count($images) > 0)
                         <div class="mt-4 p-4 bg-light rounded-4 shadow-sm">
                             <div class="container">
-
-                                {{-- Hero image with slightly smaller width --}}
+                                {{-- Hero image --}}
                                 <div class="row mb-4 justify-content-center">
                                     <div class="col-12 col-md-8 col-lg-7">
                                         <div class="overflow-hidden rounded-4 shadow-lg hero-img-wrapper">
-                                            <img src="{{ asset('photos/photos/'.$images[0]) }}"
+                                            <img src="{{ asset('storage/photos/campaign/'.$images[0]) }}"
                                                  alt="Main"
                                                  class="hero-img"
                                                  style="aspect-ratio: 5 / 3;">
@@ -173,7 +173,7 @@
                                     @foreach(array_slice($images, 1) as $img)
                                         <div class="col-6 col-md-5 col-lg-4">
                                             <div class="overflow-hidden rounded-4 shadow-sm image-thumb-wrapper">
-                                                <img src="{{ asset('photos/photos/'.$img) }}"
+                                                <img src="{{ asset('storage/photos/campaign/'.$img) }}"
                                                      alt="Thumbnail"
                                                      class="image-thumb"
                                                      style="aspect-ratio: 4 / 3;">
@@ -181,7 +181,6 @@
                                         </div>
                                     @endforeach
                                 </div>
-
                             </div>
                         </div>
                     @endif

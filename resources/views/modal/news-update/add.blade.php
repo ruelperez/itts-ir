@@ -310,7 +310,7 @@
                         <div wire:ignore style="padding-left: 2%; padding-right: 2%;" class="mt-4">
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" wire:model="text" required></textarea>
                             <img id="preview" src="#" alt="Image Preview" style="display: none; max-width: 60%; max-height: 60%; margin-top: 3%;">
-                            <input type="file" wire:model="images" accept="image/*" multiple>
+                            <input type="file" wire:model="images" accept="image/*" multiple key="{{ $iteration }}">
                             @error('images.*') <span class="text-danger">{{ $message }}</span> @enderror
 
                             {{-- Optional preview --}}

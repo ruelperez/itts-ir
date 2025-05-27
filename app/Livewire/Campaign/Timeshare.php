@@ -24,10 +24,10 @@ class Timeshare extends Component
 {
     use WithFileUploads;
 
-    #[Validate('image|max:1024')] // 1MB Max
+    #[Validate('image|max:5120')] // 5MB Max
     public $registrationSwitch, $did, $link = [
         ['title' => '', 'textLink' => ''],
-    ],  $schedule, $geo, $clientList = [], $authorizer, $cntName, $restriction, $campaign, $campList = [], $tcpa = false, $felony = false, $client_name, $client_list = [], $campaignList = [], $campName, $employeeData, $tf = false, $fj = 0, $email= false, $thatsthem= false, $dupe= false, $blacklist = false, $govt= false, $dtrData = [], $campaign_stat = "active", $edit_comment_id, $editTextComment, $linkData = [], $imagePath, $title, $images = [], $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "all", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
+    ],  $schedule, $geo, $clientList = [], $iteration = 0, $authorizer, $cntName, $restriction, $campaign, $campList = [], $tcpa = false, $felony = false, $client_name, $client_list = [], $campaignList = [], $campName, $employeeData, $tf = false, $fj = 0, $email= false, $thatsthem= false, $dupe= false, $blacklist = false, $govt= false, $dtrData = [], $campaign_stat = "active", $edit_comment_id, $editTextComment, $linkData = [], $imagePath, $title, $images = [], $comment_reactors = [], $method, $comment_heart = [], $client, $lawfirm, $note_id, $all_comment = [], $text_comment, $comment = [], $selectedNotes = [], $reactors = [], $campaign_name = "all", $searchInput, $heart = [], $text, $photo, $ids, $tags, $fullname, $webName, $user_id, $is_admin, $user_fullname, $notes_all;
 
     public function render()
     {
@@ -74,6 +74,13 @@ class Timeshare extends Component
             ->where('client', $this->client_name)
             ->distinct()->get();
         return view('livewire.campaign.timeshare');
+    }
+
+    public function updatedImages()
+    {
+        $this->validate([
+            'images.*' => 'image|max:5120', // Ensure each image is under 5MB
+        ]);
     }
 
     public function submit_campaign(){
@@ -268,11 +275,15 @@ class Timeshare extends Component
 
     }
 
-    public function storeImage(){
-        $filename = Str::random(40) . '.' . $this->image->getClientOriginalExtension();
-        $this->image->storeAs('photos', $filename, 'public_photos');
-        $this->imagePath = $filename;
+    public function storeImage()
+    {
+        if ($this->image) {
+            $filename = Str::random(40) . '.' . $this->image->getClientOriginalExtension();
+            $this->image->storeAs('photos/campaign', $filename, 'public'); // 🔁 Correct disk and path
+            $this->imagePath = $filename;
+        }
     }
+
     public function submit()
     {
         $uploadedImages = [];
@@ -280,7 +291,7 @@ class Timeshare extends Component
         if (!empty($this->images)) {
             foreach ($this->images as $img) {
                 $filename = Str::random(40) . '.' . $img->getClientOriginalExtension();
-                $img->storeAs('photos', $filename, 'public_photos');
+                $img->storeAs('photos/campaign', $filename, 'public'); // ✅ correct path
                 $uploadedImages[] = $filename;
             }
         }
@@ -295,7 +306,7 @@ class Timeshare extends Component
                 'photo' => $this->photo,
                 'title' => $this->title,
                 'client' => $this->client,
-                'image' => json_encode($uploadedImages),
+                'image' => json_encode($uploadedImages), // ✅ save image names only
                 'campaign_stat' => $this->campaign_stat,
                 'tcpa' => $this->tcpa,
                 'blacklist' => $this->blacklist,
@@ -511,6 +522,7 @@ class Timeshare extends Component
             ['title' => '', 'textLink' => ''],
         ];
         $this->images = [];
+        $this->iteration++;
     }
 
     public function logout(){
