@@ -337,8 +337,14 @@
                         @endif
                     </div>
                     <div style="margin-left: auto">
+                        <div wire:loading wire:target="images" class="text-info text-primary">
+                            Uploading images, please wait...
+                        </div>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" wire:loading.attr="disabled">
+                            <span wire:loading.remove wire:target="images">Submit</span>
+                            <span wire:loading wire:target="images">Uploading...</span>
+                        </button>
                     </div>
                 </div>
             </form>
