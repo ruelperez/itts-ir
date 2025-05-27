@@ -50,7 +50,6 @@
     {{--    <div class="mt-2"><a href="/campaign/mass-tort/calculator"><i class="fa-solid fa-calculator me-2"></i>Depo Calculator</a> </div>--}}
     <div style="margin-top: 20px;">
         @foreach($notes_all as $data)
-            <p>{{$data->id}}</p>
             <div style="box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9); background-color: white; padding-left: 3%; padding-right: 3%; padding-top: 1.5%; padding-bottom: 2%; margin-bottom: 3%;">
                 <div class="fw-light" style="display: flex;">
                     <div class="profile-picture">

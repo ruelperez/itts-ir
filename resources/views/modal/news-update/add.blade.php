@@ -344,5 +344,8 @@
             </form>
         </div>
     </div>
+    @error('images.*') <div class="text-danger">{{ $message }}</div> @enderror
+    @error('title') <div class="text-danger">{{ $message }}</div> @enderror
+
 </div>
 
