@@ -67,7 +67,6 @@ class PageController extends Controller
             return response()->json(['success' => false]);
         }
     }
-
     public function in(){
         DtrPermanent::create([
             'fullname' => $this->userData->fullname,

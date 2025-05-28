@@ -5,11 +5,16 @@
             <input id="scannerInput" type="text" placeholder="Employee ID" style="width: 300px; height: 50px; font-size: 24px;" />
         </div>
         <!-- Employee Photo Section -->
-        <div class="mt-5">
-            <img id="employeePhoto" src="{{ asset('photos/photos/'.$empPhoto) }}" alt="Employee Photo" style="width: 250px; height: 250px; object-fit: cover; border: 2px solid #ccc;" />
-        </div>
-        <div>
-            <p id="employeeFullName" style="font-size: 18px; font-weight: bold; margin-top: 10px;">{{$empFullname}}</p>
+        <div class="mt-5 text-center">
+            <img id="employeePhoto"
+                 src="{{ asset('photos/photos/'.$empPhoto) }}"
+                 alt="Employee Photo"
+                 style="width: 250px; height: 250px; object-fit: cover; border: 2px solid #ccc; border-radius: 50%; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);" />
+
+            <p id="employeeFullName"
+               style="font-size: 18px; font-weight: bold; margin-top: 10px;">
+                {{$empFullname}}
+            </p>
         </div>
     </div>
 
