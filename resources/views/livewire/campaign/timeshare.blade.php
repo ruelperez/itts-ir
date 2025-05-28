@@ -153,35 +153,114 @@
                     {{-- Image Section --}}
                     @php $images = json_decode($data->image, true); @endphp
                     @if(is_array($images) && count($images) > 0)
-                        <div class="mt-4 p-4 bg-light rounded-4 shadow-sm">
-                            <div class="container">
-                                {{-- Hero image --}}
-                                <div class="row mb-4 justify-content-center">
-                                    <div class="col-12 col-md-8 col-lg-7">
-                                        <div class="overflow-hidden rounded-4 shadow-lg hero-img-wrapper">
-                                            <img src="{{ asset('storage/photos/campaign/'.$images[0]) }}"
-                                                 alt="Main"
-                                                 class="hero-img"
-                                                 style="aspect-ratio: 5 / 3;">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {{-- Remaining images --}}
-                                <div class="row g-4 justify-content-center">
-                                    @foreach(array_slice($images, 1) as $img)
-                                        <div class="col-6 col-md-5 col-lg-4">
-                                            <div class="overflow-hidden rounded-4 shadow-sm image-thumb-wrapper">
-                                                <img src="{{ asset('storage/photos/campaign/'.$img) }}"
-                                                     alt="Thumbnail"
-                                                     class="image-thumb"
-                                                     style="aspect-ratio: 4 / 3;">
-                                            </div>
+                        <div class="swiper-outer-wrapper" style="position: relative; overflow: hidden;">
+                            <div class="swiper mySwiper">
+                                <div class="swiper-wrapper">
+                                    @foreach($images as $img)
+                                        <div class="swiper-slide">
+                                            <img src="{{ asset('storage/photos/campaign/' . $img) }}"
+                                                 alt="Image"
+                                                 class="img-fluid rounded-4">
                                         </div>
                                     @endforeach
                                 </div>
+
+                                <!-- Navigation Arrows -->
+                                <div class="swiper-button-prev"></div>
+{{--                                <div class="swiper-button-next"></div> <!-- ✅ Add this back -->--}}
                             </div>
                         </div>
+
+                        <style>
+                            .swiper {
+                                width: 100%;
+                                padding-top: 60px;
+                                padding-bottom: 60px;
+                                overflow: visible !important;
+                            }
+
+                            .swiper-wrapper {
+                                overflow: visible !important;
+                                align-items: center;
+                            }
+
+                            .swiper-slide {
+                                width: auto;
+                                transition: transform 0.4s ease, z-index 0.4s ease;
+                                z-index: 1;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                            }
+
+                            .swiper-slide img {
+                                width: 300px;
+                                height: auto;
+                                border-radius: 15px;
+                                transition: transform 0.4s ease, box-shadow 0.4s ease;
+                                transform: scale(0.9);
+                                transform-origin: center center;
+                            }
+
+                            .swiper-slide-active {
+                                z-index: 10 !important;
+                            }
+
+                            .swiper-slide-active img {
+                                transform: scale(1.5);
+                                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+                            }
+
+                            .swiper-button-prev,
+                            .swiper-button-next {
+                                color: #333;
+                                background-color: white;
+                                border-radius: 50%;
+                                width: 44px;
+                                height: 44px;
+                                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+                                top: 50%;
+                                transform: translateY(-50%);
+                            }
+
+                            .swiper-button-prev::after,
+                            .swiper-button-next::after {
+                                font-size: 25px;
+                            }
+
+                            /* Optional: keep arrows inside bounds */
+                            .swiper-button-prev {
+                                left: 5px;
+                                background-color: #0d6efd; /* Bootstrap Primary Blue */
+                                color: white;
+                                border-radius: 50%;
+                                width: 54px; /* 🔧 Bigger width */
+                                height: 54px; /* 🔧 Bigger height */
+                                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); /* 💡 More shadow */
+                                z-index: 20;
+                            }
+
+                            .swiper-button-next {
+                                right: 5px;
+                            }
+                        </style>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                new Swiper('.mySwiper', {
+                                    slidesPerView: 'auto',
+                                    centeredSlides: true,
+                                    spaceBetween: 10,
+                                    loop: true,
+                                    grabCursor: true,
+                                    navigation: {
+                                        prevEl: '.swiper-button-prev',
+                                        nextEl: '.swiper-button-next'
+                                    },
+                                });
+                            });
+                        </script>
+
                     @endif
                 </div>
 
@@ -242,6 +321,7 @@
     {{--    @endscript--}}
 </div>
 @push('css')
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <style>
         /* General animation on load */
         @keyframes fadeSlideUp {
@@ -292,5 +372,8 @@
             object-fit: cover;
         }
     </style>
+@endpush
 
+@push('js')
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 @endpush
