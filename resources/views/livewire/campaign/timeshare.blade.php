@@ -99,8 +99,8 @@
                     {{-- Content + Lead Compliance side-by-side --}}
                     <div class="row g-4">
                         {{-- Left Column: Main Details --}}
-                        <div class="col-md-7">
-                            <div class="col-md-8">
+                        <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="bg-light rounded shadow-sm p-4 h-100" style="font-size: 1.2rem;">
                                     <p class="mb-2"><strong>Title :</strong> {{ strtoupper($data->title) }}</p>
                                     <p class="mb-2"><strong>Campaign :</strong> {{ strtoupper($data->campaign) }}</p>
@@ -126,7 +126,7 @@
                         </div>
 
                         {{-- Right Column: Lead Compliance --}}
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <div class="bg-light rounded shadow-sm p-4 h-100" style="font-size: 1.2rem;">
                                 <h6 class="fw-bold mb-3">LEAD COMPLIANCE</h6>
                                 <div class="list-group">
