@@ -10,8 +10,8 @@ use Livewire\Component;
 
 class TimeshareForm extends Component
 {
-    public $registrationSwitch, $hostingTrans, $gm = 0, $gm2 = 0, $DQ, $jn, $toChecked = false, $comment, $caseType = "self", $is_success = false, $showSearch = false, $showSearch2 = false, $showSearchCoach = false, $results = [], $results2 = [], $resultsCoach = [], $client, $clientList = [], $campaignList = [], $campaign = "Timeshare", $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
-        $date, $leadOwnership, $mll = 0, $day, $reason, $gift, $time, $agent2, $campaignName, $guest1, $guest2, $displayComment = false, $orderNumber, $desciption, $service, $package, $dateSales, $submission = [], $checkboxDQ, $lawfirm = "selectLawfirm", $bam, $bbb, $clients = ['webinar','day tour','day tour (ca)','day tour (nc)'], $bms, $dtvRemarks, $remarks, $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $checkboxInvalidTO, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "", $resultsVerifier = [], $showSearchVerifier = false ;
+    public $registrationSwitch, $hostingTrans, $gm = 0, $gm2 = 0, $DQ, $jn, $toChecked = false, $comment, $caseType = "self", $is_success = false, $showSearch = false, $showSearch2 = false, $showSearchCoach = false, $results = [], $results2 = [], $resultsCoach = [], $client, $clientList = [], $gifts = [], $campaignList = [], $campaign = "Timeshare", $employeeData, $position, $superAdminSwitch, $adminSwitch, $webName, $fullname, $user_id, $is_admin, $photo,
+        $date, $leadOwnership, $mll = 0, $day, $reason, $gift, $time, $agent2, $campaignName, $guest1, $guest2, $displayComment = false, $orderNumber, $desciption, $service, $package, $dateSales, $submission = [], $checkboxDQ, $lawfirm = "selectLawfirm", $bam, $bbb, $clients = ['webinar','TOT - Orlando FL','NC - daytour','ANAHEIM - DAYTOUR (CA)'], $bms, $dtvRemarks, $remarks, $claimant, $checkboxTO = [], $lawfirmList = [], $injuredParty, $phoneNumber, $turnover, $checkboxInvalidTO, $altPhoneNumber, $dob, $email, $address, $ssn, $agent, $coach, $verifier, $source = "", $resultsVerifier = [], $showSearchVerifier = false ;
 
 
     public function render()
@@ -170,6 +170,42 @@ class TimeshareForm extends Component
     }
 
     public function updated($field){
+//        'webinar','day TOT - Orlando FL','NC - daytour','ANAHEIM-DAYTOUR (CA)'
+        if ($field == "client"){
+            $this->gifts = [];
+            if ($this->client == "webinar"){
+                $this->gifts = [
+                    'Roundtrip airfare for two people, plus hotel for two nights (23 locations).',
+                    'Up to 7 nights accommodations at one of 3000 resorts/hotels worldwide.',
+                    '3-day all-inclusive in Mexico or the Dominican Republic.',
+                    'Open Choice (Not decided yet)',
+                ];
+            }
+            elseif($this->client == "TOT - Orlando FL"){
+                $this->gifts = [
+                    '3 to 7-night Caribbean cruise  cruise for two adults.',
+                    '2 round-trip airfares with a 2-night stay in your destination city.',
+                ];
+            }
+            elseif($this->client == "NC - daytour"){
+                $this->gifts = [
+                    'Choice of 3. 4. 5- or 7-day cruise for two, plus airfare for two people.',
+                    'Up to 7 nights hotel/resort.',
+                    '3 day and 2-night airfare and hotel.',
+                    'Open Choice (Not decided yet).',
+                ];
+            }
+            elseif($this->client == "ANAHEIM - DAYTOUR (CA)"){
+                $this->gifts = [
+                    'Roundtrip airfare for two people, plus hotel for two nights (23 locations).',
+                    'Up to 7 nights hotel accommodations at one of 3000 resorts/hotels worldwide.',
+                    '3-day all-inclusive trip to Mexico or the Dominican Republic.',
+                    '5-day and 4-night cruise for two people to Mexico or the Bahamas.',
+                    'Open Choice (Not decided yet).',
+                ];
+            }
+        }
+
         if ($field == "leadOwnership"){
             if ($this->leadOwnership == "1st Touch"){
                 $this->agent2 = "";
@@ -180,7 +216,6 @@ class TimeshareForm extends Component
                 $this->gm2 = 1;
             }
         }
-
         if ($field == "verifier"){
             if ($this->verifier != ""){
                 $this->resultsVerifier = Employee::where('employeeFullname','LIKE','%'. $this->verifier. '%')

@@ -50,7 +50,7 @@
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-6 mb-md-4 mb-sm-4 mt-4 mt-lg-2">
                     <label class="form-label">Client*</label>
-                    <select class="form-control" wire:model="client" required>
+                    <select class="form-control" wire:model.live="client" required>
                         <option value="" selected>Select</option>
                         @foreach ($clients as $option)
                             <option value="{{ $option }}">{{ ucfirst($option) }}</option>
@@ -116,11 +116,9 @@
                     <div>
                         <select class="form-select" aria-label="Default select example" wire:model="gift" required>
                             <option value="">Select Gift</option>
-                            <option value="Roundtrip airfare to two people, plus hotel for two nights (23 locations)">Roundtrip airfare to two people, plus hotel for two nights (23 locations)</option>
-                            <option value="Up to 7 nights' accommodations at one of 3000 resorts/hotels worldwide.">Up to 7 nights' accommodations at one of 3000 resorts/hotels worldwide.</option>
-                            <option value="3-days all-inclusive in Mexico or Dominican Republic">3-days all-inclusive in Mexico or Dominican Republic</option>
-                            <option value="5-day and 4-night cruise for two people to Mexico or the Bahamas">5-day and 4-night cruise for two people to Mexico or the Bahamas</option>
-                            <option value="Open Choice (Not decided yet)">Open Choice (Not decided yet)</option>
+                            @foreach($gifts as $gft)
+                                <option value="{{$gft}}">{{$gft}}</option>
+                            @endforeach
                         </select>
                         @error('gift') <span style="color: #8B0000">{{ $message }}</span> @enderror
                     </div>
