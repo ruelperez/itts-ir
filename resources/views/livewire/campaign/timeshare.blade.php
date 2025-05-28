@@ -99,33 +99,35 @@
                     {{-- Content + Lead Compliance side-by-side --}}
                     <div class="row g-4">
                         {{-- Left Column: Main Details --}}
-                        <div class="col-md-8">
-                            <div class="bg-light rounded shadow-sm p-4 h-100">
-                                <p class="mb-2"><strong>Title :</strong> {{ strtoupper($data->title) }}</p>
-                                <p class="mb-2"><strong>Campaign :</strong> {{ strtoupper($data->campaign) }}</p>
-                                <p class="mb-2"><strong>Client :</strong> {{ strtoupper($data->client) }}</p>
+                        <div class="col-md-7">
+                            <div class="col-md-8">
+                                <div class="bg-light rounded shadow-sm p-4 h-100" style="font-size: 1.2rem;">
+                                    <p class="mb-2"><strong>Title :</strong> {{ strtoupper($data->title) }}</p>
+                                    <p class="mb-2"><strong>Campaign :</strong> {{ strtoupper($data->campaign) }}</p>
+                                    <p class="mb-2"><strong>Client :</strong> {{ strtoupper($data->client) }}</p>
 
-                                {{-- Link Section --}}
-                                @foreach($linkData as $linked)
-                                    @if($data->id == $linked->note_id)
-                                        <p class="mb-2"><strong>Link :</strong></p>
-                                        <div class="ms-3 mb-2">
-                                            <span class="me-1">{{ ucfirst($linked->title) }}:</span>
-                                            <a href="{{ $linked->link }}" target="_blank" class="text-primary text-break">{{ $linked->link }}</a>
-                                        </div>
-                                    @endif
-                                @endforeach
+                                    {{-- Link Section --}}
+                                    <p class="mb-2"><strong>Link :</strong></p>
+                                    @foreach($linkData as $linked)
+                                        @if($data->id == $linked->note_id)
+                                            <div class="ms-3 mb-2">
+                                                <span class="me-1">{{ ucfirst($linked->title) }}:</span>
+                                                <a href="{{ $linked->link }}" target="_blank" class="text-primary text-break">{{ $linked->link }}</a>
+                                            </div>
+                                        @endif
+                                    @endforeach
 
-                                {{-- Note --}}
-                                <p class="mt-3 mb-0" style="white-space: pre-line;">
-                                    <i>Note :</i> {{ $data->text }}
-                                </p>
+                                    {{-- Note --}}
+                                    <p class="mt-3 mb-0" style="white-space: pre-line;">
+                                        <i>Note :</i> {{ $data->text }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
                         {{-- Right Column: Lead Compliance --}}
-                        <div class="col-md-4">
-                            <div class="bg-light rounded shadow-sm p-4 h-100">
+                        <div class="col-md-5">
+                            <div class="bg-light rounded shadow-sm p-4 h-100" style="font-size: 1.2rem;">
                                 <h6 class="fw-bold mb-3">LEAD COMPLIANCE</h6>
                                 <div class="list-group">
                                     @foreach([
