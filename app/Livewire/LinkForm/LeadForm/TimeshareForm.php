@@ -185,6 +185,7 @@ class TimeshareForm extends Component
                 $this->gifts = [
                     '3 to 7-night Caribbean cruise  cruise for two adults.',
                     '2 round-trip airfares with a 2-night stay in your destination city.',
+                    'Open Choice (Not decided yet)',
                 ];
             }
             elseif($this->client == "NC - daytour"){
