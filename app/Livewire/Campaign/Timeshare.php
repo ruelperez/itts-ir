@@ -366,136 +366,91 @@ class Timeshare extends Component
         }
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $this->ids = $id;
         $rt = Note::find($id);
+
         $this->tags = $rt->tags;
         $this->text = $rt->text;
         $this->title = $rt->title;
         $this->campaign = $rt->campaign;
         $this->client = $rt->client;
-        $this->lawfirm = $rt->lawfirm;
-        $this->image = $rt->image;
-        $this->method = $rt->method;
-        $this->did = $rt->did;
-        $this->schedule = $rt->schedule;
-        $this->geo = $rt->geo;
-        $this->restriction = $rt->restriction;
         $this->campaign_stat = $rt->campaign_stat;
         $this->tcpa = $rt->tcpa;
         $this->tf = $rt->tf;
         $this->blacklist = $rt->blacklist;
-        $this->thatsthem = $rt->thatsthem;
         $this->dupe = $rt->dupe;
         $this->email = $rt->email;
-        $this->felony = $rt->felony;
-        $this->govt =$rt->govt;
-        $lnk = Link::where('note_id',$id)->get();
+        // 👇 Decode image string to array for editing
+//        $this->images = json_decode($rt->image, true) ?? [];
+        // Handle link data
+        $lnk = Link::where('note_id', $id)->get();
         $this->link = [];
-        foreach ($lnk as $ln){
+        foreach ($lnk as $ln) {
             $this->link[] = ['title' => $ln->title, 'textLink' => $ln->link];
         }
-
     }
+    public function submit_edit()
+    {
+        $note = Note::find($this->ids);
 
-    public function submit_edit(){
-        if ($this->fj == 0){
-            $rt = Note::find($this->ids);
-            try {
-                $rt->tags = $this->tags;
-                $rt->text = $this->text;
-                $rt->title = $this->title;
-                $rt->campaign = $this->campaign;
-                $rt->client = $this->client;
-                $rt->lawfirm = $this->lawfirm;
-                $rt->method = $this->method;
-                $rt->image = $this->image;
-                $rt->did = $this->did;
-                $rt->schedule = $this->schedule;
-                $rt->geo = $this->geo;
-                $rt->restriction = $this->restriction;
-                $rt->campaign_stat = $this->campaign_stat;
-                $rt->tcpa = $this->tcpa;
-                $rt->tf = $this->tf;
-                $rt->blacklist = $this->blacklist;
-                $rt->thatsthem = $this->thatsthem;
-                $rt->dupe= $this->dupe;
-                $rt->email = $this->email;
-                $rt->felony = $this->felony;
-                $rt->govt = $this->govt;
-                $rt->save();
+        if (!$note) {
+            session()->flash('badEdit', "Note not found");
+            return;
+        }
 
-                $jas = Link::where('note_id',$this->ids)->get();
-                foreach ($jas as $gg){
-                    Link::find($gg->id)->delete();
-                }
-                foreach ($this->link as $links){
+        try {
+            // If there's a new image uploaded
+            if ($this->fj === 1 && $this->image) {
+                $this->storeImage(); // Store image and set $this->imagePath
+                $note->image = $this->imagePath;
+            }
+
+            // Update the fields
+            $note->tags = $this->tags;
+            $note->text = $this->text;
+            $note->title = $this->title;
+            $note->campaign = $this->campaign;
+            $note->client = $this->client;
+            $note->campaign_stat = $this->campaign_stat;
+            $note->tcpa = $this->tcpa;
+            $note->blacklist = $this->blacklist;
+            $note->thatsthem = $this->thatsthem;
+            $note->dupe = $this->dupe;
+            $note->email = $this->email;
+            $note->save();
+
+            // Delete old links and replace with updated
+            Link::where('note_id', $this->ids)->delete();
+
+            foreach ($this->link as $links) {
+                if (!empty($links['title']) || !empty($links['textLink'])) {
                     Link::create([
                         'title' => $links['title'],
                         'link' => $links['textLink'],
                         'note_id' => $this->ids,
                     ]);
                 }
-                $this->clearInput();
-                \App\Models\Logs::create([
-                    'action' => "edit",
-                    'user_id' => $this->user_id,
-                    'note_id' => $this->ids,
-                    'photo' => $this->photo,
-                    'fullname' => $this->fullname,
-                ]);
-//                $this->dispatch('post-created');
-                session()->flash('goodEdit', "Successfully updated");
-            }catch (\Exception $e){
-                session()->flash('badEdit', "Failed to update");
             }
-        }
-        else{
-            $this->storeImage();
-            $rt = Note::find($this->ids);
-            try {
-                $rt->tags = $this->tags;
-                $rt->text = $this->text;
-                $rt->title = $this->title;
-                $rt->campaign = $this->campaign;
-                $rt->client = $this->client;
-                $rt->lawfirm = $this->lawfirm;
-                $rt->method = $this->method;
-                $rt->image = $this->imagePath;
-                $rt->did = $this->did;
-                $rt->schedule = $this->schedule;
-                $rt->geo = $this->geo;
-                $rt->restriction = $this->restriction;
-                $rt->campaign_stat = $this->campaign_stat;
-                $rt->tcpa = $this->tcpa;
-                $rt->tf = $this->tf;
-                $rt->blacklist = $this->blacklist;
-                $rt->thatsthem = $this->thatsthem;
-                $rt->dupe= $this->dupe;
-                $rt->email = $this->email;
-                $rt->felony = $this->felony;
-                $rt->govt = $this->govt;
-                $rt->save();
 
-                $jas = Link::where('note_id',$this->ids)->get();
-                foreach ($jas as $gg){
-                    Link::find($gg->id)->delete();
-                }
-                foreach ($this->link as $links){
-                    Link::create([
-                        'title' => $links['title'],
-                        'link' => $links['textLink'],
-                        'note_id' => $this->ids,
-                    ]);
-                }
-                $this->clearInput();
-                session()->flash('goodEdit', "Successfully updated");
-            }catch (\Exception $e){
-                session()->flash('badEdit', "Failed to update");
-            }
-        }
+            // Log the edit
+            \App\Models\Logs::create([
+                'action' => "edit",
+                'user_id' => $this->user_id,
+                'note_id' => $this->ids,
+                'photo' => $this->photo,
+                'fullname' => $this->fullname,
+            ]);
 
+            $this->clearInput();
+            session()->flash('goodEdit', "Successfully updated");
+
+        } catch (\Exception $e) {
+            session()->flash('badEdit', "Failed to update");
+        }
     }
+
 
     public function clearInput(){
         $this->tags = "";

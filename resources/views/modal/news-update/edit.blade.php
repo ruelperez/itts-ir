@@ -23,7 +23,12 @@
                                         <label class="col-form-label">Campaign:</label>
                                     </div>
                                     <div class="col-auto">
-                                        <input type="text" class="form-control" wire:model="campaign_name" disabled>
+                                        <select class="form-select" aria-label="Default select example" wire:model="campaign" required>
+                                            <option value="">Select Campaign</option>
+                                            @foreach($campList as $list)
+                                                <option value="{{$list->name}}">{{strtoupper($list->name)}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row g-3 align-items-center mb-2">
@@ -31,53 +36,12 @@
                                         <label class="col-form-label">Client:</label>
                                     </div>
                                     <div class="col-auto">
-                                        <input type="text" class="form-control" wire:model="client" required>
-                                    </div>
-                                </div>
-                                <div class="row g-3 align-items-center mb-2">
-                                    <div class="col-auto">
-                                        <label class="col-form-label">Law firm:</label>
-                                    </div>
-                                    <div class="col-auto">
-                                        <input type="text" class="form-control" wire:model="lawfirm" required>
-                                    </div>
-                                </div>
-                                <div class="row g-3 align-items-center mb-2">
-                                    <div class="col-auto">
-                                        <label class="col-form-label">Method</label>
-                                    </div>
-                                    <div class="col-auto">
-                                        <input type="text" class="form-control" wire:model="method" required>
-                                    </div>
-                                    <div class="col-auto">
-                                        <label class="col-form-label">DID</label>
-                                    </div>
-                                    <div class="col-auto">
-                                        <input type="text" class="form-control" wire:model="did" required>
-                                    </div>
-                                </div>
-                                <div class="row g-3 align-items-center mb-2">
-                                    <div class="col-auto">
-                                        <label class="col-form-label">Schedule:</label>
-                                    </div>
-                                    <div class="col-auto">
-                                        <input type="text" class="form-control" wire:model="schedule" required>
-                                    </div>
-                                </div>
-                                <div class="row g-3 align-items-center mb-2">
-                                    <div class="col-auto">
-                                        <label class="col-form-label">GEO:</label>
-                                    </div>
-                                    <div class="col-auto">
-                                        <input type="text" class="form-control" wire:model="geo" required>
-                                    </div>
-                                </div>
-                                <div class="row g-3 align-items-center mb-2">
-                                    <div class="col-auto">
-                                        <label class="col-form-label">Restriction:</label>
-                                    </div>
-                                    <div class="col-auto">
-                                        <input type="text" class="form-control" wire:model="restriction" required>
+                                        <select class="form-select" aria-label="Default select example" wire:model="client" required>
+                                            <option value="">Select Client</option>
+                                            @foreach($clientList as $list)
+                                                <option value="{{$list->name}}">{{strtoupper($list->name)}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row g-3 align-items-center mb-2">
@@ -105,10 +69,6 @@
                                             TCPA/ LITIGATOR CHECK
                                         </label>
                                         <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox" wire:model="tf" value="{{$tf}}">
-                                            TF
-                                        </label>
-                                        <label class="list-group-item">
                                             <input class="form-check-input me-1" type="checkbox" wire:model="blacklist" value="{{$blacklist}}">
                                             BLACKLIST
                                         </label>
@@ -123,14 +83,6 @@
                                         <label class="list-group-item">
                                             <input class="form-check-input me-1" type="checkbox" wire:model="email" value="{{$email}}">
                                             EMAIL REQUIRED
-                                        </label>
-                                        <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox" wire:model="felony" value="{{$felony}}">
-                                            FELONY
-                                        </label>
-                                        <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox" wire:model="govt" value="{{$govt}}">
-                                            GOVT. ISSUED ID
                                         </label>
                                     </div>
                                 </div>
@@ -155,7 +107,7 @@
                         <div wire:ignore style="padding-left: 2%; padding-right: 2%;">
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" wire:model="text" required></textarea>
                             <img id="preview" src="#" alt="Image Preview" style="display: none; max-width: 60%; max-height: 60%;">
-                            <input type="file" id="image" wire:model="image" accept="image/*" onchange="previewImage(event)" style="margin-top: 1%;">
+{{--                            <input type="file" id="image" wire:model="image" accept="image/*" onchange="previewImage(event)" style="margin-top: 1%;">--}}
                         </div>
                     </div>
                 </div>
