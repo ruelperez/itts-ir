@@ -16,8 +16,8 @@ class RestrictByIP
      * @var array
      */
 //    protected $allowedIps = '49.146.207.44';
-    protected $allowedIps = '122.54.211.23';
-//    protected $allowedIps = '127.0.0.1';
+//    protected $allowedIps = '122.54.211.23';
+    protected $allowedIps = '127.0.0.1';
     /**
      *
      * Handle an incoming request.

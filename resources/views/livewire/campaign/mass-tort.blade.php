@@ -1,5 +1,5 @@
 <div>
-    @include('modal.news-update.add')
+    @include('modal.news-update.masstort.add')
     @include('modal.news-update.edit_tags')
     @include('modal.news-update.edit')
     @include('modal.news-update.reactor')
