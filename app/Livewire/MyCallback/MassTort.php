@@ -15,6 +15,21 @@ class MassTort extends Component
         'nec_diagnosis' => '',
         'formula' => '',
         'premature' => ''],
+        $rupQuestion = ['usage_year' => '',
+        'last_usage_year' => '',
+        'use_every_year' => '',
+        'hours_exposed' => '',
+        'lymphoma' => '',
+        'subtype' => '',
+        'diagnose_year' => ''],
+        $pqQuestion = ['is_diagnosed' => '',
+        'date_diagnosed' => '',
+        'medication' => '',
+        'start_usage' => '',
+        'end_usage' => '',
+        'live_property' => '',
+        'type_exposure' => '',
+        'name_diagnosing' => ''],
         $afffQuestion = ['member' => '',
         'exposed' => '',
         'firstExposure' => '',
@@ -156,12 +171,35 @@ class MassTort extends Component
                 "*Are you represented by other LF? - " . $this->rideshareQuestion['represented'],
             ]);
         }
-        elseif ($this->campaign == "depo-provera" or $this->campaign == "DEPO-PROVERA"){
+        elseif ($this->campaign == "depo" or $this->campaign == "DEPO"){
             $formattedAnswers = implode('<br>', [
                 "*Did you or a loved one use Depo-Provera for at least one year - " . $this->depoQuestion['𝐢𝐧𝐣𝐞𝐜𝐭𝐚𝐛𝐥𝐞'],
                 "*Were you diagnosed with meningioma after using Depo-Provera for at least one year? - " . $this->depoQuestion['𝐌𝐞𝐧𝐢𝐧𝐠𝐢𝐨𝐦𝐚'],
                 "*Are you able to provide proof of your prescription for Depo-Provera? - " . $this->depoQuestion['𝐩𝐫𝐞𝐬𝐜𝐫𝐢𝐩𝐭𝐢𝐨𝐧'],
                 "*Are you currently represented by another law firm? - " . $this->depoQuestion['represented'],
+            ]);
+        }
+        elseif ($this->campaign == "RUP" or $this->campaign == "rup"){
+            $formattedAnswers = implode('<br>', [
+                "*Year of First Usage? - " . $this->rupQuestion['usage_year'],
+                "*Year of Last Usage? - " . $this->rupQuestion['last_usage_year'],
+                "*How many times you use RUP every year? - " . $this->rupQuestion['use_every_year'],
+                "*How many hours you were exposed to RUP for every application? - " . $this->rupQuestion['hours_exposed'],
+                "*Were you diagnosed with Non-Hodgkin’s Lymphoma? - " . $this->rupQuestion['lymphoma'],
+                "*Sub-Type? - " . $this->rupQuestion['subtype'],
+                "*When were you diagnosed? - " . $this->rupQuestion['diagnose_year'],
+            ]);
+        }
+        elseif ($this->campaign == "PQ" or $this->campaign == "pq"){
+            $formattedAnswers = implode('<br>', [
+                "*Diagnosed with PD? - " . $this->pqQuestion['is_diagnosed'],
+                "*Date of Diagnosis? - " . $this->pqQuestion['date_diagnosed'],
+                "*Medication? - " . $this->pqQuestion['medication'],
+                "*Start Date of Usage? - " . $this->pqQuestion['start_usage'],
+                "*End Date of Usage? - " . $this->pqQuestion['end_usage'],
+                "*Did you live or work on the property where Paraquat was used? - " . $this->pqQuestion['live_property'],
+                "*Type of Exposure? - " . $this->pqQuestion['type_exposure'],
+                "*Name of Diagnosing Physician and Facility? - " . $this->pqQuestion['name_diagnosing'],
             ]);
         }
         try {
@@ -273,7 +311,7 @@ class MassTort extends Component
 
     public function removeSearch(){
         $this->showSearch = false;
-        if (strtolower($this->campaign) == "afff" || strtolower($this->campaign) == "nec" || strtolower($this->campaign) == "rideshare uber/left" || strtolower($this->campaign) == "depo-provera"){
+        if (strtolower($this->campaign) == "afff" || strtolower($this->campaign) == "nec" || strtolower($this->campaign) == "rideshare uber/left" || strtolower($this->campaign) == "depo"){
             $this->gm = 1;
             $this->campName = strtolower($this->campaign);
         }

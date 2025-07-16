@@ -53,27 +53,34 @@ class MassTort extends Component
         if ($this->searchInput == ""){
             if ($this->campaign_name == "all"){
                 $this->notes_all = Note::where('client',$this->client_name)
+                    ->where('subject','mass-tort')
                     ->orderBy('updated_at', 'desc')
                     ->get();
             }else{
                 $this->notes_all = Note::where('campaign',$this->campaign_name)
+                    ->where('subject','mass-tort')
                     ->where('client',$this->client_name)
                     ->orderBy('updated_at', 'desc')
                     ->get();
             }
 
         }else{
-            $this->notes_all = Note::where('id','LIKE', '%'.$this->searchInput.'%')
-                ->orWhere('tags', 'LIKE', '%'.$this->searchInput.'%')
+            $this->notes_all = Note::where('subject', 'mass-tort')
+                ->where(function ($query) {
+                    $query->where('id', 'LIKE', '%' . $this->searchInput . '%')
+                        ->orWhere('tags', 'LIKE', '%' . $this->searchInput . '%');
+                })
                 ->get();
         }
         $this->client_list = Note::select('client')
+            ->where('subject','mass-tort')
             ->distinct()
             ->orderBy('updated_at', 'desc')
             ->get();
-        $this->campList = Campaign::all();
-        $this->clientList = Client::all();
+        $this->campList = Campaign::where('subject', 'mass-tort')->get();
+        $this->clientList = Client::where('subject', 'mass-tort')->get();
         $this->campaignList = Note::select('campaign')
+            ->where('subject','mass-tort')
             ->where('client', $this->client_name)
             ->distinct()->get();
         return view('livewire.campaign.mass-tort')->title('Campaign');
@@ -83,6 +90,7 @@ class MassTort extends Component
         try {
             Campaign::create([
                 'name' => $this->campName,
+                'subject' => $this->webName
             ]);
             $this->campName = "";
             session()->flash('good', "Successfully saved");
@@ -95,6 +103,7 @@ class MassTort extends Component
         try {
             Client::create([
                 'name' => $this->cntName,
+                'subject' => $this->webName
             ]);
             $this->cntName = "";
             session()->flash('goodClient', "Successfully saved");
@@ -105,7 +114,9 @@ class MassTort extends Component
 
     public function campRemove($id,$name){
         Campaign::find($id)->delete();
-        $ha = Note::where('campaign',$name)->get();
+        $ha = Note::where('campaign',$name)
+            ->where('subject','mass-tort')
+            ->get();
         foreach ($ha as $has){
             Note::find($has->id)->delete();
         }
@@ -118,7 +129,9 @@ class MassTort extends Component
     }
     public function clientRemove($id,$name){
         Client::find($id)->delete();
-        $ha = Note::where('client',$name)->get();
+        $ha = Note::where('client',$name)
+            ->where('subject','mass-tort')
+            ->get();
         foreach ($ha as $has){
             Note::find($has->id)->delete();
         }
@@ -222,6 +235,7 @@ class MassTort extends Component
     public function mount($name){
         $this->webName = $name;
         $this->client_list = Note::select('client')
+            ->where('subject','mass-tort')
             ->distinct()
             ->orderBy('updated_at', 'desc')
             ->get();
@@ -230,6 +244,7 @@ class MassTort extends Component
             break;
         }
         $this->campaignList = Note::select('campaign')
+            ->where('subject','mass-tort')
             ->where('client', $this->client_name)
             ->distinct()->get();
     }
@@ -312,6 +327,7 @@ class MassTort extends Component
                 'email' => $this->email,
                 'govt' => $this->govt,
                 'felony' => $this->felony,
+                'subject' => $this->webName,
             ]);
 
             $v = Note::latest()->first();
@@ -531,10 +547,12 @@ class MassTort extends Component
     public function updated($field){
         if ($field == "client_name"){
             $this->notes_all = Note::where('campaign',$this->campaign_name)
+                ->where('subject','mass-tort')
                 ->where('client',$this->client_name)
                 ->orderBy('updated_at', 'desc')
                 ->get();
             $this->campaignList = Note::select('campaign')->where('client',$this->client_name)
+                ->where('subject','mass-tort')
                 ->distinct()
                 ->orderBy('updated_at', 'desc')
                 ->get();
@@ -543,10 +561,12 @@ class MassTort extends Component
         if ($field == "campaign_name"){
             if ($this->campaign_name == "all"){
                 $this->notes_all = Note::where('client',$this->client_name)
+                    ->where('subject','mass-tort')
                     ->orderBy('updated_at', 'desc')
                     ->get();
             }else{
                 $this->notes_all = Note::where('campaign',$this->campaign_name)
+                    ->where('subject','mass-tort')
                     ->where('client',$this->client_name)
                     ->orderBy('updated_at', 'desc')
                     ->get();

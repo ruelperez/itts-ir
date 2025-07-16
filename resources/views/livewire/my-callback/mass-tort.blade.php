@@ -128,11 +128,7 @@
                 'FAILED!',
                 '',
                 'error'
-            ).then((result) => {
-                if (result.isConfirmed) {
-                    location.reload();
-                }
-            });
+            )
         });
         $wire.on('show-detailss-modal', () => {
             const positionModal = new bootstrap.Modal(document.getElementById('viewDetail'));

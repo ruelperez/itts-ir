@@ -10,7 +10,7 @@
             @if($campaignName === "travel") GREEN ESCAPES @else {{$campaignName}} @endif
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-{{--            <li><a class="dropdown-item" href="/link-form/lead-form/masstort-form">Mass Tort</a></li>--}}
+            <li><a class="dropdown-item" href="/link-form/lead-form/masstort-form">Mass Tort</a></li>
 {{--            <li><a class="dropdown-item" href="/link-form/lead-form/dtv-form">Direct TV</a></li>--}}
 {{--            <li><a class="dropdown-item" href="/link-form/lead-form/homesec-form">Home Security</a></li>--}}
             <li><a class="dropdown-item" href="/link-form/lead-form/timeshare-form">Timeshare</a></li>

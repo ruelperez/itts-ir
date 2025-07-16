@@ -151,6 +151,153 @@
                                 <input type="text" class="form-control" wire:model="necQuestion.premature" required>
                             </div>
                         </div>
+                    @elseif($campName == "rup")
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Year of First Usage</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="rupQuestion.usage_year" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Year of Last Usage</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="rupQuestion.last_usage_year" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">How many times you use RUP every year?</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="rupQuestion.use_every_year" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">How many hours you were exposed to RUP for every application</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="rupQuestion.hours_exposed" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Were you diagnosed with Non-Hodgkin’s Lymphoma</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="rupQuestion.lymphoma" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Sub-Type</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="rupQuestion.subtype" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">When were you diagnosed</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="rupQuestion.diagnose_year" required>
+                            </div>
+                        </div>
+                    @elseif($campName == "pq")
+                        <!-- 1. Diagnosed with PD? -->
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Diagnosed with PD?</label>
+                            </div>
+                            <div class="col-auto">
+                                <select class="form-control" wire:model="rupQuestion.pd_diagnosed" required>
+                                    <option value="">-- Select --</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                    <option value="Symptoms only">Symptoms only</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 2. Date of Diagnosis -->
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Date of Diagnosis</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="rupQuestion.diagnosis_date" required>
+                            </div>
+                        </div>
+
+                        <!-- 3. Medications -->
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Medications</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="rupQuestion.medications" required>
+                            </div>
+                        </div>
+
+                        <!-- 4. Start date of usage -->
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Start Date of Usage</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="rupQuestion.med_start_date" required>
+                            </div>
+                        </div>
+
+                        <!-- 5. End date of usage -->
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">End Date of Usage</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="rupQuestion.med_end_date" required>
+                            </div>
+                        </div>
+
+                        <!-- 6. Did you live or work on the property where Paraquat was used? -->
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Did you live or work on the property where Paraquat was used?</label>
+                            </div>
+                            <div class="col-auto">
+                                <select class="form-control" wire:model="rupQuestion.paraquat_property" required>
+                                    <option value="">-- Select --</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 7. Type of Exposure -->
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Type of Exposure</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="rupQuestion.exposure_type" required placeholder="e.g., Mixing/Handling, Purchasing, Spraying, Lived nearby">
+                            </div>
+                        </div>
+
+                        <!-- 8. Name of Diagnosing Physician and Facility -->
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <label class="col-form-label">Name of Diagnosing Physician and Facility</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" wire:model="rupQuestion.physician_info" required>
+                            </div>
+                        </div>
+
                     @elseif($campName == "afff")
                         <div class="row mt-3">
                             <div class="col-auto">
@@ -273,7 +420,7 @@
                                 <input type="text" class="form-control" wire:model="rideshareQuestion.represented" required>
                             </div>
                         </div>
-                    @elseif($campName == "depo-provera")
+                    @elseif($campName == "depo")
                         <div class="row mt-3">
                             <div class="col-auto">
                                 <label class="col-form-label">Did you or a loved one use the injectable contraceptive brand Depo-Provera for at least one year?</label>

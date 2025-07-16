@@ -333,6 +333,8 @@
                                                 <option value="Posted / Pending Result">Posted / Pending Result</option>
                                                 <option value="Posted / Executed">Posted / Executed</option>
                                             @endif
+                                            <option value="Executed with 14 day window">Executed with 14 day window</option>
+                                            <option value="Executed - Billable">Executed - Billable</option>
                                             <option value="Callback For Transfer">Callback For Transfer</option>
                                                 <option value="DQ By Manager">DQ By Manager</option>
                                                 <option value="DQ Due to Risk">DQ Due to Risk</option>
@@ -389,6 +391,8 @@
                                             <option value="Posted / Pending Result">Posted / Pending Result</option>
                                             <option value="Posted / Executed">Posted / Executed</option>
                                         @endif
+                                        <option value="Executed with 14 day window">Executed with 14 day window</option>
+                                        <option value="Executed - Billable">Executed - Billable</option>
                                         <option value="Callback For Transfer">Callback For Transfer</option>
                                         <option value="DQ By Manager">DQ By Manager</option>
                                         <option value="DQ Due to Risk">DQ Due to Risk</option>

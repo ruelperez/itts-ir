@@ -7,47 +7,62 @@
     @include('modal.news-update.comment_reactor')
     @include('modal.news-update.edit_comment')
     @include('modal.news-update.add_remove_campaign')
-        <div class="px-2 py-2 px-lg-3 py-lg-3" style="background-color: #41464b;">
-            <div class="row text-center">
-                <div class="col-12 text-md-start">
-                    <h6 style="color: white">( {{strtoupper($client_name)}}  @if($campaign_name != "all") <i class="fa-solid fa-arrow-right" style="color: #FFFF00"></i> {{strtoupper($campaign_name)}} @endif)</h6>
-                </div>
-                <div class="col-12  col-lg-4 col-md-6 col-xl-4 mt-2">
-                    <input type="search" class="form-control w-100" placeholder="Search" wire:model.live="searchInput">
-                </div>
-{{--                        @if($campaign_name == "Camp lejeune" or $campaign_name == "clj")--}}
-{{--                            <div class="col-4">--}}
-{{--                                <a href="/itts/2/age-checker" wire:navigate style="color: white;">Age checker</a>--}}
-{{--                            </div>--}}
-{{--                        @endif--}}
-                @if($authorizer)
-                    <div class="col-12 col-lg-4 col-md-6 col-xl-2 mt-2 text-center">
-                        <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#arc"><i class="fa-solid fa-gear"></i> Camp/Client</button>
-                    </div>
-                @endif
-                <div class="col-12 col-md-6 col-lg-4 col-xl-2 mt-2">
-                    <select class="form-select" aria-label="Default select example" wire:model.live="client_name">
-                        @foreach($client_list as $list)
-                            <option value="{{$list->client}}">{{strtoupper($list->client)}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4 col-xl-2 mt-2">
-                    <select class="form-select" aria-label="Default select example" wire:model.live="campaign_name">
-                        <option value="all">All</option>
-                        @foreach($campaignList as $list)
-                            <option value="{{$list->campaign}}">{{strtoupper($list->campaign)}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                @if($authorizer)
-                    <div class="col-12 col-lg-4 col-xl-2 text-md-start mt-2">
-                        <i class="fa-solid fa-circle-plus" data-bs-toggle="modal" data-bs-target="#add" style="color: #00FF00; font-size: 20px; cursor: pointer"></i>
-                    </div>
-                @endif
+    <div class="px-2 py-2 px-lg-3 py-lg-3" style="background-color: #41464b;">
+        <div class="row text-center text-md-start align-items-center g-2">
+            <div class="col-12">
+                <h6 class="mb-0" style="color: white">
+                    ( {{ strtoupper($client_name) }}
+                    @if($campaign_name != "all")
+                        <i class="fa-solid fa-arrow-right" style="color: #FFFF00"></i> {{ strtoupper($campaign_name) }}
+                    @endif )
+                </h6>
             </div>
+
+            <div class="col-12 col-md-6 col-lg-4 mt-2">
+                <input type="search" class="form-control w-100" placeholder="Search" wire:model.live="searchInput">
+            </div>
+
+            {{-- Make the Age Checker a responsive link button --}}
+            <div class="col-12 col-md-6 col-lg-2 mt-2">
+                <a href="/campaign/mass-tort/mva/checker" wire:navigate class="btn btn-outline-light w-100">
+                    <i class="fa-solid fa-calendar-check me-1"></i>Checker
+                </a>
+            </div>
+
+            @if($authorizer)
+                <div class="col-12 col-md-6 col-lg-2 mt-2">
+                    <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#arc">
+                        <i class="fa-solid fa-gear me-1"></i> Camp/Client
+                    </button>
+                </div>
+            @endif
+
+            <div class="col-12 col-md-6 col-lg-2 mt-2">
+                <select class="form-select" wire:model.live="client_name">
+                    @foreach($client_list as $list)
+                        <option value="{{ $list->client }}">{{ strtoupper($list->client) }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-2 mt-2">
+                <select class="form-select" wire:model.live="campaign_name">
+                    <option value="all">All</option>
+                    @foreach($campaignList as $list)
+                        <option value="{{ $list->campaign }}">{{ strtoupper($list->campaign) }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            @if($authorizer)
+                <div class="col-12 col-md-6 col-lg-2 mt-2">
+                    <i class="fa-solid fa-circle-plus" data-bs-toggle="modal" data-bs-target="#add"
+                       style="color: #00FF00; font-size: 20px; cursor: pointer;"></i>
+                </div>
+            @endif
         </div>
-{{--    <div class="mt-2"><a href="/campaign/mass-tort/calculator"><i class="fa-solid fa-calculator me-2"></i>Depo Calculator</a> </div>--}}
+    </div>
+    {{--    <div class="mt-2"><a href="/campaign/mass-tort/calculator"><i class="fa-solid fa-calculator me-2"></i>Depo Calculator</a> </div>--}}
         <div style="margin-top: 20px;">
             @foreach($notes_all as $data)
                 <div style="box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9); background-color: white; padding-left: 3%; padding-right: 3%; padding-top: 1.5%; padding-bottom: 2%; margin-bottom: 3%;">

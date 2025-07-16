@@ -50,27 +50,33 @@ class Timeshare extends Component
         if ($this->searchInput == ""){
             if ($this->campaign_name == "all"){
                 $this->notes_all = Note::where('client',$this->client_name)
+                    ->where('subject','timeshare')
                     ->orderBy('updated_at', 'desc')
                     ->get();
             }else{
                 $this->notes_all = Note::where('campaign',$this->campaign_name)
+                    ->where('subject','timeshare')
                     ->where('client',$this->client_name)
                     ->orderBy('updated_at', 'desc')
                     ->get();
             }
 
         }else{
-            $this->notes_all = Note::where('id','LIKE', '%'.$this->searchInput.'%')
-                ->orWhere('tags', 'LIKE', '%'.$this->searchInput.'%')
+            $this->notes_all = Note::where('subject', 'timeshare')
+                ->where(function ($query) {
+                    $query->where('id', 'LIKE', '%' . $this->searchInput . '%')
+                        ->orWhere('tags', 'LIKE', '%' . $this->searchInput . '%');
+                })
                 ->get();
         }
         $this->client_list = Note::select('client')
             ->distinct()
             ->orderBy('updated_at', 'desc')
             ->get();
-        $this->campList = Campaign::all();
-        $this->clientList = Client::all();
+        $this->campList = Campaign::where('subject', 'timeshare')->get();
+        $this->clientList = Client::where('subject', 'timeshare')->get();
         $this->campaignList = Note::select('campaign')
+            ->where('subject', 'timeshare')
             ->where('client', $this->client_name)
             ->distinct()->get();
         return view('livewire.campaign.timeshare');
@@ -87,6 +93,7 @@ class Timeshare extends Component
         try {
             Campaign::create([
                 'name' => $this->campName,
+                'subject' => $this->webName
             ]);
             $this->campName = "";
             session()->flash('good', "Successfully saved");
@@ -99,6 +106,7 @@ class Timeshare extends Component
         try {
             Client::create([
                 'name' => $this->cntName,
+                'subject' => $this->webName
             ]);
             $this->cntName = "";
             session()->flash('goodClient', "Successfully saved");
@@ -109,7 +117,9 @@ class Timeshare extends Component
 
     public function campRemove($id,$name){
         Campaign::find($id)->delete();
-        $ha = Note::where('campaign',$name)->get();
+        $ha = Note::where('campaign',$name)
+            ->where('subject', 'timeshare')
+            ->get();
         foreach ($ha as $has){
             Note::find($has->id)->delete();
         }
@@ -122,7 +132,9 @@ class Timeshare extends Component
     }
     public function clientRemove($id,$name){
         Client::find($id)->delete();
-        $ha = Note::where('client',$name)->get();
+        $ha = Note::where('client',$name)
+            ->where('subject', 'timeshare')
+            ->get();
         foreach ($ha as $has){
             Note::find($has->id)->delete();
         }
@@ -226,6 +238,7 @@ class Timeshare extends Component
     public function mount($name){
         $this->webName = $name;
         $this->client_list = Note::select('client')
+            ->where('subject','timeshare')
             ->distinct()
             ->orderBy('updated_at', 'desc')
             ->get();
@@ -234,6 +247,7 @@ class Timeshare extends Component
             break;
         }
         $this->campaignList = Note::select('campaign')
+            ->where('subject','timeshare')
             ->where('client', $this->client_name)
             ->distinct()->get();
     }

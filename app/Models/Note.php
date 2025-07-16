@@ -32,6 +32,7 @@ class Note extends Model
         'email',
         'felony',
         'govt',
+        'subject',
     ];
 
     protected $casts = [

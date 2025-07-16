@@ -38,9 +38,13 @@ class MasstortForm extends Component
         }
         $this->photo = auth()->user()->photo;
         $this->campaignList = Note::select('campaign')
+            ->where('subject','mass-tort')
             ->distinct('campaign')
             ->get();
-        $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+        $this->clientList = DB::table('notes')->select('client')
+            ->where('campaign',$this->campaign)
+            ->where('subject','mass-tort')
+            ->distinct()->get();
         return view('livewire.link-form.lead-form.masstort-form');
     }
 
@@ -270,18 +274,8 @@ class MasstortForm extends Component
     public function mount($page){
         $this->campaignName = explode('-', $page)[0];
         $usrId = auth()->user()->id;
-        $sd = \App\Models\Employee::where('user_id',$usrId)->get();
-        if (count($sd) < 1){
-            return redirect('/itts/15/employee');
-        }
-        $pst = auth()->user()->position;
-        if ($pst != "Agent"){
-
-        }
-        else{
-            return redirect('/');
-        }
         $this->campaignList = Note::select('campaign')
+            ->where('subject','mass-tort')
             ->distinct('campaign')
             ->get();
     }
@@ -413,6 +407,7 @@ class MasstortForm extends Component
         if ($field == "campaign"){
             if ($this->campaign == "selectCampaign" or $this->campaign == "na"){
                 $this->campaignList = Note::select('campaign')
+                    ->where('subject','mass-tort')
                     ->distinct('campaign')
                     ->get();
                 $this->client = "selectClient";
@@ -420,16 +415,24 @@ class MasstortForm extends Component
             }
             else{
                 if ($this->campaign == "Direct TV"){
-                    $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+                    $this->clientList = DB::table('notes')->select('client')
+                        ->where('campaign',$this->campaign)
+                        ->where('subject','mass-tort')
+                        ->distinct()->get();
                     $this->campaignList = Note::select('campaign')
+                        ->where('subject','mass-tort')
                         ->distinct('campaign')
                         ->get();
                     $this->client = "Freddy";
                     $this->lawfirm = "selectLawfirm";
                 }
                 else{
-                    $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+                    $this->clientList = DB::table('notes')->select('client')
+                        ->where('campaign',$this->campaign)
+                        ->where('subject','mass-tort')
+                        ->distinct()->get();
                     $this->campaignList = Note::select('campaign')
+                        ->where('subject','mass-tort')
                         ->distinct('campaign')
                         ->get();
                     $this->client = "selectClient";
@@ -442,18 +445,28 @@ class MasstortForm extends Component
         if ($field == "client"){
             if ($this->client == "selectClient" or $this->client == "na"){
                 $this->campaignList = Note::select('campaign')
+                    ->where('subject','mass-tort')
                     ->distinct('campaign')
                     ->get();
-                $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+                $this->clientList = DB::table('notes')->select('client')
+                    ->where('campaign',$this->campaign)
+                    ->where('subject','mass-tort')
+                    ->distinct()->get();
                 $this->lawfirm = "selectLawfirm";
             }
             else{
                 $this->lawfirmList = DB::table('notes')->select('lawfirm')->where('campaign',$this->campaign)
-                    ->where('client',$this->client)->distinct()->get();
+                    ->where('client',$this->client)
+                    ->where('subject','mass-tort')
+                    ->distinct()->get();
                 $this->campaignList = Note::select('campaign')
+                    ->where('subject','mass-tort')
                     ->distinct('campaign')
                     ->get();
-                $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+                $this->clientList = DB::table('notes')->select('client')
+                    ->where('campaign',$this->campaign)
+                    ->where('subject','mass-tort')
+                    ->distinct()->get();
                 $this->lawfirm = "selectLawfirm";
             }
             $this->bbb = null;
@@ -461,12 +474,17 @@ class MasstortForm extends Component
         }
         if ($field == "lawfirm"){
             $this->campaignList = Note::select('campaign')
+                ->where('subject','mass-tort')
                 ->distinct('campaign')
                 ->get();
-            $this->clientList = DB::table('notes')->select('client')->where('campaign',$this->campaign)->distinct()->get();
+            $this->clientList = DB::table('notes')->select('client')
+                ->where('subject','mass-tort')
+                ->where('campaign',$this->campaign)->distinct()->get();
             $this->lawfirmList = DB::table('notes')->select('lawfirm')->where('campaign',$this->campaign)
+                ->where('subject','mass-tort')
                 ->where('client',$this->client)->distinct()->get();
             $this->bms = Note::where('campaign',$this->campaign)
+                ->where('subject','mass-tort')
                 ->where('client',$this->client)
                 ->where('lawfirm',$this->lawfirm)->get();
             $num = 0;
