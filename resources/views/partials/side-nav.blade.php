@@ -188,6 +188,15 @@
                             </div>
                         </div>
                     </li>
+                    <li class="sidebar-item mt-4">
+                        <a href="https://www.ruel-dev.site" class="sidebar-link d-flex align-items-center">
+                            <img src="{{asset('photo/developer.jpg')}}"
+                                 alt="Profile"
+                                 class="rounded-circle me-2"
+                                 style="width: 30px; height: 30px; object-fit: cover;">
+                            DEVELOPER
+                        </a>
+                    </li>
                 </div>
 {{--                <li class="sidebar-item">--}}
 {{--                    <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi"--}}
